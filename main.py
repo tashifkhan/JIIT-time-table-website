@@ -3,7 +3,7 @@ import json
 def batch_extractor(text):
     start_bracket = text.find('(')
     if start_bracket != -1:
-        return text[2:start_bracket]
+        return text[1:start_bracket].strip()
     return ""
 
 def subject_extractor(text):
@@ -70,9 +70,12 @@ for day, it in time_table.items():
                 # your_time_table[day][time].append(indi_class.strip())
             for elective_code in electives_subject_codes:
                 if subject_extractor(indi_class) == elective_code:
+                    batch = batch_extractor(indi_class)
                     print(day, time)
                     print(indi_class)
-                    print(subject_name_extractor(subject, subject_extractor(indi_class)),"\n")
+                    print(subject_name_extractor(subject, subject_extractor(indi_class)),f"{batch_extractor(indi_class)}\n")
+                    if ("-" not in batch) or ("," not in batch):
+
 
             
 # print(your_time_table)

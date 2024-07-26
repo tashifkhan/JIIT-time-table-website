@@ -41,7 +41,7 @@ for i in range (2, rows):
             4: []
         }    
 
-    if (str(pd.iloc[i,1]) == "Short Subject Code"):
+    if (str(df.iloc[i,1]) == "Short Subject Code"):
         next_file_index = i
         break
         
@@ -59,7 +59,25 @@ with open(filename, 'w') as file:
 
 print(f"Data has been written to {filename}")
 
-output_subject = {}
+output_subject = {
+    "Code":[],
+    "Full Code": [],
+    "Subject": []
+}
+subject_binding = ["Code", "Full Code", "Subject"]
+for i in range(next_file_index+1, rows):
+    for j in range(3):
+        if pd.notna(df.iloc[i,1+j]):
+            output_subject[subject_binding[j]].append(str(df.iloc[i,1+j]))
+        if pd.notna(df.iloc[i,4+j]):    
+            output_subject[subject_binding[j]].append(str(df.iloc[i,4+j]))
 
-for i in range()
 
+# Specify the filename
+filename = 'subject.json'
+
+# Writing the dictionary to a JSON file
+with open(filename, 'w') as file:
+    json.dump(output_subject, file, indent=4)  # indent=4 is optional, it makes the file more readable
+
+print(f"Data has been written to {filename}")

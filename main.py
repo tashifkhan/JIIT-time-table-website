@@ -89,23 +89,23 @@ for day, it in time_table.items():
 
                         elif len(extracted_batch) == 2:
                             for letter in extracted_batch:
-                                if letter == batch:
+                                if letter == batch[0]:
                                     print(day, time)
                                     print(indi_class)
                                     print(subject_name_extractor(subject, subject_extractor(indi_class)),f"{batch_extractor(indi_class)}\n")
 
-                    elif ("," not in extracted_batch):
+                    elif ("," in extracted_batch):
                         batch_list = extracted_batch.split(",")
                         for indi_batchss in batch_list:
                             if "-" in indi_batchss:
-                                if indi_batchss[0] == batch[0]:
-                                    batch_num_list = indi_batchss.split("-")
+                                if indi_batchss.strip()[0] == batch[0]:
+                                    batch_num_list = indi_batchss.strip().split("-")
                                     if (int(batch_num_list[0][1:]) > int(batch[1:])) and (int(batch_num_list[1][1:]) < int(batch[1:])):
                                         print(day, time)
                                         print(indi_class)
                                         print(subject_name_extractor(subject, subject_extractor(indi_class)),f"{batch_extractor(indi_class)}\n")
                             else:
-                                if indi_batchss[0] == batch[0]:
+                                if indi_batchss.strip()[0] == batch[0]:
                                     print(day, time)
                                     print(indi_class)
                                     print(subject_name_extractor(subject, subject_extractor(indi_class)),f"{batch_extractor(indi_class)}\n")

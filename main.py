@@ -55,30 +55,60 @@ for day, it in time_table.items():
             if batch in (indi_class.strip()):
                 subjectCode = indi_class.strip()
                 code = subject_extractor(subjectCode)
-                your_time_table.update({
-                    day:{
-                        time:{
-                            # "subjectCode": subjectCode,
-                            # "code": code,
-                            "name": subject_name_extractor(subject, code),
-                            "type": indi_class.strip()[0],
-                            "location": location_extractor(subjectCode)
+                if len(indi_class.strip()) > 0:
+                    your_time_table.update({
+                        day:{
+                            time:{
+                                # "subjectCode": subjectCode,
+                                # "code": code,
+                                "name": subject_name_extractor(subject, code),
+                                "type": indi_class.strip()[0],
+                                "location": location_extractor(subjectCode)
 
+                            }
                         }
-                    }
-                })
+                    })
+
             for elective_code in electives_subject_codes:
+
                 if subject_extractor(indi_class) == elective_code:
-                    batch = batch_extractor(indi_class)
-                    if ("-" not in batch) or ("," not in batch):
+                    _batch = batch_extractor(indi_class)
+
+                    if ("-" not in _batch) or ("," not in _batch):
                         if len(batch) in [0,3]:
                             # code = subject_extractor(subjectCode)
                             print(day, time)
                             print(indi_class)
                             print(subject_name_extractor(subject, subject_extractor(indi_class)),f"{batch_extractor(indi_class)}\n")
 
-                        
+                        elif len(_batch) == 1:
+                            if _batch == batch[0]:
+                                print(day, time)
+                                print(indi_class)
+                                print(subject_name_extractor(subject, subject_extractor(indi_class)),f"{batch_extractor(indi_class)}\n")
 
+                        elif len(_batch) == 2:
+                            for __batch in _batch:
+                                if __batch == batch:
+                                    print(day, time)
+                                    print(indi_class)
+                                    print(subject_name_extractor(subject, subject_extractor(indi_class)),f"{batch_extractor(indi_class)}\n")
+
+                    elif ("," not in _batch):
+                        batch_list = _batch.split(",")
+                        for __batch in batch_list:
+                            if "-" in __batch:
+                                if __batch[0] == batch[0]:
+                                    batch_num_list = __batch.split("-")
+                                    if (int(batch_num_list[0][1:]) > int(batch[1:])) and (int(batch_num_list[1][1:]) < int(batch[1:])):
+                                        print(day, time)
+                                        print(indi_class)
+                                        print(subject_name_extractor(subject, subject_extractor(indi_class)),f"{batch_extractor(indi_class)}\n")
+                            else:
+                                if __batch[0] == batch[0]:
+                                    print(day, time)
+                                    print(indi_class)
+                                    print(subject_name_extractor(subject, subject_extractor(indi_class)),f"{batch_extractor(indi_class)}\n")
 
             
 # print(your_time_table)

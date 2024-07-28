@@ -52,7 +52,7 @@ for i in range(n):
 for day, it in time_table.items():
     for time, classes in it.items():
         for indi_class in classes:
-            if batch in indi_class.strip():
+            if batch in (indi_class.strip()):
                 subjectCode = indi_class.strip()
                 code = subject_extractor(subjectCode)
                 your_time_table.update({
@@ -67,14 +67,17 @@ for day, it in time_table.items():
                         }
                     }
                 })
-                # your_time_table[day][time].append(indi_class.strip())
             for elective_code in electives_subject_codes:
                 if subject_extractor(indi_class) == elective_code:
                     batch = batch_extractor(indi_class)
-                    print(day, time)
-                    print(indi_class)
-                    print(subject_name_extractor(subject, subject_extractor(indi_class)),f"{batch_extractor(indi_class)}\n")
                     if ("-" not in batch) or ("," not in batch):
+                        if len(batch) in [0,3]:
+                            # code = subject_extractor(subjectCode)
+                            print(day, time)
+                            print(indi_class)
+                            print(subject_name_extractor(subject, subject_extractor(indi_class)),f"{batch_extractor(indi_class)}\n")
+
+                        
 
 
             

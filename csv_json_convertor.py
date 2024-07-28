@@ -29,7 +29,7 @@ for i in range (2, rows):
         
     for j in range(1, columns):
         if pd.notna(df.iloc[i,j]):
-            output[current_day][col_time_mapping[j-1]].append(str(df.iloc[i,j]))
+            output[current_day][col_time_mapping[j-1]].append(str(df.iloc[i,j]).strip())
     
 filename = 'time_table.json'
 
@@ -47,9 +47,9 @@ subject_binding = ["Code", "Full Code", "Subject"]
 for i in range(next_file_index+1, rows):
     for j in range(3):
         if pd.notna(df.iloc[i,1+j]):
-            output_subject[subject_binding[j]].append(str(df.iloc[i,1+j]))
+            output_subject[subject_binding[j]].append(str(df.iloc[i,1+j]).strip())
         if pd.notna(df.iloc[i,4+j]):    
-            output_subject[subject_binding[j]].append(str(df.iloc[i,4+j]))
+            output_subject[subject_binding[j]].append(str(df.iloc[i,4+j]).strip())
 
 filename = 'subject.json'
 

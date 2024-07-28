@@ -72,40 +72,40 @@ for day, it in time_table.items():
             for elective_code in electives_subject_codes:
 
                 if subject_extractor(indi_class) == elective_code:
-                    _batch = batch_extractor(indi_class)
+                    extracted_batch = batch_extractor(indi_class)
 
-                    if ("-" not in _batch) or ("," not in _batch):
-                        if len(batch) in [0,3]:
+                    if ("-" not in extracted_batch) or ("," not in extracted_batch):
+                        if len(extracted_batch) in [0,3]:
                             # code = subject_extractor(subjectCode)
                             print(day, time)
                             print(indi_class)
                             print(subject_name_extractor(subject, subject_extractor(indi_class)),f"{batch_extractor(indi_class)}\n")
 
-                        elif len(_batch) == 1:
-                            if _batch == batch[0]:
+                        elif len(extracted_batch) == 1:
+                            if extracted_batch == batch[0]:
                                 print(day, time)
                                 print(indi_class)
                                 print(subject_name_extractor(subject, subject_extractor(indi_class)),f"{batch_extractor(indi_class)}\n")
 
-                        elif len(_batch) == 2:
-                            for __batch in _batch:
-                                if __batch == batch:
+                        elif len(extracted_batch) == 2:
+                            for letter in extracted_batch:
+                                if letter == batch:
                                     print(day, time)
                                     print(indi_class)
                                     print(subject_name_extractor(subject, subject_extractor(indi_class)),f"{batch_extractor(indi_class)}\n")
 
-                    elif ("," not in _batch):
-                        batch_list = _batch.split(",")
-                        for __batch in batch_list:
-                            if "-" in __batch:
-                                if __batch[0] == batch[0]:
-                                    batch_num_list = __batch.split("-")
+                    elif ("," not in extracted_batch):
+                        batch_list = extracted_batch.split(",")
+                        for indi_batchss in batch_list:
+                            if "-" in indi_batchss:
+                                if indi_batchss[0] == batch[0]:
+                                    batch_num_list = indi_batchss.split("-")
                                     if (int(batch_num_list[0][1:]) > int(batch[1:])) and (int(batch_num_list[1][1:]) < int(batch[1:])):
                                         print(day, time)
                                         print(indi_class)
                                         print(subject_name_extractor(subject, subject_extractor(indi_class)),f"{batch_extractor(indi_class)}\n")
                             else:
-                                if __batch[0] == batch[0]:
+                                if indi_batchss[0] == batch[0]:
                                     print(day, time)
                                     print(indi_class)
                                     print(subject_name_extractor(subject, subject_extractor(indi_class)),f"{batch_extractor(indi_class)}\n")

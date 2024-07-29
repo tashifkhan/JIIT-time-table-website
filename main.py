@@ -56,6 +56,9 @@ for day, it in time_table.items():
                 subjectCode = indi_class.strip()
                 code = subject_extractor(subjectCode)
                 if len(indi_class.strip()) > 0:
+                    print(day, time)
+                    print(indi_class)
+                    print(subject_name_extractor(subject, subject_extractor(indi_class)),f"{batch_extractor(indi_class)}\n")
                     your_time_table.update({
                         day:{
                             time:{
@@ -94,21 +97,41 @@ for day, it in time_table.items():
                                     print(indi_class)
                                     print(subject_name_extractor(subject, subject_extractor(indi_class)),f"{batch_extractor(indi_class)}\n")
 
-                    elif ("," in extracted_batch):
-                        batch_list = extracted_batch.split(",")
-                        for indi_batchss in batch_list:
-                            if "-" in indi_batchss:
-                                if indi_batchss.strip()[0] == batch[0]:
-                                    batch_num_list = indi_batchss.strip().split("-")
-                                    if (int(batch_num_list[0][1:]) > int(batch[1:])) and (int(batch_num_list[1][1:]) < int(batch[1:])):
+                    else:
+                        if ("," in extracted_batch):
+                            batch_list = extracted_batch.split(",")
+                            # print(batch_list, "\n")
+                            for b in batch_list:
+                                # print(b.strip())
+                                if b.strip()[0] == batch[0]:
+                                    if len(b.strip()) == 1:
                                         print(day, time)
                                         print(indi_class)
                                         print(subject_name_extractor(subject, subject_extractor(indi_class)),f"{batch_extractor(indi_class)}\n")
-                            else:
-                                if indi_batchss.strip()[0] == batch[0]:
-                                    print(day, time)
-                                    print(indi_class)
-                                    print(subject_name_extractor(subject, subject_extractor(indi_class)),f"{batch_extractor(indi_class)}\n")
+                                    else:
+                                        batch_nums = ((b.strip())).split("-")
+                                        # print(batch_nums)
+                                        # Ensure the batch string is in expected format
+                                        if len(batch) > 1 and all(len(num.strip()) > 1 for num in batch_nums):
+                                            batch_number_str = batch.strip()[1:]
+                                            
+                                            if batch_number_str:
+                                                batch_number = int(batch_number_str)
+                                                
+                                                # Strip and slice batch_nums elements correctly
+                                                batch_num_0 = int(batch_nums[0].strip()[1:])
+                                                batch_num_1 = int(batch_nums[1].strip()[1:])
+                                                
+                                                if batch_num_0 <= batch_number <= batch_num_1:
+                                                    print(day, time)
+                                                    print(indi_class)
+                                                    print(subject_name_extractor(subject, subject_extractor(indi_class)),f"{batch_extractor(indi_class)}\n")
+                    
+                                            else:
+                                                print("Batch string is empty or incorrectly sliced.")
+                                        else:
+                                            print("Batch string or batch_nums are incorrectly formatted.")
+
 
             
 # print(your_time_table)

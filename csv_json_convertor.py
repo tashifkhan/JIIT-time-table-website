@@ -7,21 +7,16 @@ rows, columns = df.shape
 
 output = {}
 current_day = "-1"
-col_time_mapping = [9,10,11,12,1,2,3,4]
+col_time_mapping = []
+print(df.iloc[1,1])
+for k in range(1,columns):
+    col_time_mapping.append(df.iloc[1,k])
+print(col_time_mapping)
 next_file_index = -1
 for i in range (2, rows):
     if pd.notna(df.iloc[i,0]):
         current_day = str(df.iloc[i,0])
-        output[current_day] = {
-            9: [],
-            10: [],
-            11: [],
-            12: [],
-            1: [],
-            2: [],
-            3: [],
-            4: []
-        }    
+        output[current_day] = {time: [] for time in col_time_mapping} 
 
     if (str(df.iloc[i,1]) == "Short Subject Code"):
         next_file_index = i

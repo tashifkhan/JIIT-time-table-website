@@ -52,9 +52,9 @@ for i in range(n):
 for day, it in time_table.items():
     for time, classes in it.items():
         for indi_class in classes:
+            subjectCode = indi_class.strip()
+            code = subject_extractor(subjectCode)
             if batch in (indi_class.strip()):
-                subjectCode = indi_class.strip()
-                code = subject_extractor(subjectCode)
                 if len(indi_class.strip()) > 0:
                     print(day, time)
                     print(indi_class)
@@ -79,16 +79,39 @@ for day, it in time_table.items():
 
                     if ("-" not in extracted_batch) or ("," not in extracted_batch):
                         if len(extracted_batch) in [0,3]:
-                            # code = subject_extractor(subjectCode)
                             print(day, time)
                             print(indi_class)
                             print(subject_name_extractor(subject, subject_extractor(indi_class)),f"{batch_extractor(indi_class)}\n")
+                            your_time_table.update({
+                                day:{
+                                    time:{
+                                        # "subjectCode": subjectCode,
+                                        # "code": code,
+                                        "name": subject_name_extractor(subject, code),
+                                        "type": indi_class.strip()[0],
+                                        "location": location_extractor(subjectCode)
+
+                                    }
+                                }
+                            })
 
                         elif len(extracted_batch) == 1:
                             if extracted_batch == batch[0]:
                                 print(day, time)
                                 print(indi_class)
                                 print(subject_name_extractor(subject, subject_extractor(indi_class)),f"{batch_extractor(indi_class)}\n")
+                                your_time_table.update({
+                                    day:{
+                                        time:{
+                                            # "subjectCode": subjectCode,
+                                            # "code": code,
+                                            "name": subject_name_extractor(subject, code),
+                                            "type": indi_class.strip()[0],
+                                            "location": location_extractor(subjectCode)
+
+                                        }
+                                    }
+                                })
 
                         elif len(extracted_batch) == 2:
                             for letter in extracted_batch:
@@ -96,6 +119,18 @@ for day, it in time_table.items():
                                     print(day, time)
                                     print(indi_class)
                                     print(subject_name_extractor(subject, subject_extractor(indi_class)),f"{batch_extractor(indi_class)}\n")
+                                    your_time_table.update({
+                                        day:{
+                                            time:{
+                                                # "subjectCode": subjectCode,
+                                                # "code": code,
+                                                "name": subject_name_extractor(subject, code),
+                                                "type": indi_class.strip()[0],
+                                                "location": location_extractor(subjectCode)
+
+                                            }
+                                        }
+                                    })
 
                     else:
                         if ("," in extracted_batch):
@@ -108,6 +143,18 @@ for day, it in time_table.items():
                                         print(day, time)
                                         print(indi_class)
                                         print(subject_name_extractor(subject, subject_extractor(indi_class)),f"{batch_extractor(indi_class)}\n")
+                                        your_time_table.update({
+                                            day:{
+                                                time:{
+                                                    # "subjectCode": subjectCode,
+                                                    # "code": code,
+                                                    "name": subject_name_extractor(subject, code),
+                                                    "type": indi_class.strip()[0],
+                                                    "location": location_extractor(subjectCode)
+
+                                                }
+                                            }
+                                        })
                                     else:
                                         batch_nums = ((b.strip())).split("-")
                                         # print(batch_nums)
@@ -126,15 +173,25 @@ for day, it in time_table.items():
                                                     print(day, time)
                                                     print(indi_class)
                                                     print(subject_name_extractor(subject, subject_extractor(indi_class)),f"{batch_extractor(indi_class)}\n")
-                    
+                                                    your_time_table.update({
+                                                        day:{
+                                                            time:{
+                                                                # "subjectCode": subjectCode,
+                                                                # "code": code,
+                                                                "name": subject_name_extractor(subject, code),
+                                                                "type": indi_class.strip()[0],
+                                                                "location": location_extractor(subjectCode)
+
+                                                            }
+                                                        }
+                                                    })
                                             else:
                                                 print("Batch string is empty or incorrectly sliced.")
                                         else:
                                             print("Batch string or batch_nums are incorrectly formatted.")
 
 
-            
-# print(your_time_table)
+print(your_time_table)
 
 
 

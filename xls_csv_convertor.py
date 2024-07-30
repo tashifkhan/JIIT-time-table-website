@@ -11,6 +11,7 @@ def xls_to_csv(xls_file, csv_file):
     for rownum in range(worksheet.nrows):
       csv_writer.writerow(worksheet.row_values(rownum))
 
-xls_file = 'time_table.xls'
+# xls_file = 'time_table.xls'
+xls_file = "B.Tech VII sem May 28.xls"
 csv_file = 'output.csv'
 xls_to_csv(xls_file, csv_file)

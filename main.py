@@ -34,10 +34,10 @@ def subject_name_extractor(subjects_dict, code):
     return ""
 
 
-with open("time_table.json", 'r') as file:
+with open("./data/time_table.json", 'r') as file:
     time_table = json.load(file)
 
-with open("subject.json", 'r') as file:
+with open("./data/subject.json", 'r') as file:
     subject = json.load(file)
 
 your_time_table = []

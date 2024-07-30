@@ -1,7 +1,7 @@
 import pandas as pd
 import json
 
-df = pd.read_csv('time_table.csv')
+df = pd.read_csv('./data/time_table.csv')
 
 rows, columns = df.shape
 

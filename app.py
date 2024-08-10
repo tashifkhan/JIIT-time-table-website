@@ -1,26 +1,48 @@
 import streamlit as st
+import json
+
+st.set_page_config(
+    page_title="JIIT Time Table Simplified",
+    page_icon="🤡",  
+    layout="centered", 
+    initial_sidebar_state="auto",  
+)
+
+st.write("# JIIT Schedule")
+
+with open("./data/json/subject.json", 'r') as file:
+    subject = json.load(file)
+
+# print(subject["Subject"])
 
 # File Upload
-uploaded_file = st.file_uploader("Choose a file")
+uploaded_file = st.file_uploader("Upload the time table Excel here")
 
 if uploaded_file is not None:
-    # Batch input
-    batch = st.text_input("Enter your batch:")
+    file_extension = uploaded_file.name.split('.')[-1]
 
-    # Electives input
-    has_electives = st.radio("Do you have electives?", ("Yes", "No"))
+    if file_extension in ["xls", "xlsx"]:
+        batch = st.text_input("Enter your batch:")
 
-    if has_electives == "Yes":
-        num_electives = st.number_input("How many electives do you have?", min_value=1, step=1)
+        has_electives = st.radio("Do you have electives?", ("Yes", "No"), index=1)
+        if has_electives == "Yes":
+            num_electives = st.number_input("How many electives do you have?", min_value=1, step=1)
 
-        # Render input fields according to the number of electives
-        electives = []
-        for i in range(int(num_electives)):
-            elective = st.text_input(f"Enter the name of elective {i+1}:")
-            electives.append(elective)
+            selecions = ['Select your elective'] + subject["Subject"]
+            electives = []
+            for i in range(int(num_electives)):
+                elective = st.selectbox(f"Choose your elective {i+1}:", selecions)
+                electives.append(elective)
 
-        st.write("Electives you entered:")
-        for elective in electives:
-            st.write(elective)
+
+        else:
+            st.write("No electives selected.")
+
+    elif file_extension == "pdf":
+        st.error("PDF files can't be parsed.")
+        st.error("If you are from 128 ask your teachers to give a excel version of the time table.")
+        st.error("Otherwise upload a file of xls or xlsx format.")
+        
     else:
-        st.write("No electives selected.")
+        st.error("Please upload a valid file. It must be of xls or xlsx format")
+

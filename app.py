@@ -1,16 +1,26 @@
-from flask import Flask, render_template, request
+import streamlit as st
 
-app = Flask(__name__)
+# File Upload
+uploaded_file = st.file_uploader("Choose a file")
 
-@app.route('/', methods=['GET', 'POST'])
-def planner():
-    if request.method == 'POST':
-        day = request.form['day']
-        batch = request.form['batch']
-        year = request.form['year']
-        electives = request.form['electives']
-        return render_template('planner.html', day=day, batch=batch, year=year, electives=electives)
-    return render_template('planner.html')
+if uploaded_file is not None:
+    # Batch input
+    batch = st.text_input("Enter your batch:")
 
-if __name__ == '__main__':
-    app.run(debug=True)
+    # Electives input
+    has_electives = st.radio("Do you have electives?", ("Yes", "No"))
+
+    if has_electives == "Yes":
+        num_electives = st.number_input("How many electives do you have?", min_value=1, step=1)
+
+        # Render input fields according to the number of electives
+        electives = []
+        for i in range(int(num_electives)):
+            elective = st.text_input(f"Enter the name of elective {i+1}:")
+            electives.append(elective)
+
+        st.write("Electives you entered:")
+        for elective in electives:
+            st.write(elective)
+    else:
+        st.write("No electives selected.")

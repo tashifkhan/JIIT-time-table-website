@@ -1,5 +1,7 @@
 import streamlit as st
 import json
+import xlsx_csv_convertor as xcc
+import xls_csv_convertor as xcc_legacy
 
 st.set_page_config(
     page_title="JIIT Time Table Simplified",
@@ -22,7 +24,14 @@ if uploaded_file is not None:
     file_extension = uploaded_file.name.split('.')[-1]
 
     if file_extension in ["xls", "xlsx"]:
+        if file_extension == "xlsx":
+            csv_file = xcc.xlsx_to_csv_string(uploaded_file)
+        else:
+            csv_file = xcc_legacy.xls_to_csv_string(uploaded_file)
+            # print(csv_file)
+        
         batch = st.text_input("Enter your batch:")
+
 
         has_electives = st.radio("Do you have electives?", ("Yes", "No"), index=1)
         if has_electives == "Yes":
@@ -37,6 +46,9 @@ if uploaded_file is not None:
 
         else:
             st.write("No electives selected.")
+
+        if st.button("Submit"):
+            st.success("Submit works")
 
     elif file_extension == "pdf":
         st.error("PDF files can't be parsed.")

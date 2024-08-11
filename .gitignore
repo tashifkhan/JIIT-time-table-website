@@ -1,13 +1,6 @@
 .env
 .idea
 blah.py
-data.json
-time_table.csv
-time_table.json
-time_table.xls
-subject.json
-B.Tech VII sem May 28.xls
-output.csv
 data
 .gitignore
 .DS_Store

@@ -180,8 +180,106 @@ for day, it in time_table.items():
                                             else:
                                                 print("Batch string or batch_nums are incorrectly formatted.")
 
+formatted_timetable = {}
+
+for entry in your_time_table:
+    day = entry[0]
+    time = entry[1]
+    
+    if day not in formatted_timetable:
+        formatted_timetable[day] = {}
+    
+    formatted_timetable[day][time] = {
+        "subject_name": entry[2],
+        "type": entry[3],
+        "location": entry[4]
+    }
 
 print()
-for t in your_time_table:
-    print(t)
-
+print(formatted_timetable)
+''' formated timetable
+{
+   "MON":{
+      "10 -10.50 AM":{
+         "subject_name":"Data Structures and Algorithms",
+         "type":"L",
+         "location":"G7"
+      },
+      "3-3.50 PM":{
+         "subject_name":"Indian Constitution and Traditional knowledge",
+         "type":"L",
+         "location":"G8"
+      }
+   },
+   "TUES":{
+      "10 -10.50 AM":{
+         "subject_name":"Electromagnetic Field Theory",
+         "type":"L",
+         "location":"G8"
+      },
+      "3-3.50 PM":{
+         "subject_name":"Data Structures and Algorithms Lab",
+         "type":"P",
+         "location":"CL04"
+      }
+   },
+   "WED":{
+      "9 -9.50 AM":{
+         "subject_name":"Microprocessors and Microcontrollers",
+         "type":"P",
+         "location":"IOT Lab"
+      },
+      "1- 1.50 PM":{
+         "subject_name":"Data Structures and Algorithms",
+         "type":"L",
+         "location":"G4"
+      },
+      "3-3.50 PM":{
+         "subject_name":"Indian Constitution and Traditional knowledge",
+         "type":"L",
+         "location":"G6"
+      }
+   },
+   "THUR":{
+      "9 -9.50 AM":{
+         "subject_name":"Indian Constitution and Traditional knowledge",
+         "type":"L",
+         "location":"G8"
+      },
+      "10 -10.50 AM":{
+         "subject_name":"Electromagnetic Field Theory",
+         "type":"L",
+         "location":"FF4"
+      },
+      "3-3.50 PM":{
+         "subject_name":"Data Structures and Algorithms",
+         "type":"L",
+         "location":"G4"
+      },
+      "4-4.50 PM":{
+         "subject_name":"Electromagnetic Field Theory",
+         "type":"T",
+         "location":"F10"
+      }
+   },
+   "FRI":{
+      "10 -10.50 AM":{
+         "subject_name":"Electromagnetic Field Theory",
+         "type":"L",
+         "location":"G8"
+      },
+      "3-3.50 PM":{
+         "subject_name":"Python for Signal Processing & Communication Lab",
+         "type":"P",
+         "location":"SPL"
+      }
+   },
+   "SAT":{
+      "9 -9.50 AM":{
+         "subject_name":"Electromagnetic Field Theory",
+         "type":"P",
+         "location":"ACL,JBSPL"
+      }
+   }
+}
+'''

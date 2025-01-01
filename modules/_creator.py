@@ -127,35 +127,48 @@ def time_table_creator(time_table_json_string, subject_json_string, batch, elect
     time_table = time_table_json_string
     subject = subject_json_string
     your_time_table = []
-
+    # Iterate through each day in the timetable
     for day, it in time_table.items():
+        # Iterate through each time slot in the day
         for time, classes in it.items():
+            # Iterate through each class in the time slot
             for indi_class in classes:
                 subjectCode = indi_class.strip()
-                code = subject_extractor(subjectCode)
+                code = subject_extractor(subjectCode)  # Extract subject code from the class string
+
+                # Check if class belongs to student's batch (direct match)
                 if batch in batch_extractor(indi_class.strip()) and "-" not in batch_extractor(indi_class.strip()):
                     if len(indi_class.strip()) > 0:
                         your_time_table.append([day, time, subject_name_extractor(subject, code), indi_class.strip()[0], location_extractor(subjectCode)])
 
+                # Handle elective subjects
                 for elective_code in electives_subject_codes:
+                    # Skip practical sessions (marked with 'P')
                     if len(indi_class)>0 and indi_class[0] != "P":
                         if subject_extractor(indi_class) == elective_code:
                             extracted_batch = batch_extractor(indi_class)
+
+                            # Handle simple batch assignments (no ranges or groups)
                             if ("-" not in extracted_batch) or ("," not in extracted_batch):
+                                # No batch specified or full batch (3 characters)
                                 if len(extracted_batch) in [0,3]:
                                     your_time_table.append([day, time, subject_name_extractor(subject, code), indi_class.strip()[0], location_extractor(subjectCode)])
 
+                                # Single character batch
                                 elif len(extracted_batch) == 1:
                                     if extracted_batch == batch[0]:
                                         your_time_table.append([day, time, subject_name_extractor(subject, code), indi_class.strip()[0], location_extractor(subjectCode)])
 
+                                # Two character batch
                                 elif len(extracted_batch) == 2:
                                     for letter in extracted_batch:
                                         your_time_table.append([day, time, subject_name_extractor(subject, code), indi_class.strip()[0], location_extractor(subjectCode)])
 
+                            # Handle comma-separated batch lists
                             if ("," in extracted_batch):
                                 batch_list = extracted_batch.split(",")
                                 for index, b in enumerate(batch_list):
+                                    # Handle long batch lists (more than 3 batches)
                                     if len(batch_list) > 3:
                                         if b.strip()[0].isalpha():
                                             if b.strip()[0] == batch[0]:
@@ -168,18 +181,21 @@ def time_table_creator(time_table_json_string, subject_json_string, batch, elect
                                             if b == batch[1:]:
                                                 your_time_table.append([day, time, subject_name_extractor(subject, code), indi_class.strip()[0], location_extractor(subjectCode)])
 
+                                    # Handle short batch lists
                                     else:
                                         if b.strip()[0] == batch[0]:
+                                            # Single character batch
                                             if len(b.strip()) == 1:
                                                 your_time_table.append([day, time, subject_name_extractor(subject, code), indi_class.strip()[0], location_extractor(subjectCode)])
                                             else:
+                                                # Handle batch ranges (e.g., A1-A4)
                                                 batch_nums = ((b.strip())).split("-")
                                                 if len(batch) > 1 and all(len(num.strip()) > 1 for num in batch_nums):
                                                     batch_number_str = batch.strip()[1:]
 
                                                     if batch_number_str:
+                                                        # Check if student's batch number falls within the range
                                                         batch_number = int(batch_number_str)
-
                                                         batch_num_0 = int(batch_nums[0].strip()[1:])
                                                         batch_num_1 = int(batch_nums[1].strip()[1:])
 

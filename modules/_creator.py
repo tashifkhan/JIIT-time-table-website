@@ -229,7 +229,7 @@ if __name__ == "__main__":
     with open("./data/json/time_table.json", 'r') as file:
         time_table = json.load(file)
 
-    with open("./data/json/subject.json", 'r') as file:
+    with open("./data/json/subject2.json", 'r') as file:
         subject = json.load(file)
 
     your_time_table = []

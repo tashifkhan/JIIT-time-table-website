@@ -22,30 +22,51 @@ def csv_to_json(csv_file_path, json_filename, json_subject_filename):
 
 
 def csvstring_to_jsonstrings(csv_string):
+    # Read CSV into DataFrame and drop empty rows and columns
     df = pd.read_csv(io.StringIO(csv_string))
+    df = df.dropna(how='all', axis=0)  # Drop rows where all values are NaN
+    df = df.dropna(how='all', axis=1)  # Drop columns where all values are NaN
     rows, columns = df.shape
+  
+    print("\nTable Structure:")
+    print("-" * (columns * 15))  # Print horizontal line
+    for i in range(rows):
+        for j in range(columns):
+            cell_value = str(df.iloc[i,j])
+            print(f"{cell_value[:12]:<12}", end=" | ")  # Truncate and left-align values
+        print("\n" + "-" * (columns * 15))  # Print horizontal line after each row
 
     output = {}
     current_day = "-1"
     col_time_mapping = []
 
     for k in range(1,columns):
-        col_time_mapping.append(df.iloc[1,k])
+        col_time_mapping.append(df.iloc[0,k])
+    
+    # Initialize time slots with empty lists for each day
+    for i in range(0, rows):
+        if pd.notna(df.iloc[i,0]):
+            current_day = str(df.iloc[i,0]).strip()
+            if current_day not in output:
+                output[current_day] = {time: [] for time in col_time_mapping}
 
+    # Find where subject codes start
     next_file_index = -1
     for i in range(2, rows):
-        if pd.notna(df.iloc[i,0]):
-            current_day = str(df.iloc[i,0])
-            output[current_day] = {time: [] for time in col_time_mapping} 
-
         if (str(df.iloc[i,1]) == "Short Subject Code"):
             next_file_index = i
             break
 
+    # Extract class entries
+    for i in range(0, next_file_index):
+        if pd.notna(df.iloc[i,0]):
+            current_day = str(df.iloc[i,0]).strip()
+        
         for j in range(1, columns):
             if pd.notna(df.iloc[i,j]):
                 output[current_day][col_time_mapping[j-1]].append(str(df.iloc[i,j]).strip())
 
+    # Extract subject codes and details
     output_subject = []
     subject_binding = ["Code", "Full Code", "Subject"]
 

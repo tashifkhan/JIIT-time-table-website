@@ -7,3 +7,4 @@ data
 \templet\*
 __pycache__
 *.pyc
+hello.csv

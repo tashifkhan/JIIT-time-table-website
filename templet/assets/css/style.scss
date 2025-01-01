@@ -1,11 +1,6 @@
-@import '../../../../../codyhouse-framework/main/assets/css/style.scss'; // ⚠️ make sure to import the CodyHouse framework
+@import '../../../codyframe/main/scss/style'; // ⚠️ make sure to import the CodyHouse framework SCSS
 @import url('https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,600'); // custom font
 
-// --------------------------------
-
-// Schedule Template - by CodyHouse.co
-
-// --------------------------------
 
 :root {
   // colors
@@ -560,4 +555,18 @@ a {
   &:hover {
     opacity: 0.8;
   }
+}
+
+.download-btn {
+  margin-top: 1rem;
+  padding: 0.5rem 1rem;
+  background: var(--cd-color-event-3);
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.download-btn:hover {
+  opacity: 0.9;
 }

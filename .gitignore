@@ -4,5 +4,5 @@ blah.py
 data
 .gitignore
 .DS_Store
-__pycache__
 \templet\*
+\__pycache__\*

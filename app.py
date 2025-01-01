@@ -163,6 +163,33 @@ def render_schedule_html(schedule_data):
     </html>
     """
     return html_content
+    def create_streamlit_schedule_template():
+        # Create dynamic CSS classes for different event types
+        st.markdown("""
+            <style>
+            .L { background: #f0918e; }
+            .P { background: #61c0bf; }
+            .T { background: #ffbe0f; }
+            .schedule-item {
+                padding: 10px;
+                margin: 5px;
+                border-radius: 5px;
+                color: white;
+            }
+            </style>
+        """, unsafe_allow_html=True)
+
+        # Create a time table layout
+        for day in ['MON', 'TUES', 'WED', 'THUR', 'FRI', 'SAT']:
+            day_events = [event for event in schedule_data if event[0] == day]
+            if day_events:
+                st.subheader(day)
+                for event in day_events:
+                    st.markdown(f"""
+                        <div class="schedule-item {event[3]}">
+                            {event[1]}: {event[2]} ({event[4]})
+                        </div>
+                    """, unsafe_allow_html=True)
 
 # Streamlit app
 # st.title("Class Schedule")

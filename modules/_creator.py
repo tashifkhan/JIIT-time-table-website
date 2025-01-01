@@ -27,7 +27,7 @@ def subject_name_extractor(subjects_dict, code):
     for subject in subjects_dict:
         if subject["Code"] == code:
             return subject["Subject"]
-    return ""
+    return code
 
 def process_day(day_str):
     day_mapping = {

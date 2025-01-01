@@ -1,4 +1,5 @@
 import json
+from datetime import datetime
 
 def batch_extractor(text):
     start_bracket = text.find('(')
@@ -94,17 +95,87 @@ def time_table_creator(time_table_json_string, subject_json_string, batch, elect
                                                         print("Batch string is empty or incorrectly sliced.")
                                                 else:
                                                     print("Batch string or batch_nums are incorrectly formatted.")
-    
+
+    def process_day(day_str):
+        day_mapping = {
+            'MON': 'Monday',
+            'M': 'Monday',
+            'MONDAY': 'Monday',
+            'TUES': 'Tuesday',
+            'TUE': 'Tuesday',
+            'T': 'Tuesday',
+            'TUESDAY': 'Tuesday',
+            'WED': 'Wednesday',
+            'W': 'Wednesday',
+            'WEDNESDAY': 'Wednesday',
+            'THUR': 'Thursday',
+            'THURS': 'Thursday',
+            'THURSDAY': 'Thursday',
+            'THU': 'Thursday',
+            'TH': 'Thursday',
+            'FRI': 'Friday',
+            'FRIDAY': 'Friday',
+            'F': 'Friday',
+            'SAT': 'Saturday',
+            'S': 'Saturday',
+            'SA': 'Saturday',
+            'SATURDAY': 'Saturday',
+            'SATUR': 'Saturday',
+            'SUN': 'Sunday',
+            'SU': 'Sunday',
+            'U': 'Sunday',
+            'SUNDAY': 'Sunday'
+        }
+        
+        day_str = day_str.strip().upper()
+        return day_mapping.get(day_str, day_str)
+
+    def convert_time_format(time_str):
+        # Remove extra spaces
+        time_str = time_str.strip().replace(' ', '')
+        
+        # Ensure the time string contains minutes
+        if 'AM' in time_str or 'PM' in time_str:
+            if ':' not in time_str:
+                time_str = time_str.replace('AM', ':00 AM').replace('PM', ':00 PM')
+        
+        # Format to ensure no extra spaces
+        time_str = time_str.replace('AM', ' AM').replace('PM', ' PM')
+        
+        try:
+            # Convert 12-hour format to 24-hour format
+            return datetime.strptime(time_str, '%I:%M %p').strftime('%H:%M')
+        except ValueError as e:
+            raise ValueError(f"Error parsing time string '{time_str}': {e}")
+
+    def process_timeslot(timeslot):
+        # Split the timeslot into start and end times
+        start_time, end_time = timeslot.split('-')
+        
+        # Handle cases with or without AM/PM
+        start_time = start_time.strip()
+        end_time = end_time.strip().replace('.', ':')
+        
+        # Assuming AM/PM is consistent and provided
+        if not ('AM' in start_time or 'PM' in start_time):
+            start_time += " AM"
+        if not ('AM' in end_time or 'PM' in end_time):
+            end_time += " AM"
+        
+        # Convert times to 24-hour format
+        return convert_time_format(start_time), convert_time_format(end_time)
+
     formatted_timetable = {}
 
     for entry in your_time_table:
-        day = entry[0]
+        day = process_day(entry[0])
         time = entry[1]
+        start_time, end_time = process_timeslot(time)
         
         if day not in formatted_timetable:
             formatted_timetable[day] = {}
         
-        formatted_timetable[day][time] = {
+        formatted_timetable[day][f"{start_time}-{end_time}"] = {
             "subject_name": entry[2],
             "type": entry[3],
             "location": entry[4]
@@ -187,23 +258,92 @@ if __name__ == "__main__":
                                                 else:
                                                     print("Batch string or batch_nums are incorrectly formatted.")
 
+    def process_day(day_str):
+        day_mapping = {
+            'MON': 'Monday',
+            'M': 'Monday',
+            'MONDAY': 'Monday',
+            'TUES': 'Tuesday',
+            'TUE': 'Tuesday',
+            'T': 'Tuesday',
+            'TUESDAY': 'Tuesday',
+            'WED': 'Wednesday',
+            'W': 'Wednesday',
+            'WEDNESDAY': 'Wednesday',
+            'THUR': 'Thursday',
+            'THURS': 'Thursday',
+            'THURSDAY': 'Thursday',
+            'THU': 'Thursday',
+            'TH': 'Thursday',
+            'FRI': 'Friday',
+            'FRIDAY': 'Friday',
+            'F': 'Friday',
+            'SAT': 'Saturday',
+            'S': 'Saturday',
+            'SA': 'Saturday',
+            'SATURDAY': 'Saturday',
+            'SATUR': 'Saturday',
+            'SUN': 'Sunday',
+            'SU': 'Sunday',
+            'U': 'Sunday',
+            'SUNDAY': 'Sunday'
+        }
+        
+        day_str = day_str.strip().upper()
+        return day_mapping.get(day_str, day_str)
+
+    def convert_time_format(time_str):
+        # Remove extra spaces
+        time_str = time_str.strip().replace(' ', '')
+        
+        # Ensure the time string contains minutes
+        if 'AM' in time_str or 'PM' in time_str:
+            if ':' not in time_str:
+                time_str = time_str.replace('AM', ':00 AM').replace('PM', ':00 PM')
+        
+        # Format to ensure no extra spaces
+        time_str = time_str.replace('AM', ' AM').replace('PM', ' PM')
+        
+        try:
+            # Convert 12-hour format to 24-hour format
+            return datetime.strptime(time_str, '%I:%M %p').strftime('%H:%M')
+        except ValueError as e:
+            raise ValueError(f"Error parsing time string '{time_str}': {e}")
+
+    def process_timeslot(timeslot):
+        # Split the timeslot into start and end times
+        start_time, end_time = timeslot.split('-')
+        
+        # Handle cases with or without AM/PM
+        start_time = start_time.strip()
+        end_time = end_time.strip().replace('.', ':')
+        
+        # Assuming AM/PM is consistent and provided
+        if not ('AM' in start_time or 'PM' in start_time):
+            start_time += " AM"
+        if not ('AM' in end_time or 'PM' in end_time):
+            end_time += " AM"
+        
+        # Convert times to 24-hour format
+        return convert_time_format(start_time), convert_time_format(end_time)
+
     formatted_timetable = {}
 
     for entry in your_time_table:
-        day = entry[0]
+        day = process_day(entry[0])
         time = entry[1]
+        start_time, end_time = process_timeslot(time)
         
         if day not in formatted_timetable:
             formatted_timetable[day] = {}
         
-        formatted_timetable[day][time] = {
+        formatted_timetable[day][f"{start_time}-{end_time}"] = {
             "subject_name": entry[2],
             "type": entry[3],
             "location": entry[4]
         }
-
-    print()
-    print(formatted_timetable)
+    
+    print(json.dumps(formatted_timetable, indent=4))
 
 ''' formated timetable
 {

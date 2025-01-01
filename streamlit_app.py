@@ -2,8 +2,8 @@ import streamlit as st
 import streamlit.components.v1 as components
 from datetime import datetime
 import json
-import xlsx_csv_convertor as xcc
-import xls_csv_convertor as xcc_legacy
+import xlsx_handeler as xcc
+import xls_handeler as xcc_legacy
 
 st.set_page_config(
     page_title="JIIT Time Table Simplified",

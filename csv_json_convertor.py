@@ -1,11 +1,7 @@
 import pandas as pd
 import json
 
-def time_table_creator():
-    
-
-
-df = pd.read_csv('./data/csv/time_table2.csv')
+df = pd.read_csv('./data/csv/time_table.csv')
 # print(df)
 
 rows, columns = df.shape
@@ -37,21 +33,20 @@ with open(filename, 'w') as file:
     json.dump(output, file, indent=4)  # indent=4 is optional, it makes the file more readable
 
 print(f"Data has been written to {filename}")
-
-output_subject = {
-    "Code":[],
-    "Full Code": [],
-    "Subject": []
-}
+output_subject = []
 subject_binding = ["Code", "Full Code", "Subject"]
-for i in range(next_file_index+1, rows):
-    for j in range(3):
-        if pd.notna(df.iloc[i,1+j]):
-            output_subject[subject_binding[j]].append(str(df.iloc[i,1+j]).strip())
-        if pd.notna(df.iloc[i,4+j]):    
-            output_subject[subject_binding[j]].append(str(df.iloc[i,4+j]).strip())
 
-filename = './data/json/subject.json'
+for i in range(next_file_index+1, rows):
+    for j in range(0, 6, 3):  # Step by 3 to handle both sets of columns
+        if pd.notna(df.iloc[i,1+j]):
+            subject_dict = {}
+            for k in range(3):
+                if pd.notna(df.iloc[i,1+j+k]):
+                    subject_dict[subject_binding[k]] = str(df.iloc[i,1+j+k]).strip()
+            if subject_dict:
+                output_subject.append(subject_dict)
+
+filename = './data/json/subject2.json'
 
 with open(filename, 'w') as file:
     json.dump(output_subject, file, indent=4)  # indent=4 is optional, it makes the file more readable

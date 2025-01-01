@@ -5,4 +5,5 @@ data
 .gitignore
 .DS_Store
 \templet\*
-\__pycache__\*
+__pycache__
+*.pyc

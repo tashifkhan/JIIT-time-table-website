@@ -24,9 +24,9 @@ def location_extractor(text):
     return ""
 
 def subject_name_extractor(subjects_dict, code):
-    for i in range(len(subjects_dict["Code"])):
-        if subjects_dict["Code"][i] == code:
-            return subjects_dict["Subject"][i]
+    for subject in subjects_dict:
+        if subject["Code"] == code:
+            return subject["Subject"]
     return ""
 
 def process_day(day_str):

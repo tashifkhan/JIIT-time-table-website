@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <script>document.getElementsByTagName("html")[0].className += " js";</script>
   <script src="https://html2canvas.hertzen.com/dist/html2canvas.min.js"></script>
-  <link rel="stylesheet" href="assets/css/style.css">
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
 </head>
 <body>
   <header class="cd-main-header">
@@ -254,7 +254,7 @@
       });
     }
     </script>
-  <script src="assets/js/util.js"></script> <!-- util functions included in the CodyHouse framework -->
-  <script src="assets/js/main.js"></script>
+  <script src="{{ url_for('static', filename='js/util.js') }}"></script> <!-- util functions included in the CodyHouse framework -->
+  <script src="{{ url_for('static', filename='js/main.js') }}"></script>
 </body>
 </html>

@@ -16,7 +16,8 @@ from modules._creator import time_table_creator
 # state management
 global_state = {
     "time_table": None,
-    "subjects_dict": None
+    "subjects_dict": None,
+    "file_path": None
 }
 
 ''' pipeline
@@ -76,6 +77,7 @@ def fileupload():
         
     filename = secure_filename(file.filename)
     file.save(os.path.join(UPLOAD_FOLDER, filename))
+    global_state["file_path"] = os.path.join(UPLOAD_FOLDER, filename)
     file_extension = os.path.splitext(filename)[1].lower()
     
     if file_extension == ".xls":
@@ -120,6 +122,10 @@ def electives_page():
         elective = request_data[f'elective_{i}']
         electives.append(elective)
     result = time_table_creator(global_state['time_table'], global_state['subjects_dict'], request_data['batch'].capitalize(), electives)
+    os.remove(global_state["file_path"])
+    global_state["file_path"] = None
+    global_state["time_table"] = None
+    global_state["subjects_dict"] = None
     return render_template('schedule.html', your_schedule=result)
 
 if __name__ == '__main__':

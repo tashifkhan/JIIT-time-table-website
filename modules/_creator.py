@@ -14,8 +14,8 @@ def parse_batch_numbers(batch_input: str) -> List[str]:
     batch_input = batch_input.strip()
     
     # Handle ABC special case
-    if batch_input.upper() == 'ABC':
-        return ['A', 'B', 'C']
+    if batch_input.isalpha():
+        return [c.upper() for c in batch_input]
     
     # Handle single letter case
     if len(batch_input) == 1 and batch_input.isalpha():
@@ -25,37 +25,49 @@ def parse_batch_numbers(batch_input: str) -> List[str]:
     if ',' in batch_input:
         ranges = [r.strip() for r in batch_input.split(',')]
         result = []
+        
         for r in ranges:
-            result.extend(parse_single_range(r))
-        return result
-    
-    return parse_single_range(batch_input)
-
-def parse_single_range(batch_range: str) -> List[str]:
-    """Helper function to parse a single batch range."""
-    # Handle comma-separated format with missing prefix
-    if ',' in batch_range:
-        parts = batch_range.split(',')
-        prefix = re.match(r'([A-Za-z]+)', parts[0]).group(1)
-        result = []
-        for part in parts:
-            if re.match(r'[A-Za-z]', part):
-                result.append(part.strip())
+            # Handle hyphen-separated ranges within comma-separated parts
+            if '-' in r:
+                parts = r.split('-')
+                prefix = re.match(r'([A-Za-z]+)', parts[0]).group(1)
+                numbers = [int(re.search(r'\d+', part).group()) for part in parts]
+                result.extend(f"{prefix}{i}" for i in range(numbers[0], numbers[-1] + 1))
             else:
-                result.append(f"{prefix}{part.strip()}")
+                # Handle non-range parts
+                result.append(r.strip())
         return result
     
-    # Handle hyphen-separated ranges
-    if '-' in batch_range:
-        parts = batch_range.split('-')
+    # Handle single range without commas
+    if '-' in batch_input:
+        parts = batch_input.split('-')
         prefix = re.match(r'([A-Za-z]+)', parts[0]).group(1)
         numbers = [int(re.search(r'\d+', part).group()) for part in parts]
         return [f"{prefix}{i}" for i in range(numbers[0], numbers[-1] + 1)]
     
     # Handle single batch number
-    return [batch_range]
+    return [batch_input]
 
-
+def is_batch_included(search_batch: str, batch_input: str) -> bool:
+    """
+    Check if a batch is included in the batch input string.
+    Handles both exact matches and prefix matches.
+    
+    Args:
+        search_batch: Batch to search for (e.g., 'A6' or 'B')
+        batch_input: Input string containing batch specifications
+    
+    Returns:
+        bool: True if batch is included, False otherwise
+    """
+    parsed_batches = parse_batch_numbers(batch_input)
+    
+    # If search_batch is just a letter, check if it's a prefix of any batch
+    if len(search_batch) == 1 and search_batch.isalpha():
+        return any(batch.startswith(search_batch) for batch in parsed_batches)
+    
+    # Otherwise, look for exact match
+    return search_batch in parsed_batches
 
 def batch_extractor(text):
     start_bracket = text.find('(')
@@ -342,10 +354,15 @@ if __name__ == "__main__":
         "C1-C3",
         "B9,10",
         "B3,B4",
+        "B3,B4,A9",
+        "B3,4,8,A9,C1-C3",
         "ABC",
         "B",
         "A",
         "C",
+        "AC",
+        "bc",
+        "Ac",
         "A1-A10, B11-B15, C1-C3",
         "B1-B10",
         ""
@@ -355,6 +372,23 @@ if __name__ == "__main__":
     for test_input in test_inputs:
         result = parse_batch_numbers(test_input)
         print(f"Input: {test_input:20} -> Output: {result}")
+
+    test_cases = [
+        ("A6", "A1-A10"),
+        ("B16", "B"),
+        ("C2", "C1-C3"),
+        ("A3", "ABC"),
+        ("B5", "B1-B10"),
+        ("B3", "B3,B4"),
+        ("B4", "B3,4"),
+        ("D1", "ABC"),
+        ("A1", ""),
+        ("A8", "A7-A8-A10"),
+    ]
+
+    for search_batch, batch_input in test_cases:
+        result = is_batch_included(search_batch, batch_input)
+        print(f"Searching for {search_batch:3} in {batch_input:10} -> {result}")
 
 
 

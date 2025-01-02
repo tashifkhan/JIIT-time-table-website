@@ -3,6 +3,7 @@ import json
 import io
 
 def firstyear_subject_extractor(csv_string, imp_index):
+    print("First Year Subject Extractor")
     df = pd.read_csv(io.StringIO(csv_string))
     df = df.dropna(how='all', axis=0)  # Drop rows where all values are NaN
     df = df.dropna(how='all', axis=1)  # Drop columns where all values are NaN
@@ -13,28 +14,52 @@ def firstyear_subject_extractor(csv_string, imp_index):
     for i in range(imp_index, rows):
         for j in range(columns):
             cell_value = str(df.iloc[i,j])
+            # print(cell_value)
             if cell_value ==  "SHORT FORM / SUBJECT CODE":
                 heading_cell = (i, j)
+                print(heading_cell)
                 break
-    subject_binding = ["Code", "Subject"]
-    output_subject = []
-    for i in range(heading_cell[0]+1, rows):
-        subject_dict = {}
-        for j in range(2):
-            if pd.notna(df.iloc[i,heading_cell[1]+j]):
-                subject_dict[subject_binding[j]] = str(df.iloc[i,heading_cell[1]+j]).strip()
-        if subject_dict:
-            if subject_dict["Code"] == "Faculty Abbreviation with Names":
+            elif cell_value == "SUBJECT CODE":
+                heading_cell = (i, j)
+                print(heading_cell)
                 break
-            break_point = 0
-            for i in range(len(subject_dict["Code"])):
-                if subject_dict["Code"][i] == " ":
-                    break_point = i
+    
+    if cell_value == "SHORT FORM / SUBJECT CODE":
+        subject_binding = ["Code", "Subject"]
+        output_subject = []
+        for i in range(heading_cell[0]+1, rows):
+            subject_dict = {}
+            for j in range(2):
+                if pd.notna(df.iloc[i,heading_cell[1]+j]):
+                    subject_dict[subject_binding[j]] = str(df.iloc[i,heading_cell[1]+j]).strip()
+            if subject_dict:
+                if subject_dict["Code"] == "Faculty Abbreviation with Names":
                     break
-            subject_dict["Full Code"] = subject_dict["Code"][break_point+3:]
-            subject_dict["Code"] = subject_dict["Code"][:break_point]
+                break_point = 0
+                for i in range(len(subject_dict["Code"])):
+                    if subject_dict["Code"][i] == " ":
+                        break_point = i
+                        break
+                subject_dict["Full Code"] = subject_dict["Code"][break_point+3:]
+                subject_dict["Code"] = subject_dict["Code"][:break_point]
+                output_subject.append(subject_dict)
+        return output_subject
+    
+    elif cell_value == "SUBJECT CODE":
+        subject_binding = ["Full Code", "Subject"]
+        output_subject = []
+        for i in range(heading_cell[0]+1, rows):
+            subject_dict = {}
+            for j in range(2):
+                if pd.notna(df.iloc[i,heading_cell[1]+j]):
+                    subject_dict[subject_binding[j]] = str(df.iloc[i,heading_cell[1]+j]).strip()
+        if subject_dict:
+            subject_dict["Code"] = subject_dict["Full Code"][5:]
             output_subject.append(subject_dict)
-    return output_subject
+        print(json.dumps(output_subject, indent=4))
+        return output_subject
+    else:
+        return []
 
 def csv_to_json(csv_file_path, json_filename, json_subject_filename):
     with open(csv_file_path, 'r') as file:
@@ -57,6 +82,7 @@ def csv_to_json(csv_file_path, json_filename, json_subject_filename):
 
 def csvstring_to_jsonstrings(csv_string):
     # Read CSV into DataFrame and drop empty rows and columns
+    print("CSV String to JSON Strings")
     df = pd.read_csv(io.StringIO(csv_string))
     df = df.dropna(how='all', axis=0)  # Drop rows where all values are NaN
     df = df.dropna(how='all', axis=1)  # Drop columns where all values are NaN
@@ -105,7 +131,7 @@ def csvstring_to_jsonstrings(csv_string):
             current_day = str(df.iloc[i,0]).strip()
         
         for j in range(1, columns):
-            print(df.iloc[i,j])
+            # print(df.iloc[i,j])
             if pd.notna(df.iloc[i,j]):
                 output[current_day][col_time_mapping[j-1]].append(str(df.iloc[i,j]).strip())
 
@@ -131,7 +157,7 @@ def csvstring_to_jsonstrings(csv_string):
     else:
         output_subject = firstyear_subject_extractor(csv_string, next_file_index)
 
-    print(json.dumps(output_subject, indent=4))
+    # print(json.dumps(output_subject, indent=4))
 
     return {
         "timetable": output,

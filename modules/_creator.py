@@ -9,7 +9,7 @@ def parse_batch_numbers(batch_input: str) -> List[str]:
     Handles special cases like 'ABC', single letters, and empty strings.
     """
     if not batch_input:
-        return ['A', 'B', 'C']
+        return ['A', 'B', 'C', 'G']
     
     batch_input = batch_input.strip()
     

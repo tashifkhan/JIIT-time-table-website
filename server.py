@@ -107,7 +107,7 @@ def fileupload():
     global_state["time_table"] = time_table
     global_state["subjects_dict"] = subjects_dict
 
-    return render_template('fileupload.html', time_table=time_table, subjects_dict=subjects_dict)
+    return render_template('electives.html', time_table=time_table, subjects_dict=subjects_dict)
 
 @app.route('/electives', methods=['POST'])
 def electives_page():

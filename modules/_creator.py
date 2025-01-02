@@ -223,6 +223,8 @@ def time_table_creator(time_table_json_string, subject_json_string, batch, elect
     ['SAT', '9 -9.50 AM', 'Electromagnetic Field Theory', 'P', 'ACL,JBSPL']
     '''
 
+    # print(your_time_table)
+
     formatted_timetable = {}
 
     for entry in your_time_table:

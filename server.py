@@ -120,7 +120,7 @@ def electives_page():
         elective = request_data[f'elective_{i}']
         electives.append(elective)
     result = time_table_creator(global_state['time_table'], global_state['subjects_dict'], request_data['batch'].capitalize(), electives)
-    return json.dumps(result, indent=4)
+    return render_template('schedule.html', your_schedule=result)
 
 if __name__ == '__main__':
     app.run(debug=True)

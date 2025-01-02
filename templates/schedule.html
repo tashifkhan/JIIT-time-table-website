@@ -10,14 +10,14 @@
 <body>
   <header class="cd-main-header">
     <div style="display: flex; justify-content: center; align-items: center; width: 100%;"></div>
-      <div style="display: flex; justify-content: center; align-items: center; gap: 30px;">
+      <div style="display: flex; justify-content: center; align-items: center; gap: 30px; padding-top: 20px;">
       <h1 class="text-xl" >Your Schedule</h1>
-      <button onclick="downloadScreenshot()" class="download-btn">
+      <!-- <button onclick="downloadScreenshot()" class="download-btn">
         <svg width="25px" height="22px" iewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
           <path d="M12 3V16M12 16L16 11.625M12 16L8 11.625" stroke="#1C274C" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
           <path d="M15 21H9C6.17157 21 4.75736 21 3.87868 20.1213C3 19.2426 3 17.8284 3 15M21 15C21 17.8284 21 19.2426 20.1213 20.1213C19.8215 20.4211 19.4594 20.6186 19 20.7487" stroke="#1C274C" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
         </svg>
-      </button>
+      </button> -->
       </div>
   </div>
   </header>
@@ -51,143 +51,33 @@
   
     <div class="cd-schedule__events">
       <ul>
+        {% for day in ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'] %}
         <li class="cd-schedule__group">
-          <div class="cd-schedule__top-info"><span>Monday</span></div>
-  
+          <div class="cd-schedule__top-info"><span>{{ day }}</span></div>
+          
           <ul>
-            <li class="cd-schedule__event">
-              <a data-start="09:30" data-end="10:30" data-content="event-abs-circuit" data-event="event-1" href="#0">
-                <em class="cd-schedule__name">Abs Circuit</em>
-              </a>
-              <li class="cd-schedule__event">
-                <a data-start="11:00" data-end="12:30" data-content="event-rowing-workout" data-event="event-2" href="#0">
-                  <em class="cd-schedule__name">Rowing Workout</em>
-                </a>
-              </li>
-            </li>
-  
-  
-            <li class="cd-schedule__event">
-              <a data-start="14:00" data-end="15:15"  data-content="event-yoga-1" data-event="event-3" href="#0">
-                <em class="cd-schedule__name">Yoga Level 1</em>
-              </a>
-            </li>
+            {% if day in your_schedule %}
+              {% for time_slot, class_info in your_schedule[day].items() %}
+                {% set start_time = time_slot.split('-')[0] %}
+                {% set end_time = time_slot.split('-')[1] %}
+                <li class="cd-schedule__event">
+                  <a data-start="{{ start_time }}" 
+                     data-end="{{ end_time }}" 
+                     data-content="event-{{ class_info.type|lower }}" 
+                     data-event="event-{{ loop.index % 4 + 1 }}" 
+                     href="#0">
+                    <em class="cd-schedule__name">
+                      {{ class_info.subject_name }}
+                      <br>
+                      <small>{{ class_info.location }} ({{ class_info.type }})</small>
+                    </em>
+                  </a>
+                </li>
+              {% endfor %}
+            {% endif %}
           </ul>
         </li>
-  
-        <li class="cd-schedule__group">
-          <div class="cd-schedule__top-info"><span>Tuesday</span></div>
-  
-          <ul>
-            <li class="cd-schedule__event">
-              <a data-start="10:00" data-end="11:00"  data-content="event-rowing-workout" data-event="event-2" href="#0">
-                <em class="cd-schedule__name">Rowing Workout</em>
-              </a>
-            </li>
-  
-            <li class="cd-schedule__event">
-              <a data-start="11:30" data-end="13:00"  data-content="event-restorative-yoga" data-event="event-4" href="#0">
-                <em class="cd-schedule__name">Restorative Yoga</em>
-              </a>
-            </li>
-  
-            <li class="cd-schedule__event">
-              <a data-start="13:30" data-end="15:00" data-content="event-abs-circuit" data-event="event-1" href="#0">
-                <em class="cd-schedule__name">Abs Circuit</em>
-              </a>
-            </li>
-  
-            <li class="cd-schedule__event">
-              <a data-start="15:45" data-end="16:45"  data-content="event-yoga-1" data-event="event-3" href="#0">
-                <em class="cd-schedule__name">Yoga Level 1</em>
-              </a>
-            </li>
-          </ul>
-        </li>
-  
-        <li class="cd-schedule__group">
-          <div class="cd-schedule__top-info"><span>Wednesday</span></div>
-  
-          <ul>
-            <li class="cd-schedule__event">
-              <a data-start="09:00" data-end="10:15" data-content="event-restorative-yoga" data-event="event-4" href="#0">
-                <em class="cd-schedule__name">Restorative Yoga</em>
-              </a>
-            </li>
-  
-            <li class="cd-schedule__event">
-              <a data-start="10:45" data-end="11:45" data-content="event-yoga-1" data-event="event-3" href="#0">
-                <em class="cd-schedule__name">Yoga Level 1</em>
-              </a>
-            </li>
-  
-            <li class="cd-schedule__event">
-              <a data-start="12:00" data-end="13:45"  data-content="event-rowing-workout" data-event="event-2" href="#0">
-                <em class="cd-schedule__name">Rowing Workout</em>
-              </a>
-            </li>
-  
-            <li class="cd-schedule__event">
-              <a data-start="13:45" data-end="15:00" data-content="event-yoga-1" data-event="event-3" href="#0">
-                <em class="cd-schedule__name">Yoga Level 1</em>
-              </a>
-            </li>
-          </ul>
-        </li>
-  
-        <li class="cd-schedule__group">
-          <div class="cd-schedule__top-info"><span>Thursday</span></div>
-  
-          <ul>
-            <li class="cd-schedule__event">
-              <a data-start="09:30" data-end="10:30" data-content="event-abs-circuit" data-event="event-1" href="#0">
-                <em class="cd-schedule__name">Abs Circuit</em>
-              </a>
-            </li>
-  
-            <li class="cd-schedule__event">
-              <a data-start="12:00" data-end="13:45" data-content="event-restorative-yoga" data-event="event-4" href="#0">
-                <em class="cd-schedule__name">Restorative Yoga</em>
-              </a>
-            </li>
-  
-            <li class="cd-schedule__event">
-              <a data-start="15:30" data-end="16:30" data-content="event-abs-circuit" data-event="event-1" href="#0">
-                <em class="cd-schedule__name">Abs Circuit</em>
-              </a>
-            </li>
-  
-            <li class="cd-schedule__event">
-              <a data-start="17:00" data-end="18:30"  data-content="event-rowing-workout" data-event="event-2" href="#0">
-                <em class="cd-schedule__name">Rowing Workout</em>
-              </a>
-            </li>
-          </ul>
-        </li>
-  
-        <li class="cd-schedule__group">
-          <div class="cd-schedule__top-info"><span>Friday</span></div>
-  
-          <ul>
-            <li class="cd-schedule__event">
-              <a data-start="10:00" data-end="11:00"  data-content="event-rowing-workout" data-event="event-2" href="#0">
-                <em class="cd-schedule__name">Rowing Workout</em>
-              </a>
-            </li>
-  
-            <li class="cd-schedule__event">
-              <a data-start="12:30" data-end="14:00" data-content="event-abs-circuit" data-event="event-1" href="#0">
-                <em class="cd-schedule__name">Abs Circuit</em>
-              </a>
-            </li>
-  
-            <li class="cd-schedule__event">
-              <a data-start="15:45" data-end="16:45"  data-content="event-yoga-1" data-event="event-3" href="#0">
-                <em class="cd-schedule__name">Yoga Level 1</em>
-              </a>
-            </li>
-          </ul>
-        </li>
+        {% endfor %}
       </ul>
     </div>
   
@@ -212,47 +102,7 @@
     <div class="cd-schedule__cover-layer"></div>
   </div> <!-- .cd-schedule -->
   <script>
-    function downloadScreenshot() {
-      // Force desktop view
-      const originalWidth = document.body.style.width;
-      document.body.style.width = '1024px';  // Standard desktop width
-      
-      // Get full document height
-      const html = document.documentElement;
-      const canvas = document.createElement("canvas");
-      const fullHeight = Math.max(
-        document.body.scrollHeight,
-        document.body.offsetHeight,
-        html.clientHeight,
-        html.scrollHeight,
-        html.offsetHeight
-      );
     
-      // Configure html2canvas
-      html2canvas(document.documentElement, {
-        windowWidth: 1024,
-        windowHeight: fullHeight,
-        scrollY: -window.scrollY,
-        width: 1024,
-        height: fullHeight,
-        scale: 1,
-        useCORS: true,
-        allowTaint: true,
-        onclone: function(clonedDoc) {
-          clonedDoc.querySelector('.cd-schedule').classList.remove('cd-schedule--loading');
-        }
-      }).then(function(canvas) {
-        // Convert and download
-        const image = canvas.toDataURL("image/png").replace("image/png", "image/octet-stream");
-        const link = document.createElement('a');
-        link.download = 'schedule-screenshot.png';
-        link.href = image;
-        link.click();
-        
-        // Restore original width
-        document.body.style.width = originalWidth;
-      });
-    }
     </script>
   <script src="{{ url_for('static', filename='js/util.js') }}"></script> <!-- util functions included in the CodyHouse framework -->
   <script src="{{ url_for('static', filename='js/main.js') }}"></script>

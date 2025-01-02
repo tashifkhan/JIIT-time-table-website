@@ -1,25 +1,23 @@
-import PyPDF2
-import pandas as pd
 import io
+import tabula
 
-def pdf_to_csv(pdf_file, csv_file):
-    # Open the PDF file
-    with open(pdf_file, 'rb') as file:
-        reader = PyPDF2.PdfReader(file)
-        all_data = []
+def pdf_to_csv_string(uploaded_pdf_file):
+    pdf_path = io.BytesIO(uploaded_pdf_file.read())
+    # Extract tables from PDF
+    tables = tabula.read_pdf(pdf_path, pages='all', multiple_tables=True)
+    
+    # Convert tables to CSV string
+    csv_buffer = io.StringIO()
+    for table in tables:
+        table.to_csv(csv_buffer, index=False)
+    
+    csv_string = csv_buffer.getvalue()
+    csv_buffer.close()
+    return csv_string
 
-        for page in reader.pages:
-            text = page.extract_text()
-
-            lines = text.split('\n')
-
-            for line in lines:
-                row = line.split()
-                all_data.append(row)
-
-        df = pd.DataFrame(all_data)
-        df.to_csv(csv_file, index=False, header=False)
-
-pdf_to_csv('./uploads/BTECH 5th Sem J128.pdf', 'output.csv')
+if __name__ == "__main__":
+    with open('/Users/taf/Projects/Time Table Python Creator/data/xls/BTECH 5th Sem 2024.pdf', 'rb') as file:
+        csv_string = pdf_to_csv_string(file)
+        print(csv_string)
 
 ## bekar hai no use pdf to csv convertor ask 128 students to get the time table in excel format or something

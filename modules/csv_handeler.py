@@ -88,7 +88,7 @@ def csvstring_to_jsonstrings(csv_string):
     # Find where subject codes start
     next_file_index = -1
     for i in range(2, rows):
-        if (str(df.iloc[i,1]) == "Short Subject Code"):
+        if (str(df.iloc[i,1]) == "Short Subject Code" or str(df.iloc[i,1]) == "Short Name"):
             next_file_index = i
             does_include_subjects = True
             break
@@ -114,8 +114,13 @@ def csvstring_to_jsonstrings(csv_string):
     output_subject = []
     subject_binding = ["Code", "Full Code", "Subject"]
     if does_include_subjects:
+        coordinate = []
+        for i in range(next_file_index, rows):
+            for j in range(0, columns): 
+                if j < columns - 2 and (str(df.iloc[i,1+j]) == "Short Subject Code" or str(df.iloc[i,1+j]) == "Short Name"):
+                    coordinate.append(j)
         for i in range(next_file_index+1, rows):
-            for j in range(0, 6, 3):  # Step by 3 to handle both sets of columns
+            for j in coordinate:  # Step by 3 to handle both sets of columns
                 if pd.notna(df.iloc[i,1+j]):
                     subject_dict = {}
                     for k in range(3):
@@ -126,6 +131,8 @@ def csvstring_to_jsonstrings(csv_string):
     else:
         output_subject = firstyear_subject_extractor(csv_string, next_file_index)
 
+    print(json.dumps(output_subject, indent=4))
+
     return {
         "timetable": output,
         "subjects": output_subject
@@ -133,3 +140,24 @@ def csvstring_to_jsonstrings(csv_string):
 
 if __name__ == "__main__":
     csv_to_json("./data/csv/time_table.csv", "test012", "testsub122")
+
+'''
+    if does_include_subjects:
+        for i in range(next_file_index, rows):
+            if i == next_file_index:
+                for j in range(1, columns): 
+                    coordinate = []
+                # for j in range(0, 6, 3):  # Step by 3 to handle both sets of columns
+                    if j < columns - 2 and (str(df.iloc[i,1+j]) == "Short Subject Code" or str(df.iloc[i,1+j]) == "Short Name"):
+                        print(df.iloc[i,1+j], "-->")
+                        coordinate.append(j+1)
+                subject_dict = {}
+            for j in coordinate:
+                for k in range(3):
+                    if j + k < columns - 1 and pd.notna(df.iloc[i,1+j+k]):
+                        subject_dict[subject_binding[k]] = str(df.iloc[i,1+j+k]).strip()
+                if subject_dict:
+                    output_subject.append(subject_dict)
+    else:
+        output_subject = firstyear_subject_extractor(csv_string, next_file_index)
+'''

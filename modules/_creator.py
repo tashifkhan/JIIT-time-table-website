@@ -93,7 +93,7 @@ def location_extractor(text):
 
 def subject_name_extractor(subjects_dict, code):
     for subject in subjects_dict:
-        if subject["Code"] == code:
+        if subject["Code"] == code or subject["Full Code"] == code or subject["Full Code"][2:] == code:
             return subject["Subject"]
     return code
 
@@ -186,6 +186,8 @@ def process_timeslot(timeslot, type="L"):
             end_hour = (end_hour + 1) % 24
             end_time_24 = f"{end_hour:02d}:{end_min}"
 
+        if start_time_24 == "00:00":
+            start_time_24 = "12:00"
         return start_time_24, end_time_24
     except Exception as e:
         print(f"Error processing timeslot '{timeslot}': {e}")

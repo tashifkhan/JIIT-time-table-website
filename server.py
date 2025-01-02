@@ -129,4 +129,4 @@ def electives_page():
     return render_template('schedule.html', your_schedule=result)
 
 if __name__ == '__main__':
-    app.run()
+    app.run(debug=True)

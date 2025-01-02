@@ -119,7 +119,7 @@ def electives_page():
     for i in range(1, numumber_electives+1):
         elective = request_data[f'elective_{i}']
         electives.append(elective)
-    result = time_table_creator(global_state['time_table'], global_state['subjects_dict'], request_data['batch'], electives)
+    result = time_table_creator(global_state['time_table'], global_state['subjects_dict'], request_data['batch'].capitalize(), electives)
     return json.dumps(result, indent=4)
 
 if __name__ == '__main__':

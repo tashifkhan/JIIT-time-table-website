@@ -62,13 +62,13 @@ def csvstring_to_jsonstrings(csv_string):
     df = df.dropna(how='all', axis=1)  # Drop columns where all values are NaN
     rows, columns = df.shape
   
-    print("\nTable Structure:")
-    print("-" * (columns * 15))  # Print horizontal line
-    for i in range(rows):
-        for j in range(columns):
-            cell_value = str(df.iloc[i,j])
-            print(f"{cell_value[:12]:<12}", end=" | ")  # Truncate and left-align values
-        print("\n" + "-" * (columns * 15))  # Print horizontal line after each row
+    # print("\nTable Structure:")
+    # print("-" * (columns * 15))  # Print horizontal line
+    # for i in range(rows):
+    #     for j in range(columns):
+    #         cell_value = str(df.iloc[i,j])
+    #         print(f"{cell_value[:12]:<12}", end=" | ")  # Truncate and left-align values
+    #     print("\n" + "-" * (columns * 15))  # Print horizontal line after each row
 
     output = {}
     current_day = "-1"

@@ -1,5 +1,61 @@
 import json
 from datetime import datetime
+import re
+from typing import List
+
+def parse_batch_numbers(batch_input: str) -> List[str]:
+    """
+    Parse batch number formats and return array of individual batches.
+    Handles special cases like 'ABC', single letters, and empty strings.
+    """
+    if not batch_input:
+        return ['A', 'B', 'C']
+    
+    batch_input = batch_input.strip()
+    
+    # Handle ABC special case
+    if batch_input.upper() == 'ABC':
+        return ['A', 'B', 'C']
+    
+    # Handle single letter case
+    if len(batch_input) == 1 and batch_input.isalpha():
+        return [batch_input.upper()]
+    
+    # Handle multiple ranges separated by comma
+    if ',' in batch_input:
+        ranges = [r.strip() for r in batch_input.split(',')]
+        result = []
+        for r in ranges:
+            result.extend(parse_single_range(r))
+        return result
+    
+    return parse_single_range(batch_input)
+
+def parse_single_range(batch_range: str) -> List[str]:
+    """Helper function to parse a single batch range."""
+    # Handle comma-separated format with missing prefix
+    if ',' in batch_range:
+        parts = batch_range.split(',')
+        prefix = re.match(r'([A-Za-z]+)', parts[0]).group(1)
+        result = []
+        for part in parts:
+            if re.match(r'[A-Za-z]', part):
+                result.append(part.strip())
+            else:
+                result.append(f"{prefix}{part.strip()}")
+        return result
+    
+    # Handle hyphen-separated ranges
+    if '-' in batch_range:
+        parts = batch_range.split('-')
+        prefix = re.match(r'([A-Za-z]+)', parts[0]).group(1)
+        numbers = [int(re.search(r'\d+', part).group()) for part in parts]
+        return [f"{prefix}{i}" for i in range(numbers[0], numbers[-1] + 1)]
+    
+    # Handle single batch number
+    return [batch_range]
+
+
 
 def batch_extractor(text):
     start_bracket = text.find('(')
@@ -122,6 +178,17 @@ def process_timeslot(timeslot, type="L"):
     except Exception as e:
         print(f"Error processing timeslot '{timeslot}': {e}")
         return "00:00", "00:00"
+    
+def handeling_normal_batch():
+    ''' types of formats
+    TA3(EC315)-TS20/AKS
+    LA5-A6(EC315)-G6/SCH
+    LA7-A8-A10(EC611)-FF8/JG
+    LC1-C3(BT414)-CS1/RAC,SHM
+    LB9,10(CS311)-CS3/KA
+    LB3,B4(CS311)-CR425/AST
+    '''
+    return
 
 def time_table_creator(time_table_json_string, subject_json_string, batch, electives_subject_codes):
     time_table = time_table_json_string
@@ -244,21 +311,53 @@ def time_table_creator(time_table_json_string, subject_json_string, batch, elect
     return formatted_timetable
 
 if __name__ == "__main__":
-    with open("./data/json/time_table.json", 'r') as file:
-        time_table = json.load(file)
+    # with open("./data/json/time_table.json", 'r') as file:
+    #     time_table = json.load(file)
 
-    with open("./data/json/subject2.json", 'r') as file:
+    with open("./data/json/subjects_newsem.json", 'r') as file:
         subject = json.load(file)
 
-    your_time_table = []
+    # your_time_table = []
 
-    batch = input("Enter your Batch: ").upper().strip()
-    electives_subject_codes = []
-    n = int(input("Number of electives you have: "))
-    for i in range(n):
-        electives_subject_codes.append(input("Enter the subject code of the elective (shortttened one): ").upper().strip())
+    # batch = input("Enter your Batch: ").upper().strip()
+    # electives_subject_codes = []
+    # n = int(input("Number of electives you have: "))
+    # for i in range(n):
+    #     electives_subject_codes.append(input("Enter the subject code of the elective (shortttened one): ").upper().strip())
 
-    print(json.dumps(time_table_creator(time_table, subject, batch, electives_subject_codes), indent=4))
+    # print(json.dumps(time_table_creator(time_table, subject, batch, electives_subject_codes), indent=4))
+    test = "LA5-A6(EC315)-G6/SCH"
+    test2 = "T A1-A10,C1-C3 (H3H30)-FF1/IJ"
+    print(batch_extractor(test2))
+    subjectCode = test2.strip()
+    code = subject_extractor(subjectCode) 
+    print(code)
+    print(subject_name_extractor(subject, code))
+    batch = "B12"
+    print(batch_extractor(test))
+    test_inputs = [
+        "A3",
+        "A5-A6",
+        "A7-A8-A10",
+        "C1-C3",
+        "B9,10",
+        "B3,B4",
+        "ABC",
+        "B",
+        "A",
+        "C",
+        "A1-A10, B11-B15, C1-C3",
+        "B1-B10",
+        ""
+    ]
+
+    print("Testing batch number parser:")
+    for test_input in test_inputs:
+        result = parse_batch_numbers(test_input)
+        print(f"Input: {test_input:20} -> Output: {result}")
+
+
+
 
 ''' formated timetable
 {

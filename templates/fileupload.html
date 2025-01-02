@@ -41,6 +41,7 @@
                         <!-- Hidden inputs for passing time_table and subjects_dict -->
                         <!-- <input type="hidden" name="time_table" value="{{ time_table }}">
                         <input type="hidden" name="subjects_dict" value="{{ subjects_dict }}"> -->
+                        <input type="hidden" name="electives" id="electives-json">
                         <button type="submit" class="btn btn-primary w-100">Submit</button>
                     </form>
                 </div>
@@ -49,6 +50,17 @@
     </div>
 
     <script>
+        document.getElementById('elective-form').addEventListener('submit', function(e) {
+            const electives = [];
+            const selectElements = document.querySelectorAll('[name^="elective_"]');
+            selectElements.forEach(select => {
+                if (select.value) {
+                    electives.push(select.value);
+                }
+            });
+            document.getElementById('electives-json').value = JSON.stringify(electives);
+        });
+
         document.getElementById('elective_count').addEventListener('change', function() {
             const count = this.value;
             const container = document.getElementById('elective-selections');

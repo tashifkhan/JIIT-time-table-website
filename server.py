@@ -1,5 +1,6 @@
 from flask import Flask, render_template
 import os
+import json
 from flask import request
 from werkzeug.utils import secure_filename
 
@@ -11,6 +12,12 @@ from modules.pdf_handeler import pdf_to_csv_string
 # processing modules
 from modules.csv_handeler import csvstring_to_jsonstrings
 from modules._creator import time_table_creator
+
+# state management
+global_state = {
+    "time_table": None,
+    "subjects_dict": None
+}
 
 ''' pipeline
 from modules.xls_handeler import xls_to_csv_string
@@ -95,13 +102,25 @@ def fileupload():
     for subject in subjects_dict:
         subject['Subject'] = subject['Subject'].title()
 
+    global_state["time_table"] = time_table
+    global_state["subjects_dict"] = subjects_dict
+
     return render_template('fileupload.html', time_table=time_table, subjects_dict=subjects_dict)
 
 @app.route('/electives', methods=['POST'])
-def electives():
+def electives_page():
+    if not global_state['time_table'] or not global_state['subjects_dict']:
+        return 'Please upload a file first', 400
+    
     request_data = request.form
-    print(request_data)
-    return "yes"
+    request_data = dict(request_data)
+    numumber_electives = int(request_data['elective_count'])
+    electives = []
+    for i in range(1, numumber_electives+1):
+        elective = request_data[f'elective_{i}']
+        electives.append(elective)
+    result = time_table_creator(global_state['time_table'], global_state['subjects_dict'], request_data['batch'], electives)
+    return json.dumps(result, indent=4)
 
 if __name__ == '__main__':
     app.run(debug=True)

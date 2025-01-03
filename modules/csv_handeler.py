@@ -211,12 +211,14 @@ def csvstring_to_jsonstrings(csv_string: str) -> dict:
             for j in range(0, columns): 
                 if j < columns - 2 and (str(df.iloc[i,1+j]) == "Short Subject Code" or str(df.iloc[i,1+j]) == "Short Name"):
                     coordinate.append(j)
+        # print(coordinate)
         for i in range(next_file_index+1, rows):
             for j in coordinate:  # Step by 3 to handle both sets of columns
                 if pd.notna(df.iloc[i,1+j]):
                     subject_dict = {}
                     for k in range(3):
                         if pd.notna(df.iloc[i,1+j+k]):
+                            # print(str(df.iloc[i,1+j+k]).strip())
                             subject_dict[subject_binding[k]] = str(df.iloc[i,1+j+k]).strip()
                     if subject_dict:
                         output_subject.append(subject_dict)

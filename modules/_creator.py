@@ -134,9 +134,47 @@ def location_extractor(text: str) -> str:
 
 def subject_name_extractor(subjects_dict: dict, code: str) -> str:
     for subject in subjects_dict:
-        if subject["Code"] == code or subject["Full Code"] == code or subject["Full Code"][2:] == code or ((subject["Full Code"][:2]+subject["Code"]) == code):
+        if subject["Code"] == code:
+            return subject["Subject"]
+        if subject["Full Code"] == code:
+            return subject["Subject"]
+        if str(subject["Full Code"][:2] + subject["Code"]).strip() == code.strip():
+            return subject["Subject"]
+        if str(subject["Full Code"][3:]).strip() == code.strip():
+            return subject["Subject"]
+        if str(subject["Full Code"][2:]).strip() == code.strip():
+            return subject["Subject"]
+        if str(subject["Full Code"][:5] + subject["Code"]).strip() == code.strip():
+            return subject["Subject"]
+        if str(subject["Full Code"][2:5] + subject["Code"]).strip() == code.strip():
+            return subject["Subject"]
+        if str(subject["Full Code"][3:5] + subject["Code"]).strip() == code.strip():
             return subject["Subject"]
     return code
+
+def do_you_have_elective(elective_subject_codes: List[str], subject_code: str, subject_dict :dict) -> bool:
+    if subject_code in elective_subject_codes:
+        return True
+    electives_directory = []
+    for subject in subject_dict:
+        if subject["Code"] in elective_subject_codes:
+            electives_directory.append(subject)
+    for elective in electives_directory:
+        if elective["Full Code"][:2] + elective["Code"] == subject_code:
+            return True
+        if elective["Full Code"][3:] == subject_code:
+            return True
+        if elective["Full Code"][2:] == subject_code:
+            return True
+        if elective["Full Code"][:5] + elective["Code"] == subject_code:
+            return True
+        if elective["Full Code"][:2] + elective["Code"] == subject_code:
+            return True  
+        if elective["Full Code"][2:5] + elective["Code"] == subject_code:
+            return True
+        if elective["Full Code"][3:5] + elective["Code"] == subject_code:
+            return True
+    return False
 
 def process_day(day_str: str) -> str:
     day_mapping = {
@@ -192,6 +230,9 @@ def convert_time_format(time_str):
 
 def process_timeslot(timeslot: str, type: str = "L") -> tuple[str]:
     try:
+        # Handle special case for NOON
+        timeslot = timeslot.replace('12 NOON', '12:00 PM').replace('NOON', '12:00 PM')
+        
         # Split the timeslot into start and end times
         start_time, end_time = timeslot.split('-')
         
@@ -236,16 +277,6 @@ def process_timeslot(timeslot: str, type: str = "L") -> tuple[str]:
         print(f"Error processing timeslot '{timeslot}': {e}")
         return "00:00", "00:00"
     
-def handeling_normal_batch():
-    ''' types of formats
-    TA3(EC315)-TS20/AKS
-    LA5-A6(EC315)-G6/SCH
-    LA7-A8-A10(EC611)-FF8/JG
-    LC1-C3(BT414)-CS1/RAC,SHM
-    LB9,10(CS311)-CS3/KA
-    LB3,B4(CS311)-CR425/AST
-    '''
-    return
 
 def time_table_creator(time_table_json: dict, subject_json: dict, batch: str, electives_subject_codes: List[str]) -> dict:
     time_table = time_table_json
@@ -257,18 +288,17 @@ def time_table_creator(time_table_json: dict, subject_json: dict, batch: str, el
         for time, classes in it.items():
             # Iterate through each class in the time slot
             for indi_class in classes:
-                subjectCode = indi_class.strip()
-                code = subject_extractor(subjectCode)  # Extract subject code from the class string
+                code = subject_extractor(indi_class.strip())  # Extract subject code from the class string
                 batchs = batch_extractor(indi_class.strip())
                 batchs_list = parse_batch_numbers(batchs)
 
                 if not is_elective(extracted_batch=batchs, subject_code=code, extracted_batches=batchs_list):
                     if is_batch_included(batch, batchs):
-                        your_time_table.append([day, time, subject_name_extractor(subject, code), indi_class.strip()[0], location_extractor(subjectCode)])
+                        your_time_table.append([day, time, subject_name_extractor(subject, code), indi_class.strip()[0], location_extractor(indi_class.strip())])
 
                 else:
-                    if code in electives_subject_codes and is_batch_included(batch, batchs):
-                        your_time_table.append([day, time, subject_name_extractor(subject, code), indi_class.strip()[0], location_extractor(subjectCode)])
+                    if do_you_have_elective(subject_dict=subject, elective_subject_codes=electives_subject_codes, subject_code=code) and is_batch_included(batch, batchs):
+                        your_time_table.append([day, time, subject_name_extractor(subject, code), indi_class.strip()[0], location_extractor(indi_class.strip())])
 
                 
     ''' time table 

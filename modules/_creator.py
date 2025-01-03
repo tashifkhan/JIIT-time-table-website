@@ -188,6 +188,8 @@ def process_timeslot(timeslot, type="L"):
 
         if start_time_24 == "00:00":
             start_time_24 = "12:00"
+        if end_time_24[3:] == "50":
+            end_time_24 = f"{int(end_time_24[:2])+1}00"
         return start_time_24, end_time_24
     except Exception as e:
         print(f"Error processing timeslot '{timeslot}': {e}")

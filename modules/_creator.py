@@ -42,9 +42,13 @@ def parse_batch_numbers(batch_input: str) -> List[str]:
             # Handle hyphen-separated ranges within comma-separated parts
             if '-' in r:
                 parts = r.split('-')
-                prefix = re.match(r'([A-Za-z]+)', parts[0]).group(1)
-                numbers = [int(re.search(r'\d+', part).group()) for part in parts]
-                result.extend(f"{prefix}{i}" for i in range(numbers[0], numbers[-1] + 1))
+                match = re.match(r'([A-Za-z]+)', parts[0])
+                if not match:
+                    continue
+                prefix = match.group(1)
+                numbers = [int(re.search(r'\d+', part).group()) for part in parts if re.search(r'\d+', part)]
+                if numbers:
+                    result.extend(f"{prefix}{i}" for i in range(numbers[0], numbers[-1] + 1))
             else:
                 # Handle non-range parts
                 result.append(r.strip())
@@ -127,7 +131,7 @@ def location_extractor(text: str) -> str:
 
 def subject_name_extractor(subjects_dict: dict, code: str) -> str:
     for subject in subjects_dict:
-        if subject["Code"] == code or subject["Full Code"] == code or subject["Full Code"][2:] == code:
+        if subject["Code"] == code or subject["Full Code"] == code or subject["Full Code"][2:] == code or ((subject["Full Code"][:2]+subject["Code"]) == code):
             return subject["Subject"]
     return code
 
@@ -252,76 +256,81 @@ def time_table_creator(time_table_json: dict, subject_json: dict, batch: str, el
             for indi_class in classes:
                 subjectCode = indi_class.strip()
                 code = subject_extractor(subjectCode)  # Extract subject code from the class string
+                batchs = batch_extractor(indi_class.strip())
+                batchs_list = parse_batch_numbers(batchs)
 
-                # Check if class belongs to student's batch (direct match)
-                if batch in batch_extractor(indi_class.strip()) and "-" not in batch_extractor(indi_class.strip()):
-                    if len(indi_class.strip()) > 0:
+                if not is_elective(extracted_batch=batchs, subject_code=code, extracted_batches=batchs_list):
+                    if is_batch_included(batch, batchs):
+                        your_time_table.append([day, time, subject_name_extractor(subject, code), indi_class.strip()[0], location_extractor(subjectCode)])
+
+                else:
+                    if code in electives_subject_codes:
                         your_time_table.append([day, time, subject_name_extractor(subject, code), indi_class.strip()[0], location_extractor(subjectCode)])
 
                 # Handle elective subjects
-                for elective_code in electives_subject_codes:
-                    # Skip practical sessions (marked with 'P')
-                    if len(indi_class)>0 and indi_class[0] != "P":
-                        if subject_extractor(indi_class) == elective_code:
-                            extracted_batch = batch_extractor(indi_class)
+                # for elective_code in electives_subject_codes:
+                #     # Skip practical sessions (marked with 'P')
+                #     if len(indi_class)>0 and indi_class[0] != "P":
+                #         if subject_extractor(indi_class) == elective_code:
+                #             extracted_batch = batch_extractor(indi_class)
 
-                            # Handle simple batch assignments (no ranges or groups)
-                            if ("-" not in extracted_batch) or ("," not in extracted_batch):
-                                # No batch specified or full batch (3 characters)
-                                if len(extracted_batch) in [0,3]:
-                                    your_time_table.append([day, time, subject_name_extractor(subject, code), indi_class.strip()[0], location_extractor(subjectCode)])
+                #             # Handle simple batch assignments (no ranges or groups)
+                #             if ("-" not in extracted_batch) or ("," not in extracted_batch):
+                #                 # No batch specified or full batch (3 characters)
+                #                 if len(extracted_batch) in [0,3]:
+                #                     your_time_table.append([day, time, subject_name_extractor(subject, code), indi_class.strip()[0], location_extractor(subjectCode)])
 
-                                # Single character batch
-                                elif len(extracted_batch) == 1:
-                                    if extracted_batch == batch[0]:
-                                        your_time_table.append([day, time, subject_name_extractor(subject, code), indi_class.strip()[0], location_extractor(subjectCode)])
+                #                 # Single character batch
+                #                 elif len(extracted_batch) == 1:
+                #                     if extracted_batch == batch[0]:
+                #                         your_time_table.append([day, time, subject_name_extractor(subject, code), indi_class.strip()[0], location_extractor(subjectCode)])
 
-                                # Two character batch
-                                elif len(extracted_batch) == 2:
-                                    for letter in extracted_batch:
-                                        your_time_table.append([day, time, subject_name_extractor(subject, code), indi_class.strip()[0], location_extractor(subjectCode)])
+                #                 # Two character batch
+                #                 elif len(extracted_batch) == 2:
+                #                     for letter in extracted_batch:
+                #                         your_time_table.append([day, time, subject_name_extractor(subject, code), indi_class.strip()[0], location_extractor(subjectCode)])
 
-                            # Handle comma-separated batch lists
-                            if ("," in extracted_batch):
-                                batch_list = extracted_batch.split(",")
-                                for index, b in enumerate(batch_list):
-                                    # Handle long batch lists (more than 3 batches)
-                                    if len(batch_list) > 3:
-                                        if b.strip()[0].isalpha():
-                                            if b.strip()[0] == batch[0]:
-                                                batch_list[index] = b[1:]
-                                                if batch_list[index] == batch[1:]:
-                                                    your_time_table.append([day, time, subject_name_extractor(subject, code), indi_class.strip()[0], location_extractor(subjectCode)])
-                                            else: 
-                                                break
-                                        else:
-                                            if b == batch[1:]:
-                                                your_time_table.append([day, time, subject_name_extractor(subject, code), indi_class.strip()[0], location_extractor(subjectCode)])
+                #             # Handle comma-separated batch lists
+                #             if ("," in extracted_batch):
+                #                 batch_list = extracted_batch.split(",")
+                #                 for index, b in enumerate(batch_list):
+                #                     # Handle long batch lists (more than 3 batches)
+                #                     if len(batch_list) > 3:
+                #                         if b.strip()[0].isalpha():
+                #                             if b.strip()[0] == batch[0]:
+                #                                 batch_list[index] = b[1:]
+                #                                 if batch_list[index] == batch[1:]:
+                #                                     your_time_table.append([day, time, subject_name_extractor(subject, code), indi_class.strip()[0], location_extractor(subjectCode)])
+                #                             else: 
+                #                                 break
+                #                         else:
+                #                             if b == batch[1:]:
+                #                                 your_time_table.append([day, time, subject_name_extractor(subject, code), indi_class.strip()[0], location_extractor(subjectCode)])
 
-                                    # Handle short batch lists
-                                    else:
-                                        if b.strip()[0] == batch[0]:
-                                            # Single character batch
-                                            if len(b.strip()) == 1:
-                                                your_time_table.append([day, time, subject_name_extractor(subject, code), indi_class.strip()[0], location_extractor(subjectCode)])
-                                            else:
-                                                # Handle batch ranges (e.g., A1-A4)
-                                                batch_nums = ((b.strip())).split("-")
-                                                if len(batch) > 1 and all(len(num.strip()) > 1 for num in batch_nums):
-                                                    batch_number_str = batch.strip()[1:]
+                #                     # Handle short batch lists
+                #                     else:
+                #                         if b.strip()[0] == batch[0]:
+                #                             # Single character batch
+                #                             if len(b.strip()) == 1:
+                #                                 your_time_table.append([day, time, subject_name_extractor(subject, code), indi_class.strip()[0], location_extractor(subjectCode)])
+                #                             else:
+                #                                 # Handle batch ranges (e.g., A1-A4)
+                #                                 batch_nums = ((b.strip())).split("-")
+                #                                 if len(batch) > 1 and all(len(num.strip()) > 1 for num in batch_nums):
+                #                                     batch_number_str = batch.strip()[1:]
 
-                                                    if batch_number_str:
-                                                        # Check if student's batch number falls within the range
-                                                        batch_number = int(batch_number_str)
-                                                        batch_num_0 = int(batch_nums[0].strip()[1:])
-                                                        batch_num_1 = int(batch_nums[1].strip()[1:])
+                #                                     if batch_number_str:
+                #                                         # Check if student's batch number falls within the range
+                #                                         batch_number = int(batch_number_str)
+                #                                         batch_num_0 = int(batch_nums[0].strip()[1:])
+                #                                         batch_num_1 = int(batch_nums[1].strip()[1:])
 
-                                                        if batch_num_0 <= batch_number <= batch_num_1:
-                                                            your_time_table.append([day, time, subject_name_extractor(subject, code), indi_class.strip()[0], location_extractor(subjectCode)])
-                                                    else:
-                                                        print("Batch string is empty or incorrectly sliced.")
-                                                else:
-                                                    print("Batch string or batch_nums are incorrectly formatted.")
+                #                                         if batch_num_0 <= batch_number <= batch_num_1:
+                #                                             your_time_table.append([day, time, subject_name_extractor(subject, code), indi_class.strip()[0], location_extractor(subjectCode)])
+                #                                     else:
+                #                                         print("Batch string is empty or incorrectly sliced.")
+                #                                 else:
+                #                                     print("Batch string or batch_nums are incorrectly formatted.")
 
     ''' time table 
     ['MON', '10 -10.50 AM', 'Data Structures and Algorithms', 'L', 'G7']

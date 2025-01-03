@@ -1,5 +1,8 @@
 # Time Table Python Creator
 
+<div align="center">
+   <a href="https://jiit-timetable.tashif.codes/"> try it out </a> 
+</div>
 This is a Flask-based web application that simplifies the process of creating and managing time tables. The application allows users to upload their time table files in various formats (CSV, XLSX, XLS, PDF) and generates a simplified schedule (you can download it too). Additionally, it provides an option to select electives and integrates with Google Calendar to add events.
 
 ## Features
@@ -14,8 +17,8 @@ This is a Flask-based web application that simplifies the process of creating an
 1. Clone the repository:
 
    ```sh
-   git clone https://github.com/yourusername/time-table-python-creator.git
-   cd time-table-python-creator
+   git clone https://github.com/tashifkhan/JIIT-time-table-parser
+   cd JIIT-time-table-parser
    ```
 
 2. Create a virtual environment and activate it:
@@ -65,3 +68,8 @@ This is a Flask-based web application that simplifies the process of creating an
 - [Flask](https://flask.palletsprojects.com/)
 - [Google Calendar API](https://developers.google.com/calendar)
 - [html2canvas](https://html2canvas.hertzen.com/)
+
+
+## Work In Progress
+- 4th year table not handelled yet (double entries beacuse of 2 slots availble)
+- google calender integration in works

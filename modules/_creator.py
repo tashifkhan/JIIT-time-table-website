@@ -75,6 +75,8 @@ def is_elective(extracted_batch: str, subject_code: str, extracted_batches: List
     Returns:
         bool: True if subject is an elective, False otherwise
     """
+    if extracted_batch.upper() == "A7-A8-A10":
+        return False
     if extracted_batch.isalpha():
         return True
     if len(extracted_batches) > 3:

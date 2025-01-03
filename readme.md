@@ -1,8 +1,9 @@
 # Time Table Python Creator
 
 <div align="center">
-   <a href="https://jiit-timetable.tashif.codes/"> try it out </a> 
+   <a href="https://jiit-timetable.tashif.codes/"> hosted here </a> 
 </div>
+
 This is a Flask-based web application that simplifies the process of creating and managing time tables. The application allows users to upload their time table files in various formats (CSV, XLSX, XLS, PDF) and generates a simplified schedule (you can download it too). Additionally, it provides an option to select electives and integrates with Google Calendar to add events.
 
 ## Features

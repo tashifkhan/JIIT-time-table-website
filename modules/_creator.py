@@ -60,28 +60,7 @@ def parse_batch_numbers(batch_input: str) -> List[str]:
     # Handle single batch number
     return [batch_input]
 
-def is_batch_included(search_batch: str, batch_input: str) -> bool:
-    """
-    Check if a batch is included in the batch input string.
-    Handles both exact matches and prefix matches.
-    
-    Args:
-        search_batch: Batch to search for (e.g., 'A6' or 'B')
-        batch_input: Input string containing batch specifications
-    
-    Returns:
-        bool: True if batch is included, False otherwise
-    """
-    parsed_batches = parse_batch_numbers(batch_input)
-    
-    # If search_batch is just a letter, check if it's a prefix of any batch
-    if len(search_batch) == 1 and search_batch.isalpha():
-        return any(batch.startswith(search_batch) for batch in parsed_batches)
-    
-    # Otherwise, look for exact match
-    return search_batch in parsed_batches
-
-def is_elective(extracted_batch: str, extracted_batches: List[str]) -> bool:
+def is_elective(extracted_batch: str, subject_code: str, extracted_batches: List[str]) -> bool:
     """
     Check if a subject code is an elective subject.
     
@@ -98,10 +77,31 @@ def is_elective(extracted_batch: str, extracted_batches: List[str]) -> bool:
         return True
     if not extracted_batch.strip():
         return True
-    if len(extracted_batches) > 3 and extracted_batch[0] == "C":
+    if len(extracted_batches) == 3 and extracted_batch[0] == "C" and subject_code[0] != "B":
         return True
     return False
 
+def is_batch_included(search_batch: str, extracted_batch_input: str) -> bool:
+    """
+    Check if a batch is included in the batch input string.
+    Handles both exact matches and prefix matches.
+    
+    Args:
+        search_batch: Batch to search for (e.g., 'A6' or 'B')
+        batch_input: Input string containing batch specifications
+    
+    Returns:
+        bool: True if batch is included, False otherwise
+    """
+    if not extracted_batch_input:
+        return True
+    batch_list = parse_batch_numbers(extracted_batch_input.strip())
+    if search_batch in batch_list:
+        return True
+    for batch in batch_list:
+        if len(batch) == 1 and search_batch[0] == batch:
+            return True
+    return False
 
 def batch_extractor(text: str) -> str:
     start_bracket = text.find('(')
@@ -405,7 +405,9 @@ if __name__ == "__main__":
         "A1-A10, B11-B15, C1-C3",
         "B1-B10",
         "",
-        "A15A17"
+        "A15A17",
+        "A1-A10, B11-B15,C",
+        "LA1-A10,C"
     ]
 
     print("Testing batch number parser:")
@@ -413,22 +415,29 @@ if __name__ == "__main__":
         result = parse_batch_numbers(test_input)
         print(f"Input: {test_input:20} -> Output: {result}")
 
-    # test_cases = [
-    #     ("A6", "A1-A10"),
-    #     ("B16", "B"),
-    #     ("C2", "C1-C3"),
-    #     ("A3", "ABC"),
-    #     ("B5", "B1-B10"),
-    #     ("B3", "B3,B4"),
-    #     ("B4", "B3,4"),
-    #     ("D1", "ABC"),
-    #     ("A1", ""),
-    #     ("A8", "A7-A8-A10"),
-    # ]
+    print()
 
-    # for search_batch, batch_input in test_cases:
-    #     result = is_batch_included(search_batch, batch_input)
-    #     print(f"Searching for {search_batch:3} in {batch_input:10} -> {result}")
+    test_cases = [
+        ("A6", "A1-A10"),
+        ("B16", "B"),
+        ("C2", "C1-C3"),
+        ("A3", "ABC"),
+        ("B5", "B1-B10"),
+        ("B3", "B3,B4"),
+        ("B4", "B3,4"),
+        ("D1", "ABC"),
+        ("A1", ""),
+        ("A8", "A7-A8-A10"),
+        ("B7", "Ca"),
+        ("A14", "A14A17"),
+        ("B12", "A1-A10, B11-B15, C1-C3"),
+        ("B4", "B3,4,8,A9,C1-C3"),
+        ("C5", "A1-A10, B11-B15,C "),
+    ]
+
+    for search_batch, batch_input in test_cases:
+        result = is_batch_included(search_batch, batch_input)
+        print(f"Searching for {search_batch:3} in {batch_input:10} -> {result}")
 
 
 

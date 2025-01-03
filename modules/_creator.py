@@ -69,13 +69,13 @@ def is_batch_included(search_batch: str, batch_input: str) -> bool:
     # Otherwise, look for exact match
     return search_batch in parsed_batches
 
-def batch_extractor(text):
+def batch_extractor(text: str) -> str:
     start_bracket = text.find('(')
     if start_bracket != -1:
         return text[1:start_bracket].strip()
     return ""
 
-def subject_extractor(text):
+def subject_extractor(text: str) -> str:
     start_bracket = text.find('(')
     if start_bracket != -1:
         end_bracket = text.find(')', start_bracket)
@@ -83,7 +83,7 @@ def subject_extractor(text):
             return text[start_bracket + 1:end_bracket]
     return ""
 
-def location_extractor(text):
+def location_extractor(text: str) -> str:
     start_dash = text.find('-')
     if start_dash != -1:
         end_slash = text.find('/', start_dash)
@@ -91,13 +91,13 @@ def location_extractor(text):
             return text[start_dash + 1:end_slash]
     return ""
 
-def subject_name_extractor(subjects_dict, code):
+def subject_name_extractor(subjects_dict: dict, code: str) -> str:
     for subject in subjects_dict:
         if subject["Code"] == code or subject["Full Code"] == code or subject["Full Code"][2:] == code:
             return subject["Subject"]
     return code
 
-def process_day(day_str):
+def process_day(day_str: str) -> str:
     day_mapping = {
         'MON': 'Monday',
         'M': 'Monday',
@@ -149,7 +149,7 @@ def convert_time_format(time_str):
     except ValueError as e:
         raise ValueError(f"Error parsing time string '{time_str}': {e}")
 
-def process_timeslot(timeslot, type="L"):
+def process_timeslot(timeslot: str, type: str = "L") -> tuple[str]:
     try:
         # Split the timeslot into start and end times
         start_time, end_time = timeslot.split('-')
@@ -206,9 +206,9 @@ def handeling_normal_batch():
     '''
     return
 
-def time_table_creator(time_table_json_string, subject_json_string, batch, electives_subject_codes):
-    time_table = time_table_json_string
-    subject = subject_json_string
+def time_table_creator(time_table_json: dict, subject_json: dict, batch: str, electives_subject_codes: List[str]) -> dict:
+    time_table = time_table_json
+    subject = subject_json
     your_time_table = []
     # Iterate through each day in the timetable
     for day, it in time_table.items():

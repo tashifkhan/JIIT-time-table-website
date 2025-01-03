@@ -59,7 +59,73 @@ def firstyear_subject_extractor(csv_string, imp_index):
         print(json.dumps(output_subject, indent=4))
         return output_subject
     else:
-        return []
+        return [
+            {
+                "Code": "CI121",
+                "Full Code": "18B11CI121",
+                "Subject": "Fundamentals of Computers & Programming - II"
+            },
+            {
+                "Code": "CI121",
+                "Full Code": "18B15CI121",
+                "Subject": "Fundamentals of Computers & Programming Lab- II"
+            },
+            {
+                "Code": "CI121",
+                "Full Code": "15B11CI121",
+                "Subject": "Software Development Fundamentals-II"
+            },
+            {
+                "Code": "CI271",
+                "Full Code": "15B17CI271",
+                "Subject": "Software Development Fundamentals Lab-II"
+            },
+            {
+                "Code": "HS111",
+                "Full Code": "24B11HS111",
+                "Subject": "Universal Human Values"
+            },
+            {
+                "Code": "GE111",
+                "Full Code": "18B15GE111",
+                "Subject": "Engineering Drawing & Design"
+            },
+            {
+                "Code": "MA211",
+                "Full Code": "15B11MA211",
+                "Subject": "Mathematics-II"
+            },
+            {
+                "Code": "MA212",
+                "Full Code": "15B11MA212",
+                "Subject": "Basic Mathematics-II"
+            },
+            {
+                "Code": "HS111",
+                "Full Code": "24B16HS111",
+                "Subject": "Life Skills and Professional Communications"
+            },
+            {
+                "Code": "BT111",
+                "Full Code": "18B15BT111",
+                "Subject": "Basic Bioscience Lab"
+            },
+            {
+                "Code": "PH211",
+                "Full Code": "15B11PH211",
+                "Subject": "Physics-2"
+            },
+            {
+                "Code": "PH271",
+                "Full Code": "15B17PH271",
+                "Subject": "Physics Lab-2"
+            },
+            {
+                "Code": "PH212",
+                "Full Code": "15B11PH212",
+                "Subject": "Biophysical Techniques"
+            }
+        ]
 
 def csv_to_json(csv_file_path, json_filename, json_subject_filename):
     with open(csv_file_path, 'r') as file:

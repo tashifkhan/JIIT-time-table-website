@@ -2,7 +2,7 @@ import xlrd
 import csv
 import io
 
-def xls_to_csv_string(uploaded_xls_file):
+def xls_to_csv_string(uploaded_xls_file: io.BytesIO) -> str:
     file_contents = uploaded_xls_file.read()
     workbook = xlrd.open_workbook(file_contents=file_contents)
     worksheet = workbook.sheet_by_index(0)
@@ -14,7 +14,7 @@ def xls_to_csv_string(uploaded_xls_file):
     csv_buffer.close()
     return csv_string
                                       
-def xls_to_csv(xls_file, csv_file):
+def xls_to_csv(xls_file: str, csv_file: str) -> None:
 
     workbook = xlrd.open_workbook(xls_file)
     worksheet = workbook.sheet_by_index(0)  # Assuming you want the first sheet

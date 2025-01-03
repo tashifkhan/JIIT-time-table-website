@@ -1,7 +1,7 @@
 import io
 import tabula
 
-def pdf_to_csv_string(uploaded_pdf_file):
+def pdf_to_csv_string(uploaded_pdf_file: io.BytesIO) -> str:
     pdf_path = io.BytesIO(uploaded_pdf_file.read())
     # Extract tables from PDF
     tables = tabula.read_pdf(pdf_path, pages='all', multiple_tables=True)

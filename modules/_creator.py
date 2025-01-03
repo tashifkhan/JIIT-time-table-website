@@ -13,6 +13,11 @@ def parse_batch_numbers(batch_input: str) -> List[str]:
     
     batch_input = batch_input.strip()
     
+    # Handle concatenated batch numbers (e.g., A15A17)
+    if re.match(r'^[A-Za-z]\d+[A-Za-z]\d+$', batch_input):
+        matches = re.findall(r'[A-Za-z]\d+', batch_input)
+        return [match.upper() for match in matches]
+    
     # Handle ABC special case
     if batch_input.isalpha():
         return [c.upper() for c in batch_input]

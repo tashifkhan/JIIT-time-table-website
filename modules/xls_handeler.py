@@ -14,7 +14,7 @@ def xls_to_csv_string(uploaded_xls_file: io.BytesIO) -> str:
     csv_buffer.close()
     return csv_string
                                       
-def xls_to_csv(xls_file: str, csv_file: str) -> None:
+def xls_to_csv(xls_file: io.BytesIO, csv_file: str) -> None:
 
     workbook = xlrd.open_workbook(xls_file)
     worksheet = workbook.sheet_by_index(0)  # Assuming you want the first sheet

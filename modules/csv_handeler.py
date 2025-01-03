@@ -2,7 +2,7 @@ import pandas as pd
 import json
 import io
 
-def firstyear_subject_extractor(csv_string, imp_index):
+def firstyear_subject_extractor(csv_string: str, imp_index: int) -> list[dict]:
     print("First Year Subject Extractor")
     df = pd.read_csv(io.StringIO(csv_string))
     df = df.dropna(how='all', axis=0)  # Drop rows where all values are NaN
@@ -127,7 +127,7 @@ def firstyear_subject_extractor(csv_string, imp_index):
             }
         ]
 
-def csv_to_json(csv_file_path, json_filename, json_subject_filename):
+def csv_to_json(csv_file_path: str, json_filename: str, json_subject_filename: str) -> None:
     with open(csv_file_path, 'r') as file:
         csv_string = file.read()
     
@@ -146,7 +146,7 @@ def csv_to_json(csv_file_path, json_filename, json_subject_filename):
     print(f"Data has been written to {filename}")
 
 
-def csvstring_to_jsonstrings(csv_string):
+def csvstring_to_jsonstrings(csv_string: str) -> dict:
     # Read CSV into DataFrame and drop empty rows and columns
     print("CSV String to JSON Strings")
     df = pd.read_csv(io.StringIO(csv_string))

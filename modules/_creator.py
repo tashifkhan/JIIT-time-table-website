@@ -25,8 +25,15 @@ def parse_batch_numbers(batch_input: str) -> List[str]:
     if ',' in batch_input:
         ranges = [r.strip() for r in batch_input.split(',')]
         result = []
+        current_prefix = None
         
         for r in ranges:
+            if r.isdigit():  # If it's just a number, use the previous prefix
+                if current_prefix:
+                    result.append(f"{current_prefix}{r}")
+                continue
+            elif r[0].isalpha():  # If it starts with a letter, update the prefix
+                current_prefix = re.match(r'([A-Za-z]+)', r).group(1)
             # Handle hyphen-separated ranges within comma-separated parts
             if '-' in r:
                 parts = r.split('-')
@@ -68,6 +75,28 @@ def is_batch_included(search_batch: str, batch_input: str) -> bool:
     
     # Otherwise, look for exact match
     return search_batch in parsed_batches
+
+def is_elective(extracted_batch: str, extracted_batches: List[str]) -> bool:
+    """
+    Check if a subject code is an elective subject.
+    
+    Args:
+        subject_code: Subject code to check
+        electives: List of elective subject codes
+    
+    Returns:
+        bool: True if subject is an elective, False otherwise
+    """
+    if extracted_batch.isalpha():
+        return True
+    if len(extracted_batches) > 3:
+        return True
+    if not extracted_batch.strip():
+        return True
+    if len(extracted_batches) > 3 and extracted_batch[0] == "C":
+        return True
+    return False
+
 
 def batch_extractor(text: str) -> str:
     start_bracket = text.find('(')
@@ -358,6 +387,7 @@ if __name__ == "__main__":
         "C1-C3",
         "B9,10",
         "B3,B4",
+        "B3,4",
         "B3,B4,A9",
         "B3,4,8,A9,C1-C3",
         "ABC",
@@ -369,7 +399,8 @@ if __name__ == "__main__":
         "Ac",
         "A1-A10, B11-B15, C1-C3",
         "B1-B10",
-        ""
+        "",
+        "A15A17"
     ]
 
     print("Testing batch number parser:")
@@ -377,23 +408,22 @@ if __name__ == "__main__":
         result = parse_batch_numbers(test_input)
         print(f"Input: {test_input:20} -> Output: {result}")
 
-    test_cases = [
-        ("A6", "A1-A10"),
-        ("B16", "B"),
-        ("C2", "C1-C3"),
-        ("A3", "ABC"),
-        ("B5", "B1-B10"),
-        ("B3", "B3,B4"),
-        ("B4", "B3,4"),
-        ("D1", "ABC"),
-        ("A1", ""),
-        ("A8", "A7-A8-A10"),
-    ]
+    # test_cases = [
+    #     ("A6", "A1-A10"),
+    #     ("B16", "B"),
+    #     ("C2", "C1-C3"),
+    #     ("A3", "ABC"),
+    #     ("B5", "B1-B10"),
+    #     ("B3", "B3,B4"),
+    #     ("B4", "B3,4"),
+    #     ("D1", "ABC"),
+    #     ("A1", ""),
+    #     ("A8", "A7-A8-A10"),
+    # ]
 
-    for search_batch, batch_input in test_cases:
-        result = is_batch_included(search_batch, batch_input)
-        print(f"Searching for {search_batch:3} in {batch_input:10} -> {result}")
-
+    # for search_batch, batch_input in test_cases:
+    #     result = is_batch_included(search_batch, batch_input)
+    #     print(f"Searching for {search_batch:3} in {batch_input:10} -> {result}")
 
 
 

@@ -1,21 +1,17 @@
-import { useState } from "react";
-
-declare global {
-	interface Window {
-		gapi: any;
-	}
-}
+import { useState, useEffect } from "react";
 import { Button } from "./ui/button";
 import { Calendar } from "lucide-react";
 import { motion } from "framer-motion";
 import { createGoogleCalendarEvents } from "../utils/calendar";
 import { WeekSchedule } from "../types/schedule";
 
+declare global {
+	interface Window {
+		google: any;
+	}
+}
+
 const CLIENT_ID = import.meta.env.VITE_GOOGLE_CLIENT_ID;
-const API_KEY = import.meta.env.VITE_GOOGLE_API_KEY;
-const DISCOVERY_DOC =
-	"https://www.googleapis.com/discovery/v1/apis/calendar/v3/rest";
-const SCOPES = "https://www.googleapis.com/auth/calendar.events";
 
 interface GoogleCalendarButtonProps {
 	schedule: WeekSchedule;
@@ -24,47 +20,72 @@ interface GoogleCalendarButtonProps {
 export function GoogleCalendarButton({ schedule }: GoogleCalendarButtonProps) {
 	const [isLoading, setIsLoading] = useState(false);
 
-	const initializeGoogleCalendar = async () => {
-		if (!window.gapi) return;
+	useEffect(() => {
+		const script = document.createElement("script");
+		script.src = "https://accounts.google.com/gsi/client";
+		script.async = true;
+		script.defer = true;
+		document.body.appendChild(script);
 
-		try {
-			await window.gapi.client.init({
-				apiKey: API_KEY,
-				discoveryDocs: [DISCOVERY_DOC],
-			});
-
-			await window.gapi.client.load("calendar", "v3");
-		} catch (error) {
-			console.error("Error initializing Google Calendar:", error);
-		}
-	};
+		return () => {
+			document.body.removeChild(script);
+		};
+	}, []);
 
 	const handleAddToCalendar = async () => {
 		setIsLoading(true);
 		try {
-			// Load the Google API client
-			await new Promise((resolve) => window.gapi.load("client:auth2", resolve));
-			await initializeGoogleCalendar();
+			const client = window.google.accounts.oauth2.initTokenClient({
+				client_id: CLIENT_ID,
+				scope: "https://www.googleapis.com/auth/calendar.events",
+				prompt: "consent",
+				ux_mode: "popup",
+				hosted_domain: "gmail.com",
+				state: window.location.origin,
+				callback: async (response: any) => {
+					if (response.error) {
+						console.error("OAuth error:", response);
+						throw new Error(response.error);
+					}
 
-			// Request authorization
-			await window.gapi.auth2.getAuthInstance().signIn();
+					try {
+						const events = await createGoogleCalendarEvents(schedule);
+						const results = await Promise.allSettled(
+							events.map((event) =>
+								fetch(
+									"https://www.googleapis.com/calendar/v3/calendars/primary/events",
+									{
+										method: "POST",
+										headers: {
+											Authorization: `Bearer ${response.access_token}`,
+											"Content-Type": "application/json",
+										},
+										body: JSON.stringify(event),
+									}
+								)
+							)
+						);
 
-			// Create calendar events
-			const events = await createGoogleCalendarEvents(schedule);
+						const failures = results.filter((r) => r.status === "rejected");
+						if (failures.length > 0) {
+							console.error("Some events failed to add:", failures);
+							alert("Some events could not be added to your calendar");
+						} else {
+							alert("Schedule successfully added to Google Calendar!");
+						}
+					} catch (error) {
+						console.error("Error adding events:", error);
+						alert("Failed to add events to calendar");
+					} finally {
+						setIsLoading(false);
+					}
+				},
+			});
 
-			// Add events to calendar
-			for (const event of events) {
-				await window.gapi.client.calendar.events.insert({
-					calendarId: "primary",
-					resource: event,
-				});
-			}
-
-			alert("Schedule successfully added to Google Calendar!");
+			client.requestAccessToken();
 		} catch (error) {
-			console.error("Error adding to Google Calendar:", error);
-			alert("Failed to add schedule to Google Calendar. Please try again.");
-		} finally {
+			console.error("Error initiating OAuth:", error);
+			alert("Failed to connect to Google Calendar. Please try again.");
 			setIsLoading(false);
 		}
 	};
@@ -79,7 +100,7 @@ export function GoogleCalendarButton({ schedule }: GoogleCalendarButtonProps) {
 				onClick={handleAddToCalendar}
 				disabled={isLoading}
 				className="backdrop-blur-md bg-[#FFF0DC]/10 border border-[#F0BB78]/20 shadow-lg hover:bg-[#FFF0DC]/20
-				transition-all duration-300 rounded-xl px-6 py-3 text-[#fff]/60"
+        transition-all duration-300 rounded-xl px-6 py-3 text-[#fff]/60"
 			>
 				<Calendar className="w-5 h-5 mr-3" />
 				{isLoading ? "Adding to Calendar..." : "Add to Google Calendar"}

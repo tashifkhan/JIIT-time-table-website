@@ -32,10 +32,10 @@ export function ScheduleDisplay({ schedule }: ScheduleDisplayProps) {
 						key={day}
 						initial={{ opacity: 0, y: 20 }}
 						animate={{ opacity: 1, y: 0 }}
-						className="backdrop-blur-lg bg-[#FFF0DC]/10 dark:bg-[#131010]/50 rounded-xl border border-[#F0BB78]/20 shadow-xl"
+						className="backdrop-blur-lg bg-[#131010]/50 rounded-xl border border-[#F0BB78]/20 shadow-xl"
 					>
 						<div className="p-6">
-							<h3 className="text-xl font-semibold mb-4 text-slate-800 dark:text-slate-100">
+							<h3 className="text-xl font-semibold mb-4 text-slate-100">
 								{day}
 							</h3>
 							<div className="space-y-4">

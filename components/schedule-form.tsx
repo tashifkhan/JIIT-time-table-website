@@ -47,19 +47,23 @@ export function ScheduleForm({ subjects, onSubmit }: ScheduleFormProps) {
 	};
 
 	return (
-		<Card className="w-full max-w-md p-6 backdrop-blur-xl bg-slate-900/50 border border-slate-800/50 shadow-xl rounded-xl">
+		<Card className="w-full max-w-md p-6 backdrop-blur-2xl bg-[#FFF0DC]/10 border border-[#F0BB78]/20 shadow-2xl rounded-xl">
 			<form onSubmit={handleSubmit} className="space-y-6">
 				<div className="space-y-2">
-					<Label htmlFor="year" className="text-slate-200">
+					<Label htmlFor="year" className="text-white/90 font-medium">
 						Year
 					</Label>
 					<Select value={year} onValueChange={setYear}>
-						<SelectTrigger className="bg-slate-800/50 border-slate-700">
+						<SelectTrigger className="bg-[#FFF0DC]/10 border-[#F0BB78]/20 backdrop-blur-md hover:bg-[#FFF0DC]/15 transition-all">
 							<SelectValue placeholder="Select year" />
 						</SelectTrigger>
-						<SelectContent>
+						<SelectContent className="bg-[#FFF0DC]/20 backdrop-blur-2xl border-[#F0BB78]/20">
 							{[1, 2, 3, 4].map((yr) => (
-								<SelectItem key={yr} value={yr.toString()}>
+								<SelectItem
+									key={yr}
+									value={yr.toString()}
+									className="hover:bg-white/20"
+								>
 									Year {yr}
 								</SelectItem>
 							))}
@@ -68,7 +72,7 @@ export function ScheduleForm({ subjects, onSubmit }: ScheduleFormProps) {
 				</div>
 
 				<div className="space-y-2">
-					<Label htmlFor="batch" className="text-slate-200">
+					<Label htmlFor="batch" className="text-white/90 font-medium">
 						Batch
 					</Label>
 					<Input
@@ -76,12 +80,12 @@ export function ScheduleForm({ subjects, onSubmit }: ScheduleFormProps) {
 						value={batch}
 						onChange={(e) => setBatch(e.target.value)}
 						placeholder="Enter your batch (e.g., B3)"
-						className="bg-slate-800/50 border-slate-700"
+						className="bg-white/10 border-white/20 backdrop-blur-md hover:bg-white/15 transition-all"
 					/>
 				</div>
 
 				<div className="space-y-2">
-					<Label htmlFor="electiveCount" className="text-slate-200">
+					<Label htmlFor="electiveCount" className="text-white/90 font-medium">
 						Number of Electives
 					</Label>
 					<Input
@@ -95,7 +99,7 @@ export function ScheduleForm({ subjects, onSubmit }: ScheduleFormProps) {
 							setElectiveCount(count);
 							setSelectedElectives(Array.from({ length: count }, () => ""));
 						}}
-						className="bg-slate-800/50 border-slate-700"
+						className="bg-white/10 border-white/20 backdrop-blur-md hover:bg-white/15 transition-all"
 					/>
 				</div>
 
@@ -103,23 +107,30 @@ export function ScheduleForm({ subjects, onSubmit }: ScheduleFormProps) {
 					<motion.div
 						key={index}
 						className="space-y-2"
-						initial={{ opacity: 0, x: -20 }}
-						animate={{ opacity: 1, x: 0 }}
-						transition={{ duration: 0.3, delay: index * 0.1 }}
+						initial={{ opacity: 0, y: 20 }}
+						animate={{ opacity: 1, y: 0 }}
+						transition={{ duration: 0.4, delay: index * 0.1 }}
 					>
-						<Label htmlFor={`elective-${index}`} className="text-slate-200">
+						<Label
+							htmlFor={`elective-${index}`}
+							className="text-white/90 font-medium"
+						>
 							Elective {index + 1}
 						</Label>
 						<Select
 							value={selectedElectives[index]}
 							onValueChange={(value) => handleElectiveChange(index, value)}
 						>
-							<SelectTrigger className="bg-slate-800/50 border-slate-700">
+							<SelectTrigger className="bg-[#FFF0DC]/10 border-[#F0BB78]/20 backdrop-blur-md hover:bg-[#FFF0DC]/15 transition-all">
 								<SelectValue placeholder="Select elective" />
 							</SelectTrigger>
-							<SelectContent>
+							<SelectContent className="bg-[#FFF0DC]/20 backdrop-blur-2xl border-[#F0BB78]/20">
 								{subjects.map((subject) => (
-									<SelectItem key={subject.code} value={subject.code}>
+									<SelectItem
+										key={subject.code}
+										value={subject.code}
+										className="hover:bg-white/20"
+									>
 										{subject.subject}
 									</SelectItem>
 								))}
@@ -130,7 +141,7 @@ export function ScheduleForm({ subjects, onSubmit }: ScheduleFormProps) {
 
 				<Button
 					type="submit"
-					className="w-full bg-gradient-to-r from-purple-500 to-pink-500 hover:from-purple-600 hover:to-pink-600"
+					className="w-full bg-gradient-to-r from-[#543A14] to-[#F0BB78] hover:from-[#543A14]/80 hover:to-[#F0BB78]/80 transition-all duration-300 shadow-lg hover:shadow-[#F0BB78]/25"
 				>
 					<Sparkles className="w-4 h-4 mr-2" />
 					Generate Schedule

@@ -16,6 +16,8 @@ export interface DaySchedule {
   [key: string]: TimeSlot[];
 }
 
+export type ClassType = 'L' | 'T' | 'P';
+
 export interface WeekSchedule {
   [key: string]: DaySchedule;
 }

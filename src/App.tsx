@@ -17,6 +17,16 @@ interface YourTietable {
 }
 
 const App: React.FC = () => {
+	const [schedule, setSchedule] = useState<{
+		[day: string]: {
+			[time: string]: {
+				subject_name: string;
+				type: "L" | "T" | "P";
+				location: string;
+			};
+		};
+	} | null>(null);
+
 	const evaluteTimeTable = async (
 		time_table_json: any,
 		subject_json: any,
@@ -36,16 +46,6 @@ const App: React.FC = () => {
 		}
 	};
 
-	const [schedule, setSchedule] = useState<{
-		[day: string]: {
-			[time: string]: {
-				subject_name: string;
-				type: "L" | "T" | "P";
-				location: string;
-			};
-		};
-	} | null>(null);
-
 	const handleFormSubmit = async (data: {
 		year: string;
 		batch: string;
@@ -63,6 +63,7 @@ const App: React.FC = () => {
 			batch,
 			electives
 		);
+		console.log(Schedule);
 		const mockSchedule: YourTietable = {
 			Monday: {
 				"08:00-09:00": {
@@ -184,8 +185,11 @@ const App: React.FC = () => {
 		};
 		if (Schedule === "Error executing Python function") {
 			setSchedule(mockSchedule);
+			console.log(schedule);
+		} else {
+			setSchedule(Schedule);
+			console.log(schedule);
 		}
-		setSchedule(Schedule);
 	};
 
 	// console.log(timetableMapping);

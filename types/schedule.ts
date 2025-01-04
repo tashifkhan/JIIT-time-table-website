@@ -19,5 +19,11 @@ export interface DaySchedule {
 export type ClassType = 'L' | 'T' | 'P';
 
 export interface WeekSchedule {
-  [key: string]: DaySchedule;
+  [day: string]: {
+    [time: string]: {
+      subject_name: string;
+      type: "L" | "T" | "P";
+      location: string;
+    };
+  };
 }

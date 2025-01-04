@@ -29,7 +29,7 @@ export function ScheduleDisplay({ schedule }: ScheduleDisplayProps) {
 				id="schedule-display"
 				className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 p-6 relative"
 			>
-				{Object.entries(schedule).map(([day, classes]) => (
+				{Object.entries(schedule).map(([day, slots]) => (
 					<motion.div
 						key={day}
 						initial={{ opacity: 0, y: 20 }}
@@ -41,26 +41,26 @@ export function ScheduleDisplay({ schedule }: ScheduleDisplayProps) {
 								{day}
 							</h3>
 							<div className="space-y-4">
-								{classes.map((class_: { type: ClassType }, index) => (
+								{Object.entries(slots).map(([time, class_]) => (
 									<Card
-										key={index}
+										key={time}
 										className={`${
-											typeColors[class_.type]
+											typeColors[class_.type as ClassType]
 										} backdrop-blur-sm border p-4 transition-all duration-300`}
 									>
-										<h4 className="font-medium mb-2">{class_.subject}</h4>
+										<h4 className="font-medium mb-2">{class_.subject_name}</h4>
 										<div className="space-y-2 text-sm opacity-80">
 											<div className="flex items-center gap-2">
 												<Clock className="w-4 h-4" />
-												<span>{class_.time}</span>
+												<span>{time}</span>
 											</div>
 											<div className="flex items-center gap-2">
 												<MapPin className="w-4 h-4" />
-												<span>{class_.room}</span>
+												<span>{class_.location}</span>
 											</div>
 											<div className="flex items-center gap-2">
 												<User className="w-4 h-4" />
-												<span>{class_.faculty}</span>
+												<span>{typeLabels[class_.type as ClassType]}</span>
 											</div>
 										</div>
 									</Card>

@@ -95,7 +95,7 @@ export function ScheduleForm({ mapping, onSubmit }: ScheduleFormProps) {
 					<Input
 						id="batch"
 						value={batch}
-						onChange={(e) => setBatch(e.target.value)}
+						onChange={(e) => setBatch(e.target.value.toUpperCase())}
 						placeholder="Enter your batch (e.g., B3)"
 						className="h-9 sm:h-10 text-sm bg-white/10 border-white/20 backdrop-blur-md hover:bg-white/15 transition-all"
 					/>

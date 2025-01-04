@@ -5,6 +5,8 @@ import { ScheduleDisplay } from "./components/schedule-display";
 import { motion } from "framer-motion";
 import timetableMapping from "./data/timetable-mapping.json";
 import { Calendar } from "lucide-react";
+import { useNavigate } from "react-router-dom";
+";
 
 interface YourTietable {
 	[key: string]: {
@@ -15,8 +17,8 @@ interface YourTietable {
 		};
 	};
 }
-
 const App: React.FC = () => {
+	const navigate = useNavigate();
 	const [schedule, setSchedule] = useState<{
 		[day: string]: {
 			[time: string]: {
@@ -26,6 +28,8 @@ const App: React.FC = () => {
 			};
 		};
 	} | null>(null);
+
+	const [numExecutions, setNumExecutions] = useState(0);
 
 	const evaluteTimeTable = async (
 		time_table_json: any,
@@ -40,6 +44,7 @@ const App: React.FC = () => {
 				batch,
 				electives_subject_codes,
 			});
+			setNumExecutions((prev) => prev + 1);
 			return output;
 		} catch (error) {
 			return "Error executing Python function";
@@ -57,132 +62,22 @@ const App: React.FC = () => {
 		].subjects.sort((a, b) => a.Subject.localeCompare(b.Subject));
 		const timeTableJSON =
 			timetableMapping[year as keyof typeof timetableMapping].timetable;
-		const Schedule = await evaluteTimeTable(
+		let Schedule = await evaluteTimeTable(
 			timeTableJSON,
 			subjectJSON,
 			batch,
 			electives
 		);
+		if (numExecutions == 1) {
+			Schedule = await evaluteTimeTable(
+				timeTableJSON,
+				subjectJSON,
+				batch,
+				electives
+			);
+		}
 		console.log(Schedule);
-		const mockSchedule: YourTietable = {
-			Monday: {
-				"08:00-09:00": {
-					subject_name: "MOBILE COMMUNICATION",
-					type: "L",
-					location: "CS4",
-				},
-				"09:00-10:00": {
-					subject_name: "GLOBAL POLITICS",
-					type: "T",
-					location: "FF1",
-				},
-				"10:00-11:00": {
-					subject_name: "VLSI Design",
-					type: "L",
-					location: "G6",
-				},
-				"11:00-12:00": {
-					subject_name: "Telecommunication Networks",
-					type: "L",
-					location: "FF9",
-				},
-			},
-			Tuesday: {
-				"08:00-09:00": {
-					subject_name: "Fundamentals of Electric Vehicle",
-					type: "L",
-					location: "CS5",
-				},
-				"09:00-10:00": {
-					subject_name: "Popular Literature",
-					type: "L",
-					location: "CS5",
-				},
-				"10:00-12:00": {
-					subject_name: "Telecommunication Networks Lab",
-					type: "P",
-					location: "ACL",
-				},
-				"14:00-15:00": {
-					subject_name: "VLSI Design",
-					type: "L",
-					location: "CS3",
-				},
-				"15:00-16:00": {
-					subject_name: "Telecommunication Networks",
-					type: "L",
-					location: "CS3",
-				},
-			},
-			Wednesday: {
-				"08:00-09:00": {
-					subject_name: "GLOBAL POLITICS",
-					type: "L",
-					location: "CS7",
-				},
-				"09:00-10:00": {
-					subject_name: "MOBILE COMMUNICATION",
-					type: "L",
-					location: "CS6",
-				},
-				"14:00-15:00": {
-					subject_name: "VLSI Design",
-					type: "L",
-					location: "CS2",
-				},
-				"15:00-16:00": {
-					subject_name: "Telecommunication Networks",
-					type: "L",
-					location: "CS2",
-				},
-			},
-			Thursday: {
-				"08:00-09:00": {
-					subject_name: "Popular Literature",
-					type: "L",
-					location: "CS5",
-				},
-				"09:00-10:00": {
-					subject_name: "Fundamentals of Electric Vehicle",
-					type: "L",
-					location: "CS8",
-				},
-				"14:00-15:00": {
-					subject_name: "Basics of Creative Writing",
-					type: "L",
-					location: "FF4",
-				},
-			},
-			Friday: {
-				"08:00-09:00": {
-					subject_name: "MOBILE COMMUNICATION",
-					type: "L",
-					location: "CS6",
-				},
-				"09:00-10:00": {
-					subject_name: "GLOBAL POLITICS",
-					type: "L",
-					location: "CS7",
-				},
-				"10:00-12:00": {
-					subject_name: "VLSI Design Lab II",
-					type: "P",
-					location: "VDA",
-				},
-				"15:00-16:00": {
-					subject_name: "VLSI Design",
-					type: "T",
-					location: "F10",
-				},
-			},
-			Saturday: {
-				"09:00-10:00": {
-					subject_name: "Popular Literature",
-					type: "L",
-					location: "CS5",
-				},
-			},
-		};
+		const mockSchedule: YourTietable = {};
 		if (Schedule === "Error executing Python function") {
 			setSchedule(mockSchedule);
 			console.log(schedule);
@@ -242,6 +137,21 @@ const App: React.FC = () => {
 						<ScheduleDisplay schedule={schedule} />
 					</motion.div>
 				)}
+				<div className="flex justify-center">
+					<motion.button
+						onClick={() => navigate("/timeline")}
+						className="mt-4 px-6 py-2 rounded-lg backdrop-blur-lg bg-white/10 border border-white/20 
+											 text-[#F0BB78] hover:bg-white/20 transition-all duration-300 shadow-lg
+											 flex items-center gap-2"
+						initial={{ opacity: 0 }}
+						animate={{ opacity: 1 }}
+						whileHover={{ scale: 1.05 }}
+						whileTap={{ scale: 0.95 }}
+					>
+						<Calendar className="w-5 h-5" />
+						<span>Timeline View</span>
+					</motion.button>
+				</div>
 			</div>
 		</main>
 	);

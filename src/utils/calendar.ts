@@ -17,6 +17,18 @@ interface GoogleEvent {
   recurrence: string[];
 }
 
+
+declare global {
+  interface Window {
+    gapi: {
+      client: {
+        calendar: any;
+      };
+    };
+  }
+}
+
+
 const getDayNumber = (day: string): number => {
   const days = { MON: 1, TUE: 2, WED: 3, THU: 4, FRI: 5, SAT: 6, SUN: 0 };
   return days[day as keyof typeof days] || 0;
@@ -51,9 +63,15 @@ export const createGoogleCalendarEvents = async (schedule: WeekSchedule) => {
 
   Object.entries(schedule).forEach(([day, slots]) => {
     Object.entries(slots).forEach(([timeSlot, classes]) => {
-      classes.forEach((slot: TimeSlot) => {
-        const dayNumber = getDayNumber(day);
-        const time = parseTime(timeSlot);
+      const slot: TimeSlot = {
+        time: timeSlot,
+        subject: classes.subject_name,
+        type: classes.type,
+        location: classes.location,
+        faculty: 'TBD'  // Add actual faculty data if available
+      };
+      const dayNumber = getDayNumber(day);
+      const time = parseTime(timeSlot);
         const startDate = createEventDateTime(dayNumber, time);
         const endDate = new Date(startDate);
         endDate.setHours(endDate.getHours() + 1);
@@ -76,7 +94,6 @@ export const createGoogleCalendarEvents = async (schedule: WeekSchedule) => {
         events.push(event);
       });
     });
-  });
 
   return events;
 };

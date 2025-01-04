@@ -1,5 +1,7 @@
 import { loadPyodide, PyodideInterface } from 'pyodide';
 
+import { Subject } from '../types/subject';
+import { YourTietable } from '../App';
 let pyodideInstance: PyodideInterface | null = null;
 
 // URL of the Python module file
@@ -25,14 +27,30 @@ export async function initializePyodide() {
   return pyodideInstance;
 }
 
-export async function callPythonFunction(functionName: string, args: any[]): Promise<any> {
+interface PythonFunctionArgs {
+  time_table_json: YourTietable, 
+  subject_json: Subject[], 
+  batch: string, 
+  electives_subject_codes: string[]
+}
+
+export async function callPythonFunction(functionName: string, args: PythonFunctionArgs): Promise<any> {
   const pyodide = await initializePyodide();
   try {
+    console.log("Calling Python function with args:", args);
     const pythonFunction = pyodide.globals.get(functionName);
     if (!pythonFunction) {
       throw new Error(`Function ${functionName} not found in Python module`);
     }
-    return pythonFunction(...args);
+    
+    // Convert JavaScript objects to Python objects
+    const pyTimeTable = pyodide.toPy(args.time_table_json);
+    const pySubjects = pyodide.toPy(args.subject_json);
+    const pyBatch = pyodide.toPy(args.batch);
+    const pyElectives = pyodide.toPy(args.electives_subject_codes);
+    
+    const result = pythonFunction(pyTimeTable, pySubjects, pyBatch, pyElectives);
+    return result.toJs();
   } catch (error) {
     console.error('Error calling Python function:', error);
     throw error;

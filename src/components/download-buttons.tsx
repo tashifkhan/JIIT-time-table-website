@@ -1,6 +1,4 @@
-"use client";
-
-import { Button } from "../components/ui/button";
+import { Button } from "./ui/button";
 import { Download } from "lucide-react";
 import { downloadAsPng, downloadAsPdf } from "../utils/download";
 import { motion } from "framer-motion";

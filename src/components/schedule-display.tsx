@@ -1,7 +1,5 @@
-"use client";
-
 import { motion } from "framer-motion";
-import { Card } from "@/components/ui/card";
+import { Card } from "./ui/card";
 import { WeekSchedule, ClassType } from "../types/schedule";
 import { Clock, MapPin, User } from "lucide-react";
 import { ActionButtons } from "./action-buttons";

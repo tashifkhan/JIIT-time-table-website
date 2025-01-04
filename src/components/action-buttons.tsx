@@ -1,8 +1,6 @@
-"use client";
-
 import { motion } from "framer-motion";
 import { DownloadButtons } from "./download-buttons";
-import { GoogleCalendarButton } from "./google-calendar-button";
+// import { GoogleCalendarButton } from "./google-calendar-button";
 import { WeekSchedule } from "../types/schedule";
 
 interface ActionButtonsProps {
@@ -18,7 +16,7 @@ export function ActionButtons({ schedule }: ActionButtonsProps) {
 			transition={{ duration: 0.3 }}
 		>
 			<DownloadButtons />
-			<GoogleCalendarButton schedule={schedule} />
+			{/* <GoogleCalendarButton schedule={schedule} /> */}
 		</motion.div>
 	);
 }

@@ -11,11 +11,21 @@ import {
 } from "./ui/select";
 import { Input } from "./ui/input";
 import { Label } from "./ui/label";
-import { Subject } from "../types/schedule";
+import { Subject } from "../types/subject";
 import { Sparkles } from "lucide-react";
 
 interface ScheduleFormProps {
-	subjects: Subject[];
+	mapping: {
+		[key: string]: {
+			timetable: {
+				[day: string]: {
+					[time: string]: string[];
+				};
+			};
+			subjects: Subject[];
+		};
+	};
+
 	onSubmit: (data: {
 		year: string;
 		batch: string;
@@ -23,7 +33,7 @@ interface ScheduleFormProps {
 	}) => void;
 }
 
-export function ScheduleForm({ subjects, onSubmit }: ScheduleFormProps) {
+export function ScheduleForm({ mapping, onSubmit }: ScheduleFormProps) {
 	const [year, setYear] = useState("");
 	const [batch, setBatch] = useState("");
 	const [electiveCount, setElectiveCount] = useState(0);
@@ -59,11 +69,14 @@ export function ScheduleForm({ subjects, onSubmit }: ScheduleFormProps) {
 							<SelectValue placeholder="Select year" />
 						</SelectTrigger>
 						<SelectContent className="bg-[#FFF0DC]/20 backdrop-blur-2xl border-[#F0BB78]/20">
-							{[1, 2, 3, 4].map((yr) => (
+							{[1, 2, 3].map((yr) => (
 								<SelectItem
 									key={yr}
 									value={yr.toString()}
 									className="hover:bg-white/20"
+									onChange={() => {
+										setYear(yr.toString());
+									}}
 								>
 									Year {yr}
 								</SelectItem>
@@ -132,15 +145,24 @@ export function ScheduleForm({ subjects, onSubmit }: ScheduleFormProps) {
 								<SelectValue placeholder="Select elective" />
 							</SelectTrigger>
 							<SelectContent className="bg-[#FFF0DC]/20 backdrop-blur-2xl border-[#F0BB78]/20">
-								{subjects.map((subject) => (
-									<SelectItem
-										key={subject.code}
-										value={subject.code}
-										className="hover:bg-white/20"
-									>
-										{subject.subject}
-									</SelectItem>
-								))}
+								{year &&
+									mapping[year]?.subjects
+										?.sort((a, b) => a.Subject.localeCompare(b.Subject))
+										?.map((subject) => (
+											<SelectItem
+												key={subject.Code}
+												value={subject.Code}
+												className="hover:bg-white/20"
+											>
+												{subject.Subject.split(" ")
+													.map(
+														(word) =>
+															word.charAt(0).toUpperCase() +
+															word.slice(1).toLowerCase()
+													)
+													.join(" ")}
+											</SelectItem>
+										))}
 							</SelectContent>
 						</Select>
 					</motion.div>

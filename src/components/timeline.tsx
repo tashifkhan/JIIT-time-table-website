@@ -28,7 +28,7 @@ const TimelinePage: React.FC = () => {
 		"Friday",
 		"Saturday",
 	];
-	const hours = Array.from({ length: 9 }, (_, i) => i + 8); // 8:00 to 16:00
+	// const hours = Array.from({ length: 9 }, (_, i) => i + 8); // 8:00 to 16:00
 
 	const getEventColor = (type: string) => {
 		switch (type) {
@@ -72,7 +72,7 @@ const TimelinePage: React.FC = () => {
 
 	return (
 		<div
-			className="min-h-screen bg-[#131010] text-[#FFF0DC] p-4 md:p-8 overflow-scroll"
+			className="min-h-[50%] bg-[#131010] text-[#FFF0DC] p-4 md:p-8 overflow-scroll"
 			style={{ minWidth: "1600px" }}
 		>
 			<div
@@ -89,10 +89,10 @@ const TimelinePage: React.FC = () => {
 						{/* Time column */}
 						<div className="font-medium">
 							<div className="h-12"></div> {/* Header spacer */}
-							{hours.map((hour) => (
+							{Array.from({ length: 11 }, (_, i) => i + 8).map((hour) => (
 								<div
 									key={hour}
-									className="h-16 md:h-24 flex items-center justify-center text-sm md:text-base"
+									className="h-20 md:h-28 flex items-center justify-center text-sm md:text-base"
 									style={{ transform: "translateY(-50%)" }}
 								>
 									{`${hour}:00`}
@@ -108,8 +108,8 @@ const TimelinePage: React.FC = () => {
 								</div>
 
 								{/* Time grid background */}
-								<div className="grid grid-rows-[repeat(8,4rem)] md:grid-rows-[repeat(8,6rem)]">
-									{hours.map((hour) => (
+								<div className="grid grid-rows-[repeat(10,5rem)] md:grid-rows-[repeat(10,7rem)]">
+									{Array.from({ length: 11 }, (_, i) => i + 8).map((hour) => (
 										<div
 											key={hour}
 											className="border-b border-[rgba(255,240,220,0.05)]"
@@ -127,12 +127,12 @@ const TimelinePage: React.FC = () => {
 												style={{
 													top: `${
 														getEventPosition(timeSlot) *
-															(window.innerWidth >= 768 ? 6 : 4) +
+															(window.innerWidth >= 768 ? 7 : 5) +
 														3
 													}rem`,
 													height: `${
 														getEventDuration(timeSlot) *
-														(window.innerWidth >= 768 ? 6 : 4)
+														(window.innerWidth >= 768 ? 7 : 5)
 													}rem`,
 												}}
 											>

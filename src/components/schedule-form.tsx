@@ -1,18 +1,16 @@
-"use client";
-
 import { useState } from "react";
 import { motion } from "framer-motion";
-import { Button } from "@/components/ui/button";
-import { Card } from "@/components/ui/card";
+import { Button } from "./ui/button";
+import { Card } from "./ui/card";
 import {
 	Select,
 	SelectContent,
 	SelectItem,
 	SelectTrigger,
 	SelectValue,
-} from "@/components/ui/select";
-import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
+} from "./ui/select";
+import { Input } from "./ui/input";
+import { Label } from "./ui/label";
 import { Subject } from "../types/schedule";
 import { Sparkles } from "lucide-react";
 

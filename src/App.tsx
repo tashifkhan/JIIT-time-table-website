@@ -3,7 +3,7 @@ import { callPythonFunction } from "./utils/pyodide";
 import { ScheduleForm } from "./components/schedule-form";
 import { ScheduleDisplay } from "./components/schedule-display";
 import { motion } from "framer-motion";
-import subjects from "./data/subjects.json";
+import timetableMapping from "./data/timetable-mapping.json";
 import { Calendar } from "lucide-react";
 
 const App: React.FC = () => {
@@ -171,6 +171,8 @@ const App: React.FC = () => {
 		setSchedule(mockSchedule);
 	};
 
+	// console.log(timetableMapping);
+
 	return (
 		<main className="min-h-screen bg-gradient-to-br from-[#543A14]/20 via-[#131010]/40 to-[#131010]/60 p-4 sm:p-8 relative overflow-hidden flex items-center justify-center">
 			{/* Background effects - adjusted for mobile */}
@@ -204,7 +206,7 @@ const App: React.FC = () => {
 					transition={{ duration: 0.5, delay: 0.2 }}
 				>
 					<ScheduleForm
-						subjects={subjects.electives}
+						mapping={timetableMapping}
 						onSubmit={handleFormSubmit}
 					/>
 				</motion.div>

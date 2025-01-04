@@ -1,9 +1,3 @@
-export interface Subject {
-  code: string;
-  fullCode: string;
-  subject: string;
-}
-
 export interface TimeSlot {
   time: string;
   subject: string;

@@ -52,8 +52,14 @@ export default function Home() {
 	};
 
 	return (
-		<main className="min-h-screen bg-gradient-to-br from-slate-950 via-slate-900 to-slate-950 p-8">
-			<div className="max-w-7xl mx-auto space-y-8">
+		<main className="min-h-screen bg-gradient-to-br from-[#543A14]/20 via-[#131010]/40 to-[#131010]/60 p-8 relative overflow-hidden">
+			{/* Background effects */}
+			<div className="absolute inset-0 w-full h-full">
+				<div className="absolute top-[-10%] left-[-10%] w-72 h-72 bg-[#F0BB78]/30 rounded-full blur-[128px]" />
+				<div className="absolute bottom-[-10%] right-[-10%] w-72 h-72 bg-[#543A14]/30 rounded-full blur-[128px]" />
+			</div>
+
+			<div className="max-w-7xl mx-auto space-y-8 relative z-10">
 				<motion.div
 					className="text-center space-y-4"
 					initial={{ opacity: 0, y: 20 }}
@@ -61,18 +67,18 @@ export default function Home() {
 					transition={{ duration: 0.5 }}
 				>
 					<div className="flex items-center justify-center gap-3 mb-4">
-						<Calendar className="w-10 h-10 text-purple-400" />
-						<h1 className="text-4xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-purple-400 to-pink-400">
+						<Calendar className="w-10 h-10 text-[#F0BB78]" />
+						<h1 className="text-4xl font-bold bg-clip-text text-[#F0BB78] bg-gradient-to-r from-[#F0BB78] to-[#543A14]">
 							JIIT Schedule Creator
 						</h1>
 					</div>
-					<p className="text-lg text-slate-400">
+					<p className="text-lg text-slate-300/80">
 						Create your personalized class schedule in minutes
 					</p>
 				</motion.div>
 
 				<motion.div
-					className="flex justify-center"
+					className="flex justify-center rounded-2xl p-6"
 					initial={{ opacity: 0, y: 20 }}
 					animate={{ opacity: 1, y: 0 }}
 					transition={{ duration: 0.5, delay: 0.2 }}
@@ -85,7 +91,7 @@ export default function Home() {
 
 				{schedule && (
 					<motion.div
-						className="mt-8"
+						className="mt-8 backdrop-blur-lg bg-white/5 rounded-2xl p-6 border border-white/10 shadow-xl"
 						initial={{ opacity: 0, scale: 0.95 }}
 						animate={{ opacity: 1, scale: 1 }}
 						transition={{ duration: 0.5 }}

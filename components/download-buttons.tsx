@@ -15,14 +15,14 @@ export function DownloadButtons() {
 		>
 			<Button
 				onClick={() => downloadAsPng("schedule-display", "schedule")}
-				className="bg-purple-500 hover:bg-purple-600"
+				className="backdrop-blur-md bg-[#F0BB78]/30 border border-[#F0BB78]/20 shadow-lg hover:bg-[#F0BB78]/40 transition-all duration-300"
 			>
 				<Download className="w-4 h-4 mr-2" />
 				Download PNG
 			</Button>
 			<Button
 				onClick={() => downloadAsPdf("schedule-display", "schedule")}
-				className="bg-pink-500 hover:bg-pink-600"
+				className="backdrop-blur-md bg-[#543A14]/30 border border-[#543A14]/20 shadow-lg hover:bg-[#543A14]/40 transition-all duration-300"
 			>
 				<Download className="w-4 h-4 mr-2" />
 				Download PDF

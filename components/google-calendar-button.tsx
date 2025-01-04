@@ -80,9 +80,10 @@ export function GoogleCalendarButton({ schedule }: GoogleCalendarButtonProps) {
 			<Button
 				onClick={handleAddToCalendar}
 				disabled={isLoading}
-				className="bg-green-500 hover:bg-green-600"
+				className="backdrop-blur-md bg-[#FFF0DC]/10 border border-[#F0BB78]/20 shadow-lg hover:bg-[#FFF0DC]/20 
+				transition-all duration-300 rounded-xl px-6 py-3 text-[#131010]"
 			>
-				<Calendar className="w-4 h-4 mr-2" />
+				<Calendar className="w-5 h-5 mr-3" />
 				{isLoading ? "Adding to Calendar..." : "Add to Google Calendar"}
 			</Button>
 		</motion.div>

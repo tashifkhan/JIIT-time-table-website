@@ -9,14 +9,12 @@ import { Calendar } from "lucide-react";
 
 export default function Home() {
 	const [schedule, setSchedule] = useState<{
-		[key: string]: {
+		[day: string]: {
 			[time: string]: {
-				time: string;
-				subject: string;
+				subject_name: string;
 				type: "L" | "T" | "P";
 				location: string;
-				faculty: string;
-			}[];
+			};
 		};
 	} | null>(null);
 
@@ -25,29 +23,133 @@ export default function Home() {
 		batch: string;
 		electives: string[];
 	}) => {
-		const mockSchedule = {
-			MON: {
-				"8:00-9:00": [
-					{
-						time: "8:00-9:00",
-						subject: "Data Structures",
-						type: "L" as const,
-						location: "LT-1",
-						faculty: "Dr. Smith",
-					},
-				],
-				"9:00-10:00": [
-					{
-						time: "9:00-10:00",
-						subject: "Computer Networks",
-						type: "T" as const,
-						location: "CR-301",
-						faculty: "Prof. Johnson",
-					},
-				],
+		const mockSchedule: {
+			[key: string]: {
+				[key: string]: {
+					subject_name: string;
+					type: "L" | "T" | "P";
+					location: string;
+				};
+			};
+		} = {
+			Monday: {
+				"08:00-09:00": {
+					subject_name: "MOBILE COMMUNICATION",
+					type: "L",
+					location: "CS4",
+				},
+				"09:00-10:00": {
+					subject_name: "GLOBAL POLITICS",
+					type: "T",
+					location: "FF1",
+				},
+				"10:00-11:00": {
+					subject_name: "VLSI Design",
+					type: "L",
+					location: "G6",
+				},
+				"11:00-12:00": {
+					subject_name: "Telecommunication Networks",
+					type: "L",
+					location: "FF9",
+				},
+			},
+			Tuesday: {
+				"08:00-09:00": {
+					subject_name: "Fundamentals of Electric Vehicle",
+					type: "L",
+					location: "CS5",
+				},
+				"09:00-10:00": {
+					subject_name: "Popular Literature",
+					type: "L",
+					location: "CS5",
+				},
+				"10:00-12:00": {
+					subject_name: "Telecommunication Networks Lab",
+					type: "P",
+					location: "ACL",
+				},
+				"14:00-15:00": {
+					subject_name: "VLSI Design",
+					type: "L",
+					location: "CS3",
+				},
+				"15:00-16:00": {
+					subject_name: "Telecommunication Networks",
+					type: "L",
+					location: "CS3",
+				},
+			},
+			Wednesday: {
+				"08:00-09:00": {
+					subject_name: "GLOBAL POLITICS",
+					type: "L",
+					location: "CS7",
+				},
+				"09:00-10:00": {
+					subject_name: "MOBILE COMMUNICATION",
+					type: "L",
+					location: "CS6",
+				},
+				"14:00-15:00": {
+					subject_name: "VLSI Design",
+					type: "L",
+					location: "CS2",
+				},
+				"15:00-16:00": {
+					subject_name: "Telecommunication Networks",
+					type: "L",
+					location: "CS2",
+				},
+			},
+			Thursday: {
+				"08:00-09:00": {
+					subject_name: "Popular Literature",
+					type: "L",
+					location: "CS5",
+				},
+				"09:00-10:00": {
+					subject_name: "Fundamentals of Electric Vehicle",
+					type: "L",
+					location: "CS8",
+				},
+				"14:00-15:00": {
+					subject_name: "Basics of Creative Writing",
+					type: "L",
+					location: "FF4",
+				},
+			},
+			Friday: {
+				"08:00-09:00": {
+					subject_name: "MOBILE COMMUNICATION",
+					type: "L",
+					location: "CS6",
+				},
+				"09:00-10:00": {
+					subject_name: "GLOBAL POLITICS",
+					type: "L",
+					location: "CS7",
+				},
+				"10:00-12:00": {
+					subject_name: "VLSI Design Lab II",
+					type: "P",
+					location: "VDA",
+				},
+				"15:00-16:00": {
+					subject_name: "VLSI Design",
+					type: "T",
+					location: "F10",
+				},
+			},
+			Saturday: {
+				"09:00-10:00": {
+					subject_name: "Popular Literature",
+					type: "L",
+					location: "CS5",
+				},
 			},
 		};
-
 		setSchedule(mockSchedule);
 	};
 

@@ -1,4 +1,4 @@
-import { WeekSchedule, TimeSlot } from "../types/schedule";
+import { WeekSchedule } from "../types/schedule";
 
 // const MONTHS_TO_ADD = 5;
 

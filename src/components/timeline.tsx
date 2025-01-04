@@ -7,14 +7,6 @@ interface ScheduleEvent {
 	location: string;
 }
 
-interface DailySchedule {
-	[timeSlot: string]: ScheduleEvent;
-}
-
-interface WeeklySchedule {
-	[day: string]: DailySchedule;
-}
-
 const TimelinePage: React.FC = () => {
 	// const { schedule } = useUserContext();
 

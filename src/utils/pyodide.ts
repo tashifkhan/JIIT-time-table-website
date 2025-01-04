@@ -2,16 +2,16 @@ import { loadPyodide, PyodideInterface } from 'pyodide';
 
 let pyodideInstance: PyodideInterface | null = null;
 
-const pythonModuleCode = `
-def add(a, b):
-    return a + b
+// URL of the Python module file
+const pythonModuleURL = '/_creator.py';
 
-def multiply(a, b):
-    return a * b
-
-def greet(name):
-    return f"Hello, {name}!"
-`;
+async function fetchPythonCode(url: string): Promise<string> {
+  const response = await fetch(url);
+  if (!response.ok) {
+    throw new Error(`Failed to fetch Python module from ${url}: ${response.statusText}`);
+  }
+  return response.text();
+}
 
 export async function initializePyodide() {
   if (!pyodideInstance) {
@@ -19,7 +19,8 @@ export async function initializePyodide() {
       indexURL: 'https://cdn.jsdelivr.net/pyodide/v0.27.0/full/',
       fullStdLib: false,
     });
-    await pyodideInstance.runPython(pythonModuleCode);
+    const pythonCode = await fetchPythonCode(pythonModuleURL);
+    await pyodideInstance.runPython(pythonCode);
   }
   return pyodideInstance;
 }

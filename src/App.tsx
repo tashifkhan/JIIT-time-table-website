@@ -6,23 +6,33 @@ import { motion } from "framer-motion";
 import timetableMapping from "./data/timetable-mapping.json";
 import { Calendar } from "lucide-react";
 
-const App: React.FC = () => {
-	const [functionName, setFunctionName] = useState<string>("add");
-	const [args, setArgs] = useState<string>("1, 2");
-	const [result, setResult] = useState<string>("");
+interface YourTietable {
+	[key: string]: {
+		[key: string]: {
+			subject_name: string;
+			type: "L" | "T" | "P";
+			location: string;
+		};
+	};
+}
 
-	const executeFunction = async () => {
+const App: React.FC = () => {
+	const evaluteTimeTable = async (
+		time_table_json: any,
+		subject_json: any,
+		batch: string,
+		electives_subject_codes: any[]
+	) => {
 		try {
-			const parsedArgs = args.split(",").map((arg) => {
-				const trimmed = arg.trim();
-				if (!isNaN(Number(trimmed))) return Number(trimmed); // Convert to number if possible
-				return trimmed; // Keep as string otherwise
-			});
-			const output = await callPythonFunction(functionName, parsedArgs);
-			setResult(JSON.stringify(output));
+			const output = await callPythonFunction("time_table_creator", [
+				time_table_json,
+				subject_json,
+				batch,
+				electives_subject_codes,
+			]);
+			return output;
 		} catch (error) {
-			setResult("Error executing Python function");
-			console.error(error);
+			return "Error executing Python function";
 		}
 	};
 
@@ -41,15 +51,19 @@ const App: React.FC = () => {
 		batch: string;
 		electives: string[];
 	}) => {
-		const mockSchedule: {
-			[key: string]: {
-				[key: string]: {
-					subject_name: string;
-					type: "L" | "T" | "P";
-					location: string;
-				};
-			};
-		} = {
+		const { year, batch, electives } = data;
+		const subjectJSON = timetableMapping[
+			year as keyof typeof timetableMapping
+		].subjects.sort((a, b) => a.Subject.localeCompare(b.Subject));
+		const timeTableJSON =
+			timetableMapping[year as keyof typeof timetableMapping].timetable;
+		const Schedule = await evaluteTimeTable(
+			timeTableJSON,
+			subjectJSON,
+			batch,
+			electives
+		);
+		const mockSchedule: YourTietable = {
 			Monday: {
 				"08:00-09:00": {
 					subject_name: "MOBILE COMMUNICATION",
@@ -168,7 +182,10 @@ const App: React.FC = () => {
 				},
 			},
 		};
-		setSchedule(mockSchedule);
+		if (Schedule === "Error executing Python function") {
+			setSchedule(mockSchedule);
+		}
+		setSchedule(Schedule);
 	};
 
 	// console.log(timetableMapping);

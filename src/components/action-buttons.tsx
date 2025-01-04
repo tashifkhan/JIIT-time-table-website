@@ -56,6 +56,9 @@ export function ActionButtons({ schedule }: ActionButtonsProps) {
 				</Button>
 			</motion.div>
 			<GoogleCalendarButton schedule={schedule} />
+			<p className="text-xs text-gray-400 mt-2">
+				Note: Google Calendar sync may not work as expected.
+			</p>
 		</motion.div>
 	);
 }

@@ -326,7 +326,10 @@ def time_table_creator(time_table_json: dict, subject_json: list, batch: str, el
             
             if day not in formatted_timetable:
                 formatted_timetable[day] = {}
-            
+            # Format end time to ensure it's in HH:MM format
+            if len(end_time) == 4:  # If end time is like "1100"
+                end_time = f"{end_time[:2]}:{end_time[2:]}"
+                
             formatted_timetable[day][f"{start_time}-{end_time}"] = {
                 "subject_name": entry[2],
                 "type": entry[3],

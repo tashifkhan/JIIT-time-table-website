@@ -278,65 +278,66 @@ def process_timeslot(timeslot: str, type: str = "L") -> tuple[str]:
         return "00:00", "00:00"
     
 
-def time_table_creator(time_table_json: dict, subject_json: dict, batch: str, electives_subject_codes: List[str]) -> dict:
-    time_table = time_table_json
-    subject = subject_json
-    your_time_table = []
-    # Iterate through each day in the timetable
-    for day, it in time_table.items():
-        # Iterate through each time slot in the day
-        for time, classes in it.items():
-            # Iterate through each class in the time slot
-            for indi_class in classes:
-                code = subject_extractor(indi_class.strip())  # Extract subject code from the class string
-                batchs = batch_extractor(indi_class.strip())
-                batchs_list = parse_batch_numbers(batchs)
-
-                if not is_elective(extracted_batch=batchs, subject_code=code, extracted_batches=batchs_list):
-                    if is_batch_included(batch, batchs):
-                        your_time_table.append([day, time, subject_name_extractor(subject, code), indi_class.strip()[0], location_extractor(indi_class.strip())])
-
-                else:
-                    if do_you_have_elective(subject_dict=subject, elective_subject_codes=electives_subject_codes, subject_code=code) and is_batch_included(batch, batchs):
-                        your_time_table.append([day, time, subject_name_extractor(subject, code), indi_class.strip()[0], location_extractor(indi_class.strip())])
-
-                
-    ''' time table 
-    ['MON', '10 -10.50 AM', 'Data Structures and Algorithms', 'L', 'G7']
-    ['MON', '3-3.50 PM', 'Indian Constitution and Traditional knowledge', 'L', 'G8']
-    ['TUES', '10 -10.50 AM', 'Electromagnetic Field Theory', 'L', 'G8']
-    ['TUES', '3-3.50 PM', 'Data Structures and Algorithms Lab', 'P', 'CL04']
-    ['WED', '9 -9.50 AM', 'Microprocessors and Microcontrollers', 'P', 'IOT Lab']
-    ['WED', '1- 1.50 PM', 'Data Structures and Algorithms', 'L', 'G4']
-    ['WED', '3-3.50 PM', 'Indian Constitution and Traditional knowledge', 'L', 'G6']
-    ['THUR', '9 -9.50 AM', 'Indian Constitution and Traditional knowledge', 'L', 'G8']
-    ['THUR', '10 -10.50 AM', 'Electromagnetic Field Theory', 'L', 'FF4']
-    ['THUR', '3-3.50 PM', 'Data Structures and Algorithms', 'L', 'G4']
-    ['THUR', '4-4.50 PM', 'Electromagnetic Field Theory', 'T', 'F10']
-    ['FRI', '10 -10.50 AM', 'Electromagnetic Field Theory', 'L', 'G8']
-    ['FRI', '3-3.50 PM', 'Python for Signal Processing & Communication Lab', 'P', 'SPL']
-    ['SAT', '9 -9.50 AM', 'Electromagnetic Field Theory', 'P', 'ACL,JBSPL']
-    '''
-
-    # print(your_time_table)
-
-    formatted_timetable = {}
-
-    for entry in your_time_table:
-        day = process_day(entry[0])
-        time = entry[1]
-        start_time, end_time = process_timeslot(time, entry[3])
-        
-        if day not in formatted_timetable:
-            formatted_timetable[day] = {}
-        
-        formatted_timetable[day][f"{start_time}-{end_time}"] = {
-            "subject_name": entry[2],
-            "type": entry[3],
-            "location": entry[4]
-        }
+def time_table_creator(time_table_json: dict, subject_json: list, batch: str, electives_subject_codes: List[str]) -> dict:
+    print("Processing inputs:", {
+        "batch": batch,
+        "electives": electives_subject_codes,
+        "time_table_type": type(time_table_json),
+        "subject_type": type(subject_json)
+    })
     
-    return formatted_timetable
+    try:
+        time_table = time_table_json if isinstance(time_table_json, dict) else {}
+        subject = subject_json if isinstance(subject_json, list) else []
+        your_time_table = []
+
+        # Convert dict_keys to list for iteration
+        days = list(time_table.keys())
+        
+        for day in days:
+            time_slots = time_table[day]
+            time_slot_keys = list(time_slots.keys())
+            
+            for time in time_slot_keys:
+                classes = time_slots[time]
+                if not isinstance(classes, list):
+                    continue
+                    
+                for indi_class in classes:
+                    if not isinstance(indi_class, str):
+                        continue
+                        
+                    code = subject_extractor(indi_class.strip())
+                    batchs = batch_extractor(indi_class.strip())
+                    batchs_list = parse_batch_numbers(batchs)
+
+                    if not is_elective(extracted_batch=batchs, subject_code=code, extracted_batches=batchs_list):
+                        if is_batch_included(batch, batchs):
+                            your_time_table.append([day, time, subject_name_extractor(subject, code), indi_class.strip()[0], location_extractor(indi_class.strip())])
+                    else:
+                        if do_you_have_elective(subject_dict=subject, elective_subject_codes=electives_subject_codes, subject_code=code) and is_batch_included(batch, batchs):
+                            your_time_table.append([day, time, subject_name_extractor(subject, code), indi_class.strip()[0], location_extractor(indi_class.strip())])
+
+        formatted_timetable = {}
+        for entry in your_time_table:
+            day = process_day(entry[0])
+            time = entry[1]
+            start_time, end_time = process_timeslot(time, entry[3])
+            
+            if day not in formatted_timetable:
+                formatted_timetable[day] = {}
+            
+            formatted_timetable[day][f"{start_time}-{end_time}"] = {
+                "subject_name": entry[2],
+                "type": entry[3],
+                "location": entry[4]
+            }
+        
+        return formatted_timetable
+    
+    except Exception as e:
+        print(f"Error in time_table_creator: {str(e)}")
+        return {}
 
 if __name__ == "__main__":
     # with open("./data/json/time_table.json", 'r') as file:

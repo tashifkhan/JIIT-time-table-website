@@ -34,12 +34,12 @@ const App: React.FC = () => {
 		electives_subject_codes: any[]
 	) => {
 		try {
-			const output = await callPythonFunction("time_table_creator", [
+			const output = await callPythonFunction("time_table_creator", {
 				time_table_json,
 				subject_json,
 				batch,
 				electives_subject_codes,
-			]);
+			});
 			return output;
 		} catch (error) {
 			return "Error executing Python function";
@@ -276,5 +276,5 @@ const App: React.FC = () => {
 // 		</div>
 // 	);
 // };
-
 export default App;
+export type { YourTietable };

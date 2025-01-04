@@ -68,7 +68,7 @@ export function ScheduleDisplay({ schedule }: ScheduleDisplayProps) {
 					</motion.div>
 				))}
 			</div>
-			<ActionButtons schedule={schedule} />
+			<ActionButtons />
 		</>
 	);
 }

@@ -56,10 +56,10 @@ Welcome to the JIIT Personalized Schedule Creator, a Next.js + Flask-based appli
 ## Installation
 
 1.  Clone the repository and navigate:
-  
+
     ```bash
-    git clone https://github.com/your-username/jiit-schedule-creator.git
-    cd jiit-schedule-creator/backend
+    git clone https://github.com/tashifkhan/JIIT-time-table-website
+    cd jiit-schedule-creator
     ```
 
 2.  Install dependencies:
@@ -94,9 +94,9 @@ We welcome contributions to enhance this project!
 1.  Fork the repository.
 2.  Create a new branch:
 
-  ```bash
-  git checkout -b feature-name
-  ```
+```bash
+git checkout -b feature-name
+```
 
 3.  Commit changes and create a pull request.
 

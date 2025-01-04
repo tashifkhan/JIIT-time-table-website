@@ -3,14 +3,14 @@ import { Button } from "./ui/button";
 import { Download } from "lucide-react";
 import { downloadAsPng, downloadAsPdf } from "../utils/download";
 import { useNavigate } from "react-router-dom";
-// import { GoogleCalendarButton } from "./google-calendar-button";
-// import { WeekSchedule } from "../types/schedule";
+import { GoogleCalendarButton } from "./google-calendar-button";
+import { YourTietable } from "../App";
 
-// interface ActionButtonsProps {
-// 	schedule: WeekSchedule;
-// }
+interface ActionButtonsProps {
+	schedule: YourTietable;
+}
 
-export function ActionButtons() {
+export function ActionButtons({ schedule }: ActionButtonsProps) {
 	const navigate = useNavigate();
 
 	const handleDownload = async (downloadFn: Function) => {
@@ -55,7 +55,7 @@ export function ActionButtons() {
 					PDF
 				</Button>
 			</motion.div>
-			{/* <GoogleCalendarButton schedule={schedule} /> */}
+			<GoogleCalendarButton schedule={schedule} />
 		</motion.div>
 	);
 }

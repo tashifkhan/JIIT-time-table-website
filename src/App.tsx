@@ -6,7 +6,6 @@ import { motion } from "framer-motion";
 import timetableMapping from "./data/timetable-mapping.json";
 import { Calendar } from "lucide-react";
 import { useNavigate } from "react-router-dom";
-";
 
 interface YourTietable {
 	[key: string]: {
@@ -128,30 +127,32 @@ const App: React.FC = () => {
 				</motion.div>
 
 				{schedule && (
-					<motion.div
-						className="mt-6 sm:mt-8 backdrop-blur-lg bg-white/5 rounded-xl sm:rounded-2xl p-0 sm:p-6 border border-white/10 shadow-xl overflow-x-auto"
-						initial={{ opacity: 0, scale: 0.95 }}
-						animate={{ opacity: 1, scale: 1 }}
-						transition={{ duration: 0.5 }}
-					>
-						<ScheduleDisplay schedule={schedule} />
-					</motion.div>
-				)}
-				<div className="flex justify-center">
-					<motion.button
-						onClick={() => navigate("/timeline")}
-						className="mt-4 px-6 py-2 rounded-lg backdrop-blur-lg bg-white/10 border border-white/20 
+					<>
+						<motion.div
+							className="mt-6 sm:mt-8 backdrop-blur-lg bg-white/5 rounded-xl sm:rounded-2xl p-0 sm:p-6 border border-white/10 shadow-xl overflow-x-auto"
+							initial={{ opacity: 0, scale: 0.95 }}
+							animate={{ opacity: 1, scale: 1 }}
+							transition={{ duration: 0.5 }}
+						>
+							<ScheduleDisplay schedule={schedule} />
+						</motion.div>
+						<div className="flex justify-center">
+							<motion.button
+								onClick={() => navigate("/timeline")}
+								className="mt-4 px-6 py-2 rounded-lg backdrop-blur-lg bg-white/10 border border-white/20 
 											 text-[#F0BB78] hover:bg-white/20 transition-all duration-300 shadow-lg
 											 flex items-center gap-2"
-						initial={{ opacity: 0 }}
-						animate={{ opacity: 1 }}
-						whileHover={{ scale: 1.05 }}
-						whileTap={{ scale: 0.95 }}
-					>
-						<Calendar className="w-5 h-5" />
-						<span>Timeline View</span>
-					</motion.button>
-				</div>
+								initial={{ opacity: 0 }}
+								animate={{ opacity: 1 }}
+								whileHover={{ scale: 1.05 }}
+								whileTap={{ scale: 0.95 }}
+							>
+								<Calendar className="w-5 h-5" />
+								<span>Timeline View</span>
+							</motion.button>
+						</div>
+					</>
+				)}
 			</div>
 		</main>
 	);

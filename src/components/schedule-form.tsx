@@ -95,8 +95,17 @@ export function ScheduleForm({ mapping, onSubmit }: ScheduleFormProps) {
 					<Input
 						id="batch"
 						value={batch}
-						onChange={(e) => setBatch(e.target.value.toUpperCase())}
-						placeholder="Enter your batch (e.g., B3)"
+						onChange={(e) => {
+							const value = e.target.value.toUpperCase();
+							if (value.match(/^[DF]|BBA|BCA|BSC|MCA|MBA/)) {
+								alert(
+									"This website only shows timetables for BTech 62 batches till 3rd year."
+								);
+								return;
+							}
+							setBatch(value);
+						}}
+						placeholder="Enter your batch (e.g., A6)"
 						className="h-9 sm:h-10 text-sm bg-white/10 border-white/20 backdrop-blur-md hover:bg-white/15 transition-all"
 					/>
 				</div>

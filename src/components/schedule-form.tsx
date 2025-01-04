@@ -121,7 +121,7 @@ export function ScheduleForm({ mapping, onSubmit }: ScheduleFormProps) {
 						id="electiveCount"
 						type="number"
 						min="0"
-						max="5"
+						max="10"
 						value={electiveCount}
 						onChange={(e) => {
 							const count = parseInt(e.target.value);

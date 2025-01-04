@@ -47,14 +47,17 @@ export function ScheduleForm({ subjects, onSubmit }: ScheduleFormProps) {
 	};
 
 	return (
-		<Card className="w-full max-w-md p-6 backdrop-blur-2xl bg-[#FFF0DC]/10 border border-[#F0BB78]/20 shadow-2xl rounded-xl">
-			<form onSubmit={handleSubmit} className="space-y-6">
+		<Card className="w-full max-w-[95vw] sm:max-w-md p-4 sm:p-6 backdrop-blur-2xl bg-[#FFF0DC]/10 border border-[#F0BB78]/20 shadow-2xl rounded-xl">
+			<form onSubmit={handleSubmit} className="space-y-4 sm:space-y-6">
 				<div className="space-y-2">
-					<Label htmlFor="year" className="text-white/90 font-medium">
+					<Label
+						htmlFor="year"
+						className="text-white/90 font-medium text-sm sm:text-base"
+					>
 						Year
 					</Label>
 					<Select value={year} onValueChange={setYear}>
-						<SelectTrigger className="bg-[#FFF0DC]/10 border-[#F0BB78]/20 backdrop-blur-md hover:bg-[#FFF0DC]/15 transition-all">
+						<SelectTrigger className="h-9 sm:h-10 text-sm bg-[#FFF0DC]/10 border-[#F0BB78]/20 backdrop-blur-md hover:bg-[#FFF0DC]/15 transition-all">
 							<SelectValue placeholder="Select year" />
 						</SelectTrigger>
 						<SelectContent className="bg-[#FFF0DC]/20 backdrop-blur-2xl border-[#F0BB78]/20">
@@ -72,7 +75,10 @@ export function ScheduleForm({ subjects, onSubmit }: ScheduleFormProps) {
 				</div>
 
 				<div className="space-y-2">
-					<Label htmlFor="batch" className="text-white/90 font-medium">
+					<Label
+						htmlFor="batch"
+						className="text-white/90 font-medium text-sm sm:text-base"
+					>
 						Batch
 					</Label>
 					<Input
@@ -80,12 +86,15 @@ export function ScheduleForm({ subjects, onSubmit }: ScheduleFormProps) {
 						value={batch}
 						onChange={(e) => setBatch(e.target.value)}
 						placeholder="Enter your batch (e.g., B3)"
-						className="bg-white/10 border-white/20 backdrop-blur-md hover:bg-white/15 transition-all"
+						className="h-9 sm:h-10 text-sm bg-white/10 border-white/20 backdrop-blur-md hover:bg-white/15 transition-all"
 					/>
 				</div>
 
 				<div className="space-y-2">
-					<Label htmlFor="electiveCount" className="text-white/90 font-medium">
+					<Label
+						htmlFor="electiveCount"
+						className="text-white/90 font-medium text-sm sm:text-base"
+					>
 						Number of Electives
 					</Label>
 					<Input
@@ -99,7 +108,7 @@ export function ScheduleForm({ subjects, onSubmit }: ScheduleFormProps) {
 							setElectiveCount(count);
 							setSelectedElectives(Array.from({ length: count }, () => ""));
 						}}
-						className="bg-white/10 border-white/20 backdrop-blur-md hover:bg-white/15 transition-all"
+						className="h-9 sm:h-10 text-sm bg-white/10 border-white/20 backdrop-blur-md hover:bg-white/15 transition-all"
 					/>
 				</div>
 
@@ -113,7 +122,7 @@ export function ScheduleForm({ subjects, onSubmit }: ScheduleFormProps) {
 					>
 						<Label
 							htmlFor={`elective-${index}`}
-							className="text-white/90 font-medium"
+							className="text-white/90 font-medium text-sm sm:text-base"
 						>
 							Elective {index + 1}
 						</Label>
@@ -121,7 +130,7 @@ export function ScheduleForm({ subjects, onSubmit }: ScheduleFormProps) {
 							value={selectedElectives[index]}
 							onValueChange={(value) => handleElectiveChange(index, value)}
 						>
-							<SelectTrigger className="bg-[#FFF0DC]/10 border-[#F0BB78]/20 backdrop-blur-md hover:bg-[#FFF0DC]/15 transition-all">
+							<SelectTrigger className="h-9 sm:h-10 text-sm bg-[#FFF0DC]/10 border-[#F0BB78]/20 backdrop-blur-md hover:bg-[#FFF0DC]/15 transition-all">
 								<SelectValue placeholder="Select elective" />
 							</SelectTrigger>
 							<SelectContent className="bg-[#FFF0DC]/20 backdrop-blur-2xl border-[#F0BB78]/20">
@@ -141,9 +150,9 @@ export function ScheduleForm({ subjects, onSubmit }: ScheduleFormProps) {
 
 				<Button
 					type="submit"
-					className="w-full bg-gradient-to-r from-[#543A14] to-[#F0BB78] hover:from-[#543A14]/80 hover:to-[#F0BB78]/80 transition-all duration-300 shadow-lg hover:shadow-[#F0BB78]/25"
+					className="w-full h-9 sm:h-10 text-sm sm:text-base bg-gradient-to-r from-[#543A14] to-[#F0BB78] hover:from-[#543A14]/80 hover:to-[#F0BB78]/80 transition-all duration-300 shadow-lg hover:shadow-[#F0BB78]/25"
 				>
-					<Sparkles className="w-4 h-4 mr-2" />
+					<Sparkles className="w-3 h-3 sm:w-4 sm:h-4 mr-2" />
 					Generate Schedule
 				</Button>
 			</form>

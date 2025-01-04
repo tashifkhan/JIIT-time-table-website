@@ -154,33 +154,33 @@ export default function Home() {
 	};
 
 	return (
-		<main className="min-h-screen bg-gradient-to-br from-[#543A14]/20 via-[#131010]/40 to-[#131010]/60 p-8 relative overflow-hidden">
-			{/* Background effects */}
+		<main className="min-h-screen bg-gradient-to-br from-[#543A14]/20 via-[#131010]/40 to-[#131010]/60 p-4 sm:p-8 relative overflow-hidden">
+			{/* Background effects - adjusted for mobile */}
 			<div className="absolute inset-0 w-full h-full">
-				<div className="absolute top-[-10%] left-[-10%] w-72 h-72 bg-[#F0BB78]/30 rounded-full blur-[128px]" />
-				<div className="absolute bottom-[-10%] right-[-10%] w-72 h-72 bg-[#543A14]/30 rounded-full blur-[128px]" />
+				<div className="absolute top-[-5%] left-[-5%] w-48 sm:w-72 h-48 sm:h-72 bg-[#F0BB78]/30 rounded-full blur-[96px] sm:blur-[128px]" />
+				<div className="absolute bottom-[-5%] right-[-5%] w-48 sm:w-72 h-48 sm:h-72 bg-[#543A14]/30 rounded-full blur-[96px] sm:blur-[128px]" />
 			</div>
 
-			<div className="max-w-7xl mx-auto space-y-8 relative z-10">
+			<div className="max-w-7xl mx-auto space-y-6 sm:space-y-8 relative z-10">
 				<motion.div
-					className="text-center space-y-4"
+					className="text-center space-y-3 sm:space-y-4"
 					initial={{ opacity: 0, y: 20 }}
 					animate={{ opacity: 1, y: 0 }}
 					transition={{ duration: 0.5 }}
 				>
-					<div className="flex items-center justify-center gap-3 mb-4">
-						<Calendar className="w-10 h-10 text-[#F0BB78]" />
-						<h1 className="text-4xl font-bold bg-clip-text text-[#F0BB78] bg-gradient-to-r from-[#F0BB78] to-[#543A14]">
+					<div className="flex items-center justify-center gap-2 sm:gap-3 mb-2 sm:mb-4">
+						<Calendar className="w-8 h-8 sm:w-10 sm:h-10 text-[#F0BB78]" />
+						<h1 className="text-2xl sm:text-4xl font-bold bg-clip-text text-[#F0BB78] bg-gradient-to-r from-[#F0BB78] to-[#543A14]">
 							JIIT Schedule Creator
 						</h1>
 					</div>
-					<p className="text-lg text-slate-300/80">
+					<p className="text-base sm:text-lg text-slate-300/80 px-4">
 						Create your personalized class schedule in minutes
 					</p>
 				</motion.div>
 
 				<motion.div
-					className="flex justify-center rounded-2xl p-6"
+					className="flex justify-center rounded-xl sm:rounded-2xl p-3 sm:p-6"
 					initial={{ opacity: 0, y: 20 }}
 					animate={{ opacity: 1, y: 0 }}
 					transition={{ duration: 0.5, delay: 0.2 }}
@@ -193,7 +193,7 @@ export default function Home() {
 
 				{schedule && (
 					<motion.div
-						className="mt-8 backdrop-blur-lg bg-white/5 rounded-2xl p-6 border border-white/10 shadow-xl"
+						className="mt-6 sm:mt-8 backdrop-blur-lg bg-white/5 rounded-xl sm:rounded-2xl p-0 sm:p-6 border border-white/10 shadow-xl overflow-x-auto"
 						initial={{ opacity: 0, scale: 0.95 }}
 						animate={{ opacity: 1, scale: 1 }}
 						transition={{ duration: 0.5 }}

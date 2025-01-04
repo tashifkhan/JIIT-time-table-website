@@ -65,6 +65,7 @@ export const downloadAsPdf = async (elementId: string, filename: string) => {
     pdf.save(`${filename}.pdf`);
   } catch (err) {
     console.error('Error downloading PDF:', err);
-    alert(`Failed to download PDF: ${err.message}`);
+    const errorMessage = err instanceof Error ? err.message : 'Unknown error occurred';
+    alert(`Failed to download PDF: ${errorMessage}`);
   }
 };

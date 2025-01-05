@@ -61,7 +61,14 @@ const App: React.FC = () => {
 			batch,
 			electives
 		);
-		if (numExecutions == 1) {
+		if (numExecutions === 0) {
+			console.log("Initial execution - running twice");
+			Schedule = await evaluteTimeTable(
+				timeTableJSON,
+				subjectJSON,
+				batch,
+				electives
+			);
 			Schedule = await evaluteTimeTable(
 				timeTableJSON,
 				subjectJSON,

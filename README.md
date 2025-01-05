@@ -1,7 +1,7 @@
 <h1 align="center"> JIIT Personalized Time Table Creator </h1>
 
 <div align="center">
-    <a href="simple-timetable.tashif.codes">Hosted Here</a>
+    <a href="https://simple-timetable.tashif.codes/">Hosted Here</a>
 </div>
 </br>
 

@@ -1,6 +1,13 @@
-# JIIT Personalized Time Table Creator
+<h1 align="center"> JIIT Personalized Time Table Creator </h1>
 
-Welcome to the JIIT Personalized Schedule Creator, a Next.js + Flask-based application that allows JIIT students to create a personalized schedule. With a glassmorphic UI, color-coded timetable, elective integration, and export options, it provides a seamless user experience tailored to individual needs.
+<div align="center">
+    <a href="simple-timetable.tashif.codes">Hosted Here</a>
+</div>
+</br>
+
+Welcome to the JIIT Personalized Schedule Creator, a React + Python application (WebAssembly - WADM Pyodide) that allows JIIT students to create a personalized schedule. With a glassmorphic UI, color-coded timetable, elective integration, and export options, it provides a seamless user experience tailored to individual needs.
+
+- It usses <a href="https://github.com/tashifkhan/JIIT-time-table-parser">JIIT TimeTable Parser</a> to parse the TimeTable Doc into JSON
 
 ## Features
 
@@ -15,19 +22,15 @@ Welcome to the JIIT Personalized Schedule Creator, a Next.js + Flask-based appli
 
 ### Frontend
 
-- **Framework**: Next.js with TypeScript
+- **Framework**: React.js with TypeScript
 - **Styling**: Tailwind CSS
 - **Animations**: Framer Motion
-- **Export Tools**: js-pdf, react-to-pdf
+- **Export Tools**: js-pdf, html-to-image
 
 ### Backend
 
-- **Framework**: Flask
+- **Framework**: Python - Pyodide (Web Assembly)
 - **Endpoints**: Timetable processing and generation
-
-### APIs
-
-- **Custom Flask API** for timetable processing (JIIT-timetable-parser)
 - **Google Calendar API** for syncing schedules
 
 ### Data
@@ -39,18 +42,29 @@ Welcome to the JIIT Personalized Schedule Creator, a Next.js + Flask-based appli
 
 ```
 .
-├── components/
-│   ├── ScheduleForm.tsx # Form for user input
-│   └── Timetable.tsx # Timetable rendering component
-├── data/
-│   ├── subjects.json # Elective subjects JSON
-│   └── raw_timetable.json # Raw timetable JSON
-├── pages/
-│   ├── index.tsx # Home page
-│   └── timetable.tsx # Timetable display
-├── styles/
-│   └── globals.css # Global styles (Tailwind setup)
-└── package.json # Frontend dependencies
+├── src/
+│   ├── components/
+│   │   ├── ScheduleForm.tsx     # Form for batch & elective selection
+│   │   ├── Timetable.tsx        # Main timetable display
+│   │   ├── ColorPicker.tsx      # Subject color customization
+│   │   └── ExportButtons.tsx    # PDF & Calendar export options
+│   ├── data/
+│   │   ├── electives.json       # Elective subjects data
+│   │   └── timetables/          # Batch-wise timetable JSONs
+│   ├── hooks/
+│   │   ├── useTimeTable.ts      # Timetable generation logic
+│   │   └── useExport.ts         # Export functionality
+│   ├── styles/
+│   │   └── globals.css          # Tailwind & custom styles
+│   ├── types/
+│   │   └── index.ts             # TypeScript definitions
+│   └── pages/
+│       ├── index.tsx            # Landing page
+│       └── timetable.tsx        # Schedule view
+├── public/
+│   ├── _creator.py              # Python Module
+│   └── icon.png                 # Icon
+└── package.json                 # Project dependencies
 ```
 
 ## Installation
@@ -59,7 +73,7 @@ Welcome to the JIIT Personalized Schedule Creator, a Next.js + Flask-based appli
 
     ```bash
     git clone https://github.com/tashifkhan/JIIT-time-table-website
-    cd jiit-schedule-creator
+    cd JIIT-time-table-website
     ```
 
 2.  Install dependencies:
@@ -74,7 +88,7 @@ Welcome to the JIIT Personalized Schedule Creator, a Next.js + Flask-based appli
     npm run dev
     ```
 
-Frontend runs at: `http://localhost:3000`
+Frontend runs at: `http://localhost:5173`
 
 ## Usage
 
@@ -85,7 +99,7 @@ Frontend runs at: `http://localhost:3000`
    - View your personalized schedule.
    - Color-coded design for easy understanding.
 3. **Export Options**
-   - Download as PDF or sync with Google Calendar.
+   - Download as PDF/PNG or sync with Google Calendar.
 
 ## Contributing
 
@@ -94,14 +108,16 @@ We welcome contributions to enhance this project!
 1.  Fork the repository.
 2.  Create a new branch:
 
-```bash
-git checkout -b feature-name
-```
+    ```bash
+    git checkout -b feature-name
+    ```
 
 3.  Commit changes and create a pull request.
 
 ## Future Scope
 
-- Visualization of free and busy slots.
-- Reminders for classes.
-- PWA Support for offline usage.
+- Handelling 4th year BE TimeTable
+- BBA, BCA, MBA, MCA, BS, BE-128 TimeTable Generation
+- PWA Support for offline usage
+- Reminders for classes
+- Visualization of free and busy slots of 2 students

@@ -150,6 +150,8 @@ def subject_name_extractor(subjects_dict: dict, code: str) -> str:
             return subject["Subject"]
         if str(subject["Full Code"][3:5] + subject["Code"]).strip() == code.strip():
             return subject["Subject"]
+        if str(subject["Code"][1:]).strip() == code.strip():
+            return subject["Subject"]
     return code
 
 def do_you_have_elective(elective_subject_codes: List[str], subject_code: str, subject_dict :dict) -> bool:
@@ -173,6 +175,8 @@ def do_you_have_elective(elective_subject_codes: List[str], subject_code: str, s
         if elective["Full Code"][2:5] + elective["Code"] == subject_code:
             return True
         if elective["Full Code"][3:5] + elective["Code"] == subject_code:
+            return True
+        if elective["Code"][1:] == subject_code:
             return True
     return False
 
@@ -332,6 +336,9 @@ def time_table_creator(time_table_json: dict, subject_json: list, batch: str, el
             # Format end time to ensure it's in HH:MM format
             if len(end_time) == 4:  # If end time is like "1100"
                 end_time = f"{end_time[:2]}:{end_time[2:]}"
+
+            if entry[2].strip() == entry[2].strip().upper():
+                entry[2] = entry[2].strip().title()
                 
             formatted_timetable[day][f"{start_time}-{end_time}"] = {
                 "subject_name": entry[2],

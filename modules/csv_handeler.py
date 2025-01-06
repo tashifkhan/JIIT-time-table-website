@@ -233,7 +233,7 @@ def csvstring_to_jsonstrings(csv_string: str) -> dict:
     }
 
 if __name__ == "__main__":
-    csv_to_json("./data/csv/time_table.csv", "test012", "testsub122")
+    csv_to_json("./hello.csv", "test012", "testsub122")
 
 '''
     if does_include_subjects:

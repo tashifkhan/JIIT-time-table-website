@@ -25,6 +25,9 @@ export async function initializePyodide() {
     // First load the BE62_creator module
     const creatorCode = await fetchPythonCode('/modules/BE62_creator.py');
     await pyodideInstance.runPython(creatorCode);
+
+    const creatorCode128 = await fetchPythonCode('/modules/BE128_creator.py');
+    await pyodideInstance.runPython(creatorCode128);
     
     // Then load and run the main script
     const pythonCode = await fetchPythonCode(pythonModuleURL);

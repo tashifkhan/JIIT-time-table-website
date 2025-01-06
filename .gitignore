@@ -2,12 +2,13 @@
 .idea
 blah.py
 data
-.gitignore
 .DS_Store
-\templet\*
 __pycache__
 *.pyc
 hello.csv
 uploads
 styles.scss
 .vercel
+emsdk
+.pyodide-xbuildenv-0.29.2
+UNKNOWN.egg-info

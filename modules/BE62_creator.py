@@ -150,6 +150,8 @@ def subject_name_extractor(subjects_dict: dict, code: str) -> str:
             return subject["Subject"]
         if str(subject["Full Code"][3:5] + subject["Code"]).strip() == code.strip():
             return subject["Subject"]
+        if str(subject["Code"][1:]).strip() == code.strip():
+            return subject["Subject"]
     return code
 
 def do_you_have_elective(elective_subject_codes: List[str], subject_code: str, subject_dict :dict) -> bool:
@@ -173,6 +175,8 @@ def do_you_have_elective(elective_subject_codes: List[str], subject_code: str, s
         if elective["Full Code"][2:5] + elective["Code"] == subject_code:
             return True
         if elective["Full Code"][3:5] + elective["Code"] == subject_code:
+            return True
+        if elective["Code"][1:] == subject_code:
             return True
     return False
 

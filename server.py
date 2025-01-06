@@ -11,7 +11,7 @@ from modules.pdf_handeler import pdf_to_csv_string
 
 # processing modules
 from modules.csv_handeler import csvstring_to_jsonstrings
-from modules._creator import time_table_creator
+from modules.BE62_creator import time_table_creator
 
 # state management
 global_state = {

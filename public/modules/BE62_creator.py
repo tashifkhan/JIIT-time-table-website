@@ -323,6 +323,9 @@ def time_table_creator(time_table_json: dict, subject_json: list, batch: str, el
             day = process_day(entry[0])
             time = entry[1]
             start_time, end_time = process_timeslot(time, entry[3])
+
+            if entry[2] in ["ENGINEERING DRAWING AND DESIGN", "Engineering Drawing & Design"]:
+                end_time = f"{int(end_time[:2])+1}{end_time[2:]}"
             
             if day not in formatted_timetable:
                 formatted_timetable[day] = {}

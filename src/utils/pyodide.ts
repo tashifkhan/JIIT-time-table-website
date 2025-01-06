@@ -5,7 +5,7 @@ import { YourTietable } from '../App';
 let pyodideInstance: PyodideInterface | null = null;
 
 // URL of the Python module file
-const pythonModuleURL = '/_creator.py';
+const pythonModuleURL = '/script.py';
 
 async function fetchPythonCode(url: string): Promise<string> {
   const response = await fetch(url);
@@ -21,6 +21,12 @@ export async function initializePyodide() {
       indexURL: 'https://cdn.jsdelivr.net/pyodide/v0.27.0/full/',
       fullStdLib: false,
     });
+    
+    // First load the BE62_creator module
+    const creatorCode = await fetchPythonCode('/modules/BE62_creator.py');
+    await pyodideInstance.runPython(creatorCode);
+    
+    // Then load and run the main script
     const pythonCode = await fetchPythonCode(pythonModuleURL);
     await pyodideInstance.runPython(pythonCode);
   }

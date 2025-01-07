@@ -4,6 +4,7 @@ import { ScheduleForm } from "./components/schedule-form";
 import { ScheduleDisplay } from "./components/schedule-display";
 import { motion } from "framer-motion";
 import timetableMapping from "./data/timetable-mapping.json";
+import mapping128 from "./data/128-mapping.json";
 import { Calendar } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import UserContext from "./context/userContext";
@@ -28,10 +29,12 @@ const App: React.FC = () => {
 		time_table_json: any,
 		subject_json: any,
 		batch: string,
-		electives_subject_codes: any[]
+		electives_subject_codes: any[],
+		campus: string
 	) => {
 		try {
-			const output = await callPythonFunction("time_table_creator", {
+			const functionName = campus === "62" ? "time_table_creator" : "banado128";
+			const output = await callPythonFunction(functionName, {
 				time_table_json,
 				subject_json,
 				batch,
@@ -48,42 +51,50 @@ const App: React.FC = () => {
 		year: string;
 		batch: string;
 		electives: string[];
+		campus: string;
 	}) => {
-		const { year, batch, electives } = data;
-		const subjectJSON = timetableMapping[
-			year as keyof typeof timetableMapping
-		].subjects.sort((a, b) => a.Subject.localeCompare(b.Subject));
-		const timeTableJSON =
-			timetableMapping[year as keyof typeof timetableMapping].timetable;
-		let Schedule = await evaluteTimeTable(
-			timeTableJSON,
-			subjectJSON,
-			batch,
-			electives
-		);
-		if (numExecutions === 0) {
-			console.log("Initial execution - running twice");
-			Schedule = await evaluteTimeTable(
+		const { year, batch, electives, campus } = data;
+		const mapping = campus === "62" ? timetableMapping : mapping128;
+		// Fix for 128 campus - it has a different structure
+		const subjectJSON =
+			campus === "62"
+				? mapping[year as keyof typeof mapping].subjects
+				: Object.values(mapping[year as keyof typeof mapping].subjects);
+		const timeTableJSON = mapping[year as keyof typeof mapping].timetable;
+
+		console.log("Using mapping:", campus === "62" ? "62" : "128");
+		console.log("With data:", { timeTableJSON, subjectJSON, batch, electives });
+
+		try {
+			let Schedule = await evaluteTimeTable(
 				timeTableJSON,
 				subjectJSON,
 				batch,
-				electives
+				electives,
+				campus
 			);
-			Schedule = await evaluteTimeTable(
-				timeTableJSON,
-				subjectJSON,
-				batch,
-				electives
-			);
-		}
-		console.log(Schedule);
-		const mockSchedule: YourTietable = {};
-		if (Schedule === "Error executing Python function") {
-			setSchedule(mockSchedule);
-			console.log(schedule);
-		} else {
-			setSchedule(Schedule);
-			console.log(schedule);
+			if (numExecutions === 0) {
+				console.log("Initial execution - running twice");
+				Schedule = await evaluteTimeTable(
+					timeTableJSON,
+					subjectJSON,
+					batch,
+					electives,
+					campus
+				);
+			}
+			console.log(Schedule);
+			const mockSchedule: YourTietable = {};
+			if (Schedule === "Error executing Python function") {
+				setSchedule(mockSchedule);
+				console.log(schedule);
+			} else {
+				setSchedule(Schedule);
+				console.log(schedule);
+			}
+		} catch (error) {
+			console.error("Error generating schedule:", error);
+			setSchedule({});
 		}
 	};
 

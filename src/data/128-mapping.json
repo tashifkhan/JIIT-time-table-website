@@ -308,54 +308,242 @@
 				"5:00 PM -5:50 PM": []
 			}
 		},
-		"subject": {
-			"18B12HS611": "Marketing Management",
-			"20B16CS322": "Java Programming",
-			"18B11CS311": "Computer Networks and Internet of Things",
-			"18B12EC417": "SATELLITE COMMUNICATION",
-			"16B1NHS635": "Organisational Behaviour",
-			"20B16CS323": "Problem Solving using C and C++",
-			"15B11CI513": "Software Engineering",
-			"21B17CI573": "Software Engineering Lab",
-			"18B12MA811": "FUZZY OPTIMIZATION & DECSION MAKING",
-			"20B12HS311": "Global Politics",
-			"20B16CS326": "Front End Programming",
-			"15B11CI514": "Artificial Intelligence",
-			"22B12CS413": "Data Analytics using R and Python",
-			"16B1NHS636": "Literature and Adaption",
-			"15B11EC611": "Telecommunication Networks",
-			"21B12CS312": "Sensor Technology & Android Programming",
-			"22B12CS422": "Cloud computing Essentials: Azure and AWS",
-			"19B12HS613": "International Trade and Finance",
-			"18B11EC315": "VLSI Design",
-			"21B12CS319": "Fundamentals of Soft Computing",
-			"19B12EC414": "PROCESSING WITH DEEP LEARNING",
-			"16B1NPH631": "COMPUTATIONAL PHYSICS",
-			"17B11EC731": "Mobile Communication",
-			"21B12CS314": "Introduction to Large Scale Database Systems",
-			"16B1NPH632": "SOLID STATE ELECTRONIC DEVICES",
-			"18B13EC314": "Machine Learning for Signal Processing",
-			"21B12CS315": "Web Technology and Cyber Security",
-			"16B1NPH633": "PHOTOVOLTAIC TECHNIQUES",
-			"23B12EC311": "Semiconductor Devices and Circuits",
-			"21B12CS317": "Introduction to Blockchain Technology",
-			"18B12MA611": "Operations Research",
-			"15B11EC613": "Control Systems",
-			"21B12CS318": "Big Data Ingestion",
-			"17B1NEC741": "Digital Hardware Design",
-			"21B12CS320": "Open source software development",
-			"16B1NMA633": "Statistics",
-			"17B1NEC734": "RF and Microwave Engineering",
-			"21B12CS313": "Fundamentals of Distributed and Cloud Computing",
-			"16B1NHS631": "Project Management",
-			"16B19EC691": "Renewable Energy",
-			"21B12CS321": "Concepts of Graph theory",
-			"15B17CI573": "Software Engineering Lab",
-			"15B17EC671": "Telecommunication Networks Lab",
-			"15B17CI574": "Artificial Intelligence Lab",
-			"18B15EC315": "VLSI Design Lab-II",
-			"16B1NHS632": "Cognitive Psychology",
-			"16B1NHS634": "THEATRE AND PERFORMANCE"
+		"subjects": {
+			"18B12HS611": {
+				"Code": "18B12HS611",
+				"Full Code": "18B12HS611",
+				"Subject": "Marketing Management"
+			},
+			"20B16CS322": {
+				"Code": "20B16CS322",
+				"Full Code": "20B16CS322",
+				"Subject": "Java Programming"
+			},
+			"18B11CS311": {
+				"Code": "18B11CS311",
+				"Full Code": "18B11CS311",
+				"Subject": "Computer Networks and Internet of Things"
+			},
+			"18B12EC417": {
+				"Code": "18B12EC417",
+				"Full Code": "18B12EC417",
+				"Subject": "SATELLITE COMMUNICATION"
+			},
+			"16B1NHS635": {
+				"Code": "16B1NHS635",
+				"Full Code": "16B1NHS635",
+				"Subject": "Organisational Behaviour"
+			},
+			"20B16CS323": {
+				"Code": "20B16CS323",
+				"Full Code": "20B16CS323",
+				"Subject": "Problem Solving using C and C++"
+			},
+			"15B11CI513": {
+				"Code": "15B11CI513",
+				"Full Code": "15B11CI513",
+				"Subject": "Software Engineering"
+			},
+			"21B17CI573": {
+				"Code": "21B17CI573",
+				"Full Code": "21B17CI573",
+				"Subject": "Software Engineering Lab"
+			},
+			"18B12MA811": {
+				"Code": "18B12MA811",
+				"Full Code": "18B12MA811",
+				"Subject": "FUZZY OPTIMIZATION & DECSION MAKING"
+			},
+			"20B12HS311": {
+				"Code": "20B12HS311",
+				"Full Code": "20B12HS311",
+				"Subject": "Global Politics"
+			},
+			"20B16CS326": {
+				"Code": "20B16CS326",
+				"Full Code": "20B16CS326",
+				"Subject": "Front End Programming"
+			},
+			"15B11CI514": {
+				"Code": "15B11CI514",
+				"Full Code": "15B11CI514",
+				"Subject": "Artificial Intelligence"
+			},
+			"22B12CS413": {
+				"Code": "22B12CS413",
+				"Full Code": "22B12CS413",
+				"Subject": "Data Analytics using R and Python"
+			},
+			"16B1NHS636": {
+				"Code": "16B1NHS636",
+				"Full Code": "16B1NHS636",
+				"Subject": "Literature and Adaption"
+			},
+			"15B11EC611": {
+				"Code": "15B11EC611",
+				"Full Code": "15B11EC611",
+				"Subject": "Telecommunication Networks"
+			},
+			"21B12CS312": {
+				"Code": "21B12CS312",
+				"Full Code": "21B12CS312",
+				"Subject": "Sensor Technology & Android Programming"
+			},
+			"22B12CS422": {
+				"Code": "22B12CS422",
+				"Full Code": "22B12CS422",
+				"Subject": "Cloud computing Essentials: Azure and AWS"
+			},
+			"19B12HS613": {
+				"Code": "19B12HS613",
+				"Full Code": "19B12HS613",
+				"Subject": "International Trade and Finance"
+			},
+			"18B11EC315": {
+				"Code": "18B11EC315",
+				"Full Code": "18B11EC315",
+				"Subject": "VLSI Design"
+			},
+			"21B12CS319": {
+				"Code": "21B12CS319",
+				"Full Code": "21B12CS319",
+				"Subject": "Fundamentals of Soft Computing"
+			},
+			"19B12EC414": {
+				"Code": "19B12EC414",
+				"Full Code": "19B12EC414",
+				"Subject": "PROCESSING WITH DEEP LEARNING"
+			},
+			"16B1NPH631": {
+				"Code": "16B1NPH631",
+				"Full Code": "16B1NPH631",
+				"Subject": "COMPUTATIONAL PHYSICS"
+			},
+			"17B11EC731": {
+				"Code": "17B11EC731",
+				"Full Code": "17B11EC731",
+				"Subject": "Mobile Communication"
+			},
+			"21B12CS314": {
+				"Code": "21B12CS314",
+				"Full Code": "21B12CS314",
+				"Subject": "Introduction to Large Scale Database Systems"
+			},
+			"16B1NPH632": {
+				"Code": "16B1NPH632",
+				"Full Code": "16B1NPH632",
+				"Subject": "SOLID STATE ELECTRONIC DEVICES"
+			},
+			"18B13EC314": {
+				"Code": "18B13EC314",
+				"Full Code": "18B13EC314",
+				"Subject": "Machine Learning for Signal Processing"
+			},
+			"21B12CS315": {
+				"Code": "21B12CS315",
+				"Full Code": "21B12CS315",
+				"Subject": "Web Technology and Cyber Security"
+			},
+			"16B1NPH633": {
+				"Code": "16B1NPH633",
+				"Full Code": "16B1NPH633",
+				"Subject": "PHOTOVOLTAIC TECHNIQUES"
+			},
+			"23B12EC311": {
+				"Code": "23B12EC311",
+				"Full Code": "23B12EC311",
+				"Subject": "Semiconductor Devices and Circuits"
+			},
+			"21B12CS317": {
+				"Code": "21B12CS317",
+				"Full Code": "21B12CS317",
+				"Subject": "Introduction to Blockchain Technology"
+			},
+			"18B12MA611": {
+				"Code": "18B12MA611",
+				"Full Code": "18B12MA611",
+				"Subject": "Operations Research"
+			},
+			"15B11EC613": {
+				"Code": "15B11EC613",
+				"Full Code": "15B11EC613",
+				"Subject": "Control Systems"
+			},
+			"21B12CS318": {
+				"Code": "21B12CS318",
+				"Full Code": "21B12CS318",
+				"Subject": "Big Data Ingestion"
+			},
+			"17B1NEC741": {
+				"Code": "17B1NEC741",
+				"Full Code": "17B1NEC741",
+				"Subject": "Digital Hardware Design"
+			},
+			"21B12CS320": {
+				"Code": "21B12CS320",
+				"Full Code": "21B12CS320",
+				"Subject": "Open source software development"
+			},
+			"16B1NMA633": {
+				"Code": "16B1NMA633",
+				"Full Code": "16B1NMA633",
+				"Subject": "Statistics"
+			},
+			"17B1NEC734": {
+				"Code": "17B1NEC734",
+				"Full Code": "17B1NEC734",
+				"Subject": "RF and Microwave Engineering"
+			},
+			"21B12CS313": {
+				"Code": "21B12CS313",
+				"Full Code": "21B12CS313",
+				"Subject": "Fundamentals of Distributed and Cloud Computing"
+			},
+			"16B1NHS631": {
+				"Code": "16B1NHS631",
+				"Full Code": "16B1NHS631",
+				"Subject": "Project Management"
+			},
+			"16B19EC691": {
+				"Code": "16B19EC691",
+				"Full Code": "16B19EC691",
+				"Subject": "Renewable Energy"
+			},
+			"21B12CS321": {
+				"Code": "21B12CS321",
+				"Full Code": "21B12CS321",
+				"Subject": "Concepts of Graph theory"
+			},
+			"15B17CI573": {
+				"Code": "15B17CI573",
+				"Full Code": "15B17CI573",
+				"Subject": "Software Engineering Lab"
+			},
+			"15B17EC671": {
+				"Code": "15B17EC671",
+				"Full Code": "15B17EC671",
+				"Subject": "Telecommunication Networks Lab"
+			},
+			"15B17CI574": {
+				"Code": "15B17CI574",
+				"Full Code": "15B17CI574",
+				"Subject": "Artificial Intelligence Lab"
+			},
+			"18B15EC315": {
+				"Code": "18B15EC315",
+				"Full Code": "18B15EC315",
+				"Subject": "VLSI Design Lab-II"
+			},
+			"16B1NHS632": {
+				"Code": "16B1NHS632",
+				"Full Code": "16B1NHS632",
+				"Subject": "Cognitive Psychology"
+			},
+			"16B1NHS634": {
+				"Code": "16B1NHS634",
+				"Full Code": "16B1NHS634",
+				"Subject": "THEATRE AND PERFORMANCE"
+			}
 		}
 	},
 	"2": {
@@ -657,25 +845,97 @@
 				"4:00 PM -4:50 PM": []
 			}
 		},
-		"subject": {
-			"15B11EC411": "Analogue Electronics",
-			"15B11MA301": "Probability and Random Processes",
-			"18B11EC212": "Analog and Digital Communication",
-			"18B11EC213": "Digital Systems",
-			"15B11EC413": "Digital Signal Processing",
-			"15B11CI411": "Algorithms and Problem Solving",
-			"15B17EC471": "Analogue Electronics Lab",
-			"19B13BT211": "Environmental Studies",
-			"18B15EC212": "Analog and Digital Communication Lab",
-			"18B15EC213": "Digital Systems Lab",
-			"15B17EC473": "Digital Signal Processing Lab",
-			"15B17CI471": "Algorithms and Problem Solving Lab",
-			"15B1NHS432": "Introduction to Psychology",
-			"19B12HS412": "Industrial Economics",
-			"15B1NHS431": "Introduction to Literature",
-			"16B1NHS431": "Human Resource Management",
-			"15B1NHS435": "Financial Accounting",
-			"24B11HS111": "Universal Human Values"
+		"subjects": {
+			"15B11EC411": {
+				"Code": "15B11EC411",
+				"Full Code": "15B11EC411",
+				"Subject": "Analogue Electronics"
+			},
+			"15B11MA301": {
+				"Code": "15B11MA301",
+				"Full Code": "15B11MA301",
+				"Subject": "Probability and Random Processes"
+			},
+			"18B11EC212": {
+				"Code": "18B11EC212",
+				"Full Code": "18B11EC212",
+				"Subject": "Analog and Digital Communication"
+			},
+			"18B11EC213": {
+				"Code": "18B11EC213",
+				"Full Code": "18B11EC213",
+				"Subject": "Digital Systems"
+			},
+			"15B11EC413": {
+				"Code": "15B11EC413",
+				"Full Code": "15B11EC413",
+				"Subject": "Digital Signal Processing"
+			},
+			"15B11CI411": {
+				"Code": "15B11CI411",
+				"Full Code": "15B11CI411",
+				"Subject": "Algorithms and Problem Solving"
+			},
+			"15B17EC471": {
+				"Code": "15B17EC471",
+				"Full Code": "15B17EC471",
+				"Subject": "Analogue Electronics Lab"
+			},
+			"19B13BT211": {
+				"Code": "19B13BT211",
+				"Full Code": "19B13BT211",
+				"Subject": "Environmental Studies"
+			},
+			"18B15EC212": {
+				"Code": "18B15EC212",
+				"Full Code": "18B15EC212",
+				"Subject": "Analog and Digital Communication Lab"
+			},
+			"18B15EC213": {
+				"Code": "18B15EC213",
+				"Full Code": "18B15EC213",
+				"Subject": "Digital Systems Lab"
+			},
+			"15B17EC473": {
+				"Code": "15B17EC473",
+				"Full Code": "15B17EC473",
+				"Subject": "Digital Signal Processing Lab"
+			},
+			"15B17CI471": {
+				"Code": "15B17CI471",
+				"Full Code": "15B17CI471",
+				"Subject": "Algorithms and Problem Solving Lab"
+			},
+			"15B1NHS432": {
+				"Code": "15B1NHS432",
+				"Full Code": "15B1NHS432",
+				"Subject": "Introduction to Psychology"
+			},
+			"19B12HS412": {
+				"Code": "19B12HS412",
+				"Full Code": "19B12HS412",
+				"Subject": "Industrial Economics"
+			},
+			"15B1NHS431": {
+				"Code": "15B1NHS431",
+				"Full Code": "15B1NHS431",
+				"Subject": "Introduction to Literature"
+			},
+			"16B1NHS431": {
+				"Code": "16B1NHS431",
+				"Full Code": "16B1NHS431",
+				"Subject": "Human Resource Management"
+			},
+			"15B1NHS435": {
+				"Code": "15B1NHS435",
+				"Full Code": "15B1NHS435",
+				"Subject": "Financial Accounting"
+			},
+			"24B11HS111": {
+				"Code": "24B11HS111",
+				"Full Code": "24B11HS111",
+				"Subject": "Universal Human Values"
+			}
 		}
 	},
 	"1": {
@@ -1059,17 +1319,57 @@
 				"4:00 PM -4:50 PM": []
 			}
 		},
-		"subject": {
-			"15B11EC111": "ELECTRICAL SCIENCE -I",
-			"15B11PH211": "PHYSICS-II",
-			"15B11MA211": "MATHEMATICS-II",
-			"18B15GE111": "ENGINEERING DRAWING AND DESIGN",
-			"15B11CI211": "SOFTWARE DEVELOPMENT FUNDAMENTALS-2",
-			"15B17PH271": "PHYSICS LAB-2",
-			"15B17EC171": "ELECTRICAL SCIENCE LAB-I",
-			"15B17CI271": "SOFTWARE DEVELOPMENT LANSHU BANWARI -2",
-			"24B11HS111": "UNIVERSAL HUMAN VALUES (UHV)",
-			"24B16HS111": "LIFE SKILLS AND PROFESSIONAL COMMUNICATION"
+		"subjects": {
+			"15B11EC111": {
+				"Code": "15B11EC111",
+				"Full Code": "15B11EC111",
+				"Subject": "ELECTRICAL SCIENCE -I"
+			},
+			"15B11PH211": {
+				"Code": "15B11PH211",
+				"Full Code": "15B11PH211",
+				"Subject": "PHYSICS-II"
+			},
+			"15B11MA211": {
+				"Code": "15B11MA211",
+				"Full Code": "15B11MA211",
+				"Subject": "MATHEMATICS-II"
+			},
+			"18B15GE111": {
+				"Code": "18B15GE111",
+				"Full Code": "18B15GE111",
+				"Subject": "ENGINEERING DRAWING AND DESIGN"
+			},
+			"15B11CI211": {
+				"Code": "15B11CI211",
+				"Full Code": "15B11CI211",
+				"Subject": "SOFTWARE DEVELOPMENT FUNDAMENTALS-2"
+			},
+			"15B17PH271": {
+				"Code": "15B17PH271",
+				"Full Code": "15B17PH271",
+				"Subject": "PHYSICS LAB-2"
+			},
+			"15B17EC171": {
+				"Code": "15B17EC171",
+				"Full Code": "15B17EC171",
+				"Subject": "ELECTRICAL SCIENCE LAB-I"
+			},
+			"15B17CI271": {
+				"Code": "15B17CI271",
+				"Full Code": "15B17CI271",
+				"Subject": "SOFTWARE DEVELOPMENT LANSHU BANWARI -2"
+			},
+			"24B11HS111": {
+				"Code": "24B11HS111",
+				"Full Code": "24B11HS111",
+				"Subject": "UNIVERSAL HUMAN VALUES (UHV)"
+			},
+			"24B16HS111": {
+				"Code": "24B16HS111",
+				"Full Code": "24B16HS111",
+				"Subject": "LIFE SKILLS AND PROFESSIONAL COMMUNICATION"
+			}
 		}
 	}
 }

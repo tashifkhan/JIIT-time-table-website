@@ -81,8 +81,8 @@ export function ScheduleForm({ mapping, onSubmit }: ScheduleFormProps) {
 							<SelectValue placeholder="Select campus" />
 						</SelectTrigger>
 						<SelectContent className="bg-[#FFF0DC]/20 backdrop-blur-2xl border-[#F0BB78]/20">
-							<SelectItem value="62">62 </SelectItem>
-							<SelectItem value="128">128 </SelectItem>
+							<SelectItem value="62">62</SelectItem>
+							<SelectItem value="128">128</SelectItem>
 						</SelectContent>
 					</Select>
 				</div>

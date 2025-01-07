@@ -5,7 +5,7 @@ import { YourTietable } from '../App';
 let pyodideInstance: PyodideInterface | null = null;
 
 // URL of the Python module file
-const pythonModuleURL = '/script.py';
+const pythonModuleURL = '/_creator.py';
 
 async function fetchPythonCode(url: string): Promise<string> {
   const response = await fetch(url);
@@ -23,16 +23,6 @@ export async function initializePyodide() {
       fullStdLib: false,
     });
     
-    // First load the BE62_creator and BE128_creator modules
-    console.log('Loading BE62_creator module...');
-    const creatorCode = await fetchPythonCode('/modules/BE62_creator.py');
-    await pyodideInstance.runPython(creatorCode);
-
-    console.log('Loading BE128_creator module...');
-    const creatorCode128 = await fetchPythonCode('/modules/BE128_creator.py');
-    await pyodideInstance.runPython(creatorCode128);
-    
-    // Then load and run the main script that exposes the functions
     console.log('Loading main script...');
     const pythonCode = await fetchPythonCode(pythonModuleURL);
     await pyodideInstance.runPython(pythonCode);
@@ -66,13 +56,13 @@ export async function callPythonFunction(functionName: string, args: PythonFunct
     
     // Convert JavaScript objects to Python objects
     const pyTimeTable = pyodide.toPy(args.time_table_json);
-    console.log('pyTimeTable:', pyTimeTable);
+    // console.log('pyTimeTable:', pyTimeTable);
     const pySubjects = pyodide.toPy(args.subject_json);
-    console.log('pySubjects:', pySubjects);
+    // console.log('pySubjects:', pySubjects);
     const pyBatch = pyodide.toPy(args.batch);
-    console.log('pyBatch:', pyBatch);
+    // console.log('pyBatch:', pyBatch);
     const pyElectives = pyodide.toPy(args.electives_subject_codes);
-    console.log('pyElectives:', pyElectives);
+    // console.log('pyElectives:', pyElectives);
     
     const result = pythonFunction(pyTimeTable, pySubjects, pyBatch, pyElectives);
     return result.toJs();

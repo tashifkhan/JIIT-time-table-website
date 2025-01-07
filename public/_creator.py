@@ -352,180 +352,234 @@ def time_table_creator(time_table_json: dict, subject_json: list, batch: str, el
         print(f"Error in time_table_creator: {str(e)}")
         return {}
 
-if __name__ == "__main__":
-    # with open("./data/json/time_table.json", 'r') as file:
-    #     time_table = json.load(file)
+# 128 Creator
 
-    with open("./data/json/subjects_newsem.json", 'r') as file:
-        subject = json.load(file)
+def batch_extractor128(text: str) -> str:
+    start_bracket = text.find('(')
+    if start_bracket != -1:
+        return text[1:start_bracket].strip()
+    return ""
 
-    # your_time_table = []
+def subject_extractor128(text: str) -> str:
+    start_bracket = text.find('(')
+    if start_bracket != -1:
+        end_bracket = text.find(')', start_bracket)
+        if end_bracket != -1:
+            return text[start_bracket + 1:end_bracket]
+    return ""
 
-    # batch = input("Enter your Batch: ").upper().strip()
-    # electives_subject_codes = []
-    # n = int(input("Number of electives you have: "))
-    # for i in range(n):
-    #     electives_subject_codes.append(input("Enter the subject code of the elective (shortttened one): ").upper().strip())
+def faculty_extractor128(text: str) -> str:
+    start_bracket = text.find('/')
+    if start_bracket != -1:
+        return text[start_bracket+1:].strip()
+    return ""
 
-    # print(json.dumps(time_table_creator(time_table, subject, batch, electives_subject_codes), indent=4))
-    test = "LA5-A6(EC315)-G6/SCH"
-    test2 = "T A1-A10,C1-C3 (H3H30)-FF1/IJ"
-    test3 = "T B1-B15 (H3H30)-FF1/IJ"
-    print(location_extractor(test3))
-    print(subject_name_extractor(subject, subject_extractor(test3)))
-    print(parse_batch_numbers(batch_extractor(test3)))
-    print(location_extractor(test2))
-    print(subject_name_extractor(subject, subject_extractor(test2)))
-    print(parse_batch_numbers(batch_extractor(test2)))
-    print(location_extractor(test))
-    print(subject_name_extractor(subject, subject_extractor(test)))
-    print(parse_batch_numbers(batch_extractor(test)))
-    # print(batch_extractor(test2))
-    # subjectCode = test2.strip()
-    # code = subject_extractor(subjectCode) 
-    # print(code)
-    # print(subject_name_extractor(subject, code))
-    # batch = "B12"
-    # print(batch_extractor(test))
-    # test_inputs = [
-    #     "A3",
-    #     "A5-A6",
-    #     "A7-A8-A10",
-    #     "C1-C3",
-    #     "B9,10",
-    #     "B3,B4",
-    #     "B3,4",
-    #     "B3,B4,A9",
-    #     "B3,4,8,A9,C1-C3",
-    #     "ABC",
-    #     "B",
-    #     "A",
-    #     "C",
-    #     "AC",
-    #     "bc",
-    #     "Ac",
-    #     "A1-A10, B11-B15, C1-C3",
-    #     "B1-B10",
-    #     "",
-    #     "A15A17",
-    #     "A1-A10, B11-B15,C",
-    #     "LA1-A10,C"
-    # ]
+def expand_batch128(batch_code):
+    """Expand batch code into list of individual batches."""
+    if not batch_code: 
+        return []
+        
+    if batch_code == 'ALL':
+        return ['E', 'F']
+    
+    matches = re.findall(r'([A-Z])(\d+)', batch_code)
+    if matches:
+        return [f"{letter}{number}" for letter, number in matches]
+    
+    return [batch_code]
 
-    # print("Testing batch number parser:")
-    # for test_input in test_inputs:
-    #     result = parse_batch_numbers(test_input)
-    #     print(f"Input: {test_input:20} -> Output: {result}")
+def location_extractor128(text: str) -> str:
+    parts = text.split('-')
+    if len(parts) < 2:
+        return ""
 
-    # print()
+    location = parts[-1].split('/')[0]
+    return location.strip()
 
-    # test_cases = [
-    #     ("A6", "A1-A10"),
-    #     ("B16", "B"),
-    #     ("C2", "C1-C3"),
-    #     ("A3", "ABC"),
-    #     ("B5", "B1-B10"),
-    #     ("B3", "B3,B4"),
-    #     ("B4", "B3,4"),
-    #     ("D1", "ABC"),
-    #     ("A1", ""),
-    #     ("A8", "A7-A8-A10"),
-    #     ("B7", "Ca"),
-    #     ("A14", "A14A17"),
-    #     ("B12", "A1-A10, B11-B15, C1-C3"),
-    #     ("B4", "B3,4,8,A9,C1-C3"),
-    #     ("C5", "A1-A10, B11-B15,C "),
-    # ]
+def is_batch_included128(search_batch: str, extracted_batch_input: str) -> bool:
+    if not extracted_batch_input:
+        return True
+    batch_list = expand_batch128(extracted_batch_input.strip())
+    if search_batch in batch_list:
+        return True
+    for batch in batch_list:
+        if len(batch) == 1 and search_batch[0] == batch:
+            return True
+    return False
 
-    # for search_batch, batch_input in test_cases:
-    #     result = is_batch_included(search_batch, batch_input)
-    #     print(f"Searching for {search_batch:3} in {batch_input:10} -> {result}")
-
-
-
-''' formated timetable
-{
-    "Monday": {
-        "10:00-10:50": {
-            "subject_name": "Data Structures and Algorithms",
-            "type": "L",
-            "location": "G7"
-        },
-        "15:00-15:50": {
-            "subject_name": "Indian Constitution and Traditional knowledge",
-            "type": "L",
-            "location": "G8"
-        }
-    },
-    "Tuesday": {
-        "10:00-10:50": {
-            "subject_name": "Electromagnetic Field Theory",
-            "type": "L",
-            "location": "G8"
-        },
-        "15:00-16:50": {
-            "subject_name": "Data Structures and Algorithms Lab",
-            "type": "P",
-            "location": "CL04"
-        }
-    },
-    "Wednesday": {
-        "09:00-10:50": {
-            "subject_name": "Microprocessors and Microcontrollers",
-            "type": "P",
-            "location": "IOT Lab"
-        },
-        "13:00-13:50": {
-            "subject_name": "Data Structures and Algorithms",
-            "type": "L",
-            "location": "G4"
-        },
-        "15:00-15:50": {
-            "subject_name": "Indian Constitution and Traditional knowledge",
-            "type": "L",
-            "location": "G6"
-        }
-    },
-    "Thursday": {
-        "09:00-09:50": {
-            "subject_name": "Indian Constitution and Traditional knowledge",
-            "type": "L",
-            "location": "G8"
-        },
-        "10:00-10:50": {
-            "subject_name": "Electromagnetic Field Theory",
-            "type": "L",
-            "location": "FF4"
-        },
-        "15:00-15:50": {
-            "subject_name": "Data Structures and Algorithms",
-            "type": "L",
-            "location": "G4"
-        },
-        "16:00-16:50": {
-            "subject_name": "Electromagnetic Field Theory",
-            "type": "T",
-            "location": "F10"
-        }
-    },
-    "Friday": {
-        "10:00-10:50": {
-            "subject_name": "Electromagnetic Field Theory",
-            "type": "L",
-            "location": "G8"
-        },
-        "15:00-16:50": {
-            "subject_name": "Python for Signal Processing & Communication Lab",
-            "type": "P",
-            "location": "SPL"
-        }
-    },
-    "Saturday": {
-        "09:00-10:50": {
-            "subject_name": "Electromagnetic Field Theory",
-            "type": "P",
-            "location": "ACL,JBSPL"
-        }
+def process_day128(day_str: str) -> str:
+    day_mapping = {
+        'MON': 'Monday',
+        'M': 'Monday',
+        'MONDAY': 'Monday',
+        'TUES': 'Tuesday',
+        'TUE': 'Tuesday',
+        'T': 'Tuesday',
+        'TUESDAY': 'Tuesday',
+        'WED': 'Wednesday',
+        'W': 'Wednesday',
+        'WEDNESDAY': 'Wednesday',
+        'THUR': 'Thursday',
+        'THURS': 'Thursday',
+        'THURSDAY': 'Thursday',
+        'THU': 'Thursday',
+        'TH': 'Thursday',
+        'FRI': 'Friday',
+        'FRIDAY': 'Friday',
+        'F': 'Friday',
+        'SAT': 'Saturday',
+        'S': 'Saturday',
+        'SA': 'Saturday',
+        'SATURDAY': 'Saturday',
+        'SATUR': 'Saturday',
+        'SUN': 'Sunday',
+        'SU': 'Sunday',
+        'U': 'Sunday',
+        'SUNDAY': 'Sunday'
     }
-}
-'''
+    
+    day_str = day_str.strip().upper()
+    return day_mapping.get(day_str, day_str)
+
+def convert_time_format128(time_str):
+    time_str = time_str.strip().replace(' ', '')
+    
+    if 'AM' in time_str or 'PM' in time_str:
+        if ':' not in time_str:
+            time_str = time_str.replace('AM', ':00 AM').replace('PM', ':00 PM')
+
+    time_str = time_str.replace('AM', ' AM').replace('PM', ' PM')
+    
+    try:
+        return datetime.strptime(time_str, '%I:%M %p').strftime('%H:%M')
+    except ValueError as e:
+        raise ValueError(f"Error parsing time string '{time_str}': {e}")
+
+def process_timeslot128(timeslot: str, type: str = "L") -> tuple[str]:
+    try:
+        timeslot = timeslot.replace('12 NOON', '12:00 PM').replace('NOON', '12:00 PM')
+
+        start_time, end_time = timeslot.split('-')
+
+        start_time = start_time.strip()
+        end_time = end_time.strip().replace('.', ':')
+        
+        if not ('AM' in start_time.upper() or 'PM' in start_time.upper()):
+            if len(start_time.split(':')[0].strip()) == 1:
+                start_time = "0" + start_time
+            if int(start_time.split(':')[0]) < 7:
+                start_time += " PM"
+            else:
+                start_time += " AM"
+                
+        if not ('AM' in end_time.upper() or 'PM' in end_time.upper()):
+            if len(end_time.split(':')[0].strip()) == 1:
+                end_time = "0" + end_time
+            if int(end_time.split(':')[0]) < 7:
+                end_time += " PM"
+            else:
+                end_time += " AM"
+
+        start_time_24 = convert_time_format128(start_time)
+        end_time_24 = convert_time_format128(end_time)
+        
+        if type == "P":
+            end_hour = int(end_time_24.split(':')[0])
+            end_min = end_time_24.split(':')[1]
+            end_hour = (end_hour + 1) % 24
+            end_time_24 = f"{end_hour:02d}:{end_min}"
+
+        if start_time_24 == "00:00":
+            start_time_24 = "12:00"
+        if end_time_24[3:] == "50":
+            end_time_24 = f"{int(end_time_24[:2])+1}00"
+        return start_time_24, end_time_24
+    except Exception as e:
+        print(f"Error processing timeslot '{timeslot}': {e}")
+        return "00:00", "00:00"
+
+def is_elective128(extracted_batch:str):
+    if extracted_batch == "ALL":
+        return True
+    return False
+
+def do_you_have_elective128(elective_subject_codes: List[str], subject_code: str) -> bool:
+    if subject_code in elective_subject_codes:
+        return True
+    return False
+
+def subject_name128(subjects_dict: dict, code: str) -> str:
+    for subject in subjects_dict:
+        if subject["Code"] == code:
+            return subject["Subject"]
+        if subject["Full Code"] == code:
+            return subject["Subject"]
+        if str(subject["Full Code"][:2] + subject["Code"]).strip() == code.strip():
+            return subject["Subject"]
+        if str(subject["Full Code"][3:]).strip() == code.strip():
+            return subject["Subject"]
+        if str(subject["Full Code"][2:]).strip() == code.strip():
+            return subject["Subject"]
+        if str(subject["Full Code"][:5] + subject["Code"]).strip() == code.strip():
+            return subject["Subject"]
+        if str(subject["Full Code"][2:5] + subject["Code"]).strip() == code.strip():
+            return subject["Subject"]
+        if str(subject["Full Code"][3:5] + subject["Code"]).strip() == code.strip():
+            return subject["Subject"]
+        if str(subject["Code"][1:]).strip() == code.strip():
+            return subject["Subject"]
+    return code
+
+def banado128(time_table_json: dict, subject_json: dict, batch: str, electives_subject_codes: List[str]) -> dict:
+    try:
+        time_table = time_table_json
+        subject = subject_json
+        your_time_table = []
+
+        days = list(time_table.keys())
+        # Iterate through each day in the timetable
+        for day in days:
+            time_slots = time_table[day]
+            time_slot_keys = list(time_slots.keys())
+            for time in time_slot_keys:
+                classes = time_slots[time]
+                if not isinstance(classes, list):
+                    continue
+                for indi_class in classes:
+                    if not isinstance(indi_class, str):
+                        continue
+                    code = subject_extractor128(indi_class.strip())
+                    batchs = batch_extractor128(indi_class.strip())
+
+                    if not is_elective128(extracted_batch=batchs):
+                        if is_batch_included128(batch, batchs):
+                            your_time_table.append([day, time, subject_name128(subject, code), indi_class.strip()[0], location_extractor128(indi_class.strip())])
+
+                    else:
+                        if do_you_have_elective128(elective_subject_codes=electives_subject_codes, subject_code=code) and is_batch_included128(batch, batchs):
+                            your_time_table.append([day, time, subject_name128(subject, code), indi_class.strip()[0], location_extractor128(indi_class.strip())])
+
+        formatted_timetable = {}
+
+        for entry in your_time_table:
+            day = process_day128(entry[0])
+            time = entry[1]
+            start_time, end_time = process_timeslot128(time, entry[3])
+
+            if entry[2].strip() in ["ENGINEERING DRAWING AND DESIGN", "Engineering Drawing & Design"]:
+                end_time = f"{int(end_time[:2])+1}{end_time[2:]}"
+            
+            if day not in formatted_timetable:
+                formatted_timetable[day] = {}
+            
+            formatted_timetable[day][f"{start_time}-{end_time}"] = {
+                "subject_name": entry[2],
+                "type": entry[3],
+                "location": entry[4]
+            }
+        
+        return formatted_timetable
+
+    except Exception as e:
+        print(f"Error in time_table_creator: {str(e)}")
+        return {}

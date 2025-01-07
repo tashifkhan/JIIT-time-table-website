@@ -40,9 +40,9 @@ interface PythonFunctionArgs {
 export async function callPythonFunction(functionName: string, args: PythonFunctionArgs): Promise<any> {
   const pyodide = await initializePyodide();
   try {
-    console.log("Calling Python function:", functionName);
+    // console.log("Calling Python function:", functionName);
     const pythonFunction = pyodide.globals.get(functionName);
-    console.log('Python function:', pythonFunction, 'type:', typeof pythonFunction);
+    // console.log('Python function:', pythonFunction, 'type:', typeof pythonFunction);
     
     if (!pythonFunction || typeof pythonFunction !== 'function') {
       console.error('Available globals:', Object.keys(pyodide.globals.toJs()));

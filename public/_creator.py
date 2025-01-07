@@ -562,16 +562,22 @@ def banado128(time_table_json: dict, subject_json: dict, batch: str, electives_s
         formatted_timetable = {}
 
         for entry in your_time_table:
-            day = process_day128(entry[0])
+            day = process_day(entry[0])
             time = entry[1]
-            start_time, end_time = process_timeslot128(time, entry[3])
+            start_time, end_time = process_timeslot(time, entry[3])
 
-            if entry[2].strip() in ["ENGINEERING DRAWING AND DESIGN", "Engineering Drawing & Design"]:
+            if entry[2] in ["ENGINEERING DRAWING AND DESIGN", "Engineering Drawing & Design"]:
                 end_time = f"{int(end_time[:2])+1}{end_time[2:]}"
             
             if day not in formatted_timetable:
                 formatted_timetable[day] = {}
-            
+            # Format end time to ensure it's in HH:MM format
+            if len(end_time) == 4:  # If end time is like "1100"
+                end_time = f"{end_time[:2]}:{end_time[2:]}"
+
+            if entry[2].strip() == entry[2].strip().upper():
+                entry[2] = entry[2].strip().title()
+                
             formatted_timetable[day][f"{start_time}-{end_time}"] = {
                 "subject_name": entry[2],
                 "type": entry[3],

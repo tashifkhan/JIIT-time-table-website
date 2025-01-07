@@ -66,13 +66,23 @@ export function ScheduleForm({ mapping, onSubmit }: ScheduleFormProps) {
 					>
 						Campus
 					</Label>
-					<Select value={campus} onValueChange={setCampus}>
+					<Select
+						value={campus}
+						onValueChange={(value) => {
+							setCampus(value);
+							if (value === "128") {
+								alert(
+									"⚠️ Warning ⚠️ \n128 Time Table is not compltely tested yet. You may encounter bugs or errors or formating issues. You can raise a github issue for the same."
+								);
+							}
+						}}
+					>
 						<SelectTrigger className="h-9 sm:h-10 text-sm bg-[#FFF0DC]/10 border-[#F0BB78]/20 backdrop-blur-md hover:bg-[#FFF0DC]/15 transition-all">
 							<SelectValue placeholder="Select campus" />
 						</SelectTrigger>
 						<SelectContent className="bg-[#FFF0DC]/20 backdrop-blur-2xl border-[#F0BB78]/20">
-							<SelectItem value="62">62 Campus</SelectItem>
-							<SelectItem value="128">128 Campus</SelectItem>
+							<SelectItem value="62">62 </SelectItem>
+							<SelectItem value="128">128 </SelectItem>
 						</SelectContent>
 					</Select>
 				</div>

@@ -121,7 +121,9 @@ def subject_extractor(text: str) -> str:
         end_bracket = text.find(')', start_bracket)
         if end_bracket != -1:
             return text[start_bracket + 1:end_bracket]
-    return ""
+        elif dash := text.find('-'):
+            return text[start_bracket + 1:dash]
+    return text
 
 def location_extractor(text: str) -> str:
     parts = text.split('-')
@@ -337,7 +339,7 @@ def time_table_creator(time_table_json: dict, subject_json: list, batch: str, el
             if len(end_time) == 4:  # If end time is like "1100"
                 end_time = f"{end_time[:2]}:{end_time[2:]}"
 
-            if entry[2].strip() == entry[2].strip().upper():
+            if len(entry[2].strip()) > 3 and entry[2].strip() == entry[2].strip().upper():
                 entry[2] = entry[2].strip().title()
                 
             formatted_timetable[day][f"{start_time}-{end_time}"] = {

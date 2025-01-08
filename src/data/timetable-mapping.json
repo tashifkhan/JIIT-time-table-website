@@ -1666,7 +1666,15 @@
 					"PXW,XG(V1B40)-CL16/TRN",
 					"PA6,7,8,C1,2(V1B20)-CL15/JAG, KJ"
 				],
-				"3-4PM": ["LAB(13V1P10)-G4/ABH"],
+				"3-4PM": [
+					"LAB(13V1P10)-G4/ABH",
+					"L(16B19V1A10)-FF3/NSH",
+					"LABC(V1H10)-FF4/HK",
+					"LC1-C3(V1C10)-CS1/MAS,MOB",
+					"LC1-C3(16V2C20)-CS2/RPS",
+					"LABC(V1H20)-CS3/EKS",
+					"LAB(13V1P10)-G4/ABH"
+				],
 				"4-5PM": [],
 				"5-6PM": []
 			},

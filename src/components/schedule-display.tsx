@@ -80,15 +80,19 @@ export function ScheduleDisplay({ schedule }: ScheduleDisplayProps) {
 											key={time}
 											className={`${
 												typeColors[class_.type]
-											} backdrop-blur-sm border p-4 relative group`}
+											} backdrop-blur-sm border p-4 relative group cursor-pointer`}
+											onClick={() =>
+												setEditingEvent({ day, time, event: class_ })
+											}
 										>
 											<Button
 												variant="ghost"
 												size="sm"
 												className="absolute top-2 right-2 opacity-0 group-hover:opacity-100 transition-opacity duration-200"
-												onClick={() =>
-													setEditingEvent({ day, time, event: class_ })
-												}
+												onClick={(e) => {
+													e.stopPropagation();
+													setEditingEvent({ day, time, event: class_ });
+												}}
 											>
 												<Edit2 className="w-4 h-4 text-gray-400 hover:text-gray-100" />
 											</Button>

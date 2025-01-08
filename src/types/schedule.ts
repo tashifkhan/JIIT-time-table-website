@@ -16,7 +16,7 @@ export interface WeekSchedule {
   [day: string]: {
     [time: string]: {
       subject_name: string;
-      type: "L" | "T" | "P";
+      type: "L" | "T" | "P" | "C";
       location: string;
     };
   };

@@ -56,17 +56,37 @@ export function EditEventDialog({
 	const handleSave = () => {
 		if (!editedSchedule) return;
 
-		const updatedSchedule = { ...editedSchedule };
-		const newTimeSlot = `${formData.startTime}-${formData.endTime}`;
+		// Validate required fields
+		if (
+			!formData.subject_name ||
+			!formData.type ||
+			!formData.location ||
+			!formData.startTime ||
+			!formData.endTime
+		) {
+			alert("Please fill in all fields");
+			return;
+		}
 
-		// Remove old time slot if it exists
-		if (time) {
+		// Format time slots consistently
+		const formatTime = (time: string) => {
+			return time.replace(/:/g, "");
+		};
+
+		const newTimeSlot = `${formatTime(formData.startTime)}-${formatTime(
+			formData.endTime
+		)}`;
+
+		const updatedSchedule = { ...editedSchedule };
+
+		// Remove old time slot if it exists and is different from new time slot
+		if (time && time !== newTimeSlot) {
 			const daySchedule = { ...updatedSchedule[day] };
 			delete daySchedule[time];
 			updatedSchedule[day] = daySchedule;
 		}
 
-		// Create or update day if it doesn't exist
+		// Ensure the day exists in the schedule
 		if (!updatedSchedule[day]) {
 			updatedSchedule[day] = {};
 		}

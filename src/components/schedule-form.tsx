@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useContext } from "react";
 import { motion } from "framer-motion";
 import { Button } from "./ui/button";
 import { Card } from "./ui/card";
@@ -13,6 +13,7 @@ import { Input } from "./ui/input";
 import { Label } from "./ui/label";
 import { Subject } from "../types/subject";
 import { Sparkles } from "lucide-react";
+import UserContext from "../context/userContext";
 
 interface ScheduleFormProps {
 	mapping: {
@@ -34,6 +35,7 @@ interface ScheduleFormProps {
 }
 
 export function ScheduleForm({ mapping, onSubmit }: ScheduleFormProps) {
+	const { setEditedSchedule } = useContext(UserContext);
 	const [year, setYear] = useState("");
 	const [batch, setBatch] = useState("");
 	const [campus, setCampus] = useState("");
@@ -48,6 +50,7 @@ export function ScheduleForm({ mapping, onSubmit }: ScheduleFormProps) {
 
 	const handleSubmit = (e: React.FormEvent) => {
 		e.preventDefault();
+		setEditedSchedule(null);
 		onSubmit({
 			year,
 			batch,

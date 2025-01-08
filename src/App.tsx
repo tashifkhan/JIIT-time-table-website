@@ -146,6 +146,10 @@ const App: React.FC = () => {
 							animate={{ opacity: 1, scale: 1 }}
 							transition={{ duration: 0.5 }}
 						>
+							<p className="text-sm text-slate-300/60 p-4 text-center">
+								Tap on any time slot to edit it, or click the + icon in each
+								day's title to add new events.
+							</p>
 							<ScheduleDisplay schedule={schedule} />
 						</motion.div>
 						<div className="flex justify-center">

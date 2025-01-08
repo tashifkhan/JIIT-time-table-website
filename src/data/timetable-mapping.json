@@ -1366,13 +1366,8 @@
 					"LB,XW,XG(D2B40)-CR301/VIK"
 				],
 				"9-10AM": [
-					"L(17B1ND3A20)-CS1/AB",
-					"L(15B11D3A50)-CS2/RRJ",
 					"LB(D3B30)-CS3/GZL",
 					"LB(D3B50)-CS4/DL",
-					"L(17B1ND3A30)-CS5/ABY",
-					"L(24D3A40)-CS6/RHA",
-					"L(24B12D3A10)-CS7/RU",
 					"LB(D3B10)-CR325/PK",
 					"LB(D3B20)-CR401/PKAU",
 					"TA1-A10,C1-C3 (H3H70)-TS13/MSU",
@@ -1680,6 +1675,8 @@
 			},
 			"FRI": {
 				"8-9AM": [
+					"L(17B1ND3A20)-CS1/AB",
+					"L(15B11D3A50)-CS2/RRJ",
 					"LC1-C3(D2C10)-CS1/AKT",
 					"LC1-C3(D2C20)-CS2/SMO",
 					"L(D2A20)-CS3/PKY",
@@ -1768,6 +1765,9 @@
 					"LC1-C3(D3C10)-CS1/VGU",
 					"LC1-C3(D3C20)-CS2/AV",
 					"T B1-B15 (H3H30)-FF1/IJ",
+					"L(17B1ND3A30)-CS5/ABY",
+					"L(24D3A40)-CS6/RHA",
+					"L(24B12D3A10)-CS7/RU",
 					"TB1-B6 (H3H10)-FF2/AMN",
 					"TB7-B15 (H3H10)-FF3/SDA",
 					"TB1-B15 (H3H80)-FF4/VSE",

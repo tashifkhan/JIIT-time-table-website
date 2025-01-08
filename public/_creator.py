@@ -57,8 +57,17 @@ def parse_batch_numbers(batch_input: str) -> List[str]:
     # Handle single range without commas
     if '-' in batch_input:
         parts = batch_input.split('-')
-        prefix = re.match(r'([A-Za-z]+)', parts[0]).group(1)
-        numbers = [int(re.search(r'\d+', part).group()) for part in parts]
+        prefix_match = re.match(r'([A-Za-z]+)', parts[0])
+        if not prefix_match:
+            return [batch_input]
+        prefix = prefix_match.group(1)
+        numbers = []
+        for part in parts:
+            num_match = re.search(r'\d+', part)
+            if num_match:
+                numbers.append(int(num_match.group()))
+        if not numbers:
+            return [batch_input]
         return [f"{prefix}{i}" for i in range(numbers[0], numbers[-1] + 1)]
     
     # Handle single batch number
@@ -339,7 +348,7 @@ def time_table_creator(time_table_json: dict, subject_json: list, batch: str, el
             if len(end_time) == 4:  # If end time is like "1100"
                 end_time = f"{end_time[:2]}:{end_time[2:]}"
 
-            if len(entry[2].strip()) > 3 and entry[2].strip() == entry[2].strip().upper():
+            if len(entry[2].strip()) > 3 and len(entry[2].strip()) not in [5,7] and entry[2].strip() == entry[2].strip().upper():
                 entry[2] = entry[2].strip().title()
                 
             formatted_timetable[day][f"{start_time}-{end_time}"] = {

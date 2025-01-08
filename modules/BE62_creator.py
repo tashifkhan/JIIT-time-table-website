@@ -121,7 +121,9 @@ def subject_extractor(text: str) -> str:
         end_bracket = text.find(')', start_bracket)
         if end_bracket != -1:
             return text[start_bracket + 1:end_bracket]
-    return ""
+        elif dash := text.find('-'):
+            return text[start_bracket + 1:dash]
+    return text
 
 def location_extractor(text: str) -> str:
     parts = text.split('-')

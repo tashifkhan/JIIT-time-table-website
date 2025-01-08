@@ -113,7 +113,7 @@ def batch_extractor(text: str) -> str:
     start_bracket = text.find('(')
     if start_bracket != -1:
         return text[1:start_bracket].strip()
-    return ""
+    return text
 
 def subject_extractor(text: str) -> str:
     start_bracket = text.find('(')
@@ -128,7 +128,7 @@ def subject_extractor(text: str) -> str:
 def location_extractor(text: str) -> str:
     parts = text.split('-')
     if len(parts) < 2:
-        return ""
+        return text
 
     location = parts[-1].split('/')[0]
     return location.strip()
@@ -360,7 +360,7 @@ def batch_extractor128(text: str) -> str:
     start_bracket = text.find('(')
     if start_bracket != -1:
         return text[1:start_bracket].strip()
-    return ""
+    return text
 
 def subject_extractor128(text: str) -> str:
     start_bracket = text.find('(')
@@ -368,13 +368,13 @@ def subject_extractor128(text: str) -> str:
         end_bracket = text.find(')', start_bracket)
         if end_bracket != -1:
             return text[start_bracket + 1:end_bracket]
-    return ""
+    return text
 
 def faculty_extractor128(text: str) -> str:
     start_bracket = text.find('/')
     if start_bracket != -1:
         return text[start_bracket+1:].strip()
-    return ""
+    return text
 
 def expand_batch128(batch_code):
     """Expand batch code into list of individual batches."""
@@ -393,7 +393,7 @@ def expand_batch128(batch_code):
 def location_extractor128(text: str) -> str:
     parts = text.split('-')
     if len(parts) < 2:
-        return ""
+        return text
 
     location = parts[-1].split('/')[0]
     return location.strip()

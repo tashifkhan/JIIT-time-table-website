@@ -3,7 +3,7 @@ import UserContext from "../context/userContext";
 
 interface ScheduleEvent {
 	subject_name: string;
-	type: "L" | "P" | "T" | "C"; // Added "C" type
+	type: "L" | "P" | "T" | "C";
 	location: string;
 }
 
@@ -37,7 +37,7 @@ const TimelinePage: React.FC = () => {
 			case "T":
 				return "rgba(255, 240, 220, 0.15)";
 			case "C":
-				return "rgba(74, 144, 226, 0.2)"; // Custom event color
+				return "rgba(255, 155, 80, 0.2)";
 			default:
 				return "transparent";
 		}

@@ -25,7 +25,7 @@ export function ScheduleDisplay({ schedule }: ScheduleDisplayProps) {
 		L: "bg-[#F0BB78]/10 border-[#F0BB78]/20 hover:bg-[#F0BB78]/20",
 		T: "bg-[#543A14]/10 border-[#543A14]/20 hover:bg-[#543A14]/20",
 		P: "bg-[#FFF0DC]/10 border-[#FFF0DC]/20 hover:bg-[#FFF0DC]/20",
-		C: "bg-[#4A90E2]/10 border-[#4A90E2]/20 hover:bg-[#4A90E2]/20",
+		C: "bg-[#FF9B50]/10 border-[#FF9B50]/20 hover:bg-[#FF9B50]/20",
 	};
 
 	const typeLabels = {

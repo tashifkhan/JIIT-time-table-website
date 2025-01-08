@@ -3,16 +3,15 @@ import UserContext from "../context/userContext";
 
 interface ScheduleEvent {
 	subject_name: string;
-	type: "L" | "P" | "T";
+	type: "L" | "P" | "T" | "C"; // Added "C" type
 	location: string;
 }
 
 const TimelinePage: React.FC = () => {
-	// const { schedule } = useUserContext();
+	const { editedSchedule, schedule } = React.useContext(UserContext);
+	const displaySchedule = editedSchedule || schedule;
 
-	const { schedule } = React.useContext(UserContext);
-
-	if (!schedule) {
+	if (!displaySchedule) {
 		return (
 			<div className="min-h-screen bg-[#131010] text-[#FFF0DC] p-8 flex items-center justify-center">
 				<p>No schedule data available</p>
@@ -28,7 +27,6 @@ const TimelinePage: React.FC = () => {
 		"Friday",
 		"Saturday",
 	];
-	// const hours = Array.from({ length: 9 }, (_, i) => i + 8); // 8:00 to 16:00
 
 	const getEventColor = (type: string) => {
 		switch (type) {
@@ -38,6 +36,8 @@ const TimelinePage: React.FC = () => {
 				return "rgba(84, 58, 20, 0.3)";
 			case "T":
 				return "rgba(255, 240, 220, 0.15)";
+			case "C":
+				return "rgba(74, 144, 226, 0.2)"; // Custom event color
 			default:
 				return "transparent";
 		}
@@ -118,8 +118,8 @@ const TimelinePage: React.FC = () => {
 								</div>
 
 								{/* Events */}
-								{schedule[day] &&
-									Object.entries(schedule[day]).map(
+								{displaySchedule[day] &&
+									Object.entries(displaySchedule[day]).map(
 										([timeSlot, event]: [string, ScheduleEvent]) => (
 											<div
 												key={timeSlot}
@@ -139,6 +139,7 @@ const TimelinePage: React.FC = () => {
 												<div style={getEventStyle(event as ScheduleEvent)}>
 													<div className="font-medium text-xs md:text-sm">
 														{event.subject_name}
+														{event.type === "C" && " (Custom)"}
 													</div>
 													<div className="text-[10px] md:text-xs opacity-75">
 														{timeSlot}

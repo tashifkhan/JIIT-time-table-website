@@ -68,9 +68,11 @@ export function EditEventDialog({
 			return;
 		}
 
-		// Format time slots consistently
+		// Format time slots to retain colon
 		const formatTime = (time: string) => {
-			return time.replace(/:/g, "");
+			// Ensure time is in HH:mm format
+			const [hours, minutes] = time.split(":");
+			return `${hours.padStart(2, "0")}:${minutes || "00"}`;
 		};
 
 		const newTimeSlot = `${formatTime(formData.startTime)}-${formatTime(

@@ -5,13 +5,19 @@ import { downloadAsPng, downloadAsPdf } from "../utils/download";
 import { useNavigate } from "react-router-dom";
 import { GoogleCalendarButton } from "./google-calendar-button";
 import { YourTietable } from "../App";
+import { useContext } from "react";
+import UserContext from "../context/userContext";
 
 interface ActionButtonsProps {
 	schedule: YourTietable;
 }
 
 export function ActionButtons({ schedule }: ActionButtonsProps) {
+	const { editedSchedule } = useContext(UserContext);
 	const navigate = useNavigate();
+
+	// Use edited schedule if available, otherwise use original schedule
+	const displaySchedule = editedSchedule || schedule;
 
 	const handleDownload = async (downloadFn: Function) => {
 		navigate("/timeline");
@@ -55,9 +61,9 @@ export function ActionButtons({ schedule }: ActionButtonsProps) {
 					PDF
 				</Button>
 			</motion.div>
-			<GoogleCalendarButton schedule={schedule} />
+			<GoogleCalendarButton schedule={displaySchedule} />
 			<p className="text-xs text-gray-400 mt-2">
-				Note: Google Calendar sync may not work as expected.
+				Note: Custom events will not be recurring in Google Calendar
 			</p>
 		</motion.div>
 	);

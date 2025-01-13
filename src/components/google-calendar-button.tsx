@@ -49,9 +49,12 @@ export function GoogleCalendarButton({ schedule }: GoogleCalendarButtonProps) {
 					}
 
 					try {
-						const events = await createGoogleCalendarEvents(schedule);
+						const eventsData = await createGoogleCalendarEvents(
+							schedule,
+							response
+						);
 						const results = await Promise.allSettled(
-							events.map((event) =>
+							eventsData.events.map((event) =>
 								fetch(
 									"https://www.googleapis.com/calendar/v3/calendars/primary/events",
 									{

@@ -1,25 +1,5 @@
 import { WeekSchedule } from "../types/schedule";
-import { google } from 'googleapis';
-
-async function createCalendar(auth: any) {
-    const calendar = google.calendar({ version: 'v3', auth });
-    try {
-        const response = await calendar.calendars.insert({
-            requestBody: {
-                summary: 'College Schedule',
-                timeZone: 'Asia/Kolkata'
-            }
-        });
-        return response.data.id;
-    } catch (error) {
-        console.error('Error creating calendar:', error);
-        throw error;
-    }
-}
-
-export async function createGoogleCalendarEvents(schedule: WeekSchedule, auth: any) {
-    // Create new calendar
-    const calendarId = await createCalendar(auth);
+export async function createGoogleCalendarEvents(schedule: WeekSchedule) {
     const events = [];
     const startDate = new Date();
     const endDate = new Date(startDate);
@@ -44,7 +24,6 @@ export async function createGoogleCalendarEvents(schedule: WeekSchedule, auth: a
             let isCustom = slot.type === 'C';
             
             const event = {
-                calendarId: calendarId,
                 summary: `${isCustom ? '✨' : ''} ${slot.type} - ${slot.subject_name}`,
                 location: slot.location,
                 description: getEventDescription(slot),
@@ -62,7 +41,7 @@ export async function createGoogleCalendarEvents(schedule: WeekSchedule, auth: a
         }
     }
 
-    return { events, calendarId };
+    return events;
 }
 
 function getEventDescription(slot: { subject_name: string; location: string; type: string;}) {

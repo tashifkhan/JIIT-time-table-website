@@ -27,15 +27,22 @@ export function AcademicCalendar() {
 	const handleAddToCalendar = async () => {
 		setIsLoading(true);
 		try {
+			console.log("Starting calendar event addition...");
 			const result = await addAcademicCalendarEvents(calendarData);
+			console.log("Calendar operation result:", result);
+
 			if (result.success) {
 				alert(result.message); // Replace with your preferred notification system
 			} else {
-				throw new Error(result.error || "Unknown error occurred");
+				throw new Error(result.error || "Failed to add events to calendar");
 			}
 		} catch (error) {
-			console.error("Error:", error);
-			alert("Failed to add events to calendar. Please try again."); // Replace with your preferred notification system
+			console.error("Calendar error:", error);
+			alert(
+				error instanceof Error
+					? error.message
+					: "Failed to add events to calendar"
+			);
 		} finally {
 			setIsLoading(false);
 		}

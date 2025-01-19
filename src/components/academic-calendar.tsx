@@ -144,11 +144,11 @@ export function AcademicCalendar() {
 												</span>
 											)}
 										</div>
-										<time className="text-lg sm:text-xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-orange-200 to-[#FFF] block">
+										<time className="text-lg sm:text-xl font-bold text-white block">
 											{formatDate(startDate)}
 											{hasEndDate && (
 												<>
-													<span className="mx-2 text-[#FFF]">→</span>
+													<span className="mx-2">→</span>
 													{formatDate(endDate)}
 												</>
 											)}

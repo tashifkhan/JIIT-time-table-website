@@ -514,8 +514,8 @@ def is_elective128(extracted_batch:str):
         return True
     return False
 
-def do_you_have_elective128(elective_subject_codes: List[str], subject_code: str) -> bool:
-    if subject_code in elective_subject_codes:
+def do_you_have_subject(subject_codes: List[str], subject_code: str) -> bool:
+    if subject_code in subject_codes:
         return True
     return False
 
@@ -541,7 +541,7 @@ def subject_name128(subjects_dict: dict, code: str) -> str:
             return subject["Subject"]
     return code
 
-def banado128(time_table_json: dict, subject_json: dict, batch: str, electives_subject_codes: List[str]) -> dict:
+def banado128(time_table_json: dict, subject_json: dict, batch: str, subject_codes: List[str]) -> dict:
     try:
         time_table = time_table_json
         subject = subject_json
@@ -561,14 +561,9 @@ def banado128(time_table_json: dict, subject_json: dict, batch: str, electives_s
                         continue
                     code = subject_extractor128(indi_class.strip())
                     batchs = batch_extractor128(indi_class.strip())
-
-                    if not is_elective128(extracted_batch=batchs):
-                        if is_batch_included128(batch, batchs):
-                            your_time_table.append([day, time, subject_name128(subject, code), indi_class.strip()[0], location_extractor128(indi_class.strip())])
-
-                    else:
-                        if do_you_have_elective128(elective_subject_codes=electives_subject_codes, subject_code=code) and is_batch_included128(batch, batchs):
-                            your_time_table.append([day, time, subject_name128(subject, code), indi_class.strip()[0], location_extractor128(indi_class.strip())])
+                    
+                    if do_you_have_subject(subject_codes=subject_codes, subject_code=code) and is_batch_included128(batch, batchs):
+                        your_time_table.append([day, time, subject_name128(subject, code), indi_class.strip()[0], location_extractor128(indi_class.strip())])
 
         formatted_timetable = {}
 

@@ -154,7 +154,9 @@ export function ScheduleForm({ mapping, onSubmit }: ScheduleFormProps) {
 								htmlFor="electiveCount"
 								className="text-white/90 font-medium text-sm sm:text-base"
 							>
-								Number of Electives
+								{campus === "128"
+									? "Number of Subjects"
+									: "Number of Electives"}
 							</Label>
 							<Input
 								id="electiveCount"
@@ -183,14 +185,22 @@ export function ScheduleForm({ mapping, onSubmit }: ScheduleFormProps) {
 									htmlFor={`elective-${index}`}
 									className="text-white/90 font-medium text-sm sm:text-base"
 								>
-									Elective {index + 1}
+									{campus === "128"
+										? `Subject ${index + 1}`
+										: `Elective ${index + 1}`}
 								</Label>
 								<Select
 									value={selectedElectives[index]}
 									onValueChange={(value) => handleElectiveChange(index, value)}
 								>
 									<SelectTrigger className="h-9 sm:h-10 text-sm bg-[#FFF0DC]/10 border-[#F0BB78]/20 backdrop-blur-md hover:bg-[#FFF0DC]/15 transition-all">
-										<SelectValue placeholder="Select elective" />
+										<SelectValue
+											placeholder={`${
+												campus === "128"
+													? `Select Subject ${index + 1}`
+													: `Select Elective ${index + 1}`
+											}`}
+										/>
 									</SelectTrigger>
 									<SelectContent className="bg-[#FFF0DC]/20 backdrop-blur-2xl border-[#F0BB78]/20">
 										{year &&

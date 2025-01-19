@@ -1,3 +1,10 @@
+// Add the missing Window interface extension
+declare global {
+    interface Window {
+        google: any;
+    }
+}
+
 // Type definitions
 type CalendarEvent = {
     summary: string;

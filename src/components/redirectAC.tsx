@@ -18,7 +18,10 @@ function RedirectAC() {
 				whileTap={{ scale: 0.95 }}
 			>
 				<Calendar className="w-5 h-5" />
-				<span>View Academic Calendar →</span>
+				<span className={`hidden sm:inline-block`}>
+					View Academic Calendar →
+				</span>
+				<span className={` sm:hidden`}>Academic Calendar</span>
 			</motion.button>
 		</div>
 	);

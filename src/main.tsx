@@ -7,6 +7,8 @@ import { Github } from "lucide-react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import UserContextProvider from "./context/userContextProvider.tsx";
 import { Analytics } from "@vercel/analytics/react";
+import { AcademicCalendar } from "./components/academic-calendar";
+import RedirectAC from "./components/redirectAC.tsx";
 
 createRoot(document.getElementById("root")!).render(
 	<StrictMode>
@@ -23,10 +25,13 @@ createRoot(document.getElementById("root")!).render(
 						<Github className="w-8 h-8 sm:w-10 sm:h-10" />
 					</a>
 				</div>
+				<div className="fixed left-4 bottom-4 z-50">
+					<RedirectAC />
+				</div>
 				<Routes>
 					<Route path="/" element={<App />} />
 					<Route path="/timeline" element={<TimelinePage />} />
-					{/* Add more routes here as needed */}
+					<Route path="/academic-calendar" element={<AcademicCalendar />} />
 				</Routes>
 			</Router>
 		</UserContextProvider>

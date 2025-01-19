@@ -152,7 +152,7 @@ const App: React.FC = () => {
 							</p>
 							<ScheduleDisplay schedule={schedule} />
 						</motion.div>
-						<div className="flex justify-center">
+						<div className="flex justify-center gap-4">
 							<motion.button
 								onClick={() => navigate("/timeline")}
 								className="mt-4 px-6 py-2 rounded-lg backdrop-blur-lg bg-white/10 border border-white/20 

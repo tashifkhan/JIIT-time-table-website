@@ -25,10 +25,11 @@ export async function addAcademicCalendarEvents(events: CalendarEvent[]): Promis
             scope: "https://www.googleapis.com/auth/calendar.events",
             callback: async (response: any) => {
                 if (response.error) {
+                    console.error("OAuth error:", response.error);
                     resolve({
                         success: false,
-                        message: "Operation failed",
-                        error: "Authentication failed",
+                        message: "Authentication failed",
+                        error: response.error
                     });
                     return;
                 }
@@ -44,52 +45,63 @@ export async function addAcademicCalendarEvents(events: CalendarEvent[]): Promis
                             date: event.end.date,
                             timeZone: 'Asia/Kolkata'
                         },
-                        description: `Academic Calendar Event for JIIT 2024-25\n\nDate: ${event.start.date}${
-                            event.start.date !== event.end.date ? ` to ${event.end.date}` : ''
-                        }`,
-                        colorId: event.summary.startsWith('Holiday -') ? '11' : '1',
+                        description: `Academic Calendar Event for JIIT 2024-25`,
+                        transparency: 'transparent',
+                        visibility: 'public',
+                        colorId: event.summary.toLowerCase().includes('holiday') ? '11' : '1',
                     }));
 
-                    const results = await Promise.allSettled(
-                        calendarEvents.map(event =>
-                            fetch(
+                    console.log("Attempting to add events:", calendarEvents.length);
+
+                    for (const event of calendarEvents) {
+                        try {
+                            const fetchResponse = await fetch(
                                 "https://www.googleapis.com/calendar/v3/calendars/primary/events",
                                 {
                                     method: "POST",
                                     headers: {
-                                        Authorization: `Bearer ${response.access_token}`,
-                                        "Content-Type": "application/json",
+                                        'Authorization': `Bearer ${response.access_token}`,
+                                        'Content-Type': 'application/json',
                                     },
                                     body: JSON.stringify(event),
                                 }
-                            )
-                        )
-                    );
+                            );
 
-                    const failures = results.filter(result => result.status === 'rejected');
-                    
-                    if (failures.length > 0) {
-                        resolve({
-                            success: false,
-                            message: "Operation failed",
-                            error: `Failed to add ${failures.length} events`,
-                        });
-                    } else {
-                        resolve({
-                            success: true,
-                            message: "Successfully added all academic calendar events!",
-                        });
+                            if (!fetchResponse.ok) {
+                                const errorData = await fetchResponse.json();
+                                console.error("Failed to add event:", errorData);
+                                throw new Error(`Failed to add event: ${errorData.error?.message || 'Unknown error'}`);
+                            }
+                        } catch (error) {
+                            console.error("Error adding event:", error);
+                            throw error;
+                        }
                     }
+
+                    resolve({
+                        success: true,
+                        message: "Successfully added all academic calendar events!"
+                    });
                 } catch (error) {
+                    console.error("Calendar operation failed:", error);
                     resolve({
                         success: false,
-                        message: "Operation failed",
-                        error: "An unexpected error occurred",
+                        message: "Failed to add events",
+                        error: error instanceof Error ? error.message : "Unknown error occurred"
                     });
                 }
             },
         });
 
-        client.requestAccessToken();
+        try {
+            client.requestAccessToken();
+        } catch (error) {
+            console.error("Failed to request access token:", error);
+            resolve({
+                success: false,
+                message: "Failed to initialize Google Calendar",
+                error: "Authentication failed"
+            });
+        }
     });
 }

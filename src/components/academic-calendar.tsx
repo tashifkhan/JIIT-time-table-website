@@ -1,21 +1,43 @@
 import { Calendar } from "lucide-react";
 import calendarData from "../data/calendar.json";
 import { motion } from "framer-motion";
-// import { createGoogleCalendarEvents } from "../utils/calendar";
+import { addAcademicCalendarEvents } from "../utils/calendar-AC";
+import { useState, useEffect } from "react";
 
 export function AcademicCalendar() {
+	const [isLoading, setIsLoading] = useState(false);
+
+	useEffect(() => {
+		const script = document.createElement("script");
+		script.src = "https://accounts.google.com/gsi/client";
+		script.async = true;
+		script.defer = true;
+		document.body.appendChild(script);
+
+		return () => {
+			document.body.removeChild(script);
+		};
+	}, []);
+
 	const sortedEvents = [...calendarData].sort(
 		(a, b) =>
 			new Date(a.start.date).getTime() - new Date(b.start.date).getTime()
 	);
 
 	const handleAddToCalendar = async () => {
+		setIsLoading(true);
 		try {
-			// const events = await createGoogleCalendarEvents(calendarData);
-			// Google Calendar implementation will be handled here
-			console.log("Adding events to calendar:");
+			const result = await addAcademicCalendarEvents(calendarData);
+			if (result.success) {
+				alert(result.message); // Replace with your preferred notification system
+			} else {
+				throw new Error(result.error || "Unknown error occurred");
+			}
 		} catch (error) {
-			console.error("Error adding events to calendar:", error);
+			console.error("Error:", error);
+			alert("Failed to add events to calendar. Please try again."); // Replace with your preferred notification system
+		} finally {
+			setIsLoading(false);
 		}
 	};
 
@@ -35,6 +57,7 @@ export function AcademicCalendar() {
 					</div>
 					<motion.button
 						onClick={handleAddToCalendar}
+						disabled={isLoading}
 						className="mt-4 px-4 sm:px-6 py-2 rounded-lg backdrop-blur-lg bg-white/10 border border-white/20 
                             text-[#F0BB78] hover:bg-white/20 transition-all duration-300 shadow-lg
                             flex items-center gap-2 text-sm sm:text-base mx-auto"
@@ -42,7 +65,9 @@ export function AcademicCalendar() {
 						whileTap={{ scale: 0.95 }}
 					>
 						<Calendar className="w-4 h-4 sm:w-5 sm:h-5" />
-						<span>Add to Calendar</span>
+						<span>
+							{isLoading ? "Adding to Calendar..." : "Add to Calendar"}
+						</span>
 					</motion.button>
 				</motion.div>
 

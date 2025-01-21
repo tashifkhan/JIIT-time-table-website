@@ -59,8 +59,11 @@ const App: React.FC = () => {
 		const subjectJSON =
 			campus === "62"
 				? mapping[year as keyof typeof mapping].subjects
-				: Object.values(mapping[year as keyof typeof mapping].subjects);
-		const timeTableJSON = mapping[year as keyof typeof mapping].timetable;
+				: mapping[year as keyof typeof mapping].subjects;
+		const timeTableJSON =
+			campus === "62"
+				? mapping[year as keyof typeof mapping].timetable
+				: mapping[year as keyof typeof mapping].timetable;
 
 		console.log("Using mapping:", campus === "62" ? "62" : "128");
 		console.log("With data:", { timeTableJSON, subjectJSON, batch, electives });
@@ -134,6 +137,7 @@ const App: React.FC = () => {
 				>
 					<ScheduleForm
 						mapping={timetableMapping}
+						mapping128={mapping128}
 						onSubmit={handleFormSubmit}
 					/>
 				</motion.div>

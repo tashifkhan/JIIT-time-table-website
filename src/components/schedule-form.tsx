@@ -26,6 +26,16 @@ interface ScheduleFormProps {
 			subjects: Subject[];
 		};
 	};
+	mapping128: {
+		[key: string]: {
+			timetable: {
+				[day: string]: {
+					[time: string]: string[];
+				};
+			};
+			subjects: Subject[];
+		};
+	};
 	onSubmit: (data: {
 		year: string;
 		batch: string;
@@ -34,7 +44,11 @@ interface ScheduleFormProps {
 	}) => void;
 }
 
-export function ScheduleForm({ mapping, onSubmit }: ScheduleFormProps) {
+export function ScheduleForm({
+	mapping,
+	mapping128,
+	onSubmit,
+}: ScheduleFormProps) {
 	const { setEditedSchedule } = useContext(UserContext);
 	const [year, setYear] = useState("");
 	const [batch, setBatch] = useState("");
@@ -59,6 +73,8 @@ export function ScheduleForm({ mapping, onSubmit }: ScheduleFormProps) {
 		});
 	};
 
+	const [mapz, setMapz] = useState(mapping);
+
 	return (
 		<Card className="w-full max-w-[95vw] sm:max-w-md p-4 sm:p-6 backdrop-blur-2xl bg-[#FFF0DC]/10 border border-[#F0BB78]/20 shadow-2xl rounded-xl">
 			<form onSubmit={handleSubmit} className="space-y-4 sm:space-y-6">
@@ -74,6 +90,7 @@ export function ScheduleForm({ mapping, onSubmit }: ScheduleFormProps) {
 						onValueChange={(value) => {
 							setCampus(value);
 							if (value === "128") {
+								setMapz(mapping128);
 								alert(
 									"⚠️ Warning ⚠️ \n128 Time Table is not compltely tested yet. You may encounter bugs or errors or formating issues. You can raise a github issue for the same."
 								);
@@ -158,11 +175,17 @@ export function ScheduleForm({ mapping, onSubmit }: ScheduleFormProps) {
 									? "Number of Subjects"
 									: "Number of Electives"}
 							</Label>
+							{campus === "128" && (
+								<p className="text-sm text-slate-300/50 italic">
+									If you {"don't"} remember the exact number just enter 20 and
+									select only the ones you need
+								</p>
+							)}
 							<Input
 								id="electiveCount"
 								type="number"
 								min="0"
-								max="10"
+								max="20"
 								value={electiveCount}
 								onChange={(e) => {
 									const count = parseInt(e.target.value);
@@ -204,23 +227,29 @@ export function ScheduleForm({ mapping, onSubmit }: ScheduleFormProps) {
 									</SelectTrigger>
 									<SelectContent className="bg-[#FFF0DC]/20 backdrop-blur-2xl border-[#F0BB78]/20">
 										{year &&
-											mapping[year]?.subjects
-												?.sort((a, b) => a.Subject.localeCompare(b.Subject))
-												?.map((subject) => (
-													<SelectItem
-														key={subject.Code}
-														value={subject.Code}
-														className="hover:bg-white/20"
-													>
-														{subject.Subject.split(" ")
-															.map(
-																(word) =>
-																	word.charAt(0).toUpperCase() +
-																	word.slice(1).toLowerCase()
-															)
-															.join(" ")}
-													</SelectItem>
-												))}
+											mapz[year]?.subjects &&
+											[...mapz[year].subjects]
+												.sort((a, b) =>
+													(a?.Subject || "").localeCompare(b?.Subject || "")
+												)
+												.map(
+													(subject) =>
+														subject && (
+															<SelectItem
+																key={subject.Code}
+																value={subject.Code}
+																className="hover:bg-white/20"
+															>
+																{subject.Subject.split(" ")
+																	.map(
+																		(word) =>
+																			word.charAt(0).toUpperCase() +
+																			word.slice(1).toLowerCase()
+																	)
+																	.join(" ")}
+															</SelectItem>
+														)
+												)}
 									</SelectContent>
 								</Select>
 							</motion.div>

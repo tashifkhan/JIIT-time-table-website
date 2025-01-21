@@ -1,12 +1,12 @@
-import re
 from datetime import datetime
+import re
 from typing import List
 
 def batch_extractor128(text: str) -> str:
     start_bracket = text.find('(')
     if start_bracket != -1:
         return text[1:start_bracket].strip()
-    return ""
+    return text
 
 def subject_extractor128(text: str) -> str:
     start_bracket = text.find('(')
@@ -14,13 +14,13 @@ def subject_extractor128(text: str) -> str:
         end_bracket = text.find(')', start_bracket)
         if end_bracket != -1:
             return text[start_bracket + 1:end_bracket]
-    return ""
+    return text
 
 def faculty_extractor128(text: str) -> str:
     start_bracket = text.find('/')
     if start_bracket != -1:
         return text[start_bracket+1:].strip()
-    return ""
+    return text
 
 def expand_batch128(batch_code):
     """Expand batch code into list of individual batches."""
@@ -39,7 +39,7 @@ def expand_batch128(batch_code):
 def location_extractor128(text: str) -> str:
     parts = text.split('-')
     if len(parts) < 2:
-        return ""
+        return text
 
     location = parts[-1].split('/')[0]
     return location.strip()
@@ -140,7 +140,7 @@ def process_timeslot128(timeslot: str, type: str = "L") -> tuple[str]:
         if start_time_24 == "00:00":
             start_time_24 = "12:00"
         if end_time_24[3:] == "50":
-            end_time_24 = f"{int(end_time_24[:2])+1}00"
+            end_time_24 = f"{int(end_time_24[:2])+1}:00"
         return start_time_24, end_time_24
     except Exception as e:
         print(f"Error processing timeslot '{timeslot}': {e}")
@@ -151,34 +151,20 @@ def is_elective128(extracted_batch:str):
         return True
     return False
 
-def do_you_have_elective128(elective_subject_codes: List[str], subject_code: str) -> bool:
-    if subject_code in elective_subject_codes:
+def do_you_have_subject(subject_codes: List[str], subject_code: str) -> bool:
+    if subject_code in subject_codes:
         return True
     return False
 
 def subject_name128(subjects_dict: dict, code: str) -> str:
     for subject in subjects_dict:
-        if subject["Code"] == code:
-            return subject["Subject"]
-        if subject["Full Code"] == code:
-            return subject["Subject"]
-        if str(subject["Full Code"][:2] + subject["Code"]).strip() == code.strip():
-            return subject["Subject"]
-        if str(subject["Full Code"][3:]).strip() == code.strip():
-            return subject["Subject"]
-        if str(subject["Full Code"][2:]).strip() == code.strip():
-            return subject["Subject"]
-        if str(subject["Full Code"][:5] + subject["Code"]).strip() == code.strip():
-            return subject["Subject"]
-        if str(subject["Full Code"][2:5] + subject["Code"]).strip() == code.strip():
-            return subject["Subject"]
-        if str(subject["Full Code"][3:5] + subject["Code"]).strip() == code.strip():
-            return subject["Subject"]
-        if str(subject["Code"][1:]).strip() == code.strip():
-            return subject["Subject"]
+        if subject["fullCode"] == code:
+            return subject["subject"]
+        if subject["code"] == code:
+            return subject["subject"]
     return code
 
-def banado128(time_table_json: dict, subject_json: dict, batch: str, electives_subject_codes: List[str]) -> dict:
+def banado128(time_table_json: dict, subject_json: dict, batch: str, subject_codes: List[str]) -> dict:
     try:
         time_table = time_table_json
         subject = subject_json
@@ -198,14 +184,9 @@ def banado128(time_table_json: dict, subject_json: dict, batch: str, electives_s
                         continue
                     code = subject_extractor128(indi_class.strip())
                     batchs = batch_extractor128(indi_class.strip())
-
-                    if not is_elective128(extracted_batch=batchs):
-                        if is_batch_included128(batch, batchs):
-                            your_time_table.append([day, time, subject_name128(subject_json=subject, subject_code=code), indi_class.strip()[0], location_extractor128(indi_class.strip())])
-
-                    else:
-                        if do_you_have_elective128(elective_subject_codes=electives_subject_codes, subject_code=code) and is_batch_included128(batch, batchs):
-                            your_time_table.append([day, time, subject_name128(subject_json=subject, subject_code=code), indi_class.strip()[0], location_extractor128(indi_class.strip())])
+                    
+                    if do_you_have_subject(subject_codes=subject_codes, subject_code=code) and is_batch_included128(batch, batchs):
+                        your_time_table.append([day, time, subject_name128(subject, code), indi_class.strip()[0], location_extractor128(indi_class.strip())])
 
         formatted_timetable = {}
 
@@ -214,12 +195,18 @@ def banado128(time_table_json: dict, subject_json: dict, batch: str, electives_s
             time = entry[1]
             start_time, end_time = process_timeslot128(time, entry[3])
 
-            if entry[2].strip() in ["ENGINEERING DRAWING AND DESIGN", "Engineering Drawing & Design"]:
+            if entry[2] in ["ENGINEERING DRAWING AND DESIGN", "Engineering Drawing & Design"]:
                 end_time = f"{int(end_time[:2])+1}{end_time[2:]}"
             
             if day not in formatted_timetable:
                 formatted_timetable[day] = {}
-            
+            # Format end time to ensure it's in HH:MM format
+            if len(end_time) == 4:  # If end time is like "1100"
+                end_time = f"{end_time[:2]}:{end_time[2:]}"
+
+            if entry[2].strip() == entry[2].strip().upper():
+                entry[2] = entry[2].strip().title()
+                
             formatted_timetable[day][f"{start_time}-{end_time}"] = {
                 "subject_name": entry[2],
                 "type": entry[3],
@@ -229,5 +216,5 @@ def banado128(time_table_json: dict, subject_json: dict, batch: str, electives_s
         return formatted_timetable
 
     except Exception as e:
-        print(f"Error in time_table_creator: {str(e)}")
+        print(f"{str(e)}")
         return {}

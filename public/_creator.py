@@ -144,25 +144,37 @@ def location_extractor(text: str) -> str:
         
 
 def subject_name_extractor(subjects_dict: dict, code: str) -> str:
-    for subject in subjects_dict:
-        if subject["Code"] == code:
-            return subject["Subject"]
-        if subject["Full Code"] == code:
-            return subject["Subject"]
-        if str(subject["Full Code"][:2] + subject["Code"]).strip() == code.strip():
-            return subject["Subject"]
-        if str(subject["Full Code"][3:]).strip() == code.strip():
-            return subject["Subject"]
-        if str(subject["Full Code"][2:]).strip() == code.strip():
-            return subject["Subject"]
-        if str(subject["Full Code"][:5] + subject["Code"]).strip() == code.strip():
-            return subject["Subject"]
-        if str(subject["Full Code"][2:5] + subject["Code"]).strip() == code.strip():
-            return subject["Subject"]
-        if str(subject["Full Code"][3:5] + subject["Code"]).strip() == code.strip():
-            return subject["Subject"]
-        if str(subject["Code"][1:]).strip() == code.strip():
-            return subject["Subject"]
+    try:
+        for subject in subjects_dict:
+            if "Code" not in subject:
+                continue
+                
+            if subject.get("Code") == code:
+                return subject.get("Subject", code)
+                
+            if "Full Code" in subject:
+                full_code = subject["Full Code"]
+                
+                # Different comparison patterns
+                patterns = [
+                    full_code,
+                    full_code[:2] + subject["Code"],
+                    full_code[3:],
+                    full_code[2:],
+                    full_code[:5] + subject["Code"],
+                    full_code[2:5] + subject["Code"],
+                    full_code[3:5] + subject["Code"]
+                ]
+                
+                if any(pattern.strip() == code.strip() for pattern in patterns):
+                    return subject.get("Subject", code)
+                    
+            if subject["Code"][1:].strip() == code.strip():
+                return subject.get("Subject", code)
+                
+    except Exception as e:
+        print(f"Error extracting subject name for code {code}: {e}")
+        
     return code
 
 def do_you_have_elective(elective_subject_codes: List[str], subject_code: str, subject_dict :dict) -> bool:
@@ -520,25 +532,37 @@ def do_you_have_subject(subject_codes: List[str], subject_code: str) -> bool:
     return False
 
 def subject_name128(subjects_dict: dict, code: str) -> str:
-    for subject in subjects_dict:
-        if subject["Code"] == code:
-            return subject["Subject"]
-        if subject["Full Code"] == code:
-            return subject["Subject"]
-        if str(subject["Full Code"][:2] + subject["Code"]).strip() == code.strip():
-            return subject["Subject"]
-        if str(subject["Full Code"][3:]).strip() == code.strip():
-            return subject["Subject"]
-        if str(subject["Full Code"][2:]).strip() == code.strip():
-            return subject["Subject"]
-        if str(subject["Full Code"][:5] + subject["Code"]).strip() == code.strip():
-            return subject["Subject"]
-        if str(subject["Full Code"][2:5] + subject["Code"]).strip() == code.strip():
-            return subject["Subject"]
-        if str(subject["Full Code"][3:5] + subject["Code"]).strip() == code.strip():
-            return subject["Subject"]
-        if str(subject["Code"][1:]).strip() == code.strip():
-            return subject["Subject"]
+    try:
+        for subject in subjects_dict:
+            if "Code" not in subject:
+                continue
+                
+            if subject.get("Code") == code:
+                return subject.get("Subject", code)
+                
+            if "Full Code" in subject:
+                full_code = subject["Full Code"]
+                
+                # Different comparison patterns
+                patterns = [
+                    full_code,
+                    full_code[:2] + subject["Code"],
+                    full_code[3:],
+                    full_code[2:],
+                    full_code[:5] + subject["Code"],
+                    full_code[2:5] + subject["Code"],
+                    full_code[3:5] + subject["Code"]
+                ]
+                
+                if any(pattern.strip() == code.strip() for pattern in patterns):
+                    return subject.get("Subject", code)
+                    
+            if subject["Code"][1:].strip() == code.strip():
+                return subject.get("Subject", code)
+                
+    except Exception as e:
+        print(f"Error extracting subject name for code {code}: {e}")
+        
     return code
 
 def banado128(time_table_json: dict, subject_json: dict, batch: str, subject_codes: List[str]) -> dict:

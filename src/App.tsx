@@ -26,6 +26,7 @@ const App: React.FC = () => {
 	const [numExecutions, setNumExecutions] = useState(0);
 
 	const evaluteTimeTable = async (
+		year: string,
 		time_table_json: any,
 		subject_json: any,
 		batch: string,
@@ -33,7 +34,12 @@ const App: React.FC = () => {
 		campus: string
 	) => {
 		try {
-			const functionName = campus === "62" ? "time_table_creator" : "banado128";
+			const functionName =
+				campus === "62"
+					? "time_table_creator"
+					: year === "1"
+					? "bando128_year1"
+					: "banado128";
 			const output = await callPythonFunction(functionName, {
 				time_table_json,
 				subject_json,
@@ -70,6 +76,7 @@ const App: React.FC = () => {
 
 		try {
 			let Schedule = await evaluteTimeTable(
+				year,
 				timeTableJSON,
 				subjectJSON,
 				batch,
@@ -79,6 +86,7 @@ const App: React.FC = () => {
 			if (numExecutions === 0) {
 				console.log("Initial execution - running twice");
 				Schedule = await evaluteTimeTable(
+					year,
 					timeTableJSON,
 					subjectJSON,
 					batch,

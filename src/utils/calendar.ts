@@ -1,4 +1,3 @@
-import { color } from "framer-motion";
 import { WeekSchedule } from "../types/schedule";
 export async function createGoogleCalendarEvents(schedule: WeekSchedule) {
     const events = [];

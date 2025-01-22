@@ -619,7 +619,7 @@ def bando128_year1(time_table_json: dict, subject_json: dict, batch: str, electi
                     batchs = batch_extractor128(indi_class.strip())
 
                     if is_batch_included128(batch, batchs):
-                        your_time_table.append([day, time, subject_name128(subject_json=subject, subject_code=code), indi_class.strip()[0], location_extractor128(indi_class.strip())])
+                        your_time_table.append([day, time, subject_name128(subject, code), indi_class.strip()[0], location_extractor128(indi_class.strip())])
 
 
         formatted_timetable = {}

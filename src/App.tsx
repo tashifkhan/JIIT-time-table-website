@@ -26,12 +26,12 @@ const App: React.FC = () => {
 	const [numExecutions, setNumExecutions] = useState(0);
 
 	const evaluteTimeTable = async (
-		year: string,
 		time_table_json: any,
 		subject_json: any,
 		batch: string,
 		electives_subject_codes: any[],
-		campus: string
+		campus: string,
+		year: string
 	) => {
 		try {
 			const functionName =
@@ -76,22 +76,22 @@ const App: React.FC = () => {
 
 		try {
 			let Schedule = await evaluteTimeTable(
-				year,
 				timeTableJSON,
 				subjectJSON,
 				batch,
 				electives,
-				campus
+				campus,
+				year
 			);
 			if (numExecutions === 0) {
 				console.log("Initial execution - running twice");
 				Schedule = await evaluteTimeTable(
-					year,
 					timeTableJSON,
 					subjectJSON,
 					batch,
 					electives,
-					campus
+					campus,
+					year
 				);
 			}
 			console.log(Schedule);

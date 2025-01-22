@@ -11,7 +11,7 @@ import {
 } from "./ui/select";
 import { Input } from "./ui/input";
 import { Label } from "./ui/label";
-import { Subject } from "../types/subject";
+// import { Subject } from "../types/subject";
 import { Sparkles } from "lucide-react";
 import UserContext from "../context/userContext";
 
@@ -42,6 +42,14 @@ interface ScheduleFormProps {
 		electives: string[];
 		campus: string;
 	}) => void;
+}
+
+// Add type definition for subject structure
+interface Subject {
+	Code: string;
+	"Full Code"?: string;
+	"Subject "?: string; // Note the space after "Subject"
+	Subject?: string;
 }
 
 export function ScheduleForm({
@@ -240,13 +248,7 @@ export function ScheduleForm({
 																value={subject.Code}
 																className="hover:bg-white/20"
 															>
-																{subject.Subject.split(" ")
-																	.map(
-																		(word) =>
-																			word.charAt(0).toUpperCase() +
-																			word.slice(1).toLowerCase()
-																	)
-																	.join(" ")}
+																{subject.Subject}
 															</SelectItem>
 														)
 												)}

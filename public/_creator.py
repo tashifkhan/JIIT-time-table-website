@@ -580,6 +580,8 @@ def banado128(time_table_json: dict, subject_json: dict, batch: str, subject_cod
             # Format end time to ensure it's in HH:MM format
             if len(end_time) == 4:  # If end time is like "1100"
                 end_time = f"{end_time[:2]}:{end_time[2:]}"
+            elif len(end_time) == 3:
+                end_time = f"0{end_time[0]}:{end_time[1:]}"
 
             if entry[2].strip() == entry[2].strip().upper():
                 entry[2] = entry[2].strip().title()

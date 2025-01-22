@@ -62,32 +62,32 @@ The timetable is parsed using the script available at:
 │   │   ├── schedule-form.tsx           # Form for creating or editing TimeTable
 │   │   ├── timeline.tsx                # Timeline visualization for the TimeTable
 │   ├── data/
-│   │   ├── 128-mapping.json         # 128 BE subjects data
-│   │   ├── timetable-mapping.json   # 62 BE subjects data
-│   │   └── calender.json            # Academic Calender data
+│   │   ├── 128-mapping.json            # 128 BE subjects data
+│   │   ├── timetable-mapping.json      # 62 BE subjects data
+│   │   └── calender.json               # Academic Calender data
 │   ├── utils/
-│   │   ├── calender-AC.ts       # Google Calender API Integration for AC
-│   │   ├── calender.ts          # Google Calender API Integration for TimeTable
-│   │   ├── download.ts          # Hook/function to download png/pdf of TimeTable
-│   │   └── pyodide.ts           # WASM middleware for module execution
+│   │   ├── calender-AC.ts              # Google Calender API Integration for AC
+│   │   ├── calender.ts                 # Google Calender API Integration for TimeTable
+│   │   ├── download.ts                 # Hook/function to download png/pdf of TimeTable
+│   │   └── pyodide.ts                  # WASM middleware for module execution
 │   ├── context/
-│   │   ├── userContext.ts            # Manges State of the TimeTable across different Conmopents/Pages
+│   │   ├── userContext.ts              # Manages State of the TimeTable across different Components/Pages
 │   │   └── userContextProvidor.tsx
 │   ├── types/
-│   │   ├── schedule.ts          # TypeScript Definations
+│   │   ├── schedule.ts                 # TypeScript Definitions
 │   │   ├── subjects.ts
 │   │   └── timetable.ts
-│   ├── App.tsx             # Main App page / Entrypoint
-│   ├── main.tsx            # Layout page
-│   └── global.css          # Schedule view
+│   ├── App.tsx                         # Main App page / Entrypoint
+│   ├── main.tsx                        # Layout page
+│   └── global.css                      # Schedule view
 ├── public/
-│   ├── modules/                 # Specific Course Python Module
+│   ├── modules/                        # Specific Course Python Module
 │   │   ├── BE62_creator.py
 │   │   ├── BE128_creator.py
 │   │   └── BCA_creator.py
-│   ├── _creator.py              # Python Module
-│   └── icon.png                 # Icon
-└── package.json...              # Project dependencies & config files
+│   ├── _creator.py                     # Python Module
+│   └── icon.png                        # Icon
+└── package.json                        # Project dependencies & config files
 ```
 
 ## Data Flow

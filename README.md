@@ -17,14 +17,14 @@ The timetable is parsed using the script available at:
 
 ## Key Features
 
-- 🎨 **Modern UI**: Glassmorphic design with Tailwind CSS
-- 📊 **Smart Parsing**: Uses JIIT TimeTable Parser for accurate data extraction
-- 🎯 **Branch Support**: Handles multiple branches and years
-- 📱 **Responsive**: Works seamlessly across devices
-- 🔄 **Export Options**: PDF, PNG, and Google Calendar sync
-- 📝 **Custom Events**: Edit the timetable and add custom events
-- 📅 **Academic Calendar**: Fetch and sync the academic calendar to Google Calendar
-- 🌈 **Enhanced Color Coding**: More color coding for events synced to Google Calendar
+- **Modern UI**: Glassmorphic design with Tailwind CSS
+- **Parsing**: Uses JIIT TimeTable Parser for accurate data extraction
+- **Branch Support**: Handles multiple branches and years
+- **Responsive**: Works seamlessly across devices
+- **Export Options**: PDF, PNG, and Google Calendar sync
+- **Custom Events**: Edit the timetable and add custom events
+- **Academic Calendar**: Fetch and sync the academic calendar to Google Calendar
+- **Enhanced Color Coding**: More color coding for events synced to Google Calendar
 
 ## Tech Stack
 

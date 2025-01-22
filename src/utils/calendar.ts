@@ -1,3 +1,4 @@
+import { color } from "framer-motion";
 import { WeekSchedule } from "../types/schedule";
 export async function createGoogleCalendarEvents(schedule: WeekSchedule) {
     const events = [];
@@ -35,7 +36,8 @@ export async function createGoogleCalendarEvents(schedule: WeekSchedule) {
                 end: {
                     timeZone: 'Asia/Kolkata',
                     dateTime: getNextDateForDayAndTime(dayMapping[day], endTime).toISOString()
-                }
+                },
+                colorId: slot.type === 'C' ? '2' : '6'
             };
             events.push(event);
         }

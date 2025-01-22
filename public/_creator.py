@@ -597,3 +597,52 @@ def banado128(time_table_json: dict, subject_json: dict, batch: str, subject_cod
     except Exception as e:
         print(f"Error in time_table_creator: {str(e)}")
         return {}
+    
+def bando128_year1(time_table_json: dict, subject_json: dict, batch: str, electives_subject_codes: List[str] = []) -> dict:
+    try:
+        time_table = time_table_json
+        subject = subject_json
+        your_time_table = []
+
+        days = list(time_table.keys())
+        for day in days:
+            time_slots = time_table[day]
+            time_slot_keys = list(time_slots.keys())
+            for time in time_slot_keys:
+                classes = time_slots[time]
+                if not isinstance(classes, list):
+                    continue
+                for indi_class in classes:
+                    if not isinstance(indi_class, str):
+                        continue
+                    code = subject_extractor128(indi_class.strip())
+                    batchs = batch_extractor128(indi_class.strip())
+
+                    if is_batch_included128(batch, batchs):
+                        your_time_table.append([day, time, subject_name128(subject_json=subject, subject_code=code), indi_class.strip()[0], location_extractor128(indi_class.strip())])
+
+
+        formatted_timetable = {}
+
+        for entry in your_time_table:
+            day = process_day128(entry[0])
+            time = entry[1]
+            start_time, end_time = process_timeslot128(time, entry[3])
+
+            if entry[2].strip() in ["ENGINEERING DRAWING AND DESIGN", "Engineering Drawing & Design"]:
+                end_time = f"{int(end_time[:2])+1}{end_time[2:]}"
+            
+            if day not in formatted_timetable:
+                formatted_timetable[day] = {}
+            
+            formatted_timetable[day][f"{start_time}-{end_time}"] = {
+                "subject_name": entry[2],
+                "type": entry[3],
+                "location": entry[4]
+            }
+        
+        return formatted_timetable
+
+    except Exception as e:
+        print(f"Error in time_table_creator: {str(e)}")
+        return {}

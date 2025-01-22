@@ -99,9 +99,9 @@ export function ScheduleForm({
 							setCampus(value);
 							if (value === "128") {
 								setMapz(mapping128);
-								alert(
-									"⚠️ Warning ⚠️ \n128 Time Table is not compltely tested yet. You may encounter bugs or errors or formating issues. You can raise a github issue for the same."
-								);
+								// alert(
+								// 	"⚠️ Warning ⚠️ \n128 Time Table is not compltely tested yet. You may encounter bugs or errors or formating issues. You can raise a github issue for the same."
+								// );
 							}
 						}}
 					>
@@ -174,35 +174,39 @@ export function ScheduleForm({
 							/>
 						</div>
 
-						<div className="space-y-2">
-							<Label
-								htmlFor="electiveCount"
-								className="text-white/90 font-medium text-sm sm:text-base"
-							>
-								{campus === "128"
-									? "Number of Subjects"
-									: "Number of Electives"}
-							</Label>
-							{campus === "128" && (
-								<p className="text-sm text-slate-300/50 italic">
-									If you {"don't"} remember the exact number just enter 20 and
-									select only the ones you need
-								</p>
-							)}
-							<Input
-								id="electiveCount"
-								type="number"
-								min="0"
-								max="20"
-								value={electiveCount}
-								onChange={(e) => {
-									const count = parseInt(e.target.value);
-									setElectiveCount(count);
-									setSelectedElectives(Array.from({ length: count }, () => ""));
-								}}
-								className="h-9 sm:h-10 text-sm bg-white/10 border-white/20 backdrop-blur-md hover:bg-white/15 transition-all"
-							/>
-						</div>
+						{year && year != "1" && (
+							<div className="space-y-2">
+								<Label
+									htmlFor="electiveCount"
+									className="text-white/90 font-medium text-sm sm:text-base"
+								>
+									{campus === "128"
+										? "Number of Subjects"
+										: "Number of Electives"}
+								</Label>
+								{campus === "128" && (
+									<p className="text-sm text-slate-300/50 italic">
+										If you {"don't"} remember the exact number just enter 20 and
+										select only the ones you need
+									</p>
+								)}
+								<Input
+									id="electiveCount"
+									type="number"
+									min="0"
+									max="20"
+									value={electiveCount}
+									onChange={(e) => {
+										const count = parseInt(e.target.value);
+										setElectiveCount(count);
+										setSelectedElectives(
+											Array.from({ length: count }, () => "")
+										);
+									}}
+									className="h-9 sm:h-10 text-sm bg-white/10 border-white/20 backdrop-blur-md hover:bg-white/15 transition-all"
+								/>
+							</div>
+						)}
 
 						{Array.from({ length: electiveCount }).map((_, index) => (
 							<motion.div

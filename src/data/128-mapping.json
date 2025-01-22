@@ -850,27 +850,27 @@
 		"subjects": [
 			{
 				"Code": "15B11EC411",
-				"Full  Code": "15B11EC411",
+				"Full Code": "15B11EC411",
 				"Subject": "Analogue Electronics"
 			},
 			{
 				"Code": "15B11MA301",
-				"Full  Code": "15B11MA301",
+				"Full Code": "15B11MA301",
 				"Subject": "Probability and Random Processes"
 			},
 			{
 				"Code": "18B11EC212",
-				"Full  Code": "18B11EC212",
+				"Full Code": "18B11EC212",
 				"Subject": "Analog and Digital Communication"
 			},
 			{
 				"Code": "18B11EC213",
-				"Full  Code": "18B11EC213",
+				"Full Code": "18B11EC213",
 				"Subject": "Digital Systems"
 			},
 			{
 				"Code": "15B11EC413",
-				"Full Code": "15B11EC413",
+				"FullCode": "15B11EC413",
 				"Subject": "Digital Signal Processing"
 			},
 			{

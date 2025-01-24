@@ -191,4 +191,4 @@ GPL-3.0 License - See LICENSE file
 For support or queries:
 
 - GitHub Issues
-- Email: [developer@tashid.codes]
+- Email: [developer@tashif.codes]

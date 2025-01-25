@@ -252,7 +252,14 @@ export function ScheduleForm({
 																value={subject.Code}
 																className="hover:bg-white/20"
 															>
-																{subject.Subject}
+																{subject.Subject?.match(/^[A-Z\s]+$/)
+																	? subject.Subject.replace(
+																			/\w\S*/g,
+																			(txt) =>
+																				txt.charAt(0).toUpperCase() +
+																				txt.substr(1).toLowerCase()
+																	  )
+																	: subject.Subject}
 															</SelectItem>
 														)
 												)}

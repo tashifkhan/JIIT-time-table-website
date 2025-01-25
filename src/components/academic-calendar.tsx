@@ -184,7 +184,7 @@ export function AcademicCalendar() {
 				whileHover={{ scale: 1.05 }}
 				whileTap={{ scale: 0.95 }}
 			>
-				<Sparkles />
+				<Sparkles className="w-4 h-4 sm:w-5 sm:h-5" />
 				Create your Timetable
 			</motion.button>
 			<motion.button

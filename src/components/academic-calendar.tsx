@@ -27,13 +27,19 @@ export function AcademicCalendar() {
 
 	useEffect(() => {
 		const today = new Date();
-
-		const targetIndex =
-			sortedEvents.findIndex((event) => {
+		let targetIndex = -1;
+		try {
+			targetIndex =
+				sortedEvents.findIndex((event) => {
+					const eventDate = new Date(event.start.date);
+					return eventDate >= today;
+				}) - 1;
+		} catch (e) {
+			targetIndex = sortedEvents.findIndex((event) => {
 				const eventDate = new Date(event.start.date);
 				return eventDate >= today;
-			}) - 1;
-
+			});
+		}
 		if (targetIndex >= 0 && eventRefs.current[targetIndex]) {
 			eventRefs.current[targetIndex].scrollIntoView({ behavior: "smooth" });
 		}

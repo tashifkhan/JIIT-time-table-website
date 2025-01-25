@@ -2,10 +2,11 @@ import { Calendar } from "lucide-react";
 import calendarData from "../data/calendar.json";
 import { motion } from "framer-motion";
 import { addAcademicCalendarEvents } from "../utils/calendar-AC";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 
 export function AcademicCalendar() {
 	const [isLoading, setIsLoading] = useState(false);
+	const eventRefs = useRef<HTMLDivElement[]>([]);
 
 	useEffect(() => {
 		const script = document.createElement("script");
@@ -23,6 +24,23 @@ export function AcademicCalendar() {
 		(a, b) =>
 			new Date(a.start.date).getTime() - new Date(b.start.date).getTime()
 	);
+
+	useEffect(() => {
+		const today = new Date();
+		const currentYear = today.getFullYear();
+		const currentMonth = today.getMonth();
+
+		const targetIndex = sortedEvents.findIndex((event) => {
+			const start = new Date(event.start.date);
+			return (
+				start.getFullYear() === currentYear && start.getMonth() === currentMonth
+			);
+		});
+
+		if (targetIndex >= 0 && eventRefs.current[targetIndex]) {
+			eventRefs.current[targetIndex].scrollIntoView({ behavior: "smooth" });
+		}
+	}, [sortedEvents]);
 
 	const handleAddToCalendar = async () => {
 		setIsLoading(true);
@@ -62,20 +80,6 @@ export function AcademicCalendar() {
 							Academic Calendar 2024-25
 						</h1>
 					</div>
-					<motion.button
-						onClick={handleAddToCalendar}
-						disabled={isLoading}
-						className="mt-4 px-4 sm:px-6 py-2 rounded-lg backdrop-blur-lg bg-white/10 border border-white/20 
-                            text-[#F0BB78] hover:bg-white/20 transition-all duration-300 shadow-lg
-                            flex items-center gap-2 text-sm sm:text-base mx-auto"
-						whileHover={{ scale: 1.05 }}
-						whileTap={{ scale: 0.95 }}
-					>
-						<Calendar className="w-4 h-4 sm:w-5 sm:h-5" />
-						<span>
-							{isLoading ? "Adding to Calendar..." : "Add to Calendar"}
-						</span>
-					</motion.button>
 				</motion.div>
 
 				<motion.div
@@ -101,6 +105,9 @@ export function AcademicCalendar() {
 
 						return (
 							<motion.div
+								ref={(el) => {
+									if (el) eventRefs.current[index] = el;
+								}}
 								key={index}
 								className={`relative flex flex-row items-start gap-4 sm:gap-8 mb-8 sm:mb-12 pl-8 sm:pl-0
                                     ${
@@ -110,7 +117,7 @@ export function AcademicCalendar() {
 																		}`}
 								initial={{ opacity: 0, x: 0, y: 20 }}
 								animate={{ opacity: 1, x: 0, y: 0 }}
-								transition={{ delay: index * 0.1 }}
+								transition={{ delay: index * 0.01, duration: 0.15 }}
 							>
 								<div
 									className={`w-full sm:w-1/2 ${
@@ -172,6 +179,18 @@ export function AcademicCalendar() {
 					})}
 				</motion.div>
 			</div>
+			<motion.button
+				onClick={handleAddToCalendar}
+				disabled={isLoading}
+				className="fixed bottom-4 left-4 px-4 sm:px-6 py-2 rounded-lg backdrop-blur-lg bg-white/10 border border-white/20 
+        text-[#F0BB78] hover:bg-white/20 transition-all duration-300 shadow-lg
+        flex items-center gap-2 text-sm sm:text-base"
+				whileHover={{ scale: 1.05 }}
+				whileTap={{ scale: 0.95 }}
+			>
+				<Calendar className="w-4 h-4 sm:w-5 sm:h-5" />
+				<span>{isLoading ? "Adding to Calendar..." : "Add to Calendar"}</span>
+			</motion.button>
 		</main>
 	);
 }

@@ -1,4 +1,4 @@
-import { Calendar } from "lucide-react";
+import { Calendar, Sparkles } from "lucide-react";
 import calendarData from "../data/calendar.json";
 import { motion } from "framer-motion";
 import { addAcademicCalendarEvents } from "../utils/calendar-AC";
@@ -27,15 +27,12 @@ export function AcademicCalendar() {
 
 	useEffect(() => {
 		const today = new Date();
-		const currentYear = today.getFullYear();
-		const currentMonth = today.getMonth();
 
-		const targetIndex = sortedEvents.findIndex((event) => {
-			const start = new Date(event.start.date);
-			return (
-				start.getFullYear() === currentYear && start.getMonth() === currentMonth
-			);
-		});
+		const targetIndex =
+			sortedEvents.findIndex((event) => {
+				const eventDate = new Date(event.start.date);
+				return eventDate >= today;
+			}) - 1;
 
 		if (targetIndex >= 0 && eventRefs.current[targetIndex]) {
 			eventRefs.current[targetIndex].scrollIntoView({ behavior: "smooth" });
@@ -179,6 +176,17 @@ export function AcademicCalendar() {
 					})}
 				</motion.div>
 			</div>
+			<motion.button
+				onClick={() => (window.location.href = "/")}
+				className="fixed bottom-16 left-4 px-4 sm:px-6 py-2 rounded-lg backdrop-blur-lg bg-white/10 border border-white/20 
+        text-[#F0BB78] hover:bg-white/20 transition-all duration-300 shadow-lg
+        flex items-center gap-2 text-sm sm:text-base"
+				whileHover={{ scale: 1.05 }}
+				whileTap={{ scale: 0.95 }}
+			>
+				<Sparkles />
+				Create your Timetable
+			</motion.button>
 			<motion.button
 				onClick={handleAddToCalendar}
 				disabled={isLoading}

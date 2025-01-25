@@ -47,7 +47,7 @@ export function AcademicCalendar() {
 			console.log("Calendar operation result:", result);
 
 			if (result.success) {
-				alert(result.message); // Replace with your preferred notification system
+				alert(result.message);
 			} else {
 				throw new Error(result.error || "Failed to add events to calendar");
 			}

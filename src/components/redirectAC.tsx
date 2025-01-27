@@ -1,7 +1,6 @@
 import { useNavigate } from "react-router-dom";
 import { Calendar } from "lucide-react";
 import { motion } from "framer-motion";
-import { useEffect } from "react";
 
 function RedirectAC() {
 	const navigate = useNavigate();

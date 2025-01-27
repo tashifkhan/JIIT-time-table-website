@@ -1,10 +1,14 @@
 import { useNavigate } from "react-router-dom";
 import { Calendar } from "lucide-react";
 import { motion } from "framer-motion";
+import { useEffect } from "react";
 
 function RedirectAC() {
 	const navigate = useNavigate();
 	const currentPath = window.location.pathname;
+	// useEffect(() => {
+	// 	document.title = "JIIT Academic Calender Simplified";
+	// }, []);
 	return currentPath === "/academic-calendar" ? null : (
 		<div className="flex justify-center">
 			<motion.button

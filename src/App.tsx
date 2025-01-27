@@ -166,7 +166,9 @@ const App: React.FC = () => {
 						</motion.div>
 						<div className="flex justify-center gap-4">
 							<motion.button
-								onClick={() => navigate("/timeline")}
+								onClick={() => {
+									navigate("/timeline");
+								}}
 								className="mt-4 px-6 py-2 rounded-lg backdrop-blur-lg bg-white/10 border border-white/20 
 												 text-[#F0BB78] hover:bg-white/20 transition-all duration-300 shadow-lg
 												 flex items-center gap-2"

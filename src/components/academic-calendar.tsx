@@ -9,6 +9,7 @@ export function AcademicCalendar() {
 	const eventRefs = useRef<HTMLDivElement[]>([]);
 
 	useEffect(() => {
+		document.title = "JIIT Academic Calender Simplified";
 		const script = document.createElement("script");
 		script.src = "https://accounts.google.com/gsi/client";
 		script.async = true;

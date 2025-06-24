@@ -1,11 +1,15 @@
-import React, { useContext, useState, useEffect } from "react";
-import { callPythonFunction, initializePyodide } from "./utils/pyodide";
+import React, { useContext, useState } from "react";
+import {
+	callPythonFunction,
+	usePyodideStatus,
+	initializePyodide,
+} from "./utils/pyodide";
 import { ScheduleForm } from "./components/schedule-form";
 import { ScheduleDisplay } from "./components/schedule-display";
-import { motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 import timetableMapping from "./data/timetable-mapping.json";
 import mapping128 from "./data/128-mapping.json";
-import { Calendar } from "lucide-react";
+import { Calendar, Sparkles } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import UserContext from "./context/userContext";
 
@@ -20,12 +24,19 @@ interface YourTietable {
 }
 const App: React.FC = () => {
 	const navigate = useNavigate();
-
 	const { schedule, setSchedule } = useContext(UserContext);
-
 	const [numExecutions, setNumExecutions] = useState(0);
 
-	useEffect(() => {
+	// Pyodide loading state
+	const {
+		loading: pyodideLoading,
+		loaded: pyodideLoaded,
+		error: pyodideError,
+	} = usePyodideStatus();
+	const [isGenerating, setIsGenerating] = useState(false);
+
+	// Start pyodide loading in the background on mount
+	React.useEffect(() => {
 		initializePyodide();
 	}, []);
 
@@ -79,6 +90,11 @@ const App: React.FC = () => {
 		console.log("With data:", { timeTableJSON, subjectJSON, batch, electives });
 
 		try {
+			setIsGenerating(true);
+			// Wait for pyodide if not ready
+			if (!pyodideLoaded) {
+				await initializePyodide();
+			}
 			let Schedule = await evaluteTimeTable(
 				timeTableJSON,
 				subjectJSON,
@@ -110,10 +126,10 @@ const App: React.FC = () => {
 		} catch (error) {
 			console.error("Error generating schedule:", error);
 			setSchedule({});
+		} finally {
+			setIsGenerating(false);
 		}
 	};
-
-	// console.log(timetableMapping);
 
 	return (
 		<main className="min-h-screen bg-gradient-to-br from-[#543A14]/20 via-[#131010]/40 to-[#131010]/60 p-4 sm:p-8 relative overflow-hidden flex items-center justify-center">
@@ -122,6 +138,39 @@ const App: React.FC = () => {
 				<div className="absolute top-[-5%] left-[-5%] w-48 sm:w-72 h-48 sm:h-72 bg-[#F0BB78]/30 rounded-full blur-[96px] sm:blur-[128px]" />
 				<div className="absolute bottom-[-5%] right-[-5%] w-48 sm:w-72 h-48 sm:h-72 bg-[#543A14]/30 rounded-full blur-[96px] sm:blur-[128px]" />
 			</div>
+
+			{/* Loader only when generating */}
+			{isGenerating && (
+				<motion.div
+					initial={{ opacity: 0 }}
+					animate={{ opacity: 1 }}
+					exit={{ opacity: 0 }}
+					className="fixed inset-0 z-50 flex items-center justify-center bg-black/40 backdrop-blur-md"
+				>
+					<motion.div
+						initial={{ scale: 0.9, opacity: 0 }}
+						animate={{ scale: 1, opacity: 1 }}
+						exit={{ scale: 0.9, opacity: 0 }}
+						transition={{ duration: 0.2 }}
+						className="bg-white/10 border border-[#F0BB78]/20 rounded-2xl shadow-2xl p-8 flex flex-col items-center"
+					>
+						<motion.div
+							className="mb-4"
+							initial={{ rotate: 0 }}
+							animate={{ rotate: 360 }}
+							transition={{ repeat: Infinity, duration: 1, ease: "linear" }}
+						>
+							<Sparkles className="w-10 h-10 text-[#F0BB78]" />
+						</motion.div>
+						<p className="text-lg font-semibold text-[#F0BB78] mb-1">
+							Generating your schedule...
+						</p>
+						<p className="text-slate-200/80 text-sm">
+							This may take a few seconds
+						</p>
+					</motion.div>
+				</motion.div>
+			)}
 
 			<div className="max-w-7xl mx-auto space-y-6 sm:space-y-8 relative z-10">
 				<motion.div
@@ -151,6 +200,7 @@ const App: React.FC = () => {
 						mapping={timetableMapping}
 						mapping128={mapping128}
 						onSubmit={handleFormSubmit}
+						pyodideReady={pyodideLoaded && !pyodideLoading && !pyodideError}
 					/>
 				</motion.div>
 
@@ -174,8 +224,8 @@ const App: React.FC = () => {
 									navigate("/timeline");
 								}}
 								className="mt-4 px-6 py-2 rounded-lg backdrop-blur-lg bg-white/10 border border-white/20 
-												 text-[#F0BB78] hover:bg-white/20 transition-all duration-300 shadow-lg
-												 flex items-center gap-2"
+										 text-[#F0BB78] hover:bg-white/20 transition-all duration-300 shadow-lg
+										 flex items-center gap-2"
 								initial={{ opacity: 0 }}
 								animate={{ opacity: 1 }}
 								whileHover={{ scale: 1.05 }}

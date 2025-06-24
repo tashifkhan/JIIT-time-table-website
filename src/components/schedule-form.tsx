@@ -42,6 +42,7 @@ interface ScheduleFormProps {
 		electives: string[];
 		campus: string;
 	}) => void;
+	pyodideReady: boolean;
 }
 
 // Add type definition for subject structure
@@ -56,6 +57,7 @@ export function ScheduleForm({
 	mapping,
 	mapping128,
 	onSubmit,
+	pyodideReady,
 }: ScheduleFormProps) {
 	const { setEditedSchedule } = useContext(UserContext);
 	const [year, setYear] = useState("");

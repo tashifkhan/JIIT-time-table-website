@@ -1,11 +1,12 @@
 import { Calendar, Sparkles } from "lucide-react";
-import calendarData from "../data/calendar.json";
 import { motion } from "framer-motion";
 import { addAcademicCalendarEvents } from "../utils/calendar-AC";
 import { useState, useEffect, useRef } from "react";
 
 export function AcademicCalendar() {
 	const [isLoading, setIsLoading] = useState(false);
+	const [calendarData, setCalendarData] = useState<any[]>([]);
+	const [isDataLoading, setIsDataLoading] = useState(true);
 	const eventRefs = useRef<HTMLDivElement[]>([]);
 
 	useEffect(() => {
@@ -15,6 +16,13 @@ export function AcademicCalendar() {
 		script.async = true;
 		script.defer = true;
 		document.body.appendChild(script);
+
+		// Fetch calendar data from public/data
+		setIsDataLoading(true);
+		fetch("/data/calendar.json")
+			.then((res) => res.json())
+			.then((data) => setCalendarData(data))
+			.finally(() => setIsDataLoading(false));
 
 		return () => {
 			document.body.removeChild(script);
@@ -69,6 +77,37 @@ export function AcademicCalendar() {
 			setIsLoading(false);
 		}
 	};
+
+	if (isDataLoading) {
+		return (
+			<main className="min-h-screen bg-gradient-to-br from-[#543A14]/20 via-[#131010]/40 to-[#131010]/60 p-2 sm:p-8 flex items-center justify-center">
+				<div className="bg-white/10 border border-[#F0BB78]/20 rounded-2xl shadow-2xl p-8 flex flex-col items-center">
+					<div className="mb-6 flex flex-row items-end gap-2 h-10">
+						{[0, 1, 2].map((i) => (
+							<motion.div
+								key={i}
+								className="w-4 h-4 sm:w-5 sm:h-5 rounded-full bg-[#F0BB78]"
+								initial={{ y: 0 }}
+								animate={{ y: [0, -18, 0] }}
+								transition={{
+									repeat: Infinity,
+									duration: 0.9,
+									ease: "easeInOut",
+									delay: i * 0.15,
+								}}
+							/>
+						))}
+					</div>
+					<p className="text-lg font-semibold text-[#F0BB78] mb-1">
+						Loading Academic Calendar...
+					</p>
+					<p className="text-slate-200/80 text-sm">
+						This may take a few seconds
+					</p>
+				</div>
+			</main>
+		);
+	}
 
 	return (
 		<main className="min-h-screen bg-gradient-to-br from-[#543A14]/20 via-[#131010]/40 to-[#131010]/60 p-2 sm:p-8">

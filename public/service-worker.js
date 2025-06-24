@@ -5,9 +5,9 @@ const APP_SHELL = [
   '/manifest.json',
   '/icon.png',
   '/_creator.py',
-  '/src/data/timetable-mapping.json',
-  '/src/data/128-mapping.json',
-  '/src/data/calendar.json',
+  '/data/timetable-mapping.json',
+  '/data/128-mapping.json',
+  '/data/calendar.json',
 ];
 
 // Pyodide CDN files to cache (adjust version if needed)
@@ -19,7 +19,6 @@ const PYODIDE_FILES = [
   'pyodide_py.tar',
   'repodata.json',
   'packages.json',
-  // Add more if needed
 ].map(f => PYODIDE_CDN + f);
 
 self.addEventListener('install', event => {

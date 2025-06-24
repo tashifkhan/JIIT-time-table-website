@@ -154,14 +154,23 @@ const App: React.FC = () => {
 						transition={{ duration: 0.2 }}
 						className="bg-white/10 border border-[#F0BB78]/20 rounded-2xl shadow-2xl p-8 flex flex-col items-center"
 					>
-						<motion.div
-							className="mb-4"
-							initial={{ rotate: 0 }}
-							animate={{ rotate: 360 }}
-							transition={{ repeat: Infinity, duration: 1, ease: "linear" }}
-						>
-							<Sparkles className="w-10 h-10 text-[#F0BB78]" />
-						</motion.div>
+						{/* Three bouncing balls loader */}
+						<div className="mb-6 flex flex-row items-end gap-2 h-10">
+							{[0, 1, 2].map((i) => (
+								<motion.div
+									key={i}
+									className="w-4 h-4 sm:w-5 sm:h-5 rounded-full bg-[#F0BB78]"
+									initial={{ y: 0 }}
+									animate={{ y: [0, -18, 0] }}
+									transition={{
+										repeat: Infinity,
+										duration: 0.9,
+										ease: "easeInOut",
+										delay: i * 0.15,
+									}}
+								/>
+							))}
+						</div>
 						<p className="text-lg font-semibold text-[#F0BB78] mb-1">
 							Generating your schedule...
 						</p>

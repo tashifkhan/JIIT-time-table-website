@@ -1,4 +1,4 @@
-import { useState, useContext } from "react";
+import { useState, useContext, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Button } from "./ui/button";
 import { Card } from "./ui/card";
@@ -81,6 +81,73 @@ export function ScheduleForm({
 		parseAsArrayOf(parseAsString).withDefault([])
 	);
 	const [isGenerating, setIsGenerating] = useState(false);
+	const [configName, setConfigName] = useState("");
+	const [savedConfigs, setSavedConfigs] = useState<{ [key: string]: any }>({});
+	const [selectedConfig, setSelectedConfig] = useState("");
+
+	// Load saved configs from localStorage on mount
+	useEffect(() => {
+		const configs = localStorage.getItem("scheduleConfigs");
+		if (configs) {
+			setSavedConfigs(JSON.parse(configs));
+		}
+	}, []);
+
+	// Save configs to localStorage whenever they change
+	useEffect(() => {
+		localStorage.setItem("scheduleConfigs", JSON.stringify(savedConfigs));
+	}, [savedConfigs]);
+
+	// Save current config
+	const handleSaveConfig = () => {
+		if (!configName.trim())
+			return alert("Please enter a name for the configuration.");
+		const config = {
+			campus,
+			year,
+			batch,
+			electiveCount,
+			selectedElectives,
+			numExecutions:
+				Number(
+					new URLSearchParams(window.location.search).get("numExecutions")
+				) || 0,
+		};
+		setSavedConfigs((prev) => ({ ...prev, [configName.trim()]: config }));
+		setConfigName("");
+	};
+
+	// Load selected config
+	const handleLoadConfig = (name: string) => {
+		const config = savedConfigs[name];
+		if (!config) return;
+		setCampus(config.campus);
+		setYear(config.year);
+		setBatch(config.batch);
+		setElectiveCount(config.electiveCount);
+		setSelectedElectives(config.selectedElectives);
+		// Update URL params
+		const params = new URLSearchParams(window.location.search);
+		params.set("campus", config.campus);
+		params.set("year", config.year);
+		params.set("batch", config.batch);
+		params.set("electiveCount", config.electiveCount);
+		params.set("selectedElectives", config.selectedElectives.join(","));
+		params.set("numExecutions", config.numExecutions || 0);
+		window.history.replaceState(
+			{},
+			"",
+			`${window.location.pathname}?${params}`
+		);
+		setSelectedConfig(name);
+	};
+
+	// Delete selected config
+	const handleDeleteConfig = (name: string) => {
+		const { [name]: _, ...rest } = savedConfigs;
+		setSavedConfigs(rest);
+		if (selectedConfig === name) setSelectedConfig("");
+	};
 
 	const handleElectiveChange = (index: number, value: string) => {
 		const newElectives = [...selectedElectives];
@@ -108,6 +175,48 @@ export function ScheduleForm({
 
 	return (
 		<>
+			{/* Config Save/Load UI */}
+			<Card className="w-full max-w-[95vw] sm:max-w-md p-2 mb-4 bg-[#FFF0DC]/10 border border-[#F0BB78]/20 flex flex-col gap-2">
+				<div className="flex gap-2 items-center">
+					<input
+						type="text"
+						placeholder="Config name"
+						value={configName}
+						onChange={(e) => setConfigName(e.target.value)}
+						className="flex-1 h-8 px-2 rounded border border-[#F0BB78]/30 bg-white/10 text-white"
+					/>
+					<Button
+						type="button"
+						onClick={handleSaveConfig}
+						className="h-8 px-3 text-xs"
+					>
+						Save Config
+					</Button>
+				</div>
+				<div className="flex gap-2 items-center">
+					<select
+						value={selectedConfig}
+						onChange={(e) => handleLoadConfig(e.target.value)}
+						className="flex-1 h-8 px-2 rounded border border-[#F0BB78]/30 bg-white/10 text-white"
+					>
+						<option value="">Select saved config</option>
+						{Object.keys(savedConfigs).map((name) => (
+							<option key={name} value={name}>
+								{name}
+							</option>
+						))}
+					</select>
+					{selectedConfig && (
+						<Button
+							type="button"
+							onClick={() => handleDeleteConfig(selectedConfig)}
+							className="h-8 px-3 text-xs bg-red-500 hover:bg-red-600"
+						>
+							Delete
+						</Button>
+					)}
+				</div>
+			</Card>
 			<AnimatePresence>
 				{isGenerating && (
 					<motion.div

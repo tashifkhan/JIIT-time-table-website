@@ -24,12 +24,9 @@ const App: React.FC = () => {
 	const { schedule, setSchedule } = useContext(UserContext);
 
 	const [numExecutions, setNumExecutions] = useState(0);
-	const [pyodideLoading, setPyodideLoading] = useState(true);
 
 	useEffect(() => {
-		initializePyodide()
-			.then(() => setPyodideLoading(false))
-			.catch(() => setPyodideLoading(false));
+		initializePyodide();
 	}, []);
 
 	const evaluteTimeTable = async (
@@ -144,24 +141,18 @@ const App: React.FC = () => {
 					</p>
 				</motion.div>
 
-				{pyodideLoading ? (
-					<div className="flex justify-center items-center h-32">
-						<p className="text-lg text-[#F0BB78]">Loading Python engine...</p>
-					</div>
-				) : (
-					<motion.div
-						className="flex justify-center rounded-xl sm:rounded-2xl p-3 sm:p-6"
-						initial={{ opacity: 0, y: 20 }}
-						animate={{ opacity: 1, y: 0 }}
-						transition={{ duration: 0.5, delay: 0.2 }}
-					>
-						<ScheduleForm
-							mapping={timetableMapping}
-							mapping128={mapping128}
-							onSubmit={handleFormSubmit}
-						/>
-					</motion.div>
-				)}
+				<motion.div
+					className="flex justify-center rounded-xl sm:rounded-2xl p-3 sm:p-6"
+					initial={{ opacity: 0, y: 20 }}
+					animate={{ opacity: 1, y: 0 }}
+					transition={{ duration: 0.5, delay: 0.2 }}
+				>
+					<ScheduleForm
+						mapping={timetableMapping}
+						mapping128={mapping128}
+						onSubmit={handleFormSubmit}
+					/>
+				</motion.div>
 
 				{schedule && (
 					<>

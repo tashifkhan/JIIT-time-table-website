@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useContext } from "react";
 import {
 	callPythonFunction,
 	usePyodideStatus,
@@ -6,12 +6,13 @@ import {
 } from "./utils/pyodide";
 import { ScheduleForm } from "./components/schedule-form";
 import { ScheduleDisplay } from "./components/schedule-display";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion } from "framer-motion";
 import timetableMapping from "./data/timetable-mapping.json";
 import mapping128 from "./data/128-mapping.json";
-import { Calendar, Sparkles } from "lucide-react";
+import { Calendar } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import UserContext from "./context/userContext";
+import { useQueryState, parseAsInteger, parseAsBoolean } from "nuqs";
 
 interface YourTietable {
 	[key: string]: {
@@ -25,17 +26,21 @@ interface YourTietable {
 const App: React.FC = () => {
 	const navigate = useNavigate();
 	const { schedule, setSchedule } = useContext(UserContext);
-	const [numExecutions, setNumExecutions] = useState(0);
+	const [numExecutions, setNumExecutions] = useQueryState(
+		"numExecutions",
+		parseAsInteger.withDefault(0)
+	);
+	const [isGenerating, setIsGenerating] = useQueryState(
+		"isGenerating",
+		parseAsBoolean.withDefault(false)
+	);
 
-	// Pyodide loading state
 	const {
 		loading: pyodideLoading,
 		loaded: pyodideLoaded,
 		error: pyodideError,
 	} = usePyodideStatus();
-	const [isGenerating, setIsGenerating] = useState(false);
 
-	// Start pyodide loading in the background on mount
 	React.useEffect(() => {
 		initializePyodide();
 	}, []);
@@ -61,7 +66,7 @@ const App: React.FC = () => {
 				batch,
 				electives_subject_codes,
 			});
-			setNumExecutions((prev) => prev + 1);
+			setNumExecutions((prev) => (typeof prev === "number" ? prev + 1 : 1));
 			return output;
 		} catch (error) {
 			return "Error executing Python function";
@@ -76,7 +81,6 @@ const App: React.FC = () => {
 	}) => {
 		const { year, batch, electives, campus } = data;
 		const mapping = campus === "62" ? timetableMapping : mapping128;
-		// Fix for 128 campus - it has a different structure
 		const subjectJSON =
 			campus === "62"
 				? mapping[year as keyof typeof mapping].subjects
@@ -91,7 +95,7 @@ const App: React.FC = () => {
 
 		try {
 			setIsGenerating(true);
-			// Wait for pyodide if not ready
+
 			if (!pyodideLoaded) {
 				await initializePyodide();
 			}

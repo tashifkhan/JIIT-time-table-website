@@ -11,9 +11,15 @@ import {
 } from "./ui/select";
 import { Input } from "./ui/input";
 import { Label } from "./ui/label";
-// import { Subject } from "../types/subject";
+
 import { Sparkles } from "lucide-react";
 import UserContext from "../context/userContext";
+import {
+	useQueryState,
+	parseAsString,
+	parseAsInteger,
+	parseAsArrayOf,
+} from "nuqs";
 
 interface ScheduleFormProps {
 	mapping: {
@@ -45,11 +51,10 @@ interface ScheduleFormProps {
 	pyodideReady: boolean;
 }
 
-// Add type definition for subject structure
 interface Subject {
 	Code: string;
 	"Full Code"?: string;
-	"Subject "?: string; // Note the space after "Subject"
+	"Subject "?: string;
 	Subject?: string;
 }
 
@@ -60,11 +65,23 @@ export function ScheduleForm({
 	pyodideReady,
 }: ScheduleFormProps) {
 	const { setEditedSchedule } = useContext(UserContext);
-	const [year, setYear] = useState("");
-	const [batch, setBatch] = useState("");
-	const [campus, setCampus] = useState("");
-	const [electiveCount, setElectiveCount] = useState(0);
-	const [selectedElectives, setSelectedElectives] = useState<string[]>([]);
+	const [year, setYear] = useQueryState("year", parseAsString.withDefault(""));
+	const [batch, setBatch] = useQueryState(
+		"batch",
+		parseAsString.withDefault("")
+	);
+	const [campus, setCampus] = useQueryState(
+		"campus",
+		parseAsString.withDefault("")
+	);
+	const [electiveCount, setElectiveCount] = useQueryState(
+		"electiveCount",
+		parseAsInteger.withDefault(0)
+	);
+	const [selectedElectives, setSelectedElectives] = useQueryState(
+		"selectedElectives",
+		parseAsArrayOf(parseAsString).withDefault([])
+	);
 	const [isGenerating, setIsGenerating] = useState(false);
 
 	const handleElectiveChange = (index: number, value: string) => {

@@ -35,11 +35,7 @@ const App: React.FC = () => {
 		parseAsBoolean.withDefault(false)
 	);
 
-	const {
-		loading: pyodideLoading,
-		loaded: pyodideLoaded,
-		error: pyodideError,
-	} = usePyodideStatus();
+	const { loaded: pyodideLoaded } = usePyodideStatus();
 
 	React.useEffect(() => {
 		initializePyodide();
@@ -213,7 +209,6 @@ const App: React.FC = () => {
 						mapping={timetableMapping}
 						mapping128={mapping128}
 						onSubmit={handleFormSubmit}
-						pyodideReady={pyodideLoaded && !pyodideLoading && !pyodideError}
 					/>
 				</motion.div>
 

@@ -1,5 +1,5 @@
-import React, { useContext, useState } from "react";
-import { callPythonFunction } from "./utils/pyodide";
+import React, { useContext, useState, useEffect } from "react";
+import { callPythonFunction, initializePyodide } from "./utils/pyodide";
 import { ScheduleForm } from "./components/schedule-form";
 import { ScheduleDisplay } from "./components/schedule-display";
 import { motion } from "framer-motion";
@@ -24,6 +24,13 @@ const App: React.FC = () => {
 	const { schedule, setSchedule } = useContext(UserContext);
 
 	const [numExecutions, setNumExecutions] = useState(0);
+	const [pyodideLoading, setPyodideLoading] = useState(true);
+
+	useEffect(() => {
+		initializePyodide()
+			.then(() => setPyodideLoading(false))
+			.catch(() => setPyodideLoading(false));
+	}, []);
 
 	const evaluteTimeTable = async (
 		time_table_json: any,
@@ -137,18 +144,24 @@ const App: React.FC = () => {
 					</p>
 				</motion.div>
 
-				<motion.div
-					className="flex justify-center rounded-xl sm:rounded-2xl p-3 sm:p-6"
-					initial={{ opacity: 0, y: 20 }}
-					animate={{ opacity: 1, y: 0 }}
-					transition={{ duration: 0.5, delay: 0.2 }}
-				>
-					<ScheduleForm
-						mapping={timetableMapping}
-						mapping128={mapping128}
-						onSubmit={handleFormSubmit}
-					/>
-				</motion.div>
+				{pyodideLoading ? (
+					<div className="flex justify-center items-center h-32">
+						<p className="text-lg text-[#F0BB78]">Loading Python engine...</p>
+					</div>
+				) : (
+					<motion.div
+						className="flex justify-center rounded-xl sm:rounded-2xl p-3 sm:p-6"
+						initial={{ opacity: 0, y: 20 }}
+						animate={{ opacity: 1, y: 0 }}
+						transition={{ duration: 0.5, delay: 0.2 }}
+					>
+						<ScheduleForm
+							mapping={timetableMapping}
+							mapping128={mapping128}
+							onSubmit={handleFormSubmit}
+						/>
+					</motion.div>
+				)}
 
 				{schedule && (
 					<>
@@ -188,34 +201,5 @@ const App: React.FC = () => {
 	);
 };
 
-// 	return (
-// 		<div className="flex flex-col items-center justify-center h-screen bg-gray-100">
-// 			<h1 className="text-2xl font-bold mb-4">
-// 				React + Pyodide + Python Module
-// 			</h1>
-// 			<input
-// 				type="text"
-// 				value={functionName}
-// 				onChange={(e) => setFunctionName(e.target.value)}
-// 				placeholder="Function name (e.g., add)"
-// 				className="border rounded p-2 w-96 mb-4"
-// 			/>
-// 			<input
-// 				type="text"
-// 				value={args}
-// 				onChange={(e) => setArgs(e.target.value)}
-// 				placeholder="Arguments (comma-separated, e.g., 1, 2)"
-// 				className="border rounded p-2 w-96 mb-4"
-// 			/>
-// 			<button
-// 				onClick={executeFunction}
-// 				className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600"
-// 			>
-// 				Call Python Function
-// 			</button>
-// 			<pre className="mt-4 bg-gray-200 p-4 rounded w-96">Output: {result}</pre>
-// 		</div>
-// 	);
-// };
 export default App;
 export type { YourTietable };

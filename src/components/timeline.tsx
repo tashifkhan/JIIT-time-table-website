@@ -8,8 +8,25 @@ interface ScheduleEvent {
 }
 
 const TimelinePage: React.FC = () => {
-	const { editedSchedule, schedule } = React.useContext(UserContext);
+	const { editedSchedule, schedule, setSchedule } =
+		React.useContext(UserContext);
 	const displaySchedule = editedSchedule || schedule;
+
+	// Load cached schedule from localStorage if not present in context
+	React.useEffect(() => {
+		if (!schedule && !editedSchedule) {
+			const cached = localStorage.getItem("cachedSchedule");
+			if (cached) {
+				try {
+					const parsed = JSON.parse(cached);
+					if (parsed && typeof parsed === "object") {
+						setSchedule(parsed);
+					}
+				} catch {}
+			}
+		}
+		// eslint-disable-next-line react-hooks/exhaustive-deps
+	}, []);
 
 	if (!displaySchedule) {
 		return (

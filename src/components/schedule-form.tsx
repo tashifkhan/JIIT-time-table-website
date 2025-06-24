@@ -48,7 +48,6 @@ interface ScheduleFormProps {
 		electives: string[];
 		campus: string;
 	}) => void;
-	pyodideReady: boolean;
 }
 
 interface Subject {
@@ -62,7 +61,6 @@ export function ScheduleForm({
 	mapping,
 	mapping128,
 	onSubmit,
-	pyodideReady,
 }: ScheduleFormProps) {
 	const { setEditedSchedule } = useContext(UserContext);
 	const [year, setYear] = useQueryState("year", parseAsString.withDefault(""));

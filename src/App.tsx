@@ -37,6 +37,26 @@ const App: React.FC = () => {
 
 	const { loaded: pyodideLoaded } = usePyodideStatus();
 
+	// cached schedule from localStorage on mount
+	React.useEffect(() => {
+		const cached = localStorage.getItem("cachedSchedule");
+		if (cached) {
+			try {
+				const parsed = JSON.parse(cached);
+				if (parsed && typeof parsed === "object") {
+					setSchedule(parsed);
+				}
+			} catch {}
+		}
+	}, []);
+
+	// schedule to localStorage whenever it changes (and is not null)
+	React.useEffect(() => {
+		if (schedule && Object.keys(schedule).length > 0) {
+			localStorage.setItem("cachedSchedule", JSON.stringify(schedule));
+		}
+	}, [schedule]);
+
 	React.useEffect(() => {
 		initializePyodide();
 	}, []);

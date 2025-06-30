@@ -1,7 +1,8 @@
 import json
 from datetime import datetime
 import re
-from typing import List
+from typing import List, Dict, Optional
+from pydantic import BaseModel
 
 
 def parse_batch_numbers(batch_input: str) -> List[str]:
@@ -284,7 +285,7 @@ def convert_time_format(time_str):
         raise ValueError(f"Error parsing time string '{time_str}': {e}")
 
 
-def process_timeslot(timeslot: str, type: str = "L") -> tuple[str]:
+def process_timeslot(timeslot: str, type: str = "L") -> tuple[str, str]:
     try:
         # Handle special case for NOON
         timeslot = timeslot.replace("12 NOON", "12:00 PM").replace("NOON", "12:00 PM")
@@ -326,9 +327,12 @@ def process_timeslot(timeslot: str, type: str = "L") -> tuple[str]:
 
         if start_time_24 == "00:00":
             start_time_24 = "12:00"
+
         if end_time_24[3:] == "50":
             end_time_24 = f"{int(end_time_24[:2])+1}00"
+
         return start_time_24, end_time_24
+
     except Exception as e:
         print(f"Error processing timeslot '{timeslot}': {e}")
         return "00:00", "00:00"
@@ -556,7 +560,7 @@ def convert_time_format128(time_str):
         raise ValueError(f"Error parsing time string '{time_str}': {e}")
 
 
-def process_timeslot128(timeslot: str, type: str = "L") -> tuple[str]:
+def process_timeslot128(timeslot: str, type: str = "L") -> tuple[str, str]:
     try:
         timeslot = timeslot.replace("12 NOON", "12:00 PM").replace("NOON", "12:00 PM")
 
@@ -592,9 +596,12 @@ def process_timeslot128(timeslot: str, type: str = "L") -> tuple[str]:
 
         if start_time_24 == "00:00":
             start_time_24 = "12:00"
+
         if end_time_24[3:] == "50":
             end_time_24 = f"{int(end_time_24[:2])+1}:00"
+
         return start_time_24, end_time_24
+
     except Exception as e:
         print(f"Error processing timeslot '{timeslot}': {e}")
         return "00:00", "00:00"
@@ -648,7 +655,10 @@ def subject_name128(subjects_dict: dict, code: str) -> str:
 
 
 def banado128(
-    time_table_json: dict, subject_json: dict, batch: str, subject_codes: List[str]
+    time_table_json: dict,
+    subject_json: dict,
+    batch: str,
+    subject_codes: List[str],
 ) -> dict:
     try:
         time_table = time_table_json
@@ -783,3 +793,131 @@ def bando128_year1(
     except Exception as e:
         print(f"Error in time_table_creator: {str(e)}")
         return {}
+
+
+class ClassInfo(BaseModel):
+    subject_name: str
+    type: str
+    location: str
+
+
+class CompareTimetablesResult(BaseModel):
+    common_free_slots: Dict[str, List[str]]
+    classes_together: Dict[str, Dict[str, ClassInfo]]
+
+
+def compare_timetables(timetable1: dict, timetable2: dict) -> dict:
+    """
+    Compare two timetables and return:
+      - common_free_slots: dict of day -> list of time slots where both are free
+      - classes_together: dict of day -> dict of time slot -> class info where both have the same class
+    """
+    # Collect all days
+    all_days = set(timetable1.keys()) | set(timetable2.keys())
+    result = {
+        "common_free_slots": {},
+        "classes_together": {},
+    }
+
+    for day in all_days:
+        slots1 = timetable1.get(day, {})
+        slots2 = timetable2.get(day, {})
+
+        # Get the set of all unique time slots for this day from both timetables (union of slot keys)
+        # all_slots = set(slots1.keys()) | set(slots2.keys())
+        all_slots = [f"{time}:00-{time+1}:00" for time in range(8, 17)]
+
+        free_slots = []
+        together_slots = {}
+
+        for slot in all_slots:
+            class1 = slots1.get(slot)
+            class2 = slots2.get(slot)
+
+            if class1 is None and class2 is None:
+                free_slots.append(slot)  # both free
+
+            elif class1 is not None and class2 is not None:
+                # Both have a class at this slot
+                if (
+                    class1.get("subject_name") == class2.get("subject_name")
+                    and class1.get("type") == class2.get("type")
+                    and class1.get("location") == class2.get("location")
+                ):
+                    together_slots[slot] = class1
+
+        if free_slots:
+            result["common_free_slots"][day] = free_slots
+
+        if together_slots:
+            result["classes_together"][day] = together_slots
+
+    return result
+
+
+if __name__ == "__main__":
+    # Example timetables
+    timetable1 = {
+        "Monday": {
+            "10:00-11:00": {
+                "subject_name": "Data Structures and Algorithms",
+                "type": "L",
+                "location": "G7",
+            },
+            "15:00-16:00": {
+                "subject_name": "Indian Constitution and Traditional knowledge",
+                "type": "L",
+                "location": "G8",
+            },
+        },
+        "Tuesday": {
+            "10:00-11:00": {
+                "subject_name": "Electromagnetic Field Theory",
+                "type": "L",
+                "location": "G8",
+            },
+            "15:00-16:00": {
+                "subject_name": "Data Structures and Algorithms Lab",
+                "type": "P",
+                "location": "CL04",
+            },
+        },
+    }
+
+    timetable2 = {
+        "Monday": {
+            "10:00-11:00": {
+                "subject_name": "Data Structures and Algorithms",
+                "type": "L",
+                "location": "G7",
+            },
+            "11:00-12:00": {
+                "subject_name": "Mathematics",
+                "type": "L",
+                "location": "G1",
+            },
+        },
+        "Tuesday": {
+            "10:00-11:00": {
+                "subject_name": "Electromagnetic Field Theory",
+                "type": "L",
+                "location": "G8",
+            },
+            "15:00-16:00": {
+                "subject_name": "Data Structures and Algorithms Lab",
+                "type": "P",
+                "location": "CL04",
+            },
+            "16:00-17:00": {
+                "subject_name": "Mathematics",
+                "type": "L",
+                "location": "G1",
+            },
+        },
+    }
+
+    result = compare_timetables(timetable1, timetable2)
+    print("Common Free Slots:")
+    print(json.dumps(result["common_free_slots"], indent=2))
+    print("\nClasses Together:")
+    print(json.dumps(result["classes_together"], indent=2))

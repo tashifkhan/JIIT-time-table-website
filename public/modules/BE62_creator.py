@@ -3,75 +3,90 @@ from datetime import datetime
 import re
 from typing import List
 
+
 def parse_batch_numbers(batch_input: str) -> List[str]:
     """
     Parse batch number formats and return array of individual batches.
     Handles special cases like 'ABC', single letters, and empty strings.
     """
     if not batch_input:
-        return ['A', 'B', 'C', 'G']
-    
+        return [
+            "A",
+            "B",
+            "C",
+            "G",
+        ]
+
     batch_input = batch_input.strip()
-    
+
     # Handle concatenated batch numbers (e.g., A15A17)
-    if re.match(r'^[A-Za-z]\d+[A-Za-z]\d+$', batch_input):
-        matches = re.findall(r'[A-Za-z]\d+', batch_input)
+    if re.match(r"^[A-Za-z]\d+[A-Za-z]\d+$", batch_input):
+        matches = re.findall(r"[A-Za-z]\d+", batch_input)
         return [match.upper() for match in matches]
-    
+
     # Handle ABC special case
     if batch_input.isalpha():
         return [c.upper() for c in batch_input]
-    
+
     # Handle single letter case
     if len(batch_input) == 1 and batch_input.isalpha():
         return [batch_input.upper()]
-    
+
     # Handle multiple ranges separated by comma
-    if ',' in batch_input:
-        ranges = [r.strip() for r in batch_input.split(',')]
+    if "," in batch_input:
+        ranges = [r.strip() for r in batch_input.split(",")]
         result = []
         current_prefix = None
-        
+
         for r in ranges:
             if r.isdigit():  # If it's just a number, use the previous prefix
                 if current_prefix:
                     result.append(f"{current_prefix}{r}")
                 continue
             elif r[0].isalpha():  # If it starts with a letter, update the prefix
-                current_prefix = re.match(r'([A-Za-z]+)', r).group(1)
+                current_prefix = re.match(r"([A-Za-z]+)", r).group(1)
             # Handle hyphen-separated ranges within comma-separated parts
-            if '-' in r:
-                parts = r.split('-')
-                match = re.match(r'([A-Za-z]+)', parts[0])
+            if "-" in r:
+                parts = r.split("-")
+                match = re.match(r"([A-Za-z]+)", parts[0])
                 if not match:
                     continue
                 prefix = match.group(1)
-                numbers = [int(re.search(r'\d+', part).group()) for part in parts if re.search(r'\d+', part)]
+                numbers = [
+                    int(re.search(r"\d+", part).group())
+                    for part in parts
+                    if re.search(r"\d+", part)
+                ]
                 if numbers:
-                    result.extend(f"{prefix}{i}" for i in range(numbers[0], numbers[-1] + 1))
+                    result.extend(
+                        f"{prefix}{i}" for i in range(numbers[0], numbers[-1] + 1)
+                    )
             else:
                 # Handle non-range parts
                 result.append(r.strip())
         return result
-    
+
     # Handle single range without commas
-    if '-' in batch_input:
-        parts = batch_input.split('-')
-        prefix = re.match(r'([A-Za-z]+)', parts[0]).group(1)
-        numbers = [int(re.search(r'\d+', part).group()) for part in parts]
+    if "-" in batch_input:
+        parts = batch_input.split("-")
+        prefix = re.match(r"([A-Za-z]+)", parts[0]).group(1)
+        numbers = [int(re.search(r"\d+", part).group()) for part in parts]
         return [f"{prefix}{i}" for i in range(numbers[0], numbers[-1] + 1)]
-    
+
     # Handle single batch number
     return [batch_input]
 
-def is_elective(extracted_batch: str, subject_code: str, extracted_batches: List[str]) -> bool:
+
+def is_elective(
+    extracted_batch: str, subject_code: str, extracted_batches: List[str]
+) -> bool:
     """
     Check if a subject code is an elective subject.
-    
+
     Args:
         subject_code: Subject code to check
         electives: List of elective subject codes
-    
+
     Returns:
         bool: True if subject is an elective, False otherwise
     """
@@ -83,19 +98,24 @@ def is_elective(extracted_batch: str, subject_code: str, extracted_batches: List
         return True
     if not extracted_batch.strip():
         return True
-    if len(extracted_batches) == 3 and extracted_batch[0] == "C" and subject_code[0] != "B":
+    if (
+        len(extracted_batches) == 3
+        and extracted_batch[0] == "C"
+        and subject_code[0] != "B"
+    ):
         return True
     return False
+
 
 def is_batch_included(search_batch: str, extracted_batch_input: str) -> bool:
     """
     Check if a batch is included in the batch input string.
     Handles both exact matches and prefix matches.
-    
+
     Args:
         search_batch: Batch to search for (e.g., 'A6' or 'B')
         batch_input: Input string containing batch specifications
-    
+
     Returns:
         bool: True if batch is included, False otherwise
     """
@@ -109,30 +129,33 @@ def is_batch_included(search_batch: str, extracted_batch_input: str) -> bool:
             return True
     return False
 
+
 def batch_extractor(text: str) -> str:
-    start_bracket = text.find('(')
+    start_bracket = text.find("(")
     if start_bracket != -1:
         return text[1:start_bracket].strip()
     return ""
 
+
 def subject_extractor(text: str) -> str:
-    start_bracket = text.find('(')
+    start_bracket = text.find("(")
     if start_bracket != -1:
-        end_bracket = text.find(')', start_bracket)
+        end_bracket = text.find(")", start_bracket)
         if end_bracket != -1:
-            return text[start_bracket + 1:end_bracket]
-        elif dash := text.find('-'):
-            return text[start_bracket + 1:dash]
+            return text[start_bracket + 1 : end_bracket]
+        elif dash := text.find("-"):
+            return text[start_bracket + 1 : dash]
     return text
 
+
 def location_extractor(text: str) -> str:
-    parts = text.split('-')
+    parts = text.split("-")
     if len(parts) < 2:
         return ""
 
-    location = parts[-1].split('/')[0]
+    location = parts[-1].split("/")[0]
     return location.strip()
-        
+
 
 def subject_name_extractor(subjects_dict: dict, code: str) -> str:
     for subject in subjects_dict:
@@ -156,7 +179,10 @@ def subject_name_extractor(subjects_dict: dict, code: str) -> str:
             return subject["Subject"]
     return code
 
-def do_you_have_elective(elective_subject_codes: List[str], subject_code: str, subject_dict :dict) -> bool:
+
+def do_you_have_elective(
+    elective_subject_codes: List[str], subject_code: str, subject_dict: dict
+) -> bool:
     if subject_code in elective_subject_codes:
         return True
     electives_directory = []
@@ -173,7 +199,7 @@ def do_you_have_elective(elective_subject_codes: List[str], subject_code: str, s
         if elective["Full Code"][:5] + elective["Code"] == subject_code:
             return True
         if elective["Full Code"][:2] + elective["Code"] == subject_code:
-            return True  
+            return True
         if elective["Full Code"][2:5] + elective["Code"] == subject_code:
             return True
         if elective["Full Code"][3:5] + elective["Code"] == subject_code:
@@ -182,83 +208,86 @@ def do_you_have_elective(elective_subject_codes: List[str], subject_code: str, s
             return True
     return False
 
+
 def process_day(day_str: str) -> str:
     day_mapping = {
-        'MON': 'Monday',
-        'M': 'Monday',
-        'MONDAY': 'Monday',
-        'TUES': 'Tuesday',
-        'TUE': 'Tuesday',
-        'T': 'Tuesday',
-        'TUESDAY': 'Tuesday',
-        'WED': 'Wednesday',
-        'W': 'Wednesday',
-        'WEDNESDAY': 'Wednesday',
-        'THUR': 'Thursday',
-        'THURS': 'Thursday',
-        'THURSDAY': 'Thursday',
-        'THU': 'Thursday',
-        'TH': 'Thursday',
-        'FRI': 'Friday',
-        'FRIDAY': 'Friday',
-        'F': 'Friday',
-        'SAT': 'Saturday',
-        'S': 'Saturday',
-        'SA': 'Saturday',
-        'SATURDAY': 'Saturday',
-        'SATUR': 'Saturday',
-        'SUN': 'Sunday',
-        'SU': 'Sunday',
-        'U': 'Sunday',
-        'SUNDAY': 'Sunday'
+        "MON": "Monday",
+        "M": "Monday",
+        "MONDAY": "Monday",
+        "TUES": "Tuesday",
+        "TUE": "Tuesday",
+        "T": "Tuesday",
+        "TUESDAY": "Tuesday",
+        "WED": "Wednesday",
+        "W": "Wednesday",
+        "WEDNESDAY": "Wednesday",
+        "THUR": "Thursday",
+        "THURS": "Thursday",
+        "THURSDAY": "Thursday",
+        "THU": "Thursday",
+        "TH": "Thursday",
+        "FRI": "Friday",
+        "FRIDAY": "Friday",
+        "F": "Friday",
+        "SAT": "Saturday",
+        "S": "Saturday",
+        "SA": "Saturday",
+        "SATURDAY": "Saturday",
+        "SATUR": "Saturday",
+        "SUN": "Sunday",
+        "SU": "Sunday",
+        "U": "Sunday",
+        "SUNDAY": "Sunday",
     }
-    
+
     day_str = day_str.strip().upper()
     return day_mapping.get(day_str, day_str)
 
+
 def convert_time_format(time_str):
     # Remove extra spaces
-    time_str = time_str.strip().replace(' ', '')
-    
+    time_str = time_str.strip().replace(" ", "")
+
     # Ensure the time string contains minutes
-    if 'AM' in time_str or 'PM' in time_str:
-        if ':' not in time_str:
-            time_str = time_str.replace('AM', ':00 AM').replace('PM', ':00 PM')
-    
+    if "AM" in time_str or "PM" in time_str:
+        if ":" not in time_str:
+            time_str = time_str.replace("AM", ":00 AM").replace("PM", ":00 PM")
+
     # Format to ensure no extra spaces
-    time_str = time_str.replace('AM', ' AM').replace('PM', ' PM')
-    
+    time_str = time_str.replace("AM", " AM").replace("PM", " PM")
+
     try:
         # Convert 12-hour format to 24-hour format
-        return datetime.strptime(time_str, '%I:%M %p').strftime('%H:%M')
+        return datetime.strptime(time_str, "%I:%M %p").strftime("%H:%M")
     except ValueError as e:
         raise ValueError(f"Error parsing time string '{time_str}': {e}")
+
 
 def process_timeslot(timeslot: str, type: str = "L") -> tuple[str]:
     try:
         # Handle special case for NOON
-        timeslot = timeslot.replace('12 NOON', '12:00 PM').replace('NOON', '12:00 PM')
-        
+        timeslot = timeslot.replace("12 NOON", "12:00 PM").replace("NOON", "12:00 PM")
+
         # Split the timeslot into start and end times
-        start_time, end_time = timeslot.split('-')
-        
+        start_time, end_time = timeslot.split("-")
+
         # Handle cases with or without AM/PM
         start_time = start_time.strip()
-        end_time = end_time.strip().replace('.', ':')
-        
+        end_time = end_time.strip().replace(".", ":")
+
         # Add AM if no AM/PM specified (assuming morning times)
-        if not ('AM' in start_time.upper() or 'PM' in start_time.upper()):
-            if len(start_time.split(':')[0].strip()) == 1:
+        if not ("AM" in start_time.upper() or "PM" in start_time.upper()):
+            if len(start_time.split(":")[0].strip()) == 1:
                 start_time = "0" + start_time
-            if int(start_time.split(':')[0]) < 7:
+            if int(start_time.split(":")[0]) < 7:
                 start_time += " PM"
             else:
                 start_time += " AM"
-                
-        if not ('AM' in end_time.upper() or 'PM' in end_time.upper()):
-            if len(end_time.split(':')[0].strip()) == 1:
+
+        if not ("AM" in end_time.upper() or "PM" in end_time.upper()):
+            if len(end_time.split(":")[0].strip()) == 1:
                 end_time = "0" + end_time
-            if int(end_time.split(':')[0]) < 7:
+            if int(end_time.split(":")[0]) < 7:
                 end_time += " PM"
             else:
                 end_time += " AM"
@@ -266,11 +295,11 @@ def process_timeslot(timeslot: str, type: str = "L") -> tuple[str]:
         # Convert times to 24-hour format
         start_time_24 = convert_time_format(start_time)
         end_time_24 = convert_time_format(end_time)
-        
+
         # Add an hour to end time if type is P
         if type == "P":
-            end_hour = int(end_time_24.split(':')[0])
-            end_min = end_time_24.split(':')[1]
+            end_hour = int(end_time_24.split(":")[0])
+            end_min = end_time_24.split(":")[1]
             end_hour = (end_hour + 1) % 24
             end_time_24 = f"{end_hour:02d}:{end_min}"
 
@@ -282,9 +311,14 @@ def process_timeslot(timeslot: str, type: str = "L") -> tuple[str]:
     except Exception as e:
         print(f"Error processing timeslot '{timeslot}': {e}")
         return "00:00", "00:00"
-    
 
-def time_table_creator(time_table_json: dict, subject_json: dict, batch: str, electives_subject_codes: List[str]) -> dict:
+
+def time_table_creator(
+    time_table_json: dict,
+    subject_json: dict,
+    batch: str,
+    electives_subject_codes: List[str],
+) -> dict:
     time_table = time_table_json
     subject = subject_json
     your_time_table = []
@@ -294,20 +328,45 @@ def time_table_creator(time_table_json: dict, subject_json: dict, batch: str, el
         for time, classes in it.items():
             # Iterate through each class in the time slot
             for indi_class in classes:
-                code = subject_extractor(indi_class.strip())  # Extract subject code from the class string
+                code = subject_extractor(
+                    indi_class.strip()
+                )  # Extract subject code from the class string
                 batchs = batch_extractor(indi_class.strip())
                 batchs_list = parse_batch_numbers(batchs)
 
-                if not is_elective(extracted_batch=batchs, subject_code=code, extracted_batches=batchs_list):
+                if not is_elective(
+                    extracted_batch=batchs,
+                    subject_code=code,
+                    extracted_batches=batchs_list,
+                ):
                     if is_batch_included(batch, batchs):
-                        your_time_table.append([day, time, subject_name_extractor(subject, code), indi_class.strip()[0], location_extractor(indi_class.strip())])
+                        your_time_table.append(
+                            [
+                                day,
+                                time,
+                                subject_name_extractor(subject, code),
+                                indi_class.strip()[0],
+                                location_extractor(indi_class.strip()),
+                            ]
+                        )
 
                 else:
-                    if do_you_have_elective(subject_dict=subject, elective_subject_codes=electives_subject_codes, subject_code=code) and is_batch_included(batch, batchs):
-                        your_time_table.append([day, time, subject_name_extractor(subject, code), indi_class.strip()[0], location_extractor(indi_class.strip())])
+                    if do_you_have_elective(
+                        subject_dict=subject,
+                        elective_subject_codes=electives_subject_codes,
+                        subject_code=code,
+                    ) and is_batch_included(batch, batchs):
+                        your_time_table.append(
+                            [
+                                day,
+                                time,
+                                subject_name_extractor(subject, code),
+                                indi_class.strip()[0],
+                                location_extractor(indi_class.strip()),
+                            ]
+                        )
 
-                
-    ''' time table 
+    """ time table 
     ['MON', '10 -10.50 AM', 'Data Structures and Algorithms', 'L', 'G7']
     ['MON', '3-3.50 PM', 'Indian Constitution and Traditional knowledge', 'L', 'G8']
     ['TUES', '10 -10.50 AM', 'Electromagnetic Field Theory', 'L', 'G8']
@@ -322,7 +381,7 @@ def time_table_creator(time_table_json: dict, subject_json: dict, batch: str, el
     ['FRI', '10 -10.50 AM', 'Electromagnetic Field Theory', 'L', 'G8']
     ['FRI', '3-3.50 PM', 'Python for Signal Processing & Communication Lab', 'P', 'SPL']
     ['SAT', '9 -9.50 AM', 'Electromagnetic Field Theory', 'P', 'ACL,JBSPL']
-    '''
+    """
 
     # print(your_time_table)
 
@@ -333,25 +392,29 @@ def time_table_creator(time_table_json: dict, subject_json: dict, batch: str, el
         time = entry[1]
         start_time, end_time = process_timeslot(time, entry[3])
 
-        if entry[2].strip() in ["ENGINEERING DRAWING AND DESIGN", "Engineering Drawing & Design"]:
+        if entry[2].strip() in [
+            "ENGINEERING DRAWING AND DESIGN",
+            "Engineering Drawing & Design",
+        ]:
             end_time = f"{int(end_time[:2])+1}{end_time[2:]}"
-        
+
         if day not in formatted_timetable:
             formatted_timetable[day] = {}
-        
+
         formatted_timetable[day][f"{start_time}-{end_time}"] = {
             "subject_name": entry[2],
             "type": entry[3],
-            "location": entry[4]
+            "location": entry[4],
         }
-    
+
     return formatted_timetable
+
 
 if __name__ == "__main__":
     # with open("./data/json/time_table.json", 'r') as file:
     #     time_table = json.load(file)
 
-    with open("./data/json/subjects_newsem.json", 'r') as file:
+    with open("./data/json/subjects_newsem.json", "r") as file:
         subject = json.load(file)
 
     # your_time_table = []
@@ -377,7 +440,7 @@ if __name__ == "__main__":
     print(parse_batch_numbers(batch_extractor(test)))
     # print(batch_extractor(test2))
     # subjectCode = test2.strip()
-    # code = subject_extractor(subjectCode) 
+    # code = subject_extractor(subjectCode)
     # print(code)
     # print(subject_name_extractor(subject, code))
     # batch = "B12"
@@ -437,8 +500,7 @@ if __name__ == "__main__":
     #     print(f"Searching for {search_batch:3} in {batch_input:10} -> {result}")
 
 
-
-''' formated timetable
+""" formated timetable
 {
     "Monday": {
         "10:00-10:50": {
@@ -523,4 +585,4 @@ if __name__ == "__main__":
         }
     }
 }
-'''
+"""

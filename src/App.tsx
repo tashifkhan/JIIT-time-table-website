@@ -177,20 +177,20 @@ const App: React.FC = () => {
 	};
 
 	// For setting form fields from App (using nuqs)
-	const [year, setYear] = useQueryState("year", parseAsString.withDefault(""));
-	const [batch, setBatch] = useQueryState(
+	const [_year, setYear] = useQueryState("year", parseAsString.withDefault(""));
+	const [_batch, setBatch] = useQueryState(
 		"batch",
 		parseAsString.withDefault("")
 	);
-	const [campus, setCampus] = useQueryState(
+	const [_campus, setCampus] = useQueryState(
 		"campus",
 		parseAsString.withDefault("")
 	);
-	const [electiveCount, setElectiveCount] = useQueryState(
+	const [_electiveCount, setElectiveCount] = useQueryState(
 		"electiveCount",
 		parseAsInteger.withDefault(0)
 	);
-	const [selectedElectives, setSelectedElectives] = useQueryState(
+	const [_selectedElectives, setSelectedElectives] = useQueryState(
 		"selectedElectives",
 		parseAsArrayOf(parseAsString).withDefault([])
 	);

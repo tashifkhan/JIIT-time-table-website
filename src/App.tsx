@@ -35,10 +35,6 @@ const App: React.FC = () => {
 		parseAsBoolean.withDefault(false)
 	);
 
-	const [isFormOpen, setIsFormOpen] = React.useState(true); // Collapsible state
-
-	const { loaded: pyodideLoaded } = usePyodideStatus();
-
 	// cached schedule from localStorage on mount
 	React.useEffect(() => {
 		const cached = localStorage.getItem("cachedSchedule");
@@ -51,6 +47,14 @@ const App: React.FC = () => {
 			} catch {}
 		}
 	}, []);
+
+	// Set initial form open state based on localStorage
+	const initialFormOpen = React.useMemo(() => {
+		return !localStorage.getItem("cachedSchedule");
+	}, []);
+	const [isFormOpen, setIsFormOpen] = React.useState(initialFormOpen); // Collapsible state
+
+	const { loaded: pyodideLoaded } = usePyodideStatus();
 
 	// schedule to localStorage whenever it changes (and is not null)
 	React.useEffect(() => {

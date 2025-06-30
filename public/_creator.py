@@ -921,8 +921,8 @@ if __name__ == "__main__":
         },
     }
 
-    result = compare_timetables(timetable1, timetable2)
-    print("Common Free Slots:")
-    print(json.dumps(result["common_free_slots"], indent=2))
-    print("\nClasses Together:")
-    print(json.dumps(result["classes_together"], indent=2))
+    # result = compare_timetables(timetable1, timetable2)
+    # print("Common Free Slots:")
+    # print(json.dumps(result["common_free_slots"], indent=2))
+    # print("\nClasses Together:")
+    # print(json.dumps(result["classes_together"], indent=2))

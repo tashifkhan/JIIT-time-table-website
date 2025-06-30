@@ -9,7 +9,7 @@ import { ScheduleDisplay } from "./components/schedule-display";
 import { motion } from "framer-motion";
 import timetableMapping from "./data/timetable-mapping.json";
 import mapping128 from "./data/128-mapping.json";
-import { Calendar } from "lucide-react";
+import { Calendar, ChevronDown } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import UserContext from "./context/userContext";
 import { useQueryState, parseAsInteger, parseAsBoolean } from "nuqs";
@@ -34,6 +34,8 @@ const App: React.FC = () => {
 		"isGenerating",
 		parseAsBoolean.withDefault(false)
 	);
+
+	const [isFormOpen, setIsFormOpen] = React.useState(true); // Collapsible state
 
 	const { loaded: pyodideLoaded } = usePyodideStatus();
 
@@ -220,16 +222,45 @@ const App: React.FC = () => {
 				</motion.div>
 
 				<motion.div
-					className="flex justify-center rounded-xl sm:rounded-2xl p-3 sm:p-6"
+					className="flex justify-center w-full"
 					initial={{ opacity: 0, y: 20 }}
 					animate={{ opacity: 1, y: 0 }}
 					transition={{ duration: 0.5, delay: 0.2 }}
 				>
-					<ScheduleForm
-						mapping={timetableMapping}
-						mapping128={mapping128}
-						onSubmit={handleFormSubmit}
-					/>
+					<div className="w-full max-w-xl bg-white/5 rounded-xl sm:rounded-2xl border border-white/10 shadow-xl overflow-hidden">
+						<button
+							onClick={() => setIsFormOpen((prev) => !prev)}
+							className="w-full flex items-center justify-between px-6 py-4 bg-transparent hover:bg-white/10 transition-all duration-200 focus:outline-none cursor-pointer select-none"
+						>
+							<span className="text-lg font-semibold text-[#F0BB78]">
+								Schedule Form
+							</span>
+							<ChevronDown
+								className={`w-6 h-6 text-[#F0BB78] transition-transform duration-300 ${
+									isFormOpen ? "rotate-180" : "rotate-0"
+								}`}
+							/>
+						</button>
+						<motion.div
+							initial={false}
+							animate={{
+								height: isFormOpen ? "auto" : 0,
+								opacity: isFormOpen ? 1 : 0,
+							}}
+							style={{ overflow: "hidden" }}
+							transition={{ duration: 0.4, ease: "easeInOut" }}
+						>
+							{isFormOpen && (
+								<div className="px-6 pb-6 pt-2 flex justify-center">
+									<ScheduleForm
+										mapping={timetableMapping}
+										mapping128={mapping128}
+										onSubmit={handleFormSubmit}
+									/>
+								</div>
+							)}
+						</motion.div>
+					</div>
 				</motion.div>
 
 				{schedule && (

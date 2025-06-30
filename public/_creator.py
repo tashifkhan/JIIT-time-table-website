@@ -1,8 +1,9 @@
 import json
 from datetime import datetime
 import re
-from typing import List, Dict, Optional
-from pydantic import BaseModel
+from typing import List, Dict
+
+# from pydantic import BaseModel
 
 
 def parse_batch_numbers(batch_input: str) -> List[str]:
@@ -795,15 +796,19 @@ def bando128_year1(
         return {}
 
 
-class ClassInfo(BaseModel):
-    subject_name: str
-    type: str
-    location: str
+# class ClassInfo(BaseModel):
+#     subject_name: str
+#     type: str
+#     location: str
 
 
-class CompareTimetablesResult(BaseModel):
-    common_free_slots: Dict[str, List[str]]
-    classes_together: Dict[str, Dict[str, ClassInfo]]
+# class CompareTimetablesResult(BaseModel):
+#     common_free_slots: Dict[str, List[str]]
+#     classes_together: Dict[str, Dict[str, ClassInfo]]
+
+
+# class FormattedTimetable(BaseModel):
+#     __root__: Dict[str, Dict[str, ClassInfo]]
 
 
 def compare_timetables(timetable1: dict, timetable2: dict) -> dict:

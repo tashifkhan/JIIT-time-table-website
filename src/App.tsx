@@ -9,10 +9,24 @@ import { ScheduleDisplay } from "./components/schedule-display";
 import { motion } from "framer-motion";
 import timetableMapping from "./data/timetable-mapping.json";
 import mapping128 from "./data/128-mapping.json";
-import { Calendar, ChevronDown } from "lucide-react";
+import { Calendar, ChevronDown, Trash } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import UserContext from "./context/userContext";
-import { useQueryState, parseAsInteger, parseAsBoolean } from "nuqs";
+import {
+	useQueryState,
+	parseAsInteger,
+	parseAsBoolean,
+	parseAsString,
+	parseAsArrayOf,
+} from "nuqs";
+import {
+	Select,
+	SelectContent,
+	SelectItem,
+	SelectTrigger,
+	SelectValue,
+} from "./components/ui/select";
+import { Label } from "./components/ui/label";
 
 interface YourTietable {
 	[key: string]: {
@@ -34,6 +48,19 @@ const App: React.FC = () => {
 		"isGenerating",
 		parseAsBoolean.withDefault(false)
 	);
+
+	// Saved configs state
+	const [savedConfigs, setSavedConfigs] = React.useState<{
+		[key: string]: any;
+	}>(() => {
+		const configs = localStorage.getItem("classConfigs");
+		return configs ? JSON.parse(configs) : {};
+	});
+	const [selectedConfig, setSelectedConfig] = React.useState<string>("");
+
+	React.useEffect(() => {
+		localStorage.setItem("classConfigs", JSON.stringify(savedConfigs));
+	}, [savedConfigs]);
 
 	// cached schedule from localStorage on mount
 	React.useEffect(() => {
@@ -157,6 +184,58 @@ const App: React.FC = () => {
 		}
 	};
 
+	// For setting form fields from App (using nuqs)
+	const [year, setYear] = useQueryState("year", parseAsString.withDefault(""));
+	const [batch, setBatch] = useQueryState(
+		"batch",
+		parseAsString.withDefault("")
+	);
+	const [campus, setCampus] = useQueryState(
+		"campus",
+		parseAsString.withDefault("")
+	);
+	const [electiveCount, setElectiveCount] = useQueryState(
+		"electiveCount",
+		parseAsInteger.withDefault(0)
+	);
+	const [selectedElectives, setSelectedElectives] = useQueryState(
+		"selectedElectives",
+		parseAsArrayOf(parseAsString).withDefault([])
+	);
+
+	const handleSelectConfig = async (name: string) => {
+		const config = savedConfigs[name];
+		if (!config) return;
+		setYear(config.year);
+		setBatch(config.batch);
+		setElectiveCount(config.electiveCount);
+		setSelectedElectives(config.selectedElectives);
+		setCampus(config.campus);
+		setSelectedConfig(name);
+		// Generate schedule with this config
+		await handleFormSubmit({
+			year: config.year,
+			batch: config.batch,
+			electives: config.selectedElectives,
+			campus: config.campus,
+		});
+	};
+
+	const handleSaveConfig = (name: string, configData: any) => {
+		setSavedConfigs((prev) => ({ ...prev, [name]: configData }));
+	};
+
+	const [isConfigOpen, setIsConfigOpen] = React.useState(false);
+
+	const handleDeleteConfig = (name: string) => {
+		setSavedConfigs((prev) => {
+			const newConfigs = { ...prev };
+			delete newConfigs[name];
+			return newConfigs;
+		});
+		if (selectedConfig === name) setSelectedConfig("");
+	};
+
 	return (
 		<main className="min-h-screen bg-gradient-to-br from-[#543A14]/20 via-[#131010]/40 to-[#131010]/60 p-4 sm:p-8 relative overflow-hidden flex items-center justify-center">
 			{/* Background effects - adjusted for mobile */}
@@ -225,6 +304,67 @@ const App: React.FC = () => {
 					</p>
 				</motion.div>
 
+				{/* Dropdown for saved configs - always visible above the form */}
+				{Object.keys(savedConfigs).length > 0 && (
+					<div className="mb-4 w-full max-w-xl mx-auto">
+						<div className="bg-white/5 rounded-xl sm:rounded-2xl border border-white/10 shadow-xl overflow-hidden">
+							<button
+								onClick={() => setIsConfigOpen((prev) => !prev)}
+								className="w-full flex items-center justify-between px-6 py-4 bg-transparent hover:bg-white/10 transition-all duration-200 focus:outline-none cursor-pointer select-none"
+							>
+								<span className="text-lg font-semibold text-[#F0BB78]">
+									Load Saved Config
+								</span>
+								<ChevronDown
+									className={`w-6 h-6 text-[#F0BB78] transition-transform duration-300 ${
+										isConfigOpen ? "rotate-180" : "rotate-0"
+									}`}
+								/>
+							</button>
+							<motion.div
+								initial={false}
+								animate={{
+									height: isConfigOpen ? "auto" : 0,
+									opacity: isConfigOpen ? 1 : 0,
+								}}
+								style={{ overflow: "hidden" }}
+								transition={{ duration: 0.4, ease: "easeInOut" }}
+							>
+								{isConfigOpen && (
+									<div className="px-6 pb-6 pt-2 flex flex-col gap-2">
+										{Object.keys(savedConfigs).map((name) => (
+											<div
+												key={name}
+												className="flex items-center justify-between gap-2"
+											>
+												<button
+													onClick={async () => {
+														await handleSelectConfig(name);
+														setIsConfigOpen(false);
+													}}
+													className={`flex-1 text-left px-4 py-2 rounded-lg bg-[#FFF0DC]/10 border border-[#F0BB78]/10 hover:bg-[#F0BB78]/20 text-[#F0BB78] font-medium transition-all duration-200`}
+												>
+													{name}
+												</button>
+												<button
+													onClick={(e) => {
+														e.stopPropagation();
+														handleDeleteConfig(name);
+													}}
+													className="ml-2 p-1 rounded hover:bg-red-100/20 transition-colors"
+													title="Delete config"
+												>
+													<Trash className="w-4 h-4 text-red-400" />
+												</button>
+											</div>
+										))}
+									</div>
+								)}
+							</motion.div>
+						</div>
+					</div>
+				)}
+
 				<motion.div
 					className="flex justify-center w-full"
 					initial={{ opacity: 0, y: 20 }}
@@ -260,6 +400,9 @@ const App: React.FC = () => {
 										mapping={timetableMapping}
 										mapping128={mapping128}
 										onSubmit={handleFormSubmit}
+										onSaveConfig={handleSaveConfig}
+										savedConfigs={savedConfigs}
+										autoSubmitKey={selectedConfig}
 									/>
 								</div>
 							)}

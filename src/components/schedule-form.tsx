@@ -1,4 +1,4 @@
-import { useState, useContext } from "react";
+import { useState, useContext, useEffect, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Button } from "./ui/button";
 import { Card } from "./ui/card";
@@ -48,6 +48,9 @@ interface ScheduleFormProps {
 		electives: string[];
 		campus: string;
 	}) => void;
+	onSaveConfig?: (name: string, configData: any) => void;
+	savedConfigs?: { [key: string]: any };
+	autoSubmitKey?: string;
 }
 
 interface Subject {
@@ -61,6 +64,9 @@ export function ScheduleForm({
 	mapping,
 	mapping128,
 	onSubmit,
+	onSaveConfig,
+	savedConfigs,
+	autoSubmitKey,
 }: ScheduleFormProps) {
 	const { setEditedSchedule } = useContext(UserContext);
 	const [year, setYear] = useQueryState("year", parseAsString.withDefault(""));
@@ -81,6 +87,11 @@ export function ScheduleForm({
 		parseAsArrayOf(parseAsString).withDefault([])
 	);
 	const [isGenerating, setIsGenerating] = useState(false);
+
+	// Modal state
+	const [showSaveModal, setShowSaveModal] = useState(false);
+	const [saveName, setSaveName] = useState("");
+	const [saveError, setSaveError] = useState("");
 
 	const handleElectiveChange = (index: number, value: string) => {
 		const newElectives = [...selectedElectives];
@@ -105,6 +116,52 @@ export function ScheduleForm({
 	};
 
 	const [mapz, setMapz] = useState(mapping);
+
+	// Handle save config
+	const handleSaveConfig = () => {
+		if (!saveName.trim()) {
+			setSaveError("Please enter a name");
+			return;
+		}
+		if (savedConfigs && savedConfigs[saveName]) {
+			setSaveError("A config with this name already exists");
+			return;
+		}
+		const configData = {
+			year,
+			batch,
+			electiveCount,
+			selectedElectives,
+			campus,
+		};
+		if (onSaveConfig) {
+			onSaveConfig(saveName, configData);
+		}
+		setShowSaveModal(false);
+		setSaveName("");
+		setSaveError("");
+	};
+
+	const prevAutoSubmitKey = useRef<string | undefined>(undefined);
+	useEffect(() => {
+		if (
+			autoSubmitKey &&
+			autoSubmitKey !== prevAutoSubmitKey.current &&
+			year &&
+			batch &&
+			campus &&
+			selectedElectives &&
+			selectedElectives.length > 0
+		) {
+			onSubmit({
+				year,
+				batch,
+				electives: selectedElectives,
+				campus,
+			});
+			prevAutoSubmitKey.current = autoSubmitKey;
+		}
+	}, [autoSubmitKey, year, batch, campus, selectedElectives, onSubmit]);
 
 	return (
 		<>
@@ -141,6 +198,7 @@ export function ScheduleForm({
 					</motion.div>
 				)}
 			</AnimatePresence>
+
 			<Card className="w-full max-w-[95vw] sm:max-w-md p-4 sm:p-6 backdrop-blur-2xl bg-[#FFF0DC]/10 border border-[#F0BB78]/20 shadow-2xl rounded-xl">
 				<form onSubmit={handleSubmit} className="space-y-4 sm:space-y-6">
 					<div className="space-y-2">
@@ -329,15 +387,73 @@ export function ScheduleForm({
 						</>
 					)}
 
-					<Button
-						type="submit"
-						className="w-full h-9 sm:h-10 text-sm sm:text-base bg-gradient-to-r from-[#543A14] to-[#F0BB78] hover:from-[#543A14]/80 hover:to-[#F0BB78]/80 transition-all duration-300 shadow-lg hover:shadow-[#F0BB78]/25"
-					>
-						<Sparkles className="w-3 h-3 sm:w-4 sm:h-4 mr-2" />
-						Generate Schedule
-					</Button>
+					<div className="flex justify-center gap-2">
+						<Button
+							type="submit"
+							className="w-full h-9 sm:h-10 text-sm sm:text-base bg-gradient-to-r from-[#543A14] to-[#F0BB78] hover:from-[#543A14]/80 hover:to-[#F0BB78]/80 transition-all duration-300 shadow-lg hover:shadow-[#F0BB78]/25"
+						>
+							<Sparkles className="w-3 h-3 sm:w-4 sm:h-4 mr-2" />
+							Generate Schedule
+						</Button>
+						<Button
+							type="button"
+							className="w-[50%] h-9 sm:h-10 text-sm sm:text-base bg-gradient-to-r from-[#543A14] to-[#F0BB78] hover:from-[#543A14]/80 hover:to-[#F0BB78]/80 transition-all duration-300 shadow-lg hover:shadow-[#F0BB78]/25"
+							onClick={() => setShowSaveModal(true)}
+						>
+							Save Class Config
+						</Button>
+					</div>
 				</form>
 			</Card>
+
+			{/* Modal for saving config */}
+			<AnimatePresence>
+				{showSaveModal && (
+					<motion.div
+						initial={{ opacity: 0 }}
+						animate={{ opacity: 1 }}
+						exit={{ opacity: 0 }}
+						className="fixed inset-0 z-50 flex items-center justify-center bg-black/40 backdrop-blur-md"
+					>
+						<motion.div
+							initial={{ scale: 0.9, opacity: 0 }}
+							animate={{ scale: 1, opacity: 1 }}
+							exit={{ scale: 0.9, opacity: 0 }}
+							transition={{ duration: 0.2 }}
+							className="bg-white/10 border border-[#F0BB78]/20 rounded-2xl shadow-2xl p-8 flex flex-col items-center"
+						>
+							<h2 className="text-lg font-semibold text-[#F0BB78] mb-4">
+								Save Class Config
+							</h2>
+							<Input
+								type="text"
+								placeholder="Enter a name for this config"
+								value={saveName}
+								onChange={(e) => {
+									setSaveName(e.target.value);
+									setSaveError("");
+								}}
+								className="mb-2"
+							/>
+							{saveError && (
+								<p className="text-red-400 text-sm mb-2">{saveError}</p>
+							)}
+							<div className="flex gap-3 mt-2">
+								<Button onClick={handleSaveConfig} type="button">
+									Save
+								</Button>
+								<Button
+									onClick={() => setShowSaveModal(false)}
+									type="button"
+									variant="ghost"
+								>
+									Cancel
+								</Button>
+							</div>
+						</motion.div>
+					</motion.div>
+				)}
+			</AnimatePresence>
 		</>
 	);
 }

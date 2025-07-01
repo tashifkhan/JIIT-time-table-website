@@ -95,18 +95,41 @@ const App: React.FC = () => {
 		year: string
 	) => {
 		try {
-			const functionName =
-				campus === "62"
-					? "time_table_creator"
-					: year === "1"
-					? "bando128_year1"
-					: "banado128";
-			const output = await callPythonFunction(functionName, {
-				time_table_json,
-				subject_json,
-				batch,
-				electives_subject_codes,
-			});
+			let functionName = "";
+			let args: any = {};
+			if (campus === "62") {
+				if (year === "1") {
+					functionName = "time_table_creator";
+					args = {
+						time_table_json,
+						subject_json,
+						batch,
+						electives_subject_codes,
+					};
+				} else {
+					functionName = "time_table_creator_v2";
+					// Build all_subs_code: { subject_code: [batch] }
+					const all_subs_code: Record<string, string[]> = {};
+					electives_subject_codes.forEach((code) => {
+						all_subs_code[code] = [batch];
+					});
+					args = { time_table_json, subject_json, batch, all_subs_code };
+				}
+			} else {
+				if (year === "1") {
+					functionName = "bando128_year1";
+					args = { time_table_json, subject_json, batch };
+				} else {
+					functionName = "banado_v2";
+					// Build all_subs_code: { subject_code: [batch] }
+					const all_subs_code: Record<string, string[]> = {};
+					electives_subject_codes.forEach((code) => {
+						all_subs_code[code] = [batch];
+					});
+					args = { time_table_json, subject_json, batch, all_subs_code };
+				}
+			}
+			const output = await callPythonFunction(functionName, args);
 			setNumExecutions((prev) => (typeof prev === "number" ? prev + 1 : 1));
 			return output;
 		} catch (error) {
@@ -168,6 +191,9 @@ const App: React.FC = () => {
 				setSchedule(Schedule);
 				console.log(schedule);
 			}
+			// Save to localStorage
+			const cacheData = { year, batch, electives, campus, schedule: Schedule };
+			localStorage.setItem("cachedSchedule", JSON.stringify(cacheData));
 		} catch (error) {
 			console.error("Error generating schedule:", error);
 			setSchedule({});

@@ -11,6 +11,7 @@ import {
 } from "./ui/select";
 import { Input } from "./ui/input";
 import { Label } from "./ui/label";
+import { Dialog, DialogContent, DialogHeader, DialogTitle } from "./ui/dialog";
 
 import { Sparkles } from "lucide-react";
 import UserContext from "../context/userContext";
@@ -78,25 +79,19 @@ export function ScheduleForm({
 		"campus",
 		parseAsString.withDefault("")
 	);
-	const [electiveCount, setElectiveCount] = useQueryState(
-		"electiveCount",
-		parseAsInteger.withDefault(0)
-	);
-	const [selectedElectives, setSelectedElectives] = useQueryState(
-		"selectedElectives",
-		parseAsArrayOf(parseAsString).withDefault([])
-	);
 	const [isGenerating, setIsGenerating] = useState(false);
-
-	// Modal state
 	const [showSaveModal, setShowSaveModal] = useState(false);
 	const [saveName, setSaveName] = useState("");
 	const [saveError, setSaveError] = useState("");
+	const [showSubjectModal, setShowSubjectModal] = useState(false);
+	const [subjectSearch, setSubjectSearch] = useState("");
+	const [selectedSubjects, setSelectedSubjects] = useState<string[]>([]);
+	const [mapz, setMapz] = useState(mapping);
 
-	const handleElectiveChange = (index: number, value: string) => {
-		const newElectives = [...selectedElectives];
-		newElectives[index] = value;
-		setSelectedElectives(newElectives);
+	const handleSubjectToggle = (code: string) => {
+		setSelectedSubjects((prev) =>
+			prev.includes(code) ? prev.filter((c) => c !== code) : [...prev, code]
+		);
 	};
 
 	const handleSubmit = async (e: React.FormEvent) => {
@@ -107,15 +102,13 @@ export function ScheduleForm({
 			await onSubmit({
 				year,
 				batch,
-				electives: selectedElectives,
+				electives: selectedSubjects,
 				campus,
 			});
 		} finally {
 			setIsGenerating(false);
 		}
 	};
-
-	const [mapz, setMapz] = useState(mapping);
 
 	// Handle save config
 	const handleSaveConfig = () => {
@@ -130,8 +123,6 @@ export function ScheduleForm({
 		const configData = {
 			year,
 			batch,
-			electiveCount,
-			selectedElectives,
 			campus,
 		};
 		if (onSaveConfig) {
@@ -141,27 +132,6 @@ export function ScheduleForm({
 		setSaveName("");
 		setSaveError("");
 	};
-
-	const prevAutoSubmitKey = useRef<string | undefined>(undefined);
-	useEffect(() => {
-		if (
-			autoSubmitKey &&
-			autoSubmitKey !== prevAutoSubmitKey.current &&
-			year &&
-			batch &&
-			campus &&
-			selectedElectives &&
-			selectedElectives.length > 0
-		) {
-			onSubmit({
-				year,
-				batch,
-				electives: selectedElectives,
-				campus,
-			});
-			prevAutoSubmitKey.current = autoSubmitKey;
-		}
-	}, [autoSubmitKey, year, batch, campus, selectedElectives, onSubmit]);
 
 	return (
 		<>
@@ -230,7 +200,7 @@ export function ScheduleForm({
 						</Select>
 					</div>
 
-					{campus && (
+					{campus && typeof campus === "string" && (
 						<>
 							<div className="space-y-2">
 								<Label
@@ -289,101 +259,37 @@ export function ScheduleForm({
 								/>
 							</div>
 
-							{year && year != "1" && (
+							{typeof year === "string" && year !== "1" && (
 								<div className="space-y-2">
-									<Label
-										htmlFor="electiveCount"
-										className="text-white/90 font-medium text-sm sm:text-base"
-									>
-										{campus === "128"
-											? "Number of Subjects"
-											: "Number of Electives"}
+									<Label className="text-white/90 font-medium text-sm sm:text-base">
+										Choose Your Subjects
 									</Label>
-									{campus === "128" && (
-										<p className="text-sm text-slate-300/50 italic">
-											If you {"don't"} remember the exact number just enter 20
-											and select only the ones you need
-										</p>
-									)}
-									<Input
-										id="electiveCount"
-										type="number"
-										min="0"
-										max="20"
-										value={electiveCount}
-										onChange={(e) => {
-											const count = parseInt(e.target.value);
-											setElectiveCount(count);
-											setSelectedElectives(
-												Array.from({ length: count }, () => "")
+									<Button
+										type="button"
+										className="w-full h-9 sm:h-10 text-sm bg-gradient-to-r from-[#543A14] to-[#F0BB78] hover:from-[#543A14]/80 hover:to-[#F0BB78]/80 transition-all duration-300 shadow-lg hover:shadow-[#F0BB78]/25"
+										onClick={() => setShowSubjectModal(true)}
+									>
+										{selectedSubjects.length > 0
+											? `Selected: ${selectedSubjects.length} subject(s)`
+											: "Select Subjects"}
+									</Button>
+									<div className="flex flex-wrap gap-2 mt-2">
+										{selectedSubjects.map((code) => {
+											const subj = mapz[year]?.subjects.find(
+												(s) => s.Code === code
 											);
-										}}
-										className="h-9 sm:h-10 text-sm bg-white/10 border-white/20 backdrop-blur-md hover:bg-white/15 transition-all"
-									/>
+											return (
+												<span
+													key={code}
+													className="px-2 py-1 bg-[#F0BB78]/20 rounded text-[#F0BB78] text-xs"
+												>
+													{subj?.Subject || code}
+												</span>
+											);
+										})}
+									</div>
 								</div>
 							)}
-
-							{Array.from({ length: electiveCount }).map((_, index) => (
-								<motion.div
-									key={index}
-									className="space-y-2"
-									initial={{ opacity: 0, y: 20 }}
-									animate={{ opacity: 1, y: 0 }}
-									transition={{ duration: 0.4, delay: index * 0.1 }}
-								>
-									<Label
-										htmlFor={`elective-${index}`}
-										className="text-white/90 font-medium text-sm sm:text-base"
-									>
-										{campus === "128"
-											? `Subject ${index + 1}`
-											: `Elective ${index + 1}`}
-									</Label>
-									<Select
-										value={selectedElectives[index]}
-										onValueChange={(value) =>
-											handleElectiveChange(index, value)
-										}
-									>
-										<SelectTrigger className="h-9 sm:h-10 text-sm bg-[#FFF0DC]/10 border-[#F0BB78]/20 backdrop-blur-md hover:bg-[#FFF0DC]/15 transition-all">
-											<SelectValue
-												placeholder={`${
-													campus === "128"
-														? `Select Subject ${index + 1}`
-														: `Select Elective ${index + 1}`
-												}`}
-											/>
-										</SelectTrigger>
-										<SelectContent className="bg-[#FFF0DC]/20 backdrop-blur-2xl border-[#F0BB78]/20">
-											{year &&
-												mapz[year]?.subjects &&
-												[...mapz[year].subjects]
-													.sort((a, b) =>
-														(a?.Subject || "").localeCompare(b?.Subject || "")
-													)
-													.map(
-														(subject) =>
-															subject && (
-																<SelectItem
-																	key={subject.Code}
-																	value={subject.Code}
-																	className="hover:bg-white/20"
-																>
-																	{subject.Subject?.match(/^[A-Z\s]+$/)
-																		? subject.Subject.replace(
-																				/\w\S*/g,
-																				(txt) =>
-																					txt.charAt(0).toUpperCase() +
-																					txt.substr(1).toLowerCase()
-																		  )
-																		: subject.Subject}
-																</SelectItem>
-															)
-													)}
-										</SelectContent>
-									</Select>
-								</motion.div>
-							))}
 						</>
 					)}
 
@@ -454,6 +360,114 @@ export function ScheduleForm({
 					</motion.div>
 				)}
 			</AnimatePresence>
+
+			{/* Modal for subject selection */}
+			<Dialog open={showSubjectModal} onOpenChange={setShowSubjectModal}>
+				<DialogContent
+					className="p-0 sm:p-6 max-w-full w-full sm:max-w-lg h-[100dvh] sm:h-auto flex flex-col"
+					style={{ maxHeight: "100dvh" }}
+				>
+					<div className="sticky top-0 z-10 bg-background/90 border-b border-[#F0BB78]/10 px-4 py-3 flex items-center gap-2">
+						<DialogHeader className="flex-1">
+							<DialogTitle className="text-base sm:text-lg">
+								Select Subjects
+								<span className="ml-2 text-xs text-[#F0BB78]">
+									{selectedSubjects.length} selected
+								</span>
+							</DialogTitle>
+						</DialogHeader>
+						<Button
+							variant="ghost"
+							size="sm"
+							className="text-[#F0BB78] px-2 py-1"
+							onClick={() => setShowSubjectModal(false)}
+						>
+							Done
+						</Button>
+					</div>
+					<div className="px-4 pt-2 pb-2 flex gap-2 items-center sticky top-[48px] bg-background/90 z-10">
+						<Input
+							placeholder="Search subjects..."
+							value={subjectSearch}
+							onChange={(e) => setSubjectSearch(e.target.value)}
+							className="flex-1"
+						/>
+						<Button
+							type="button"
+							variant="outline"
+							size="sm"
+							className="ml-2 text-xs px-3 py-2"
+							onClick={() => setSelectedSubjects([])}
+							disabled={selectedSubjects.length === 0}
+						>
+							Clear All
+						</Button>
+					</div>
+					<div className="flex-1 overflow-y-auto px-2 pb-4 pt-2">
+						{year &&
+							mapz[year]?.subjects &&
+							[...mapz[year].subjects]
+								.filter(
+									(subject) =>
+										subject.Subject?.toLowerCase().includes(
+											subjectSearch.toLowerCase()
+										) ||
+										subject.Code.toLowerCase().includes(
+											subjectSearch.toLowerCase()
+										)
+								)
+								.sort((a, b) =>
+									(a?.Subject || "").localeCompare(b?.Subject || "")
+								)
+								.map((subject) => (
+									<div
+										key={subject.Code}
+										className={`flex items-center gap-3 px-3 py-2 rounded-lg cursor-pointer transition-colors mb-1 ${
+											selectedSubjects.includes(subject.Code)
+												? "bg-[#F0BB78]/30 border border-[#F0BB78]/40"
+												: "hover:bg-[#F0BB78]/10"
+										}`}
+										onClick={() => handleSubjectToggle(subject.Code)}
+									>
+										<input
+											type="checkbox"
+											checked={selectedSubjects.includes(subject.Code)}
+											readOnly
+											className="accent-[#F0BB78] w-5 h-5"
+										/>
+										<div className="flex flex-col flex-1 min-w-0">
+											<span className="text-sm truncate font-medium text-white/90">
+												{subject.Subject}
+											</span>
+											<span className="text-xs text-[#F0BB78] truncate">
+												{subject.Code}
+											</span>
+										</div>
+										{selectedSubjects.includes(subject.Code) && (
+											<span className="text-xs text-[#F0BB78] font-semibold">
+												Selected
+											</span>
+										)}
+									</div>
+								))}
+						{year &&
+							mapz[year]?.subjects &&
+							[...mapz[year].subjects].filter(
+								(subject) =>
+									subject.Subject?.toLowerCase().includes(
+										subjectSearch.toLowerCase()
+									) ||
+									subject.Code.toLowerCase().includes(
+										subjectSearch.toLowerCase()
+									)
+							).length === 0 && (
+								<div className="text-center text-slate-400 py-8">
+									No subjects found.
+								</div>
+							)}
+					</div>
+				</DialogContent>
+			</Dialog>
 		</>
 	);
 }

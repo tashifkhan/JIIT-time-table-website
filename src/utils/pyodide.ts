@@ -82,10 +82,11 @@ export function usePyodideStatus() {
 }
 
 interface PythonFunctionArgs {
-  time_table_json: YourTietable, 
-  subject_json: Subject[], 
-  batch: string, 
-  electives_subject_codes: string[]
+  time_table_json: YourTietable,
+  subject_json: Subject[],
+  batch: string,
+  electives_subject_codes?: string[],
+  all_subs_code?: Record<string, string[]>
 }
 
 export async function callPythonFunction(functionName: string, args: PythonFunctionArgs): Promise<any> {
@@ -99,8 +100,16 @@ export async function callPythonFunction(functionName: string, args: PythonFunct
     const pyTimeTable = pyodide.toPy(args.time_table_json);
     const pySubjects = pyodide.toPy(args.subject_json);
     const pyBatch = pyodide.toPy(args.batch);
-    const pyElectives = pyodide.toPy(args.electives_subject_codes);
-    const result = pythonFunction(pyTimeTable, pySubjects, pyBatch, pyElectives);
+    let result;
+    if (functionName.endsWith('_v2') || functionName === 'banado_v2') {
+      const pyAllSubsCode = pyodide.toPy(args.all_subs_code || {});
+      result = pythonFunction(pyTimeTable, pySubjects, pyBatch, pyAllSubsCode);
+    } else if (functionName === 'bando128_year1') {
+      result = pythonFunction(pyTimeTable, pySubjects, pyBatch);
+    } else {
+      const pyElectives = pyodide.toPy(args.electives_subject_codes || []);
+      result = pythonFunction(pyTimeTable, pySubjects, pyBatch, pyElectives);
+    }
     return result.toJs();
   } catch (error) {
     console.error('Error calling Python function:', error);

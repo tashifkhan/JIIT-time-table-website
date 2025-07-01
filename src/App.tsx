@@ -19,6 +19,8 @@ import {
 	parseAsString,
 	parseAsArrayOf,
 } from "nuqs";
+import { Tabs, TabsList, TabsTrigger } from "./components/ui/tabs";
+import { Calendar as CalendarIcon, ListChecks } from "lucide-react";
 
 interface YourTietable {
 	[key: string]: {
@@ -228,8 +230,42 @@ const App: React.FC = () => {
 		if (selectedConfig === name) setSelectedConfig("");
 	};
 
+	// Add this to determine the current tab from the route
+	const currentPath = window.location.pathname;
+	const tabValue =
+		currentPath === "/academic-calendar" ? "calendar" : "timetable";
+
 	return (
-		<main className="min-h-screen bg-gradient-to-br from-[#543A14]/20 via-[#131010]/40 to-[#131010]/60 p-4 sm:p-8 relative overflow-hidden flex items-center justify-center">
+		<main className="min-h-screen bg-gradient-to-br from-[#543A14]/20 via-[#131010]/40 to-[#131010]/60 p-4 sm:p-8 relative overflow-hidden flex flex-col items-center justify-start">
+			{/* Top-level navigation tabs */}
+			<div className="w-full flex justify-center z-20 mb-8">
+				<Tabs
+					value={tabValue}
+					onValueChange={(val) => {
+						if (val === "timetable") navigate("/");
+						if (val === "calendar") navigate("/academic-calendar");
+					}}
+					className="w-full max-w-xl"
+				>
+					<TabsList className="w-full">
+						<TabsTrigger
+							value="timetable"
+							className="flex items-center gap-2 w-1/2 justify-center"
+						>
+							<ListChecks className="w-4 h-4" />
+							<span>Generate Timetable</span>
+						</TabsTrigger>
+						<TabsTrigger
+							value="calendar"
+							className="flex items-center gap-2 w-1/2 justify-center"
+						>
+							<CalendarIcon className="w-4 h-4" />
+							<span>Academic Calendar</span>
+						</TabsTrigger>
+					</TabsList>
+				</Tabs>
+			</div>
+
 			{/* Background effects - adjusted for mobile */}
 			<div className="absolute inset-0 w-full h-full">
 				<div className="absolute top-[-5%] left-[-5%] w-48 sm:w-72 h-48 sm:h-72 bg-[#F0BB78]/30 rounded-full blur-[96px] sm:blur-[128px]" />

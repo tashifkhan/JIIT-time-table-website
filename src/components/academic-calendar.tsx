@@ -17,9 +17,9 @@ export function AcademicCalendar() {
 		script.defer = true;
 		document.body.appendChild(script);
 
-		// Fetch calendar data from public/data
+		// fetch calendar data from public/data
 		setIsDataLoading(true);
-		fetch("/data/calendar.json")
+		fetch("/data/calender/2526/calender.json")
 			.then((res) => res.json())
 			.then((data) => setCalendarData(data))
 			.finally(() => setIsDataLoading(false));

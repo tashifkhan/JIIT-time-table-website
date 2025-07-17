@@ -6,6 +6,7 @@ import {
 } from "./utils/pyodide";
 import { ScheduleForm } from "./components/schedule-form";
 import { ScheduleDisplay } from "./components/schedule-display";
+// import { AcademicCalendar } from "./components/academic-calendar";
 import { motion } from "framer-motion";
 import timetableMapping from "./data/timetable-mapping.json";
 import mapping128 from "./data/128-mapping.json";
@@ -19,8 +20,6 @@ import {
 	parseAsString,
 	parseAsArrayOf,
 } from "nuqs";
-import { Tabs, TabsList, TabsTrigger } from "./components/ui/tabs";
-import { Calendar as CalendarIcon, ListChecks } from "lucide-react";
 
 interface YourTietable {
 	[key: string]: {
@@ -31,6 +30,7 @@ interface YourTietable {
 		};
 	};
 }
+
 const App: React.FC = () => {
 	const navigate = useNavigate();
 	const { schedule, setSchedule } = useContext(UserContext);
@@ -69,11 +69,10 @@ const App: React.FC = () => {
 		}
 	}, []);
 
-	// Set initial form open state based on localStorage
 	const initialFormOpen = React.useMemo(() => {
 		return !localStorage.getItem("cachedSchedule");
 	}, []);
-	const [isFormOpen, setIsFormOpen] = React.useState(initialFormOpen); // Collapsible state
+	const [isFormOpen, setIsFormOpen] = React.useState(initialFormOpen);
 
 	const { loaded: pyodideLoaded } = usePyodideStatus();
 
@@ -178,7 +177,6 @@ const App: React.FC = () => {
 		}
 	};
 
-	// For setting form fields from App (using nuqs)
 	const [_year, setYear] = useQueryState("year", parseAsString.withDefault(""));
 	const [_batch, setBatch] = useQueryState(
 		"batch",
@@ -230,281 +228,222 @@ const App: React.FC = () => {
 		if (selectedConfig === name) setSelectedConfig("");
 	};
 
-	// Add this to determine the current tab from the route
-	const currentPath = window.location.pathname;
-	const tabValue =
-		currentPath === "/academic-calendar" ? "calendar" : "timetable";
-
 	return (
-		<main className="min-h-screen bg-gradient-to-br from-[#543A14]/20 via-[#131010]/40 to-[#131010]/60 p-4 sm:p-8 relative overflow-hidden flex flex-col items-center justify-start">
-			{/* Responsive Navigation Tabs */}
-			<div className="w-full flex justify-center z-20 mb-8">
-				{/* Desktop: Sidebar Tabs */}
-				<div className="hidden md:flex w-full max-w-7xl">
-					<div className="flex w-full">
-						<Tabs
-							value={tabValue}
-							onValueChange={(val) => {
-								if (val === "timetable") navigate("/");
-								if (val === "calendar") navigate("/academic-calendar");
-							}}
-							orientation="vertical"
-							className="flex gap-0"
-						>
-							<TabsList className="flex-col gap-2 bg-transparent py-0 w-56 min-h-[80vh] sticky top-8">
-								<TabsTrigger
-									value="timetable"
-									className="w-full justify-start data-[state=active]:bg-[#F0BB78]/20 data-[state=active]:shadow-none"
-								>
-									<ListChecks className="w-5 h-5 mr-3" />
-									<span className="text-lg">Generate Timetable</span>
-								</TabsTrigger>
-								<TabsTrigger
-									value="calendar"
-									className="w-full justify-start data-[state=active]:bg-[#F0BB78]/20 data-[state=active]:shadow-none"
-								>
-									<CalendarIcon className="w-5 h-5 mr-3" />
-									<span className="text-lg">Academic Calendar</span>
-								</TabsTrigger>
-							</TabsList>
-						</Tabs>
-						{/* Main content to the right of sidebar */}
-						<div className="flex-1 pl-8">
-							<motion.div
-								className="text-center space-y-3 sm:space-y-4"
-								initial={{ opacity: 0, y: 20 }}
-								animate={{ opacity: 1, y: 0 }}
-								transition={{ duration: 0.5 }}
+		<main className="min-h-screen bg-gradient-to-br from-[#543A14]/20 via-[#131010]/40 to-[#131010]/60 p-4 sm:p-8 relative overflow-hidden">
+			{/* Background effects */}
+			<div className="absolute inset-0 w-full h-full pointer-events-none">
+				<div className="absolute top-[-5%] left-[-5%] w-48 sm:w-72 h-48 sm:h-72 bg-[#F0BB78]/30 rounded-full blur-[96px] sm:blur-[128px]" />
+				<div className="absolute bottom-[-5%] right-[-5%] w-48 sm:w-72 h-48 sm:h-72 bg-[#543A14]/30 rounded-full blur-[96px] sm:blur-[128px]" />
+			</div>
+
+			<div className="relative z-10 flex flex-col items-center justify-start max-w-7xl mx-auto space-y-6 sm:space-y-8">
+				<motion.div
+					className="text-center space-y-3 sm:space-y-4"
+					initial={{ opacity: 0, y: 20 }}
+					animate={{ opacity: 1, y: 0 }}
+					transition={{ duration: 0.5 }}
+				>
+					<div className="flex items-center justify-center gap-2 sm:gap-3 mb-2 sm:mb-4">
+						<Calendar className="w-8 h-8 sm:w-10 sm:h-10 text-[#F0BB78]" />
+						<h1 className="text-2xl sm:text-4xl font-bold bg-clip-text text-[#F0BB78] bg-gradient-to-r from-[#F0BB78] to-[#543A14]">
+							JIIT Schedule Creator
+						</h1>
+					</div>
+					<p className="text-base sm:text-lg text-slate-300/80 px-4">
+						Create your personalized class schedule in minutes
+					</p>
+				</motion.div>
+				{/* Dropdown for saved configs - always visible above the form */}
+				{Object.keys(savedConfigs).length > 0 && (
+					<div className="mb-4 w-full max-w-xl mx-auto">
+						<div className="bg-white/5 rounded-xl sm:rounded-2xl border border-white/10 shadow-xl overflow-hidden">
+							<button
+								onClick={() => setIsConfigOpen((prev) => !prev)}
+								className="w-full flex items-center justify-between px-6 py-4 bg-transparent hover:bg-white/10 transition-all duration-200 focus:outline-none cursor-pointer select-none"
 							>
-								<div className="flex items-center justify-center gap-2 sm:gap-3 mb-2 sm:mb-4">
-									<Calendar className="w-8 h-8 sm:w-10 sm:h-10 text-[#F0BB78]" />
-									<h1 className="text-2xl sm:text-4xl font-bold bg-clip-text text-[#F0BB78] bg-gradient-to-r from-[#F0BB78] to-[#543A14]">
-										JIIT Schedule Creator
-									</h1>
-								</div>
-								<p className="text-base sm:text-lg text-slate-300/80 px-4">
-									Create your personalized class schedule in minutes
-								</p>
-							</motion.div>
-
-							{/* Dropdown for saved configs - always visible above the form */}
-							{Object.keys(savedConfigs).length > 0 && (
-								<div className="mb-4 w-full max-w-xl mx-auto">
-									<div className="bg-white/5 rounded-xl sm:rounded-2xl border border-white/10 shadow-xl overflow-hidden">
-										<button
-											onClick={() => setIsConfigOpen((prev) => !prev)}
-											className="w-full flex items-center justify-between px-6 py-4 bg-transparent hover:bg-white/10 transition-all duration-200 focus:outline-none cursor-pointer select-none"
-										>
-											<span className="text-lg font-semibold text-[#F0BB78]">
-												Load Saved Config
-											</span>
-											<ChevronDown
-												className={`w-6 h-6 text-[#F0BB78] transition-transform duration-300 ${
-													isConfigOpen ? "rotate-180" : "rotate-0"
-												}`}
-											/>
-										</button>
-										<motion.div
-											initial={false}
-											animate={{
-												height: isConfigOpen ? "auto" : 0,
-												opacity: isConfigOpen ? 1 : 0,
-											}}
-											style={{ overflow: "hidden" }}
-											transition={{ duration: 0.4, ease: "easeInOut" }}
-										>
-											{isConfigOpen && (
-												<div className="px-6 pb-6 pt-2 flex flex-col gap-2">
-													{Object.keys(savedConfigs).map((name) => (
-														<div
-															key={name}
-															className="flex items-center justify-between gap-2"
-														>
-															<button
-																onClick={async () => {
-																	await handleSelectConfig(name);
-																	setIsConfigOpen(false);
-																}}
-																className={`flex-1 text-left px-4 py-2 rounded-lg bg-[#FFF0DC]/10 border border-[#F0BB78]/10 hover:bg-[#F0BB78]/20 text-[#F0BB78] font-medium transition-all duration-200`}
-															>
-																{name}
-															</button>
-															<button
-																onClick={(e) => {
-																	e.stopPropagation();
-																	handleDeleteConfig(name);
-																}}
-																className="ml-2 p-1 rounded hover:bg-red-100/20 transition-colors"
-																title="Delete config"
-															>
-																<Trash className="w-4 h-4 text-red-400" />
-															</button>
-														</div>
-													))}
-												</div>
-											)}
-										</motion.div>
-									</div>
-								</div>
-							)}
-
+								<span className="text-lg font-semibold text-[#F0BB78]">
+									Load Saved Config
+								</span>
+								<ChevronDown
+									className={`w-6 h-6 text-[#F0BB78] transition-transform duration-300 ${
+										isConfigOpen ? "rotate-180" : "rotate-0"
+									}`}
+								/>
+							</button>
 							<motion.div
-								className="flex justify-center w-full"
-								initial={{ opacity: 0, y: 20 }}
-								animate={{ opacity: 1, y: 0 }}
-								transition={{ duration: 0.5, delay: 0.2 }}
+								initial={false}
+								animate={{
+									height: isConfigOpen ? "auto" : 0,
+									opacity: isConfigOpen ? 1 : 0,
+								}}
+								style={{ overflow: "hidden" }}
+								transition={{ duration: 0.4, ease: "easeInOut" }}
 							>
-								<div className="w-full max-w-xl bg-white/5 rounded-xl sm:rounded-2xl border border-white/10 shadow-xl overflow-hidden">
-									<button
-										onClick={() => setIsFormOpen((prev) => !prev)}
-										className="w-full flex items-center justify-between px-6 py-4 bg-transparent hover:bg-white/10 transition-all duration-200 focus:outline-none cursor-pointer select-none"
-									>
-										<span className="text-lg font-semibold text-[#F0BB78]">
-											Schedule Form
-										</span>
-										<ChevronDown
-											className={`w-6 h-6 text-[#F0BB78] transition-transform duration-300 ${
-												isFormOpen ? "rotate-180" : "rotate-0"
-											}`}
-										/>
-									</button>
-									<motion.div
-										initial={false}
-										animate={{
-											height: isFormOpen ? "auto" : 0,
-											opacity: isFormOpen ? 1 : 0,
-										}}
-										style={{ overflow: "hidden" }}
-										transition={{ duration: 0.4, ease: "easeInOut" }}
-									>
-										{isFormOpen && (
-											<div className="px-6 pb-6 pt-2 flex justify-center">
-												<ScheduleForm
-													mapping={timetableMapping}
-													mapping128={mapping128}
-													onSubmit={handleFormSubmit}
-													onSaveConfig={handleSaveConfig}
-													savedConfigs={savedConfigs}
-													autoSubmitKey={selectedConfig}
-												/>
-											</div>
-										)}
-									</motion.div>
-								</div>
-							</motion.div>
-
-							{schedule && (
-								<>
-									<motion.div
-										className="mt-6 sm:mt-8 backdrop-blur-lg bg-white/5 rounded-xl sm:rounded-2xl p-0 sm:p-6 border border-white/10 shadow-xl overflow-x-auto"
-										initial={{ opacity: 0, scale: 0.95 }}
-										animate={{ opacity: 1, scale: 1 }}
-										transition={{ duration: 0.5 }}
-									>
-										<p className="text-sm text-slate-300/60 p-4 text-center">
-											Tap on any time slot to edit it, or click the + icon in
-											each day's title to add new events.
-										</p>
-										<ScheduleDisplay schedule={schedule} />
-									</motion.div>
-									<div className="flex justify-center gap-4">
-										<motion.button
-											onClick={() => {
-												navigate("/timeline");
-											}}
-											className="mt-4 px-6 py-2 rounded-lg backdrop-blur-lg bg-white/10 border border-white/20 
-															 text-[#F0BB78] hover:bg-white/20 transition-all duration-300 shadow-lg
-															 flex items-center gap-2"
-											initial={{ opacity: 0 }}
-											animate={{ opacity: 1 }}
-											whileHover={{ scale: 1.05 }}
-											whileTap={{ scale: 0.95 }}
-										>
-											<Calendar className="w-5 h-5" />
-											<span>Timeline View</span>
-										</motion.button>
-									</div>
-								</>
-							)}
-
-							{/* Background effects - adjusted for mobile */}
-							<div className="absolute inset-0 w-full h-full">
-								<div className="absolute top-[-5%] left-[-5%] w-48 sm:w-72 h-48 sm:h-72 bg-[#F0BB78]/30 rounded-full blur-[96px] sm:blur-[128px]" />
-								<div className="absolute bottom-[-5%] right-[-5%] w-48 sm:w-72 h-48 sm:h-72 bg-[#543A14]/30 rounded-full blur-[96px] sm:blur-[128px]" />
-							</div>
-
-							{/* Loader only when generating */}
-							{isGenerating && (
-								<motion.div
-									initial={{ opacity: 0 }}
-									animate={{ opacity: 1 }}
-									exit={{ opacity: 0 }}
-									className="fixed inset-0 z-50 flex items-center justify-center bg-black/40 backdrop-blur-md"
-								>
-									<motion.div
-										initial={{ scale: 0.9, opacity: 0 }}
-										animate={{ scale: 1, opacity: 1 }}
-										exit={{ scale: 0.9, opacity: 0 }}
-										transition={{ duration: 0.2 }}
-										className="bg-white/10 border border-[#F0BB78]/20 rounded-2xl shadow-2xl p-8 flex flex-col items-center"
-									>
-										{/* Three bouncing balls loader */}
-										<div className="mb-6 flex flex-row items-end gap-2 h-10">
-											{[0, 1, 2].map((i) => (
-												<motion.div
-													key={i}
-													className="w-4 h-4 sm:w-5 sm:h-5 rounded-full bg-[#F0BB78]"
-													initial={{ y: 0 }}
-													animate={{ y: [0, -18, 0] }}
-													transition={{
-														repeat: Infinity,
-														duration: 0.9,
-														ease: "easeInOut",
-														delay: i * 0.15,
+								{isConfigOpen && (
+									<div className="px-6 pb-6 pt-2 flex flex-col gap-2">
+										{Object.keys(savedConfigs).map((name) => (
+											<div
+												key={name}
+												className="flex items-center justify-between gap-2"
+											>
+												<button
+													onClick={async () => {
+														await handleSelectConfig(name);
+														setIsConfigOpen(false);
 													}}
-												/>
-											))}
-										</div>
-										<p className="text-lg font-semibold text-[#F0BB78] mb-1">
-											Generating your schedule...
-										</p>
-										<p className="text-slate-200/80 text-sm">
-											This may take a few seconds
-										</p>
-									</motion.div>
-								</motion.div>
-							)}
-
-							<div className="max-w-7xl mx-auto space-y-6 sm:space-y-8 relative z-10">
-								{/* ... main content blocks ... */}
-							</div>
+													className={`flex-1 text-left px-4 py-2 rounded-lg bg-[#FFF0DC]/10 border border-[#F0BB78]/10 hover:bg-[#F0BB78]/20 text-[#F0BB78] font-medium transition-all duration-200`}
+												>
+													{name}
+												</button>
+												<button
+													onClick={(e) => {
+														e.stopPropagation();
+														handleDeleteConfig(name);
+													}}
+													className="ml-2 p-1 rounded hover:bg-red-100/20 transition-colors"
+													title="Delete config"
+												>
+													<Trash className="w-4 h-4 text-red-400" />
+												</button>
+											</div>
+										))}
+									</div>
+								)}
+							</motion.div>
 						</div>
 					</div>
-				</div>
+				)}{" "}
+				<motion.div
+					className="flex justify-center w-full"
+					initial={{ opacity: 0, y: 20 }}
+					animate={{ opacity: 1, y: 0 }}
+					transition={{ duration: 0.5, delay: 0.2 }}
+				>
+					<div className="w-full max-w-xl bg-white/5 rounded-xl sm:rounded-2xl border border-white/10 shadow-xl overflow-hidden">
+						<button
+							onClick={() => setIsFormOpen((prev) => !prev)}
+							className="w-full flex items-center justify-between px-6 py-4 bg-transparent hover:bg-white/10 transition-all duration-200 focus:outline-none cursor-pointer select-none"
+						>
+							<span className="text-lg font-semibold text-[#F0BB78]">
+								Schedule Form
+							</span>
+							<ChevronDown
+								className={`w-6 h-6 text-[#F0BB78] transition-transform duration-300 ${
+									isFormOpen ? "rotate-180" : "rotate-0"
+								}`}
+							/>
+						</button>
+						<motion.div
+							initial={false}
+							animate={{
+								height: isFormOpen ? "auto" : 0,
+								opacity: isFormOpen ? 1 : 0,
+							}}
+							style={{ overflow: "hidden" }}
+							transition={{ duration: 0.4, ease: "easeInOut" }}
+						>
+							{isFormOpen && (
+								<div className="px-6 pb-6 pt-2 flex justify-center">
+									<ScheduleForm
+										mapping={timetableMapping}
+										mapping128={mapping128}
+										onSubmit={handleFormSubmit}
+										onSaveConfig={handleSaveConfig}
+										savedConfigs={savedConfigs}
+										autoSubmitKey={selectedConfig}
+									/>
+								</div>
+							)}
+						</motion.div>
+					</div>
+				</motion.div>
+				{schedule && (
+					<>
+						<motion.div
+							className="mt-6 sm:mt-8 backdrop-blur-lg bg-white/5 rounded-xl sm:rounded-2xl p-0 sm:p-6 border border-white/10 shadow-xl overflow-x-auto"
+							initial={{ opacity: 0, scale: 0.95 }}
+							animate={{ opacity: 1, scale: 1 }}
+							transition={{ duration: 0.5 }}
+						>
+							<p className="text-sm text-slate-300/60 p-4 text-center">
+								Tap on any time slot to edit it, or click the + icon in each
+								day's title to add new events.
+							</p>
+							<ScheduleDisplay schedule={schedule} />
+						</motion.div>
+						<div className="flex justify-center gap-4">
+							<motion.button
+								onClick={() => {
+									navigate("/timeline");
+								}}
+								className="mt-4 px-6 py-2 rounded-lg backdrop-blur-lg bg-white/10 border border-white/20 
+														 text-[#F0BB78] hover:bg-white/20 transition-all duration-300 shadow-lg
+														 flex items-center gap-2"
+								initial={{ opacity: 0 }}
+								animate={{ opacity: 1 }}
+								whileHover={{ scale: 1.05 }}
+								whileTap={{ scale: 0.95 }}
+							>
+								<Calendar className="w-5 h-5" />
+								<span>Timeline View</span>
+							</motion.button>
+						</div>
+					</>
+				)}
 			</div>
 
-			{/* Mobile: Horizontal Tabs */}
-			<div className="md:hidden w-full max-w-xl">
-				<Tabs
-					value={tabValue}
-					onValueChange={(val) => {
-						if (val === "timetable") navigate("/");
-						if (val === "calendar") navigate("/academic-calendar");
-					}}
-					className="w-full"
-				>
-					<TabsList className="w-full mb-4">
-						<TabsTrigger value="timetable" className="flex-1">
-							<ListChecks className="w-4 h-4 mr-2" />
-							<span>Timetable</span>
-						</TabsTrigger>
-						<TabsTrigger value="calendar" className="flex-1">
-							<CalendarIcon className="w-4 h-4 mr-2" />
-							<span>Calendar</span>
-						</TabsTrigger>
-					</TabsList>
-				</Tabs>
+			{/* Background effects - adjusted for mobile */}
+			<div className="absolute inset-0 w-full h-full pointer-events-none">
+				<div className="absolute top-[-5%] left-[-5%] w-48 sm:w-72 h-48 sm:h-72 bg-[#F0BB78]/30 rounded-full blur-[96px] sm:blur-[128px]" />
+				<div className="absolute bottom-[-5%] right-[-5%] w-48 sm:w-72 h-48 sm:h-72 bg-[#543A14]/30 rounded-full blur-[96px] sm:blur-[128px]" />
 			</div>
+
+			{/* Loader only when generating */}
+			{isGenerating && (
+				<motion.div
+					initial={{ opacity: 0 }}
+					animate={{ opacity: 1 }}
+					exit={{ opacity: 0 }}
+					className="fixed inset-0 z-50 flex items-center justify-center bg-black/40 backdrop-blur-md"
+				>
+					<motion.div
+						initial={{ scale: 0.9, opacity: 0 }}
+						animate={{ scale: 1, opacity: 1 }}
+						exit={{ scale: 0.9, opacity: 0 }}
+						transition={{ duration: 0.2 }}
+						className="bg-white/10 border border-[#F0BB78]/20 rounded-2xl shadow-2xl p-8 flex flex-col items-center"
+					>
+						{/* Three bouncing balls loader */}
+						<div className="mb-6 flex flex-row items-end gap-2 h-10">
+							{[0, 1, 2].map((i) => (
+								<motion.div
+									key={i}
+									className="w-4 h-4 sm:w-5 sm:h-5 rounded-full bg-[#F0BB78]"
+									initial={{ y: 0 }}
+									animate={{ y: [0, -18, 0] }}
+									transition={{
+										repeat: Infinity,
+										duration: 0.9,
+										ease: "easeInOut",
+										delay: i * 0.15,
+									}}
+								/>
+							))}
+						</div>
+						<p className="text-lg font-semibold text-[#F0BB78] mb-1">
+							Generating your schedule...
+						</p>
+						<p className="text-slate-200/80 text-sm">
+							This may take a few seconds
+						</p>
+					</motion.div>
+				</motion.div>
+			)}
+
+			{/* <div className="max-w-7xl mx-auto space-y-6 sm:space-y-8 relative z-10"> */}
+			{/* Academic Calendar Component */}
+			{/* <AcademicCalendar />
+			</div> */}
 		</main>
 	);
 };

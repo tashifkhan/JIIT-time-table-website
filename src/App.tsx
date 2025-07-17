@@ -43,7 +43,7 @@ const App: React.FC = () => {
 		parseAsBoolean.withDefault(false)
 	);
 
-	// Saved configs state
+	// saved configs state
 	const [savedConfigs, setSavedConfigs] = React.useState<{
 		[key: string]: any;
 	}>(() => {

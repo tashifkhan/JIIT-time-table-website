@@ -46,7 +46,7 @@ def parse_batch_numbers(batch_input: str) -> List[str]:
                     result.append(f"{current_prefix}{r}")
                 continue
             elif r[0].isalpha():  # If it starts with a letter, update the prefix
-                current_prefix = re.match(r"([A-Za-z]+)", r).group(1)
+                current_prefix = re.match(r"([A-Za-z]+)", r).group(1)  # type: ignore
             # Handle hyphen-separated ranges within comma-separated parts
             if "-" in r:
                 parts = r.split("-")
@@ -55,7 +55,7 @@ def parse_batch_numbers(batch_input: str) -> List[str]:
                     continue
                 prefix = match.group(1)
                 numbers = [
-                    int(re.search(r"\d+", part).group())
+                    int(re.search(r"\d+", part).group())  # type: ignore
                     for part in parts
                     if re.search(r"\d+", part)
                 ]
@@ -390,14 +390,14 @@ def time_table_creator(
                                 [
                                     day,
                                     time,
-                                    subject_name_extractor(subject, code),
+                                    subject_name_extractor(subject, code),  # type: ignore
                                     indi_class.strip()[0],
                                     location_extractor(indi_class.strip()),
                                 ]
                             )
                     else:
                         if do_you_have_elective(
-                            subject_dict=subject,
+                            subject_dict=subject,  # type: ignore
                             elective_subject_codes=electives_subject_codes,
                             subject_code=code,
                         ) and is_batch_included(batch, batchs):
@@ -405,7 +405,7 @@ def time_table_creator(
                                 [
                                     day,
                                     time,
-                                    subject_name_extractor(subject, code),
+                                    subject_name_extractor(subject, code),  # type: ignore
                                     indi_class.strip()[0],
                                     location_extractor(indi_class.strip()),
                                 ]
@@ -862,18 +862,19 @@ def compare_timetables(timetable1: dict, timetable2: dict) -> dict:
 
 def time_table_creator_v2(
     time_table_json: dict,
-    subject_json: list,
+    subject_json: list[str],
     batch: str,
     all_subs_code: dict,  # {subject_code: [allowed_batches]}
 ) -> dict:
-    print(
-        "Processing inputs:",
+    Print(
         {
-            "batch": batch,
-            "all_subs_code": all_subs_code,
-            "time_table_type": type(time_table_json),
-            "subject_type": type(subject_json),
-        },
+            "Processing inputs": {
+                "batch": batch,
+                "all_subs_code": all_subs_code,
+                "time_table_type": str(type(time_table_json)),
+                "subject_type": str(type(subject_json)),
+            }
+        }
     )
 
     try:
@@ -909,7 +910,7 @@ def time_table_creator_v2(
                                 [
                                     day,
                                     time,
-                                    subject_name_extractor(subject, code),
+                                    subject_name_extractor(subject, code),  # type: ignore
                                     indi_class.strip()[0],
                                     location_extractor(indi_class.strip()),
                                 ]
@@ -1031,7 +1032,52 @@ def banado_v2(
         return {}
 
 
+def Print(dic: dict) -> None:
+    """
+    Custom print function to handle dictionary printing.
+    """
+    import json
+
+    print(
+        json.dumps(
+            dic,
+            indent=2,
+            ensure_ascii=False,
+        )
+    )
+
+
 if __name__ == "__main__":
+
+    # create a timetable
+    import json
+
+    whole_timetable = json.load(open("./data/time-table/EVEN25/62.json", "r"))
+    # print(
+    #     "Whole Timetable:",
+    #     json.dumps(
+    #         whole_timetable["3"],
+    #         indent=2,
+    #     ),
+    # )
+
+    tt_year3 = whole_timetable["3"]["timetable"]
+    # Print(tt_year3)
+
+    subjects = whole_timetable["3"]["subjects"]
+    # Print(subjects)
+
+    subject_codes = ["CI513", "CI573", "D2A30", "V1H10", "H3H30", "O1H20"]
+
+    user_timetable = time_table_creator_v2(
+        time_table_json=tt_year3,
+        subject_json=subject_codes,
+        batch="B12",
+        all_subs_code=subjects,
+    )
+
+    Print(user_timetable)
+
     # Example timetables
     timetable1 = {
         "Monday": {

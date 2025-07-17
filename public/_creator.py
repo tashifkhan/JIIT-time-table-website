@@ -203,15 +203,17 @@ def subject_name_extractor(subjects_dict: dict, code: str) -> str:
     return code
 
 
-def do_you_have_elective(
-    elective_subject_codes: List[str], subject_code: str, subject_dict: dict
+def is_enrolled_subject(
+    enrolled_subject_codes: List[str], subject_code: str, subject_dict: list[dict]
 ) -> bool:
-    if subject_code in elective_subject_codes:
+    if subject_code in enrolled_subject_codes:
         return True
     electives_directory = []
+
     for subject in subject_dict:
-        if subject["Code"] in elective_subject_codes:
+        if subject["Code"] in enrolled_subject_codes:
             electives_directory.append(subject)
+
     for elective in electives_directory:
         if elective["Full Code"][:2] + elective["Code"] == subject_code:
             return True
@@ -229,6 +231,7 @@ def do_you_have_elective(
             return True
         if elective["Code"][1:] == subject_code:
             return True
+
     return False
 
 
@@ -396,9 +399,9 @@ def time_table_creator(
                                 ]
                             )
                     else:
-                        if do_you_have_elective(
+                        if is_enrolled_subject(
                             subject_dict=subject,  # type: ignore
-                            elective_subject_codes=electives_subject_codes,
+                            enrolled_subject_codes=electives_subject_codes,
                             subject_code=code,
                         ) and is_batch_included(batch, batchs):
                             your_time_table.append(
@@ -862,24 +865,28 @@ def compare_timetables(timetable1: dict, timetable2: dict) -> dict:
 
 def time_table_creator_v2(
     time_table_json: dict,
-    subject_json: list[str],
+    enrolled_subjects: list[str],
     batch: str,
-    all_subs_code: dict,  # {subject_code: [allowed_batches]}
+    all_subjects: list[dict],  # {subject_code: [allowed_batches]}
 ) -> dict:
     Print(
         {
             "Processing inputs": {
                 "batch": batch,
-                "all_subs_code": all_subs_code,
-                "time_table_type": str(type(time_table_json)),
-                "subject_type": str(type(subject_json)),
+                "all_subjects": all_subjects,
+                "enrolled_subjects": enrolled_subjects,
+                "time_table_json": time_table_json,
             }
         }
     )
 
     try:
         time_table = time_table_json if isinstance(time_table_json, dict) else {}
-        subject = subject_json if isinstance(subject_json, list) else []
+        # print(f"Time table: {time_table}")
+
+        all_subjects = all_subjects if isinstance(all_subjects, list) else []
+        # print(f"Subject: {subject}")
+
         your_time_table = []
 
         days = list(time_table.keys())
@@ -902,15 +909,18 @@ def time_table_creator_v2(
                     batchs_list = parse_batch_numbers(batchs)
 
                     # Only add if code is in all_subs_code and batch is allowed
-                    if code in all_subs_code:
-                        allowed_batches = all_subs_code[code]
+                    if is_enrolled_subject(
+                        enrolled_subject_codes=enrolled_subjects,
+                        subject_dict=all_subjects,
+                        subject_code=code,
+                    ):
                         # Check if any batch in batchs_list is in allowed_batches
-                        if any(b in allowed_batches for b in batchs_list):
+                        if is_batch_included(batch, batchs):
                             your_time_table.append(
                                 [
                                     day,
                                     time,
-                                    subject_name_extractor(subject, code),  # type: ignore
+                                    subject_name_extractor(all_subjects, code),  # type: ignore
                                     indi_class.strip()[0],
                                     location_extractor(indi_class.strip()),
                                 ]
@@ -1032,7 +1042,7 @@ def banado_v2(
         return {}
 
 
-def Print(dic: dict) -> None:
+def Print(dic: dict | list) -> None:
     """
     Custom print function to handle dictionary printing.
     """
@@ -1067,15 +1077,38 @@ if __name__ == "__main__":
     subjects = whole_timetable["3"]["subjects"]
     # Print(subjects)
 
-    subject_codes = ["CI513", "CI573", "D2A30", "V1H10", "H3H30", "O1H20"]
+    subject_codes = [
+        "D2B40",
+        "CS311",
+        "B15CS311",
+        "CI513",
+        "CI573",
+        "D3B50",
+        "V1H10",
+        "H3H30",
+        "O1H20",
+    ]
 
     user_timetable = time_table_creator_v2(
         time_table_json=tt_year3,
-        subject_json=subject_codes,
+        all_subjects=subjects,
         batch="B12",
-        all_subs_code=subjects,
+        enrolled_subjects=subject_codes,
     )
 
+    Print(user_timetable)
+
+    subjects2 = str("EC315,15EC315,D3A10,D2A10,V1H10,H3H30,O1H10,EC611,EC671").split(
+        ","
+    )
+    print("Enrolled Subjects:", subjects2)
+
+    user_timetable = time_table_creator_v2(
+        time_table_json=tt_year3,
+        all_subjects=subjects,
+        batch="A6",
+        enrolled_subjects=subjects2,
+    )
     Print(user_timetable)
 
     # Example timetables

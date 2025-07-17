@@ -9,12 +9,11 @@ export function AcademicCalendar() {
 	const [isDataLoading, setIsDataLoading] = useState(true);
 	const [selectedYear, setSelectedYear] = useState("2526");
 	const [visibleEventsCount, setVisibleEventsCount] = useState(0);
-	const eventRefs = useRef<HTMLDivElement[]>([]);
-
-	const availableYears = [
+	const [availableYears, setAvailableYears] = useState([
 		{ value: "2425", label: "2024-25" },
 		{ value: "2526", label: "2025-26" },
-	];
+	]);
+	const eventRefs = useRef<HTMLDivElement[]>([]);
 
 	useEffect(() => {
 		document.title = "JIIT Academic Calender Simplified";
@@ -23,6 +22,18 @@ export function AcademicCalendar() {
 		script.async = true;
 		script.defer = true;
 		document.body.appendChild(script);
+
+		fetch("/api/available-years")
+			.then((res) => res.json())
+			.then((years) => {
+				setAvailableYears(years);
+				if (years.length > 0) {
+					setSelectedYear(years[years.length - 1].value);
+				}
+			})
+			.catch((error) => {
+				console.error("Failed to fetch available years:", error);
+			});
 
 		return () => {
 			document.body.removeChild(script);

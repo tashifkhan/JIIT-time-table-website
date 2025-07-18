@@ -884,16 +884,16 @@ def time_table_creator_v2(
     batch: str,
     enrolled_subjects: list[str],
 ) -> dict:
-    Print(
-        {
-            "Processing inputs": {
-                "batch": batch,
-                "all_subjects": all_subjects,
-                "enrolled_subjects": enrolled_subjects,
-                "time_table_json": time_table_json,
-            }
-        }
-    )
+    # Print(
+    #     {
+    #         "Processing inputs": {
+    #             "batch": batch,
+    #             "all_subjects": all_subjects,
+    #             "enrolled_subjects": enrolled_subjects,
+    #             "time_table_json": time_table_json,
+    #         }
+    #     }
+    # )
 
     try:
         time_table = time_table_json if isinstance(time_table_json, dict) else {}

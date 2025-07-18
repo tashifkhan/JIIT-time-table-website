@@ -27,6 +27,14 @@ if uploaded_file is not None:
         else:
             df = pd.read_excel(uploaded_file, header=None)
 
+        # when a new file is uploaded, validate and adjust existing subject ranges
+        if "subject_ranges" in st.session_state:
+            for r in st.session_state.subject_ranges:
+                r["start_row"] = min(r["start_row"], len(df))
+                r["end_row"] = min(r["end_row"], len(df))
+                for i in range(len(r["cols"])):
+                    r["cols"][i] = min(r["cols"][i], len(df.columns))
+
         st.success("File uploaded successfully! Here's a preview:")
         st.dataframe(df)
 

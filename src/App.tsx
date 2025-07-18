@@ -120,7 +120,7 @@ const App: React.FC = () => {
 	const handleFormSubmit = async (data: {
 		year: string;
 		batch: string;
-		electives: string[];
+		electives?: string[];
 		campus: string;
 		manual?: boolean;
 	}) => {

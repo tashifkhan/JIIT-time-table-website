@@ -102,18 +102,23 @@ def is_elective(
     """
     if extracted_batch.upper() == "A7-A8-A10":
         return False
+
     if extracted_batch.isalpha():
         return True
+
     if len(extracted_batches) > 3:
         return True
+
     if not extracted_batch.strip():
         return True
+
     if (
         len(extracted_batches) == 3
         and extracted_batch[0] == "C"
         and subject_code[0] != "B"
     ):
         return True
+
     return False
 
 
@@ -131,9 +136,12 @@ def is_batch_included(search_batch: str, extracted_batch_input: str) -> bool:
     """
     if not extracted_batch_input:
         return True
+
     batch_list = parse_batch_numbers(extracted_batch_input.strip())
+
     if search_batch in batch_list:
         return True
+
     for batch in batch_list:
         if len(batch) == 1 and search_batch[0] == batch:
             return True
@@ -149,6 +157,7 @@ def batch_extractor(text: str) -> str:
 
 def subject_extractor(text: str) -> str:
     start_bracket = text.find("(")
+
     if start_bracket != -1:
         end_bracket = text.find(")", start_bracket)
         if end_bracket != -1:
@@ -346,7 +355,7 @@ def time_table_creator(
     time_table_json: dict,
     subject_json: list,
     batch: str,
-    electives_subject_codes: list[str],
+    electives_subject_codes: list[str] = [],
 ) -> dict:
     print(
         "Processing inputs:",

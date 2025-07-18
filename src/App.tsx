@@ -120,8 +120,9 @@ const App: React.FC = () => {
 		batch: string;
 		electives: string[];
 		campus: string;
+		manual?: boolean;
 	}) => {
-		const { year, batch, electives, campus } = data;
+		const { year, batch, electives, campus, manual } = data;
 		const mapping = campus === "62" ? timetableMapping : mapping128;
 		const subjectJSON =
 			campus === "62"
@@ -136,7 +137,7 @@ const App: React.FC = () => {
 		console.log("With data:", { timeTableJSON, subjectJSON, batch, electives });
 
 		try {
-			setIsGenerating(true);
+			if (manual) setIsGenerating(true);
 
 			if (!pyodideLoaded) {
 				await initializePyodide();
@@ -173,7 +174,7 @@ const App: React.FC = () => {
 			console.error("Error generating schedule:", error);
 			setSchedule({});
 		} finally {
-			setIsGenerating(false);
+			if (manual) setIsGenerating(false);
 		}
 	};
 
@@ -194,6 +195,21 @@ const App: React.FC = () => {
 		"selectedElectives",
 		parseAsArrayOf(parseAsString).withDefault([])
 	);
+
+	React.useEffect(() => {
+		const cached = localStorage.getItem("cachedSchedule");
+		const allParamsPresent = _year && _batch && _campus;
+		if (!cached && allParamsPresent) {
+			handleFormSubmit({
+				year: _year,
+				batch: _batch,
+				electives: _selectedElectives,
+				campus: _campus,
+				manual: false,
+			});
+		}
+		// eslint-disable-next-line react-hooks/exhaustive-deps
+	}, []);
 
 	const handleSelectConfig = async (name: string) => {
 		const config = savedConfigs[name];

@@ -122,7 +122,7 @@ const App: React.FC = () => {
 		campus: string;
 		manual?: boolean;
 	}) => {
-		const { year, batch, electives, campus, manual } = data;
+		const { year, batch, electives, campus } = data;
 		const mapping = campus === "62" ? timetableMapping : mapping128;
 		const subjectJSON =
 			campus === "62"
@@ -137,7 +137,7 @@ const App: React.FC = () => {
 		console.log("With data:", { timeTableJSON, subjectJSON, batch, electives });
 
 		try {
-			if (manual) setIsGenerating(true);
+			setIsGenerating(true);
 
 			if (!pyodideLoaded) {
 				await initializePyodide();
@@ -174,7 +174,7 @@ const App: React.FC = () => {
 			console.error("Error generating schedule:", error);
 			setSchedule({});
 		} finally {
-			if (manual) setIsGenerating(false);
+			setIsGenerating(false);
 		}
 	};
 
@@ -220,6 +220,7 @@ const App: React.FC = () => {
 		setSelectedElectives(config.selectedElectives);
 		setCampus(config.campus);
 		setSelectedConfig(name);
+		setIsGenerating(true); // Show loader immediately on config click
 		// Generate schedule with this config
 		await handleFormSubmit({
 			year: config.year,

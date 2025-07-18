@@ -880,9 +880,9 @@ def compare_timetables(timetable1: dict, timetable2: dict) -> dict:
 
 def time_table_creator_v2(
     time_table_json: dict,
-    enrolled_subjects: list[str],
-    batch: str,
     all_subjects: list[dict],  # {subject_code: [allowed_batches]}
+    batch: str,
+    enrolled_subjects: list[str],
 ) -> dict:
     Print(
         {

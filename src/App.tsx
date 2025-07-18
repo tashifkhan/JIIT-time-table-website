@@ -96,12 +96,13 @@ const App: React.FC = () => {
 		year: string
 	) => {
 		try {
-			const functionName =
-				campus === "62"
-					? "time_table_creator"
-					: year === "1"
-					? "bando128_year1"
-					: "banado128";
+			let functionName;
+			if (year === "1") {
+				functionName =
+					campus === "62" ? "time_table_creator" : "bando128_year1";
+			} else {
+				functionName = campus === "62" ? "time_table_creator_v2" : "bando128";
+			}
 			const output = await callPythonFunction(functionName, {
 				time_table_json,
 				subject_json,

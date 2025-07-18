@@ -1,0 +1,580 @@
+{
+	"1": {
+		"timetable": {
+			"MON": {
+				"9-9.50": [
+					"LB3,B4(PH211)-FF7/VRT",
+					"LB11,B12(B11HS111)-CS8/GA",
+					"LB7,B8(PH211)- CR425/RAV",
+					"LC1,C2,C3(B11HS111)-FF3/VGU",
+					"LB5,B6(MA211)- FF4/RSC",
+					"TA7(MA211)-TS6/AN",
+					"TA8(MA211)-TS7/NS",
+					"PA15(CI271)-CL01 /APR,NIY,SAA",
+					"PA16(CI271)- CL02/BS,ANP,DCH",
+					"PB1 (HS111)- LL/HK",
+					"PB2 (HS111)- CL12/EKS",
+					"PA1(GE111)- CAD1/ SNP",
+					"PA2(GE111)- CAD2/ GGL",
+					"PA17(GE111)- CAD3/ SWET"
+				],
+				"10-10.50": [
+					"LA5,A6(MA211)- G1/YG",
+					"LA7,A8(PH211)-G2/MTR",
+					"LA10,B14(CI121)- G3/DEP",
+					"LG1,G2(CI121)-FF1/APJ",
+					"LB3,B4(CI121)-FF2/AMT",
+					"TB5(B11HS111)-TS6/BB",
+					"TB6(B11HS111)-TS7/AMN",
+					"TA18(MA211)-TS8/HA",
+					"TB9(PH211)-TS11/INC",
+					"TB10(PH211)-TS12/GPK",
+					"PA4(PH271)- PL1/ABH",
+					"PA3(PH271)- PL2/AP/RKD"
+				],
+				"11-11.50": [
+					"LA5.A6(CI121)- G1/DSR",
+					"LA7,A8(CI121)- G2/SMT",
+					"LA10,B14(MA211)- G3/AN",
+					"LG1,G2(PH211)-FF1/DIN",
+					"LA15,A16(PH211)-FF2/SDC",
+					"LB7,B8(B11HS111)-G6/BCJ",
+					"TB1(B11HS111)-TS7/IJ",
+					"TB5(PH211)-TS8/NKS",
+					"TB6(PH211)-TS10/MKC",
+					"TB10(MA211)-TS11/MPA",
+					"TC1(MA212)-TS6/RSH"
+				],
+				"12-12.50": ["LUNCH"],
+				"1-1.50": [
+					"LA3,A4(CI121)- G1/SOS",
+					"LC1,C2,C3(MA212)- G2/RSH",
+					"LB5,B6(PH211)-G3/ABH",
+					"LA1,A2(CI121)-FF1/AJS",
+					"LA10,B14(PH211)-FF2/NG",
+					"LB1,B2(MA211)-G5 /GA",
+					"TB3(B11HS111)-TS6/IJ",
+					"PB11(PH271)- PL1/RAV/BCJ",
+					"PB12(PH271)- PL2/ANU/MTR",
+					"PA15(HS111)- LL/MRB",
+					"PA16 (HS111)- CL12/ KMB",
+					"PA5(GE111)- CAD1/ SWET",
+					"PA6(GE111)- CAD2/ NKR",
+					"PA18(GE111)- CAD3/ CDN"
+				],
+				"2-2.50": [
+					"LB1,B2(B11HS111)-G1/PRV",
+					"LB9,B10(PH211)-G2/SND",
+					"LA1,A2(MA211)-FF1/MPA",
+					"LB3,B4(B11HS111)-FF2/SHB",
+					"TB7(B11HS111)-TS6/VSE",
+					"TA3(MA211)-TS7/AN",
+					"PA10(CI271)-CL01 /DCH,AJP,BS,SUD",
+					"PB14(CI271)- CL02/KM,SAA,DSI",
+					"PC3(B15BT111)- BT3/EKT, PMG,SHD,AKT"
+				],
+				"3-3.50": [
+					"LB1,B2(PH211)-G1/MKC",
+					"LB9,B10(MA211)-G2/HPT",
+					"LB11,B12(CI121)- G3/NEH",
+					"LA15,A16(MA211)- FF1/NSK",
+					"TB5(MA211)-TS6/RSC",
+					"TA4(MA211)-TS7/PSI",
+					"TG1(PH211)-TS11/ABH",
+					"TG2(PH211)-TS12/RKG",
+					"PA1(CI271)-CL05 /MGR.SOS,SLK,MAY",
+					"PA2(CI271)-CL06 /GZL,HN,PSO",
+					"PC1 (HS111)- LL/YN",
+					"PC2 (HS111)- CL12/ NES",
+					"PB3(PH271)- PL1/SDC",
+					"PB4(PH271)- PL2/SPP/GPK"
+				],
+				"4-4.50": [
+					"LA10,B14(B11HS111)-G1/IC",
+					"LA15,A16(CI121)- FF1/TAJ",
+					"TA17(CI121)-TS6/SMT",
+					"TA18(CI121)-TS7/AM",
+					"TG1(CI121)-TS8/DSR",
+					"TG2(CI121)-TS10/APJ",
+					"TC3(B11CI121)-TS11/SJA"
+				]
+			},
+			"TUE": {
+				"9-9.50": [
+					"LC1,C2,C3(B11CI121)- G1/SJA",
+					"LA5,A6(PH211)-FF8/GPK",
+					"LB9,B10(MA211)-FF9/HPT",
+					"LA7,A8(B11HS111)-FF3/SGL",
+					"LB5,B6(CI121)-FF4/SUD",
+					"TG1(MA211)-TS6/PAT",
+					"TB14(B11HS111)-TS7/BB",
+					"TA1(B11HS111)-TS8/AMN",
+					"TA2(B11HS111)-TS11/IJ",
+					"TA3(B11HS111)-TS10/VSE",
+					"PB11(CI271)-CL05 /NIY,AMT,DSI",
+					"PB12(CI271)-CL06 /ASK,KP,NSA",
+					"PB3 (HS111)-LL / KMB",
+					"PB4 (HS111)- CL12/ NES",
+					"PA4(GE111)- CAD1/ SNP",
+					"PA15(GE111)- CAD2/ CDN",
+					"PA16(GE111)- CAD3/ NKR"
+				],
+				"10-10.50": [
+					"LC1,C2,C3(B11HS111)-G1/VGU",
+					"LB1,B2(MA211)- G2/GA",
+					"LB9,B10(B11HS111)-G3/SDA",
+					"LB7,B8(CI121)- FF1/AM",
+					"LB5,B6(B11HS111)-FF2/PU",
+					"TA5(B11HS111)-TS6/PRI",
+					"TA6(B11HS111)-TS7/BB",
+					"TA2(PH211)-TS11/SND",
+					"TA1(PH211)-TS12/ABH",
+					"PA8(PH271)-PL2 /AP/RKG",
+					"PA7(PH271)- PL1/MKC"
+				],
+				"11-11.50": [
+					"LA10,B14(CI121)- G1/DEP",
+					"LB3,B4(PH211)-G2/VRT",
+					"LG1,G2(MA211)-G3 /AT",
+					"LB7,B8(MA211)- FF1/RSC",
+					"LB11,B12(PH211)-FF2/RKD",
+					"LA1,A2(B11HS111)-FF4/NEJ",
+					"TC2(MA212)-TS6/AKK",
+					"TB1(CI121)-TS7/APJ",
+					"TB2(CI121)-TS8/AJS"
+				],
+				"12-12.50": ["LUNCH"],
+				"1-1.50": [
+					"LA3,A4(CI121)- G1/SOS",
+					"LC1,C2,C3(MA212)-G2 /RSH",
+					"LB3,B4(MA211)- G3/PAT",
+					"LB7,B8(PH211)-FF1/RAV",
+					"LA17,A18(MA211)- G5/AKK",
+					"TA1(MA211)-TS6/AKK",
+					"TA10(MA211)-TS7/BPC",
+					"PB11 (HS111)- LL/ PSH",
+					"PA7 (HS111)- CL12/ NAM",
+					"PB1(PH271)- PL1/PC/NKS",
+					"PB2(PH271)- PL2/RKD/NG",
+					"PB10(GE111)- CAD1/ SNP",
+					"PG1(GE111)- CAD2/ GGL",
+					"PG2(GE111)- CAD3/ CDN"
+				],
+				"2-2.50": [
+					"LA3,A4(MA211)- G1/BPC",
+					"LB5,B6(PH211)-G2/ABH",
+					"LB3,B4(CI121)-G3/AMT",
+					"LB7,B8(B11HS111)-FF1/BCJ",
+					"LA15,A16(MA211)- FF2/NSK",
+					"LA5,A6(B11HS111)-FF4/MKB",
+					"TB12(PH211)-TS12/MTR",
+					"TC1(PH212)-TS6/RKG",
+					"TB14(MA211)-TS7/AN",
+					"TA17(MA211)-TS8/MPA"
+				],
+				"3-3.50": [
+					"LA15,A16(CI121)- G1/TAJ",
+					"LA3,A4(PH211)-G2/MKC",
+					"LA7,A8(CI121)-G3 /SMT",
+					"LB5,B6(MA211)-FF1/RSC",
+					"LA17,A18(B11HS111)-FF2/VRT",
+					"TA6(PH211)-TS11/INC",
+					"TB11(CI121)-TS6/SHP",
+					"TB9(MA211)-TS8/AKK",
+					"TA5(MA211)-TS10/YG",
+					"PB7(CI271)-CL21 /APR,MSH,SOS,AM",
+					"PB8(CI271)-CL23 /HN,SLK,PSO",
+					"PA10(PH271)- PL1/SPP/SND",
+					"PC3 (HS111)-LL / EKS",
+					"PB12 (HS111)- CL12/ MDU"
+				],
+				"4-4.50": [
+					"LA15,16(PH211)-G1/SDC",
+					"LG1,G2(CI121)-FF1/APJ",
+					"LB9,B10(CI121)- G3/MEE",
+					"TB6(CI121)-TS7/AMT",
+					"TA17(PH211)-TS11/RKG",
+					"TA7(B11HS111)-TS12/PRI",
+					"TA8(B11HS111)-TS10/BB",
+					"TB5(CI121)-TS6/SMT"
+				]
+			},
+			"WED": {
+				"9-9.50": [
+					"LB7,B8(CI121)-G1/AM",
+					"LA17,A18(PH211)-G2/INC",
+					"LA10,B14(B11HS111)-G3/IC",
+					"LA15,A16(B11HS111)-FF4/SHS",
+					"LB11,B12(B11HS111)-FF8/GA",
+					"TA4(B11HS111)-TS6/PRI",
+					"TA2(MA211)-TS7/PAT",
+					"PA7(CI271)-CL01 /SHP,AJP,SMT",
+					"PA8(CI271)-CL05 /ANP,BS,SYN",
+					"PA5 (HS111)- LL/ MRB",
+					"PA6 (HS111)- CL12/ PSH",
+					"PC1(GE111)- CAD1/ NKR",
+					"PC2(GE111)- CAD2/ GGL",
+					"PB9(GE111)- CAD3/ SWET"
+				],
+				"10-10.50": [
+					"LA3,A4(MA211)- G1/BPC",
+					"LA17,A18(CI121)-G2/SLK",
+					"LA15,A16(PH211)-G3/SDC",
+					"LB3,B4(CI121)-FF1 /AMT",
+					"LG1,G2(B11HS111)-FF2/SDA",
+					"TB11(MA211)-TS6/SG",
+					"TA10(PH211)-TS11/DIN",
+					"TB2(B11HS111)-TS12/BB",
+					"PB7(PH271)- PL1/BCJ",
+					"PB8(PH271)- PL2/GPK"
+				],
+				"11-11.50": [
+					"LA3,A4(PH211)-G1/MKC",
+					"LA17,A18(B11HS111)-G2/VRT",
+					"LB11,B12(MA211)- G3/NS",
+					"LG1,G2(MA211)-FF1/AT",
+					"LA7,A8(CI121)-FF2/SMT",
+					"LA1,A2(B11HS111)-FF4/NEJ",
+					"TB1(PH211)-TS11/RKD",
+					"TB2(PH211)-TS12/SND",
+					"TB10(B11HS111)-TS7/VSE",
+					"TA5(CI121)-TS6/AJS",
+					"TA6(CI121)-TS8/TAJ",
+					"TB3(CI121)-TS10/MEE"
+				],
+				"12-12.50": ["LUNCH"],
+				"1-1.50": [
+					"LA3,A4(CI121)- G1/SOS",
+					"LC1,C2,C3(B11CI121)- G2/SJA",
+					"LA7,A8(PH211)-G3/MTR",
+					"LB5,B6(MA211)-FF1/RSC",
+					"LB9,B10(B11HS111)-FF2/SDA",
+					"TB7(MA211)-TS10/BPC",
+					"TB4(PH211)-TS11/DIN",
+					"LB11,B12(CI121)- G4/NEH",
+					"PB14(PH271)- PL1/VRT/PC",
+					"PG1 (HS111)- LL/ KMB",
+					"PG2 (HS111)-CL12 / MRB"
+				],
+				"2-2.50": [
+					"LA5,A6(PH211)-G1/GPK",
+					"LA15,A16(MA211)- G3/NSK",
+					"LB7, B8(PH211)-FF1/RAV",
+					"LB3,B4(MA211)- FF2/PAT",
+					"LA3,A4(B11HS111)- FF4/CKJ",
+					"TA7(PH211)-TS11/INC",
+					"TC2(PH212)-TS6/RKG",
+					"TA10(B11HS111)-TS7/IJ",
+					"TB9(B11HS111)-TS8/AMN",
+					"TB12(CI121)-TS10/SUD",
+					"PC3(CI121)- CL01/SJA,PKU,SON",
+					"PB11(GE111)- CAD1/ SNP",
+					"PB5(GE111)- CAD2/ GGL",
+					"PB6(GE111)- CAD3/ CDN"
+				],
+				"3-3.50": [
+					"LB9,B10(PH211)-G1/SND",
+					"LA10,B14(PH211)-G2/NG",
+					"LB1,B2(MA211)- G3/GA",
+					"LG1,G2(PH211)-FF1/DIN",
+					"TB12(MA211)-TS6/NS",
+					"TB7(CI121)-TS7/SOS",
+					"TB8(CI121)-TS8/AMT",
+					"PA3(CI271)- CL21/MEE,MSH,MSI,DCH",
+					"PA4(CI271)-CL22 /MGR,SLK,ASY",
+					"PA15(PH271)- PL1/RKG",
+					"PA16(PH271)- PL2/RKD",
+					"PA17 (HS111)-LL / EKS",
+					"PA18 (HS111)- CL12/MDU",
+					"PB3(CI271)-CL02/HN,TAJ,AA",
+					"PB4(CI271)-CL03 /AM,DSR,APJ"
+				],
+				"4-4.50": [
+					"LB1,B2(CI121)- G1/PSO",
+					"LC1,C2,C3(PH212)-FF2/SPP",
+					"TB7(PH211)-TS11/ABH",
+					"TB8(PH211)-TS12/NAR"
+				]
+			},
+			"THU": {
+				"9-9.50": [
+					"LB5,B6(PH211)-G1/ABH",
+					"LA5,A6(PH211)-G2/GPK",
+					"LA17,A18(CI121)-G3/SLK",
+					"LB3,B4(MA211)-G6/PAT",
+					"LG1,G2(PH211)-G7/DIN",
+					"PB10(CI271)- CL01/SHP,NIY,SMT",
+					"PB9(CI271)- CL05/KP,SYN,MEE,MAY",
+					"PA1 (HS111)- LL/ NAM",
+					"PA2(HS111)- CL12/ MRB",
+					"PB7(GE111)- CAD1/ SWET",
+					"PB8(GE111)- CAD2/ CDN"
+				],
+				"10-10.50": [
+					"LA5,A6(CI121)- G2/DSR",
+					"LA7,A8(PH211)-G3/MTR",
+					"LB11,B12(PH211)-FF1/RKD",
+					"LG1,G2(CI121)- FF2/APJ",
+					"TB1(MA211)-TS6/BPC",
+					"TB4(B11HS111)-TS7/AMN",
+					"TA10(CI121)-TS8/SOS",
+					"TB14(CI121)-TS10/NEH",
+					"PB6(PH271)- PL1/PC",
+					"PB5(PH271)- PL2/MKC/NKS",
+					"PC2(CI121)- CL06/ALK,PK,PKU"
+				],
+				"11-11.50": [
+					"LA17,A18(PH211)-G1/INC",
+					"LA5,A6(MA211)-G2 /YG",
+					"LA10,B14(MA211)- G3/AN",
+					"LB9,B10(CI121)- FF1/MEE",
+					"LG1,G2(MA211)- FF2/AT",
+					"LA1,A2(CI121)-FF4/AJS",
+					"TC3(PH212)-TS6/RKG",
+					"TB2(MA211)-TS10/SG",
+					"TA8(PH211)-TS11/GPK",
+					"TA15(B11HS111)-TS7/IJ",
+					"TA16(B11HS111)-TS8/VSE"
+				],
+				"12-12.50": ["LUNCH"],
+				"1-1.50": [
+					"LA7,A8(MA211)- G1/HPT",
+					"LC1,C2,C3(MA212)- G2/RSH",
+					"LA1,A2(PH211)-G3/RKG",
+					"LA3,A4(B11HS111)-FF1/CKJ",
+					"LG1,G2(B11HS111)-/SDA",
+					"TB11(B11HS111)-TS7/AMN",
+					"TB12(B11HS111)-TS8/VSE",
+					"TB9(CI121)-TS10/DSR",
+					"TB10(CI121)-TS11/SOS",
+					"TB6(MA211)-TS12/PSI",
+					"PA18(PH271)- PL1/INC",
+					"PA17(PH271)- PL2/NKS",
+					"PB7 (HS111)-LL / NAM",
+					"PB8 (HS111)- CL12/ KMB",
+					"PB1(GE111)- CAD1/ NKR",
+					"PB2(GE111)- CAD2/ GGL"
+				],
+				"2-2.50": [
+					"LB9,B10(PH211)-G1/SND",
+					"LA1,A2(MA211)- G3/MPA",
+					"LA3,A4(B11HS111)-FF1/CKJ",
+					"LB11,B12(MA211)-FF2 /NS",
+					"TG2(MA211)-TS6/PAT",
+					"TC1(B11CI121)-TS7/SJA"
+				],
+				"3-3.50": [
+					"LA3,A4(MA211)- G1/BPC",
+					"LB3,B4(B11HS111)-G2/SHB",
+					"LB7,B8(MA211)- G3/RSC",
+					"LB5,B6(CI121)- FF1/SUD",
+					"TC3(MA212)-TS6/AKK",
+					"TA7(CI121)-TS7/SHP",
+					"TA8(CI121)-TS8/MEE",
+					"TA17(B11HS111)-TS10/IJ",
+					"TA18(B11HS111)-TS11/VSE",
+					"PB9(PH271)- PL1/NG/SDC",
+					"PB10(PH271)- PL2/SND",
+					"PB14 (HS111)-LL / SKU",
+					"PA10 (HS111)- CL12/ NES",
+					"TA6(MA201)-TS12/PSI"
+				],
+				"4-4.50": [
+					"LC1,C2,C3(PH212)-G1/SPP",
+					"TA3(CI121)-TS6/TAJ",
+					"TA4(CI121)-TS7/MEE",
+					"TB11(PH211)-TS11/DIN"
+				]
+			},
+			"FRI": {
+				"9-9.50": [
+					"LB3,B4(PH211)-G1/VRT",
+					"LA5,A6(CI121)-G2/DSR",
+					"LB1,B2(PH211)-G3/MKC",
+					"LB5,B6(CI121)-FF1/SUD",
+					"TA1(CI121)-TS6/NEH",
+					"TA2(CI121)-TS7/AM",
+					"LA17,A18(MA211)- G9/AKK",
+					"PC1(CI121)- CL05/ALK,SON,PK",
+					"PB9(HS111)- / HK",
+					"PB10(HS111)- / EKS",
+					"PA10(GE111)- CAD1/ NKR",
+					"PC3(GE111)- CAD2/ SWET",
+					"PB14(GE111)- CAD3/ GGL"
+				],
+				"10-10.50": [
+					"LB11,B12(PH211)-G1/RKD",
+					"LA5,A6(MA211)- G2/YG",
+					"LB1,B2(B11HS111)-G3/PRV",
+					"LA17,A18(PH211)-FF1/INC",
+					"LA1,A2(CI121)-FF2 /AJS",
+					"LA15,A16(B11HS111)-FF4/SHS",
+					"TB4(CI121)-TS6/TAJ",
+					"TB8(B11HS111)-TS7/AMN",
+					"TA4(PH211)-TS11/BCJ",
+					"TA3(PH211)-TS12/RAV",
+					"PC2(B15BT111)- BT3/EKT, PMG,SHD,AKT",
+					"PG1(PH271)- PL1/NG",
+					"PG2(PH271)- PL2/VRT"
+				],
+				"11-11.50": [
+					"LB11,B12(MA211)- G1/NS",
+					"LB9,B10(MA211)- G2/HPT",
+					"LA3,A4(PH211)-G3/MKC",
+					"LA7,A8(B11HS111)-FF1/SGL",
+					"LA1,A2(MA211)- FF2/MPA",
+					"LB5,B6(B11HS111)-FF4/PU",
+					"TA18(PH211)-TS7/SND",
+					"TA15(PH211)-TS11/BCJ",
+					"TA5(PH211)-TS12/ABH"
+				],
+				"12-12.50": ["LUNCH"],
+				"1-1.50": [
+					"LA7,A8(MA211)-G1 /HPT",
+					"LA1,A2(PH211)-G2/RKG",
+					"LA17,A18(MA211)- FF1/AKK",
+					"TA16(PH211)-TS11/GPK",
+					"TB3(PH211)-TS12/VRT",
+					"TG1(B11HS111)-TS7/IJ",
+					"TG2(B11HS111)-TS8/VSE",
+					"LB11,B12(CI121)-G8/NEH"
+				],
+				"2-2.50": [
+					"ALL BATCH FREE FOR MEETING",
+					"PB12(GE111)- CAD1/ NKR",
+					"PA7(GE111)- CAD2/ SNP",
+					"PA8(GE111)- CAD3/ CDN"
+				],
+				"3-3.50": [
+					"LB9,B10(CI121)- G1/MEE",
+					"LB7,B8(MA211)- G2/RSC",
+					"LB1,B2(CI121)- G3/PSO",
+					"TA15(MA211)-TS6/YG",
+					"TA16(MA211)-TS7/AN",
+					"TB3(MA211)-TS8/BPC",
+					"TB4(MA211)-TS10/PAT",
+					"TB14(PH211)-TS11/RKG",
+					"TC1(B11HS111)-TS12/BB",
+					"TC2(B11HS111)- TS13/AMN",
+					"TC3(B11HS111)- TS14/PRI",
+					"PG1(CI271)-CL05/GZL,DEP,AMS",
+					"PG2(CI271)-CL06 /NSA,APR,PAG",
+					"PA5(PH271)-PL1 /MKC/SDC",
+					"PA6(PH271)- PL2/ABH/DIN",
+					"PA17(CI271)-CL21 /HN,PKU,AA",
+					"PA18(CI271)- CL22/AJS,MSH,ASK",
+					"PA3 (HS111)-LL / EKS",
+					"PA4 (HS111)- CL12/ YN"
+				],
+				"4-4.50": [
+					"LC1,C2,C3(PH212)-G1/SPP",
+					"LB7,B8(CI121)- FF1/AM",
+					"LA10,B14(PH211)-FF2/NG"
+				]
+			},
+			"SAT": {
+				"9-9.50": [
+					"LC1,C2,C3(B11CI121)- G1/SJA",
+					"LA10,B14(MA211)-G2 /AN",
+					"LB1,B2(CI121)-G3/PSO",
+					"LA7,A8(MA211)- FF1/HPT",
+					"LA1,A2(PH211)-FF2/RKG",
+					"PA5(CI271)-CL01 /PAG,KM,SAA",
+					"PA6(CI271)-CL02 /SYN,DSR,KP",
+					"PB5(CI271)- CL05/AJP,SHB,ASK",
+					"PB6(CI271)- CL06/ANP,AA,GZL,MAY",
+					"PA3(GE111)- CAD1/ CDN",
+					"PB3(GE111)- CAD2/ SNP",
+					"PB4(GE111)- CAD3/ SWET"
+				],
+				"10-10.50": [
+					"LA17,A18(CI121)- G1/SLK",
+					"LA10,B14(CI121)- G2/DEP",
+					"LB1,B2(PH211)-G3/MKC",
+					"TC2(B11CI121)-TS6/SJA",
+					"TB8(MA211)-TS7/AKK",
+					"PA1(PH271)- PL1/INC",
+					"PA2(PH271)- PL2/NAR/ANU",
+					"PA8 (HS111)- CL24/ YN"
+				],
+				"11-11.50": [
+					"LA15,A16(CI121)- G1/TAJ",
+					"LA5,A6(B11HS111)-G2/MKB",
+					"PB5 (HS111)- LL/ MDU",
+					"PB6(HS111)- CL12/ SKU",
+					"PC1(B15BT111)- BT3/EKT, PMG,SHD,AKT",
+					"PB1(CI271)- CL01/DEP,PSO,MSI",
+					"PB2(CI271)- CL02/NSA,TNV,PKU"
+				],
+				"12-12.50": ["TA15(CI121)-TS6/NEH", "TA16(CI121)-TS7/SUD"]
+			}
+		},
+		"subjects": [
+			{
+				"Code": "CI121",
+				"Full Code": "18B11CI121",
+				"Subject": "Fundamentals of Computers & Programming - II"
+			},
+			{
+				"Code": "CI121",
+				"Full Code": "18B15CI121",
+				"Subject": "Fundamentals of Computers & Programming Lab- II"
+			},
+			{
+				"Code": "CI121",
+				"Full Code": "15B11CI121",
+				"Subject": "Software Development Fundamentals-II"
+			},
+			{
+				"Code": "CI271",
+				"Full Code": "15B17CI271",
+				"Subject": "Software Development Fundamentals Lab-II"
+			},
+			{
+				"Code": "HS111",
+				"Full Code": "24B11HS111",
+				"Subject": "Universal Human Values"
+			},
+			{
+				"Code": "GE111",
+				"Full Code": "18B15GE111",
+				"Subject": "Engineering Drawing & Design"
+			},
+			{
+				"Code": "MA211",
+				"Full Code": "15B11MA211",
+				"Subject": "Mathematics-II"
+			},
+			{
+				"Code": "MA212",
+				"Full Code": "15B11MA212",
+				"Subject": "Basic Mathematics-II"
+			},
+			{
+				"Code": "HS111",
+				"Full Code": "24B16HS111",
+				"Subject": "Life Skills and Professional Communications"
+			},
+			{
+				"Code": "BT111",
+				"Full Code": "18B15BT111",
+				"Subject": "Basic Bioscience Lab"
+			},
+			{
+				"Code": "PH211",
+				"Full Code": "15B11PH211",
+				"Subject": "Physics-2"
+			},
+			{
+				"Code": "PH271",
+				"Full Code": "15B17PH271",
+				"Subject": "Physics Lab-2"
+			},
+			{
+				"Code": "PH212",
+				"Full Code": "15B11PH212",
+				"Subject": "Biophysical Techniques"
+			}
+		]
+	}
+}

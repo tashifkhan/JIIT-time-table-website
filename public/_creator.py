@@ -1,12 +1,11 @@
 import json
 from datetime import datetime
 import re
-from typing import List, Dict
 
 # from pydantic import BaseModel
 
 
-def parse_batch_numbers(batch_input: str) -> List[str]:
+def parse_batch_numbers(batch_input: str) -> list[str]:
     """
     Parse batch number formats and return array of individual batches.
     Handles special cases like 'ABC', single letters, and empty strings.
@@ -89,14 +88,14 @@ def parse_batch_numbers(batch_input: str) -> List[str]:
 
 
 def is_elective(
-    extracted_batch: str, subject_code: str, extracted_batches: List[str]
+    extracted_batch: str, subject_code: str, extracted_batches: list[str]
 ) -> bool:
     """
     Check if a subject code is an elective subject.
 
     Args:
         subject_code: Subject code to check
-        electives: List of elective subject codes
+        electives: list of elective subject codes
 
     Returns:
         bool: True if subject is an elective, False otherwise
@@ -204,10 +203,11 @@ def subject_name_extractor(subjects_dict: dict, code: str) -> str:
 
 
 def is_enrolled_subject(
-    enrolled_subject_codes: List[str], subject_code: str, subject_dict: list[dict]
+    enrolled_subject_codes: list[str], subject_code: str, subject_dict: list[dict]
 ) -> bool:
     if subject_code in enrolled_subject_codes:
         return True
+
     electives_directory = []
 
     for subject in subject_dict:
@@ -346,7 +346,7 @@ def time_table_creator(
     time_table_json: dict,
     subject_json: list,
     batch: str,
-    electives_subject_codes: List[str],
+    electives_subject_codes: list[str],
 ) -> dict:
     print(
         "Processing inputs:",
@@ -617,13 +617,13 @@ def is_elective128(extracted_batch: str):
     return False
 
 
-def do_you_have_subject(subject_codes: List[str], subject_code: str) -> bool:
+def do_you_have_subject(subject_codes: list[str], subject_code: str) -> bool:
     if subject_code in subject_codes:
         return True
     return False
 
 
-def subject_name128(subjects_dict: dict, code: str) -> str:
+def subject_name128(subjects_dict: list[dict], code: str) -> str:
     try:
         for subject in subjects_dict:
             if "Code" not in subject:
@@ -660,9 +660,9 @@ def subject_name128(subjects_dict: dict, code: str) -> str:
 
 def banado128(
     time_table_json: dict,
-    subject_json: dict,
+    subject_json: list[dict],
     batch: str,
-    subject_codes: List[str],
+    subject_codes: list[str],
 ) -> dict:
     try:
         time_table = time_table_json
@@ -674,10 +674,12 @@ def banado128(
         for day in days:
             time_slots = time_table[day]
             time_slot_keys = list(time_slots.keys())
+
             for time in time_slot_keys:
                 classes = time_slots[time]
                 if not isinstance(classes, list):
                     continue
+
                 for indi_class in classes:
                     if not isinstance(indi_class, str):
                         continue
@@ -736,9 +738,9 @@ def banado128(
 
 def bando128_year1(
     time_table_json: dict,
-    subject_json: dict,
+    subject_json: list[dict],
     batch: str,
-    electives_subject_codes: List[str] = [],
+    electives_subject_codes: list[str] = [],
 ) -> dict:
     try:
         time_table = time_table_json
@@ -749,10 +751,13 @@ def bando128_year1(
         for day in days:
             time_slots = time_table[day]
             time_slot_keys = list(time_slots.keys())
+
             for time in time_slot_keys:
                 classes = time_slots[time]
+
                 if not isinstance(classes, list):
                     continue
+
                 for indi_class in classes:
                     if not isinstance(indi_class, str):
                         continue
@@ -806,7 +811,7 @@ def bando128_year1(
 
 
 # class CompareTimetablesResult(BaseModel):
-#     common_free_slots: Dict[str, List[str]]
+#     common_free_slots: Dict[str, list[str]]
 #     classes_together: Dict[str, Dict[str, ClassInfo]]
 
 
@@ -913,18 +918,16 @@ def time_table_creator_v2(
                         enrolled_subject_codes=enrolled_subjects,
                         subject_dict=all_subjects,
                         subject_code=code,
-                    ):
-                        # Check if any batch in batchs_list is in allowed_batches
-                        if is_batch_included(batch, batchs):
-                            your_time_table.append(
-                                [
-                                    day,
-                                    time,
-                                    subject_name_extractor(all_subjects, code),  # type: ignore
-                                    indi_class.strip()[0],
-                                    location_extractor(indi_class.strip()),
-                                ]
-                            )
+                    ) and is_batch_included(batch, batchs):
+                        your_time_table.append(
+                            [
+                                day,
+                                time,
+                                subject_name_extractor(all_subjects, code),  # type: ignore
+                                indi_class.strip()[0],
+                                location_extractor(indi_class.strip()),
+                            ]
+                        )
 
         formatted_timetable = {}
         for entry in your_time_table:
@@ -964,82 +967,82 @@ def time_table_creator_v2(
         return {}
 
 
-def banado_v2(
-    time_table_json: dict,
-    subject_json: dict,
-    batch: str,
-    all_subs_code: dict,  # {subject_code: [allowed_batches]}
-) -> dict:
-    try:
-        time_table = time_table_json
-        subject = subject_json
-        your_time_table = []
+# def banado_v2(
+#     time_table_json: dict,
+#     subject_json: dict,
+#     batch: str,
+#     all_subs_code: dict,  # {subject_code: [allowed_batches]}
+# ) -> dict:
+#     try:
+#         time_table = time_table_json
+#         subject = subject_json
+#         your_time_table = []
 
-        days = list(time_table.keys())
-        # Iterate through each day in the timetable
-        for day in days:
-            time_slots = time_table[day]
-            time_slot_keys = list(time_slots.keys())
-            for time in time_slot_keys:
-                classes = time_slots[time]
-                if not isinstance(classes, list):
-                    continue
-                for indi_class in classes:
-                    if not isinstance(indi_class, str):
-                        continue
-                    code = subject_extractor128(indi_class.strip())
-                    batchs = batch_extractor128(indi_class.strip())
-                    batchs_list = expand_batch128(batchs)
+#         days = list(time_table.keys())
+#         # Iterate through each day in the timetable
+#         for day in days:
+#             time_slots = time_table[day]
+#             time_slot_keys = list(time_slots.keys())
+#             for time in time_slot_keys:
+#                 classes = time_slots[time]
+#                 if not isinstance(classes, list):
+#                     continue
+#                 for indi_class in classes:
+#                     if not isinstance(indi_class, str):
+#                         continue
+#                     code = subject_extractor128(indi_class.strip())
+#                     batchs = batch_extractor128(indi_class.strip())
+#                     batchs_list = expand_batch128(batchs)
 
-                    # Only add if code is in all_subs_code and batch is allowed
-                    if code in all_subs_code:
-                        allowed_batches = all_subs_code[code]
-                        if any(b in allowed_batches for b in batchs_list):
-                            your_time_table.append(
-                                [
-                                    day,
-                                    time,
-                                    subject_name128(subject, code),
-                                    indi_class.strip()[0],
-                                    location_extractor128(indi_class.strip()),
-                                ]
-                            )
+#                     # Only add if code is in all_subs_code and batch is allowed
+#                     if code in all_subs_code:
+#                         allowed_batches = all_subs_code[code]
+#                         if any(b in allowed_batches for b in batchs_list):
+#                             your_time_table.append(
+#                                 [
+#                                     day,
+#                                     time,
+#                                     subject_name128(subject, code),
+#                                     indi_class.strip()[0],
+#                                     location_extractor128(indi_class.strip()),
+#                                 ]
+#                             )
 
-        formatted_timetable = {}
+#         formatted_timetable = {}
 
-        for entry in your_time_table:
-            day = process_day(entry[0])
-            time = entry[1]
-            start_time, end_time = process_timeslot(time, entry[3])
+#         for entry in your_time_table:
+#             day = process_day(entry[0])
+#             time = entry[1]
+#             start_time, end_time = process_timeslot(time, entry[3])
 
-            if entry[2] in [
-                "ENGINEERING DRAWING AND DESIGN",
-                "Engineering Drawing & Design",
-            ]:
-                end_time = f"{int(end_time[:2])+1}{end_time[2:]}"
+#             if entry[2] in [
+#                 "ENGINEERING DRAWING AND DESIGN",
+#                 "Engineering Drawing & Design",
+#             ]:
+#                 end_time = f"{int(end_time[:2])+1}{end_time[2:]}"
 
-            if day not in formatted_timetable:
-                formatted_timetable[day] = {}
-            # Format end time to ensure it's in HH:MM format
-            if len(end_time) == 4:  # If end time is like "1100"
-                end_time = f"{end_time[:2]}:{end_time[2:]}"
-            elif len(end_time) == 3:
-                end_time = f"0{end_time[0]}:{end_time[1:]}"
+#             if day not in formatted_timetable:
+#                 formatted_timetable[day] = {}
+#             # Format end time to ensure it's in HH:MM format
+#             if len(end_time) == 4:  # If end time is like "1100"
+#                 end_time = f"{end_time[:2]}:{end_time[2:]}"
+#             elif len(end_time) == 3:
+#                 end_time = f"0{end_time[0]}:{end_time[1:]}"
 
-            if entry[2].strip() == entry[2].strip().upper():
-                entry[2] = entry[2].strip().title()
+#             if entry[2].strip() == entry[2].strip().upper():
+#                 entry[2] = entry[2].strip().title()
 
-            formatted_timetable[day][f"{start_time}-{end_time}"] = {
-                "subject_name": entry[2],
-                "type": entry[3],
-                "location": entry[4],
-            }
+#             formatted_timetable[day][f"{start_time}-{end_time}"] = {
+#                 "subject_name": entry[2],
+#                 "type": entry[3],
+#                 "location": entry[4],
+#             }
 
-        return formatted_timetable
+#         return formatted_timetable
 
-    except Exception as e:
-        print(f"Error in banado_v2: {str(e)}")
-        return {}
+#     except Exception as e:
+#         print(f"Error in banado_v2: {str(e)}")
+#         return {}
 
 
 def Print(dic: dict | list) -> None:

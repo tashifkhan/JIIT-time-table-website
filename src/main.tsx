@@ -10,6 +10,7 @@ import { Analytics } from "@vercel/analytics/react";
 import { AcademicCalendar } from "./components/academic-calendar";
 import RedirectAC from "./components/redirectAC.tsx";
 import { NuqsAdapter } from "nuqs/adapters/react-router/v6";
+import CompareTimetablePage from "./components/compare-timetable";
 
 createRoot(document.getElementById("root")!).render(
 	<StrictMode>
@@ -30,10 +31,15 @@ createRoot(document.getElementById("root")!).render(
 					<div className="fixed left-4 bottom-4 z-50">
 						<RedirectAC />
 					</div>
+
 					<Routes>
 						<Route path="/" element={<App />} />
 						<Route path="/timeline" element={<TimelinePage />} />
 						<Route path="/academic-calendar" element={<AcademicCalendar />} />
+						<Route
+							path="/compare-timetables"
+							element={<CompareTimetablePage />}
+						/>
 					</Routes>
 				</Router>
 			</NuqsAdapter>

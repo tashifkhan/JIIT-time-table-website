@@ -224,3 +224,173 @@ if uploaded_file is not None:
 
 else:
     st.info("Awaiting file upload...")
+
+
+# ==== Subject JSON Generator ====
+def subject_json_generator(df):
+    st.header("Step 3: Subject JSON Generator (Optional)")
+    with st.expander("Expand to create a subject list from the timetable"):
+        st.info(
+            "Define column ranges to extract subject information. "
+            "You can add multiple ranges if subjects are in different parts of the sheet."
+        )
+
+        if "subject_ranges" not in st.session_state:
+            st.session_state.subject_ranges = [
+                {"start_row": 1, "end_row": 1, "cols": [1, 2, 3]}
+            ]
+
+        num_cols = st.radio(
+            "Select number of columns for subject data:",
+            (2, 3),
+            index=1,
+            horizontal=True,
+            help="Choose 3 if Code, Full Code, and Subject are in separate columns. "
+            "Choose 2 if you have one column for 'Full Code/Code' and another for 'Subject'.",
+        )
+
+        def add_range():
+            st.session_state.subject_ranges.append(
+                {"start_row": 1, "end_row": 1, "cols": [1, 2, 3]}
+            )
+
+        def remove_range(i):
+            st.session_state.subject_ranges.pop(i)
+
+        # display ranges
+        for i, r in enumerate(st.session_state.subject_ranges):
+            st.markdown(f"---")
+            st.markdown(f"**Range {i+1}**")
+            cols = st.columns([1, 1, 3, 0.5])
+            r["start_row"] = cols[0].number_input(
+                "Start Row",
+                min_value=1,
+                max_value=len(df),
+                value=r["start_row"],
+                key=f"sr_{i}",
+            )
+            r["end_row"] = cols[1].number_input(
+                "End Row",
+                min_value=1,
+                max_value=len(df),
+                value=r["end_row"],
+                key=f"er_{i}",
+            )
+
+            if num_cols == 3:
+                col_labels = ["Code Col", "Full Code Col", "Subject Col"]
+                help_texts = [
+                    "Column for short code (e.g., 'LK')",
+                    "Column for full code (e.g., 'O2M10-G1')",
+                    "Column for subject name",
+                ]
+            else:  # num_cols == 2
+                col_labels = ["Code/Full Code Col", "Subject Col"]
+                help_texts = [
+                    "Column with combined code (e.g., 'O2M10-G1/LK')",
+                    "Column for subject name",
+                ]
+
+            with cols[2]:
+                sub_cols = st.columns(num_cols)
+                for j in range(num_cols):
+                    r["cols"][j] = sub_cols[j].number_input(
+                        col_labels[j],
+                        min_value=1,
+                        max_value=len(df.columns),
+                        value=r["cols"][j],
+                        key=f"c_{i}_{j}",
+                        help=help_texts[j],
+                    )
+
+            with cols[3]:
+                st.button(
+                    "➖",
+                    on_click=remove_range,
+                    args=(i,),
+                    key=f"rem_{i}",
+                    help="Remove this range",
+                )
+
+        st.button("➕ Add another range", on_click=add_range)
+
+        if st.button("Generate Subject JSON", type="primary"):
+            subject_list = []
+            try:
+                for r in st.session_state.subject_ranges:
+                    start_r, end_r = r["start_row"] - 1, r["end_row"]
+
+                    for idx in range(start_r, end_r):
+                        row_data = df.iloc[idx]
+
+                        if num_cols == 2:
+                            code_full_code_col, subject_col = (
+                                r["cols"][0] - 1,
+                                r["cols"][1] - 1,
+                            )
+
+                            combined_code = str(row_data.iat[code_full_code_col])
+                            subject = str(row_data.iat[subject_col])
+
+                            if (
+                                pd.notna(combined_code)
+                                and pd.notna(subject)
+                                and "/" in combined_code
+                            ):
+                                parts = combined_code.split("/")
+                                full_code = parts[0].strip()
+                                code = parts[1].strip()
+                                subject_list.append(
+                                    {
+                                        "Code": code,
+                                        "Full Code": full_code,
+                                        "Subject": subject,
+                                    }
+                                )
+
+                        else:  # num_cols == 3
+                            code_col, full_code_col, subject_col = (
+                                r["cols"][0] - 1,
+                                r["cols"][1] - 1,
+                                r["cols"][2] - 1,
+                            )
+
+                            code = str(row_data.iat[code_col])
+                            full_code = str(row_data.iat[full_code_col])
+                            subject = str(row_data.iat[subject_col])
+
+                            if (
+                                pd.notna(code)
+                                and pd.notna(full_code)
+                                and pd.notna(subject)
+                            ):
+                                subject_list.append(
+                                    {
+                                        "Code": code,
+                                        "Full Code": full_code,
+                                        "Subject": subject,
+                                    }
+                                )
+
+                # remove duplicates
+                unique_subjects = [
+                    dict(t) for t in {tuple(d.items()) for d in subject_list}
+                ]
+
+                st.success("Subject JSON generated successfully!")
+                st.json(unique_subjects)
+
+                json_string = json.dumps(unique_subjects, indent=4)
+                st.download_button(
+                    label="Download Subject JSON",
+                    file_name="subjects.json",
+                    mime="application/json",
+                    data=json_string,
+                )
+
+            except Exception as e:
+                st.error(f"An error occurred during subject JSON generation: {e}")
+
+
+if uploaded_file is not None:
+    subject_json_generator(df)

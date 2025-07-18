@@ -1070,122 +1070,123 @@ def Print(dic: dict | list) -> None:
     )
 
 
-if __name__ == "__main__":
+# testing
+# if __name__ == "__main__":
 
-    # create a timetable
-    import json
+#     # create a timetable
+#     import json
 
-    whole_timetable = json.load(open("./data/time-table/EVEN25/62.json", "r"))
-    # print(
-    #     "Whole Timetable:",
-    #     json.dumps(
-    #         whole_timetable["3"],
-    #         indent=2,
-    #     ),
-    # )
+#     whole_timetable = json.load(open("./data/time-table/EVEN25/62.json", "r"))
+#     # print(
+#     #     "Whole Timetable:",
+#     #     json.dumps(
+#     #         whole_timetable["3"],
+#     #         indent=2,
+#     #     ),
+#     # )
 
-    tt_year3 = whole_timetable["3"]["timetable"]
-    # Print(tt_year3)
+#     tt_year3 = whole_timetable["3"]["timetable"]
+#     # Print(tt_year3)
 
-    subjects = whole_timetable["3"]["subjects"]
-    # Print(subjects)
+#     subjects = whole_timetable["3"]["subjects"]
+#     # Print(subjects)
 
-    subject_codes = [
-        "D2B40",
-        "CS311",
-        "B15CS311",
-        "CI513",
-        "CI573",
-        "D3B50",
-        "V1H10",
-        "H3H30",
-        "O1H20",
-    ]
+#     subject_codes = [
+#         "D2B40",
+#         "CS311",
+#         "B15CS311",
+#         "CI513",
+#         "CI573",
+#         "D3B50",
+#         "V1H10",
+#         "H3H30",
+#         "O1H20",
+#     ]
 
-    user_timetable = time_table_creator_v2(
-        time_table_json=tt_year3,
-        all_subjects=subjects,
-        batch="B12",
-        enrolled_subjects=subject_codes,
-    )
+#     user_timetable = time_table_creator_v2(
+#         time_table_json=tt_year3,
+#         all_subjects=subjects,
+#         batch="B12",
+#         enrolled_subjects=subject_codes,
+#     )
 
-    Print(user_timetable)
+#     Print(user_timetable)
 
-    subjects2 = str("EC315,15EC315,D3A10,D2A10,V1H10,H3H30,O1H10,EC611,EC671").split(
-        ","
-    )
-    print("Enrolled Subjects:", subjects2)
+#     subjects2 = str("EC315,15EC315,D3A10,D2A10,V1H10,H3H30,O1H10,EC611,EC671").split(
+#         ","
+#     )
+#     print("Enrolled Subjects:", subjects2)
 
-    user_timetable = time_table_creator_v2(
-        time_table_json=tt_year3,
-        all_subjects=subjects,
-        batch="A6",
-        enrolled_subjects=subjects2,
-    )
-    Print(user_timetable)
+#     user_timetable = time_table_creator_v2(
+#         time_table_json=tt_year3,
+#         all_subjects=subjects,
+#         batch="A6",
+#         enrolled_subjects=subjects2,
+#     )
+#     Print(user_timetable)
 
-    # Example timetables
-    timetable1 = {
-        "Monday": {
-            "10:00-11:00": {
-                "subject_name": "Data Structures and Algorithms",
-                "type": "L",
-                "location": "G7",
-            },
-            "15:00-16:00": {
-                "subject_name": "Indian Constitution and Traditional knowledge",
-                "type": "L",
-                "location": "G8",
-            },
-        },
-        "Tuesday": {
-            "10:00-11:00": {
-                "subject_name": "Electromagnetic Field Theory",
-                "type": "L",
-                "location": "G8",
-            },
-            "15:00-16:00": {
-                "subject_name": "Data Structures and Algorithms Lab",
-                "type": "P",
-                "location": "CL04",
-            },
-        },
-    }
+#     # Example timetables
+#     timetable1 = {
+#         "Monday": {
+#             "10:00-11:00": {
+#                 "subject_name": "Data Structures and Algorithms",
+#                 "type": "L",
+#                 "location": "G7",
+#             },
+#             "15:00-16:00": {
+#                 "subject_name": "Indian Constitution and Traditional knowledge",
+#                 "type": "L",
+#                 "location": "G8",
+#             },
+#         },
+#         "Tuesday": {
+#             "10:00-11:00": {
+#                 "subject_name": "Electromagnetic Field Theory",
+#                 "type": "L",
+#                 "location": "G8",
+#             },
+#             "15:00-16:00": {
+#                 "subject_name": "Data Structures and Algorithms Lab",
+#                 "type": "P",
+#                 "location": "CL04",
+#             },
+#         },
+#     }
 
-    timetable2 = {
-        "Monday": {
-            "10:00-11:00": {
-                "subject_name": "Data Structures and Algorithms",
-                "type": "L",
-                "location": "G7",
-            },
-            "11:00-12:00": {
-                "subject_name": "Mathematics",
-                "type": "L",
-                "location": "G1",
-            },
-        },
-        "Tuesday": {
-            "10:00-11:00": {
-                "subject_name": "Electromagnetic Field Theory",
-                "type": "L",
-                "location": "G8",
-            },
-            "15:00-16:00": {
-                "subject_name": "Data Structures and Algorithms Lab",
-                "type": "P",
-                "location": "CL04",
-            },
-            "16:00-17:00": {
-                "subject_name": "Mathematics",
-                "type": "L",
-                "location": "G1",
-            },
-        },
-    }
+#     timetable2 = {
+#         "Monday": {
+#             "10:00-11:00": {
+#                 "subject_name": "Data Structures and Algorithms",
+#                 "type": "L",
+#                 "location": "G7",
+#             },
+#             "11:00-12:00": {
+#                 "subject_name": "Mathematics",
+#                 "type": "L",
+#                 "location": "G1",
+#             },
+#         },
+#         "Tuesday": {
+#             "10:00-11:00": {
+#                 "subject_name": "Electromagnetic Field Theory",
+#                 "type": "L",
+#                 "location": "G8",
+#             },
+#             "15:00-16:00": {
+#                 "subject_name": "Data Structures and Algorithms Lab",
+#                 "type": "P",
+#                 "location": "CL04",
+#             },
+#             "16:00-17:00": {
+#                 "subject_name": "Mathematics",
+#                 "type": "L",
+#                 "location": "G1",
+#             },
+#         },
+#     }
 
-    # result = compare_timetables(timetable1, timetable2)
-    # print("Common Free Slots:")
-    # print(json.dumps(result["common_free_slots"], indent=2))
-    # print("\nClasses Together:")
-    # print(json.dumps(result["classes_together"], indent=2))
+#     # result = compare_timetables(timetable1, timetable2)
+#     # print("Common Free Slots:")
+#     # print(json.dumps(result["common_free_slots"], indent=2))
+#     # print("\nClasses Together:")
+#     # print(json.dumps(result["classes_together"], indent=2))

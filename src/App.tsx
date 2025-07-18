@@ -101,7 +101,7 @@ const App: React.FC = () => {
 				functionName =
 					campus === "62" ? "time_table_creator" : "bando128_year1";
 			} else {
-				functionName = campus === "62" ? "time_table_creator_v2" : "bando128";
+				functionName = campus === "62" ? "time_table_creator_v2" : "banado128";
 			}
 			console.log(functionName);
 			const output = await callPythonFunction(functionName, {
@@ -166,15 +166,14 @@ const App: React.FC = () => {
 					year
 				);
 			}
-			console.log(Schedule);
-			const mockSchedule: YourTietable = {};
+
 			if (Schedule === "Error executing Python function") {
-				setSchedule(mockSchedule);
-				console.log(schedule);
+				const mockSchedule: YourTietable = {};
+				const plainMockSchedule = JSON.parse(JSON.stringify(mockSchedule));
+				setSchedule(plainMockSchedule);
 			} else {
 				const plainSchedule = JSON.parse(JSON.stringify(Schedule));
 				setSchedule(plainSchedule);
-				console.log(plainSchedule);
 			}
 		} catch (error) {
 			console.error("Error generating schedule:", error);
@@ -397,7 +396,7 @@ const App: React.FC = () => {
 						</motion.div>
 					</div>
 				</motion.div>
-				{schedule && (
+				{schedule && Object.keys(schedule).length > 0 && (
 					<>
 						<motion.div
 							className="mt-6 sm:mt-8 backdrop-blur-lg bg-white/5 rounded-xl sm:rounded-2xl p-0 sm:p-6 border border-white/10 shadow-xl overflow-x-auto"

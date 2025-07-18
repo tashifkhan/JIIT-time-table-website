@@ -66,6 +66,7 @@ def parse_batch_numbers(batch_input: str) -> list[str]:
             else:
                 # Handle non-range parts
                 result.append(r.strip())
+
         return result
 
     # Handle single range without commas
@@ -146,25 +147,60 @@ def is_batch_included(search_batch: str, extracted_batch_input: str) -> bool:
     for batch in batch_list:
         if len(batch) == 1 and search_batch[0] == batch:
             return True
+
     return False
 
 
 def batch_extractor(text: str) -> str:
-    start_bracket = text.find("(")
-    if start_bracket != -1:
-        return text[1:start_bracket].strip()
+    try:
+        start_bracket = text.find("(")
+        if start_bracket != -1:
+            return text[1:start_bracket].strip()
+
+        if text.strip()[0] != "L":
+            return "ABCDGH"
+        else:
+            if start_bracket == -1:
+                return "ABCDGH"
+
+    except Exception as e:
+        print(f"Error extracting batch from text '{text}': {e}")
+        return text
+
     return text
 
 
 def subject_extractor(text: str) -> str:
-    start_bracket = text.find("(")
+    try:
+        start_bracket = text.find("(")
 
-    if start_bracket != -1:
-        end_bracket = text.find(")", start_bracket)
-        if end_bracket != -1:
-            return text[start_bracket + 1 : end_bracket]
-        elif dash := text.find("-"):
-            return text[start_bracket + 1 : dash]
+        if start_bracket != -1:
+            end_bracket = text.find(")", start_bracket)
+
+            if end_bracket != -1:
+                return text[start_bracket + 1 : end_bracket]
+
+            elif dash := text.find("-"):
+                return text[start_bracket + 1 : dash]
+
+        if (text := text.strip())[0] != "L":
+            dash_idx = text.find("-")
+
+            if dash_idx != -1:
+                return text[:dash_idx].strip()
+            else:
+                return text.strip()
+
+        else:
+            brac_idx = text.find("(")
+            if brac_idx == -1:
+                if (dash_idx := text.find("-")) != -1:
+                    return text[1:dash_idx].strip()
+
+    except Exception as e:
+        print(f"Error extracting subject from text '{text}': {e}")
+        return text
+
     return text
 
 

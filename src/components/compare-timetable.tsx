@@ -61,9 +61,25 @@ const CompareTimetablePage: React.FC = () => {
 			// Always use time_table_creator_v2 for comparison
 			const args1 = getMappingAndArgs(params1);
 			const args2 = getMappingAndArgs(params2);
-			const [tt1, tt2] = await Promise.all([
-				callPythonFunction("time_table_creator_v2", args1),
-				callPythonFunction("time_table_creator_v2", args2),
+			// Conditionally call the correct timetable generator as in App.tsx
+			let tt1, tt2;
+
+			const getFunctionName = (params: any) => {
+				if (params.year === "1") {
+					return params.campus === "62"
+						? "time_table_creator"
+						: "bando128_year1";
+				} else {
+					return params.campus === "62" ? "time_table_creator_v2" : "banado128";
+				}
+			};
+
+			const fnName1 = getFunctionName(params1);
+			const fnName2 = getFunctionName(params2);
+
+			[tt1, tt2] = await Promise.all([
+				callPythonFunction(fnName1, args1),
+				callPythonFunction(fnName2, args2),
 			]);
 			setTimetable1(tt1);
 			setTimetable2(tt2);

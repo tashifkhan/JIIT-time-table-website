@@ -576,5 +576,946 @@
 				"Subject": "Biophysical Techniques"
 			}
 		]
+	},
+	"3": {
+		"timetable": {
+			"MON": {
+				"8-9AM": [
+					"SE",
+					"LB(PH531)-G4/PC",
+					"LA(PH531)-G5/ANU",
+					"LAB(PH532)-G6/ABH",
+					"LAB(PH533)-G8/NKS",
+					"LC(PH534)-FF2/RKD",
+					"LAB(PH535)-FF4/MTR",
+					"LAB(PH311)-FF5/RKG",
+					"LABC(16B1NMA533)-FF6/NS",
+					"LBC(16B1NMA531)-FF7/NF1",
+					"LABC(16B1NMA533)-FF8/MKB",
+					"LBC(16B1NMA731)-FF9/HA",
+					"LABC(17B1NMA531)-CS2/DCS"
+				],
+				"9-10AM": [
+					"HSS-2",
+					"LABC (HS311)-CR401/MSU",
+					"LABC (HS432)-G4/BB",
+					"LABC (HS433)-CR425/MM",
+					"LABC (HS434)-CR501/MB",
+					"LABC (HS435)-G5/NIS",
+					"LABC (HS312)-G6/PSH",
+					"LABC (HS314)-G8/YN",
+					"LABC (HS315)-FF2/IJ",
+					"LABC (HS531)-CS2/SKU",
+					"LABC (HS313)-CS3/MDU",
+					"LABC (HS312)-CS4/SDA"
+				],
+				"10-11AM": [
+					"LA5-A6-A10(EC312)-FF2/NTN",
+					"LA7-A8(EC312)-CS1/VNS",
+					"LA15-A16(EC315)-CR526/APN",
+					"LB1-B2(HS311)-G4/SKU",
+					"LB9-B10(HS311)-G8/NAM",
+					"LB5-B6(HS311)-G6/IJ",
+					"LB3-B4(HS311)-G5/YN",
+					"LC1-C3(BT412)-CR325/VBR, VGU",
+					"TB8(CI313)-TS302/SAY",
+					"TB11(CI313)-TR305/PU"
+				],
+				"11-12PM": [
+					"LA15-A16(HS311)-G4/NAM",
+					"LB1,B2(CI313)-G5/ATI",
+					"LB3,B4(CI313)-G6/AMK",
+					"LB5,B6(CI313)-G8/HN",
+					"LB9,B10(CI412)-FF2/DL",
+					"LB11,B12(CI412)-CR401/VIK",
+					"LB13,B14(CI412)-CR425/ALK",
+					"LA5,A6,A10(CI518)-LT3/RCA",
+					"TB8(CI412)-TR302/APR",
+					"TA18(25B31EC311)-TA13/MO",
+					"PB7(CI373)-TAJ,NAC/CL21",
+					"PB15(CS212)-ASY,AJS/CL17",
+					"PA3,A4(CI578)-CL03/BS,TKT",
+					"PA1(EC312)-ACL,JBSPL/RB,TA-15",
+					"PA2(EC313)-IOT Lab/GV,RHA"
+				],
+				"12-1PM": ["Lunch"],
+				"1-2PM": [
+					"LA15-A16(EC413)-G4/NF-2",
+					"LA3,A4(CI518)-G5/SHG",
+					"LA1,A2(CI518)-G6/TKT",
+					"LB7,B8(CI313)-G8/SYN",
+					"LC1-C3(BT511)-FF2/RAC, POC",
+					"TB6(CI313)-TR305/PU",
+					"PA18(EC314)-SPL/KUL,TA-12",
+					"PB9,B10(CI575)-DSI,ROH,SJA/CL01,02",
+					"PB11,B12(CI576)-AST,MSH,VIK/CL17,18",
+					"PB13,B14(CI576)-APJ,SAA,KP/CL10,11",
+					"PB1,B2(CI472)-KSA,RTK,NEH/CL05,06",
+					"PA7(EC312)-ACL,JBSPL/NEJ,TA-9",
+					"PB3,B4(CI472)-ALK,JAG,PSO/CL13,14",
+					"PA5,A6(CI578)-BS,SHG/CL15/CL16",
+					"PB15,16(CI582)-KJ,PRK,SUD/CL21,22",
+					"PA17(CI578)-RCA/CL08",
+					"PB12(CI575)-/CL23"
+				],
+				"2-3PM": [
+					"LA1-A2(EC312)-G4/VNS",
+					"LA3-A4(EC312)-G5/NTN",
+					"TA15(EC312)-TS13/ABY",
+					"TA17(25B31EC311)-TS16/MO ",
+					"TB5(CI313)-TR302/AMK"
+				],
+				"3-4PM": [
+					"LA1-A2(HS311)-G4/SKU",
+					"LB7-B8(HS311)-G5/IJ",
+					"LB1,B2(CI412)-G6/DL",
+					"LB3-B4(HS311)-LT3/YN",
+					"LB3,B4(CI412)-FF2/NM",
+					"LB5,B6(CI412)-G8/KSA",
+					"LB9,B10(CI313)-CR401/ATI",
+					"LB13,B14(CI313)-CR425/TAJ",
+					"LB15-B16(HS311)-CR526/NAM",
+					"TB11(CI412)-TR302/NEH",
+					"TB12(CI412)-TR305/RTK",
+					"PA8(EC313)-IOT Lab/RU,SHS",
+					"PA16(EC315)-VDA/APN, SHA"
+				],
+				"4-5PM": [
+					"OE2",
+					"PAC(CS354)-CL05/GZL,JC",
+					"PAC(CS252)-CL06/ANV,LM",
+					"O2M31-G1/SP",
+					"LABC(O2B12)-G3/MSI",
+					"PA17(EC311)-ACL,JBSPL/ABY,SHWETA"
+				],
+				"5-6PM": [
+					"DE 4",
+					"D4A21-G1/RRP",
+					"D4C21-G3/SHM",
+					"LD4B12-G7/HN",
+					"LD4B22-LT3/AM",
+					"LD4B32-CS1/KA",
+					"LD4B42-G2/AA",
+					"PA18(25B35EC312)-SPL, 5G Lab/ALJ,PKY\n"
+				]
+			},
+			"TUES": {
+				"9-10AM": ["DE 1"],
+				"11-12PM": [
+					"LA(15B11EC313)-G4/RHA",
+					"LA(15B11EC313)-G5/VRN",
+					"LA(17B1NEC735)-G6/NF1",
+					"L(22B12EC412)-G8/RU",
+					"LA(20B12EC211)-FF2/BHG",
+					"LA(15B1NEC733)-FF5/RS",
+					"LB(CS331)-FF9/NEH",
+					"LB(CS332)-CS2/AKM",
+					"LB(CS333)-CS3/SOS",
+					"LB(CS334)-CS4/SHV",
+					"LB(CS335)-CR325/VRN",
+					"LB(CS336)-CR401/RTK",
+					"LC1-C3(11BT413)-CR425/ASM",
+					"LC1-C3(12BT311)-CR501/NDH"
+				],
+				"12-1PM": [
+					"LA1-A2(EC312)-G4/VNS",
+					"LA17-A18(24B31EC311)-G5/ALJ",
+					"LB1,B2(CI313)-G6/ATI",
+					"LB3,B4(CI313)-G8AMK",
+					"LB5,B6(CI313)-FF2/HN",
+					"LB7,B8(CI313)-FF9/SYN",
+					"LC1-C3(BT412)-CR425/VBR, VGU",
+					"TB13(CI412)-TR302ALK",
+					"TB14(CI412)-TR305NEH",
+					"LA3,A4(CI518)-LT3/SHG",
+					"TB13(CI313)-TR302/PU",
+					"TB14(CI313)-TR305TAJ",
+					"TC1,(BT511)-TR307/RAC, POC",
+					"PA5(EC312)-ACL,JBSPL/RB,TA-9",
+					"PA6(EC313)-IOT Lab/ABHY,RHA"
+				],
+				"1-2PM": [
+					"LAC(CS353)-G4/GZL",
+					"LAC(CS251)-G5/ANV",
+					"Lunch",
+					"LB9,B10(CI313)-G8/ATI",
+					"LB11,B12(CI313)-FF2/AMK",
+					"LB13,B14(CI313)-FF6/TAJ",
+					"TA3(EC312)-TS11/MO",
+					"TA4(EC312)-TS16/NTN",
+					"TB3(CI313)-TR302/TAJ",
+					"TB15(CI412)-TS11/RTK",
+					"PB1,B2(CI575)--AV,DSI,ROH/CL21,22",
+					"PB5,B6(C472)-ALK,JAG,KSA/CL17,18",
+					"PB3(CI373)-HN,PU/CL24",
+					"PB4(CI373)-AKB,SYN/CL20",
+					"PA4(EC312)-ACL,JBSPL/NEJ,TA-9",
+					"PA1(EC314)-SPL/AMR,TA-1",
+					"PA16(EC313)-IOT Lab/RU,SHS",
+					"PA15(EC315)-VDA/APN,SKA"
+				],
+				"2-3PM": [
+					"LA5,A6,A10(CI518)-G4/RCA",
+					"LA15-A16(EC315)-G5/APN",
+					"LA17-A18(HS311)-G6/IJ",
+					"LB11-B12(HS311)-G8/NAM",
+					"LC1-C3(HS311)-FF2/SKU",
+					"TB4(CI313)-TR305SYN",
+					"PA17(25B35EC312)-SPL,5G Lab/ALJ,PKY\n",
+					"PA18(EC311)-ACL,JBSPL/MO,TA-11"
+				],
+				"3-4PM": [
+					"LA5-A6-A10(EC312)-G4/NTN",
+					"LA7-A8(EC312)-G5/VNS",
+					"LA17-A18(25B31EC312)-G6/VD",
+					"LB13-B14(HS311)-G8/NAM",
+					"LB9,B10(CI412)-FF2/DL",
+					"LB11,B12(CI412)-G3/VIK/",
+					"LB15,B16(CI412)-FF6/KJ"
+				],
+				"4-5PM": [
+					"LA7-A8(HS311)-G4/IJ",
+					"LA5-A6,A10(HS311)-G5/YN",
+					"LB1-B2(HS311)-G6/SKU",
+					"PAC(CS354)-CL05/GZL,JC",
+					"PAC(CS252)-CL06/ANV,LM",
+					"D5A11-G1/RU",
+					"D6C21-G3/KS",
+					"LD5B12-G7/PRV",
+					"LD5B22-LT3/DSR",
+					"LD5B32-CS1/TNV",
+					"LD5B42-G9/AV",
+					"LD5B52-FF1/AJP"
+				],
+				"5-6PM": ["DE5", "OE2", "O2M31-/SP", "LABC(O2B12)-G1/MSI"]
+			},
+			"WED": {
+				"8-9AM": [
+					"HSS-2",
+					"LABC (HS311)-/MSU",
+					"LABC (HS432)-G4/BB",
+					"LABC (HS435)-G5/NIS",
+					"LABC (HS312)-G6/PSH",
+					"LABC (HS314)-G8/YN",
+					"LABC (HS315)-FF2/IJ",
+					"LABC (HS433)-FF4/MM",
+					"LABC (HS434)-FF6/MB",
+					"LABC (HS531)-FF7/SKU",
+					"LABC (HS313)-FF8/MDU",
+					"LABC (HS312)-CS2/SDA"
+				],
+				"9-10AM": [
+					"SE",
+					"LB(PH531)-G4/PC",
+					"LA(PH531)-G5/ANU",
+					"LAB(PH532)-G6/ABH",
+					"LAB(PH533)-G8/NKS",
+					"LC(PH534)-FF2/RKD",
+					"LAB(PH535)-CR401/MTR",
+					"LAB(PH311)-CR425/RKG",
+					"LABC(16B1NMA533)-CR526/NS",
+					"LBC(16B1NMA531)-CS2/NF1",
+					"LABC(16B1NMA533)-CS3/MKB",
+					"LBC(16B1NMA731)-CS4/HA",
+					"LABC(17B1NMA531)-FF6/DCS"
+				],
+				"10-11AM": [
+					"LA1,A2(CI518)-G4/TKT",
+					"LB1-B2(HS311)-G6/SKU",
+					"LB7-B8(HS311)-G8/IJ",
+					"LB13-B14(HS311)FF2/NAM",
+					"LC1-C3(BT412)-FF3/VBR, VGU",
+					"TA10(EC312)-TS13/ABY",
+					"TA16(EC315)-TS16/NF-3",
+					"TB9(CI313)-TR302/SYN",
+					"TB10(CI313)-TR305/TAJ",
+					"TB12(CI313)-TR307/ATI",
+					"PB15,B16(CI575)-MSI,AV,SJA/CL21,22",
+					"PB3,B4(CI576)-KP,MSH,VIK/CL17,18",
+					"PA4(EC313)-IOT Lab/GV,RHA",
+					"PA6(EC314)-SPL/BHG,TA-13",
+					"PA15(EC312)-ACL,JBSPL/MO,TA-15",
+					"PA18(CI578)-BS/CL24"
+				],
+				"11-12PM": [
+					"LA7,A8(CI518)-G4/TKT",
+					"LB7,B8(CI412)-G5/JAG",
+					"LB15,B16(CS212)-G6AJS",
+					"TA5(EC312)-TS20/VNS",
+					"TA16(EC312)-F10/NEJ",
+					"TB1(CI313)-TR302/PU",
+					"TB2(CI313)-TR305/TAJ",
+					"TB9(CI412)-TR307ALK",
+					"TB10(CI412)-TR326NEH"
+				],
+				"12-1PM": ["LAC(CS353)-G4/GZL", "LAC(CS251)-G5/ANV", "Lunch"],
+				"1-2PM": [
+					"LA15-A16(EC312)-G4/NEJ",
+					"LA17-A18(24B31EC311)-G5/ALJ",
+					"LB15,B16(CI412)-G6/KJ",
+					"LA3-A4(HS311)-G3/YN",
+					"TB2(CI412)-TR302/KJ",
+					"TB1(CI412)-TR305/JAG",
+					"PA2(EC312)-ACL,JBSPL/NHI,TA-11",
+					"PA3(EC313)-IOT Lab/RS,TA-10",
+					"PA7(EC314)-SPL/AMR,TA-1",
+					"PB5,B6(CI575)-ALK,MSI,SUD/CL21,22",
+					"PB7,B8(CI472)-APR,RTK,NEH/CL17,18",
+					"PB11(CI373)-ATI,AMK/CL24",
+					"PB12(CI373)-AKB,PU/CL20",
+					"PC1(BT472)-BT1/SOC, VBR, SHM",
+					"PC2,C3(15BT311)-BT2&3/ASM, VGU, RPS"
+				],
+				"2-3PM": [
+					"LA17-A18(25B31EC311)-G4/MO",
+					"LA5-A6-A10(EC312)-G5/NTN",
+					"LB9-B10(HS311)-G6/NAM",
+					"LB9,B10(CI412)-FF2/DL",
+					"LB11,B12(CI412)-FF5/VIK/",
+					"LB13,B14(CI313)-FF7/TAJ/"
+				],
+				"3-4PM": [
+					"LA5-A6,A10(HS311)-G4/YN",
+					"LA7-A8(EC312)-G5/VNS",
+					"LA15-A16(HS311)-G6/NAM",
+					"LA17-A18(HS311)-G8/IJ"
+				],
+				"4-5PM": [
+					"DE5",
+					"LC(NBT735)-G4/KS",
+					"D5A11-G1/RU",
+					"D6C21-G3/KS",
+					"LD5B21-G7/PRV",
+					"LD5B22-LT3/DSR",
+					"LD5B32-CS1/TNV",
+					"LD5B42-G9/AV",
+					"LD5B52-FF1/AJP"
+				],
+				"5-6PM": [
+					"DE 6",
+					"LC(BT411)-G4/AV,ANS",
+					"D5C21-G1/AV, ANS",
+					"LD6B12-G3/AMS",
+					"LD6B22-G7/KSA",
+					"LD6B32-LT3/PKU",
+					"LD6B42-CS1/TNV"
+				]
+			},
+			"THUR": {
+				"8-9AM": [
+					"DE 1",
+					"LA(15B11EC313)-G4/RHA",
+					"LA(15B11EC313)-G5/VRN",
+					"LA(17B1NEC735)-G6/NF1",
+					"LA(22B12EC412)-G8/RU",
+					"LA(20B12EC211)-FF2/BHG",
+					"LA(15B1NEC733)-FF4/RS",
+					"LB(CS331)-FF5/NEH",
+					"LB(CS332)-FF6/AKM",
+					"LB(CS333)-FF7/SOS",
+					"LB(CS334)-FF8/SHV",
+					"LB(CS335)-FF9/VRN",
+					"LB(CS336)-CS2/RTK",
+					"LC1-C3(11BT413)-CS3/ASM",
+					"LC1-C3(12BT311)-CS4/NDH"
+				],
+				"9-10AM": [
+					"SE",
+					"LA(PH531)-G4/ANU",
+					"LAB(PH532)-G5/ABH",
+					"LAB(PH533)-G6/NKS",
+					"LAB(PH311)-G8/RKG",
+					"LAB(PH535)-FF2/MTR",
+					"LABC(16B1NMA533)-FF6/NS",
+					"LABC(16B1NMA533)-FF7/MKB",
+					"LABC(17B1NMA531)-FF8/DCS",
+					"LB(PH531)-CR401/PC",
+					"LBC(16B1NMA531)-CR425/NF1",
+					"LBC(16B1NMA731)-CR526/HA",
+					"LC(PH534)-CS2/RKD"
+				],
+				"10-11AM": [
+					"LA15-A16(EC613)-G4/MJ",
+					"LA7-A8(HS311)-G5/IJ",
+					"LA17-A18(24B31EC311)-G6/ALJ",
+					"LB11,B12(CI313)-G8/AMK",
+					"LB13,B14(CI412)-FF2/ALK",
+					"LB15-B16(HS311)-LT3/NAM",
+					"LC1-C3(HS311)-CS1/SKU",
+					"LC1-C3(BT511)-CR301/RAC, POC",
+					"TB7(CI313)-TS7/SYN",
+					"PA2(EC314)-SPL/BHG,TA-13",
+					"PA10(CI578)-ASI,RCA/CL20",
+					"PA3(EC312)-ACL,JBSPL/NEJ,TA-11",
+					"PA1(EC313)-IOT Lab/ABHY,RHA",
+					"PB8(CI373)-ATI,TAJ/CL24"
+				],
+				"11-12PM": [
+					"LA17-A18(25B31EC311)-G4/MO",
+					"LB1,B2(CI412)-G5/DL",
+					"LB3,B4(CI412)-G6/NM",
+					"LB5,B6(CI412)-G8/KSA",
+					"LB13-B14(HS311)-FF2/NAM",
+					"LB15,B16(CI412)-LT3/KJ",
+					"TA15(EC413)-/TS16KUL",
+					"TB7(CI412)-TR302JAG"
+				],
+				"12-1PM": ["LAC(CS353)-G4/GZL", "LAC(CS251)-G5/ANV", "Lunch"],
+				"1-2PM": [
+					"LA1-A2(HS311)-G4/SKU",
+					"LA15-A16(EC312)-G1/NEJ",
+					"LB1,B2(CI313)-G3/ATI",
+					"LB3,B4(CI313)-FF6/AMK",
+					"LB5,B6(CI313)-FF7/HN",
+					"LB7-B8(HS311)-G8/IJ",
+					"LB11-B12(HS311)-FF2/NAM",
+					"PA1(CI578)-BS,RCA/CL17",
+					"PA2(CI578)-ASI,SHG/CL18",
+					"PA3(EC314)-SPL/BHG,TA-13",
+					"PA15(EC313)-IOT Lab/GV,RS",
+					"PA16(EC312)-ACL,JBSPL/VNS,TA-15",
+					"PB9(CI373)-TAJ,NAC/CL22",
+					"PB10(CI373)-AKB,PU/CL23",
+					"PC2,C3(16BT571)-BIOINFO/CKJ,NDH,RD,NF2 ",
+					"PC1(15BT571)-BCL/RAC,RG,MAS "
+				],
+				"2-3PM": ["LA7,A8(CI518)-G4/TKT", "LA17-A18(25B31EC312)-G5/VD"],
+				"3-4PM": [
+					"LB7,B8(CI412)-G4/JAG",
+					"LB5-B6(HS311)-G6/IJ",
+					"LB7,B8(CI313)-G8/SYN",
+					"LB15,B16(CI212)-FF2/AJS",
+					"TB3(CI412)-TR307/APR",
+					"TB4(CI412)-TR326/RTK",
+					"TB5(CI412)-TR424/ALK",
+					"TB6(CI412)-TR502/KJ"
+				],
+				"4-5PM": ["OE2", "O2M31-/SP", "LABC(O2B12)-G1/MSI"],
+				"5-6PM": [
+					"DE 4",
+					"LC(NBT832)-G4/SHM",
+					"D4A21-G1/RRP",
+					"D4C21-G3/SHM",
+					"LD4B12-G7/HN",
+					"LD4B22-LT3/AM",
+					"LD4B32-CS1/KA",
+					"LD4B42-G2/AA"
+				]
+			},
+			"FRI": {
+				"9-10AM": [
+					"HSS-2",
+					"LABC (HS311)-CS2/MSU",
+					"LABC (HS432)-G4/BB",
+					"LABC (HS433)-CS3/MM",
+					"LABC (HS434)-CS4/MB",
+					"LABC (HS435)-G5/NIS",
+					"LABC (HS312)-G6/PSH",
+					"LABC (HS314)-G8/YN",
+					"LABC (HS315)-FF2/IJ",
+					"LABC (HS531)-CR325/SKU",
+					"LABC (HS313)-CR401/MDU",
+					"LABC (HS312)-CR425/SDA"
+				],
+				"10-11AM": [
+					"LA15-A16(EC613)-G4/MJ",
+					"LA1-A2(CI518)-G5/TKT",
+					"LA3-A4(EC312)-G6/NTN",
+					"LA17-A18(25B31EC312)-G8/VD",
+					"LB9,B10(CI313)-FF2/ATI",
+					"LB3-B4(HS311)-CR325/YN",
+					"LB5-B6(HS311)-CR401/IJ",
+					"LB11,B12(CI313)-CR425/AMK",
+					"LB15-B16(HS311)-LT3/NAM",
+					"TB16(CI412)-TR302/JAG",
+					"PA6(EC312)-ACL,JBSPL/MO,TA-11",
+					"PA7(EC313)-IOT Lab/GV,SHS",
+					"PA10(EC314)-SPL/BHG,TA-13",
+					"PB7,B8(CI575)--AV,DSI,SJA/CL14,15",
+					"PB1,B2(CI576)-APJ,MSH,KP/CL17,18",
+					"PB13,B14(CI472)-APR,KJ,RTK/CL21,22",
+					"PC1, C3(15BT311)-BT2&3/ASM, VGU, RPS",
+					"PC2(BT472)-BT1/SOC, VBR, SHM"
+				],
+				"11-12PM": [
+					"LA1-A2(HS311)-G4/SKU",
+					"LA3,A4(CI518)-G5/SHG",
+					"LA15-A16(EC413)-G6/NF2",
+					"LB9-B10(HS311)-G8/NAM"
+				],
+				"12-1PM": ["Lunch"],
+				"1-2PM": [
+					"LA1-A2(EC312)-G4/VNS",
+					"LA5,A6,A10(CI518)-G5/RCA",
+					"LA7-A8(HS311)-G6/IJ",
+					"LB11-B12(HS311)-G8/NAM",
+					"LA15-A16(EC312)-FF2/NEJ",
+					"LB13,B14(CI412)-G7/ALK/",
+					"LC1-C3(BT511)-FF8/RAC, POC",
+					"PA4(EC314)-SPL/KUL,TA-12",
+					"PB15,B16(CI472)-APR,KJ,JAG/CL03,04",
+					"PA5(EC313)-IOT Lab/RU,RS",
+					"PA10(EC312)-ACL,JBSPL/VNS,TA-15",
+					"PB3,B4(CI575)-ALK,ROH,SUD/CL23,24",
+					"PB5,B6(CI576)-AST,SAA,VIK/CL17,18",
+					"PB7,B8(CI472)-APR,RTK,NEH/CL15,16",
+					"PB13(CI373)-ATI,HN/CL20",
+					"PB14(CI373)-NAC,SYN/CL22"
+				],
+				"2-3PM": ["Lecture and tutorial classes are blocked for talks."],
+				"3-4PM": [
+					"LA3-A4(HS311)-G8/YN",
+					"LA15-A16(HS311)-G4/NAM",
+					"LA17-A18(HS311)-G5/IJ",
+					"LC1-C3(HS311)-G6/SKU",
+					"TC2, C3(BT511)-G6/RAC, POC",
+					"TA6(EC312)-TS13/ABY"
+				],
+				"4-5PM": [
+					"DE 6",
+					"LC(BT411)-G4/AV,ANS",
+					"D5C21-G1/AV, ANS",
+					"LD6B12-G3/AMS",
+					"LD6B22-G7/KSA",
+					"LD6B32-LT3/PKU",
+					"LD6B42-CS1/TNV",
+					"LD5B42-G2/AV",
+					"LD5B52-G9/AJP"
+				],
+				"5-6PM": [
+					"DE5",
+					"LC(NBT735)-G4/KS",
+					"D5A11-G1/RU",
+					"D6C21-G3/KS",
+					"LD5B21-G7/PRV",
+					"LD5B22-LT3/DSR",
+					"LD5B32-CS1/TNV"
+				]
+			},
+			"SAT": {
+				"9-10AM": [
+					"DE 1",
+					"LA(15B11EC313)-G4/RHA",
+					"LA(15B11EC313)-G5/VRN",
+					"LA(17B1NEC735)-G6/NF1",
+					"LA(22B12EC412)-G8/RU",
+					"LA(20B12EC211)-FF2/BHG",
+					"LA(15B1NEC733)-FF6/RS",
+					"LB(CS331)-FF7/NEH",
+					"LB(CS332)-FF8/AKM",
+					"LB(CS333)-CS2/SOS",
+					"LB(CS334)-CS3/SHV",
+					"LB(CS335)-CS4/VRN",
+					"LB(CS336)-CR301/RTK",
+					"LC1-C3(11BT413)-CR425/ASM",
+					"LC1-C3(12BT311)-CR501/NDH"
+				],
+				"11-12PM": [
+					"LA15-A16(EC413)-G4/NF-2",
+					"LA3-A4(EC312)-G5/NTN",
+					"TA1(EC312)-TS13/VNS",
+					"TA2(EC312)-TS17/NEJ",
+					"PA5(EC314)-SPL/RIG,TA-14",
+					"PA7,A8(CI578)-ASI,SHG/CL23,24",
+					"PA8(EC312)-ACL,JBSPL/NHI,TA-9",
+					"PA10(EC313)-IOT Lab/SHS,TA-10",
+					"PB1(CI373)-TAJ,NAC/CL05",
+					"PB2(CI373)-ATI,ASK/CL06",
+					"PB3(CI576)-/CL23",
+					"PB4(CI576)-/CL17",
+					"PB5(CI373)-AMK,PU/CL04",
+					"PB6(CI373)-AKB,SYN/CL08",
+					"PB9,B10(CI472)-JAG,KJ,NEH/CL13,14",
+					"PB7,B8(CI576)-AST,SAA,VIK/CL17,18",
+					"PB11,B12(CI575)-AV,DSI,MSI/CL21,22",
+					"PB13,B14(CI575)-ROH,SUD,SJA/CL01,02",
+					"PB15(CI582)-/CL21",
+					"PB16(CS212)-KP,APR/CL20",
+					"PC1(16BT571)-BIOINFO/CKJ,NDH,RD,NF2 ",
+					"PC2,C3(15BT571)-BCL/RAC,RG,MAS "
+				],
+				"12-1PM": ["DE 4", "LA15-A16(EC613)-G4/MJ"],
+				"1-2PM": [
+					"DE 6",
+					"LC(NBT832)-G4/SHM",
+					"LA17,A18(CI518)-G5/RCA/",
+					"LA17,A18(CI518)-G6/RCA",
+					"D4A21-G1/RRP",
+					"D4C21-G3/SHM",
+					"LD4B12-G7/HN",
+					"LD4B22-LT3/AM",
+					"LD4B32-CS1/KA",
+					"LD4B42-G2/AA"
+				],
+				"2-3PM": [
+					"LC(BT411)-G4/AV,ANS",
+					"LD6B12-G1/AMS",
+					"LD6B22-G3/KSA",
+					"LD6B32-G7/PKU"
+				]
+			}
+		},
+		"subjects": [
+			{
+				"Code": "\u00a0PH531",
+				"Full Code": "\u00a016B1NPH531",
+				"Subject": "Quantum Mechanics for Engineers"
+			},
+			{
+				"Code": "\u00a0PH532",
+				"Full Code": "\u00a016B1NPH532",
+				"Subject": "Material Science"
+			},
+			{
+				"Code": "\u00a0PH533",
+				"Full Code": "\u00a016B1NPH533",
+				"Subject": "Laser Technology and Applications"
+			},
+			{
+				"Code": "\u00a0PH534",
+				"Full Code": "\u00a016B1NPH534",
+				"Subject": "Biomaterial Science"
+			},
+			{
+				"Code": "\u00a0PH535",
+				"Full Code": "\u00a016B1NPH535",
+				"Subject": "Nuclear Science and Engineering"
+			},
+			{
+				"Code": "PH311",
+				"Full Code": "20B12PH311",
+				"Subject": "Engineering Materials and Technology"
+			},
+			{
+				"Code": "BIOTECH",
+				"Full Code": "Subject Code",
+				"Subject": "Subject Title"
+			},
+			{
+				"Code": "BT412",
+				"Full Code": "15B11BT412",
+				"Subject": "Molecular biology and Genetic Engineering"
+			},
+			{
+				"Code": "BT511",
+				"Full Code": "15B11BT511",
+				"Subject": "Cell Culture Technology"
+			},
+			{
+				"Code": "16BT571",
+				"Full Code": "16B17BT571",
+				"Subject": "IT Practice Lab (CS/BT)"
+			},
+			{
+				"Code": "15BT571",
+				"Full Code": "15B17BT571",
+				"Subject": "Cell culture Lab"
+			},
+			{
+				"Code": "BT472",
+				"Full Code": "15B17BT472",
+				"Subject": "Genetic Engineering Lab"
+			},
+			{
+				"Code": "15BT311",
+				"Full Code": "18B15BT311",
+				"Subject": "Industrial Biotechnology Lab-1"
+			},
+			{
+				"Code": "11BT413",
+				"Full Code": "15B11BT413",
+				"Subject": "Bioprocess Engineering (DE-1)"
+			},
+			{
+				"Code": "12BT311",
+				"Full Code": "21B12BT311",
+				"Subject": "Phenomics"
+			},
+			{
+				"Code": "MATHS",
+				"Full Code": "Subject Code",
+				"Subject": "Subject Title"
+			},
+			{
+				"Code": "MA533",
+				"Full Code": "16B1NMA533",
+				"Subject": "Matrix Computaions"
+			},
+			{
+				"Code": "MA531",
+				"Full Code": "16B1NMA531",
+				"Subject": "Discrete Mathematics"
+			},
+			{
+				"Code": "MA533",
+				"Full Code": "LABC(16B1NMA533)-/MKB",
+				"Subject": "Matrix Computaions"
+			},
+			{
+				"Code": "MA731",
+				"Full Code": "16B1NMA731",
+				"Subject": "Theory of Numbers"
+			},
+			{
+				"Code": "MA531",
+				"Full Code": "17B1NMA531",
+				"Subject": "Basic Numerical Methods"
+			},
+			{
+				"Code": "Code",
+				"Full Code": "Subject Code",
+				"Subject": "Subject Title"
+			},
+			{
+				"Code": "CS251",
+				"Full Code": "24B11CS251",
+				"Subject": "Fundamentals of Computer Vision"
+			},
+			{
+				"Code": "CS353",
+				"Full Code": "24B11CS353",
+				"Subject": "Data Science and Data Analytics: Essential Statistics"
+			},
+			{
+				"Code": "CI313",
+				"Full Code": "15B11CI313",
+				"Subject": "Computer Organisation & Architecture"
+			},
+			{
+				"Code": "CI412",
+				"Full Code": "15B11CI412",
+				"Subject": "Operating Systems and Systems\n  Programming"
+			},
+			{
+				"Code": "CS212",
+				"Full Code": "18B11CS212",
+				"Subject": "Computer Networks and Security"
+			},
+			{
+				"Code": "CI518",
+				"Full Code": "15B11CI518",
+				"Subject": "Data Structures and Algorithms"
+			},
+			{
+				"Code": "CS331",
+				"Full Code": "20B12CS331",
+				"Subject": "Fundamentals of Machine learning"
+			},
+			{
+				"Code": "CS332",
+				"Full Code": "20B12CS332",
+				"Subject": "Fundamentals of Computer security"
+			},
+			{
+				"Code": "CS333",
+				"Full Code": "20B12CS333",
+				"Subject": "Introduction to Big data and Data Analytics"
+			},
+			{
+				"Code": "CS334",
+				"Full Code": "20B12CS334",
+				"Subject": "Object Oriented Analysis and Design using Java"
+			},
+			{
+				"Code": "CS335",
+				"Full Code": "20B12CS335",
+				"Subject": "Image Processing and Computer Vision"
+			},
+			{
+				"Code": "CS336",
+				"Full Code": "20B12CS336",
+				"Subject": "Automata Theory and its applications"
+			},
+			{
+				"Code": "CI373",
+				"Full Code": "15B17CI373",
+				"Subject": "Computer Organisation & Architecture Lab"
+			},
+			{
+				"Code": "CI472",
+				"Full Code": "15B17CI472",
+				"Subject": "Operating Systems and Systems Lab\n  Programming"
+			},
+			{
+				"Code": "15CS212",
+				"Full Code": "18B15CS212",
+				"Subject": "Computer Networks and Security Lab"
+			},
+			{
+				"Code": "CI576",
+				"Full Code": "15B17CI578",
+				"Subject": "Data Structures and Algorithms Lab"
+			},
+			{
+				"Code": "CI576",
+				"Full Code": "15B17CI576",
+				"Subject": "Information Security Lab"
+			},
+			{
+				"Code": "CI575",
+				"Full Code": "15B17CI575",
+				"Subject": "Open Source Software lab"
+			},
+			{
+				"Code": "CI582",
+				"Full Code": "15B28CI582",
+				"Subject": "Multimedia Lab"
+			},
+			{
+				"Code": "CS354",
+				"Full Code": "24B11CS354",
+				"Subject": "Data Science and Data Analytics Workshop-2"
+			},
+			{
+				"Code": "CS252",
+				"Full Code": "24B15CS252",
+				"Subject": "Computer Vision Workshop"
+			},
+			{
+				"Code": "HS531",
+				"Full Code": "16B1NHS531",
+				"Subject": "SOCIOLOGY OF YOUTH"
+			},
+			{
+				"Code": "HS312",
+				"Full Code": "21B12HS312",
+				"Subject": "Management Accounting"
+			},
+			{
+				"Code": "HS432",
+				"Full Code": "16B1NHS432",
+				"Subject": "POSITIVE PSYCHOLOGY"
+			},
+			{
+				"Code": "HS435",
+				"Full Code": "16B1NHS435",
+				"Subject": "SOCIOLOGY OF MEDIA"
+			},
+			{
+				"Code": "HS314",
+				"Full Code": "24B12HS314",
+				"Subject": "Contemporary India: A Sociological Perspective"
+			},
+			{
+				"Code": "25HS312",
+				"Full Code": "25B12HS312",
+				"Subject": "Society and Sustainability"
+			},
+			{
+				"Code": "HS315",
+				"Full Code": "24B12HS315",
+				"Subject": "Civil Society Political Regimes and Conflict"
+			},
+			{
+				"Code": "HS433",
+				"Full Code": "16B1NHS433",
+				"Subject": "FINANCIAL MANAGEMENT"
+			},
+			{
+				"Code": "HS434",
+				"Full Code": "16B1NHS434",
+				"Subject": "INTRODUCTION TO CONTEMPORARY FORM OF LITERATURE"
+			},
+			{
+				"Code": "HS311",
+				"Full Code": "25B12HS311",
+				"Subject": "Consumer Behaviour"
+			},
+			{
+				"Code": "HS313",
+				"Full Code": "25B12HS313",
+				"Subject": "Indian English Literature"
+			},
+			{
+				"Code": "EC312",
+				"Full Code": "18B11EC312",
+				"Subject": "Electromagnetic Field Theory"
+			},
+			{
+				"Code": "D1A10",
+				"Full Code": "15B11EC313",
+				"Subject": "Microprocessors and Microcontrollers"
+			},
+			{
+				"Code": "D1A20",
+				"Full Code": "20B12EC211",
+				"Subject": "Introduction to Digital Image and Video Processing"
+			},
+			{
+				"Code": "D1A30",
+				"Full Code": "17B1NEC735",
+				"Subject": "Information Theory and applications"
+			},
+			{
+				"Code": "D1A40",
+				"Full Code": "22B12EC412",
+				"Subject": "Introduction to Power Electronics"
+			},
+			{
+				"Code": "EC413",
+				"Full Code": "15B11EC413",
+				"Subject": "Digital Signal Processing"
+			},
+			{
+				"Code": "11EC315",
+				"Full Code": "18B11EC315",
+				"Subject": "VLSI Design"
+			},
+			{
+				"Code": "EC613",
+				"Full Code": "15B11EC613",
+				"Subject": "Control System"
+			},
+			{
+				"Code": "D4A40",
+				"Full Code": "15B1NEC733",
+				"Subject": "Fundamentals of Embedded Systems - DE-1"
+			},
+			{
+				"Code": "24B31EC311",
+				"Full Code": "24B31EC311",
+				"Subject": "Wireless and Mobile Communications"
+			},
+			{
+				"Code": "25B31EC311",
+				"Full Code": "25B31EC311",
+				"Subject": "Electromagnetic Waves and Antennas"
+			},
+			{
+				"Code": "31EC312",
+				"Full Code": "25B31EC312",
+				"Subject": "Applied Optimization Techniques"
+			},
+			{
+				"Code": "EC315",
+				"Full Code": "18B15EC312",
+				"Subject": "Electromagnetic Field Theory Lab"
+			},
+			{
+				"Code": "EC314",
+				"Full Code": "18B15EC314",
+				"Subject": "Python for Signal Processing & Communication Lab"
+			},
+			{
+				"Code": "EC315",
+				"Full Code": "18B15EC315",
+				"Subject": "VLSI Design Lab"
+			},
+			{
+				"Code": "35EC315",
+				"Full Code": "25B35EC312",
+				"Subject": "Wireless Communication Systems Lab"
+			},
+			{
+				"Code": "35EC311",
+				"Full Code": "25B35EC311",
+				"Subject": "Electromagnetic Waves and Antennas Lab"
+			},
+			{
+				"Code": "EC313",
+				"Full Code": "18B15EC313",
+				"Subject": "Embedded Systems/IOT Lab"
+			}
+		]
 	}
 }

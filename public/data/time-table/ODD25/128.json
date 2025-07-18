@@ -457,14 +457,14 @@
 		},
 		"subjects": [
 			{
-				"Code": "15B11MA111",
-				"Full Code": "15B11MA111",
-				"Subject": "Mathematics-1"
+				"Code": "24B15CS111",
+				"Full Code": "24B15CS111",
+				"Subject": "Software Development Fundamentals Lab-I"
 			},
 			{
-				"Code": "15B11PH111",
-				"Full Code": "15B11PH111",
-				"Subject": "Physics-1"
+				"Code": "18B15GE111",
+				"Full Code": "18B15GE111",
+				"Subject": "Engineering Drawing and Design"
 			},
 			{
 				"Code": "15B11CI111",
@@ -472,24 +472,14 @@
 				"Subject": "Software Development Fundamentals-I"
 			},
 			{
-				"Code": "15B11HS112",
-				"Full Code": "15B11HS112",
-				"Subject": "English"
-			},
-			{
 				"Code": "15B17PH171",
 				"Full Code": "15B17PH171",
 				"Subject": "Physics Lab-1"
 			},
 			{
-				"Code": "24B15CS111",
-				"Full Code": "24B15CS111",
-				"Subject": "Software Development Fundamentals Lab-I"
-			},
-			{
-				"Code": "24B11EC111",
-				"Full Code": "24B11EC111",
-				"Subject": "Basic Electronics"
+				"Code": "15B11MA111",
+				"Full Code": "15B11MA111",
+				"Subject": "Mathematics-1"
 			},
 			{
 				"Code": "24B15EC111",
@@ -497,9 +487,24 @@
 				"Subject": "Basic Electronics Lab"
 			},
 			{
-				"Code": "18B15GE111",
-				"Full Code": "18B15GE111",
-				"Subject": "Engineering Drawing and Design"
+				"Code": "15B11HS112",
+				"Full Code": "15B11HS112",
+				"Subject": "English"
+			},
+			{
+				"Code": "15B11PH111",
+				"Full Code": "15B11PH111",
+				"Subject": "Physics-1"
+			},
+			{
+				"Code": "24B11EC111",
+				"Full Code": "24B11EC111",
+				"Subject": "Basic Electronics"
+			},
+			{
+				"Code": "COURSE CODE",
+				"Full Code": "COURSE CODE",
+				"Subject": "COURSE"
 			}
 		]
 	},

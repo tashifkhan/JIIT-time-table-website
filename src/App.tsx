@@ -196,19 +196,35 @@ const App: React.FC = () => {
 		parseAsArrayOf(parseAsString).withDefault([])
 	);
 
+	// Auto-generate schedule only once on initial mount if all params are present and no cached schedule exists
 	React.useEffect(() => {
 		const cached = localStorage.getItem("cachedSchedule");
-		const allParamsPresent = _year && _batch && _campus;
+
+		// read params directly from URL to avoid dependency on state that could change after mount
+		const urlParams = new URLSearchParams(window.location.search);
+		const year = urlParams.get("year") || "";
+		const batch = urlParams.get("batch") || "";
+		const campus = urlParams.get("campus") || "";
+		const electiveCount = parseInt(urlParams.get("electiveCount") || "0", 10);
+		const selectedElectives = urlParams.getAll("selectedElectives") || [];
+
+		const allParamsPresent =
+			year &&
+			batch &&
+			campus &&
+			(!electiveCount ||
+				(electiveCount > 0 &&
+					selectedElectives.length === electiveCount &&
+					selectedElectives.every((e) => !!e)));
+
 		if (!cached && allParamsPresent) {
 			handleFormSubmit({
-				year: _year,
-				batch: _batch,
-				electives: _selectedElectives,
-				campus: _campus,
-				manual: false,
+				year,
+				batch,
+				electives: selectedElectives,
+				campus,
 			});
 		}
-		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, []);
 
 	const handleSelectConfig = async (name: string) => {
@@ -220,8 +236,9 @@ const App: React.FC = () => {
 		setSelectedElectives(config.selectedElectives);
 		setCampus(config.campus);
 		setSelectedConfig(name);
-		setIsGenerating(true); // Show loader immediately on config click
-		// Generate schedule with this config
+		setIsGenerating(true);
+
+		// generate schedule with this config
 		await handleFormSubmit({
 			year: config.year,
 			batch: config.batch,

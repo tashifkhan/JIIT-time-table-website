@@ -103,6 +103,7 @@ const App: React.FC = () => {
 			} else {
 				functionName = campus === "62" ? "time_table_creator_v2" : "bando128";
 			}
+			console.log(functionName);
 			const output = await callPythonFunction(functionName, {
 				time_table_json,
 				subject_json,
@@ -123,7 +124,10 @@ const App: React.FC = () => {
 		campus: string;
 		manual?: boolean;
 	}) => {
-		const { year, batch, electives, campus } = data;
+		let { year, batch, electives, campus } = data;
+		if (!electives) {
+			electives = [];
+		}
 		const mapping = campus === "62" ? timetableMapping : mapping128;
 		const subjectJSON =
 			campus === "62"
@@ -168,8 +172,9 @@ const App: React.FC = () => {
 				setSchedule(mockSchedule);
 				console.log(schedule);
 			} else {
-				setSchedule(Schedule);
-				console.log(schedule);
+				const plainSchedule = JSON.parse(JSON.stringify(Schedule));
+				setSchedule(plainSchedule);
+				console.log(plainSchedule);
 			}
 		} catch (error) {
 			console.error("Error generating schedule:", error);

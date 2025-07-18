@@ -145,6 +145,21 @@ export function ScheduleForm({
 	};
 
 	const prevAutoSubmitKey = useRef<string | undefined>(undefined);
+
+	// Update form state when a config is loaded
+	useEffect(() => {
+		if (autoSubmitKey && savedConfigs && savedConfigs[autoSubmitKey]) {
+			const config = savedConfigs[autoSubmitKey];
+			setYear(config.year);
+			setBatch(config.batch);
+			setCampus(config.campus);
+			setElectiveCount(config.electiveCount);
+			setSelectedElectives(config.selectedElectives);
+		}
+		// eslint-disable-next-line react-hooks/exhaustive-deps
+	}, [autoSubmitKey]);
+
+	// Auto-submit when config changes, even if electives is empty
 	useEffect(() => {
 		if (
 			autoSubmitKey &&
@@ -152,8 +167,7 @@ export function ScheduleForm({
 			year &&
 			batch &&
 			campus &&
-			selectedElectives &&
-			selectedElectives.length > 0
+			selectedElectives !== undefined // allow empty array
 		) {
 			onSubmit({
 				year,

@@ -11,6 +11,7 @@ import { AcademicCalendar } from "./components/academic-calendar";
 import RedirectAC from "./components/redirectAC.tsx";
 import { NuqsAdapter } from "nuqs/adapters/react-router/v6";
 import CompareTimetablePage from "./components/compare-timetable";
+import RedirectCT from "./components/redirectCT.tsx";
 
 createRoot(document.getElementById("root")!).render(
 	<StrictMode>
@@ -27,6 +28,9 @@ createRoot(document.getElementById("root")!).render(
 						>
 							<Github className="w-8 h-8 sm:w-10 sm:h-10" />
 						</a>
+					</div>
+					<div className="fixed left-4 bottom-16 z-50">
+						<RedirectCT />
 					</div>
 					<div className="fixed left-4 bottom-4 z-50">
 						<RedirectAC />

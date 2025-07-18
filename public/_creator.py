@@ -15,6 +15,7 @@ def parse_batch_numbers(batch_input: str) -> list[str]:
             "A",
             "B",
             "C",
+            "D",
             "G",
         ]
 

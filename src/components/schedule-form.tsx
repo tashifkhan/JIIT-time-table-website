@@ -47,6 +47,7 @@ interface ScheduleFormProps {
 		batch: string;
 		electives: string[];
 		campus: string;
+		manual?: boolean;
 	}) => void;
 	onSaveConfig?: (name: string, configData: any) => void;
 	savedConfigs?: { [key: string]: any };
@@ -109,6 +110,7 @@ export function ScheduleForm({
 				batch,
 				electives: selectedElectives,
 				campus,
+				manual: true,
 			});
 		} finally {
 			setIsGenerating(false);
@@ -158,6 +160,7 @@ export function ScheduleForm({
 				batch,
 				electives: selectedElectives,
 				campus,
+				manual: false,
 			});
 			prevAutoSubmitKey.current = autoSubmitKey;
 		}

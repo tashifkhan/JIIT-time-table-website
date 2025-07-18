@@ -1288,319 +1288,9 @@
 		},
 		"subjects": [
 			{
-				"Code": "PH531",
-				"Full Code": "16B1NPH531",
-				"Subject": "Quantum Mechanics for Engineers"
-			},
-			{
-				"Code": "\u00a0PH532",
-				"Full Code": "\u00a016B1NPH532",
-				"Subject": "Material Science"
-			},
-			{
-				"Code": "\u00a0PH533",
-				"Full Code": "\u00a016B1NPH533",
-				"Subject": "Laser Technology and Applications"
-			},
-			{
-				"Code": "\u00a0PH534",
-				"Full Code": "\u00a016B1NPH534",
-				"Subject": "Biomaterial Science"
-			},
-			{
-				"Code": "\u00a0PH535",
-				"Full Code": "\u00a016B1NPH535",
-				"Subject": "Nuclear Science and Engineering"
-			},
-			{
-				"Code": "PH311",
-				"Full Code": "20B12PH311",
-				"Subject": "Engineering Materials and Technology"
-			},
-			{
-				"Code": "BIOTECH",
-				"Full Code": "Subject Code",
-				"Subject": "Subject Title"
-			},
-			{
-				"Code": "BT412",
-				"Full Code": "15B11BT412",
-				"Subject": "Molecular biology and Genetic Engineering"
-			},
-			{
-				"Code": "BT511",
-				"Full Code": "15B11BT511",
-				"Subject": "Cell Culture Technology"
-			},
-			{
-				"Code": "16BT571",
-				"Full Code": "16B17BT571",
-				"Subject": "IT Practice Lab (CS/BT)"
-			},
-			{
-				"Code": "15BT571",
-				"Full Code": "15B17BT571",
-				"Subject": "Cell culture Lab"
-			},
-			{
-				"Code": "BT472",
-				"Full Code": "15B17BT472",
-				"Subject": "Genetic Engineering Lab"
-			},
-			{
-				"Code": "15BT311",
-				"Full Code": "18B15BT311",
-				"Subject": "Industrial Biotechnology Lab-1"
-			},
-			{
-				"Code": "11BT413",
-				"Full Code": "15B11BT413",
-				"Subject": "Bioprocess Engineering (DE-1)"
-			},
-			{
-				"Code": "12BT311",
-				"Full Code": "21B12BT311",
-				"Subject": "Phenomics"
-			},
-			{
-				"Code": "MATHS",
-				"Full Code": "Subject Code",
-				"Subject": "Subject Title"
-			},
-			{
-				"Code": "MA533",
-				"Full Code": "16B1NMA533",
-				"Subject": "Matrix Computaions"
-			},
-			{
-				"Code": "MA531",
-				"Full Code": "16B1NMA531",
-				"Subject": "Discrete Mathematics"
-			},
-			{
-				"Code": "MA533",
-				"Full Code": "LABC(16B1NMA533)-/MKB",
-				"Subject": "Matrix Computaions"
-			},
-			{
-				"Code": "MA731",
-				"Full Code": "16B1NMA731",
-				"Subject": "Theory of Numbers"
-			},
-			{
-				"Code": "MA531",
-				"Full Code": "17B1NMA531",
-				"Subject": "Basic Numerical Methods"
-			},
-			{
-				"Code": "Code",
-				"Full Code": "Subject Code",
-				"Subject": "Subject Title"
-			},
-			{
-				"Code": "CS251",
-				"Full Code": "24B11CS251",
-				"Subject": "Fundamentals of Computer Vision"
-			},
-			{
-				"Code": "CS353",
-				"Full Code": "24B11CS353",
-				"Subject": "Data Science and Data Analytics: Essential Statistics"
-			},
-			{
-				"Code": "CI313",
-				"Full Code": "15B11CI313",
-				"Subject": "Computer Organisation & Architecture"
-			},
-			{
-				"Code": "CI412",
-				"Full Code": "15B11CI412",
-				"Subject": "Operating Systems and Systems\n  Programming"
-			},
-			{
-				"Code": "CS212",
-				"Full Code": "18B11CS212",
-				"Subject": "Computer Networks and Security"
-			},
-			{
-				"Code": "CI518",
-				"Full Code": "15B11CI518",
-				"Subject": "Data Structures and Algorithms"
-			},
-			{
-				"Code": "CS331",
-				"Full Code": "20B12CS331",
-				"Subject": "Fundamentals of Machine learning"
-			},
-			{
-				"Code": "CS332",
-				"Full Code": "20B12CS332",
-				"Subject": "Fundamentals of Computer security"
-			},
-			{
-				"Code": "CS333",
-				"Full Code": "20B12CS333",
-				"Subject": "Introduction to Big data and Data Analytics"
-			},
-			{
-				"Code": "CS334",
-				"Full Code": "20B12CS334",
-				"Subject": "Object Oriented Analysis and Design using Java"
-			},
-			{
-				"Code": "CS335",
-				"Full Code": "20B12CS335",
-				"Subject": "Image Processing and Computer Vision"
-			},
-			{
 				"Code": "CS336",
 				"Full Code": "20B12CS336",
 				"Subject": "Automata Theory and its applications"
-			},
-			{
-				"Code": "CI373",
-				"Full Code": "15B17CI373",
-				"Subject": "Computer Organisation & Architecture Lab"
-			},
-			{
-				"Code": "CI472",
-				"Full Code": "15B17CI472",
-				"Subject": "Operating Systems and Systems Lab\n  Programming"
-			},
-			{
-				"Code": "15CS212",
-				"Full Code": "18B15CS212",
-				"Subject": "Computer Networks and Security Lab"
-			},
-			{
-				"Code": "CI576",
-				"Full Code": "15B17CI578",
-				"Subject": "Data Structures and Algorithms Lab"
-			},
-			{
-				"Code": "CI576",
-				"Full Code": "15B17CI576",
-				"Subject": "Information Security Lab"
-			},
-			{
-				"Code": "CI575",
-				"Full Code": "15B17CI575",
-				"Subject": "Open Source Software lab"
-			},
-			{
-				"Code": "CI582",
-				"Full Code": "15B28CI582",
-				"Subject": "Multimedia Lab"
-			},
-			{
-				"Code": "CS354",
-				"Full Code": "24B11CS354",
-				"Subject": "Data Science and Data Analytics Workshop-2"
-			},
-			{
-				"Code": "CS252",
-				"Full Code": "24B15CS252",
-				"Subject": "Computer Vision Workshop"
-			},
-			{
-				"Code": "HS531",
-				"Full Code": "16B1NHS531",
-				"Subject": "SOCIOLOGY OF YOUTH"
-			},
-			{
-				"Code": "HS312",
-				"Full Code": "21B12HS312",
-				"Subject": "Management Accounting"
-			},
-			{
-				"Code": "HS432",
-				"Full Code": "16B1NHS432",
-				"Subject": "POSITIVE PSYCHOLOGY"
-			},
-			{
-				"Code": "HS435",
-				"Full Code": "16B1NHS435",
-				"Subject": "SOCIOLOGY OF MEDIA"
-			},
-			{
-				"Code": "HS314",
-				"Full Code": "24B12HS314",
-				"Subject": "Contemporary India: A Sociological Perspective"
-			},
-			{
-				"Code": "25HS312",
-				"Full Code": "25B12HS312",
-				"Subject": "Society and Sustainability"
-			},
-			{
-				"Code": "HS315",
-				"Full Code": "24B12HS315",
-				"Subject": "Civil Society Political Regimes and Conflict"
-			},
-			{
-				"Code": "HS433",
-				"Full Code": "16B1NHS433",
-				"Subject": "FINANCIAL MANAGEMENT"
-			},
-			{
-				"Code": "HS434",
-				"Full Code": "16B1NHS434",
-				"Subject": "INTRODUCTION TO CONTEMPORARY FORM OF LITERATURE"
-			},
-			{
-				"Code": "HS311",
-				"Full Code": "25B12HS311",
-				"Subject": "Consumer Behaviour"
-			},
-			{
-				"Code": "HS313",
-				"Full Code": "25B12HS313",
-				"Subject": "Indian English Literature"
-			},
-			{
-				"Code": "EC312",
-				"Full Code": "18B11EC312",
-				"Subject": "Electromagnetic Field Theory"
-			},
-			{
-				"Code": "D1A10",
-				"Full Code": "15B11EC313",
-				"Subject": "Microprocessors and Microcontrollers"
-			},
-			{
-				"Code": "D1A20",
-				"Full Code": "20B12EC211",
-				"Subject": "Introduction to Digital Image and Video Processing"
-			},
-			{
-				"Code": "D1A30",
-				"Full Code": "17B1NEC735",
-				"Subject": "Information Theory and applications"
-			},
-			{
-				"Code": "D1A40",
-				"Full Code": "22B12EC412",
-				"Subject": "Introduction to Power Electronics"
-			},
-			{
-				"Code": "EC413",
-				"Full Code": "15B11EC413",
-				"Subject": "Digital Signal Processing"
-			},
-			{
-				"Code": "11EC315",
-				"Full Code": "18B11EC315",
-				"Subject": "VLSI Design"
-			},
-			{
-				"Code": "EC613",
-				"Full Code": "15B11EC613",
-				"Subject": "Control System"
-			},
-			{
-				"Code": "D4A40",
-				"Full Code": "15B1NEC733",
-				"Subject": "Fundamentals of Embedded Systems - DE-1"
 			},
 			{
 				"Code": "24B31EC311",
@@ -1608,9 +1298,19 @@
 				"Subject": "Wireless and Mobile Communications"
 			},
 			{
-				"Code": "25B31EC311",
-				"Full Code": "25B31EC311",
-				"Subject": "Electromagnetic Waves and Antennas"
+				"Code": "D1A10",
+				"Full Code": "15B11EC313",
+				"Subject": "Microprocessors and Microcontrollers"
+			},
+			{
+				"Code": "HS434",
+				"Full Code": "16B1NHS434",
+				"Subject": "INTRODUCTION TO CONTEMPORARY FORM OF LITERATURE"
+			},
+			{
+				"Code": "15CS212",
+				"Full Code": "18B15CS212",
+				"Subject": "Computer Networks and Security Lab"
 			},
 			{
 				"Code": "31EC312",
@@ -1618,14 +1318,19 @@
 				"Subject": "Applied Optimization Techniques"
 			},
 			{
-				"Code": "EC315",
-				"Full Code": "18B15EC312",
-				"Subject": "Electromagnetic Field Theory Lab"
+				"Code": "15BT571",
+				"Full Code": "15B17BT571",
+				"Subject": "Cell culture Lab"
 			},
 			{
-				"Code": "EC314",
-				"Full Code": "18B15EC314",
-				"Subject": "Python for Signal Processing & Communication Lab"
+				"Code": "25B31EC311",
+				"Full Code": "25B31EC311",
+				"Subject": "Electromagnetic Waves and Antennas"
+			},
+			{
+				"Code": "HS433",
+				"Full Code": "16B1NHS433",
+				"Subject": "FINANCIAL MANAGEMENT"
 			},
 			{
 				"Code": "EC315",
@@ -1638,14 +1343,299 @@
 				"Subject": "Wireless Communication Systems Lab"
 			},
 			{
-				"Code": "35EC311",
-				"Full Code": "25B35EC311",
-				"Subject": "Electromagnetic Waves and Antennas Lab"
+				"Code": "CS331",
+				"Full Code": "20B12CS331",
+				"Subject": "Fundamentals of Machine learning"
+			},
+			{
+				"Code": "EC413",
+				"Full Code": "15B11EC413",
+				"Subject": "Digital Signal Processing"
+			},
+			{
+				"Code": "CS252",
+				"Full Code": "24B15CS252",
+				"Subject": "Computer Vision Workshop"
+			},
+			{
+				"Code": "HS313",
+				"Full Code": "25B12HS313",
+				"Subject": "Indian English Literature"
+			},
+			{
+				"Code": "\u00a0PH535",
+				"Full Code": "\u00a016B1NPH535",
+				"Subject": "Nuclear Science and Engineering"
 			},
 			{
 				"Code": "EC313",
 				"Full Code": "18B15EC313",
 				"Subject": "Embedded Systems/IOT Lab"
+			},
+			{
+				"Code": "nan",
+				"Full Code": "nan",
+				"Subject": "nan"
+			},
+			{
+				"Code": "\u00a0PH534",
+				"Full Code": "\u00a016B1NPH534",
+				"Subject": "Biomaterial Science"
+			},
+			{
+				"Code": "CI576",
+				"Full Code": "15B17CI576",
+				"Subject": "Information Security Lab"
+			},
+			{
+				"Code": "HS311",
+				"Full Code": "25B12HS311",
+				"Subject": "Consumer Behaviour"
+			},
+			{
+				"Code": "EC613",
+				"Full Code": "15B11EC613",
+				"Subject": "Control System"
+			},
+			{
+				"Code": "CI582",
+				"Full Code": "15B28CI582",
+				"Subject": "Multimedia Lab"
+			},
+			{
+				"Code": "\u00a0PH531",
+				"Full Code": "\u00a016B1NPH531",
+				"Subject": "Quantum Mechanics for Engineers"
+			},
+			{
+				"Code": "D1A40",
+				"Full Code": "22B12EC412",
+				"Subject": "Introduction to Power Electronics"
+			},
+			{
+				"Code": "CI313",
+				"Full Code": "15B11CI313",
+				"Subject": "Computer Organisation & Architecture"
+			},
+			{
+				"Code": "HS314",
+				"Full Code": "24B12HS314",
+				"Subject": "Contemporary India: A Sociological Perspective"
+			},
+			{
+				"Code": "CI373",
+				"Full Code": "15B17CI373",
+				"Subject": "Computer Organisation & Architecture Lab"
+			},
+			{
+				"Code": "BT511",
+				"Full Code": "15B11BT511",
+				"Subject": "Cell Culture Technology"
+			},
+			{
+				"Code": "\u00a0PH532",
+				"Full Code": "\u00a016B1NPH532",
+				"Subject": "Material Science"
+			},
+			{
+				"Code": "MA731",
+				"Full Code": "16B1NMA731",
+				"Subject": "Theory of Numbers "
+			},
+			{
+				"Code": "CS212",
+				"Full Code": "18B11CS212",
+				"Subject": "Computer Networks and Security"
+			},
+			{
+				"Code": "12BT311",
+				"Full Code": "21B12BT311",
+				"Subject": "Phenomics"
+			},
+			{
+				"Code": "CS251",
+				"Full Code": "24B11CS251",
+				"Subject": "Fundamentals of Computer Vision"
+			},
+			{
+				"Code": "PH311",
+				"Full Code": "20B12PH311",
+				"Subject": "Engineering Materials and Technology"
+			},
+			{
+				"Code": "BT412",
+				"Full Code": "15B11BT412",
+				"Subject": "Molecular biology and Genetic Engineering"
+			},
+			{
+				"Code": "MA531",
+				"Full Code": "16B1NMA531",
+				"Subject": "Discrete Mathematics "
+			},
+			{
+				"Code": "HS432",
+				"Full Code": "16B1NHS432",
+				"Subject": "POSITIVE PSYCHOLOGY"
+			},
+			{
+				"Code": "25HS312",
+				"Full Code": "25B12HS312",
+				"Subject": "Society and Sustainability"
+			},
+			{
+				"Code": "11EC315",
+				"Full Code": "18B11EC315",
+				"Subject": "VLSI Design"
+			},
+			{
+				"Code": "HS312",
+				"Full Code": "21B12HS312",
+				"Subject": "Management Accounting"
+			},
+			{
+				"Code": "D1A20",
+				"Full Code": "20B12EC211",
+				"Subject": "Introduction to Digital Image and Video Processing"
+			},
+			{
+				"Code": "MA531",
+				"Full Code": "17B1NMA531",
+				"Subject": "Basic Numerical Methods "
+			},
+			{
+				"Code": "11BT413",
+				"Full Code": "15B11BT413",
+				"Subject": "Bioprocess Engineering (DE-1)"
+			},
+			{
+				"Code": "CS334",
+				"Full Code": "20B12CS334",
+				"Subject": "Object Oriented Analysis and Design using Java"
+			},
+			{
+				"Code": "D1A30",
+				"Full Code": "17B1NEC735",
+				"Subject": "Information Theory and applications"
+			},
+			{
+				"Code": "16BT571",
+				"Full Code": "16B17BT571",
+				"Subject": "IT Practice Lab (CS/BT)"
+			},
+			{
+				"Code": "EC312",
+				"Full Code": "18B11EC312",
+				"Subject": " Electromagnetic Field Theory"
+			},
+			{
+				"Code": "CS335",
+				"Full Code": "20B12CS335",
+				"Subject": "Image Processing and Computer Vision"
+			},
+			{
+				"Code": "MA533",
+				"Full Code": "16B1NMA533",
+				"Subject": "Matrix Computaions"
+			},
+			{
+				"Code": "CI576",
+				"Full Code": "15B17CI578",
+				"Subject": "Data Structures and Algorithms Lab"
+			},
+			{
+				"Code": "CS354",
+				"Full Code": "24B11CS354",
+				"Subject": "Data Science and Data Analytics Workshop-2"
+			},
+			{
+				"Code": "HS531",
+				"Full Code": "16B1NHS531",
+				"Subject": "SOCIOLOGY OF YOUTH"
+			},
+			{
+				"Code": "HS435",
+				"Full Code": "16B1NHS435",
+				"Subject": "SOCIOLOGY OF MEDIA"
+			},
+			{
+				"Code": "35EC311",
+				"Full Code": "25B35EC311",
+				"Subject": "Electromagnetic Waves and Antennas Lab "
+			},
+			{
+				"Code": "15BT311",
+				"Full Code": "18B15BT311",
+				"Subject": "Industrial Biotechnology Lab-1"
+			},
+			{
+				"Code": "\u00a0PH533",
+				"Full Code": "\u00a016B1NPH533",
+				"Subject": "Laser Technology and Applications"
+			},
+			{
+				"Code": "EC315",
+				"Full Code": "18B15EC312",
+				"Subject": "Electromagnetic Field Theory Lab"
+			},
+			{
+				"Code": "EC314",
+				"Full Code": "18B15EC314",
+				"Subject": "Python for Signal Processing & Communication Lab"
+			},
+			{
+				"Code": "CS332",
+				"Full Code": "20B12CS332",
+				"Subject": "Fundamentals of Computer security"
+			},
+			{
+				"Code": "D4A40",
+				"Full Code": "15B1NEC733",
+				"Subject": "Fundamentals of Embedded Systems - DE-1"
+			},
+			{
+				"Code": "CI472",
+				"Full Code": "15B17CI472",
+				"Subject": "Operating Systems and Systems Lab\n  Programming"
+			},
+			{
+				"Code": "CI575",
+				"Full Code": "15B17CI575",
+				"Subject": "Open Source Software lab"
+			},
+			{
+				"Code": "CS353",
+				"Full Code": "24B11CS353",
+				"Subject": "Data Science and Data Analytics: Essential Statistics"
+			},
+			{
+				"Code": "CI518",
+				"Full Code": "15B11CI518",
+				"Subject": "Data Structures and Algorithms"
+			},
+			{
+				"Code": "CS333",
+				"Full Code": "20B12CS333",
+				"Subject": "Introduction to Big data and Data Analytics"
+			},
+			{
+				"Code": "BT472",
+				"Full Code": "15B17BT472",
+				"Subject": "Genetic Engineering Lab"
+			},
+			{
+				"Code": "CI412",
+				"Full Code": "15B11CI412",
+				"Subject": "Operating Systems and Systems\n  Programming"
+			},
+			{
+				"Code": "HS315",
+				"Full Code": "24B12HS315",
+				"Subject": "Civil Society Political Regimes and Conflict"
+			},
+			{
+				"Code": "MA533",
+				"Full Code": "LABC(16B1NMA533)-/MKB",
+				"Subject": "Matrix Computaions"
 			}
 		]
 	},

@@ -337,24 +337,27 @@ def subject_json_generator(df):
                                 r["cols"][1] - 1,
                             )
 
-                            combined_code = str(row_data.iat[code_full_code_col])
-                            subject = str(row_data.iat[subject_col])
+                            combined_code_val = row_data.iat[code_full_code_col]
+                            subject_val = row_data.iat[subject_col]
 
-                            if (
-                                pd.notna(combined_code)
-                                and pd.notna(subject)
-                                and "/" in combined_code
-                            ):
-                                parts = combined_code.split("/")
-                                full_code = parts[0].strip()
-                                code = parts[1].strip()
-                                subject_list.append(
-                                    {
-                                        "Code": code,
-                                        "Full Code": full_code,
-                                        "Subject": subject,
-                                    }
-                                )
+                            if pd.notna(combined_code_val) and pd.notna(subject_val):
+                                combined_code = str(combined_code_val).strip()
+                                subject = str(subject_val).strip()
+
+                                if subject and "/" in combined_code:
+                                    parts = combined_code.split("/", 1)
+                                    full_code = parts[0].strip()
+                                    code = parts[1].strip()
+                                    if (
+                                        code and full_code
+                                    ):  # ensure both parts are non-empty
+                                        subject_list.append(
+                                            {
+                                                "Code": code,
+                                                "Full Code": full_code,
+                                                "Subject": subject,
+                                            }
+                                        )
 
                         else:  # num_cols == 3
                             code_col, full_code_col, subject_col = (
@@ -363,22 +366,27 @@ def subject_json_generator(df):
                                 r["cols"][2] - 1,
                             )
 
-                            code = str(row_data.iat[code_col])
-                            full_code = str(row_data.iat[full_code_col])
-                            subject = str(row_data.iat[subject_col])
+                            code_val = row_data.iat[code_col]
+                            full_code_val = row_data.iat[full_code_col]
+                            subject_val = row_data.iat[subject_col]
 
                             if (
-                                pd.notna(code)
-                                and pd.notna(full_code)
-                                and pd.notna(subject)
+                                pd.notna(code_val)
+                                and pd.notna(full_code_val)
+                                and pd.notna(subject_val)
                             ):
-                                subject_list.append(
-                                    {
-                                        "Code": code,
-                                        "Full Code": full_code,
-                                        "Subject": subject,
-                                    }
-                                )
+                                code = str(code_val).strip()
+                                full_code = str(full_code_val).strip()
+                                subject = str(subject_val).strip()
+
+                                if code and full_code and subject:
+                                    subject_list.append(
+                                        {
+                                            "Code": code,
+                                            "Full Code": full_code,
+                                            "Subject": subject,
+                                        }
+                                    )
 
                 # remove duplicates
                 unique_subjects = [

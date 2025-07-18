@@ -1,3 +1,4 @@
+import React from "react";
 import { useState, useContext, useEffect, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Button } from "./ui/button";
@@ -52,6 +53,7 @@ interface ScheduleFormProps {
 	onSaveConfig?: (name: string, configData: any) => void;
 	savedConfigs?: { [key: string]: any };
 	autoSubmitKey?: string;
+	useLocalState?: boolean;
 }
 
 interface Subject {
@@ -68,25 +70,34 @@ export function ScheduleForm({
 	onSaveConfig,
 	savedConfigs,
 	autoSubmitKey,
+	useLocalState = false,
 }: ScheduleFormProps) {
 	const { setEditedSchedule } = useContext(UserContext);
-	const [year, setYear] = useQueryState("year", parseAsString.withDefault(""));
-	const [batch, setBatch] = useQueryState(
-		"batch",
-		parseAsString.withDefault("")
-	);
-	const [campus, setCampus] = useQueryState(
-		"campus",
-		parseAsString.withDefault("")
-	);
-	const [electiveCount, setElectiveCount] = useQueryState(
-		"electiveCount",
-		parseAsInteger.withDefault(0)
-	);
-	const [selectedElectives, setSelectedElectives] = useQueryState(
-		"selectedElectives",
-		parseAsArrayOf(parseAsString).withDefault([])
-	);
+
+	// State hooks for local or query state
+	const _year = useLocalState
+		? React.useState("")
+		: useQueryState("year", parseAsString.withDefault(""));
+	const [year, setYear] = _year;
+	const _batch = useLocalState
+		? React.useState("")
+		: useQueryState("batch", parseAsString.withDefault(""));
+	const [batch, setBatch] = _batch;
+	const _campus = useLocalState
+		? React.useState("")
+		: useQueryState("campus", parseAsString.withDefault(""));
+	const [campus, setCampus] = _campus;
+	const _electiveCount = useLocalState
+		? React.useState(0)
+		: useQueryState("electiveCount", parseAsInteger.withDefault(0));
+	const [electiveCount, setElectiveCount] = _electiveCount;
+	const _selectedElectives = useLocalState
+		? React.useState<string[]>([])
+		: useQueryState(
+				"selectedElectives",
+				parseAsArrayOf(parseAsString).withDefault([])
+		  );
+	const [selectedElectives, setSelectedElectives] = _selectedElectives;
 	const [isGenerating, setIsGenerating] = useState(false);
 
 	// Modal state

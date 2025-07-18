@@ -125,7 +125,6 @@ const CompareTimetablePage: React.FC = () => {
 							mapping128={mapping128}
 							onSubmit={handleSubmit1}
 							savedConfigs={{}}
-							useLocalState={true}
 						/>
 					</div>
 					<div className="flex-1 bg-white/5 rounded-xl border border-white/10 shadow-xl p-4">
@@ -137,7 +136,6 @@ const CompareTimetablePage: React.FC = () => {
 							mapping128={mapping128}
 							onSubmit={handleSubmit2}
 							savedConfigs={{}}
-							useLocalState={true}
 						/>
 					</div>
 				</div>

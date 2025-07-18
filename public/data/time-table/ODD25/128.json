@@ -802,59 +802,9 @@
 		},
 		"subjects": [
 			{
-				"Code": "15B11CI313",
-				"Full Code": "15B11CI313",
-				"Subject": "Computer Organisation and Architecture"
-			},
-			{
-				"Code": "15B11CI412",
-				"Full Code": "15B11CI412",
-				"Subject": "Operating Systems and Systems Programming"
-			},
-			{
-				"Code": "15B19CI591",
-				"Full Code": "15B19CI591",
-				"Subject": "Minor Project – 1"
-			},
-			{
-				"Code": "15B17CI373",
-				"Full Code": "15B17CI373",
-				"Subject": "Computer Organisation and Architecture Lab"
-			},
-			{
-				"Code": "15B17CI472",
-				"Full Code": "15B17CI472",
-				"Subject": "Operating Systems and Systems Programming Lab"
-			},
-			{
-				"Code": "15B17CI575",
-				"Full Code": "15B17CI575",
-				"Subject": "Open Source Software Lab"
-			},
-			{
-				"Code": "15B17CI576",
-				"Full Code": "15B17CI576",
-				"Subject": "Information Security Lab"
-			},
-			{
-				"Code": "20B13HS311",
-				"Full Code": "20B13HS311",
-				"Subject": "Indian Constitution & Traditional Knowledge"
-			},
-			{
-				"Code": "19B12HS311",
-				"Full Code": "19B12HS311",
-				"Subject": "Entrepreneurship Development"
-			},
-			{
-				"Code": "16B1NHS532",
-				"Full Code": "16B1NHS532",
-				"Subject": "Planning & Economic Development"
-			},
-			{
-				"Code": "16B1NHS433",
-				"Full Code": "16B1NHS433",
-				"Subject": "Financial Management"
+				"Code": "18B15EC314",
+				"Full Code": "18B15EC314",
+				"Subject": "Python for Signal Processing & Communication"
 			},
 			{
 				"Code": "16B1NHS432",
@@ -862,19 +812,9 @@
 				"Subject": "Positive Psychology"
 			},
 			{
-				"Code": "16B1NHS531",
-				"Full Code": "16B1NHS531",
-				"Subject": "Sociology of Youth"
-			},
-			{
-				"Code": "15B11CI518",
-				"Full Code": "15B11CI518",
-				"Subject": "Data Structures and Algorithms"
-			},
-			{
-				"Code": "15B19EC591",
-				"Full Code": "15B19EC591",
-				"Subject": "Minor Project - 1"
+				"Code": "20B12CS331",
+				"Full Code": "20B12CS331",
+				"Subject": "Fundamentals of Machine learning"
 			},
 			{
 				"Code": "15B17CI578",
@@ -882,14 +822,24 @@
 				"Subject": "Data Structures and Algorithms Lab"
 			},
 			{
-				"Code": "18B15EC312",
-				"Full Code": "18B15EC312",
-				"Subject": "Electromagnetic Field Theory Lab"
+				"Code": "16B1NHS532",
+				"Full Code": "16B1NHS532",
+				"Subject": "Planning & Economic Development"
 			},
 			{
-				"Code": "18B15EC314",
-				"Full Code": "18B15EC314",
-				"Subject": "Python for Signal Processing & Communication"
+				"Code": "20B12EC211",
+				"Full Code": "20B12EC211",
+				"Subject": "INTRODUCTION TO DIGITAL IMAGE AND"
+			},
+			{
+				"Code": "15B11CI313",
+				"Full Code": "15B11CI313",
+				"Subject": "Computer Organisation and Architecture"
+			},
+			{
+				"Code": "15B11EC313",
+				"Full Code": "15B11EC313",
+				"Subject": "MICROPROCESSORS AND"
 			},
 			{
 				"Code": "18B11EC312",
@@ -897,14 +847,19 @@
 				"Subject": "Electromagnetic Field Theory"
 			},
 			{
-				"Code": "18B15EC313",
-				"Full Code": "18B15EC313",
-				"Subject": "Embedded Systems/IOT Lab"
+				"Code": "20B12CS336",
+				"Full Code": "20B12CS336",
+				"Subject": "Automata Theory and its applications"
 			},
 			{
-				"Code": "20B12CS331",
-				"Full Code": "20B12CS331",
-				"Subject": "Fundamentals of Machine learning"
+				"Code": "16B1NPH533",
+				"Full Code": "16B1NPH533",
+				"Subject": "Laser Technology and Applications"
+			},
+			{
+				"Code": "15B17CI576",
+				"Full Code": "15B17CI576",
+				"Subject": "Information Security Lab"
 			},
 			{
 				"Code": "20B12CS332",
@@ -917,34 +872,14 @@
 				"Subject": "Introduction to Big data and Data Analytics"
 			},
 			{
-				"Code": "20B12CS334",
-				"Full Code": "20B12CS334",
-				"Subject": "Object Oriented Analysis and Design using Java"
-			},
-			{
 				"Code": "20B12CS335",
 				"Full Code": "20B12CS335",
 				"Subject": "Image Processing and Computer Vision"
 			},
 			{
-				"Code": "20B12CS336",
-				"Full Code": "20B12CS336",
-				"Subject": "Automata Theory and its applications"
-			},
-			{
-				"Code": "16B1NPH531",
-				"Full Code": "16B1NPH531",
-				"Subject": "Quantum Mechanics for Engineers"
-			},
-			{
-				"Code": "16B1NPH532",
-				"Full Code": "16B1NPH532",
-				"Subject": "Materials Science"
-			},
-			{
-				"Code": "16B1NPH533",
-				"Full Code": "16B1NPH533",
-				"Subject": "Laser Technology and Applications"
+				"Code": "15B17CI575",
+				"Full Code": "15B17CI575",
+				"Subject": "Open Source Software lab"
 			},
 			{
 				"Code": "16B1NPH535",
@@ -957,11 +892,6 @@
 				"Subject": "Matrix Computations"
 			},
 			{
-				"Code": "17B1NMA533",
-				"Full Code": "17B1NMA533",
-				"Subject": "Statistical Information Theory with Applications"
-			},
-			{
 				"Code": "18B12MA312",
 				"Full Code": "18B12MA312",
 				"Subject": "Logical Reasoning and Inequalities"
@@ -972,9 +902,74 @@
 				"Subject": "Basic Numerical Methods"
 			},
 			{
-				"Code": "15B11EC313",
-				"Full Code": "15B11EC313",
-				"Subject": "MICROPROCESSORS AND"
+				"Code": "16B1NHS433",
+				"Full Code": "16B1NHS433",
+				"Subject": "Financial Management"
+			},
+			{
+				"Code": "16B1NPH531",
+				"Full Code": "16B1NPH531",
+				"Subject": "Quantum Mechanics for Engineers"
+			},
+			{
+				"Code": "15B17CI373",
+				"Full Code": "15B17CI373",
+				"Subject": "Computer Organisation and Architecture Lab"
+			},
+			{
+				"Code": "20B13HS311",
+				"Full Code": "20B13HS311",
+				"Subject": "Indian Constitution & Traditional Knowledge"
+			},
+			{
+				"Code": "20B12CS334",
+				"Full Code": "20B12CS334",
+				"Subject": "Object Oriented Analysis and Design using Java"
+			},
+			{
+				"Code": "16B1NHS531",
+				"Full Code": "16B1NHS531",
+				"Subject": "Sociology of Youth"
+			},
+			{
+				"Code": "18B15EC312",
+				"Full Code": "18B15EC312",
+				"Subject": "Electromagnetic Field Theory Lab"
+			},
+			{
+				"Code": "15B11CI518",
+				"Full Code": "15B11CI518",
+				"Subject": "Data Structures and Algorithms"
+			},
+			{
+				"Code": "17B1NMA533",
+				"Full Code": "17B1NMA533",
+				"Subject": "Statistical Information Theory with Applications"
+			},
+			{
+				"Code": "19B12HS311",
+				"Full Code": "19B12HS311",
+				"Subject": "Entreprenurship Development"
+			},
+			{
+				"Code": "15B11CI412",
+				"Full Code": "15B11CI412",
+				"Subject": "Operating Systems and Systems Programming"
+			},
+			{
+				"Code": "16B1NPH532",
+				"Full Code": "16B1NPH532",
+				"Subject": "Materials Science"
+			},
+			{
+				"Code": "15B17CI472",
+				"Full Code": "15B17CI472",
+				"Subject": "Operating Systems and Systems Programming Lab"
+			},
+			{
+				"Code": "18B15EC313",
+				"Full Code": "18B15EC313",
+				"Subject": "Embedded Systems/IOT Lab"
 			},
 			{
 				"Code": "17B1NEC735",
@@ -982,9 +977,14 @@
 				"Subject": "INFORMATION THEORY AND APPLICATIONS"
 			},
 			{
-				"Code": "20B12EC211",
-				"Full Code": "20B12EC211",
-				"Subject": "INTRODUCTION TO DIGITAL IMAGE"
+				"Code": "15B19EC591",
+				"Full Code": "15B19EC591",
+				"Subject": "Minor Project – 1"
+			},
+			{
+				"Code": "15B19CI591",
+				"Full Code": "15B19CI591",
+				"Subject": "Minor Project – 1"
 			}
 		]
 	}

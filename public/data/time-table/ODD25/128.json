@@ -807,129 +807,184 @@
 				"Subject": "Computer Organisation and Architecture"
 			},
 			{
-				"Code": "15B11CI312",
-				"Full Code": "15B11CI312",
+				"Code": "15B11CI412",
+				"Full Code": "15B11CI412",
 				"Subject": "Operating Systems and Systems Programming"
 			},
 			{
-				"Code": "15B19CI391",
-				"Full Code": "15B19CI391",
+				"Code": "15B19CI591",
+				"Full Code": "15B19CI591",
 				"Subject": "Minor Project – 1"
 			},
 			{
-				"Code": "15B11CI319",
-				"Full Code": "15B11CI319",
+				"Code": "15B17CI373",
+				"Full Code": "15B17CI373",
 				"Subject": "Computer Organisation and Architecture Lab"
 			},
 			{
-				"Code": "15B11CI318",
-				"Full Code": "15B11CI318",
+				"Code": "15B17CI472",
+				"Full Code": "15B17CI472",
 				"Subject": "Operating Systems and Systems Programming Lab"
 			},
 			{
-				"Code": "15B11CI315",
-				"Full Code": "15B11CI315",
+				"Code": "15B17CI575",
+				"Full Code": "15B17CI575",
+				"Subject": "Open Source Software Lab"
+			},
+			{
+				"Code": "15B17CI576",
+				"Full Code": "15B17CI576",
 				"Subject": "Information Security Lab"
 			},
 			{
-				"Code": "15B11CI316",
-				"Full Code": "15B11CI316",
+				"Code": "20B13HS311",
+				"Full Code": "20B13HS311",
 				"Subject": "Indian Constitution & Traditional Knowledge"
 			},
 			{
-				"Code": "15B11CI317",
-				"Full Code": "15B11CI317",
+				"Code": "19B12HS311",
+				"Full Code": "19B12HS311",
 				"Subject": "Entrepreneurship Development"
 			},
 			{
-				"Code": "15B11CI314",
-				"Full Code": "15B11CI314",
-				"Subject": "Planning & Research Development"
+				"Code": "16B1NHS532",
+				"Full Code": "16B1NHS532",
+				"Subject": "Planning & Economic Development"
 			},
 			{
-				"Code": "15B11CI311",
-				"Full Code": "15B11CI311",
-				"Subject": "Professional Communication"
+				"Code": "16B1NHS433",
+				"Full Code": "16B1NHS433",
+				"Subject": "Financial Management"
 			},
 			{
-				"Code": "15B11CI321",
-				"Full Code": "15B11CI321",
-				"Subject": "Reading for Joy of Youth"
+				"Code": "16B1NHS432",
+				"Full Code": "16B1NHS432",
+				"Subject": "Positive Psychology"
 			},
 			{
-				"Code": "15B11CI322",
-				"Full Code": "15B11CI322",
+				"Code": "16B1NHS531",
+				"Full Code": "16B1NHS531",
+				"Subject": "Sociology of Youth"
+			},
+			{
+				"Code": "15B11CI518",
+				"Full Code": "15B11CI518",
 				"Subject": "Data Structures and Algorithms"
 			},
 			{
-				"Code": "15B11CI323",
-				"Full Code": "15B11CI323",
+				"Code": "15B19EC591",
+				"Full Code": "15B19EC591",
+				"Subject": "Minor Project - 1"
+			},
+			{
+				"Code": "15B17CI578",
+				"Full Code": "15B17CI578",
 				"Subject": "Data Structures and Algorithms Lab"
 			},
 			{
-				"Code": "15B11CI324",
-				"Full Code": "15B11CI324",
-				"Subject": "Discrete Signal Processing"
+				"Code": "18B15EC312",
+				"Full Code": "18B15EC312",
+				"Subject": "Electromagnetic Field Theory Lab"
 			},
 			{
-				"Code": "15B11CI325",
-				"Full Code": "15B11CI325",
-				"Subject": "Randomized System/IoT Lab"
+				"Code": "18B15EC314",
+				"Full Code": "18B15EC314",
+				"Subject": "Python for Signal Processing & Communication"
 			},
 			{
-				"Code": "21B12CS311",
-				"Full Code": "21B12CS311",
-				"Subject": "Fundamentals of Machine Learning"
+				"Code": "18B11EC312",
+				"Full Code": "18B11EC312",
+				"Subject": "Electromagnetic Field Theory"
 			},
 			{
-				"Code": "21B12CS312",
-				"Full Code": "21B12CS312",
-				"Subject": "Introduction to Computer Networks and Internet of Things"
+				"Code": "18B15EC313",
+				"Full Code": "18B15EC313",
+				"Subject": "Embedded Systems/IOT Lab"
 			},
 			{
-				"Code": "21B12CS313",
-				"Full Code": "21B12CS313",
-				"Subject": "Introduction to Big Data and Cloud Computing"
+				"Code": "20B12CS331",
+				"Full Code": "20B12CS331",
+				"Subject": "Fundamentals of Machine learning"
 			},
 			{
-				"Code": "21B12CS314",
-				"Full Code": "21B12CS314",
-				"Subject": "Automata Theory and Computability"
+				"Code": "20B12CS332",
+				"Full Code": "20B12CS332",
+				"Subject": "Fundamentals of Computer security"
 			},
 			{
-				"Code": "21B12CS315",
-				"Full Code": "21B12CS315",
-				"Subject": "Numerical Methods for Engineers"
+				"Code": "20B12CS333",
+				"Full Code": "20B12CS333",
+				"Subject": "Introduction to Big data and Data Analytics"
 			},
 			{
-				"Code": "21B12CS316",
-				"Full Code": "21B12CS316",
-				"Subject": "Laser Technology"
+				"Code": "20B12CS334",
+				"Full Code": "20B12CS334",
+				"Subject": "Object Oriented Analysis and Design using Java"
 			},
 			{
-				"Code": "21B12CS317",
-				"Full Code": "21B12CS317",
-				"Subject": "Matrix Computation"
+				"Code": "20B12CS335",
+				"Full Code": "20B12CS335",
+				"Subject": "Image Processing and Computer Vision"
 			},
 			{
-				"Code": "21B12CS318",
-				"Full Code": "21B12CS318",
-				"Subject": "Legal Informatics and Cyber Law"
+				"Code": "20B12CS336",
+				"Full Code": "20B12CS336",
+				"Subject": "Automata Theory and its applications"
 			},
 			{
-				"Code": "17B1NEC741",
-				"Full Code": "17B1NEC741",
-				"Subject": "MICROPROCESSORS AND MICROCONTROLLERS"
+				"Code": "16B1NPH531",
+				"Full Code": "16B1NPH531",
+				"Subject": "Quantum Mechanics for Engineers"
 			},
 			{
-				"Code": "17B1NEC742",
-				"Full Code": "17B1NEC742",
-				"Subject": "INFORMATION THEORY AND CODING"
+				"Code": "16B1NPH532",
+				"Full Code": "16B1NPH532",
+				"Subject": "Materials Science"
 			},
 			{
-				"Code": "17B1NEC743",
-				"Full Code": "17B1NEC743",
-				"Subject": "VLSI DESIGN"
+				"Code": "16B1NPH533",
+				"Full Code": "16B1NPH533",
+				"Subject": "Laser Technology and Applications"
+			},
+			{
+				"Code": "16B1NPH535",
+				"Full Code": "16B1NPH535",
+				"Subject": "Nuclear Science and Engineering"
+			},
+			{
+				"Code": "16B1NMA533",
+				"Full Code": "16B1NMA533",
+				"Subject": "Matrix Computations"
+			},
+			{
+				"Code": "17B1NMA533",
+				"Full Code": "17B1NMA533",
+				"Subject": "Statistical Information Theory with Applications"
+			},
+			{
+				"Code": "18B12MA312",
+				"Full Code": "18B12MA312",
+				"Subject": "Logical Reasoning and Inequalities"
+			},
+			{
+				"Code": "17B1NMA531",
+				"Full Code": "17B1NMA531",
+				"Subject": "Basic Numerical Methods"
+			},
+			{
+				"Code": "15B11EC313",
+				"Full Code": "15B11EC313",
+				"Subject": "MICROPROCESSORS AND"
+			},
+			{
+				"Code": "17B1NEC735",
+				"Full Code": "17B1NEC735",
+				"Subject": "INFORMATION THEORY AND APPLICATIONS"
+			},
+			{
+				"Code": "20B12EC211",
+				"Full Code": "20B12EC211",
+				"Subject": "INTRODUCTION TO DIGITAL IMAGE"
 			}
 		]
 	}

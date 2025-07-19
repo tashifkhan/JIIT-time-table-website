@@ -465,7 +465,14 @@ const CompareTimetablePage: React.FC = () => {
 													// Extract start time from slot (e.g., "09:00-09:50" -> "09:00")
 													const timeA = a.split('-')[0];
 													const timeB = b.split('-')[0];
-													return timeA.localeCompare(timeB);
+													
+													// Convert time to minutes for proper numerical comparison
+													const getMinutes = (time: string) => {
+														const [hours, minutes] = time.split(':').map(Number);
+														return hours * 60 + minutes;
+													};
+													
+													return getMinutes(timeA) - getMinutes(timeB);
 												});
 
 												return (
@@ -520,7 +527,14 @@ const CompareTimetablePage: React.FC = () => {
 													// Extract start time (e.g., "09:00-09:50" -> "09:00")
 													const startTimeA = timeA.split('-')[0];
 													const startTimeB = timeB.split('-')[0];
-													return startTimeA.localeCompare(startTimeB);
+													
+													// Convert time to minutes for proper numerical comparison
+													const getMinutes = (time: string) => {
+														const [hours, minutes] = time.split(':').map(Number);
+														return hours * 60 + minutes;
+													};
+													
+													return getMinutes(startTimeA) - getMinutes(startTimeB);
 												});
 
 												return (

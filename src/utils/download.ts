@@ -1,8 +1,6 @@
 import { toPng } from 'html-to-image';
 import jsPDF from 'jspdf';
 
-const RENDER_DELAY = 2000; // fallback delay if needed
-
 // Add callbacks for progress, success, and error
 export const downloadAsPng = async (
   elementId: string,

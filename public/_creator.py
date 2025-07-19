@@ -160,7 +160,7 @@ def batch_extractor(text: str) -> str:
         if start_bracket != -1:
             return text[1:start_bracket].strip()
 
-        if text.strip()[0] != "L":
+        if text.strip()[0] not in ["L", "P", "T"]:
             return "ABCDGH"
         else:
             if start_bracket == -1:
@@ -186,7 +186,7 @@ def subject_extractor(text: str) -> str:
             elif dash := text.find("-"):
                 return text[start_bracket + 1 : dash]
 
-        if (text := text.strip())[0] != "L":
+        if (text := text.strip())[0] not in ["L", "P", "T"]:
             dash_idx = text.find("-")
 
             if dash_idx != -1:

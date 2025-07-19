@@ -153,8 +153,8 @@ const CompareTimetablePage: React.FC = () => {
 						Find common free slots and classes together between two schedules
 					</p>
 				</motion.div>
-				
-				<motion.div 
+
+				<motion.div
 					className="flex flex-col lg:flex-row gap-6 w-full max-w-6xl"
 					initial={{ opacity: 0, y: 20 }}
 					animate={{ opacity: 1, y: 0 }}
@@ -182,8 +182,12 @@ const CompareTimetablePage: React.FC = () => {
 										<SelectValue placeholder="Select campus" />
 									</SelectTrigger>
 									<SelectContent className="bg-[#FFF0DC]/20 backdrop-blur-2xl border-[#F0BB78]/20">
-										<SelectItem value="62" className="hover:bg-white/20">Campus 62</SelectItem>
-										<SelectItem value="128" className="hover:bg-white/20">Campus 128</SelectItem>
+										<SelectItem value="62" className="hover:bg-white/20">
+											Campus 62
+										</SelectItem>
+										<SelectItem value="128" className="hover:bg-white/20">
+											Campus 128
+										</SelectItem>
 									</SelectContent>
 								</Select>
 							</div>
@@ -193,16 +197,26 @@ const CompareTimetablePage: React.FC = () => {
 								</label>
 								<Select
 									value={config1.year}
-									onValueChange={(value) => handleConfigChange(1, "year", value)}
+									onValueChange={(value) =>
+										handleConfigChange(1, "year", value)
+									}
 								>
 									<SelectTrigger className="h-9 sm:h-10 text-sm bg-[#FFF0DC]/10 border-[#F0BB78]/20 backdrop-blur-md hover:bg-[#FFF0DC]/15 transition-all">
 										<SelectValue placeholder="Select year" />
 									</SelectTrigger>
 									<SelectContent className="bg-[#FFF0DC]/20 backdrop-blur-2xl border-[#F0BB78]/20">
-										<SelectItem value="1" className="hover:bg-white/20">1st Year</SelectItem>
-										<SelectItem value="2" className="hover:bg-white/20">2nd Year</SelectItem>
-										<SelectItem value="3" className="hover:bg-white/20">3rd Year</SelectItem>
-										<SelectItem value="4" className="hover:bg-white/20">4th Year</SelectItem>
+										<SelectItem value="1" className="hover:bg-white/20">
+											1st Year
+										</SelectItem>
+										<SelectItem value="2" className="hover:bg-white/20">
+											2nd Year
+										</SelectItem>
+										<SelectItem value="3" className="hover:bg-white/20">
+											3rd Year
+										</SelectItem>
+										<SelectItem value="4" className="hover:bg-white/20">
+											4th Year
+										</SelectItem>
 									</SelectContent>
 								</Select>
 							</div>
@@ -238,9 +252,10 @@ const CompareTimetablePage: React.FC = () => {
 									{selectedSubjects1.length > 0 && (
 										<div className="flex flex-wrap gap-2">
 											{selectedSubjects1.map((code) => {
-												const subj = getSubjects(config1.campus, config1.year).find(
-													(s) => s.Code === code
-												);
+												const subj = getSubjects(
+													config1.campus,
+													config1.year
+												).find((s) => s.Code === code);
 												return (
 													<div
 														key={code}
@@ -279,7 +294,7 @@ const CompareTimetablePage: React.FC = () => {
 							)}
 						</div>
 					</div>
-					
+
 					{/* Timetable 2 Form */}
 					<div className="flex-1 bg-white/5 backdrop-blur-xl rounded-xl sm:rounded-2xl border border-white/10 shadow-xl overflow-hidden">
 						<div className="bg-gradient-to-r from-[#543A14]/10 to-[#F0BB78]/10 px-6 py-4 border-b border-white/10">
@@ -302,8 +317,12 @@ const CompareTimetablePage: React.FC = () => {
 										<SelectValue placeholder="Select campus" />
 									</SelectTrigger>
 									<SelectContent className="bg-[#FFF0DC]/20 backdrop-blur-2xl border-[#F0BB78]/20">
-										<SelectItem value="62" className="hover:bg-white/20">Campus 62</SelectItem>
-										<SelectItem value="128" className="hover:bg-white/20">Campus 128</SelectItem>
+										<SelectItem value="62" className="hover:bg-white/20">
+											Campus 62
+										</SelectItem>
+										<SelectItem value="128" className="hover:bg-white/20">
+											Campus 128
+										</SelectItem>
 									</SelectContent>
 								</Select>
 							</div>
@@ -313,16 +332,26 @@ const CompareTimetablePage: React.FC = () => {
 								</label>
 								<Select
 									value={config2.year}
-									onValueChange={(value) => handleConfigChange(2, "year", value)}
+									onValueChange={(value) =>
+										handleConfigChange(2, "year", value)
+									}
 								>
 									<SelectTrigger className="h-9 sm:h-10 text-sm bg-[#FFF0DC]/10 border-[#F0BB78]/20 backdrop-blur-md hover:bg-[#FFF0DC]/15 transition-all">
 										<SelectValue placeholder="Select year" />
 									</SelectTrigger>
 									<SelectContent className="bg-[#FFF0DC]/20 backdrop-blur-2xl border-[#F0BB78]/20">
-										<SelectItem value="1" className="hover:bg-white/20">1st Year</SelectItem>
-										<SelectItem value="2" className="hover:bg-white/20">2nd Year</SelectItem>
-										<SelectItem value="3" className="hover:bg-white/20">3rd Year</SelectItem>
-										<SelectItem value="4" className="hover:bg-white/20">4th Year</SelectItem>
+										<SelectItem value="1" className="hover:bg-white/20">
+											1st Year
+										</SelectItem>
+										<SelectItem value="2" className="hover:bg-white/20">
+											2nd Year
+										</SelectItem>
+										<SelectItem value="3" className="hover:bg-white/20">
+											3rd Year
+										</SelectItem>
+										<SelectItem value="4" className="hover:bg-white/20">
+											4th Year
+										</SelectItem>
 									</SelectContent>
 								</Select>
 							</div>
@@ -358,9 +387,10 @@ const CompareTimetablePage: React.FC = () => {
 									{selectedSubjects2.length > 0 && (
 										<div className="flex flex-wrap gap-2">
 											{selectedSubjects2.map((code) => {
-												const subj = getSubjects(config2.campus, config2.year).find(
-													(s) => s.Code === code
-												);
+												const subj = getSubjects(
+													config2.campus,
+													config2.year
+												).find((s) => s.Code === code);
 												return (
 													<div
 														key={code}
@@ -400,7 +430,7 @@ const CompareTimetablePage: React.FC = () => {
 						</div>
 					</div>
 				</motion.div>
-				
+
 				<motion.div
 					className="flex justify-center w-full"
 					initial={{ opacity: 0, y: 20 }}
@@ -432,58 +462,87 @@ const CompareTimetablePage: React.FC = () => {
 						transition={{ duration: 0.5 }}
 					>
 						<div className="bg-gradient-to-r from-[#F0BB78]/10 to-[#543A14]/10 px-4 sm:px-6 py-3 sm:py-4 border-b border-white/10">
-							<h2 className="text-lg sm:text-xl lg:text-2xl font-bold text-[#F0BB78]">Comparison Results</h2>
+							<h2 className="text-lg sm:text-xl lg:text-2xl font-bold text-[#F0BB78]">
+								Comparison Results
+							</h2>
 						</div>
 						<div className="p-4 sm:p-6 space-y-6 sm:space-y-8">
 							{/* Common Free Slots Section */}
 							<div className="space-y-3 sm:space-y-4">
 								<div className="flex items-center gap-2 sm:gap-3">
 									<div className="w-2.5 h-2.5 sm:w-3 sm:h-3 bg-gradient-to-r from-[#F0BB78] to-[#543A14] rounded-full"></div>
-									<h3 className="text-base sm:text-lg font-semibold text-white">Common Free Slots</h3>
+									<h3 className="text-base sm:text-lg font-semibold text-white">
+										Common Free Slots
+									</h3>
 								</div>
-								{Object.keys(compareResult.common_free_slots || {}).length === 0 ? (
+								{Object.keys(compareResult.common_free_slots || {}).length ===
+								0 ? (
 									<div className="bg-white/5 rounded-lg sm:rounded-xl p-4 sm:p-6 border border-white/10">
-										<p className="text-slate-300/80 text-center text-sm sm:text-base">No common free slots found.</p>
+										<p className="text-slate-300/80 text-center text-sm sm:text-base">
+											No common free slots found.
+										</p>
 									</div>
 								) : (
 									<div className="space-y-3 sm:space-y-4">
 										{(() => {
 											// Define day order for proper sorting
-											const dayOrder = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
-											
+											const dayOrder = [
+												"Monday",
+												"Tuesday",
+												"Wednesday",
+												"Thursday",
+												"Friday",
+												"Saturday",
+												"Sunday",
+											];
+
 											// Sort days according to the defined order
-											const sortedDays = Object.keys(compareResult.common_free_slots).sort((a, b) => {
+											const sortedDays = Object.keys(
+												compareResult.common_free_slots
+											).sort((a, b) => {
 												const aIndex = dayOrder.indexOf(a);
 												const bIndex = dayOrder.indexOf(b);
 												return aIndex - bIndex;
 											});
 
 											return sortedDays.map((day) => {
-												const slots = compareResult.common_free_slots[day] as string[];
+												const slots = compareResult.common_free_slots[
+													day
+												] as string[];
 												// Sort slots within each day by time
 												const sortedSlots = [...slots].sort((a, b) => {
 													// Extract start time from slot (e.g., "09:00-09:50" -> "09:00")
-													const timeA = a.split('-')[0];
-													const timeB = b.split('-')[0];
-													
+													const timeA = a.split("-")[0];
+													const timeB = b.split("-")[0];
+
 													// Convert time to minutes for proper numerical comparison
 													const getMinutes = (time: string) => {
-														const [hours, minutes] = time.split(':').map(Number);
+														const [hours, minutes] = time
+															.split(":")
+															.map(Number);
 														return hours * 60 + minutes;
 													};
-													
+
 													return getMinutes(timeA) - getMinutes(timeB);
 												});
 
 												return (
-													<div key={day} className="bg-white/5 rounded-lg sm:rounded-xl border border-white/10 overflow-hidden">
+													<div
+														key={day}
+														className="bg-white/5 rounded-lg sm:rounded-xl border border-white/10 overflow-hidden"
+													>
 														<div className="bg-gradient-to-r from-[#F0BB78]/5 to-[#543A14]/5 px-3 sm:px-6 py-2 sm:py-3 border-b border-white/10">
-															<h4 className="text-sm sm:text-lg font-semibold text-[#F0BB78]">{day}</h4>
+															<h4 className="text-sm sm:text-lg font-semibold text-[#F0BB78]">
+																{day}
+															</h4>
 														</div>
 														<div className="p-3 sm:p-6">
 															<div className="grid grid-cols-1 xs:grid-cols-2 sm:flex sm:flex-wrap gap-2 sm:gap-3">
 																{sortedSlots.map((slot, i) => (
-																	<span key={i} className="inline-flex items-center justify-center px-3 sm:px-4 py-1.5 sm:py-2 rounded-md sm:rounded-lg bg-[#F0BB78]/20 text-[#F0BB78] text-xs sm:text-sm font-medium border border-[#F0BB78]/30 hover:bg-[#F0BB78]/30 transition-colors text-center">
+																	<span
+																		key={i}
+																		className="inline-flex items-center justify-center px-3 sm:px-4 py-1.5 sm:py-2 rounded-md sm:rounded-lg bg-[#F0BB78]/20 text-[#F0BB78] text-xs sm:text-sm font-medium border border-[#F0BB78]/30 hover:bg-[#F0BB78]/30 transition-colors text-center"
+																	>
 																		{slot}
 																	</span>
 																))}
@@ -501,99 +560,162 @@ const CompareTimetablePage: React.FC = () => {
 							<div className="space-y-3 sm:space-y-4">
 								<div className="flex items-center gap-2 sm:gap-3">
 									<div className="w-2.5 h-2.5 sm:w-3 sm:h-3 bg-gradient-to-r from-[#543A14] to-[#F0BB78] rounded-full"></div>
-									<h3 className="text-base sm:text-lg font-semibold text-white">Classes Together</h3>
+									<h3 className="text-base sm:text-lg font-semibold text-white">
+										Classes Together
+									</h3>
 								</div>
-								{Object.keys(compareResult.classes_together || {}).length === 0 ? (
+								{Object.keys(compareResult.classes_together || {}).length ===
+								0 ? (
 									<div className="bg-white/5 rounded-lg sm:rounded-xl p-4 sm:p-6 border border-white/10">
-										<p className="text-slate-300/80 text-center text-sm sm:text-base">No classes together found.</p>
+										<p className="text-slate-300/80 text-center text-sm sm:text-base">
+											No classes together found.
+										</p>
 									</div>
 								) : (
 									<div className="space-y-3 sm:space-y-4">
 										{(() => {
 											// Define day order for proper sorting
-											const dayOrder = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
-											
+											const dayOrder = [
+												"Monday",
+												"Tuesday",
+												"Wednesday",
+												"Thursday",
+												"Friday",
+												"Saturday",
+												"Sunday",
+											];
+
 											// Sort days according to the defined order
-											const sortedDays = Object.keys(compareResult.classes_together).sort((a, b) => {
+											const sortedDays = Object.keys(
+												compareResult.classes_together
+											).sort((a, b) => {
 												const aIndex = dayOrder.indexOf(a);
 												const bIndex = dayOrder.indexOf(b);
 												return aIndex - bIndex;
 											});
 
 											return sortedDays.map((day) => {
-												const daySlots = compareResult.classes_together[day] as any;
+												const daySlots = compareResult.classes_together[
+													day
+												] as any;
 												// Sort time slots within each day
-												const sortedTimeSlots = Object.entries(daySlots).sort(([timeA], [timeB]) => {
-													// Extract start time (e.g., "09:00-09:50" -> "09:00")
-													const startTimeA = timeA.split('-')[0];
-													const startTimeB = timeB.split('-')[0];
-													
-													// Convert time to minutes for proper numerical comparison
-													const getMinutes = (time: string) => {
-														const [hours, minutes] = time.split(':').map(Number);
-														return hours * 60 + minutes;
-													};
-													
-													return getMinutes(startTimeA) - getMinutes(startTimeB);
-												});
+												const sortedTimeSlots = Object.entries(daySlots).sort(
+													([timeA], [timeB]) => {
+														// Extract start time (e.g., "09:00-09:50" -> "09:00")
+														const startTimeA = timeA.split("-")[0];
+														const startTimeB = timeB.split("-")[0];
+
+														// Convert time to minutes for proper numerical comparison
+														const getMinutes = (time: string) => {
+															const [hours, minutes] = time
+																.split(":")
+																.map(Number);
+															return hours * 60 + minutes;
+														};
+
+														return (
+															getMinutes(startTimeA) - getMinutes(startTimeB)
+														);
+													}
+												);
 
 												return (
-													<div key={day} className="bg-white/5 rounded-lg sm:rounded-xl border border-white/10 overflow-hidden">
+													<div
+														key={day}
+														className="bg-white/5 rounded-lg sm:rounded-xl border border-white/10 overflow-hidden"
+													>
 														<div className="bg-gradient-to-r from-[#543A14]/5 to-[#F0BB78]/5 px-3 sm:px-6 py-2 sm:py-3 border-b border-white/10">
-															<h4 className="text-sm sm:text-lg font-semibold text-[#F0BB78]">{day}</h4>
+															<h4 className="text-sm sm:text-lg font-semibold text-[#F0BB78]">
+																{day}
+															</h4>
 														</div>
 														<div className="p-3 sm:p-6 space-y-3">
-															{sortedTimeSlots.map(([time, info]: [string, any]) => (
-																<div key={time} className="flex items-center justify-between p-4 bg-white/5 rounded-lg border border-white/10 hover:bg-white/10 transition-colors group">
-																	{/* Mobile layout - Stacked */}
-																	<div className="flex flex-col sm:hidden w-full">
-																		<div className="flex items-center justify-between mb-2">
-																			<span className="inline-flex items-center px-2 py-1 rounded-md bg-[#543A14]/30 text-[#F0BB78] text-xs font-medium border border-[#543A14]/40">
-																				{time}
-																			</span>
-																			<span className={`inline-flex items-center px-2 py-0.5 rounded-full text-xs font-medium ${
-																				info.type === 'L' ? 'bg-[#F0BB78]/20 text-[#F0BB78] border border-[#F0BB78]/30' :
-																				info.type === 'T' ? 'bg-[#543A14]/20 text-[#F0BB78] border border-[#543A14]/30' :
-																				info.type === 'P' ? 'bg-[#F0BB78]/30 text-[#543A14] border border-[#F0BB78]/40' :
-																				'bg-white/10 text-white/80 border border-white/20'
-																			}`}>
-																				{info.type === 'L' ? 'Lecture' : info.type === 'T' ? 'Tutorial' : info.type === 'P' ? 'Practical' : info.type}
-																			</span>
-																		</div>
-																		<div>
-																			<p className="text-white font-medium text-base truncate max-w-[250px]">{info.subject_name}</p>
-																			<p className="text-slate-300 text-sm">{info.location}</p>
-																		</div>
-																	</div>
-
-																	{/* Desktop layout - Horizontal */}
-																	<div className="hidden sm:flex items-center justify-between w-full">
-																		<div className="flex items-center gap-4">
-																			<div className="flex-shrink-0">
-																				<span className="inline-flex items-center px-3 py-1.5 rounded-lg bg-[#543A14]/30 text-[#F0BB78] text-sm font-medium border border-[#543A14]/40">
+															{sortedTimeSlots.map(
+																([time, info]: [string, any]) => (
+																	<div
+																		key={time}
+																		className="flex items-center justify-between p-4 bg-white/5 rounded-lg border border-white/10 hover:bg-white/10 transition-colors group"
+																	>
+																		{/* Mobile layout - Stacked */}
+																		<div className="flex flex-col sm:hidden w-full">
+																			<div className="flex items-center justify-between mb-2">
+																				<span className="inline-flex items-center px-2 py-1 rounded-md bg-[#543A14]/30 text-[#F0BB78] text-xs font-medium border border-[#543A14]/40">
 																					{time}
 																				</span>
+																				<span
+																					className={`inline-flex items-center px-2 py-0.5 rounded-full text-xs font-medium ${
+																						info.type === "L"
+																							? "bg-[#F0BB78]/20 text-[#F0BB78] border border-[#F0BB78]/30"
+																							: info.type === "T"
+																							? "bg-[#543A14]/20 text-[#F0BB78] border border-[#543A14]/30"
+																							: info.type === "P"
+																							? "bg-[#F0BB78]/30 text-[#543A14] border border-[#F0BB78]/40"
+																							: "bg-white/10 text-white/80 border border-white/20"
+																					}`}
+																				>
+																					{info.type === "L"
+																						? "Lecture"
+																						: info.type === "T"
+																						? "Tutorial"
+																						: info.type === "P"
+																						? "Practical"
+																						: info.type}
+																				</span>
 																			</div>
-																			<div className="min-w-0 flex-1">
-																				<p className="text-white font-medium text-base">{info.subject_name}</p>
-																				<p className="text-slate-300 text-sm">{info.location}</p>
+																			<div>
+																				<p className="text-white font-medium text-base truncate max-w-[250px]">
+																					{info.subject_name}
+																				</p>
+																				<p className="text-slate-300 text-sm">
+																					{info.location}
+																				</p>
 																			</div>
 																		</div>
-																		
-																		{/* Right side - Class Type (Desktop only) */}
-																		<div className="flex-shrink-0 ml-4">
-																			<span className={`inline-flex items-center px-3 py-1 rounded-full text-sm font-medium ${
-																				info.type === 'L' ? 'bg-[#F0BB78]/20 text-[#F0BB78] border border-[#F0BB78]/30' :
-																				info.type === 'T' ? 'bg-[#543A14]/20 text-[#F0BB78] border border-[#543A14]/30' :
-																				info.type === 'P' ? 'bg-[#F0BB78]/30 text-[#543A14] border border-[#F0BB78]/40' :
-																				'bg-white/10 text-white/80 border border-white/20'
-																			}`}>
-																				{info.type === 'L' ? 'Lecture' : info.type === 'T' ? 'Tutorial' : info.type === 'P' ? 'Practical' : info.type}
-																			</span>
+
+																		{/* Desktop layout - Horizontal */}
+																		<div className="hidden sm:flex items-center justify-between w-full">
+																			<div className="flex items-center gap-4">
+																				<div className="flex-shrink-0">
+																					<span className="inline-flex items-center px-3 py-1.5 rounded-lg bg-[#543A14]/30 text-[#F0BB78] text-sm font-medium border border-[#543A14]/40">
+																						{time}
+																					</span>
+																				</div>
+																				<div className="min-w-0 flex-1">
+																					<p className="text-white font-medium text-base">
+																						{info.subject_name}
+																					</p>
+																					<p className="text-slate-300 text-sm">
+																						{info.location}
+																					</p>
+																				</div>
+																			</div>
+
+																			{/* Right side - Class Type (Desktop only) */}
+																			<div className="flex-shrink-0 ml-4">
+																				<span
+																					className={`inline-flex items-center px-3 py-1 rounded-full text-sm font-medium ${
+																						info.type === "L"
+																							? "bg-[#F0BB78]/20 text-[#F0BB78] border border-[#F0BB78]/30"
+																							: info.type === "T"
+																							? "bg-[#543A14]/20 text-[#F0BB78] border border-[#543A14]/30"
+																							: info.type === "P"
+																							? "bg-[#F0BB78]/30 text-[#543A14] border border-[#F0BB78]/40"
+																							: "bg-white/10 text-white/80 border border-white/20"
+																					}`}
+																				>
+																					{info.type === "L"
+																						? "Lecture"
+																						: info.type === "T"
+																						? "Tutorial"
+																						: info.type === "P"
+																						? "Practical"
+																						: info.type}
+																				</span>
+																			</div>
 																		</div>
 																	</div>
-																</div>
-															))}
+																)
+															)}
 														</div>
 													</div>
 												);

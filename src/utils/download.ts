@@ -1,43 +1,75 @@
 import { toPng } from 'html-to-image';
 import jsPDF from 'jspdf';
 
-const RENDER_DELAY = 2000; // Increased to 2 seconds
+const RENDER_DELAY = 2000; // fallback delay if needed
 
-export const downloadAsPng = async (elementId: string, filename: string) => {
+// Add callbacks for progress, success, and error
+export const downloadAsPng = async (
+  elementId: string,
+  filename: string,
+  {
+    onProgress,
+    onSuccess,
+    onError,
+  }: {
+    onProgress?: (msg: string) => void;
+    onSuccess?: () => void;
+    onError?: (err: Error) => void;
+  } = {}
+) => {
   try {
-    await new Promise(resolve => setTimeout(resolve, RENDER_DELAY));
+    if (onProgress) onProgress('Preparing image...');
+    // Wait for next animation frame to ensure rendering
+    await new Promise((resolve) => requestAnimationFrame(resolve));
     const element = document.getElementById(elementId);
     if (!element) throw new Error('Element not found');
 
-    const dataUrl = await toPng(element, { 
-      quality: 0.95,
+    // Use devicePixelRatio for sharpness
+    const dataUrl = await toPng(element, {
+      quality: 1,
       backgroundColor: '#131010',
+      pixelRatio: window.devicePixelRatio || 2,
       style: {
         transform: 'scale(1)',
-        transformOrigin: 'top left'
-      }
+        transformOrigin: 'top left',
+      },
     });
 
+    if (onProgress) onProgress('Saving image...');
     const link = document.createElement('a');
     link.download = `${filename}.png`;
     link.href = dataUrl;
     link.click();
+    if (onSuccess) onSuccess();
   } catch (err) {
     console.error('Error downloading PNG:', err);
-    alert('Failed to download image. Please try again.');
+    if (onError) onError(err instanceof Error ? err : new Error('Unknown error'));
   }
 };
 
-export const downloadAsPdf = async (elementId: string, filename: string) => {
+export const downloadAsPdf = async (
+  elementId: string,
+  filename: string,
+  {
+    onProgress,
+    onSuccess,
+    onError,
+  }: {
+    onProgress?: (msg: string) => void;
+    onSuccess?: () => void;
+    onError?: (err: Error) => void;
+  } = {}
+) => {
   try {
-    await new Promise(resolve => setTimeout(resolve, RENDER_DELAY));
+    if (onProgress) onProgress('Preparing PDF...');
+    await new Promise((resolve) => requestAnimationFrame(resolve));
     const element = document.getElementById(elementId);
     if (!element) throw new Error('Element not found');
 
     const dataUrl = await toPng(element, {
       backgroundColor: '#131010',
       quality: 1,
-      pixelRatio: 2
+      pixelRatio: window.devicePixelRatio || 2,
     });
 
     // A4 dimensions in mm
@@ -47,25 +79,27 @@ export const downloadAsPdf = async (elementId: string, filename: string) => {
     const pdf = new jsPDF({
       orientation: 'landscape',
       unit: 'mm',
-      format: [a4Width, a4Height]
+      format: [a4Width, a4Height],
     });
 
+    // Calculate image height to fit A4
     const imageWidth = a4Width;
     const imageHeight = (element.offsetHeight * a4Width) / element.offsetWidth;
 
     pdf.addImage(
-      dataUrl, 
-      'PNG', 
-      0, 
-      0, 
+      dataUrl,
+      'PNG',
+      0,
+      0,
       imageWidth,
       Math.min(imageHeight, a4Height)
     );
-    
+
+    if (onProgress) onProgress('Saving PDF...');
     pdf.save(`${filename}.pdf`);
+    if (onSuccess) onSuccess();
   } catch (err) {
     console.error('Error downloading PDF:', err);
-    const errorMessage = err instanceof Error ? err.message : 'Unknown error occurred';
-    alert(`Failed to download PDF: ${errorMessage}`);
+    if (onError) onError(err instanceof Error ? err : new Error('Unknown error'));
   }
 };

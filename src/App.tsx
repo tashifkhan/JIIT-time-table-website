@@ -33,7 +33,7 @@ interface YourTietable {
 
 const App: React.FC = () => {
 	const navigate = useNavigate();
-	const { schedule, setSchedule } = useContext(UserContext);
+	const { schedule, setSchedule, setEditedSchedule } = useContext(UserContext);
 	const [numExecutions, setNumExecutions] = React.useState(0);
 	const [isGenerating, setIsGenerating] = useQueryState(
 		"isGenerating",
@@ -125,6 +125,10 @@ const App: React.FC = () => {
 		if (!electives) {
 			electives = [];
 		}
+
+		// Clear any existing edited schedule when generating a new one
+		setEditedSchedule(null);
+
 		const mapping = campus === "62" ? timetableMapping : mapping128;
 		const subjectJSON =
 			campus === "62"
@@ -232,19 +236,28 @@ const App: React.FC = () => {
 	const handleSelectConfig = async (name: string) => {
 		const config = savedConfigs[name];
 		if (!config) return;
+
+		// Clear any existing edited schedule to ensure fresh display
+		setEditedSchedule(null);
+
+		// Set the form state first
 		setYear(config.year);
 		setBatch(config.batch);
-		setElectiveCount(config.electiveCount);
-		setSelectedElectives(config.selectedElectives);
+		setElectiveCount(config.electiveCount || 0);
+		setSelectedElectives(
+			config.selectedSubjects || config.selectedElectives || []
+		);
 		setCampus(config.campus);
 		setSelectedConfig(name);
-		setIsGenerating(true);
 
-		// generate schedule with this config
+		// Close the form after loading config
+		setIsFormOpen(false);
+
+		// Generate schedule automatically with this config
 		await handleFormSubmit({
 			year: config.year,
 			batch: config.batch,
-			electives: config.selectedElectives,
+			electives: config.selectedSubjects || config.selectedElectives || [],
 			campus: config.campus,
 		});
 	};

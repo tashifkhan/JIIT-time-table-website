@@ -984,7 +984,11 @@ def time_table_creator_v2(
                                 day,
                                 time,
                                 subject_name_extractor(all_subjects, code),  # type: ignore
-                                indi_class.strip()[0],
+                                (
+                                    indi_class.strip()[0]
+                                    if indi_class.strip()[0] in ["L", "P", "T"]
+                                    else "L"
+                                ),
                                 location_extractor(indi_class.strip()),
                             ]
                         )

@@ -41,6 +41,9 @@ def parse_batch_numbers(batch_input: str) -> list[str]:
         current_prefix = None
 
         for r in ranges:
+            if not r:
+                continue
+
             if r.isdigit():  # If it's just a number, use the previous prefix
                 if current_prefix:
                     result.append(f"{current_prefix}{r}")
@@ -1226,3 +1229,35 @@ def Print(dic: dict | list) -> None:
 #     # print(json.dumps(result["common_free_slots"], indent=2))
 #     # print("\nClasses Together:")
 #     # print(json.dumps(result["classes_together"], indent=2))
+
+
+#  3rd year tests
+# if __name__ == "__main__":
+#     import json
+#     import os
+
+#     with open(
+#         os.path.join(
+#             os.path.dirname(__file__),
+#             "data",
+#             "time-table",
+#             "ODD25",
+#             "62.json",
+#         )
+#     ) as f:
+#         mapping62 = json.load(f)
+#         data3 = mapping62["3"]
+#         Print(data3)
+#         time_table = data3["timetable"]
+#         subjects = data3["subjects"]
+#         batch = "A2"
+#         enrolled_subjects: list[str] = str("EC312,EC315,CI576,EC314,MA533").split(",")
+
+#         user_timetable = time_table_creator_v2(
+#             time_table_json=time_table,
+#             all_subjects=subjects,
+#             batch=batch,
+#             enrolled_subjects=enrolled_subjects,
+#         )
+
+#         Print(user_timetable)

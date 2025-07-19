@@ -395,12 +395,25 @@ export function ScheduleForm({
 												(s) => s.Code === code
 											);
 											return (
-												<span
+												<div
 													key={code}
-													className="px-2 py-1 bg-[#F0BB78]/20 rounded text-[#F0BB78] text-xs"
+													className="flex items-center gap-1 px-2 py-1 bg-[#F0BB78]/20 rounded text-[#F0BB78] text-xs group hover:bg-[#F0BB78]/30 transition-colors"
 												>
-													{subj?.Subject || code}
-												</span>
+													<span className="truncate max-w-[120px]">
+														{subj?.Subject || code}
+													</span>
+													<button
+														type="button"
+														onClick={(e) => {
+															e.stopPropagation();
+															handleSubjectToggle(code);
+														}}
+														className="ml-1 text-[#F0BB78]/60 hover:text-red-400 transition-colors opacity-0 group-hover:opacity-100"
+														aria-label={`Remove ${subj?.Subject || code}`}
+													>
+														×
+													</button>
+												</div>
 											);
 										})}
 									</div>

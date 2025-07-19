@@ -94,7 +94,7 @@ export function AcademicCalendar() {
 		if (targetIndex >= 0 && eventRefs.current[targetIndex]) {
 			eventRefs.current[targetIndex].scrollIntoView({ behavior: "smooth" });
 		}
-	}, [eventsToShow]);
+	}, [selectedYear]);
 
 	const handleAddToCalendar = async () => {
 		setIsLoading(true);

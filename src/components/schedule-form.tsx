@@ -19,6 +19,205 @@ import UserContext from "../context/userContext";
 import { useQueryState, parseAsString, parseAsArrayOf } from "nuqs";
 import { useToast } from "../hooks/use-toast";
 
+export interface Subject {
+	Code: string;
+	"Full Code"?: string;
+	"Subject "?: string;
+	Subject?: string;
+}
+
+interface SubjectSelectorProps {
+	subjects: Subject[];
+	selectedSubjects: string[];
+	setSelectedSubjects: (fn: (prev: string[]) => string[]) => void;
+	open: boolean;
+	setOpen: (open: boolean) => void;
+	year: string;
+}
+
+export const SubjectSelector: React.FC<SubjectSelectorProps> = ({
+	subjects,
+	selectedSubjects,
+	setSelectedSubjects,
+	open,
+	setOpen,
+	year,
+}) => {
+	const [subjectSearch, setSubjectSearch] = useState("");
+	const fuse = useMemo(() => {
+		if (!year || !subjects) return null;
+		return new Fuse(subjects, {
+			keys: [
+				{ name: "Subject", weight: 0.7 },
+				{ name: "Code", weight: 0.3 },
+				{ name: "Full Code", weight: 0.2 },
+			],
+			threshold: 0.4,
+			includeScore: true,
+			shouldSort: true,
+			findAllMatches: true,
+			minMatchCharLength: 2,
+		});
+	}, [year, subjects]);
+
+	const filteredSubjects = useMemo(() => {
+		if (!year || !subjects) return [];
+		if (!subjectSearch.trim()) {
+			return subjects.sort((a, b) =>
+				(a?.Subject || "").localeCompare(b?.Subject || "")
+			);
+		}
+		const searchTerm = subjectSearch.toLowerCase();
+		const allSubjects = subjects;
+		const exactMatches = allSubjects.filter((subject) => {
+			const subjectName = (subject.Subject || "").toLowerCase();
+			const subjectCode = subject.Code.toLowerCase();
+			const fullCode = (subject["Full Code"] || "").toLowerCase();
+			return (
+				subjectName.includes(searchTerm) ||
+				subjectCode.includes(searchTerm) ||
+				fullCode.includes(searchTerm)
+			);
+		});
+		const fuzzyResults = fuse
+			? fuse.search(subjectSearch).map((result) => result.item)
+			: [];
+		const exactMatchCodes = new Set(exactMatches.map((s) => s.Code));
+		const uniqueFuzzyMatches = fuzzyResults.filter(
+			(subject) => !exactMatchCodes.has(subject.Code)
+		);
+		const sortedExactMatches = exactMatches.sort((a, b) => {
+			const aSubject = (a.Subject || "").toLowerCase();
+			const bSubject = (b.Subject || "").toLowerCase();
+			const aCode = a.Code.toLowerCase();
+			const bCode = b.Code.toLowerCase();
+			const aStartsWithSubject = aSubject.startsWith(searchTerm);
+			const bStartsWithSubject = bSubject.startsWith(searchTerm);
+			const aStartsWithCode = aCode.startsWith(searchTerm);
+			const bStartsWithCode = bCode.startsWith(searchTerm);
+			if (aStartsWithSubject && !bStartsWithSubject) return -1;
+			if (!aStartsWithSubject && bStartsWithSubject) return 1;
+			if (aStartsWithCode && !bStartsWithCode) return -1;
+			if (!aStartsWithCode && bStartsWithCode) return 1;
+			return aSubject.localeCompare(bSubject);
+		});
+		return [...sortedExactMatches, ...uniqueFuzzyMatches];
+	}, [year, subjects, subjectSearch, fuse]);
+
+	const handleSubjectToggle = (code: string) => {
+		setSelectedSubjects((prev) =>
+			prev.includes(code) ? prev.filter((c) => c !== code) : [...prev, code]
+		);
+	};
+
+	return (
+		<Dialog open={open} onOpenChange={setOpen}>
+			<DialogContent
+				className="p-0 sm:p-6 max-w-full w-full sm:max-w-lg h-[100dvh] sm:h-auto flex flex-col"
+				style={{ maxHeight: "100dvh" }}
+			>
+				<div className="sticky top-0 z-10 bg-background/90 border-b border-[#F0BB78]/10 px-4 py-3 flex items-center gap-2">
+					<DialogHeader className="flex-1">
+						<DialogTitle className="text-base sm:text-lg">
+							Select Subjects
+							<span className="ml-2 text-xs text-[#F0BB78]">
+								{selectedSubjects.length} selected
+							</span>
+							{subjectSearch && (
+								<span className="ml-2 text-xs text-slate-400">
+									• {filteredSubjects.length} found
+								</span>
+							)}
+						</DialogTitle>
+					</DialogHeader>
+					<Button
+						variant="ghost"
+						size="sm"
+						className="text-[#F0BB78] px-2 py-1"
+						onClick={() => setOpen(false)}
+					>
+						Done
+					</Button>
+				</div>
+				<div className="px-4 pt-2 pb-2 flex gap-2 items-center sticky top-[48px] bg-background/90 z-10">
+					<Input
+						placeholder="Search by subject name or code... (exact + fuzzy search)"
+						value={subjectSearch}
+						onChange={(e) => setSubjectSearch(e.target.value)}
+						className="flex-1"
+						autoFocus
+					/>
+					<Button
+						type="button"
+						variant="outline"
+						size="sm"
+						className="ml-2 text-xs px-3 py-2"
+						onClick={() => setSelectedSubjects(() => [])}
+						disabled={selectedSubjects.length === 0}
+					>
+						Clear All
+					</Button>
+				</div>
+				<div className="flex-1 overflow-y-auto px-2 pb-4 pt-2">
+					{filteredSubjects.map((subject) => {
+						const searchTerm = subjectSearch.toLowerCase();
+						const isExactMatch =
+							searchTerm &&
+							((subject.Subject || "").toLowerCase().includes(searchTerm) ||
+								subject.Code.toLowerCase().includes(searchTerm) ||
+								(subject["Full Code"] || "")
+									.toLowerCase()
+									.includes(searchTerm));
+						return (
+							<div
+								key={subject.Code}
+								className={`flex items-center gap-3 px-3 py-2 rounded-lg cursor-pointer transition-colors mb-1 ${
+									selectedSubjects.includes(subject.Code)
+										? "bg-[#F0BB78]/30 border border-[#F0BB78]/40"
+										: "hover:bg-[#F0BB78]/10"
+								}`}
+								onClick={() => handleSubjectToggle(subject.Code)}
+							>
+								<input
+									type="checkbox"
+									checked={selectedSubjects.includes(subject.Code)}
+									readOnly
+									className="accent-[#F0BB78] w-5 h-5"
+								/>
+								<div className="flex flex-col flex-1 min-w-0">
+									<div className="flex items-center gap-2">
+										<span className="text-sm truncate font-medium text-white/90">
+											{subject.Subject}
+										</span>
+										{isExactMatch && searchTerm && (
+											<span className="text-xs bg-green-500/20 text-green-400 px-1.5 py-0.5 rounded">
+												exact
+											</span>
+										)}
+									</div>
+									<span className="text-xs text-[#F0BB78] truncate">
+										{subject.Code}
+									</span>
+								</div>
+								{selectedSubjects.includes(subject.Code) && (
+									<span className="text-xs text-[#F0BB78] font-semibold">
+										Selected
+									</span>
+								)}
+							</div>
+						);
+					})}
+					{filteredSubjects.length === 0 && (
+						<div className="text-center text-slate-400 py-8">
+							No subjects found.
+						</div>
+					)}
+				</div>
+			</DialogContent>
+		</Dialog>
+	);
+};
+
 interface ScheduleFormProps {
 	mapping: {
 		[key: string]: {
@@ -51,13 +250,6 @@ interface ScheduleFormProps {
 	autoSubmitKey?: string;
 }
 
-interface Subject {
-	Code: string;
-	"Full Code"?: string;
-	"Subject "?: string;
-	Subject?: string;
-}
-
 export function ScheduleForm({
 	mapping,
 	mapping128,
@@ -85,88 +277,88 @@ export function ScheduleForm({
 	const [saveName, setSaveName] = useState("");
 	const [saveError, setSaveError] = useState("");
 	const [showSubjectModal, setShowSubjectModal] = useState(false);
-	const [subjectSearch, setSubjectSearch] = useState("");
+	const [_subjectSearch, setSubjectSearch] = useState("");
 	const [mapz, setMapz] = useState(mapping);
 	const { toast } = useToast();
 
 	// Initialize Fuse.js for fuzzy search
-	const fuse = useMemo(() => {
-		if (!year || !mapz[year]?.subjects) return null;
+	// const fuse = useMemo(() => {
+	// 	if (!year || !mapz[year]?.subjects) return null;
 
-		return new Fuse(mapz[year].subjects, {
-			keys: [
-				{ name: "Subject", weight: 0.7 },
-				{ name: "Code", weight: 0.3 },
-				{ name: "Full Code", weight: 0.2 },
-			],
-			threshold: 0.4, // More lenient threshold for better fuzzy matching
-			includeScore: true,
-			shouldSort: true,
-			findAllMatches: true,
-			minMatchCharLength: 2,
-		});
-	}, [year, mapz]);
+	// 	return new Fuse(mapz[year].subjects, {
+	// 		keys: [
+	// 			{ name: "Subject", weight: 0.7 },
+	// 			{ name: "Code", weight: 0.3 },
+	// 			{ name: "Full Code", weight: 0.2 },
+	// 		],
+	// 		threshold: 0.4, // More lenient threshold for better fuzzy matching
+	// 		includeScore: true,
+	// 		shouldSort: true,
+	// 		findAllMatches: true,
+	// 		minMatchCharLength: 2,
+	// 	});
+	// }, [year, mapz]);
 
-	// Filter subjects based on search - combining regular and fuzzy search
-	const filteredSubjects = useMemo(() => {
-		if (!year || !mapz[year]?.subjects) return [];
+	// // Filter subjects based on search - combining regular and fuzzy search
+	// const filteredSubjects = useMemo(() => {
+	// 	if (!year || !mapz[year]?.subjects) return [];
 
-		if (!subjectSearch.trim()) {
-			return mapz[year].subjects.sort((a, b) =>
-				(a?.Subject || "").localeCompare(b?.Subject || "")
-			);
-		}
+	// 	if (!subjectSearch.trim()) {
+	// 		return mapz[year].subjects.sort((a, b) =>
+	// 			(a?.Subject || "").localeCompare(b?.Subject || "")
+	// 		);
+	// 	}
 
-		const searchTerm = subjectSearch.toLowerCase();
-		const allSubjects = mapz[year].subjects;
+	// 	const searchTerm = subjectSearch.toLowerCase();
+	// 	const allSubjects = mapz[year].subjects;
 
-		// Regular search - exact matches first
-		const exactMatches = allSubjects.filter((subject) => {
-			const subjectName = (subject.Subject || "").toLowerCase();
-			const subjectCode = subject.Code.toLowerCase();
-			const fullCode = (subject["Full Code"] || "").toLowerCase();
+	// 	// Regular search - exact matches first
+	// 	const exactMatches = allSubjects.filter((subject) => {
+	// 		const subjectName = (subject.Subject || "").toLowerCase();
+	// 		const subjectCode = subject.Code.toLowerCase();
+	// 		const fullCode = (subject["Full Code"] || "").toLowerCase();
 
-			return (
-				subjectName.includes(searchTerm) ||
-				subjectCode.includes(searchTerm) ||
-				fullCode.includes(searchTerm)
-			);
-		});
+	// 		return (
+	// 			subjectName.includes(searchTerm) ||
+	// 			subjectCode.includes(searchTerm) ||
+	// 			fullCode.includes(searchTerm)
+	// 		);
+	// 	});
 
-		// Fuzzy search for non-exact matches
-		const fuzzyResults = fuse
-			? fuse.search(subjectSearch).map((result) => result.item)
-			: [];
+	// 	// Fuzzy search for non-exact matches
+	// 	const fuzzyResults = fuse
+	// 		? fuse.search(subjectSearch).map((result) => result.item)
+	// 		: [];
 
-		// Combine results: exact matches first, then fuzzy matches that aren't already included
-		const exactMatchCodes = new Set(exactMatches.map((s) => s.Code));
-		const uniqueFuzzyMatches = fuzzyResults.filter(
-			(subject) => !exactMatchCodes.has(subject.Code)
-		);
+	// 	// Combine results: exact matches first, then fuzzy matches that aren't already included
+	// 	const exactMatchCodes = new Set(exactMatches.map((s) => s.Code));
+	// 	const uniqueFuzzyMatches = fuzzyResults.filter(
+	// 		(subject) => !exactMatchCodes.has(subject.Code)
+	// 	);
 
-		// Sort exact matches by relevance (starts with search term gets priority)
-		const sortedExactMatches = exactMatches.sort((a, b) => {
-			const aSubject = (a.Subject || "").toLowerCase();
-			const bSubject = (b.Subject || "").toLowerCase();
-			const aCode = a.Code.toLowerCase();
-			const bCode = b.Code.toLowerCase();
+	// 	// Sort exact matches by relevance (starts with search term gets priority)
+	// 	const sortedExactMatches = exactMatches.sort((a, b) => {
+	// 		const aSubject = (a.Subject || "").toLowerCase();
+	// 		const bSubject = (b.Subject || "").toLowerCase();
+	// 		const aCode = a.Code.toLowerCase();
+	// 		const bCode = b.Code.toLowerCase();
 
-			// Prioritize matches that start with the search term
-			const aStartsWithSubject = aSubject.startsWith(searchTerm);
-			const bStartsWithSubject = bSubject.startsWith(searchTerm);
-			const aStartsWithCode = aCode.startsWith(searchTerm);
-			const bStartsWithCode = bCode.startsWith(searchTerm);
+	// 		// Prioritize matches that start with the search term
+	// 		const aStartsWithSubject = aSubject.startsWith(searchTerm);
+	// 		const bStartsWithSubject = bSubject.startsWith(searchTerm);
+	// 		const aStartsWithCode = aCode.startsWith(searchTerm);
+	// 		const bStartsWithCode = bCode.startsWith(searchTerm);
 
-			if (aStartsWithSubject && !bStartsWithSubject) return -1;
-			if (!aStartsWithSubject && bStartsWithSubject) return 1;
-			if (aStartsWithCode && !bStartsWithCode) return -1;
-			if (!aStartsWithCode && bStartsWithCode) return 1;
+	// 		if (aStartsWithSubject && !bStartsWithSubject) return -1;
+	// 		if (!aStartsWithSubject && bStartsWithSubject) return 1;
+	// 		if (aStartsWithCode && !bStartsWithCode) return -1;
+	// 		if (!aStartsWithCode && bStartsWithCode) return 1;
 
-			return aSubject.localeCompare(bSubject);
-		});
+	// 		return aSubject.localeCompare(bSubject);
+	// 	});
 
-		return [...sortedExactMatches, ...uniqueFuzzyMatches];
-	}, [year, mapz, subjectSearch, fuse]);
+	// 	return [...sortedExactMatches, ...uniqueFuzzyMatches];
+	// }, [year, mapz, subjectSearch, fuse]);
 
 	const handleSubjectToggle = (code: string) => {
 		setSelectedSubjects((prev) =>
@@ -539,112 +731,14 @@ export function ScheduleForm({
 			</AnimatePresence>
 
 			{/* Modal for subject selection */}
-			<Dialog open={showSubjectModal} onOpenChange={setShowSubjectModal}>
-				<DialogContent
-					className="p-0 sm:p-6 max-w-full w-full sm:max-w-lg h-[100dvh] sm:h-auto flex flex-col"
-					style={{ maxHeight: "100dvh" }}
-				>
-					<div className="sticky top-0 z-10 bg-background/90 border-b border-[#F0BB78]/10 px-4 py-3 flex items-center gap-2">
-						<DialogHeader className="flex-1">
-							<DialogTitle className="text-base sm:text-lg">
-								Select Subjects
-								<span className="ml-2 text-xs text-[#F0BB78]">
-									{selectedSubjects.length} selected
-								</span>
-								{subjectSearch && (
-									<span className="ml-2 text-xs text-slate-400">
-										• {filteredSubjects.length} found
-									</span>
-								)}
-							</DialogTitle>
-						</DialogHeader>
-						<Button
-							variant="ghost"
-							size="sm"
-							className="text-[#F0BB78] px-2 py-1"
-							onClick={() => setShowSubjectModal(false)}
-						>
-							Done
-						</Button>
-					</div>
-					<div className="px-4 pt-2 pb-2 flex gap-2 items-center sticky top-[48px] bg-background/90 z-10">
-						<Input
-							placeholder="Search by subject name or code... (exact + fuzzy search)"
-							value={subjectSearch}
-							onChange={(e) => setSubjectSearch(e.target.value)}
-							className="flex-1"
-							autoFocus
-						/>
-						<Button
-							type="button"
-							variant="outline"
-							size="sm"
-							className="ml-2 text-xs px-3 py-2"
-							onClick={() => setSelectedSubjects([])}
-							disabled={selectedSubjects.length === 0}
-						>
-							Clear All
-						</Button>
-					</div>
-					<div className="flex-1 overflow-y-auto px-2 pb-4 pt-2">
-						{filteredSubjects.map((subject) => {
-							// Check if this is an exact match
-							const searchTerm = subjectSearch.toLowerCase();
-							const isExactMatch =
-								searchTerm &&
-								((subject.Subject || "").toLowerCase().includes(searchTerm) ||
-									subject.Code.toLowerCase().includes(searchTerm) ||
-									(subject["Full Code"] || "")
-										.toLowerCase()
-										.includes(searchTerm));
-
-							return (
-								<div
-									key={subject.Code}
-									className={`flex items-center gap-3 px-3 py-2 rounded-lg cursor-pointer transition-colors mb-1 ${
-										selectedSubjects.includes(subject.Code)
-											? "bg-[#F0BB78]/30 border border-[#F0BB78]/40"
-											: "hover:bg-[#F0BB78]/10"
-									}`}
-									onClick={() => handleSubjectToggle(subject.Code)}
-								>
-									<input
-										type="checkbox"
-										checked={selectedSubjects.includes(subject.Code)}
-										readOnly
-										className="accent-[#F0BB78] w-5 h-5"
-									/>
-									<div className="flex flex-col flex-1 min-w-0">
-										<div className="flex items-center gap-2">
-											<span className="text-sm truncate font-medium text-white/90">
-												{subject.Subject}
-											</span>
-											{isExactMatch && searchTerm && (
-												<span className="text-xs bg-green-500/20 text-green-400 px-1.5 py-0.5 rounded">
-													exact
-												</span>
-											)}
-										</div>
-										<span className="text-xs text-[#F0BB78] truncate">
-											{subject.Code}
-										</span>
-									</div>
-									{selectedSubjects.includes(subject.Code) && (
-										<span className="text-xs text-[#F0BB78] font-semibold">
-											Selected
-										</span>
-									)}
-								</div>
-							);
-						})}
-						{filteredSubjects.length === 0 && (
-							<div className="text-center text-slate-400 py-8">
-								No subjects found.
-							</div>
-						)}
-					</div>
-				</DialogContent>
-			</Dialog>
+			<SubjectSelector
+				subjects={mapz[year]?.subjects || []}
+				selectedSubjects={selectedSubjects}
+				setSelectedSubjects={setSelectedSubjects}
+				open={showSubjectModal}
+				setOpen={setShowSubjectModal}
+				year={year}
+			/>
 		</>
 	);
 }

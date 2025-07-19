@@ -185,6 +185,15 @@ const App: React.FC = () => {
 				const plainSchedule = JSON.parse(JSON.stringify(Schedule));
 				setSchedule(plainSchedule);
 			}
+			localStorage.setItem(
+				"cachedScheduleParams",
+				JSON.stringify({
+					year,
+					batch,
+					campus,
+					selectedSubjects: electives,
+				})
+			);
 		} catch (error) {
 			console.error("Error generating schedule:", error);
 			setSchedule({});
@@ -238,6 +247,7 @@ const App: React.FC = () => {
 	// Handle URL parameters and existing cached schedule
 	React.useEffect(() => {
 		const cached = localStorage.getItem("cachedSchedule");
+		const cachedParams = localStorage.getItem("cachedScheduleParams");
 
 		// read params directly from URL to avoid dependency on state that could change after mount
 		const urlParams = new URLSearchParams(window.location.search);
@@ -252,15 +262,6 @@ const App: React.FC = () => {
 
 		const allParamsPresent = year && batch && campus;
 
-		console.log("🌐 URL params processing:", {
-			year,
-			batch,
-			campus,
-			selectedSubjects,
-			allParamsPresent,
-			cached: !!cached,
-		});
-
 		if (allParamsPresent) {
 			if (!cached) {
 				// No cached schedule - auto generate
@@ -271,15 +272,31 @@ const App: React.FC = () => {
 					campus,
 				});
 			} else {
-				// Cached schedule exists - show dialog
-
-				setUrlParamsData({
-					year,
-					batch,
-					campus,
-					selectedSubjects,
-				});
-				setShowUrlParamsDialog(true);
+				// Compare URL params to cached schedule params
+				let isSame = false;
+				try {
+					const cachedObj = cachedParams ? JSON.parse(cachedParams) : {};
+					isSame =
+						cachedObj.year === year &&
+						cachedObj.batch === batch &&
+						cachedObj.campus === campus &&
+						Array.isArray(cachedObj.selectedSubjects) &&
+						Array.isArray(selectedSubjects) &&
+						cachedObj.selectedSubjects.length === selectedSubjects.length &&
+						cachedObj.selectedSubjects.every((s: string) =>
+							selectedSubjects.includes(s)
+						);
+				} catch {}
+				setShowUrlParamsDialog(false);
+				if (!isSame) {
+					setUrlParamsData({
+						year,
+						batch,
+						campus,
+						selectedSubjects,
+					});
+					setShowUrlParamsDialog(true);
+				}
 			}
 		}
 	}, []);

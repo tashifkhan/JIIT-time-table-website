@@ -9,8 +9,11 @@ interface UrlParamsDialogProps {
 		year: string;
 		batch: string;
 		campus: string;
-		selectedElectives: string[];
+		selectedSubjects?: string[];
+		selectedElectives?: string[];
 	};
+	mapping: any;
+	year: string;
 	onOverride: () => void;
 	onPrefill: () => void;
 	onViewExisting: () => void;
@@ -19,11 +22,33 @@ interface UrlParamsDialogProps {
 export function UrlParamsDialog({
 	isOpen,
 	urlParams,
+	mapping,
+	year,
 	onOverride,
 	onPrefill,
 	onViewExisting,
+	onClose,
 }: UrlParamsDialogProps) {
 	if (!isOpen) return null;
+
+	const subjects =
+		urlParams.selectedSubjects && urlParams.selectedSubjects.length > 0
+			? urlParams.selectedSubjects
+			: urlParams.selectedElectives || [];
+
+	// Split and deduplicate codes (handle possible concatenation)
+	const allCodes = subjects
+		.flatMap((s) => s.split(","))
+		.map((s) => s.trim())
+		.filter(Boolean);
+	const uniqueCodes = Array.from(new Set(allCodes));
+
+	// Get subject list for the year
+	const subjectList = mapping[year]?.subjects || [];
+	const codeToName = (code: string) => {
+		const subj = subjectList.find((s: any) => s.Code === code);
+		return subj ? subj.Subject || code : code;
+	};
 
 	return (
 		<AnimatePresence>
@@ -76,25 +101,24 @@ export function UrlParamsDialog({
 									{urlParams.batch}
 								</span>
 							</div>
-							{urlParams.selectedElectives.length > 0 && (
+							{uniqueCodes.length > 0 && (
 								<div className="pt-2 border-t border-[#F0BB78]/10">
 									<span className="text-slate-300/70 text-xs">
 										Selected Subjects:
 									</span>
 									<div className="flex flex-wrap gap-1 mt-1">
-										{urlParams.selectedElectives
-											.slice(0, 3)
-											.map((elective, index) => (
-												<span
-													key={index}
-													className="px-2 py-1 bg-[#F0BB78]/20 rounded text-[#F0BB78] text-xs"
-												>
-													{elective}
-												</span>
-											))}
-										{urlParams.selectedElectives.length > 3 && (
+										{uniqueCodes.map((code, idx) => (
+											<span
+												key={idx}
+												className="px-2 py-1 bg-[#F0BB78]/20 rounded text-[#F0BB78] text-xs"
+											>
+												{codeToName(code)}{" "}
+												<span className="opacity-60">({code})</span>
+											</span>
+										))}
+										{uniqueCodes.length > 3 && (
 											<span className="px-2 py-1 bg-[#F0BB78]/20 rounded text-[#F0BB78] text-xs">
-												+{urlParams.selectedElectives.length - 3} more
+												+{uniqueCodes.length - 3} more
 											</span>
 										)}
 									</div>

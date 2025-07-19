@@ -16,31 +16,10 @@ const UserContextProvider: React.FC<PropsWithChildren> = ({ children }) => {
 		React.useState<UserContextType["editedSchedule"]>(null);
 
 	useEffect(() => {
-		if (schedule && !editedSchedule) {
-			// This will only set editedSchedule on initial load, not on subsequent schedule changes
-			if (!localStorage.getItem("hasLoadedSchedule")) {
-				setEditedSchedule(schedule);
-				localStorage.setItem("hasLoadedSchedule", "true");
-			}
-		}
-	}, [schedule]);
-
-	useEffect(() => {
-		if (!schedule) {
-			localStorage.removeItem("hasLoadedSchedule");
-		}
-	}, [schedule]);
-
-	useEffect(() => {
-		if (schedule && !editedSchedule) {
+		if (schedule) {
 			setEditedSchedule(schedule);
-		}
-	}, [schedule, editedSchedule]);
-
-	useEffect(() => {
-		if (!schedule) {
+		} else {
 			setEditedSchedule(null);
-			localStorage.removeItem("hasLoadedSchedule");
 		}
 	}, [schedule]);
 

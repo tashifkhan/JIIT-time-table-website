@@ -542,16 +542,16 @@ const CompareTimetablePage: React.FC = () => {
 														<div className="bg-gradient-to-r from-[#543A14]/5 to-[#F0BB78]/5 px-3 sm:px-6 py-2 sm:py-3 border-b border-white/10">
 															<h4 className="text-sm sm:text-lg font-semibold text-[#F0BB78]">{day}</h4>
 														</div>
-														<div className="p-3 sm:p-6 space-y-2 sm:space-y-3">
+														<div className="p-3 sm:p-6 space-y-3">
 															{sortedTimeSlots.map(([time, info]: [string, any]) => (
-																<div key={time} className="bg-white/5 rounded-lg border border-white/10 overflow-hidden">
-																	{/* Mobile Layout - Stacked */}
-																	<div className="block sm:hidden p-3 space-y-2">
-																		<div className="flex items-center justify-between">
-																			<span className="inline-flex items-center px-2.5 py-1 rounded-md bg-[#543A14]/30 text-[#F0BB78] text-xs font-medium border border-[#543A14]/40">
+																<div key={time} className="flex items-center justify-between p-4 bg-white/5 rounded-lg border border-white/10 hover:bg-white/10 transition-colors group">
+																	{/* Mobile layout - Stacked */}
+																	<div className="flex flex-col sm:hidden w-full">
+																		<div className="flex items-center justify-between mb-2">
+																			<span className="inline-flex items-center px-2 py-1 rounded-md bg-[#543A14]/30 text-[#F0BB78] text-xs font-medium border border-[#543A14]/40">
 																				{time}
 																			</span>
-																			<span className={`inline-flex items-center px-2 py-1 rounded-md text-xs font-medium ${
+																			<span className={`inline-flex items-center px-2 py-0.5 rounded-full text-xs font-medium ${
 																				info.type === 'L' ? 'bg-[#F0BB78]/20 text-[#F0BB78] border border-[#F0BB78]/30' :
 																				info.type === 'T' ? 'bg-[#543A14]/20 text-[#F0BB78] border border-[#543A14]/30' :
 																				info.type === 'P' ? 'bg-[#F0BB78]/30 text-[#543A14] border border-[#F0BB78]/40' :
@@ -560,22 +560,29 @@ const CompareTimetablePage: React.FC = () => {
 																				{info.type === 'L' ? 'Lecture' : info.type === 'T' ? 'Tutorial' : info.type === 'P' ? 'Practical' : info.type}
 																			</span>
 																		</div>
-																		<div className="space-y-1">
-																			<p className="text-white font-medium text-sm">{info.subject_name}</p>
-																			<p className="text-slate-300 text-xs">{info.location}</p>
+																		<div>
+																			<p className="text-white font-medium text-base truncate max-w-[250px]">{info.subject_name}</p>
+																			<p className="text-slate-300 text-sm">{info.location}</p>
 																		</div>
 																	</div>
 
-																	{/* Desktop Layout - Horizontal */}
-																	<div className="hidden sm:flex sm:items-center sm:gap-4 sm:p-4">
-																		<div className="flex items-center gap-3">
-																			<span className="inline-flex items-center px-3 py-1 rounded-lg bg-[#543A14]/30 text-[#F0BB78] text-sm font-medium border border-[#543A14]/40">
-																				{time}
-																			</span>
-																			<span className="text-white font-medium">{info.subject_name}</span>
+																	{/* Desktop layout - Horizontal */}
+																	<div className="hidden sm:flex items-center justify-between w-full">
+																		<div className="flex items-center gap-4">
+																			<div className="flex-shrink-0">
+																				<span className="inline-flex items-center px-3 py-1.5 rounded-lg bg-[#543A14]/30 text-[#F0BB78] text-sm font-medium border border-[#543A14]/40">
+																					{time}
+																				</span>
+																			</div>
+																			<div className="min-w-0 flex-1">
+																				<p className="text-white font-medium text-base">{info.subject_name}</p>
+																				<p className="text-slate-300 text-sm">{info.location}</p>
+																			</div>
 																		</div>
-																		<div className="flex items-center gap-3 ml-auto">
-																			<span className={`inline-flex items-center px-2 py-1 rounded-md text-xs font-medium ${
+																		
+																		{/* Right side - Class Type (Desktop only) */}
+																		<div className="flex-shrink-0 ml-4">
+																			<span className={`inline-flex items-center px-3 py-1 rounded-full text-sm font-medium ${
 																				info.type === 'L' ? 'bg-[#F0BB78]/20 text-[#F0BB78] border border-[#F0BB78]/30' :
 																				info.type === 'T' ? 'bg-[#543A14]/20 text-[#F0BB78] border border-[#543A14]/30' :
 																				info.type === 'P' ? 'bg-[#F0BB78]/30 text-[#543A14] border border-[#F0BB78]/40' :
@@ -583,7 +590,6 @@ const CompareTimetablePage: React.FC = () => {
 																			}`}>
 																				{info.type === 'L' ? 'Lecture' : info.type === 'T' ? 'Tutorial' : info.type === 'P' ? 'Practical' : info.type}
 																			</span>
-																			<span className="text-slate-300 text-sm">{info.location}</span>
 																		</div>
 																	</div>
 																</div>

@@ -1944,289 +1944,9 @@
 		},
 		"subjects": [
 			{
-				"Code": "20EC415",
-				"Full Code": "20B12EC415",
-				"Subject": "Network Security-DE5"
-			},
-			{
-				"Code": "NBT739",
-				"Full Code": "17B1NBT739",
-				"Subject": "Biocomputing and Applications"
-			},
-			{
-				"Code": "CS424",
-				"Full Code": "18B12CS424",
-				"Subject": "Algorithm Analysis and AI"
-			},
-			{
-				"Code": "NEC832",
-				"Full Code": "16B1NEC832",
-				"Subject": "MIMO OFDM Applications to wireless communications-DE6"
-			},
-			{
-				"Code": "EC312",
-				"Full Code": "23B12EC312",
-				"Subject": "Introduction to VLSI Fabrication Technology-DE4"
-			},
-			{
-				"Code": "D5A30",
-				"Full Code": "22B12EC413",
-				"Subject": "Low Power CMOS VLSI Circuit Design -DE5"
-			},
-			{
-				"Code": "CI732",
-				"Full Code": "15B1NCI732",
-				"Subject": "Social Network Analysis"
-			},
-			{
-				"Code": "LD6B31",
-				"Full Code": "15B1NCI732",
-				"Subject": "Social Network Analysis"
-			},
-			{
-				"Code": "NBT732",
-				"Full Code": "17B1NBT732",
-				"Subject": "Healthcare Marketplace"
-			},
-			{
-				"Code": "CS417",
-				"Full Code": "21B12CS417",
-				"Subject": "Machine Learning and Big Data"
-			},
-			{
-				"Code": "LD6B41",
-				"Full Code": "19B12CS425",
-				"Subject": "Advanced Blokchain: A game theoretic review"
-			},
-			{
-				"Code": "D6A10",
-				"Full Code": "16B1NEC832",
-				"Subject": "MIMO OFDM Applications to wireless communications-DE6"
-			},
-			{
-				"Code": "O2B12",
-				"Full Code": "18B12CS424",
-				"Subject": "Algorithm Analysis and AI"
-			},
-			{
-				"Code": "O2P11",
-				"Full Code": "20B12PH411",
-				"Subject": "Superconducting Materials, Magnets and Devices"
-			},
-			{
-				"Code": "NBT832",
-				"Full Code": "15B1NBT832",
-				"Subject": "Biostatistics & Applications"
-			},
-			{
-				"Code": "D6A20",
-				"Full Code": "17B1NEC736",
-				"Subject": "Essentials of VLSI Testing-DE6"
-			},
-			{
-				"Code": "O2M31",
-				"Full Code": "22B12MA411",
-				"Subject": "Advanced Statistical Methods"
-			},
-			{
-				"Code": "O2C20",
-				"Full Code": "17B1NBT732",
-				"Subject": "Healthcare Marketplace"
-			},
-			{
-				"Code": "EC415",
+				"Code": "D6A30",
 				"Full Code": "22B12EC415",
 				"Subject": "5G Wireless Communication Systems -DE6"
-			},
-			{
-				"Code": "LD6B11",
-				"Full Code": "17B1NCI731",
-				"Subject": "Machine Learning and Naturl Language"
-			},
-			{
-				"Code": "NBT531",
-				"Full Code": "16B1NBT531",
-				"Subject": "Networks of Life"
-			},
-			{
-				"Code": "HS412",
-				"Full Code": "18B12HS412",
-				"Subject": "HUMAN RESOURCE ANALYTICS"
-			},
-			{
-				"Code": "LD4B11",
-				"Full Code": "21B12CS414",
-				"Subject": "Smart systems and IoT"
-			},
-			{
-				"Code": "LD6B21",
-				"Full Code": "21B12CS413",
-				"Subject": "Fog and Edge Computing"
-			},
-			{
-				"Code": "O2P10",
-				"Full Code": "17B1NPH731",
-				"Subject": "Introduction to Quantum Information Processing"
-			},
-			{
-				"Code": "NEC736",
-				"Full Code": "17B1NEC736",
-				"Subject": "Essentials of VLSI Testing-DE6"
-			},
-			{
-				"Code": "O2P20",
-				"Full Code": "17B1NPH732",
-				"Subject": "Nanoscience and Technology"
-			},
-			{
-				"Code": "PH732",
-				"Full Code": "17B1NPH732",
-				"Subject": "Nanoscience and Technology"
-			},
-			{
-				"Code": "O2M20",
-				"Full Code": "17B1NMA732",
-				"Subject": "Applied Numerical Methods"
-			},
-			{
-				"Code": "NBT733",
-				"Full Code": "17B1NBT733",
-				"Subject": "Stress: Biology, Behaviour and Management"
-			},
-			{
-				"Code": "20EC413",
-				"Full Code": "20B12EC413",
-				"Subject": "Basics of Antenna and Wave Propagation-DE5"
-			},
-			{
-				"Code": "LD5B51",
-				"Full Code": "19B12CS427",
-				"Subject": "Introduction to Devops"
-			},
-			{
-				"Code": "CS428",
-				"Full Code": "18B12CS428",
-				"Subject": "Introduction to Deep Learning"
-			},
-			{
-				"Code": "D4A30",
-				"Full Code": "23B12EC312",
-				"Subject": "Introduction to VLSI Fabrication Technology-DE4"
-			},
-			{
-				"Code": "CS426",
-				"Full Code": "19B12CS426",
-				"Subject": "IoT Analytics"
-			},
-			{
-				"Code": "CS415",
-				"Full Code": "21B12CS415",
-				"Subject": "Secure Design of Software System"
-			},
-			{
-				"Code": "CS423",
-				"Full Code": "19B12CS423",
-				"Subject": "Computing for Data Sceince"
-			},
-			{
-				"Code": "O2H10",
-				"Full Code": "18B12HS412",
-				"Subject": "HUMAN RESOURCE ANALYTICS"
-			},
-			{
-				"Code": "O2C10",
-				"Full Code": "16B1NBT531",
-				"Subject": "Networks of Life"
-			},
-			{
-				"Code": "PH731",
-				"Full Code": "17B1NPH731",
-				"Subject": "Introduction to Quantum Information Processing"
-			},
-			{
-				"Code": "MA732",
-				"Full Code": "17B1NMA732",
-				"Subject": "Applied Numerical Methods"
-			},
-			{
-				"Code": "CS425",
-				"Full Code": "19B12CS425",
-				"Subject": "Advanced Blokchain: A game theoretic review"
-			},
-			{
-				"Code": "CS427",
-				"Full Code": "19B12CS427",
-				"Subject": "Introduction to Devops"
-			},
-			{
-				"Code": "BT411",
-				"Full Code": "24B12BT411",
-				"Subject": "Bioenergy and Biofuels"
-			},
-			{
-				"Code": "CS411",
-				"Full Code": "21B12CS411",
-				"Subject": "Big Data with Hadoop and Spark"
-			},
-			{
-				"Code": "LD4B41",
-				"Full Code": "21B12CS412",
-				"Subject": "Cryptography and its Applications"
-			},
-			{
-				"Code": "CS418",
-				"Full Code": "21B12CS418",
-				"Subject": "Ethical Hacking and Prevention"
-			},
-			{
-				"Code": "D6A40",
-				"Full Code": "18B12EC413",
-				"Subject": "Digital Control System-DE6"
-			},
-			{
-				"Code": "EC733",
-				"Full Code": "17B11EC733",
-				"Subject": "Optical Communication-DE4"
-			},
-			{
-				"Code": "D4A20/1",
-				"Full Code": "17B11EC733",
-				"Subject": "Optical Communication-DE4"
-			},
-			{
-				"Code": "LD4B51",
-				"Full Code": "16B1NCI648",
-				"Subject": "InformationRetrieval and Semartic Web"
-			},
-			{
-				"Code": "LD5B21",
-				"Full Code": "21B12CS417",
-				"Subject": "Machine Learning and Big Data"
-			},
-			{
-				"Code": "LD5B31",
-				"Full Code": "21B12CS415",
-				"Subject": "Secure Design of Software System"
-			},
-			{
-				"Code": "D5A10/1",
-				"Full Code": "15B1NEC731",
-				"Subject": "Soft Computing In Electronics-DE5"
-			},
-			{
-				"Code": "LD5B11",
-				"Full Code": "19B12CS426",
-				"Subject": "IoT Analytics"
-			},
-			{
-				"Code": "O2M10",
-				"Full Code": "17NMA731",
-				"Subject": "Applied Linear Algebra"
-			},
-			{
-				"Code": "D4C10",
-				"Full Code": "17B1NBT734",
-				"Subject": "Stem Cells and Healthcare"
 			},
 			{
 				"Code": "O2P13",
@@ -2234,84 +1954,19 @@
 				"Subject": "Nanoscience and Technology"
 			},
 			{
-				"Code": "CODE",
-				"Full Code": "SUBJECT CODE",
-				"Subject": "SUBJECT NAME"
+				"Code": "D6A10",
+				"Full Code": "16B1NEC832",
+				"Subject": "MIMO OFDM Applications to wireless communications-DE6"
 			},
 			{
-				"Code": "MA411",
-				"Full Code": "22B12MA411",
-				"Subject": "Advanced Statistical Methods"
+				"Code": "O2P20",
+				"Full Code": "17B1NPH732",
+				"Subject": "Nanoscience and Technology"
 			},
 			{
-				"Code": "LD5B41",
-				"Full Code": "19B12CS423",
-				"Subject": "Computing for Data Sceince"
-			},
-			{
-				"Code": "NBT734",
-				"Full Code": "17B1NBT734",
-				"Subject": "Stem Cells and Healthcare"
-			},
-			{
-				"Code": "NBT735",
-				"Full Code": "17B1NBT735",
-				"Subject": "Molecular Diagnostics"
-			},
-			{
-				"Code": "D5C10",
-				"Full Code": "17B1NBT737",
-				"Subject": "Enzymes in food processing"
-			},
-			{
-				"Code": "CS412",
-				"Full Code": "21B12CS412",
-				"Subject": "Cryptography and its Applications"
-			},
-			{
-				"Code": "CS413",
-				"Full Code": "21B12CS413",
-				"Subject": "Fog and Edge Computing"
-			},
-			{
-				"Code": "D6C20/1",
-				"Full Code": "17B1NBT735",
-				"Subject": "Molecular Diagnostics"
-			},
-			{
-				"Code": "D6A30",
-				"Full Code": "22B12EC415",
-				"Subject": "5G Wireless Communication Systems -DE6"
-			},
-			{
-				"Code": "EC416",
-				"Full Code": "19B12EC416",
-				"Subject": "Deep Learning for Multimedia-DE4"
-			},
-			{
-				"Code": "O2P30",
-				"Full Code": "20B12PH411",
-				"Subject": "Superconducting Materials, Magnets and Devices"
-			},
-			{
-				"Code": "CI648",
+				"Code": "LD4B51",
 				"Full Code": "16B1NCI648",
 				"Subject": "InformationRetrieval and Semartic Web"
-			},
-			{
-				"Code": "NEC733",
-				"Full Code": "15B1NEC733",
-				"Subject": "Fundamentals of Embedded Systems-DE4"
-			},
-			{
-				"Code": "PH411",
-				"Full Code": "20B12PH411",
-				"Subject": "Superconducting Materials, Magnets and Devices"
-			},
-			{
-				"Code": "CS414",
-				"Full Code": "21B12CS414",
-				"Subject": "Smart systems and IoT"
 			},
 			{
 				"Code": "LD6B51",
@@ -2319,34 +1974,24 @@
 				"Subject": "Ethical Hacking and Prevention"
 			},
 			{
-				"Code": "D4A40",
-				"Full Code": "15B1NEC733",
-				"Subject": "Fundamentals of Embedded Systems-DE4"
+				"Code": "O2P30",
+				"Full Code": "20B12PH411",
+				"Subject": "Superconducting Materials, Magnets and Devices"
 			},
 			{
-				"Code": "D6C10/1",
-				"Full Code": "17B1NBT739",
-				"Subject": "Biocomputing and Applications"
+				"Code": "O2M10",
+				"Full Code": "17NMA731",
+				"Subject": "Applied Linear Algebra"
 			},
 			{
-				"Code": "LD4B21",
-				"Full Code": "21B12CS411",
-				"Subject": "Big Data with Hadoop and Spark"
+				"Code": "LD6B11",
+				"Full Code": "17B1NCI731",
+				"Subject": "Machine Learning and Naturl Language"
 			},
 			{
-				"Code": "O2C30",
-				"Full Code": "17B1NBT733",
-				"Subject": "Stress: Biology, Behaviour and Management"
-			},
-			{
-				"Code": "NBT737",
-				"Full Code": "17B1NBT737",
-				"Subject": "Enzymes in food processing"
-			},
-			{
-				"Code": "D4C20/1",
-				"Full Code": "15B1NBT832",
-				"Subject": "Biostatistics & Applications"
+				"Code": "LD6B31",
+				"Full Code": "15B1NCI732",
+				"Subject": "Social Network Analysis"
 			},
 			{
 				"Code": "O2P12",
@@ -2354,9 +1999,24 @@
 				"Subject": "Introduction to Quantum Information Processing"
 			},
 			{
-				"Code": "MA731",
-				"Full Code": "17NMA731",
-				"Subject": "Applied Linear Algebra"
+				"Code": "D5C20/1",
+				"Full Code": "24B12BT411",
+				"Subject": "Bioenergy and Biofuels"
+			},
+			{
+				"Code": "D4A40",
+				"Full Code": "15B1NEC733",
+				"Subject": "Fundamentals of Embedded Systems-DE4"
+			},
+			{
+				"Code": "D6A40",
+				"Full Code": "18B12EC413",
+				"Subject": "Digital Control System-DE6"
+			},
+			{
+				"Code": "LD6B21",
+				"Full Code": "21B12CS413",
+				"Subject": "Fog and Edge Computing"
 			},
 			{
 				"Code": "D4A10",
@@ -2364,14 +2024,29 @@
 				"Subject": "Deep Learning for Multimedia-DE4"
 			},
 			{
-				"Code": "D5C20/1",
-				"Full Code": "24B12BT411",
-				"Subject": "Bioenergy and Biofuels"
+				"Code": "D4C10",
+				"Full Code": "17B1NBT734",
+				"Subject": "Stem Cells and Healthcare"
 			},
 			{
-				"Code": "CI731",
-				"Full Code": "17B1NCI731",
-				"Subject": "Machine Learning and Naturl Language"
+				"Code": "O2M20",
+				"Full Code": "17B1NMA732",
+				"Subject": "Applied Numerical Methods"
+			},
+			{
+				"Code": "O2P10",
+				"Full Code": "17B1NPH731",
+				"Subject": "Introduction to Quantum Information Processing"
+			},
+			{
+				"Code": "O2C10",
+				"Full Code": "16B1NBT531",
+				"Subject": "Networks of Life"
+			},
+			{
+				"Code": "O2H10",
+				"Full Code": "18B12HS412",
+				"Subject": "HUMAN RESOURCE ANALYTICS"
 			},
 			{
 				"Code": "LD4B31",
@@ -2379,9 +2054,54 @@
 				"Subject": "Introduction to Deep Learning"
 			},
 			{
-				"Code": "18EC413",
-				"Full Code": "18B12EC413",
-				"Subject": "Digital Control System-DE6"
+				"Code": "D6C20/1",
+				"Full Code": "17B1NBT735",
+				"Subject": "Molecular Diagnostics"
+			},
+			{
+				"Code": "O2P11",
+				"Full Code": "20B12PH411",
+				"Subject": "Superconducting Materials, Magnets and Devices"
+			},
+			{
+				"Code": "LD6B41",
+				"Full Code": "19B12CS425",
+				"Subject": "Advanced Blokchain: A game theoretic review"
+			},
+			{
+				"Code": "O2C20",
+				"Full Code": "17B1NBT732",
+				"Subject": "Healthcare Marketplace"
+			},
+			{
+				"Code": "D5A20",
+				"Full Code": "20B12EC415",
+				"Subject": "Network Security-DE5"
+			},
+			{
+				"Code": "D4C20/1",
+				"Full Code": "15B1NBT832",
+				"Subject": "Biostatistics & Applications"
+			},
+			{
+				"Code": "LD5B41",
+				"Full Code": "19B12CS423",
+				"Subject": "Computing for Data Sceince"
+			},
+			{
+				"Code": "LD4B11",
+				"Full Code": "21B12CS414",
+				"Subject": "Smart systems and IoT"
+			},
+			{
+				"Code": "D6C10/1",
+				"Full Code": "17B1NBT739",
+				"Subject": "Biocomputing and Applications"
+			},
+			{
+				"Code": "LD5B11",
+				"Full Code": "19B12CS426",
+				"Subject": "IoT Analytics"
 			},
 			{
 				"Code": "D5A40",
@@ -2389,19 +2109,74 @@
 				"Subject": "Basics of Antenna and Wave Propagation-DE5"
 			},
 			{
-				"Code": "NEC731",
+				"Code": "LD5B21",
+				"Full Code": "21B12CS417",
+				"Subject": "Machine Learning and Big Data"
+			},
+			{
+				"Code": "D4A20/1",
+				"Full Code": "17B11EC733",
+				"Subject": "Optical Communication-DE4"
+			},
+			{
+				"Code": "LD4B21",
+				"Full Code": "21B12CS411",
+				"Subject": "Big Data with Hadoop and Spark"
+			},
+			{
+				"Code": "D6A20",
+				"Full Code": "17B1NEC736",
+				"Subject": "Essentials of VLSI Testing-DE6"
+			},
+			{
+				"Code": "D5A10/1",
 				"Full Code": "15B1NEC731",
 				"Subject": "Soft Computing In Electronics-DE5"
 			},
 			{
-				"Code": "22EC413",
-				"Full Code": "22B12EC413",
-				"Subject": "Low Power CMOS VLSI Circuit Design -DE5"
+				"Code": "O2B12",
+				"Full Code": "18B12CS424",
+				"Subject": "Algorithm Analysis and AI"
 			},
 			{
-				"Code": "D5A20",
-				"Full Code": "20B12EC415",
-				"Subject": "Network Security-DE5"
+				"Code": "LD4B41",
+				"Full Code": "21B12CS412",
+				"Subject": "Cryptography and its Applications"
+			},
+			{
+				"Code": "O2M31",
+				"Full Code": "22B12MA411",
+				"Subject": "Advanced Statistical Methods"
+			},
+			{
+				"Code": "O2C30",
+				"Full Code": "17B1NBT733",
+				"Subject": "Stress: Biology, Behaviour and Management"
+			},
+			{
+				"Code": "D4A30",
+				"Full Code": "23B12EC312",
+				"Subject": "Introduction to VLSI Fabrication Technology-DE4"
+			},
+			{
+				"Code": "LD5B31",
+				"Full Code": "21B12CS415",
+				"Subject": "Secure Design of Software System"
+			},
+			{
+				"Code": "D5C10",
+				"Full Code": "17B1NBT737",
+				"Subject": "Enzymes in food processing"
+			},
+			{
+				"Code": "LD5B51",
+				"Full Code": "19B12CS427",
+				"Subject": "Introduction to Devops"
+			},
+			{
+				"Code": "D5A30",
+				"Full Code": "22B12EC413",
+				"Subject": "Low Power CMOS VLSI Circuit Design -DE5"
 			}
 		]
 	}

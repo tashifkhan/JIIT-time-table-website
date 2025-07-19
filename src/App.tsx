@@ -6,6 +6,7 @@ import {
 } from "./utils/pyodide";
 import { ScheduleForm } from "./components/schedule-form";
 import { ScheduleDisplay } from "./components/schedule-display";
+import { UrlParamsDialog } from "./components/url-params-dialog";
 // import { AcademicCalendar } from "./components/academic-calendar";
 import { motion } from "framer-motion";
 import timetableMapping from "../public/data/time-table/ODD25/62.json";
@@ -48,6 +49,13 @@ const App: React.FC = () => {
 		return configs ? JSON.parse(configs) : {};
 	});
 	const [selectedConfig, setSelectedConfig] = React.useState<string>("");
+	const [showUrlParamsDialog, setShowUrlParamsDialog] = React.useState(false);
+	const [urlParamsData, setUrlParamsData] = React.useState<{
+		year: string;
+		batch: string;
+		campus: string;
+		selectedElectives: string[];
+	} | null>(null);
 
 	React.useEffect(() => {
 		localStorage.setItem("classConfigs", JSON.stringify(savedConfigs));
@@ -202,7 +210,7 @@ const App: React.FC = () => {
 		parseAsArrayOf(parseAsString).withDefault([])
 	);
 
-	// Auto-generate schedule only once on initial mount if all params are present and no cached schedule exists
+	// Handle URL parameters and existing cached schedule
 	React.useEffect(() => {
 		const cached = localStorage.getItem("cachedSchedule");
 
@@ -211,27 +219,62 @@ const App: React.FC = () => {
 		const year = urlParams.get("year") || "";
 		const batch = urlParams.get("batch") || "";
 		const campus = urlParams.get("campus") || "";
-		const electiveCount = parseInt(urlParams.get("electiveCount") || "0", 10);
-		const selectedElectives = urlParams.getAll("selectedElectives") || [];
+		const selectedElectives = urlParams.getAll("selectedSubjects") || [];
 
-		const allParamsPresent =
-			year &&
-			batch &&
-			campus &&
-			(!electiveCount ||
-				(electiveCount > 0 &&
-					selectedElectives.length === electiveCount &&
-					selectedElectives.every((e) => !!e)));
+		const allParamsPresent = year && batch && campus;
 
-		if (!cached && allParamsPresent) {
-			handleFormSubmit({
-				year,
-				batch,
-				electives: selectedElectives,
-				campus,
-			});
+		if (allParamsPresent) {
+			if (!cached) {
+				// No cached schedule - auto generate
+				handleFormSubmit({
+					year,
+					batch,
+					electives: selectedElectives,
+					campus,
+				});
+			} else {
+				// Cached schedule exists - show dialog
+				setUrlParamsData({
+					year,
+					batch,
+					campus,
+					selectedElectives,
+				});
+				setShowUrlParamsDialog(true);
+			}
 		}
 	}, []);
+
+	const handleUrlParamsOverride = async () => {
+		if (!urlParamsData) return;
+
+		setShowUrlParamsDialog(false);
+		await handleFormSubmit({
+			year: urlParamsData.year,
+			batch: urlParamsData.batch,
+			electives: urlParamsData.selectedElectives,
+			campus: urlParamsData.campus,
+		});
+	};
+
+	const handleUrlParamsPrefill = () => {
+		if (!urlParamsData) return;
+
+		// Prefill the form but don't auto-generate
+		setYear(urlParamsData.year);
+		setBatch(urlParamsData.batch);
+		setCampus(urlParamsData.campus);
+		setSelectedElectives(urlParamsData.selectedElectives);
+
+		// Open the form so user can see the prefilled values
+		setIsFormOpen(true);
+		setShowUrlParamsDialog(false);
+	};
+
+	const handleUrlParamsViewExisting = () => {
+		// Just close the dialog and view existing schedule
+		setShowUrlParamsDialog(false);
+	};
 
 	const handleSelectConfig = async (name: string) => {
 		const config = savedConfigs[name];
@@ -493,6 +536,18 @@ const App: React.FC = () => {
 			{/* Academic Calendar Component */}
 			{/* <AcademicCalendar />
 			</div> */}
+
+			{/* URL Parameters Dialog */}
+			{urlParamsData && (
+				<UrlParamsDialog
+					isOpen={showUrlParamsDialog}
+					onClose={() => setShowUrlParamsDialog(false)}
+					urlParams={urlParamsData}
+					onOverride={handleUrlParamsOverride}
+					onPrefill={handleUrlParamsPrefill}
+					onViewExisting={handleUrlParamsViewExisting}
+				/>
+			)}
 		</main>
 	);
 };

@@ -1,7 +1,7 @@
 import React from "react";
 import UserContext from "../context/userContext";
 import { useLocation } from "react-router-dom";
-import { useState, useEffect, useRef, Fragment, useCallback } from "react";
+import { useState, useEffect, useRef, useCallback } from "react";
 
 interface ScheduleEvent {
 	subject_name: string;
@@ -420,7 +420,13 @@ const TimelinePage: React.FC = () => {
 				{/* This block is now moved outside the main display div */}
 
 				<div className="min-w-[1500px]">
-					<div className="grid grid-cols-[150px_repeat(6,1fr)] gap-4">
+					<div
+						className={
+							isDownloadMode
+								? "grid grid-cols-[150px_repeat(6,1fr)] gap-4"
+								: "grid grid-cols-[70px_repeat(6,1fr)] md:grid-cols-[110px_repeat(6,1fr)] gap-4"
+						}
+					>
 						{/* Time column */}
 						<div className="font-medium">
 							<div className="h-20"></div> {/* Header spacer */}

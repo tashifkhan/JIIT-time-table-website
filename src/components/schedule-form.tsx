@@ -14,9 +14,10 @@ import { Label } from "./ui/label";
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from "./ui/dialog";
 import Fuse from "fuse.js";
 
-import { Sparkles } from "lucide-react";
+import { Sparkles, Save } from "lucide-react";
 import UserContext from "../context/userContext";
 import { useQueryState, parseAsString, parseAsArrayOf } from "nuqs";
+import { useToast } from "../hooks/use-toast";
 
 interface ScheduleFormProps {
 	mapping: {
@@ -86,6 +87,7 @@ export function ScheduleForm({
 	const [showSubjectModal, setShowSubjectModal] = useState(false);
 	const [subjectSearch, setSubjectSearch] = useState("");
 	const [mapz, setMapz] = useState(mapping);
+	const { toast } = useToast();
 
 	// Initialize Fuse.js for fuzzy search
 	const fuse = useMemo(() => {
@@ -210,6 +212,10 @@ export function ScheduleForm({
 		setShowSaveModal(false);
 		setSaveName("");
 		setSaveError("");
+		toast({
+			title: "Class config saved!",
+			description: `Saved as '${saveName.trim()}'`,
+		});
 	};
 
 	const prevAutoSubmitKey = useRef<string | undefined>(undefined);
@@ -245,6 +251,12 @@ export function ScheduleForm({
 			prevAutoSubmitKey.current = autoSubmitKey;
 		}
 	}, [autoSubmitKey, year, batch, campus, selectedSubjects, onSubmit]);
+
+	const isFormValid =
+		year &&
+		batch &&
+		campus &&
+		(year === "1" || selectedSubjects.length > 0 || year === "1");
 
 	return (
 		<>
@@ -432,10 +444,17 @@ export function ScheduleForm({
 						</Button>
 						<Button
 							type="button"
-							className="w-[50%] h-9 sm:h-10 text-sm sm:text-base bg-gradient-to-r from-[#543A14] to-[#F0BB78] hover:from-[#543A14]/80 hover:to-[#F0BB78]/80 transition-all duration-300 shadow-lg hover:shadow-[#F0BB78]/25"
+							disabled={!isFormValid}
+							title={
+								!isFormValid
+									? "Fill all fields to save config"
+									: "Save this class config for later"
+							}
+							className="w-[50%] h-9 sm:h-10 text-sm sm:text-base bg-gradient-to-r from-[#543A14] to-[#F0BB78] hover:from-[#543A14]/80 hover:to-[#F0BB78]/80 transition-all duration-300 shadow-lg hover:shadow-[#F0BB78]/25 flex items-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed"
 							onClick={() => setShowSaveModal(true)}
 						>
-							Save Class Config
+							<Save className="w-4 h-4 mr-1" />
+							Save
 						</Button>
 					</div>
 				</form>
@@ -455,35 +474,64 @@ export function ScheduleForm({
 							animate={{ scale: 1, opacity: 1 }}
 							exit={{ scale: 0.9, opacity: 0 }}
 							transition={{ duration: 0.2 }}
-							className="bg-white/10 border border-[#F0BB78]/20 rounded-2xl shadow-2xl p-8 flex flex-col items-center"
+							className="bg-gradient-to-br from-[#FFF0DC]/30 to-[#F0BB78]/10 border border-[#F0BB78]/30 rounded-2xl shadow-2xl p-0 sm:p-0 w-[90vw] max-w-sm flex flex-col items-center"
 						>
-							<h2 className="text-lg font-semibold text-[#F0BB78] mb-4">
-								Save Class Config
-							</h2>
-							<Input
-								type="text"
-								placeholder="Enter a name for this config"
-								value={saveName}
-								onChange={(e) => {
-									setSaveName(e.target.value);
-									setSaveError("");
-								}}
-								className="mb-2"
-							/>
-							{saveError && (
-								<p className="text-red-400 text-sm mb-2">{saveError}</p>
-							)}
-							<div className="flex gap-3 mt-2">
-								<Button onClick={handleSaveConfig} type="button">
-									Save
-								</Button>
-								<Button
-									onClick={() => setShowSaveModal(false)}
-									type="button"
-									variant="ghost"
+							<div className="w-full flex flex-col items-center p-6 pb-4 border-b border-[#F0BB78]/20 bg-[#FFF0DC]/10 rounded-t-2xl">
+								<div className="flex items-center gap-2 mb-2">
+									<Save className="w-6 h-6 text-[#F0BB78]" />
+									<h2 className="text-lg font-semibold text-[#F0BB78]">
+										Save Class Config
+									</h2>
+								</div>
+								<p className="text-xs text-slate-400 text-center max-w-xs">
+									Give a memorable name to this configuration so you can quickly
+									load it later.
+								</p>
+							</div>
+							<div className="w-full flex flex-col gap-3 p-6 pt-4">
+								<Label
+									htmlFor="save-config-name"
+									className="text-sm text-white/80 mb-1"
 								>
-									Cancel
-								</Button>
+									Config Name
+								</Label>
+								<Input
+									id="save-config-name"
+									type="text"
+									placeholder="Enter a name for this config"
+									value={saveName}
+									onChange={(e) => {
+										setSaveName(e.target.value);
+										setSaveError("");
+									}}
+									autoFocus
+									onKeyDown={(e) => {
+										if (e.key === "Enter") handleSaveConfig();
+									}}
+									className="mb-0 bg-white/10 border-white/20 focus:border-[#F0BB78] focus:ring-[#F0BB78]/30 transition-all"
+								/>
+								{saveError && (
+									<p className="text-red-400 text-xs font-medium bg-red-400/10 border border-red-400/20 rounded px-2 py-1 mt-1 mb-0.5">
+										{saveError}
+									</p>
+								)}
+								<div className="flex gap-3 mt-2 w-full">
+									<Button
+										onClick={handleSaveConfig}
+										type="button"
+										className="flex-1 bg-gradient-to-r from-[#543A14] to-[#F0BB78] hover:from-[#543A14]/80 hover:to-[#F0BB78]/80 shadow-md"
+									>
+										<Save className="w-4 h-4 mr-1" /> Save
+									</Button>
+									<Button
+										onClick={() => setShowSaveModal(false)}
+										type="button"
+										variant="ghost"
+										className="flex-1 border border-[#F0BB78]/30 text-[#F0BB78] hover:bg-[#F0BB78]/10"
+									>
+										Cancel
+									</Button>
+								</div>
 							</div>
 						</motion.div>
 					</motion.div>

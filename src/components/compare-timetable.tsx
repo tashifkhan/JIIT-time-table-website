@@ -8,6 +8,13 @@ import {
 	usePyodideStatus,
 } from "../utils/pyodide";
 import { Button } from "./ui/button";
+import {
+	Select,
+	SelectContent,
+	SelectItem,
+	SelectTrigger,
+	SelectValue,
+} from "./ui/select";
 import type { PyodideInterface } from "pyodide";
 import { SubjectSelector, Subject } from "./schedule-form";
 
@@ -165,33 +172,39 @@ const CompareTimetablePage: React.FC = () => {
 								<label className="block text-white/90 font-medium text-sm">
 									Campus
 								</label>
-								<select
+								<Select
 									value={config1.campus}
-									onChange={(e) =>
-										handleConfigChange(1, "campus", e.target.value)
+									onValueChange={(value) =>
+										handleConfigChange(1, "campus", value)
 									}
-									className="w-full rounded-lg p-3 bg-white/10 border border-white/20 text-white placeholder-white/50 focus:ring-2 focus:ring-[#F0BB78]/50 focus:border-[#F0BB78]/50 transition-all duration-200"
 								>
-									<option value="" className="bg-gray-800">Select campus</option>
-									<option value="62" className="bg-gray-800">Campus 62</option>
-									<option value="128" className="bg-gray-800">Campus 128</option>
-								</select>
+									<SelectTrigger className="h-9 sm:h-10 text-sm bg-[#FFF0DC]/10 border-[#F0BB78]/20 backdrop-blur-md hover:bg-[#FFF0DC]/15 transition-all">
+										<SelectValue placeholder="Select campus" />
+									</SelectTrigger>
+									<SelectContent className="bg-[#FFF0DC]/20 backdrop-blur-2xl border-[#F0BB78]/20">
+										<SelectItem value="62" className="hover:bg-white/20">Campus 62</SelectItem>
+										<SelectItem value="128" className="hover:bg-white/20">Campus 128</SelectItem>
+									</SelectContent>
+								</Select>
 							</div>
 							<div className="space-y-2">
 								<label className="block text-white/90 font-medium text-sm">
 									Year
 								</label>
-								<select
+								<Select
 									value={config1.year}
-									onChange={(e) => handleConfigChange(1, "year", e.target.value)}
-									className="w-full rounded-lg p-3 bg-white/10 border border-white/20 text-white placeholder-white/50 focus:ring-2 focus:ring-[#F0BB78]/50 focus:border-[#F0BB78]/50 transition-all duration-200"
+									onValueChange={(value) => handleConfigChange(1, "year", value)}
 								>
-									<option value="" className="bg-gray-800">Select year</option>
-									<option value="1" className="bg-gray-800">1st Year</option>
-									<option value="2" className="bg-gray-800">2nd Year</option>
-									<option value="3" className="bg-gray-800">3rd Year</option>
-									<option value="4" className="bg-gray-800">4th Year</option>
-								</select>
+									<SelectTrigger className="h-9 sm:h-10 text-sm bg-[#FFF0DC]/10 border-[#F0BB78]/20 backdrop-blur-md hover:bg-[#FFF0DC]/15 transition-all">
+										<SelectValue placeholder="Select year" />
+									</SelectTrigger>
+									<SelectContent className="bg-[#FFF0DC]/20 backdrop-blur-2xl border-[#F0BB78]/20">
+										<SelectItem value="1" className="hover:bg-white/20">1st Year</SelectItem>
+										<SelectItem value="2" className="hover:bg-white/20">2nd Year</SelectItem>
+										<SelectItem value="3" className="hover:bg-white/20">3rd Year</SelectItem>
+										<SelectItem value="4" className="hover:bg-white/20">4th Year</SelectItem>
+									</SelectContent>
+								</Select>
 							</div>
 							<div className="space-y-2">
 								<label className="block text-white/90 font-medium text-sm">
@@ -279,33 +292,39 @@ const CompareTimetablePage: React.FC = () => {
 								<label className="block text-white/90 font-medium text-sm">
 									Campus
 								</label>
-								<select
+								<Select
 									value={config2.campus}
-									onChange={(e) =>
-										handleConfigChange(2, "campus", e.target.value)
+									onValueChange={(value) =>
+										handleConfigChange(2, "campus", value)
 									}
-									className="w-full rounded-lg p-3 bg-white/10 border border-white/20 text-white placeholder-white/50 focus:ring-2 focus:ring-[#F0BB78]/50 focus:border-[#F0BB78]/50 transition-all duration-200"
 								>
-									<option value="" className="bg-gray-800">Select campus</option>
-									<option value="62" className="bg-gray-800">Campus 62</option>
-									<option value="128" className="bg-gray-800">Campus 128</option>
-								</select>
+									<SelectTrigger className="h-9 sm:h-10 text-sm bg-[#FFF0DC]/10 border-[#F0BB78]/20 backdrop-blur-md hover:bg-[#FFF0DC]/15 transition-all">
+										<SelectValue placeholder="Select campus" />
+									</SelectTrigger>
+									<SelectContent className="bg-[#FFF0DC]/20 backdrop-blur-2xl border-[#F0BB78]/20">
+										<SelectItem value="62" className="hover:bg-white/20">Campus 62</SelectItem>
+										<SelectItem value="128" className="hover:bg-white/20">Campus 128</SelectItem>
+									</SelectContent>
+								</Select>
 							</div>
 							<div className="space-y-2">
 								<label className="block text-white/90 font-medium text-sm">
 									Year
 								</label>
-								<select
+								<Select
 									value={config2.year}
-									onChange={(e) => handleConfigChange(2, "year", e.target.value)}
-									className="w-full rounded-lg p-3 bg-white/10 border border-white/20 text-white placeholder-white/50 focus:ring-2 focus:ring-[#F0BB78]/50 focus:border-[#F0BB78]/50 transition-all duration-200"
+									onValueChange={(value) => handleConfigChange(2, "year", value)}
 								>
-									<option value="" className="bg-gray-800">Select year</option>
-									<option value="1" className="bg-gray-800">1st Year</option>
-									<option value="2" className="bg-gray-800">2nd Year</option>
-									<option value="3" className="bg-gray-800">3rd Year</option>
-									<option value="4" className="bg-gray-800">4th Year</option>
-								</select>
+									<SelectTrigger className="h-9 sm:h-10 text-sm bg-[#FFF0DC]/10 border-[#F0BB78]/20 backdrop-blur-md hover:bg-[#FFF0DC]/15 transition-all">
+										<SelectValue placeholder="Select year" />
+									</SelectTrigger>
+									<SelectContent className="bg-[#FFF0DC]/20 backdrop-blur-2xl border-[#F0BB78]/20">
+										<SelectItem value="1" className="hover:bg-white/20">1st Year</SelectItem>
+										<SelectItem value="2" className="hover:bg-white/20">2nd Year</SelectItem>
+										<SelectItem value="3" className="hover:bg-white/20">3rd Year</SelectItem>
+										<SelectItem value="4" className="hover:bg-white/20">4th Year</SelectItem>
+									</SelectContent>
+								</Select>
 							</div>
 							<div className="space-y-2">
 								<label className="block text-white/90 font-medium text-sm">

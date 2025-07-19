@@ -431,22 +431,22 @@ const CompareTimetablePage: React.FC = () => {
 						animate={{ opacity: 1, y: 0 }}
 						transition={{ duration: 0.5 }}
 					>
-						<div className="bg-gradient-to-r from-[#F0BB78]/10 to-[#543A14]/10 px-6 py-4 border-b border-white/10">
-							<h2 className="text-xl sm:text-2xl font-bold text-[#F0BB78]">Comparison Results</h2>
+						<div className="bg-gradient-to-r from-[#F0BB78]/10 to-[#543A14]/10 px-4 sm:px-6 py-3 sm:py-4 border-b border-white/10">
+							<h2 className="text-lg sm:text-xl lg:text-2xl font-bold text-[#F0BB78]">Comparison Results</h2>
 						</div>
-						<div className="p-6 space-y-8">
+						<div className="p-4 sm:p-6 space-y-6 sm:space-y-8">
 							{/* Common Free Slots Section */}
-							<div className="space-y-4">
-								<div className="flex items-center gap-3">
-									<div className="w-3 h-3 bg-gradient-to-r from-[#F0BB78] to-[#543A14] rounded-full"></div>
-									<h3 className="text-lg font-semibold text-white">Common Free Slots</h3>
+							<div className="space-y-3 sm:space-y-4">
+								<div className="flex items-center gap-2 sm:gap-3">
+									<div className="w-2.5 h-2.5 sm:w-3 sm:h-3 bg-gradient-to-r from-[#F0BB78] to-[#543A14] rounded-full"></div>
+									<h3 className="text-base sm:text-lg font-semibold text-white">Common Free Slots</h3>
 								</div>
 								{Object.keys(compareResult.common_free_slots || {}).length === 0 ? (
-									<div className="bg-white/5 rounded-xl p-6 border border-white/10">
-										<p className="text-slate-300/80 text-center">No common free slots found.</p>
+									<div className="bg-white/5 rounded-lg sm:rounded-xl p-4 sm:p-6 border border-white/10">
+										<p className="text-slate-300/80 text-center text-sm sm:text-base">No common free slots found.</p>
 									</div>
 								) : (
-									<div className="space-y-4">
+									<div className="space-y-3 sm:space-y-4">
 										{(() => {
 											// Define day order for proper sorting
 											const dayOrder = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
@@ -469,14 +469,14 @@ const CompareTimetablePage: React.FC = () => {
 												});
 
 												return (
-													<div key={day} className="bg-white/5 rounded-xl border border-white/10 overflow-hidden">
-														<div className="bg-gradient-to-r from-[#F0BB78]/5 to-[#543A14]/5 px-6 py-3 border-b border-white/10">
-															<h4 className="text-lg font-semibold text-[#F0BB78]">{day}</h4>
+													<div key={day} className="bg-white/5 rounded-lg sm:rounded-xl border border-white/10 overflow-hidden">
+														<div className="bg-gradient-to-r from-[#F0BB78]/5 to-[#543A14]/5 px-3 sm:px-6 py-2 sm:py-3 border-b border-white/10">
+															<h4 className="text-sm sm:text-lg font-semibold text-[#F0BB78]">{day}</h4>
 														</div>
-														<div className="p-6">
-															<div className="flex flex-wrap gap-3">
+														<div className="p-3 sm:p-6">
+															<div className="grid grid-cols-1 xs:grid-cols-2 sm:flex sm:flex-wrap gap-2 sm:gap-3">
 																{sortedSlots.map((slot, i) => (
-																	<span key={i} className="inline-flex items-center px-4 py-2 rounded-lg bg-green-500/20 text-green-400 text-sm font-medium border border-green-500/30 hover:bg-green-500/30 transition-colors">
+																	<span key={i} className="inline-flex items-center justify-center px-3 sm:px-4 py-1.5 sm:py-2 rounded-md sm:rounded-lg bg-green-500/20 text-green-400 text-xs sm:text-sm font-medium border border-green-500/30 hover:bg-green-500/30 transition-colors text-center">
 																		{slot}
 																	</span>
 																))}
@@ -491,17 +491,17 @@ const CompareTimetablePage: React.FC = () => {
 							</div>
 
 							{/* Classes Together Section */}
-							<div className="space-y-4">
-								<div className="flex items-center gap-3">
-									<div className="w-3 h-3 bg-gradient-to-r from-[#543A14] to-[#F0BB78] rounded-full"></div>
-									<h3 className="text-lg font-semibold text-white">Classes Together</h3>
+							<div className="space-y-3 sm:space-y-4">
+								<div className="flex items-center gap-2 sm:gap-3">
+									<div className="w-2.5 h-2.5 sm:w-3 sm:h-3 bg-gradient-to-r from-[#543A14] to-[#F0BB78] rounded-full"></div>
+									<h3 className="text-base sm:text-lg font-semibold text-white">Classes Together</h3>
 								</div>
 								{Object.keys(compareResult.classes_together || {}).length === 0 ? (
-									<div className="bg-white/5 rounded-xl p-6 border border-white/10">
-										<p className="text-slate-300/80 text-center">No classes together found.</p>
+									<div className="bg-white/5 rounded-lg sm:rounded-xl p-4 sm:p-6 border border-white/10">
+										<p className="text-slate-300/80 text-center text-sm sm:text-base">No classes together found.</p>
 									</div>
 								) : (
-									<div className="space-y-4">
+									<div className="space-y-3 sm:space-y-4">
 										{(() => {
 											// Define day order for proper sorting
 											const dayOrder = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
@@ -524,29 +524,53 @@ const CompareTimetablePage: React.FC = () => {
 												});
 
 												return (
-													<div key={day} className="bg-white/5 rounded-xl border border-white/10 overflow-hidden">
-														<div className="bg-gradient-to-r from-[#543A14]/5 to-[#F0BB78]/5 px-6 py-3 border-b border-white/10">
-															<h4 className="text-lg font-semibold text-[#F0BB78]">{day}</h4>
+													<div key={day} className="bg-white/5 rounded-lg sm:rounded-xl border border-white/10 overflow-hidden">
+														<div className="bg-gradient-to-r from-[#543A14]/5 to-[#F0BB78]/5 px-3 sm:px-6 py-2 sm:py-3 border-b border-white/10">
+															<h4 className="text-sm sm:text-lg font-semibold text-[#F0BB78]">{day}</h4>
 														</div>
-														<div className="p-6 space-y-3">
+														<div className="p-3 sm:p-6 space-y-2 sm:space-y-3">
 															{sortedTimeSlots.map(([time, info]: [string, any]) => (
-																<div key={time} className="flex flex-wrap items-center gap-4 p-4 bg-white/5 rounded-lg border border-white/10">
-																	<div className="flex items-center gap-3">
-																		<span className="inline-flex items-center px-3 py-1 rounded-lg bg-blue-500/20 text-blue-400 text-sm font-medium border border-blue-500/30">
-																			{time}
-																		</span>
-																		<span className="text-white font-medium">{info.subject_name}</span>
+																<div key={time} className="bg-white/5 rounded-lg border border-white/10 overflow-hidden">
+																	{/* Mobile Layout - Stacked */}
+																	<div className="block sm:hidden p-3 space-y-2">
+																		<div className="flex items-center justify-between">
+																			<span className="inline-flex items-center px-2.5 py-1 rounded-md bg-blue-500/20 text-blue-400 text-xs font-medium border border-blue-500/30">
+																				{time}
+																			</span>
+																			<span className={`inline-flex items-center px-2 py-1 rounded-md text-xs font-medium ${
+																				info.type === 'L' ? 'bg-purple-500/20 text-purple-400 border border-purple-500/30' :
+																				info.type === 'T' ? 'bg-orange-500/20 text-orange-400 border border-orange-500/30' :
+																				info.type === 'P' ? 'bg-green-500/20 text-green-400 border border-green-500/30' :
+																				'bg-gray-500/20 text-gray-400 border border-gray-500/30'
+																			}`}>
+																				{info.type === 'L' ? 'Lecture' : info.type === 'T' ? 'Tutorial' : info.type === 'P' ? 'Practical' : info.type}
+																			</span>
+																		</div>
+																		<div className="space-y-1">
+																			<p className="text-white font-medium text-sm">{info.subject_name}</p>
+																			<p className="text-slate-300 text-xs">{info.location}</p>
+																		</div>
 																	</div>
-																	<div className="flex items-center gap-3">
-																		<span className={`inline-flex items-center px-2 py-1 rounded-md text-xs font-medium ${
-																			info.type === 'L' ? 'bg-purple-500/20 text-purple-400 border border-purple-500/30' :
-																			info.type === 'T' ? 'bg-orange-500/20 text-orange-400 border border-orange-500/30' :
-																			info.type === 'P' ? 'bg-green-500/20 text-green-400 border border-green-500/30' :
-																			'bg-gray-500/20 text-gray-400 border border-gray-500/30'
-																		}`}>
-																			{info.type === 'L' ? 'Lecture' : info.type === 'T' ? 'Tutorial' : info.type === 'P' ? 'Practical' : info.type}
-																		</span>
-																		<span className="text-slate-300 text-sm">{info.location}</span>
+
+																	{/* Desktop Layout - Horizontal */}
+																	<div className="hidden sm:flex sm:items-center sm:gap-4 sm:p-4">
+																		<div className="flex items-center gap-3">
+																			<span className="inline-flex items-center px-3 py-1 rounded-lg bg-blue-500/20 text-blue-400 text-sm font-medium border border-blue-500/30">
+																				{time}
+																			</span>
+																			<span className="text-white font-medium">{info.subject_name}</span>
+																		</div>
+																		<div className="flex items-center gap-3 ml-auto">
+																			<span className={`inline-flex items-center px-2 py-1 rounded-md text-xs font-medium ${
+																				info.type === 'L' ? 'bg-purple-500/20 text-purple-400 border border-purple-500/30' :
+																				info.type === 'T' ? 'bg-orange-500/20 text-orange-400 border border-orange-500/30' :
+																				info.type === 'P' ? 'bg-green-500/20 text-green-400 border border-green-500/30' :
+																				'bg-gray-500/20 text-gray-400 border border-gray-500/30'
+																			}`}>
+																				{info.type === 'L' ? 'Lecture' : info.type === 'T' ? 'Tutorial' : info.type === 'P' ? 'Practical' : info.type}
+																			</span>
+																			<span className="text-slate-300 text-sm">{info.location}</span>
+																		</div>
 																	</div>
 																</div>
 															))}

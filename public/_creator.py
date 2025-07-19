@@ -544,7 +544,7 @@ def expand_batch128(batch_code):
         return []
 
     if batch_code == "ALL":
-        return ["E", "F"]
+        return ["E", "F", "H", "D"]
 
     matches = re.findall(r"([A-Z])(\d+)", batch_code)
     if matches:

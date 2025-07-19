@@ -384,6 +384,12 @@ def process_timeslot(timeslot: str, type: str = "L") -> tuple[str, str]:
         if end_time_24[3:] == "50":
             end_time_24 = f"{int(end_time_24[:2])+1}00"
 
+        if end_time_24.find(":") == -1:
+            if len(end_time_24) == 3:
+                end_time_24 = f"0{end_time_24[0]}:{end_time_24[1:]}"
+            elif len(end_time_24) == 4:
+                end_time_24 = f"{end_time_24[:2]}:{end_time_24[2:]}"
+
         return start_time_24, end_time_24
 
     except Exception as e:
@@ -982,7 +988,9 @@ def time_table_creator_v2(
         for entry in your_time_table:
             day = process_day(entry[0])
             time = entry[1]
+            print(f"Processing time: {time}")
             start_time, end_time = process_timeslot(time, entry[3])
+            print(f"Processed times: {start_time} - {end_time}")
 
             if entry[2] in [
                 "ENGINEERING DRAWING AND DESIGN",
@@ -1246,12 +1254,12 @@ def Print(dic: dict | list) -> None:
 #         )
 #     ) as f:
 #         mapping62 = json.load(f)
-#         data3 = mapping62["3"]
+#         data3 = mapping62["4"]
 #         Print(data3)
 #         time_table = data3["timetable"]
 #         subjects = data3["subjects"]
-#         batch = "A2"
-#         enrolled_subjects: list[str] = str("EC312,EC315,CI576,EC314,MA533").split(",")
+#         batch = "A6"
+#         enrolled_subjects: list[str] = str("D6A30,O2B12,D4A10,D5A20").split(",")
 
 #         user_timetable = time_table_creator_v2(
 #             time_table_json=time_table,

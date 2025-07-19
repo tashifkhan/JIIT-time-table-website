@@ -260,10 +260,15 @@ def is_enrolled_subject(
     electives_directory = []
 
     for subject in subject_dict:
-        if subject["Code"] in enrolled_subject_codes:
+        if (
+            subject["Code"] in enrolled_subject_codes
+            or subject["Full Code"] in enrolled_subject_codes
+        ):
             electives_directory.append(subject)
 
     for elective in electives_directory:
+        if elective["Full Code"] == subject_code:
+            return True
         if elective["Full Code"][:2] + elective["Code"] == subject_code:
             return True
         if elective["Full Code"][3:] == subject_code:

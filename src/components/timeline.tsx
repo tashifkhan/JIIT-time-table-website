@@ -5,6 +5,7 @@ interface ScheduleEvent {
 	subject_name: string;
 	type: "L" | "P" | "T" | "C";
 	location: string;
+	isCustom?: boolean;
 }
 
 const TimelinePage: React.FC = () => {
@@ -48,29 +49,123 @@ const TimelinePage: React.FC = () => {
 	const getEventColor = (type: string) => {
 		switch (type) {
 			case "L":
-				return "rgba(240, 187, 120, 0.2)";
+				return {
+					background:
+						"linear-gradient(135deg, rgba(59, 130, 246, 0.15), rgba(37, 99, 235, 0.25))",
+					border: "1px solid rgba(59, 130, 246, 0.3)",
+					accent: "#3B82F6",
+				};
 			case "P":
-				return "rgba(84, 58, 20, 0.3)";
+				return {
+					background:
+						"linear-gradient(135deg, rgba(16, 185, 129, 0.15), rgba(5, 150, 105, 0.25))",
+					border: "1px solid rgba(16, 185, 129, 0.3)",
+					accent: "#10B981",
+				};
 			case "T":
-				return "rgba(255, 240, 220, 0.15)";
+				return {
+					background:
+						"linear-gradient(135deg, rgba(245, 158, 11, 0.15), rgba(217, 119, 6, 0.25))",
+					border: "1px solid rgba(245, 158, 11, 0.3)",
+					accent: "#F59E0B",
+				};
 			case "C":
-				return "rgba(255, 155, 80, 0.2)";
+				return {
+					background:
+						"linear-gradient(135deg, rgba(139, 92, 246, 0.15), rgba(124, 58, 237, 0.25))",
+					border: "1px solid rgba(139, 92, 246, 0.3)",
+					accent: "#8B5CF6",
+				};
 			default:
-				return "transparent";
+				return {
+					background: "rgba(255, 240, 220, 0.1)",
+					border: "1px solid rgba(255, 240, 220, 0.2)",
+					accent: "#FFF0DC",
+				};
+		}
+	};
+
+	const getTypeLabel = (type: string) => {
+		switch (type) {
+			case "L":
+				return "Lecture";
+			case "P":
+				return "Practical";
+			case "T":
+				return "Tutorial";
+			case "C":
+				return "Custom";
+			default:
+				return type;
+		}
+	};
+
+	const getTypeIcon = (type: string) => {
+		const iconProps = "w-4 h-4 inline-block";
+		switch (type) {
+			case "L":
+				// Book/Lecture icon
+				return (
+					<svg className={iconProps} fill="currentColor" viewBox="0 0 20 20">
+						<path d="M9 4.804A7.968 7.968 0 005.5 4c-1.255 0-2.443.29-3.5.804v10A7.969 7.969 0 015.5 14c1.669 0 3.218.51 4.5 1.385A7.962 7.962 0 0114.5 14c1.255 0 2.443.29 3.5.804v-10A7.968 7.968 0 0014.5 4c-1.255 0-2.443.29-3.5.804V12a1 1 0 11-2 0V4.804z" />
+					</svg>
+				);
+			case "P":
+				// Flask/Lab icon
+				return (
+					<svg className={iconProps} fill="currentColor" viewBox="0 0 20 20">
+						<path
+							fillRule="evenodd"
+							d="M7 2a1 1 0 00-.707 1.707L7 4.414v3.758a1 1 0 01-.293.707l-4 4C.817 14.769 2.156 18 4.828 18h10.343c2.673 0 4.010-3.231 2.121-5.121l-4-4A1 1 0 0113 8.172V4.414l.707-.707A1 1 0 0013 2H7zm2 6.172V4h2v4.172a3 3 0 00.879 2.12l1.027 1.028a4 4 0 00-2.171.102l-.47.156a4 4 0 01-2.53 0l-.563-.187a1.993 1.993 0 00-.114-.035l1.063-1.063A3 3 0 009 8.172z"
+							clipRule="evenodd"
+						/>
+					</svg>
+				);
+			case "T":
+				// Pencil/Tutorial icon
+				return (
+					<svg className={iconProps} fill="currentColor" viewBox="0 0 20 20">
+						<path d="M13.586 3.586a2 2 0 112.828 2.828l-.793.793-2.828-2.828.793-.793zM11.379 5.793L3 14.172V17h2.828l8.38-8.379-2.83-2.828z" />
+					</svg>
+				);
+			case "C":
+				// Star/Custom icon
+				return (
+					<svg className={iconProps} fill="currentColor" viewBox="0 0 20 20">
+						<path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+					</svg>
+				);
+			default:
+				// Calendar icon
+				return (
+					<svg className={iconProps} fill="currentColor" viewBox="0 0 20 20">
+						<path
+							fillRule="evenodd"
+							d="M6 2a1 1 0 00-1 1v1H4a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V6a2 2 0 00-2-2h-1V3a1 1 0 10-2 0v1H7V3a1 1 0 00-1-1zm0 5a1 1 0 000 2h8a1 1 0 100-2H6z"
+							clipRule="evenodd"
+						/>
+					</svg>
+				);
 		}
 	};
 
 	const getEventStyle = (event: ScheduleEvent) => {
+		const colors = getEventColor(event.type);
 		return {
-			backgroundColor: getEventColor(event.type),
+			background: colors.background,
 			backdropFilter: "blur(10px)",
-			border: "1px solid rgba(255, 240, 220, 0.1)",
-			borderRadius: "8px",
-			padding: "0.5rem",
+			border: colors.border,
+			borderRadius: "18px",
+			padding: "0.75rem",
 			height: "100%",
 			display: "flex",
 			flexDirection: "column" as const,
-			gap: "0.25rem",
+			gap: "0.5rem",
+			boxShadow: `0 6px 18px rgba(0, 0, 0, 0.1), inset 0 1px 0 rgba(255, 255, 255, 0.1)`,
+			position: "relative" as const,
+			overflow: "hidden" as const,
+			transition: "all 0.2s ease-in-out",
+			cursor: "pointer",
 		};
 	};
 
@@ -87,32 +182,156 @@ const TimelinePage: React.FC = () => {
 		return endHour - startHour;
 	};
 
+	const getCurrentTimePosition = () => {
+		const now = new Date();
+		const currentHour = now.getHours();
+		const currentMinute = now.getMinutes();
+
+		if (currentHour < 8 || currentHour > 18) return null;
+
+		const position = currentHour - 8 + currentMinute / 60;
+		return position;
+	};
+
+	const getCurrentDay = () => {
+		const today = new Date();
+		const dayNames = [
+			"Sunday",
+			"Monday",
+			"Tuesday",
+			"Wednesday",
+			"Thursday",
+			"Friday",
+			"Saturday",
+		];
+		return dayNames[today.getDay()];
+	};
+
+	const isToday = (day: string) => {
+		return getCurrentDay() === day;
+	};
+
+	const getScheduleStats = () => {
+		if (!displaySchedule) return { total: 0, byType: {}, todayCount: 0 };
+
+		let total = 0;
+		let todayCount = 0;
+		const byType: { [key: string]: number } = {};
+		const currentDay = getCurrentDay();
+
+		Object.entries(displaySchedule).forEach(([day, daySchedule]) => {
+			Object.values(daySchedule).forEach((event) => {
+				total++;
+				byType[event.type] = (byType[event.type] || 0) + 1;
+				if (day === currentDay) {
+					todayCount++;
+				}
+			});
+		});
+
+		return { total, byType, todayCount };
+	};
+
 	return (
 		<div
 			className="min-h-[50%] bg-[#131010] text-[#FFF0DC] p-4 md:p-8 overflow-scroll"
-			style={{ minWidth: "1600px" }}
+			style={{ minWidth: "2700px" }}
 		>
 			<div
 				id="schedule-display"
 				className="max-w-8xl mx-auto backdrop-blur-lg bg-[rgba(255,240,220,0.05)] rounded-xl p-4 md:p-6 shadow-xl overflow-x-auto"
-				style={{ minWidth: "1500px" }}
+				style={{ minWidth: "2550px" }}
 			>
-				<h1 className="text-xl md:text-2xl font-bold mb-4 md:mb-6 text-center">
-					Your Schedule
-				</h1>
+				<div className="flex items-center justify-between mb-6">
+					<h1 className="text-xl md:text-3xl font-bold text-center flex-1 flex items-center justify-center gap-3">
+						<svg
+							className="w-7 h-7 md:w-8 md:h-8"
+							fill="currentColor"
+							viewBox="0 0 20 20"
+						>
+							<path
+								fillRule="evenodd"
+								d="M6 2a1 1 0 00-1 1v1H4a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V6a2 2 0 00-2-2h-1V3a1 1 0 10-2 0v1H7V3a1 1 0 00-1-1zm0 5a1 1 0 000 2h8a1 1 0 100-2H6z"
+								clipRule="evenodd"
+							/>
+						</svg>
+						Your Weekly Schedule
+					</h1>
+					<div className="text-right">
+						<div className="text-sm text-[#FFF0DC]/70">
+							Today: {getCurrentDay()}
+						</div>
+						{getScheduleStats().todayCount > 0 && (
+							<div className="text-xs text-blue-300">
+								{getScheduleStats().todayCount} classes today
+							</div>
+						)}
+					</div>
+				</div>
 
-				<div className="min-w-[800px]">
-					<div className="grid grid-cols-[60px_repeat(6,1fr)] gap-1">
+				{/* Schedule Statistics */}
+				<div className="mb-6 p-4 bg-[rgba(255,240,220,0.03)] rounded-lg border border-[rgba(255,240,220,0.1)]">
+					<div className="flex flex-wrap items-center justify-between gap-4">
+						<div className="flex items-center gap-6">
+							<div className="text-sm">
+								<span className="text-[#FFF0DC]/70">Total Classes: </span>
+								<span className="font-semibold text-blue-300">
+									{getScheduleStats().total}
+								</span>
+							</div>
+							<div className="flex gap-4 text-sm">
+								{Object.entries(getScheduleStats().byType).map(
+									([type, count]) => (
+										<div key={type} className="flex items-center gap-2">
+											<span className="flex-shrink-0">{getTypeIcon(type)}</span>
+											<span className="text-[#FFF0DC]/70">
+												{getTypeLabel(type)}:
+											</span>
+											<span
+												className="font-semibold"
+												style={{ color: getEventColor(type).accent }}
+											>
+												{count}
+											</span>
+										</div>
+									)
+								)}
+							</div>
+						</div>
+
+						{/* Legend */}
+						<div className="flex items-center gap-3 text-xs">
+							<span className="text-[#FFF0DC]/70">Legend:</span>
+							{["L", "P", "T", "C"].map((type) => (
+								<div key={type} className="flex items-center gap-1">
+									<div
+										className="w-3 h-3 rounded-full"
+										style={{ backgroundColor: getEventColor(type).accent }}
+									></div>
+									<span>{getTypeLabel(type)}</span>
+								</div>
+							))}
+						</div>
+					</div>
+				</div>
+
+				<div className="min-w-[1500px]">
+					<div className="grid grid-cols-[150px_repeat(6,1fr)] gap-4">
 						{/* Time column */}
 						<div className="font-medium">
-							<div className="h-12"></div> {/* Header spacer */}
+							<div className="h-20"></div> {/* Header spacer */}
 							{Array.from({ length: 11 }, (_, i) => i + 8).map((hour) => (
 								<div
 									key={hour}
-									className="h-20 md:h-28 flex items-center justify-center text-sm md:text-base"
+									className="h-36 md:h-48 flex items-center justify-center text-sm md:text-base relative"
 									style={{ transform: "translateY(-50%)" }}
 								>
-									{`${hour}:00`}
+									<div className="text-center">
+										<div className="font-semibold">{`${hour}:00`}</div>
+										<div className="text-xs opacity-60">
+											{hour < 12 ? "AM" : "PM"}
+										</div>
+									</div>
 								</div>
 							))}
 						</div>
@@ -120,17 +339,49 @@ const TimelinePage: React.FC = () => {
 						{/* Days columns */}
 						{days.map((day) => (
 							<div key={day} className="relative">
-								<div className="h-12 flex items-center justify-center font-medium border-b border-[rgba(255,240,220,0.1)] text-sm md:text-base">
-									{day}
+								<div
+									className={`h-20 flex items-center justify-center font-medium border-b text-sm md:text-base rounded-t-lg ${
+										isToday(day)
+											? "bg-gradient-to-r from-blue-500/20 to-purple-500/20 border-blue-400/30 text-blue-200"
+											: "border-[rgba(255,240,220,0.1)]"
+									}`}
+								>
+									<div className="text-center">
+										<div className="font-semibold">{day}</div>
+										{isToday(day) && (
+											<div className="text-xs opacity-75">Today</div>
+										)}
+									</div>
 								</div>
 
 								{/* Time grid background */}
-								<div className="grid grid-rows-[repeat(10,5rem)] md:grid-rows-[repeat(10,7rem)]">
+								<div className="grid grid-rows-[repeat(10,9rem)] md:grid-rows-[repeat(10,12rem)]">
 									{Array.from({ length: 11 }, (_, i) => i + 8).map((hour) => (
 										<div
 											key={hour}
-											className="border-b border-[rgba(255,240,220,0.05)]"
-										></div>
+											className="border-b border-[rgba(255,240,220,0.05)] relative"
+										>
+											{/* Current time indicator */}
+											{isToday(day) &&
+												getCurrentTimePosition() !== null &&
+												Math.floor(getCurrentTimePosition()!) === hour - 8 && (
+													<div
+														className="absolute left-0 right-0 h-0.5 bg-red-500 shadow-lg z-20 animate-pulse"
+														style={{
+															top: `${
+																(getCurrentTimePosition()! - (hour - 8)) * 100
+															}%`,
+															boxShadow: "0 0 10px rgba(239, 68, 68, 0.6)",
+														}}
+													>
+														<div className="absolute -left-1 -top-1 w-2 h-2 bg-red-500 rounded-full animate-ping"></div>
+														<div className="absolute -left-1 -top-1 w-2 h-2 bg-red-500 rounded-full"></div>
+														<div className="absolute -right-8 -top-2 text-xs text-red-400 font-medium bg-black/30 px-1 rounded">
+															Now
+														</div>
+													</div>
+												)}
+										</div>
 									))}
 								</div>
 
@@ -140,29 +391,81 @@ const TimelinePage: React.FC = () => {
 										([timeSlot, event]: [string, ScheduleEvent]) => (
 											<div
 												key={timeSlot}
-												className="absolute w-[calc(100%-0.5rem)] left-1"
+												className="absolute w-[calc(100%-1.2rem)] left-2.5 group transition-all duration-200 hover:scale-105 hover:-translate-y-1"
 												style={{
 													top: `${
 														getEventPosition(timeSlot) *
-															(window.innerWidth >= 768 ? 7 : 5) +
-														3
+															(window.innerWidth >= 768 ? 12 : 9) +
+														4.5
 													}rem`,
 													height: `${
 														getEventDuration(timeSlot) *
-														(window.innerWidth >= 768 ? 7 : 5)
+														(window.innerWidth >= 768 ? 12 : 9)
 													}rem`,
+													zIndex: 10,
 												}}
 											>
-												<div style={getEventStyle(event as ScheduleEvent)}>
-													<div className="font-medium text-xs md:text-sm">
+												<div
+													style={getEventStyle(event as ScheduleEvent)}
+													className="group-hover:shadow-2xl group-hover:shadow-black/20"
+												>
+													{/* Event Type Badge */}
+													<div className="flex items-center justify-between mb-2">
+														<span className="inline-flex items-center gap-2 px-2 py-1 rounded-full text-xs font-medium bg-black/20 backdrop-blur-sm">
+															{getTypeIcon(event.type)}{" "}
+															{getTypeLabel(event.type)}
+														</span>
+														{event.isCustom && (
+															<svg
+																className="w-4 h-4 opacity-75"
+																fill="currentColor"
+																viewBox="0 0 20 20"
+															>
+																<path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+															</svg>
+														)}
+													</div>
+
+													{/* Subject Name */}
+													<div className="font-semibold text-sm md:text-base mb-1 leading-tight">
 														{event.subject_name}
-														{event.type === "C" && " (Custom)"}
 													</div>
-													<div className="text-[10px] md:text-xs opacity-75">
-														{timeSlot}
+
+													{/* Time and Location */}
+													<div className="space-y-1 text-xs md:text-sm opacity-90">
+														<div className="flex items-center gap-2">
+															<svg
+																className="w-3 h-3 flex-shrink-0"
+																fill="currentColor"
+																viewBox="0 0 20 20"
+															>
+																<path
+																	fillRule="evenodd"
+																	d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-12a1 1 0 10-2 0v4a1 1 0 00.293.707l2.828 2.829a1 1 0 101.415-1.415L11 9.586V6z"
+																	clipRule="evenodd"
+																/>
+															</svg>
+															<span className="font-medium">{timeSlot}</span>
+														</div>
+														<div className="flex items-center gap-2">
+															<svg
+																className="w-3 h-3 flex-shrink-0"
+																fill="currentColor"
+																viewBox="0 0 20 20"
+															>
+																<path
+																	fillRule="evenodd"
+																	d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z"
+																	clipRule="evenodd"
+																/>
+															</svg>
+															<span>{event.location}</span>
+														</div>
 													</div>
-													<div className="text-[10px] md:text-xs opacity-75">
-														{event.location}
+
+													{/* Duration indicator */}
+													<div className="mt-auto pt-1 text-xs opacity-75">
+														Duration: {getEventDuration(timeSlot)}h
 													</div>
 												</div>
 											</div>

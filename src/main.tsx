@@ -12,6 +12,7 @@ import RedirectAC from "./components/redirectAC.tsx";
 import { NuqsAdapter } from "nuqs/adapters/react-router/v6";
 import CompareTimetablePage from "./components/compare-timetable";
 import RedirectCT from "./components/redirectCT.tsx";
+import Navbar from "./components/navbar";
 
 createRoot(document.getElementById("root")!).render(
 	<StrictMode>
@@ -19,6 +20,18 @@ createRoot(document.getElementById("root")!).render(
 			<Analytics />
 			<NuqsAdapter>
 				<Router>
+					<Navbar />
+					<div className="md:ml-56 mt-20 md:mt-0 p-4">
+						<Routes>
+							<Route path="/" element={<App />} />
+							<Route path="/timeline" element={<TimelinePage />} />
+							<Route path="/academic-calendar" element={<AcademicCalendar />} />
+							<Route
+								path="/compare-timetables"
+								element={<CompareTimetablePage />}
+							/>
+						</Routes>
+					</div>
 					<div className="fixed right-4 bottom-4 z-50 p-5 rounded-[1.4rem] backdrop-blur-md bg-white/5 border border-white/30 shadow-lg hover:bg-white/30 transition-all duration-300">
 						<a
 							href="https://github.com/tashifkhan/JIIT-time-table-website"
@@ -35,16 +48,6 @@ createRoot(document.getElementById("root")!).render(
 					<div className="fixed left-4 bottom-4 z-50">
 						<RedirectAC />
 					</div>
-
-					<Routes>
-						<Route path="/" element={<App />} />
-						<Route path="/timeline" element={<TimelinePage />} />
-						<Route path="/academic-calendar" element={<AcademicCalendar />} />
-						<Route
-							path="/compare-timetables"
-							element={<CompareTimetablePage />}
-						/>
-					</Routes>
 				</Router>
 			</NuqsAdapter>
 		</UserContextProvider>

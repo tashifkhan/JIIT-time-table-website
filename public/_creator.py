@@ -997,9 +997,9 @@ def time_table_creator_v2(
         for entry in your_time_table:
             day = process_day(entry[0])
             time = entry[1]
-            print(f"Processing time: {time}")
+            # print(f"Processing time: {time}")
             start_time, end_time = process_timeslot(time, entry[3])
-            print(f"Processed times: {start_time} - {end_time}")
+            # print(f"Processed times: {start_time} - {end_time}")
 
             if entry[2] in [
                 "ENGINEERING DRAWING AND DESIGN",

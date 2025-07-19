@@ -1,4 +1,4 @@
-import { Calendar, Sparkles, ChevronDown, Plus } from "lucide-react";
+import { Calendar, ChevronDown, Plus } from "lucide-react";
 import { motion } from "framer-motion";
 import { addAcademicCalendarEvents } from "../utils/calendar-AC";
 import { useState, useEffect, useRef } from "react";
@@ -122,7 +122,7 @@ export function AcademicCalendar() {
 
 	if (isDataLoading) {
 		return (
-			<main className="min-h-screen bg-gradient-to-br from-[#543A14]/20 via-[#131010]/40 to-[#131010]/60 p-2 sm:p-8 flex items-center justify-center">
+			<main>
 				<div className="bg-white/10 border border-[#F0BB78]/20 rounded-2xl shadow-2xl p-8 flex flex-col items-center">
 					<div className="mb-6 flex flex-row items-end gap-2 h-10">
 						{[0, 1, 2].map((i) => (
@@ -152,7 +152,7 @@ export function AcademicCalendar() {
 	}
 
 	return (
-		<main className="min-h-screen bg-gradient-to-br from-[#543A14]/20 via-[#131010]/40 to-[#131010]/60 p-2 sm:p-8">
+		<main>
 			<div className="max-w-5xl mx-auto space-y-8 sm:space-y-12">
 				<motion.div
 					className="text-center space-y-3"
@@ -342,20 +342,9 @@ export function AcademicCalendar() {
 				</motion.div>
 			</div>
 			<motion.button
-				onClick={() => (window.location.href = "/")}
-				className="fixed bottom-28 left-4 px-4 sm:px-6 py-2 rounded-lg backdrop-blur-lg bg-white/10 border border-white/20 
-        text-[#F0BB78] hover:bg-white/20 transition-all duration-300 shadow-lg
-        flex items-center gap-2 text-sm sm:text-base"
-				whileHover={{ scale: 1.05 }}
-				whileTap={{ scale: 0.95 }}
-			>
-				<Sparkles className="w-4 h-4 sm:w-5 sm:h-5" />
-				Create your Timetable
-			</motion.button>
-			<motion.button
 				onClick={handleAddToCalendar}
 				disabled={isLoading}
-				className="fixed bottom-4 left-4 px-4 sm:px-6 py-2 rounded-lg backdrop-blur-lg bg-white/10 border border-white/20 
+				className="fixed bottom-4 left-4 px-4 sm:px-6 py-2 rounded-lg backdrop-blur-lg bg-white/10 border border-white/20 z-50
         text-[#F0BB78] hover:bg-white/20 transition-all duration-300 shadow-lg
         flex items-center gap-2 text-sm sm:text-base"
 				whileHover={{ scale: 1.05 }}

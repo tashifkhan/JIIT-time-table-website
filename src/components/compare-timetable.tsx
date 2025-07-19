@@ -9,7 +9,6 @@ import {
 	usePyodideStatus,
 } from "../utils/pyodide";
 import { Button } from "./ui/button";
-import { Sparkles } from "lucide-react";
 import type { PyodideInterface } from "pyodide";
 
 const CompareTimetablePage: React.FC = () => {
@@ -100,7 +99,7 @@ const CompareTimetablePage: React.FC = () => {
 	};
 
 	return (
-		<main className="min-h-screen bg-gradient-to-br from-[#543A14]/20 via-[#131010]/40 to-[#131010]/60 p-4 sm:p-8 relative overflow-hidden">
+		<main>
 			<div className="relative z-10 flex flex-col items-center justify-start max-w-7xl mx-auto space-y-6 sm:space-y-8">
 				<motion.div
 					className="text-center space-y-3 sm:space-y-4"
@@ -227,17 +226,6 @@ const CompareTimetablePage: React.FC = () => {
 					</div>
 				)}
 			</div>
-			<motion.button
-				onClick={() => (window.location.href = "/")}
-				className="fixed bottom-16 left-4 px-4 sm:px-6 py-2 rounded-lg backdrop-blur-lg bg-white/10 border border-white/20 
-        text-[#F0BB78] hover:bg-white/20 transition-all duration-300 shadow-lg
-        flex items-center gap-2 text-sm sm:text-base"
-				whileHover={{ scale: 1.05 }}
-				whileTap={{ scale: 0.95 }}
-			>
-				<Sparkles className="w-4 h-4 sm:w-5 sm:h-5" />
-				Create your Timetable
-			</motion.button>
 		</main>
 	);
 };

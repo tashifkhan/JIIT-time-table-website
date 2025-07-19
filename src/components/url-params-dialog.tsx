@@ -27,7 +27,6 @@ export function UrlParamsDialog({
 	onOverride,
 	onPrefill,
 	onViewExisting,
-	onClose,
 }: UrlParamsDialogProps) {
 	if (!isOpen) return null;
 

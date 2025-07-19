@@ -7,7 +7,6 @@ import {
 import { ScheduleForm } from "./components/schedule-form";
 import { ScheduleDisplay } from "./components/schedule-display";
 import { UrlParamsDialog } from "./components/url-params-dialog";
-// import { AcademicCalendar } from "./components/academic-calendar";
 import { motion } from "framer-motion";
 import timetableMapping from "../public/data/time-table/ODD25/62.json";
 import mapping128 from "../public/data/time-table/ODD25/128.json";
@@ -390,7 +389,6 @@ const App: React.FC = () => {
 					transition={{ duration: 0.5 }}
 				>
 					<div className="flex items-center justify-center gap-2 sm:gap-3 mb-2 sm:mb-4">
-						<Calendar className="w-8 h-8 sm:w-10 sm:h-10 text-[#F0BB78]" />
 						<h1 className="text-2xl sm:text-4xl font-bold bg-clip-text text-[#F0BB78] bg-gradient-to-r from-[#F0BB78] to-[#543A14]">
 							JIIT Schedule Creator
 						</h1>

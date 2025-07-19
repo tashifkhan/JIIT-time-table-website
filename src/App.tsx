@@ -34,10 +34,7 @@ interface YourTietable {
 const App: React.FC = () => {
 	const navigate = useNavigate();
 	const { schedule, setSchedule } = useContext(UserContext);
-	const [numExecutions, setNumExecutions] = useQueryState(
-		"numExecutions",
-		parseAsInteger.withDefault(0)
-	);
+	const [numExecutions, setNumExecutions] = React.useState(0);
 	const [isGenerating, setIsGenerating] = useQueryState(
 		"isGenerating",
 		parseAsBoolean.withDefault(false)

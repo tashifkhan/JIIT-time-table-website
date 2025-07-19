@@ -16,7 +16,7 @@ import Fuse from "fuse.js";
 
 import { Sparkles } from "lucide-react";
 import UserContext from "../context/userContext";
-import { useQueryState, parseAsString } from "nuqs";
+import { useQueryState, parseAsString, parseAsArrayOf } from "nuqs";
 
 interface ScheduleFormProps {
 	mapping: {
@@ -75,13 +75,16 @@ export function ScheduleForm({
 		"campus",
 		parseAsString.withDefault("")
 	);
+	const [selectedSubjects, setSelectedSubjects] = useQueryState(
+		"selectedSubjects",
+		parseAsArrayOf(parseAsString).withDefault([])
+	);
 	const [isGenerating, setIsGenerating] = useState(false);
 	const [showSaveModal, setShowSaveModal] = useState(false);
 	const [saveName, setSaveName] = useState("");
 	const [saveError, setSaveError] = useState("");
 	const [showSubjectModal, setShowSubjectModal] = useState(false);
 	const [subjectSearch, setSubjectSearch] = useState("");
-	const [selectedSubjects, setSelectedSubjects] = useState<string[]>([]);
 	const [mapz, setMapz] = useState(mapping);
 
 	// Initialize Fuse.js for fuzzy search
@@ -199,6 +202,7 @@ export function ScheduleForm({
 			year,
 			batch,
 			campus,
+			selectedSubjects,
 		};
 		if (onSaveConfig) {
 			onSaveConfig(saveName, configData);

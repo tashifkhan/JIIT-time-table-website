@@ -706,6 +706,747 @@
 			}
 		]
 	},
+	"2": {
+		"timetable": {
+			"MON": {
+				"9-10AM": [
+					"LA1-A2(HS211)-FF6/MRB",
+					"LA3-A4(HS211)-FF7/VSE",
+					"LA5-A6(HS211)-FF8/KMB",
+					"LA7-A8,A10(HS211)-CS8/PRI",
+					"LA15,A16(EC214)-CS6/RB",
+					"LA17,A18(EC214)-CS7/PKY",
+					"LB7,8(CS212)-FF4/ASY",
+					"LC1-C3(BT311)-CR526/ASM,NF3",
+					"TG1(MA211)-TS8/RSH",
+					"TA10(MA301)-TS10/BPC",
+					"TB5(MA213)-TS11/NF1",
+					"TB1(MA213)-TS13/AN",
+					"TB2(MA213)-TS16/HA",
+					"TG2(CI311)-TS17/VRN",
+					"PB6(B15CS214)-CL05/PKAU, PRK",
+					"PB3(CI371)-CL01/-TRN, SRG",
+					"PB4(CI371)-CL02/-KRL, DL"
+				],
+				"10-11AM": [
+					"LB1,2(CI311)-FF6/MKT",
+					"LB7,8(CI311)-FF7/AMT",
+					"LB9,10(CI311)-FF8/AW",
+					"LB11,12(CI311)-CS8/ANP",
+					"LB13,6(CI311)-G1/DSI",
+					"LA10,C3(BT211)-G3/NV",
+					"LA3,A4(BT211)-CR401/NF1",
+					"LA1,A2(BT211)-CR425/ANS",
+					"LA5,A6(BT211)-CR526/GMA",
+					"LA7,A8(BT211)-CS2/RPS",
+					"LA15,A16(BT211)-CS7/RAC",
+					"LEC-ACT(BT211)-LT3/EKT",
+					"LG1,G2(CI312)-F8/DEP",
+					"TA17(MA301)-TS13/DCS",
+					"TA18(MA301)-TS16/YG"
+				],
+				"11-12PM": [
+					"LB3,4(CI311)-FF6/MKT",
+					"LB5,6(CI311)-FF7/SRG",
+					"LG1,G2(CI311)-FF8/TRN",
+					"LA7, A8,A10(MA301)-CS8/BPC",
+					"LA15, A16(MA301)-G1/YG",
+					"LC1-C3(15BT211)-G3/MOB, NF1",
+					"TB9(MA213)-TS6/AN",
+					"TB10(MA213)-TS16/MPA",
+					"TA2(HS211)-TS17/PSH",
+					"TA5(EC214)-TS20/JYO",
+					"TA17(EC214)-F10/BGH",
+					"TA1(EC215)-F7/AB",
+					"TA6(EC215)-F4/HEM",
+					"PA3(15EC215)-CML/AKS, SCH",
+					"PA4(15EC211)-ADC/VKH, TA4",
+					"PB7(B15CS213)-CL06/NSA,PAR",
+					"PB8(B15CS213)-CL07/-IC, AKM"
+				],
+				"12-1PM": [
+					"LA15-A16(HS211)-FF7/PRI",
+					"LG1-G2(HS211)-FF8/VSE",
+					"LA17-A18(HS211)-CS8/NES",
+					"LB1,2(CS212)-G1/ASY",
+					"LB9,10(CS212)-G3/AKT",
+					"LB11,12(CS212)-G2/RCN",
+					"LVLSI(BT211)-G4/EKT",
+					"LA1,A2(EC215)-G5/SLM",
+					"LA7,A8, A10(EC214)-G6/JYM",
+					"LA5, A6(MA301)-G7/DCS",
+					"TC3(BT311)-TS6/ASM,NF3",
+					"TC2(BT313)-TS7/POC,SOC",
+					"TC1(15BT211)-TS8/MOB, NF1",
+					"TB3(MA213)-TS10/PSI"
+				],
+				"1-2PM": ["LUNCH"],
+				"2-3PM": [
+					"LB9-B10(HS211)-FF6/KMB",
+					"LB3,4(CS212)-FF7/RCN",
+					"LB5,6(CS212)-CS8/AKT",
+					"LA15,A16(EC215)-G3/HEM",
+					"LA3,A4(EC215)-G3/AB",
+					"LA5,A6(EC215)-G6/AKS",
+					"LA7,A8,A10(EC215)-G8/RRP",
+					"LA17,A18(EC215)-FF2/SLM",
+					"TA1(HS211)-TS8/AMN",
+					"TB13(HS211)-TS10/MM",
+					"TB7(HS211)-TS17/MRB",
+					"TG2(CI312)-TS20/DEP",
+					"TG1(MA212)-F10/SGL",
+					"PC3(BT271)- BCL/SMG, ANS, RAC, MOB",
+					"PC2(BT371)-BT1/PMG, SHD, EKT, ANM,NF1",
+					"PC1(BT373)-BT2&3/SMO, SOC, MAS, MOB",
+					"PB11(CI371)-CL03/-SRG, VRN",
+					"PB12(CI371)-CL07/-TRN, RJM"
+				],
+				"3-4PM": [
+					"LA1,A2(EC214)-FF6/RB",
+					"LA3,A4(EC214)-FF7/ABU",
+					"LB3, B4(MA213)-CS8/AN",
+					"LB5, B6(MA213)-G1/HA",
+					"LB7, B8(MA213)-G3/PSI",
+					"LA5,A6(EC214)-FF8/JYM",
+					"LB9, B10(MA213)-CS2/MPA",
+					"LG1, G2(MA211)-CS5/RSH",
+					"TA15(MA301)-TS17/YG",
+					"TA16(EC215)-TS11/AB",
+					"PA10(EC214)-MODLAB/RK, TA7",
+					"PA7(15EC215)-CML/JAS,SHI",
+					"PA8(15EC211)-ADC/VKH, TA4",
+					"PB2(B15CS213)-CL13/AA, SON",
+					"PB1(B15CS213)-CL14/PSO, DCH"
+				],
+				"4-5PM": [
+					"LB11-B12(HS211)-FF6/AMN",
+					"LB13,B16(HS211)-FF7/NES",
+					"TB3(CI311)-TS7/AMT",
+					"TA2(EC215)-TS10/AGO",
+					"TA4(EC214)-TS11/ABU",
+					"TA16(EC214)-TS13/PKY",
+					"TA5(11EC211)-TS16/APN",
+					"TA6(11EC211)-TS17/SHS"
+				]
+			},
+			"TUES": {
+				"9-10AM": [
+					"LB1, B2(MA213)-FF6/AN",
+					"LB11, B12(MA213)-FF7/NF1",
+					"LB13, B16(MA213)-FF8/NF4",
+					"LA15,A16(24B11MA211)-CS8/GA",
+					"LA1,A2(EC214)-CR526/RB",
+					"LA3,A4(EC214)-CS6/ABU",
+					"LVLSI(BT211)-CS7/EKT",
+					"TB8(HS211)-TS11/VSE",
+					"TA5(MA301)-TS12/BPC",
+					"TC1(MA302)-TS13/ATI",
+					"TB4(MA213)-TS16/HA",
+					"TA7(HS211)-TS17/PRI",
+					"TG2(MA211)-TS20/RSH",
+					"TA8(EC215)-F10/HEM",
+					"TA10(EC215)-F7/SLM",
+					"PA6(EC214)-MODLAB/JG, TA3",
+					"PB5(B15CS213)-CL01/-NSA, PAR",
+					"PB6(B15CS213)-CL02/-IC, SMS",
+					"PB7(CI371)-CL04/ANP, AMT",
+					"LA17,A18(EC214)-F6/PKY",
+					"PB9(B15CS215)-CL09/PTK,TNV,TKT",
+					"PB10(B15CS215)-CL10/PTK,TNV,TKT"
+				],
+				"10-11AM": [
+					"LA15,A16(B21EC211)-FF6/SHS",
+					"LA1,A2(B11EC211)-FF7/SCH",
+					"LA3,A4(B11EC211)-FF8/RSB",
+					"LA7,A8,A10(B11EC211)-CS8/GK",
+					"LA17,A18(B11EC211)-G1/JYO",
+					"LB3,4(CI311)-G3/MKT",
+					"LB13,16(CS212)-CR401//KA",
+					"LB1,2(CS214)-CR526//DEP",
+					"LC1-C3(BT313)-CS7/POC,SOC",
+					"LB13,16(CS214)-CS2/PRK",
+					"TB11(HS211)-TS17/MM",
+					"TB12(CI311)-TS20/VRN",
+					"TG2(MA212)-F10/SGL",
+					"PB8(CI371)-CL05/-RJM,SRG"
+				],
+				"11-12PM": [
+					"LA5,A6(B11EC211)-FF6/MNA",
+					"LA1, A2(MA301)-FF7/DCS",
+					"LA3, A4(MA301)-FF8/BPC",
+					"LA17, A18(MA301)-CS8/YG",
+					"LG1, G2(MA212)-G1/SGL",
+					"LB1,2(CS212)-G3/ASY",
+					"LB9,10(CS212)-CR526/AKT",
+					"LB11,12(CS212)-CS2/RCN",
+					"LC1-C3(15BT211)-CS7/MOB, NF1",
+					"TB3(HS211)-TS7/PSH",
+					"TA10(11EC211)-TS12/SKA",
+					"PA15(25EC211)-EDC/AJK,RSB",
+					"PA16(15EC215)-CML/VGO, RRP",
+					"PB5(B15CS215)-CL09/TNV,NET,KA",
+					"PB6(B15CS215)-CL10/TNV,NET,KA"
+				],
+				"12-1PM": [
+					"LB1,2(CS213)-FF6/PAR",
+					"LB7,8(CS213)-FF7/IC",
+					"LB9,10(CS213)-FF8/DCH",
+					"LB11,12(CS213)-CS8/SON",
+					"LB13,16(CS213)-G1/PSO",
+					"LA1,A2(EC215)-G3/SLM",
+					"LA7,A8, A10(EC214)-CR401/JYM",
+					"LA5, A6(MA301)-CR425/DCS",
+					"LC1,C2(BT211)-CR501/NV",
+					"TB4(HS211)-TS6/KMB",
+					"TA3(MA301)-TS7/NF2",
+					"TA4(MA301)-TS8/BPC",
+					"TA18(11EC211)-TS10/NF1"
+				],
+				"1-2PM": ["LUNCH"],
+				"2-3PM": [
+					"LA1-A2(HS211)-FF6/MRB",
+					"LA3-A4(HS211)-FF7/VSE",
+					"LA5-A6(HS211)-FF8/KMB",
+					"LA7-A8,A10(HS211)-CS8/PRI",
+					"LB1,2(CI311)-G1/MKT",
+					"LB7,8(CI311)-G3/AMT",
+					"LB9,10(CI311)-CR401/AW",
+					"LB11,12(CI311)-CR425/ANP",
+					"TC2(MA302)-TS12/ATI",
+					"TA16(MA301)-TS13/YG",
+					"TG1(CI312)-TS16/DEP",
+					"TB1(CI311)-/TS17KRL",
+					"TB6(HS211)-TS20/AMN",
+					"TA15(EC215)-F10/AB",
+					"TA17(EC215)-F7/HEM",
+					"TA18(EC215)-F4/AGO"
+				],
+				"3-4PM": [
+					"LC1-C3(BT311)-CR325/ASM,NF3",
+					"LB5,6(CI311)-FF7/SRG",
+					"LG1,G2(CI311)-FF8/TRN",
+					"LB13,6(CI311)-CS8/DSI",
+					"LA5,A6(EC214)-G1/JYM",
+					"TB8(MA213)-TS10/HA",
+					"TA1(11EC211)-TS11/KUL",
+					"TA3(11EC211)-TS12/SHI",
+					"TA7(11EC211)-TS13/RHA",
+					"TA10(EC214)-TS17/GV",
+					"PA17(15EC211)-ADC/ACH, TA5",
+					"PA2(EC214)-MODLAB/RK, TA7",
+					"PA18(15EC215)-CML/AKS, SCH",
+					"PB9(CI371)-CL21/-RJM, VRN",
+					"PB11(B15CS213)-CL18/NSA,PAR",
+					"PB12(B15CS213)-CL19/AA, SON"
+				],
+				"4-5PM": [
+					"LB1-B2(HS211)-FF6/MRB",
+					"LB7-B8(HS211)-FF7/KMB",
+					"LB3-B4(HS211)-FF8/AMN",
+					"LB5-B6(HS211)-CS8/NES",
+					"TB13(MA213)-TS6/AN",
+					"TB16(MA213)-TS7/PSI",
+					"TA7(EC214)-TS13/ABU"
+				]
+			},
+			"WED": {
+				"9-10AM": [
+					"LB3,4(CS212)-CS5/RCN",
+					"LB5,6(CS212)-CS6/AKT",
+					"LB7,8(CS212)-FF8/ASY",
+					"LB13,16(CS212)-CS8/KA",
+					"LA15,A16(EC214)-F8/RB",
+					"TA6(MA301)-TS10/YG",
+					"TA4(HS211)-TS11/KMB",
+					"TC3(MA302)-TS12/ATI",
+					"TB11(MA213)-TS13/AN",
+					"PG1(CI372)-MCL/IMR, GZL",
+					"PG2(CI372)-CL10/DEP, AMS",
+					"PB1(CI371)-CL14/ VRN, NM",
+					"PB2(CI371)-CL13/KRL, DL",
+					"PA1(15EC215)-CML/AKS, SHI",
+					"PA2(15EC211)-ADC/JYO, TA5"
+				],
+				"10-11AM": [
+					"LB13,B16(HS211)-FF6/NES",
+					"LA7, A8,A10(MA301)-FF7/BPC",
+					"LA15, A16(MA301)-FF8/YG",
+					"LC1-C3(BT311)-CS8/ASM,NF3",
+					"LB9-B10(HS211)-G1/KMB",
+					"LB11-B12(HS211)-G3/AMN",
+					"TB4(CI311)-TS12/SRG",
+					"TB6(MA213)-TS17/HA",
+					"TB7(MA213)-TS20/PSI",
+					"TA10(HS211)-F10/PRI",
+					"TA6(EC214)-F7/JG"
+				],
+				"11-12PM": [
+					"LB1,2(CI311)-FF6/MKT",
+					"LB7,8(CI311)-FF7/AMT",
+					"LB9,10(CI311)-FF8/AW",
+					"LB11,12(CI311)-CS8/ANP",
+					"LB13,6(CI311)-G1/DSI",
+					"LC1-C3(15BT211)-G3/MOB, NF1",
+					"LA1,A2(EC214)-FF2/RB",
+					"LG1,G2(CI312)-G8/DEP",
+					"TA8(MA301)-F7/NF2",
+					"LA3,A4(EC214)-FF3/ABU",
+					"LA5,A6(EC214)-CR401/JYM",
+					"TA15(HS211)-F4/MM",
+					"TB5(HS211)-TR424/PRI",
+					"TA7(MA301)-TR502/DCS",
+					"PA17(EC214)-MODLAB/VK, TA14",
+					"PA10(15EC215)-CML/VGO, AGO"
+				],
+				"12-1PM": [
+					"LA1,A2(EC215)-FF6/SLM",
+					"LA7,A8, A10(EC214)-FF7/JYM",
+					"LA5, A6(MA301)-FF8/DCS",
+					"LB3,4(CI311)-CS8/MKT",
+					"LB5,6(CI311)-G1/SRG",
+					"LG1,G2(CI311)-G3/TRN",
+					"LB1, B2(MA213)-G2/AN",
+					"LB11, B12(MA213)-G6/NF1",
+					"LB13, B16(MA213)-G7/NF4",
+					"LA15,A16(24B11MA211)-G8/GA",
+					"TC1(BT311)-TS6/ASM,NF3",
+					"TC3(BT313)-TS7/POC,SOC",
+					"TC2(15BT211)-TS8/MOB, NF1",
+					"TB10(HS211)-TS10/MRB"
+				],
+				"1-2PM": ["LUNCH"],
+				"2-3PM": [
+					"LA15,A16(B21EC211)-FF6/SHS",
+					"LA1,A2(B11EC211)-FF7/SCH",
+					"LA3,A4(B11EC211)-FF8/RSB",
+					"LA5,A6(B11EC211)-CS8/MNA",
+					"LA7,A8,A10(B11EC211)-G1/GK",
+					"LA17,A18(B11EC211)-G3/JYO",
+					"LB3,4(CS213)-G8/SON",
+					"LB5,6(CS213)-FF2/PSO",
+					"PG1(CI371)-MCL/NM,AMT",
+					"PG2(CI371)-CL06/RJM, TRN",
+					"PB16(CI371)-CL07/KRL,SRG",
+					"PB10(B15CS214)-CL09/PKAU,SLK,MEE",
+					"PB13(B15CS214)-CL10/PKAU,SLK,MEE",
+					"PC1(BT271)- BCL/SMG, ANS, RAC, MOB",
+					"PC3(BT371)-BT1/PMG, SHD, EKT, ANM,NF1",
+					"PC2(BT373)-BT2&3/SMO, SOC, MAS, MOB"
+				],
+				"3-4PM": [
+					"LA5,A6(EC215)-FF6/AKS",
+					"TB12(MA213)-TS11/PSI",
+					"TA8(HS211)-TS12/PRI",
+					"TB9(HS211)-TS13/NES",
+					"TA4(11EC211)-TS16/KUL",
+					"PB3(B15CS213)-CL01/SMS, PSO",
+					"PB4(B15CS213)-CL02/AA, DCH",
+					"PA18(EC214)-SPL/JG, TA3",
+					"PA3(EC214)-MODLAB/RK, TA7",
+					"PA2(15EC215)-CML/JAS, SHI",
+					"PA1(15EC211)-ADC/MNA, TA6"
+				],
+				"4-5PM": [
+					"LB9,10(CS212)-FF7/AKT",
+					"LB11,12(CS212)-FF8/RCN",
+					"TG1(CI311)-TS6/DSI"
+				]
+			},
+			"THUR": {
+				"9-10AM": [
+					"TA6(HS211)-TS11/MM",
+					"TA17(HS211)-TS12/PSH",
+					"TB11(HS211)-TS13/PRI",
+					"TA2(EC214)-TS16/RB",
+					"TA18(EC214)-TS17/RRJ",
+					"LB1,2(CS212)-CS4/ASY",
+					"TA3(EC215)-F10/SLM",
+					"TA4(EC215)-F7/RRP",
+					"PC2(BT271)- BCL/SMG, ANS, RAC, MOB",
+					"PC1(BT371)-BT1/PMG, SHD, EKT, ANM,NF1",
+					"PC3(BT373)-BT2&3/SMO, SOC, MAS, MOB",
+					"PA8(15EC215)-CML/AKS, SCH",
+					"PA10(15EC211)-ADC/ABU, TA10",
+					"PB3(B15CS214)-CL09/SNG,DEP,PRK",
+					"PB4(B15CS214)-CL10/SNG,DEP,PRK"
+				],
+				"10-11AM": [
+					"LA3, A4(MA301)-FF6/BPC",
+					"LA1, A2(MA301)-FF7/DCS",
+					"LA17, A18(MA301)-FF8/YG",
+					"LG1, G2(MA212)-CS8/SGL",
+					"LB7,8(CS212)-G1/ASY",
+					"LB5,6(CS212)-G3/AKT",
+					"LB13,16(CS212)-CR401/KA",
+					"TB8(CI311)-/TS8AMT",
+					"TB10(CI311)-TS10/AW",
+					"TB9(CI311)-TS11/DSI"
+				],
+				"11-12PM": [
+					"LB1-B2(HS211)-FF6/MRB",
+					"LB7-B8(HS211)-FF7/KMB",
+					"LB3-B4(HS211)-FF8/AMN",
+					"LB5-B6(HS211)-CS8/NES",
+					"LA10,C3(BT211)-G1/NV",
+					"LA3,A4(BT211)-G3/NF1",
+					"LA5,A6(BT211)-FF3/GMA",
+					"LA7,A8(BT211)-CR301/RPJ",
+					"LA15,A16(BT211)-CR401/RAC",
+					"LEC-ACT(BT211)-CR425/EKT",
+					"LA1,A2(BT211)-CS2/ANS",
+					"LC1,C2,C3(M302)-CR501/ATI",
+					"TB12(HS211)-TS17/MM",
+					"PB13(B15CS215)-CL05/PRV,KA,TKT",
+					"PB16(B15CS215)-CL06/PRV,KA,TKT"
+				],
+				"12-1PM": [
+					"LA15,A16(B21EC211)-FF6/SHS",
+					"LA1,A2(B11EC211)-FF7/SCH",
+					"LA3,A4(B11EC211)-FF8/RSB",
+					"LA5,A6(B11EC211)-CS8/MNA",
+					"LA7,A8,A10(B11EC211)-G1/GK",
+					"LA17,A18(B11EC211)-G3/JYO",
+					"LB3,4(CS213)-G2/SON",
+					"LB5,6(CS213)-G6/PSO",
+					"LC1-C3(BT313)-G7/POC,SOC",
+					"LB7,8(CS214)-G8/PRK",
+					"LB9,10(CS214)-G9/SLK",
+					"LB11,12(CS214)-FF1/DEP",
+					"TB2(HS211)-TS6/PSH"
+				],
+				"1-2PM": ["LUNCH"],
+				"2-3PM": [
+					"LB1,2(CS213)-FF6/PAR",
+					"LB7,8(CS213)-FF7/IC",
+					"LB9,10(CS213)-FF8/DCH",
+					"LB11,12(CS213)-CS8/SON",
+					"LB13,16(CS213)-G1/PSO",
+					"LB3,4(CS212)-G3/RCN",
+					"TA3(HS211)-TS10/VSE",
+					"TC1(BT313)-TS11/POC,SOC",
+					"TC3(15BT211)-TS12/MOB, NF1",
+					"TC2(BT311)-TS13/ASM,NF3",
+					"TA5(HS211)-TS16/KMB",
+					"TA18(HS211)-TS17/PSH",
+					"PA16(25EC211)-EDC/AJK, RSB",
+					"PA15(15EC215)-CML/VGO, AGO",
+					"PA7(15EC211)-ADC/MNA, ABU",
+					"PA4(EC214)-MODLAB/VK, TA14"
+				],
+				"3-4PM": [
+					"LB1, B2(MA213)-FF6/AN",
+					"LB11, B12(MA213)-FF7/NF1",
+					"LB13, B16(MA213)-FF8/NF4",
+					"LC1,C2(BT211)-G3/NV",
+					"TA1(EC214)-TS20/RK",
+					"TA5(EC215)-F7/AKS",
+					"PB7(B15CS215)-CL05/SVS,NET,TNV",
+					"PB8(B15CS215)-CL06/SVS,NET,TNV",
+					"PB5(B15CS214)-CL09/PKAU,AMK,MEE",
+					"PB9(B15CS214)-CL10/PKAU,AMK,MEE",
+					"PB6(CI371)-CL01/NM, ANP",
+					"PB10(CI371)-CL11/AMT, AW"
+				],
+				"4-5PM": ["TB13(CI311)-/DSI"]
+			},
+			"FRI": {
+				"9-10AM": [
+					"LA3, A4(MA301)-FF6/BPC",
+					"LA1, A2(MA301)-FF7/DCS",
+					"LA17, A18(MA301)-FF8/YG",
+					"LG1, G2(MA212)-CS8/SGL",
+					"TA16(HS211)-TS12/MRB",
+					"TA15(EC214)-TS13/RB",
+					"TA8(11EC211)-TS16/KUL",
+					"LC1,C2(BT211)-FF4/NV",
+					"PB13(CI371)-CL01/VRN, NM",
+					"PB5(CI371)-CL02/-ANP,DL",
+					"PB16(B15CS214)-CL05/PKAU,PRK,MEE",
+					"PB1(B15CS214)-CL06/PKAU,PRK,MEE",
+					"PB2(B15CS214)-CL09/SNG,DEP,SLK",
+					"PB6(B15CS214)-CL10/SNG,DEP,SLK",
+					"PA7(EC214)-MODLAB/JG, TA3",
+					"PA5(15EC215)-CML/JAS, SHI",
+					"PA6(15EC211)-ADC/RSB, TA17"
+				],
+				"10-11AM": [
+					"LA15-A16(HS211)-FF6/PRI",
+					"LA17-A18(HS211)-FF7/NES",
+					"LC1-C3HS211)-FF8/KMB",
+					"LG1-G2(HS211)-CS8/VSE",
+					"TA1(MA301)-TS8/DCS",
+					"TA3(EC214)-TS9/ABU",
+					"TA8(EC214)-TS10/JYO",
+					"Free TS11",
+					"PB11(B15CS215)-CL23/TNV, PTK, KA",
+					"PB12(B15CS215)-CL24/TNV, PTK, KA"
+				],
+				"11-12PM": [
+					"LB3, B4(MA213)-FF6/AN",
+					"LB5, B6(MA213)-FF7/HA",
+					"LB7, B8(MA213)-FF8/PSI ",
+					"LC1,C2,C3(M302)-CS8/ATI",
+					"LB9, B10(MA213)-G1/MPA",
+					"LG1, G2(MA211)-G3/RSH",
+					"LA15,A16(EC215)-FF2/HEM",
+					"LA3,A4(EC215)-CR401/AB",
+					"LA5,A6(EC215)-CS2/AKS",
+					"LA7,A8,A10(EC215)-LT3/RRP",
+					"LA17,A18(EC215)-CS6/SLM",
+					"TB1(HS211)-TS8/PSH",
+					"TB2(CI311)-/TS10AW",
+					"TB11(CI311)-TS11/TRN",
+					"TA2(11EC211)-TS6/RMD"
+				],
+				"12-1PM": [
+					"LB1,2(CS213)-FF6/PAR",
+					"LB7,8(CS213)-FF7/IC",
+					"LB9,10(CS213)-FF8/DCH",
+					"LB11,12(CS213)-CS8/SON",
+					"LB13,16(CS213)-G1/PSO",
+					"LA10,C3(BT211)-G3/NV",
+					"LA3,A4(BT211)-G1/NF1",
+					"LA1,A2(BT211)-G2/ANS",
+					"LC1-C3HS211)-/FF1KMB",
+					"LA5,A6(BT211)-G3/GMA",
+					"LA7,A8(BT211)-G4/RPJ",
+					"LA15,A16(BT211)-G5/RAC",
+					"LEC-ACT(BT211)-G6/EKT",
+					"LB3,4(CS214)-G7/MEE",
+					"LB5,6(CS214)-G8/PRK",
+					"LG1,G2(CI312)-G9/DEP"
+				],
+				"1-2PM": ["LUNCH"],
+				"2-3PM": ["BLOCKED", "PA6(15EC215)-CML/AGO, GK"],
+				"3-4PM": [
+					"LA15,A16(EC214)-FF6/RB",
+					"LA17,A18(EC214)-FF7/PKY",
+					"TB16(HS211)-TS10/MM",
+					"TC1(HS211)-TS11/NES",
+					"TC2(HS211)-TS12/PRI",
+					"TC3(HS211)-TS16/KMB",
+					"TA2(MA301)-TS17/DCS",
+					"TB5(CI311)-TS20/TRN",
+					"TB6(CI311)-F10/KRL",
+					"TA7(EC215)-F7/RRP",
+					"PB1(B15CS215)-CL05/NET,PTK,KA",
+					"PB2(B15CS215)-CL06/NET,PTK,KA",
+					"PB3(B15CS215)-CL13/PRV,TKT,SVS",
+					"PB4(B15CS215)-CL14/PRV,TKT,SVS",
+					"PB7(B15CS214)-CL09/AMK,SNG,PRK",
+					"PB8(B15CS214)-CL10/AMK,SNG,PRK",
+					"PB9(B15CS213)-CL07/NSA, SON",
+					"PB10(B15CS213)-CL12/AKM, AA",
+					"PA1(EC214)-MODLAB/RK, TA7",
+					"PA5(15EC211)-ADC/JYO, TA5"
+				],
+				"4-5PM": ["TA17(11EC211)-TS13/NF1"]
+			},
+			"SAT": {
+				"9-10AM": [
+					"LC1-C3(BT313)-CS8/POC,SOC",
+					"TA17(11EC211)-TS17/NF1",
+					"PB13(B15CS213)-CL09/NSA,PAR",
+					"PB16(B15CS213)-CL10/PSO,IC",
+					"PA4(15EC215)-CML/RRP, GK",
+					"PA3(15EC211)-ADC/VKH, TA4",
+					"PA8(EC214)-MODLAB/JG, TA3",
+					"PB11(B15CS214)-CL304/PKAU,DEP,SLK",
+					"PB12(B15CS214)-CL306/PKAU,DEP,SLK"
+				],
+				"10-11AM": [
+					"LB3, B4(MA213)-FF6/AN",
+					"LB5, B6(MA213)-FF7/HA",
+					"LB7, B8(MA213)-FF8/PSI",
+					"LB9, B10(MA213)-G1/MPA",
+					"LG1, G2(MA211)-G3/RSH",
+					"LC1,C2,C3(M302)-CS8/ATI",
+					"LA17,A18(EC215)-G2/SLM"
+				],
+				"11-12PM": [
+					"LA7, A8,A10(MA301)-FF6/BPC",
+					"LA15, A16(MA301)-FF7/YG",
+					"LB3,4(CS213)-FF8/SON",
+					"LVLSI(BT211)-G1/EKT",
+					"LB5,6(CS213)-CS8/PSO",
+					"TB7(CI311)-TS11/AMT",
+					"TB16(CI311)-TS12/AW",
+					"PBG1(B15CS215)-CL11/SHB, PRV,PTK",
+					"PBG2(B15CS215)-Cl15/SHB, PRV,PTK",
+					"PA17(15EC215)-CML/VGO, GK",
+					"PA18(15EC211)-ADC/ACH, TA5",
+					"PA5(EC214)-MODLAB/VK, TA17"
+				],
+				"12-1PM": [
+					"LA15,A16(EC215)-FF6/HEM",
+					"LA3,A4(EC215)-FF7/AB",
+					"LA7,A8,A10(EC215)-FF8/RRP"
+				],
+				"1-2PM": ["LUNCH"],
+				"2-3PM": [],
+				"3-4PM": [],
+				"4-5PM": []
+			}
+		},
+		"subjects": [
+			{
+				"Code": "15BT211",
+				"Full Code": "15B11BT211",
+				"Subject": "Biochemistry"
+			},
+			{
+				"Code": "MA213",
+				"Full Code": "25B11MA213",
+				"Subject": "Mathematical Foundations for Artificial Intelligence and Data Science"
+			},
+			{
+				"Code": "BT311",
+				"Full Code": "15B11BT311",
+				"Subject": "Thermodynamics and chemical Processes"
+			},
+			{
+				"Code": "BT211",
+				"Full Code": "19B13BT211",
+				"Subject": "Environmental Studies"
+			},
+			{
+				"Code": "CS213",
+				"Full Code": "24B11CS213",
+				"Subject": "Database Management Systems"
+			},
+			{
+				"Code": "CS212",
+				"Full Code": "24B11CS212",
+				"Subject": "Theoretical Foundations of Computer Science"
+			},
+			{
+				"Code": "MA302",
+				"Full Code": "15B11MA302",
+				"Subject": "PROBABILITY & STATISTICS"
+			},
+			{
+				"Code": "BT313",
+				"Full Code": "15B11BT313",
+				"Subject": "Genetics and Developmental Biology"
+			},
+			{
+				"Code": "B15CS215",
+				"Full Code": "24B15CS215",
+				"Subject": "Object Oriented Programming using Java"
+			},
+			{
+				"Code": "BT271",
+				"Full Code": "15B17BT271",
+				"Subject": "Biochemical Techniques Lab"
+			},
+			{ "Code": "HS211", "Full Code": "15B11HS211", "Subject": "Economics" },
+			{
+				"Code": "BT373",
+				"Full Code": "15B17BT373",
+				"Subject": "Genetics and Developmental Biology Lab"
+			},
+			{
+				"Code": "EC215",
+				"Full Code": "18B15EC215",
+				"Subject": "Digital Circuit Design Lab"
+			},
+			{
+				"Code": "CI311",
+				"Full Code": "15B11CI311",
+				"Subject": "Data Structures"
+			},
+			{
+				"Code": "CS214",
+				"Full Code": "24B15CS214",
+				"Subject": "Unix Programming"
+			},
+			{
+				"Code": "B15CS213",
+				"Full Code": "24B15CS213",
+				"Subject": "Database Management Systems Lab"
+			},
+			{
+				"Code": "CI371",
+				"Full Code": "15B17CI371",
+				"Subject": "Data Structures Lab"
+			},
+			{
+				"Code": "11EC211",
+				"Full Code": "24B11EC211",
+				"Subject": "Electronic Devices and Circuit"
+			},
+			{
+				"Code": "Short Name",
+				"Full Code": "Course Code",
+				"Subject": "Course Name"
+			},
+			{
+				"Code": "EC214",
+				"Full Code": "18B11EC214",
+				"Subject": "Signals and Systems"
+			},
+			{
+				"Code": "B15CS214",
+				"Full Code": "24B15CS214",
+				"Subject": "Unix Programming Lab"
+			},
+			{
+				"Code": "EC214",
+				"Full Code": "18B15EC214",
+				"Subject": "Signals & Systems Lab"
+			},
+			{
+				"Code": "CI312",
+				"Full Code": "15B11CI312",
+				"Subject": "Database Systems and Web"
+			},
+			{
+				"Code": "EC215",
+				"Full Code": "18B11EC215",
+				"Subject": "Digital Circuit Design"
+			},
+			{
+				"Code": "CI372",
+				"Full Code": "15B17CI372",
+				"Subject": "Database Systems and Web Lab"
+			},
+			{
+				"Code": "25EC211",
+				"Full Code": "24B25EC211",
+				"Subject": "Electronic Devices Lab"
+			},
+			{
+				"Code": "MA212",
+				"Full Code": "25B11MA212",
+				"Subject": "Discrete Mathematical Structures"
+			},
+			{
+				"Code": "15EC211",
+				"Full Code": "24B15EC211",
+				"Subject": "Electronic Devices and Circuits Lab"
+			},
+			{
+				"Code": "MA301",
+				"Full Code": "15B11MA301",
+				"Subject": "PROBABILITY AND RANDOM PROCESSES"
+			},
+			{
+				"Code": "BT371",
+				"Full Code": "15B17BT371",
+				"Subject": "Thermodynamics and Chemical Processes Lab"
+			},
+			{
+				"Code": "MA211",
+				"Full Code": "25B11MA211",
+				"Subject": "Mathematical Foundation of Probability and Statistics"
+			},
+			{
+				"Code": "21EC211",
+				"Full Code": "24B21EC211",
+				"Subject": "Electronic Devices"
+			}
+		]
+	},
 	"3": {
 		"timetable": {
 			"MON": {

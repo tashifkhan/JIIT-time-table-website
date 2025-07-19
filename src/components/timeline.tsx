@@ -317,6 +317,10 @@ const TimelinePage: React.FC = () => {
 								Hover over events for details. Today is highlighted for you.
 							</li>
 							<li>
+								Moreover clicking on it will show you all the details of that
+								particular class.
+							</li>
+							<li>
 								Use the buttons below to download your schedule as PNG or PDF,
 								or add to Google Calendar.
 							</li>

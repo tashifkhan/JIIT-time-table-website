@@ -427,35 +427,46 @@ const CompareTimetablePage: React.FC = () => {
 										<p className="text-slate-300/80 text-center">No common free slots found.</p>
 									</div>
 								) : (
-									<div className="bg-white/5 rounded-xl border border-white/10 overflow-hidden">
-										<div className="overflow-x-auto">
-											<table className="min-w-full">
-												<thead>
-													<tr className="bg-white/5 border-b border-white/10">
-														<th className="px-6 py-4 text-left text-sm font-semibold text-[#F0BB78]">Day</th>
-														<th className="px-6 py-4 text-left text-sm font-semibold text-[#F0BB78]">Free Time Slots</th>
-													</tr>
-												</thead>
-												<tbody>
-													{Object.entries(compareResult.common_free_slots).map(
-														([day, slots], index) => (
-															<tr key={day} className={`border-b border-white/5 ${index % 2 === 0 ? 'bg-white/2' : ''}`}>
-																<td className="px-6 py-4 font-medium text-white">{day}</td>
-																<td className="px-6 py-4 text-slate-300">
-																	<div className="flex flex-wrap gap-2">
-																		{(slots as string[]).map((slot, i) => (
-																			<span key={i} className="inline-flex items-center px-3 py-1 rounded-lg bg-green-500/20 text-green-400 text-sm font-medium border border-green-500/30">
-																				{slot}
-																			</span>
-																		))}
-																	</div>
-																</td>
-															</tr>
-														)
-													)}
-												</tbody>
-											</table>
-										</div>
+									<div className="space-y-4">
+										{(() => {
+											// Define day order for proper sorting
+											const dayOrder = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
+											
+											// Sort days according to the defined order
+											const sortedDays = Object.keys(compareResult.common_free_slots).sort((a, b) => {
+												const aIndex = dayOrder.indexOf(a);
+												const bIndex = dayOrder.indexOf(b);
+												return aIndex - bIndex;
+											});
+
+											return sortedDays.map((day) => {
+												const slots = compareResult.common_free_slots[day] as string[];
+												// Sort slots within each day
+												const sortedSlots = [...slots].sort((a, b) => {
+													// Extract time from slot (e.g., "09:00-09:50" -> "09:00")
+													const timeA = a.split('-')[0];
+													const timeB = b.split('-')[0];
+													return timeA.localeCompare(timeB);
+												});
+
+												return (
+													<div key={day} className="bg-white/5 rounded-xl border border-white/10 overflow-hidden">
+														<div className="bg-gradient-to-r from-[#F0BB78]/5 to-[#543A14]/5 px-6 py-3 border-b border-white/10">
+															<h4 className="text-lg font-semibold text-[#F0BB78]">{day}</h4>
+														</div>
+														<div className="p-6">
+															<div className="flex flex-wrap gap-3">
+																{sortedSlots.map((slot, i) => (
+																	<span key={i} className="inline-flex items-center px-4 py-2 rounded-lg bg-green-500/20 text-green-400 text-sm font-medium border border-green-500/30 hover:bg-green-500/30 transition-colors">
+																		{slot}
+																	</span>
+																))}
+															</div>
+														</div>
+													</div>
+												);
+											});
+										})()}
 									</div>
 								)}
 							</div>
@@ -471,31 +482,43 @@ const CompareTimetablePage: React.FC = () => {
 										<p className="text-slate-300/80 text-center">No classes together found.</p>
 									</div>
 								) : (
-									<div className="bg-white/5 rounded-xl border border-white/10 overflow-hidden">
-										<div className="overflow-x-auto">
-											<table className="min-w-full">
-												<thead>
-													<tr className="bg-white/5 border-b border-white/10">
-														<th className="px-6 py-4 text-left text-sm font-semibold text-[#F0BB78]">Day</th>
-														<th className="px-6 py-4 text-left text-sm font-semibold text-[#F0BB78]">Time Slot</th>
-														<th className="px-6 py-4 text-left text-sm font-semibold text-[#F0BB78]">Subject</th>
-														<th className="px-6 py-4 text-left text-sm font-semibold text-[#F0BB78]">Type</th>
-														<th className="px-6 py-4 text-left text-sm font-semibold text-[#F0BB78]">Location</th>
-													</tr>
-												</thead>
-												<tbody>
-													{Object.entries(compareResult.classes_together).flatMap(
-														([day, slots], dayIndex) =>
-															Object.entries(slots as any).map(([time, info]: [string, any], timeIndex) => (
-																<tr key={day + time} className={`border-b border-white/5 ${(dayIndex + timeIndex) % 2 === 0 ? 'bg-white/2' : ''}`}>
-																	<td className="px-6 py-4 font-medium text-white">{day}</td>
-																	<td className="px-6 py-4 text-slate-300">
+									<div className="space-y-4">
+										{(() => {
+											// Define day order for proper sorting
+											const dayOrder = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
+											
+											// Sort days according to the defined order
+											const sortedDays = Object.keys(compareResult.classes_together).sort((a, b) => {
+												const aIndex = dayOrder.indexOf(a);
+												const bIndex = dayOrder.indexOf(b);
+												return aIndex - bIndex;
+											});
+
+											return sortedDays.map((day) => {
+												const daySlots = compareResult.classes_together[day] as any;
+												// Sort time slots within each day
+												const sortedTimeSlots = Object.entries(daySlots).sort(([timeA], [timeB]) => {
+													// Extract start time (e.g., "09:00-09:50" -> "09:00")
+													const startTimeA = timeA.split('-')[0];
+													const startTimeB = timeB.split('-')[0];
+													return startTimeA.localeCompare(startTimeB);
+												});
+
+												return (
+													<div key={day} className="bg-white/5 rounded-xl border border-white/10 overflow-hidden">
+														<div className="bg-gradient-to-r from-[#543A14]/5 to-[#F0BB78]/5 px-6 py-3 border-b border-white/10">
+															<h4 className="text-lg font-semibold text-[#F0BB78]">{day}</h4>
+														</div>
+														<div className="p-6 space-y-3">
+															{sortedTimeSlots.map(([time, info]: [string, any]) => (
+																<div key={time} className="flex flex-wrap items-center gap-4 p-4 bg-white/5 rounded-lg border border-white/10">
+																	<div className="flex items-center gap-3">
 																		<span className="inline-flex items-center px-3 py-1 rounded-lg bg-blue-500/20 text-blue-400 text-sm font-medium border border-blue-500/30">
 																			{time}
 																		</span>
-																	</td>
-																	<td className="px-6 py-4 text-slate-300 font-medium">{info.subject_name}</td>
-																	<td className="px-6 py-4">
+																		<span className="text-white font-medium">{info.subject_name}</span>
+																	</div>
+																	<div className="flex items-center gap-3">
 																		<span className={`inline-flex items-center px-2 py-1 rounded-md text-xs font-medium ${
 																			info.type === 'L' ? 'bg-purple-500/20 text-purple-400 border border-purple-500/30' :
 																			info.type === 'T' ? 'bg-orange-500/20 text-orange-400 border border-orange-500/30' :
@@ -504,14 +527,15 @@ const CompareTimetablePage: React.FC = () => {
 																		}`}>
 																			{info.type === 'L' ? 'Lecture' : info.type === 'T' ? 'Tutorial' : info.type === 'P' ? 'Practical' : info.type}
 																		</span>
-																	</td>
-																	<td className="px-6 py-4 text-slate-300">{info.location}</td>
-																</tr>
-															))
-													)}
-												</tbody>
-											</table>
-										</div>
+																		<span className="text-slate-300 text-sm">{info.location}</span>
+																	</div>
+																</div>
+															))}
+														</div>
+													</div>
+												);
+											});
+										})()}
 									</div>
 								)}
 							</div>

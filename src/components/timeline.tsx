@@ -277,12 +277,12 @@ const TimelinePage: React.FC = () => {
 	return (
 		<div
 			ref={containerRef}
-			className="min-h-[50%] bg-[#131010] text-[#FFF0DC] p-4 md:p-8 overflow-scroll"
+			className="min-h-[50%] bg-[#131010] text-[#FFF0DC] p-0 md:p-8 overflow-scroll"
 			style={isDownloadMode ? { minWidth: "2700px" } : {}}
 		>
 			{/* Page Title Header for visitors */}
 			{!isDownloadMode && (
-				<div className="mb-8 px-2 md:px-8 text-center">
+				<div className="mb-8 px-4 md:px-8 text-center">
 					<div className="flex flex-col md:flex-row items-center justify-center gap-2 md:gap-3 mb-2">
 						<svg
 							className="w-10 h-10 md:w-12 md:h-12 text-[#F0BB78]"
@@ -306,7 +306,7 @@ const TimelinePage: React.FC = () => {
 			)}
 
 			{showWelcome && (
-				<div className="mb-6 p-4 rounded-lg bg-gradient-to-r from-[#543A14]/40 to-[#F0BB78]/20 border border-[#F0BB78]/30 shadow-lg flex flex-col md:flex-row items-center justify-between gap-4 animate-fade-in">
+				<div className="mb-6 mx-4 md:mx-0 p-4 rounded-lg bg-gradient-to-r from-[#543A14]/40 to-[#F0BB78]/20 border border-[#F0BB78]/30 shadow-lg flex flex-col md:flex-row items-center justify-between gap-4 animate-fade-in">
 					<div>
 						<h2 className="text-lg md:text-xl font-bold mb-1 text-[#F0BB78]">
 							Welcome to Your Weekly Schedule!
@@ -337,7 +337,7 @@ const TimelinePage: React.FC = () => {
 
 			{/* Stats & Legend container for visitors */}
 			{!isDownloadMode && (
-				<div className="mb-6 p-4 rounded-lg bg-[#23201c]/60 border border-[#FFF0DC]/10 shadow flex flex-col md:flex-row items-center md:items-center justify-between gap-4 md:gap-0">
+				<div className="mb-6 mx-4 md:mx-0 p-4 rounded-lg bg-[#23201c]/60 border border-[#FFF0DC]/10 shadow flex flex-col md:flex-row items-center md:items-center justify-between gap-4 md:gap-0">
 					<div className="flex flex-col sm:flex-row items-center gap-2 sm:gap-6 w-full md:w-auto justify-center md:justify-start">
 						<div className="text-sm flex items-center gap-2">
 							<span className="text-[#FFF0DC]/70">Total Classes:</span>
@@ -383,7 +383,7 @@ const TimelinePage: React.FC = () => {
 
 			<div
 				id="schedule-display"
-				className="max-w-8xl mx-auto backdrop-blur-lg bg-[rgba(255,240,220,0.05)] rounded-xl p-4 md:p-6 shadow-xl overflow-x-auto"
+				className="max-w-8xl mx-auto backdrop-blur-lg bg-[rgba(255,240,220,0.05)] rounded-none md:rounded-xl p-0 md:p-6 shadow-xl overflow-x-auto"
 				style={isDownloadMode ? { minWidth: "2550px" } : {}}
 			>
 				{/* Only show the title inside the grid in download mode */}
@@ -419,7 +419,7 @@ const TimelinePage: React.FC = () => {
 				{/* Schedule Statistics */}
 				{/* This block is now moved outside the main display div */}
 
-				<div className="min-w-[1500px]">
+				<div className="min-w-[1500px] px-2 md:px-0">
 					<div
 						className={
 							isDownloadMode

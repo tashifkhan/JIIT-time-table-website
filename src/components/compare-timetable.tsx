@@ -460,9 +460,9 @@ const CompareTimetablePage: React.FC = () => {
 
 											return sortedDays.map((day) => {
 												const slots = compareResult.common_free_slots[day] as string[];
-												// Sort slots within each day
+												// Sort slots within each day by time
 												const sortedSlots = [...slots].sort((a, b) => {
-													// Extract time from slot (e.g., "09:00-09:50" -> "09:00")
+													// Extract start time from slot (e.g., "09:00-09:50" -> "09:00")
 													const timeA = a.split('-')[0];
 													const timeB = b.split('-')[0];
 													return timeA.localeCompare(timeB);
@@ -476,7 +476,7 @@ const CompareTimetablePage: React.FC = () => {
 														<div className="p-3 sm:p-6">
 															<div className="grid grid-cols-1 xs:grid-cols-2 sm:flex sm:flex-wrap gap-2 sm:gap-3">
 																{sortedSlots.map((slot, i) => (
-																	<span key={i} className="inline-flex items-center justify-center px-3 sm:px-4 py-1.5 sm:py-2 rounded-md sm:rounded-lg bg-green-500/20 text-green-400 text-xs sm:text-sm font-medium border border-green-500/30 hover:bg-green-500/30 transition-colors text-center">
+																	<span key={i} className="inline-flex items-center justify-center px-3 sm:px-4 py-1.5 sm:py-2 rounded-md sm:rounded-lg bg-[#F0BB78]/20 text-[#F0BB78] text-xs sm:text-sm font-medium border border-[#F0BB78]/30 hover:bg-[#F0BB78]/30 transition-colors text-center">
 																		{slot}
 																	</span>
 																))}
@@ -534,14 +534,14 @@ const CompareTimetablePage: React.FC = () => {
 																	{/* Mobile Layout - Stacked */}
 																	<div className="block sm:hidden p-3 space-y-2">
 																		<div className="flex items-center justify-between">
-																			<span className="inline-flex items-center px-2.5 py-1 rounded-md bg-blue-500/20 text-blue-400 text-xs font-medium border border-blue-500/30">
+																			<span className="inline-flex items-center px-2.5 py-1 rounded-md bg-[#543A14]/30 text-[#F0BB78] text-xs font-medium border border-[#543A14]/40">
 																				{time}
 																			</span>
 																			<span className={`inline-flex items-center px-2 py-1 rounded-md text-xs font-medium ${
-																				info.type === 'L' ? 'bg-purple-500/20 text-purple-400 border border-purple-500/30' :
-																				info.type === 'T' ? 'bg-orange-500/20 text-orange-400 border border-orange-500/30' :
-																				info.type === 'P' ? 'bg-green-500/20 text-green-400 border border-green-500/30' :
-																				'bg-gray-500/20 text-gray-400 border border-gray-500/30'
+																				info.type === 'L' ? 'bg-[#F0BB78]/20 text-[#F0BB78] border border-[#F0BB78]/30' :
+																				info.type === 'T' ? 'bg-[#543A14]/20 text-[#F0BB78] border border-[#543A14]/30' :
+																				info.type === 'P' ? 'bg-[#F0BB78]/30 text-[#543A14] border border-[#F0BB78]/40' :
+																				'bg-white/10 text-white/80 border border-white/20'
 																			}`}>
 																				{info.type === 'L' ? 'Lecture' : info.type === 'T' ? 'Tutorial' : info.type === 'P' ? 'Practical' : info.type}
 																			</span>
@@ -555,17 +555,17 @@ const CompareTimetablePage: React.FC = () => {
 																	{/* Desktop Layout - Horizontal */}
 																	<div className="hidden sm:flex sm:items-center sm:gap-4 sm:p-4">
 																		<div className="flex items-center gap-3">
-																			<span className="inline-flex items-center px-3 py-1 rounded-lg bg-blue-500/20 text-blue-400 text-sm font-medium border border-blue-500/30">
+																			<span className="inline-flex items-center px-3 py-1 rounded-lg bg-[#543A14]/30 text-[#F0BB78] text-sm font-medium border border-[#543A14]/40">
 																				{time}
 																			</span>
 																			<span className="text-white font-medium">{info.subject_name}</span>
 																		</div>
 																		<div className="flex items-center gap-3 ml-auto">
 																			<span className={`inline-flex items-center px-2 py-1 rounded-md text-xs font-medium ${
-																				info.type === 'L' ? 'bg-purple-500/20 text-purple-400 border border-purple-500/30' :
-																				info.type === 'T' ? 'bg-orange-500/20 text-orange-400 border border-orange-500/30' :
-																				info.type === 'P' ? 'bg-green-500/20 text-green-400 border border-green-500/30' :
-																				'bg-gray-500/20 text-gray-400 border border-gray-500/30'
+																				info.type === 'L' ? 'bg-[#F0BB78]/20 text-[#F0BB78] border border-[#F0BB78]/30' :
+																				info.type === 'T' ? 'bg-[#543A14]/20 text-[#F0BB78] border border-[#543A14]/30' :
+																				info.type === 'P' ? 'bg-[#F0BB78]/30 text-[#543A14] border border-[#F0BB78]/40' :
+																				'bg-white/10 text-white/80 border border-white/20'
 																			}`}>
 																				{info.type === 'L' ? 'Lecture' : info.type === 'T' ? 'Tutorial' : info.type === 'P' ? 'Practical' : info.type}
 																			</span>

@@ -244,7 +244,11 @@ const App: React.FC = () => {
 		const year = urlParams.get("year") || "";
 		const batch = urlParams.get("batch") || "";
 		const campus = urlParams.get("campus") || "";
-		const selectedSubjects = urlParams.getAll("selectedSubjects") || [];
+		const selectedSubjectsRaw = urlParams.getAll("selectedSubjects") || [];
+		const selectedSubjects = selectedSubjectsRaw
+			.flatMap((s) => s.split(","))
+			.map((s) => s.trim())
+			.filter(Boolean);
 
 		const allParamsPresent = year && batch && campus;
 

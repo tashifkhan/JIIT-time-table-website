@@ -252,41 +252,58 @@ def subject_name_extractor(subjects_dict: dict, code: str) -> str:
 
 
 def is_enrolled_subject(
-    enrolled_subject_codes: list[str], subject_code: str, subject_dict: list[dict]
-) -> bool:
+    enrolled_subject_codes: list[str],
+    subject_code: str,
+    subject_dict: list[dict],
+) -> tuple[bool, dict | None]:
+
     if subject_code in enrolled_subject_codes:
-        return True
+        return True, None
 
     electives_directory = []
 
+    stripeed_subject_codes = []
+    for sub in enrolled_subject_codes:
+        if sub.find("/") != -1:
+            sub = sub.split("/")[0]
+            stripeed_subject_codes.append(sub.strip())
+
     for subject in subject_dict:
         if (
-            subject["Code"] in enrolled_subject_codes
-            or subject["Full Code"] in enrolled_subject_codes
+            subject["Code"]
+            in (
+                combined_enrolled_subject_codes := enrolled_subject_codes
+                + stripeed_subject_codes
+            )
+            or subject["Full Code"] in combined_enrolled_subject_codes
         ):
             electives_directory.append(subject)
 
     for elective in electives_directory:
-        if elective["Full Code"] == subject_code:
-            return True
-        if elective["Full Code"][:2] + elective["Code"] == subject_code:
-            return True
-        if elective["Full Code"][3:] == subject_code:
-            return True
-        if elective["Full Code"][2:] == subject_code:
-            return True
-        if elective["Full Code"][:5] + elective["Code"] == subject_code:
-            return True
-        if elective["Full Code"][:2] + elective["Code"] == subject_code:
-            return True
-        if elective["Full Code"][2:5] + elective["Code"] == subject_code:
-            return True
-        if elective["Full Code"][3:5] + elective["Code"] == subject_code:
-            return True
-        if elective["Code"][1:] == subject_code:
-            return True
+        if elective["Code"].find("/") != -1:
+            if elective["Code"].split("/")[0].strip() == subject_code:
+                return True, elective
 
-    return False
+        if elective["Full Code"] == subject_code:
+            return True, elective
+        if elective["Full Code"][:2] + elective["Code"] == subject_code:
+            return True, elective
+        if elective["Full Code"][3:] == subject_code:
+            return True, elective
+        if elective["Full Code"][2:] == subject_code:
+            return True, elective
+        if elective["Full Code"][:5] + elective["Code"] == subject_code:
+            return True, elective
+        if elective["Full Code"][:2] + elective["Code"] == subject_code:
+            return True, elective
+        if elective["Full Code"][2:5] + elective["Code"] == subject_code:
+            return True, elective
+        if elective["Full Code"][3:5] + elective["Code"] == subject_code:
+            return True, elective
+        if elective["Code"][1:] == subject_code:
+            return True, elective
+
+    return False, None
 
 
 def process_day(day_str: str) -> str:
@@ -974,16 +991,23 @@ def time_table_creator_v2(
                     batchs_list = parse_batch_numbers(batchs)
 
                     # Only add if code is in all_subs_code and batch is allowed
-                    if is_enrolled_subject(
+                    is_actu8ally_enrolled_suject, subject_details = is_enrolled_subject(
                         enrolled_subject_codes=enrolled_subjects,
                         subject_dict=all_subjects,
                         subject_code=code,
-                    ) and is_batch_included(batch, batchs):
+                    )
+                    if is_actu8ally_enrolled_suject and is_batch_included(
+                        batch, batchs
+                    ):
                         your_time_table.append(
                             [
                                 day,
                                 time,
-                                subject_name_extractor(all_subjects, code),  # type: ignore
+                                (
+                                    subject_details["Subject"]
+                                    if subject_details is not None
+                                    else subject_name_extractor(all_subjects, code)  # type: ignore
+                                ),
                                 (
                                     indi_class.strip()[0]
                                     if indi_class.strip()[0] in ["L", "P", "T"]

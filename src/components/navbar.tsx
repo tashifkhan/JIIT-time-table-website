@@ -68,11 +68,20 @@ export default function Navbar() {
 			</nav>
 			{/* Invisible swipe area for mobile devices - disabled on timeline page */}
 			{!isTimelinePage && (
-				<div
-					{...swipeHandlers}
-					className="fixed top-20 left-0 right-0 bottom-0 pointer-events-none z-20 md:ml-48 md:top-0"
-					style={{ background: "transparent" }}
-				/>
+				<>
+					{/* Left edge swipe area */}
+					<div
+						{...swipeHandlers}
+						className="fixed top-20 left-0 bottom-0 w-6 pointer-events-auto z-20 md:ml-48 md:top-0"
+						style={{ background: "transparent" }}
+					/>
+					{/* Right edge swipe area */}
+					<div
+						{...swipeHandlers}
+						className="fixed top-20 right-0 bottom-0 w-6 pointer-events-auto z-20 md:ml-48 md:top-0"
+						style={{ background: "transparent" }}
+					/>
+				</>
 			)}
 		</>
 	);

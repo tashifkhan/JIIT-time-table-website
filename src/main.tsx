@@ -2,7 +2,7 @@ import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
 import "./index.css";
 import App from "./App.tsx";
-import TimelinePage from "./components/timeline.tsx";
+import TimelineWrapper from "./components/timeline-wrapper.tsx";
 import { Github } from "lucide-react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import UserContextProvider from "./context/userContextProvider.tsx";
@@ -33,7 +33,7 @@ createRoot(document.getElementById("root")!).render(
 							<div className="md:ml-56 mt-9 md:mt-0 p-4">
 								<Routes>
 									<Route path="/" element={<App />} />
-									<Route path="/timeline" element={<TimelinePage />} />
+									<Route path="/timeline" element={<TimelineWrapper />} />
 									<Route
 										path="/academic-calendar"
 										element={<AcademicCalendar />}

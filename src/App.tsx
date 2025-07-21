@@ -8,7 +8,7 @@ import { ScheduleForm } from "./components/schedule-form";
 import { ScheduleDisplay } from "./components/schedule-display";
 import { UrlParamsDialog } from "./components/url-params-dialog";
 import { motion } from "framer-motion";
-import { Calendar, ChevronDown, Trash } from "lucide-react";
+import { Calendar, ChevronDown, Trash, Share2 } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import UserContext from "./context/userContext";
 import {
@@ -18,6 +18,12 @@ import {
 	parseAsString,
 	parseAsArrayOf,
 } from "nuqs";
+import {
+	Dialog,
+	DialogContent,
+	DialogTitle,
+	DialogDescription,
+} from "./components/ui/dialog";
 
 interface YourTietable {
 	[key: string]: {
@@ -378,6 +384,13 @@ const App: React.FC = () => {
 		if (selectedConfig === name) setSelectedConfig("");
 	};
 
+	// Add state for share dialog
+	const [showShareDialog, setShowShareDialog] = React.useState(false);
+	const [shareDialogConfig, setShareDialogConfig] = React.useState<{
+		name: string;
+		config: any;
+	} | null>(null);
+
 	return (
 		<main>
 			{/* Background effects */}
@@ -453,6 +466,20 @@ const App: React.FC = () => {
 													title="Delete config"
 												>
 													<Trash className="w-4 h-4 text-red-400" />
+												</button>
+												<button
+													onClick={(e) => {
+														e.stopPropagation();
+														setShareDialogConfig({
+															name,
+															config: savedConfigs[name],
+														});
+														setShowShareDialog(true);
+													}}
+													className="ml-2 p-1 rounded hover:bg-blue-100/20 transition-colors"
+													title="Share config"
+												>
+													<Share2 className="w-4 h-4 text-[#F0BB78]" />
 												</button>
 											</div>
 										))}
@@ -606,6 +633,55 @@ const App: React.FC = () => {
 					onPrefill={handleUrlParamsPrefill}
 					onViewExisting={handleUrlParamsViewExisting}
 				/>
+			)}
+
+			{/* Share Config Dialog */}
+			{showShareDialog && shareDialogConfig && (
+				<Dialog open={showShareDialog} onOpenChange={setShowShareDialog}>
+					<DialogContent>
+						<DialogTitle>
+							Share Configuration: {shareDialogConfig.name}
+						</DialogTitle>
+						<DialogDescription>
+							Copy the link below to share this configuration:
+						</DialogDescription>
+						<div className="flex flex-col gap-2 mt-4">
+							<input
+								type="text"
+								readOnly
+								value={(() => {
+									const { year, batch, campus, selectedSubjects } =
+										shareDialogConfig.config;
+									const params = new URLSearchParams({
+										year,
+										batch,
+										campus,
+										selectedSubjects: (selectedSubjects || []).join(","),
+									});
+									return `${window.location.origin}${
+										window.location.pathname
+									}?${params.toString()}`;
+								})()}
+								className="w-full px-2 py-1 border rounded bg-slate-100 text-slate-800"
+								onFocus={(e) => e.target.select()}
+							/>
+							<button
+								className="px-4 py-2 bg-[#F0BB78] text-white rounded hover:bg-[#e0a85c]"
+								onClick={() => {
+									const input = document.querySelector(
+										"input[type='text']"
+									) as HTMLInputElement;
+									if (input) {
+										input.select();
+										document.execCommand("copy");
+									}
+								}}
+							>
+								Copy Link
+							</button>
+						</div>
+					</DialogContent>
+				</Dialog>
 			)}
 		</main>
 	);

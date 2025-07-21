@@ -460,16 +460,6 @@ const App: React.FC = () => {
 												<button
 													onClick={(e) => {
 														e.stopPropagation();
-														handleDeleteConfig(name);
-													}}
-													className="ml-2 p-1 rounded hover:bg-red-100/20 transition-colors"
-													title="Delete config"
-												>
-													<Trash className="w-4 h-4 text-red-400" />
-												</button>
-												<button
-													onClick={(e) => {
-														e.stopPropagation();
 														setShareDialogConfig({
 															name,
 															config: savedConfigs[name],
@@ -480,6 +470,16 @@ const App: React.FC = () => {
 													title="Share config"
 												>
 													<Share2 className="w-4 h-4 text-[#F0BB78]" />
+												</button>
+												<button
+													onClick={(e) => {
+														e.stopPropagation();
+														handleDeleteConfig(name);
+													}}
+													className="ml-2 p-1 rounded hover:bg-red-100/20 transition-colors"
+													title="Delete config"
+												>
+													<Trash className="w-4 h-4 text-red-400" />
 												</button>
 											</div>
 										))}

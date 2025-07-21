@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { motion } from "framer-motion";
-import timetableMapping from "../../public/data/time-table/EVEN25/62.json";
-import mapping128 from "../../public/data/time-table/EVEN25/128.json";
+// Remove direct imports, use state and fetch instead
 import {
 	initializePyodide,
 	callPythonFunction,
@@ -21,6 +20,18 @@ import { SubjectSelector, Subject } from "./schedule-form";
 const initialConfig = { campus: "", year: "", batch: "", electives: [] };
 
 const CompareTimetablePage: React.FC = () => {
+	const [mapping62, setMapping62] = useState<any>(null);
+	const [mapping128, setMapping128] = useState<any>(null);
+
+	useEffect(() => {
+		fetch("/data/time-table/EVEN25/62.json")
+			.then((res) => res.json())
+			.then(setMapping62);
+		fetch("/data/time-table/EVEN25/128.json")
+			.then((res) => res.json())
+			.then(setMapping128);
+	}, []);
+
 	const [config1, setConfig1] = useState<any>({ ...initialConfig });
 	const [config2, setConfig2] = useState<any>({ ...initialConfig });
 	const [_timetable1, setTimetable1] = useState<any>(null);
@@ -67,7 +78,7 @@ const CompareTimetablePage: React.FC = () => {
 			// Helper to get mapping and args
 			const getMappingAndArgs = (params: any) => {
 				const mapping: Record<string, any> =
-					params.campus === "62" ? timetableMapping : mapping128;
+					params.campus === "62" ? mapping62 : mapping128;
 				const yearData = mapping && params.year && mapping[params.year];
 				if (!yearData || typeof yearData !== "object") {
 					return {
@@ -127,9 +138,18 @@ const CompareTimetablePage: React.FC = () => {
 	// Helper to get subjects array for a config
 	const getSubjects = (campus: string, year: string): Subject[] => {
 		if (!campus || !year) return [];
-		const mapping = campus === "62" ? timetableMapping : mapping128;
+		const mapping = campus === "62" ? mapping62 : mapping128;
 		return (mapping as Record<string, any>)[year]?.subjects || [];
 	};
+
+	// Only allow actions when both mappings are loaded
+	if (!mapping62 || !mapping128) {
+		return (
+			<div className="text-center text-white p-8">
+				Loading timetable data...
+			</div>
+		);
+	}
 
 	return (
 		<main>

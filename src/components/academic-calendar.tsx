@@ -165,6 +165,9 @@ export function AcademicCalendar() {
 							Academic Calendar
 						</h1>
 					</div>
+					<p className="text-base sm:text-lg text-slate-300/80 px-4 pb-2">
+						Stay updated with the latest academic events and holidays at JIIT.
+					</p>
 
 					{/* Year Selector */}
 					<div className="flex justify-center mt-4">

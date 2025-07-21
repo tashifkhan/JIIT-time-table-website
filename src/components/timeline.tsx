@@ -455,7 +455,7 @@ const TimelinePage: React.FC = () => {
 							<div key={day} className="relative">
 								<div
 									className={`h-20 flex items-center justify-center font-medium border-b text-sm md:text-base rounded-t-lg ${
-										isToday(day)
+										!isDownloadMode && isToday(day)
 											? "bg-gradient-to-r from-[#543A14]/40 to-[#F0BB78]/20 border-[rgba(255,240,220,0.1)] text-white"
 											: "border-[rgba(255,240,220,0.1)]"
 									}`}
@@ -476,7 +476,8 @@ const TimelinePage: React.FC = () => {
 											className="border-b border-[rgba(255,240,220,0.05)] relative"
 										>
 											{/* Current time indicator */}
-											{isToday(day) &&
+											{!isDownloadMode &&
+												isToday(day) &&
 												getCurrentTimePosition() !== null &&
 												Math.floor(getCurrentTimePosition()!) === hour - 8 && (
 													<div

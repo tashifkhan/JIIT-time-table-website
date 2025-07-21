@@ -70,8 +70,8 @@ export default function Navbar() {
 			{!isTimelinePage && (
 				<div
 					{...swipeHandlers}
-					className="fixed inset-0 pointer-events-none z-30 md:ml-48"
-					style={{ pointerEvents: "auto", background: "transparent" }}
+					className="fixed top-20 left-0 right-0 bottom-0 pointer-events-auto z-20 md:ml-48 md:top-0"
+					style={{ background: "transparent" }}
 				/>
 			)}
 		</>

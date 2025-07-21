@@ -43,7 +43,10 @@ export function UrlParamsDialog({
 	const uniqueCodes = Array.from(new Set(allCodes));
 
 	// Get subject list for the year
-	const subjectList = mapping[year]?.subjects || [];
+	const subjectList =
+		typeof mapping === "object" && mapping !== null && mapping[year]?.subjects
+			? mapping[year].subjects
+			: [];
 	const codeToName = (code: string) => {
 		const subj = subjectList.find((s: any) => s.Code === code);
 		return subj ? subj.Subject || code : code;

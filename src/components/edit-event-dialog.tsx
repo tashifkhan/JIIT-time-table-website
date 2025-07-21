@@ -22,6 +22,15 @@ interface EditEventDialogProps {
 		type: "L" | "T" | "P" | "C";
 		location: string;
 	};
+	schedule: {
+		[day: string]: {
+			[time: string]: {
+				subject_name: string;
+				type: "L" | "T" | "P" | "C";
+				location: string;
+			};
+		};
+	} | null;
 }
 
 export function EditEventDialog({
@@ -30,6 +39,7 @@ export function EditEventDialog({
 	day,
 	time,
 	currentEvent,
+	schedule,
 }: EditEventDialogProps) {
 	const { editedSchedule, setEditedSchedule } = useContext(UserContext);
 	const [formData, setFormData] = React.useState({
@@ -54,7 +64,16 @@ export function EditEventDialog({
 	}, [currentEvent, time]);
 
 	const handleSave = () => {
-		if (!editedSchedule) return;
+		let baseSchedule = editedSchedule;
+		if (!baseSchedule) {
+			// If editedSchedule is null, initialize it as a deep copy of schedule
+			if (schedule) {
+				baseSchedule = JSON.parse(JSON.stringify(schedule));
+				setEditedSchedule(baseSchedule);
+			} else {
+				return; // nothing to edit
+			}
+		}
 
 		// Validate required fields
 		if (
@@ -79,7 +98,7 @@ export function EditEventDialog({
 			formData.endTime
 		)}`;
 
-		const updatedSchedule = { ...editedSchedule };
+		const updatedSchedule = { ...baseSchedule };
 
 		// Remove old time slot if it exists and is different from new time slot
 		if (time && time !== newTimeSlot) {

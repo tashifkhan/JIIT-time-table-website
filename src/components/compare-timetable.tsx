@@ -42,10 +42,10 @@ const CompareTimetablePage: React.FC = () => {
 	}, [savedConfigs]);
 
 	useEffect(() => {
-		fetch("/data/time-table/EVEN25/62.json")
+		fetch("/data/time-table/ODD25/62.json")
 			.then((res) => res.json())
 			.then(setMapping62);
-		fetch("/data/time-table/EVEN25/128.json")
+		fetch("/data/time-table/ODD25/128.json")
 			.then((res) => res.json())
 			.then(setMapping128);
 	}, []);

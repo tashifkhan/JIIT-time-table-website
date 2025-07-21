@@ -1,6 +1,6 @@
 import React from "react";
 import UserContext from "../context/userContext";
-import { useLocation } from "react-router-dom";
+import { useLocation, Link } from "react-router-dom";
 import { useState, useEffect, useRef, useCallback } from "react";
 
 interface ScheduleEvent {
@@ -36,21 +36,37 @@ const TimelinePage: React.FC = () => {
 		localStorage.setItem("timelineWelcomeDismissed", "1");
 	};
 
+	const [isLoading, setIsLoading] = useState(false);
+	const [hasCheckedStorage, setHasCheckedStorage] = useState(false);
+
 	// Load cached schedule from localStorage if not present in context
 	React.useEffect(() => {
-		if (!schedule && !editedSchedule) {
-			const cached = localStorage.getItem("cachedSchedule");
-			if (cached) {
-				try {
-					const parsed = JSON.parse(cached);
-					if (parsed && typeof parsed === "object") {
-						setSchedule(parsed);
-					}
-				} catch {}
-			}
+		// If we already have a schedule in context, no need to load from storage
+		if (schedule || editedSchedule) {
+			setHasCheckedStorage(true);
+			setIsLoading(false);
+			return;
 		}
+
+		// Only show loading if we're actually checking storage
+		setIsLoading(true);
+
+		const cached = localStorage.getItem("cachedSchedule");
+
+		if (cached) {
+			try {
+				const parsed = JSON.parse(cached);
+				if (parsed && typeof parsed === "object") {
+					setSchedule(parsed);
+				}
+			} catch {}
+		}
+
+		// Mark that we've checked storage and stop loading
+		setHasCheckedStorage(true);
+		setIsLoading(false);
 		// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, []);
+	}, [schedule, editedSchedule]);
 
 	// Scroll to top on mount for visitors (not download mode)
 	useEffect(() => {
@@ -63,10 +79,76 @@ const TimelinePage: React.FC = () => {
 		}
 	}, [isDownloadMode]);
 
-	if (!displaySchedule) {
+	// Show loading state only when we're actively loading from localStorage
+	if (isLoading) {
 		return (
 			<div className="min-h-screen bg-[#131010] text-[#FFF0DC] p-8 flex items-center justify-center">
-				<p>No schedule data available</p>
+				<div className="text-center">
+					<div className="inline-block animate-spin rounded-full h-12 w-12 border-b-2 border-[#F0BB78] mb-4"></div>
+					<p className="text-lg">Loading your schedule...</p>
+				</div>
+			</div>
+		);
+	}
+
+	// Show no schedule available only after we've checked storage and still have no data
+	if (!displaySchedule && hasCheckedStorage) {
+		return (
+			<div className="min-h-screen bg-[#131010] text-[#FFF0DC] p-8 flex items-center justify-center">
+				<div className="max-w-md mx-auto text-center">
+					<div className="mb-6">
+						<svg
+							className="w-16 h-16 mx-auto mb-4 text-[#F0BB78]/60"
+							fill="none"
+							stroke="currentColor"
+							viewBox="0 0 24 24"
+						>
+							<path
+								strokeLinecap="round"
+								strokeLinejoin="round"
+								strokeWidth={1.5}
+								d="M8 7V3a2 2 0 012-2h4a2 2 0 012 2v4m-6 0V6a2 2 0 012-2h2a2 2 0 012 2v1m-6 0h6m-6 0l-.5 5.5A2 2 0 007.5 20h9a2 2 0 001.96-1.64L19 13H5l.5 5.5z"
+							/>
+						</svg>
+						<h1 className="text-2xl md:text-3xl font-bold mb-2 text-[#F0BB78]">
+							No Schedule Found
+						</h1>
+						<p className="text-[#FFF0DC]/70 mb-6">
+							It looks like you haven't created a schedule yet. Let's get you
+							started!
+						</p>
+					</div>
+
+					<div className="space-y-4">
+						<Link
+							to="/"
+							className="inline-flex items-center justify-center gap-2 px-6 py-3 bg-gradient-to-r from-[#F0BB78] to-[#D4A574] text-[#131010] font-semibold rounded-lg hover:from-[#D4A574] hover:to-[#B8965A] transition-all duration-200 shadow-lg hover:shadow-xl transform hover:-translate-y-0.5"
+						>
+							<svg className="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
+								<path d="M10.707 2.293a1 1 0 00-1.414 0l-7 7a1 1 0 001.414 1.414L4 10.414V17a1 1 0 001 1h2a1 1 0 001-1v-2a1 1 0 011-1h2a1 1 0 011 1v2a1 1 0 001 1h2a1 1 0 001-1v-6.586l.293.293a1 1 0 001.414-1.414l-7-7z" />
+							</svg>
+							Create Your Schedule
+						</Link>
+
+						<div className="text-sm text-[#FFF0DC]/60">
+							<p>Or try one of these options:</p>
+							<div className="mt-2 space-y-1">
+								<Link
+									to="/academic-calendar"
+									className="block text-[#F0BB78] hover:text-[#D4A574] transition-colors"
+								>
+									→ View Academic Calendar
+								</Link>
+								<Link
+									to="/compare-timetables"
+									className="block text-[#F0BB78] hover:text-[#D4A574] transition-colors"
+								>
+									→ Compare Timetables
+								</Link>
+							</div>
+						</div>
+					</div>
+				</div>
 			</div>
 		);
 	}
@@ -501,7 +583,7 @@ const TimelinePage: React.FC = () => {
 								</div>
 
 								{/* Events */}
-								{displaySchedule[day] &&
+								{displaySchedule?.[day] &&
 									Object.entries(displaySchedule[day]).map(
 										([timeSlot, event]: [string, ScheduleEvent]) => (
 											<div

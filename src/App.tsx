@@ -643,17 +643,17 @@ const App: React.FC = () => {
 							{/* Header with icon */}
 							<div className="text-center space-y-3">
 								<div className="w-16 h-16 mx-auto rounded-full bg-[#F0BB78]/20 border border-[#F0BB78]/30 flex items-center justify-center">
-									<svg 
-										className="w-8 h-8 text-[#F0BB78]" 
-										fill="none" 
-										stroke="currentColor" 
+									<svg
+										className="w-8 h-8 text-[#F0BB78]"
+										fill="none"
+										stroke="currentColor"
 										viewBox="0 0 24 24"
 									>
-										<path 
-											strokeLinecap="round" 
-											strokeLinejoin="round" 
-											strokeWidth={2} 
-											d="M8.684 13.342C8.886 12.938 9 12.482 9 12c0-.482-.114-.938-.316-1.342m0 2.684a3 3 0 110-2.684m0 2.684l6.632 3.316m-6.632-6l6.632-3.316m0 0a3 3 0 105.367-2.684 3 3 0 00-5.367 2.684zm0 9.316a3 3 0 105.367 2.684 3 3 0 00-5.367-2.684z" 
+										<path
+											strokeLinecap="round"
+											strokeLinejoin="round"
+											strokeWidth={2}
+											d="M8.684 13.342C8.886 12.938 9 12.482 9 12c0-.482-.114-.938-.316-1.342m0 2.684a3 3 0 110-2.684m0 2.684l6.632 3.316m-6.632-6l6.632-3.316m0 0a3 3 0 105.367-2.684 3 3 0 00-5.367 2.684zm0 9.316a3 3 0 105.367 2.684 3 3 0 00-5.367-2.684z"
 										/>
 									</svg>
 								</div>
@@ -706,7 +706,7 @@ const App: React.FC = () => {
 											const url = `${window.location.origin}${
 												window.location.pathname
 											}?${params.toString()}`;
-											
+
 											try {
 												await navigator.clipboard.writeText(url);
 											} catch (err) {
@@ -722,17 +722,17 @@ const App: React.FC = () => {
 										}}
 										title="Copy to clipboard"
 									>
-										<svg 
-											className="w-4 h-4 text-slate-400 group-hover:text-[#F0BB78] transition-colors" 
-											fill="none" 
-											stroke="currentColor" 
+										<svg
+											className="w-4 h-4 text-slate-400 group-hover:text-[#F0BB78] transition-colors"
+											fill="none"
+											stroke="currentColor"
 											viewBox="0 0 24 24"
 										>
-											<path 
-												strokeLinecap="round" 
-												strokeLinejoin="round" 
-												strokeWidth={2} 
-												d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z" 
+											<path
+												strokeLinecap="round"
+												strokeLinejoin="round"
+												strokeWidth={2}
+												d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z"
 											/>
 										</svg>
 									</button>
@@ -745,17 +745,17 @@ const App: React.FC = () => {
 									onClick={() => setShowShareDialog(false)}
 									className="flex-1 px-4 py-2.5 text-sm font-medium text-slate-300 bg-white/5 hover:bg-white/10 border border-white/20 rounded-lg transition-all duration-200 flex items-center justify-center gap-2"
 								>
-									<svg 
-										className="w-4 h-4" 
-										fill="none" 
-										stroke="currentColor" 
+									<svg
+										className="w-4 h-4"
+										fill="none"
+										stroke="currentColor"
 										viewBox="0 0 24 24"
 									>
-										<path 
-											strokeLinecap="round" 
-											strokeLinejoin="round" 
-											strokeWidth={2} 
-											d="M6 18L18 6M6 6l12 12" 
+										<path
+											strokeLinecap="round"
+											strokeLinejoin="round"
+											strokeWidth={2}
+											d="M6 18L18 6M6 6l12 12"
 										/>
 									</svg>
 									Cancel
@@ -774,7 +774,7 @@ const App: React.FC = () => {
 										const url = `${window.location.origin}${
 											window.location.pathname
 										}?${params.toString()}`;
-										
+
 										try {
 											await navigator.clipboard.writeText(url);
 											setShowShareDialog(false);
@@ -791,18 +791,18 @@ const App: React.FC = () => {
 										}
 									}}
 								>
-									<svg 
-										className="w-4 h-4" 
-										fill="none" 
-										stroke="currentColor" 
+									<svg
+										className="w-4 h-4"
+										fill="none"
+										stroke="currentColor"
 										viewBox="0 0 24 24"
 									>
-										<path 
-											strokeLinecap="round" 
-											strokeLinejoin="round" 
-											strokeWidth={2} 
-											d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z" 
-									/>
+										<path
+											strokeLinecap="round"
+											strokeLinejoin="round"
+											strokeWidth={2}
+											d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z"
+										/>
 									</svg>
 									Copy Link
 								</button>

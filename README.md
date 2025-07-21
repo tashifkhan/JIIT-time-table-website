@@ -17,10 +17,13 @@ The timetable is parsed using the script available at:
 
 ## Key Features
 
-- **Modern UI**: Glassmorphic design with Tailwind CSS
 - **Parsing**: Uses JIIT TimeTable Parser for accurate data extraction
+- **PWA**: Download and use offline as well
 - **Branch Support**: Handles multiple branches and years
-- **Responsive**: Works seamlessly across devices
+- **Compare TimeTables**: Parses multiple timetables and tells you the common free slots & classes
+- **Shareable Timetable**: Now timetables can be recreated by simple url sharing.
+- **Save Configs**: Save and load multiple timetable configs to load that tiemtable anytime.
+- **Timeline View**: No need to export the timetable... you can view the timetable at /timetable route because stored locally
 - **Export Options**: PDF, PNG, and Google Calendar sync
 - **Custom Events**: Edit the timetable and add custom events
 - **Academic Calendar**: Fetch and sync the academic calendar to Google Calendar
@@ -33,61 +36,98 @@ The timetable is parsed using the script available at:
 - **Framework**: React.js with TypeScript
 - **Styling**: Tailwind CSS
 - **Animations**: Framer Motion
-- **Export Tools**: js-pdf, html-to-image
 
 ### Backend
 
 - **Framework**: Python - Pyodide (Web Assembly)
-- **Endpoints**: Timetable processing and generation
+- **Endpoints**: Timetable & Academic Calendar processing, generation & comparing
 - **Google Calendar API** for syncing schedules
 
 ### Data
 
-- **Raw Time Table**: JSON files
-- **Elective Subjects**: JSON files with course details
+`Note: If you want to make a custom frontent or an App or something`
+make a request
+
+```bash
+curl https://simple-timetable.tashif.codes/data/time-table/ODD25/62.json   # replace 62 with 128 if want 128 data, also also replace the semester also if want anyother
+```
+
+or
+
+```bash
+curl https://simple-timetable.tashif.codes/data/calender/2526/calender.json  # replace 2526 with whichever academic year you want to use
+```
 
 ## Project Structure
 
 ```
+
 .
-├── src/
-│   ├── components/
-│   │   ├── ui/
-│   │   ├── academic-calendar.tsx       # Academic calendar display page
-│   │   ├── action-buttons.tsx          # Buttons for downloading png & pdfs
-│   │   ├── edit-event-dialog.tsx       # Dialog for editing events
-│   │   ├── google-calendar-button.tsx  # Button to sync with Google Calendar
-│   │   ├── redirectAC.tsx              # Academic calendar Button
-│   │   ├── schedule-display.tsx        # Component to render the TimeTable
-│   │   ├── schedule-form.tsx           # Form for creating or editing TimeTable
-│   │   ├── timeline.tsx                # Timeline visualization for the TimeTable
-│   ├── data/
-│   │   ├── 128-mapping.json            # 128 BE subjects data
-│   │   ├── timetable-mapping.json      # 62 BE subjects data
-│   │   └── calender.json               # Academic Calender data
-│   ├── utils/
-│   │   ├── calender-AC.ts              # Google Calender API Integration for AC
-│   │   ├── calender.ts                 # Google Calender API Integration for TimeTable
-│   │   ├── download.ts                 # Hook/function to download png/pdf of TimeTable
-│   │   └── pyodide.ts                  # WASM middleware for module execution
-│   ├── context/
-│   │   ├── userContext.ts              # Manages State of the TimeTable across different Components/Pages
-│   │   └── userContextProvidor.tsx
-│   ├── types/
-│   │   ├── schedule.ts                 # TypeScript Definitions
-│   │   ├── subjects.ts
-│   │   └── timetable.ts
-│   ├── App.tsx                         # Main App page / Entrypoint
-│   ├── main.tsx                        # Layout page
-│   └── global.css                      # Schedule view
-├── public/
-│   ├── modules/                        # Specific Course Python Module
-│   │   ├── BE62_creator.py
-│   │   ├── BE128_creator.py
-│   │   └── BCA_creator.py
-│   ├── _creator.py                     # Python Module
-│   └── icon.png                        # Icon
-└── package.json                        # Project dependencies & config files
+├── json_creater.py # this the python streamlit app that converts the ugly excel to json for the website
+├── public
+│   ├── data                       # this directory contains all the json data created
+│   │   ├── calender
+│   │   │   ├── 2425
+│   │   │   │   └── calendar.json
+│   │   │   └── 2526
+│   │   │   └── calender.json
+│   │   │ 
+│   │   └── time-table
+│   │   ├── EVEN25
+│   │   │   ├── 128.json
+│   │   │   └── 62.json
+│   │   └── ODD25
+│   │   ├── 128.json
+│   │   └── 62.json
+│   │ 
+│   ├── modules                      # this directory contains specific python modules to create timetable
+│   │   ├── BE128_creator.py
+│   │   └── BE62_creator.py
+│   │ 
+│   ├── _creator.py                  # Python file that creates the timetable
+│   ├── manifest.json                # manifest file for PWA
+│   ├── robots.txt
+│   ├── service-worker.js            # service working to save resources offline
+│   └── sitemap.xml
+│ 
+├── src
+│   ├── components
+│   │   ├── academic-calendar.tsx         # Academic calendar display page
+│   │   ├── action-buttons.tsx
+│   │   ├── background.tsx
+│   │   ├── compare-timetable.tsx         # Conparing timetable page
+│   │   ├── edit-event-dialog.tsx
+│   │   ├── google-calendar-button.tsx
+│   │   ├── navbar.tsx                    # swiable navbar
+│   │   ├── not-found.tsx                 # 404 Not Found Custom page
+│   │   ├── schedule-display.tsx
+│   │   ├── schedule-form.tsx
+│   │   ├── timeline-landing.tsx          # landing page for /timeline if no schedule has been created
+│   │   ├── timeline-wrapper.tsx
+│   │   ├── timeline.tsx                  # Calendar / Timeline View page for the timetable
+│   │   ├── url-params-dialog.tsx
+│   │   └── ui\                           # this directory contains the shdcn compoents
+│   │ 
+│   ├── context
+│   │   ├── userContext.ts
+│   │   └── userContextProvider.tsx
+│   │ 
+│   ├── hooks\
+│   ├── lib\
+│   ├── types\                # TypeScript type Definitions
+│   │ 
+│   ├── utils
+│   │   ├── calender-AC.ts                  # Google Calender API Integration for AC
+│   │   ├── calender.ts                     # Google Calender API Integration for TimeTable
+│   │   ├── download.ts                     # Hook/function to download png/pdf of TimeTable
+│   │   └── pyodide.ts                      # WASM middleware for module execution
+│   │ 
+│   ├── App.tsx          # the schedule creator page
+│   └── main.tsx         # apps entry point
+│ 
+├── README.md
+└── index.html
+
 ```
 
 ## Data Flow
@@ -102,9 +142,8 @@ The timetable is parsed using the script available at:
 
 ### Prerequisites
 
-- Node.js 16+
-- npm or yarn
-- Python 3.8+ (for parser development)
+- bun (recommended) or npm
+- Python 3.8+ (for parser)
 
 1.  Clone the repository and navigate:
 
@@ -116,10 +155,22 @@ The timetable is parsed using the script available at:
 2.  Install dependencies:
 
     ```bash
-    npm install
+    bun i
+    ```
+
+    or
+
+    ```bash
+    npm i
     ```
 
 3.  Run the development server:
+
+    ```bash
+    bun dev
+    ```
+
+    or
 
     ```bash
     npm run dev
@@ -148,8 +199,8 @@ Frontend runs at: `http://localhost:5173`
 Common issues and solutions:
 
 1. **Loading Error**: Clear cache and reload
-2. **Export Failed**: Check browser permissions
-3. **Parser Error**: Verify input format
+2. **Export Failed**: Check browser permissions... especially WASM
+3. **Parser Error**: Check the frekaing Excel for errors
 
 ## Contributing
 
@@ -175,16 +226,20 @@ If you encounter any issues or have suggestions, please raise an issue on GitHub
 
 We appreciate your feedback and contributions!
 
+## Note:
+
+`timetable excels for 4th year & 2nd year 128 campus has not been released`
+
 ## Future Scope
 
-- Handelling 4th year BE TimeTable
-- PWA Support for offline usage
-- Reminders for classes
-- Visualization of free and busy slots of 2 students
+- [x] Handelling 4th year BE TimeTable
+- [x] PWA Support for offline usage
+- [x] Reminders for classes
+- [x] Visualization of free and busy slots of 2 students
 
 ## License
 
-GPL-3.0 License - See LICENSE file
+GPL-3.0 License - See ![LICENSE](./LICENSE) file
 
 ## Contact
 
@@ -192,3 +247,7 @@ For support or queries:
 
 - GitHub Issues
 - Email: [developer@tashif.codes]
+
+```
+
+```

@@ -8,8 +8,6 @@ import { ScheduleForm } from "./components/schedule-form";
 import { ScheduleDisplay } from "./components/schedule-display";
 import { UrlParamsDialog } from "./components/url-params-dialog";
 import { motion } from "framer-motion";
-import timetableMapping from "../public/data/time-table/ODD25/62.json";
-import mapping128 from "../public/data/time-table/ODD25/128.json";
 import { Calendar, ChevronDown, Trash } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import UserContext from "./context/userContext";
@@ -32,6 +30,18 @@ interface YourTietable {
 }
 
 const App: React.FC = () => {
+	const [mapping62, setMapping62] = React.useState<any>(null);
+	const [mapping128, setMapping128] = React.useState<any>(null);
+
+	React.useEffect(() => {
+		fetch("/data/time-table/ODD25/62.json")
+			.then((res) => res.json())
+			.then(setMapping62);
+		fetch("/data/time-table/ODD25/128.json")
+			.then((res) => res.json())
+			.then(setMapping128);
+	}, []);
+
 	const navigate = useNavigate();
 	const { schedule, setSchedule, setEditedSchedule } = useContext(UserContext);
 	const [numExecutions, setNumExecutions] = React.useState(0);
@@ -137,15 +147,10 @@ const App: React.FC = () => {
 		// Clear any existing edited schedule when generating a new one
 		setEditedSchedule(null);
 
-		const mapping = campus === "62" ? timetableMapping : mapping128;
-		const subjectJSON =
-			campus === "62"
-				? mapping[year as keyof typeof mapping].subjects
-				: mapping[year as keyof typeof mapping].subjects;
-		const timeTableJSON =
-			campus === "62"
-				? mapping[year as keyof typeof mapping].timetable
-				: mapping[year as keyof typeof mapping].timetable;
+		const mapping = campus === "62" ? mapping62 : mapping128;
+		if (!mapping) return; // mapping not loaded yet
+		const subjectJSON = mapping[year as keyof typeof mapping].subjects;
+		const timeTableJSON = mapping[year as keyof typeof mapping].timetable;
 
 		console.log("Using mapping:", campus === "62" ? "62" : "128");
 		console.log("With data:", { timeTableJSON, subjectJSON, batch, electives });
@@ -486,10 +491,10 @@ const App: React.FC = () => {
 							style={{ overflow: "hidden" }}
 							transition={{ duration: 0.4, ease: "easeInOut" }}
 						>
-							{isFormOpen && (
+							{isFormOpen && mapping62 && mapping128 && (
 								<div className="px-6 pb-6 pt-2 flex justify-center">
 									<ScheduleForm
-										mapping={timetableMapping}
+										mapping={mapping62}
 										mapping128={mapping128}
 										onSubmit={handleFormSubmit}
 										onSaveConfig={handleSaveConfig}
@@ -595,7 +600,7 @@ const App: React.FC = () => {
 					isOpen={showUrlParamsDialog}
 					onClose={() => setShowUrlParamsDialog(false)}
 					urlParams={urlParamsData}
-					mapping={_campus === "62" ? timetableMapping : mapping128}
+					mapping={_campus === "62" ? mapping62 : mapping128}
 					year={_year}
 					onOverride={handleUrlParamsOverride}
 					onPrefill={handleUrlParamsPrefill}

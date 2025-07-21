@@ -23,6 +23,23 @@ const CompareTimetablePage: React.FC = () => {
 	const [mapping62, setMapping62] = useState<any>(null);
 	const [mapping128, setMapping128] = useState<any>(null);
 
+	// Saved configs state (shared with App.tsx)
+	const [savedConfigs, setSavedConfigs] = useState<{ [key: string]: any }>(
+		() => {
+			const configs = localStorage.getItem("classConfigs");
+			return configs ? JSON.parse(configs) : {};
+		}
+	);
+	const [isConfigOpen1, setIsConfigOpen1] = useState(false);
+	const [isConfigOpen2, setIsConfigOpen2] = useState(false);
+	const [selectedConfig1, setSelectedConfig1] = useState<string>("");
+	const [selectedConfig2, setSelectedConfig2] = useState<string>("");
+
+	// Persist savedConfigs to localStorage
+	useEffect(() => {
+		localStorage.setItem("classConfigs", JSON.stringify(savedConfigs));
+	}, [savedConfigs]);
+
 	useEffect(() => {
 		fetch("/data/time-table/EVEN25/62.json")
 			.then((res) => res.json())
@@ -135,6 +152,43 @@ const CompareTimetablePage: React.FC = () => {
 		}
 	};
 
+	// Handler to load a config into Timetable 1 or 2
+	const handleSelectConfig = (idx: 1 | 2, name: string) => {
+		const config = savedConfigs[name];
+		if (!config) return;
+		if (idx === 1) {
+			setConfig1({
+				campus: config.campus || "",
+				year: config.year || "",
+				batch: config.batch || "",
+				electives: config.selectedSubjects || [],
+			});
+			setSelectedSubjects1(config.selectedSubjects || []);
+			setSelectedConfig1(name);
+			setIsConfigOpen1(false);
+		} else {
+			setConfig2({
+				campus: config.campus || "",
+				year: config.year || "",
+				batch: config.batch || "",
+				electives: config.selectedSubjects || [],
+			});
+			setSelectedSubjects2(config.selectedSubjects || []);
+			setSelectedConfig2(name);
+			setIsConfigOpen2(false);
+		}
+	};
+
+	const handleDeleteConfig = (name: string) => {
+		setSavedConfigs((prev) => {
+			const newConfigs = { ...prev };
+			delete newConfigs[name];
+			return newConfigs;
+		});
+		if (selectedConfig1 === name) setSelectedConfig1("");
+		if (selectedConfig2 === name) setSelectedConfig2("");
+	};
+
 	// Helper to get subjects array for a config
 	const getSubjects = (campus: string, year: string): Subject[] => {
 		if (!campus || !year) return [];
@@ -180,273 +234,383 @@ const CompareTimetablePage: React.FC = () => {
 					animate={{ opacity: 1, y: 0 }}
 					transition={{ duration: 0.5, delay: 0.2 }}
 				>
-					{/* Timetable 1 Form */}
-					<div className="flex-1 bg-white/5 backdrop-blur-xl rounded-xl sm:rounded-2xl border border-white/10 shadow-xl overflow-hidden">
-						<div className="bg-gradient-to-r from-[#F0BB78]/10 to-[#543A14]/10 px-6 py-4 border-b border-white/10">
-							<h2 className="text-lg sm:text-xl font-semibold text-[#F0BB78]">
-								Timetable 1
-							</h2>
-						</div>
-						<div className="p-6 space-y-4">
-							<div className="space-y-2">
-								<label className="block text-white/90 font-medium text-sm">
-									Campus
-								</label>
-								<Select
-									value={config1.campus}
-									onValueChange={(value) =>
-										handleConfigChange(1, "campus", value)
-									}
-								>
-									<SelectTrigger className="h-9 sm:h-10 text-sm bg-[#FFF0DC]/10 border-[#F0BB78]/20 backdrop-blur-md hover:bg-[#FFF0DC]/15 transition-all">
-										<SelectValue placeholder="Select campus" />
-									</SelectTrigger>
-									<SelectContent className="bg-[#FFF0DC]/20 backdrop-blur-2xl border-[#F0BB78]/20">
-										<SelectItem value="62" className="hover:bg-white/20">
-											Campus 62
-										</SelectItem>
-										<SelectItem value="128" className="hover:bg-white/20">
-											Campus 128
-										</SelectItem>
-									</SelectContent>
-								</Select>
-							</div>
-							<div className="space-y-2">
-								<label className="block text-white/90 font-medium text-sm">
-									Year
-								</label>
-								<Select
-									value={config1.year}
-									onValueChange={(value) =>
-										handleConfigChange(1, "year", value)
-									}
-								>
-									<SelectTrigger className="h-9 sm:h-10 text-sm bg-[#FFF0DC]/10 border-[#F0BB78]/20 backdrop-blur-md hover:bg-[#FFF0DC]/15 transition-all">
-										<SelectValue placeholder="Select year" />
-									</SelectTrigger>
-									<SelectContent className="bg-[#FFF0DC]/20 backdrop-blur-2xl border-[#F0BB78]/20">
-										<SelectItem value="1" className="hover:bg-white/20">
-											1st Year
-										</SelectItem>
-										<SelectItem value="2" className="hover:bg-white/20">
-											2nd Year
-										</SelectItem>
-										<SelectItem value="3" className="hover:bg-white/20">
-											3rd Year
-										</SelectItem>
-										<SelectItem value="4" className="hover:bg-white/20">
-											4th Year
-										</SelectItem>
-									</SelectContent>
-								</Select>
-							</div>
-							<div className="space-y-2">
-								<label className="block text-white/90 font-medium text-sm">
-									Batch
-								</label>
-								<input
-									type="text"
-									value={config1.batch}
-									onChange={(e) =>
-										handleConfigChange(1, "batch", e.target.value.toUpperCase())
-									}
-									className="w-full rounded-lg p-3 bg-white/10 border border-white/20 text-white placeholder-white/50 focus:ring-2 focus:ring-[#F0BB78]/50 focus:border-[#F0BB78]/50 transition-all duration-200"
-									placeholder="Enter batch (e.g. A6 or F4)"
-								/>
-							</div>
-							{/* Electives UI for Timetable 1 */}
-							{config1.year && config1.year !== "1" && (
-								<div className="space-y-3">
-									<label className="text-white/90 font-medium text-sm">
-										Choose Your Subjects
-									</label>
-									<Button
-										type="button"
-										className="w-full h-12 text-sm bg-gradient-to-r from-[#543A14] to-[#F0BB78] hover:from-[#543A14]/80 hover:to-[#F0BB78]/80 transition-all duration-300 shadow-lg hover:shadow-[#F0BB78]/25 rounded-lg"
-										onClick={() => setShowSubjectModal1(true)}
+					{/* Timetable 1: Config Dropdown + Form vertically */}
+					<div className="flex-1 flex flex-col gap-2">
+						{Object.keys(savedConfigs).length > 0 && (
+							<div className="mb-0 w-full max-w-md mx-auto">
+								<div className="bg-white/5 rounded-xl border border-white/10 shadow-xl overflow-hidden">
+									<button
+										onClick={() => setIsConfigOpen1((prev) => !prev)}
+										className="w-full flex items-center justify-between px-6 py-3 bg-transparent hover:bg-white/10 transition-all duration-200 focus:outline-none cursor-pointer select-none"
 									>
-										{selectedSubjects1.length > 0
-											? `Selected: ${selectedSubjects1.length} subject(s)`
-											: "Select Subjects"}
-									</Button>
-									{selectedSubjects1.length > 0 && (
-										<div className="flex flex-wrap gap-2">
-											{selectedSubjects1.map((code) => {
-												const subj = getSubjects(
-													config1.campus,
-													config1.year
-												).find((s) => s.Code === code);
-												return (
-													<div
-														key={code}
-														className="flex items-center gap-2 px-3 py-2 bg-[#F0BB78]/20 rounded-lg text-[#F0BB78] text-xs group hover:bg-[#F0BB78]/30 transition-colors border border-[#F0BB78]/20"
+										<span className="text-base font-semibold text-[#F0BB78]">
+											Load Saved Config for Timetable 1
+										</span>
+										<span
+											className={`w-5 h-5 transition-transform duration-300 ${
+												isConfigOpen1 ? "rotate-180" : "rotate-0"
+											}`}
+										>
+											▼
+										</span>
+									</button>
+									{isConfigOpen1 && (
+										<div className="px-6 pb-4 pt-2 flex flex-col gap-2">
+											{Object.keys(savedConfigs).map((name) => (
+												<div
+													key={name}
+													className="flex items-center justify-between gap-2"
+												>
+													<button
+														onClick={() => handleSelectConfig(1, name)}
+														className={`flex-1 text-left px-4 py-2 rounded-lg bg-[#FFF0DC]/10 border border-[#F0BB78]/10 hover:bg-[#F0BB78]/20 text-[#F0BB78] font-medium transition-all duration-200`}
 													>
-														<span className="truncate max-w-[120px] font-medium">
-															{subj?.Subject || code}
-														</span>
-														<button
-															type="button"
-															onClick={(e) => {
-																e.stopPropagation();
-																setSelectedSubjects1((prev) =>
-																	prev.filter((c) => c !== code)
-																);
-															}}
-															className="ml-1 text-[#F0BB78]/60 hover:text-red-400 transition-colors text-sm font-bold"
-															aria-label={`Remove ${subj?.Subject || code}`}
-														>
-															×
-														</button>
-													</div>
-												);
-											})}
+														{name}
+													</button>
+													<button
+														onClick={(e) => {
+															e.stopPropagation();
+															handleDeleteConfig(name);
+														}}
+														className="ml-2 p-1 rounded hover:bg-red-100/20 transition-colors"
+														title="Delete config"
+													>
+														<span className="text-red-400 font-bold">×</span>
+													</button>
+												</div>
+											))}
 										</div>
 									)}
-									<SubjectSelector
-										subjects={getSubjects(config1.campus, config1.year)}
-										selectedSubjects={selectedSubjects1}
-										setSelectedSubjects={setSelectedSubjects1}
-										open={showSubjectModal1}
-										setOpen={setShowSubjectModal1}
-										year={config1.year}
+								</div>
+							</div>
+						)}
+						{/* Timetable 1 Form */}
+						<div className="flex-1 bg-white/5 backdrop-blur-xl rounded-xl sm:rounded-2xl border border-white/10 shadow-xl overflow-hidden">
+							<div className="bg-gradient-to-r from-[#F0BB78]/10 to-[#543A14]/10 px-6 py-4 border-b border-white/10">
+								<h2 className="text-lg sm:text-xl font-semibold text-[#F0BB78]">
+									Timetable 1
+								</h2>
+							</div>
+							<div className="p-6 space-y-4">
+								<div className="space-y-2">
+									<label className="block text-white/90 font-medium text-sm">
+										Campus
+									</label>
+									<Select
+										value={config1.campus}
+										onValueChange={(value) =>
+											handleConfigChange(1, "campus", value)
+										}
+									>
+										<SelectTrigger className="h-9 sm:h-10 text-sm bg-[#FFF0DC]/10 border-[#F0BB78]/20 backdrop-blur-md hover:bg-[#FFF0DC]/15 transition-all">
+											<SelectValue placeholder="Select campus" />
+										</SelectTrigger>
+										<SelectContent className="bg-[#FFF0DC]/20 backdrop-blur-2xl border-[#F0BB78]/20">
+											<SelectItem value="62" className="hover:bg-white/20">
+												Campus 62
+											</SelectItem>
+											<SelectItem value="128" className="hover:bg-white/20">
+												Campus 128
+											</SelectItem>
+										</SelectContent>
+									</Select>
+								</div>
+								<div className="space-y-2">
+									<label className="block text-white/90 font-medium text-sm">
+										Year
+									</label>
+									<Select
+										value={config1.year}
+										onValueChange={(value) =>
+											handleConfigChange(1, "year", value)
+										}
+									>
+										<SelectTrigger className="h-9 sm:h-10 text-sm bg-[#FFF0DC]/10 border-[#F0BB78]/20 backdrop-blur-md hover:bg-[#FFF0DC]/15 transition-all">
+											<SelectValue placeholder="Select year" />
+										</SelectTrigger>
+										<SelectContent className="bg-[#FFF0DC]/20 backdrop-blur-2xl border-[#F0BB78]/20">
+											<SelectItem value="1" className="hover:bg-white/20">
+												1st Year
+											</SelectItem>
+											<SelectItem value="2" className="hover:bg-white/20">
+												2nd Year
+											</SelectItem>
+											<SelectItem value="3" className="hover:bg-white/20">
+												3rd Year
+											</SelectItem>
+											<SelectItem value="4" className="hover:bg-white/20">
+												4th Year
+											</SelectItem>
+										</SelectContent>
+									</Select>
+								</div>
+								<div className="space-y-2">
+									<label className="block text-white/90 font-medium text-sm">
+										Batch
+									</label>
+									<input
+										type="text"
+										value={config1.batch}
+										onChange={(e) =>
+											handleConfigChange(
+												1,
+												"batch",
+												e.target.value.toUpperCase()
+											)
+										}
+										className="w-full rounded-lg p-3 bg-white/10 border border-white/20 text-white placeholder-white/50 focus:ring-2 focus:ring-[#F0BB78]/50 focus:border-[#F0BB78]/50 transition-all duration-200"
+										placeholder="Enter batch (e.g. A6 or F4)"
 									/>
 								</div>
-							)}
+								{/* Electives UI for Timetable 1 */}
+								{config1.year && config1.year !== "1" && (
+									<div className="space-y-3">
+										<label className="text-white/90 font-medium text-sm">
+											Choose Your Subjects
+										</label>
+										<Button
+											type="button"
+											className="w-full h-12 text-sm bg-gradient-to-r from-[#543A14] to-[#F0BB78] hover:from-[#543A14]/80 hover:to-[#F0BB78]/80 transition-all duration-300 shadow-lg hover:shadow-[#F0BB78]/25 rounded-lg"
+											onClick={() => setShowSubjectModal1(true)}
+										>
+											{selectedSubjects1.length > 0
+												? `Selected: ${selectedSubjects1.length} subject(s)`
+												: "Select Subjects"}
+										</Button>
+										{selectedSubjects1.length > 0 && (
+											<div className="flex flex-wrap gap-2">
+												{selectedSubjects1.map((code) => {
+													const subj = getSubjects(
+														config1.campus,
+														config1.year
+													).find((s) => s.Code === code);
+													return (
+														<div
+															key={code}
+															className="flex items-center gap-2 px-3 py-2 bg-[#F0BB78]/20 rounded-lg text-[#F0BB78] text-xs group hover:bg-[#F0BB78]/30 transition-colors border border-[#F0BB78]/20"
+														>
+															<span className="truncate max-w-[120px] font-medium">
+																{subj?.Subject || code}
+															</span>
+															<button
+																type="button"
+																onClick={(e) => {
+																	e.stopPropagation();
+																	setSelectedSubjects1((prev) =>
+																		prev.filter((c) => c !== code)
+																	);
+																}}
+																className="ml-1 text-[#F0BB78]/60 hover:text-red-400 transition-colors text-sm font-bold"
+																aria-label={`Remove ${subj?.Subject || code}`}
+															>
+																×
+															</button>
+														</div>
+													);
+												})}
+											</div>
+										)}
+										<SubjectSelector
+											subjects={getSubjects(config1.campus, config1.year)}
+											selectedSubjects={selectedSubjects1}
+											setSelectedSubjects={setSelectedSubjects1}
+											open={showSubjectModal1}
+											setOpen={setShowSubjectModal1}
+											year={config1.year}
+										/>
+									</div>
+								)}
+							</div>
 						</div>
 					</div>
 
-					{/* Timetable 2 Form */}
-					<div className="flex-1 bg-white/5 backdrop-blur-xl rounded-xl sm:rounded-2xl border border-white/10 shadow-xl overflow-hidden">
-						<div className="bg-gradient-to-r from-[#543A14]/10 to-[#F0BB78]/10 px-6 py-4 border-b border-white/10">
-							<h2 className="text-lg sm:text-xl font-semibold text-[#F0BB78]">
-								Timetable 2
-							</h2>
-						</div>
-						<div className="p-6 space-y-4">
-							<div className="space-y-2">
-								<label className="block text-white/90 font-medium text-sm">
-									Campus
-								</label>
-								<Select
-									value={config2.campus}
-									onValueChange={(value) =>
-										handleConfigChange(2, "campus", value)
-									}
-								>
-									<SelectTrigger className="h-9 sm:h-10 text-sm bg-[#FFF0DC]/10 border-[#F0BB78]/20 backdrop-blur-md hover:bg-[#FFF0DC]/15 transition-all">
-										<SelectValue placeholder="Select campus" />
-									</SelectTrigger>
-									<SelectContent className="bg-[#FFF0DC]/20 backdrop-blur-2xl border-[#F0BB78]/20">
-										<SelectItem value="62" className="hover:bg-white/20">
-											Campus 62
-										</SelectItem>
-										<SelectItem value="128" className="hover:bg-white/20">
-											Campus 128
-										</SelectItem>
-									</SelectContent>
-								</Select>
-							</div>
-							<div className="space-y-2">
-								<label className="block text-white/90 font-medium text-sm">
-									Year
-								</label>
-								<Select
-									value={config2.year}
-									onValueChange={(value) =>
-										handleConfigChange(2, "year", value)
-									}
-								>
-									<SelectTrigger className="h-9 sm:h-10 text-sm bg-[#FFF0DC]/10 border-[#F0BB78]/20 backdrop-blur-md hover:bg-[#FFF0DC]/15 transition-all">
-										<SelectValue placeholder="Select year" />
-									</SelectTrigger>
-									<SelectContent className="bg-[#FFF0DC]/20 backdrop-blur-2xl border-[#F0BB78]/20">
-										<SelectItem value="1" className="hover:bg-white/20">
-											1st Year
-										</SelectItem>
-										<SelectItem value="2" className="hover:bg-white/20">
-											2nd Year
-										</SelectItem>
-										<SelectItem value="3" className="hover:bg-white/20">
-											3rd Year
-										</SelectItem>
-										<SelectItem value="4" className="hover:bg-white/20">
-											4th Year
-										</SelectItem>
-									</SelectContent>
-								</Select>
-							</div>
-							<div className="space-y-2">
-								<label className="block text-white/90 font-medium text-sm">
-									Batch
-								</label>
-								<input
-									type="text"
-									value={config2.batch}
-									onChange={(e) =>
-										handleConfigChange(2, "batch", e.target.value.toUpperCase())
-									}
-									className="w-full rounded-lg p-3 bg-white/10 border border-white/20 text-white placeholder-white/50 focus:ring-2 focus:ring-[#F0BB78]/50 focus:border-[#F0BB78]/50 transition-all duration-200"
-									placeholder="Enter batch (e.g. A6 or F4)"
-								/>
-							</div>
-							{/* Electives UI for Timetable 2 */}
-							{config2.year && config2.year !== "1" && (
-								<div className="space-y-3">
-									<label className="text-white/90 font-medium text-sm">
-										Choose Your Subjects
-									</label>
-									<Button
-										type="button"
-										className="w-full h-12 text-sm bg-gradient-to-r from-[#543A14] to-[#F0BB78] hover:from-[#543A14]/80 hover:to-[#F0BB78]/80 transition-all duration-300 shadow-lg hover:shadow-[#F0BB78]/25 rounded-lg"
-										onClick={() => setShowSubjectModal2(true)}
+					{/* Timetable 2: Config Dropdown + Form vertically */}
+					<div className="flex-1 flex flex-col gap-2">
+						{Object.keys(savedConfigs).length > 0 && (
+							<div className="mb-0 w-full max-w-md mx-auto">
+								<div className="bg-white/5 rounded-xl border border-white/10 shadow-xl overflow-hidden">
+									<button
+										onClick={() => setIsConfigOpen2((prev) => !prev)}
+										className="w-full flex items-center justify-between px-6 py-3 bg-transparent hover:bg-white/10 transition-all duration-200 focus:outline-none cursor-pointer select-none"
 									>
-										{selectedSubjects2.length > 0
-											? `Selected: ${selectedSubjects2.length} subject(s)`
-											: "Select Subjects"}
-									</Button>
-									{selectedSubjects2.length > 0 && (
-										<div className="flex flex-wrap gap-2">
-											{selectedSubjects2.map((code) => {
-												const subj = getSubjects(
-													config2.campus,
-													config2.year
-												).find((s) => s.Code === code);
-												return (
-													<div
-														key={code}
-														className="flex items-center gap-2 px-3 py-2 bg-[#F0BB78]/20 rounded-lg text-[#F0BB78] text-xs group hover:bg-[#F0BB78]/30 transition-colors border border-[#F0BB78]/20"
+										<span className="text-base font-semibold text-[#F0BB78]">
+											Load Saved Config for Timetable 2
+										</span>
+										<span
+											className={`w-5 h-5 transition-transform duration-300 ${
+												isConfigOpen2 ? "rotate-180" : "rotate-0"
+											}`}
+										>
+											▼
+										</span>
+									</button>
+									{isConfigOpen2 && (
+										<div className="px-6 pb-4 pt-2 flex flex-col gap-2">
+											{Object.keys(savedConfigs).map((name) => (
+												<div
+													key={name}
+													className="flex items-center justify-between gap-2"
+												>
+													<button
+														onClick={() => handleSelectConfig(2, name)}
+														className={`flex-1 text-left px-4 py-2 rounded-lg bg-[#FFF0DC]/10 border border-[#F0BB78]/10 hover:bg-[#F0BB78]/20 text-[#F0BB78] font-medium transition-all duration-200`}
 													>
-														<span className="truncate max-w-[120px] font-medium">
-															{subj?.Subject || code}
-														</span>
-														<button
-															type="button"
-															onClick={(e) => {
-																e.stopPropagation();
-																setSelectedSubjects2((prev) =>
-																	prev.filter((c) => c !== code)
-																);
-															}}
-															className="ml-1 text-[#F0BB78]/60 hover:text-red-400 transition-colors text-sm font-bold"
-															aria-label={`Remove ${subj?.Subject || code}`}
-														>
-															×
-														</button>
-													</div>
-												);
-											})}
+														{name}
+													</button>
+													<button
+														onClick={(e) => {
+															e.stopPropagation();
+															handleDeleteConfig(name);
+														}}
+														className="ml-2 p-1 rounded hover:bg-red-100/20 transition-colors"
+														title="Delete config"
+													>
+														<span className="text-red-400 font-bold">×</span>
+													</button>
+												</div>
+											))}
 										</div>
 									)}
-									<SubjectSelector
-										subjects={getSubjects(config2.campus, config2.year)}
-										selectedSubjects={selectedSubjects2}
-										setSelectedSubjects={setSelectedSubjects2}
-										open={showSubjectModal2}
-										setOpen={setShowSubjectModal2}
-										year={config2.year}
+								</div>
+							</div>
+						)}
+						{/* Timetable 2 Form */}
+						<div className="flex-1 bg-white/5 backdrop-blur-xl rounded-xl sm:rounded-2xl border border-white/10 shadow-xl overflow-hidden">
+							<div className="bg-gradient-to-r from-[#543A14]/10 to-[#F0BB78]/10 px-6 py-4 border-b border-white/10">
+								<h2 className="text-lg sm:text-xl font-semibold text-[#F0BB78]">
+									Timetable 2
+								</h2>
+							</div>
+							<div className="p-6 space-y-4">
+								<div className="space-y-2">
+									<label className="block text-white/90 font-medium text-sm">
+										Campus
+									</label>
+									<Select
+										value={config2.campus}
+										onValueChange={(value) =>
+											handleConfigChange(2, "campus", value)
+										}
+									>
+										<SelectTrigger className="h-9 sm:h-10 text-sm bg-[#FFF0DC]/10 border-[#F0BB78]/20 backdrop-blur-md hover:bg-[#FFF0DC]/15 transition-all">
+											<SelectValue placeholder="Select campus" />
+										</SelectTrigger>
+										<SelectContent className="bg-[#FFF0DC]/20 backdrop-blur-2xl border-[#F0BB78]/20">
+											<SelectItem value="62" className="hover:bg-white/20">
+												Campus 62
+											</SelectItem>
+											<SelectItem value="128" className="hover:bg-white/20">
+												Campus 128
+											</SelectItem>
+										</SelectContent>
+									</Select>
+								</div>
+								<div className="space-y-2">
+									<label className="block text-white/90 font-medium text-sm">
+										Year
+									</label>
+									<Select
+										value={config2.year}
+										onValueChange={(value) =>
+											handleConfigChange(2, "year", value)
+										}
+									>
+										<SelectTrigger className="h-9 sm:h-10 text-sm bg-[#FFF0DC]/10 border-[#F0BB78]/20 backdrop-blur-md hover:bg-[#FFF0DC]/15 transition-all">
+											<SelectValue placeholder="Select year" />
+										</SelectTrigger>
+										<SelectContent className="bg-[#FFF0DC]/20 backdrop-blur-2xl border-[#F0BB78]/20">
+											<SelectItem value="1" className="hover:bg-white/20">
+												1st Year
+											</SelectItem>
+											<SelectItem value="2" className="hover:bg-white/20">
+												2nd Year
+											</SelectItem>
+											<SelectItem value="3" className="hover:bg-white/20">
+												3rd Year
+											</SelectItem>
+											<SelectItem value="4" className="hover:bg-white/20">
+												4th Year
+											</SelectItem>
+										</SelectContent>
+									</Select>
+								</div>
+								<div className="space-y-2">
+									<label className="block text-white/90 font-medium text-sm">
+										Batch
+									</label>
+									<input
+										type="text"
+										value={config2.batch}
+										onChange={(e) =>
+											handleConfigChange(
+												2,
+												"batch",
+												e.target.value.toUpperCase()
+											)
+										}
+										className="w-full rounded-lg p-3 bg-white/10 border border-white/20 text-white placeholder-white/50 focus:ring-2 focus:ring-[#F0BB78]/50 focus:border-[#F0BB78]/50 transition-all duration-200"
+										placeholder="Enter batch (e.g. A6 or F4)"
 									/>
 								</div>
-							)}
+								{/* Electives UI for Timetable 2 */}
+								{config2.year && config2.year !== "1" && (
+									<div className="space-y-3">
+										<label className="text-white/90 font-medium text-sm">
+											Choose Your Subjects
+										</label>
+										<Button
+											type="button"
+											className="w-full h-12 text-sm bg-gradient-to-r from-[#543A14] to-[#F0BB78] hover:from-[#543A14]/80 hover:to-[#F0BB78]/80 transition-all duration-300 shadow-lg hover:shadow-[#F0BB78]/25 rounded-lg"
+											onClick={() => setShowSubjectModal2(true)}
+										>
+											{selectedSubjects2.length > 0
+												? `Selected: ${selectedSubjects2.length} subject(s)`
+												: "Select Subjects"}
+										</Button>
+										{selectedSubjects2.length > 0 && (
+											<div className="flex flex-wrap gap-2">
+												{selectedSubjects2.map((code) => {
+													const subj = getSubjects(
+														config2.campus,
+														config2.year
+													).find((s) => s.Code === code);
+													return (
+														<div
+															key={code}
+															className="flex items-center gap-2 px-3 py-2 bg-[#F0BB78]/20 rounded-lg text-[#F0BB78] text-xs group hover:bg-[#F0BB78]/30 transition-colors border border-[#F0BB78]/20"
+														>
+															<span className="truncate max-w-[120px] font-medium">
+																{subj?.Subject || code}
+															</span>
+															<button
+																type="button"
+																onClick={(e) => {
+																	e.stopPropagation();
+																	setSelectedSubjects2((prev) =>
+																		prev.filter((c) => c !== code)
+																	);
+																}}
+																className="ml-1 text-[#F0BB78]/60 hover:text-red-400 transition-colors text-sm font-bold"
+																aria-label={`Remove ${subj?.Subject || code}`}
+															>
+																×
+															</button>
+														</div>
+													);
+												})}
+											</div>
+										)}
+										<SubjectSelector
+											subjects={getSubjects(config2.campus, config2.year)}
+											selectedSubjects={selectedSubjects2}
+											setSelectedSubjects={setSelectedSubjects2}
+											open={showSubjectModal2}
+											setOpen={setShowSubjectModal2}
+											year={config2.year}
+										/>
+									</div>
+								)}
+							</div>
 						</div>
 					</div>
 				</motion.div>

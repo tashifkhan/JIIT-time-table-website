@@ -505,25 +505,25 @@ const CompareTimetablePage: React.FC = () => {
 								) : (
 									<div className="space-y-3 sm:space-y-4">
 										{(() => {
-											// Define day order for proper sorting
-											const dayOrder = [
+											// Define allowed days
+											const allowedDays = [
 												"Monday",
 												"Tuesday",
 												"Wednesday",
 												"Thursday",
 												"Friday",
 												"Saturday",
-												"Sunday",
 											];
 
 											// Sort days according to the defined order
 											const sortedDays = Object.keys(
 												compareResult.common_free_slots
-											).sort((a, b) => {
-												const aIndex = dayOrder.indexOf(a);
-												const bIndex = dayOrder.indexOf(b);
-												return aIndex - bIndex;
-											});
+											)
+												.filter((day) => allowedDays.includes(day))
+												.sort(
+													(a, b) =>
+														allowedDays.indexOf(a) - allowedDays.indexOf(b)
+												);
 
 											return sortedDays.map((day) => {
 												const slots = compareResult.common_free_slots[
@@ -594,25 +594,25 @@ const CompareTimetablePage: React.FC = () => {
 								) : (
 									<div className="space-y-3 sm:space-y-4">
 										{(() => {
-											// Define day order for proper sorting
-											const dayOrder = [
+											// Define allowed days
+											const allowedDays = [
 												"Monday",
 												"Tuesday",
 												"Wednesday",
 												"Thursday",
 												"Friday",
 												"Saturday",
-												"Sunday",
 											];
 
 											// Sort days according to the defined order
 											const sortedDays = Object.keys(
-												compareResult.classes_together
-											).sort((a, b) => {
-												const aIndex = dayOrder.indexOf(a);
-												const bIndex = dayOrder.indexOf(b);
-												return aIndex - bIndex;
-											});
+												compareResult.classes_together || {}
+											)
+												.filter((day) => allowedDays.includes(day))
+												.sort(
+													(a, b) =>
+														allowedDays.indexOf(a) - allowedDays.indexOf(b)
+												);
 
 											return sortedDays.map((day) => {
 												const daySlots = compareResult.classes_together[

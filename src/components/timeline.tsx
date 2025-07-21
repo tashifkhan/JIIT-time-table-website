@@ -456,7 +456,7 @@ const TimelinePage: React.FC = () => {
 								<div
 									className={`h-20 flex items-center justify-center font-medium border-b text-sm md:text-base rounded-t-lg ${
 										isToday(day)
-											? "bg-gradient-to-r from-blue-500/20 to-purple-500/20 border-blue-400/30 text-blue-200"
+											? "bg-gradient-to-r from-[#543A14]/40 to-[#F0BB78]/20 border-[rgba(255,240,220,0.1)] text-white"
 											: "border-[rgba(255,240,220,0.1)]"
 									}`}
 								>

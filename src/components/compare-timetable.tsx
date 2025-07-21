@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { motion } from "framer-motion";
+import { ChevronDown, Trash } from "lucide-react";
 // Remove direct imports, use state and fetch instead
 import {
 	initializePyodide,
@@ -246,13 +247,11 @@ const CompareTimetablePage: React.FC = () => {
 										<span className="text-base font-semibold text-[#F0BB78]">
 											Load Saved Config for Timetable 1
 										</span>
-										<span
-											className={`w-5 h-5 transition-transform duration-300 ${
+										<ChevronDown
+											className={`w-6 h-6 text-[#F0BB78] transition-transform duration-300 ${
 												isConfigOpen1 ? "rotate-180" : "rotate-0"
 											}`}
-										>
-											▼
-										</span>
+										/>
 									</button>
 									{isConfigOpen1 && (
 										<div className="px-6 pb-4 pt-2 flex flex-col gap-2">
@@ -275,7 +274,7 @@ const CompareTimetablePage: React.FC = () => {
 														className="ml-2 p-1 rounded hover:bg-red-100/20 transition-colors"
 														title="Delete config"
 													>
-														<span className="text-red-400 font-bold">×</span>
+														<Trash className="w-4 h-4 text-red-400" />
 													</button>
 												</div>
 											))}
@@ -436,13 +435,11 @@ const CompareTimetablePage: React.FC = () => {
 										<span className="text-base font-semibold text-[#F0BB78]">
 											Load Saved Config for Timetable 2
 										</span>
-										<span
-											className={`w-5 h-5 transition-transform duration-300 ${
+										<ChevronDown
+											className={`w-6 h-6 text-[#F0BB78] transition-transform duration-300 ${
 												isConfigOpen2 ? "rotate-180" : "rotate-0"
 											}`}
-										>
-											▼
-										</span>
+										/>
 									</button>
 									{isConfigOpen2 && (
 										<div className="px-6 pb-4 pt-2 flex flex-col gap-2">
@@ -465,7 +462,7 @@ const CompareTimetablePage: React.FC = () => {
 														className="ml-2 p-1 rounded hover:bg-red-100/20 transition-colors"
 														title="Delete config"
 													>
-														<span className="text-red-400 font-bold">×</span>
+														<Trash className="w-4 h-4 text-red-400" />
 													</button>
 												</div>
 											))}

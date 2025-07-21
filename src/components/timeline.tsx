@@ -68,16 +68,40 @@ const TimelinePage: React.FC = () => {
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [schedule, editedSchedule]);
 
-	// Scroll to top on mount for visitors (not download mode)
+	// Scroll to current time on mount for visitors (not download mode)
 	useEffect(() => {
-		if (!isDownloadMode) {
-			window.scrollTo({ top: 0, left: 0, behavior: "auto" });
+		if (!isDownloadMode && displaySchedule) {
+			const currentTimePosition = getCurrentTimePosition();
+			const currentDay = getCurrentDay();
+			const isCurrentDayInSchedule = days.includes(currentDay);
+
+			if (currentTimePosition !== null && isCurrentDayInSchedule) {
+				// Calculate the scroll position to center the current time
+				const timeSlotHeight = window.innerWidth >= 768 ? 12 * 16 : 9 * 16; // 12rem or 9rem in pixels
+				const headerHeight = 80; // Account for day header
+				const scrollPosition =
+					currentTimePosition * timeSlotHeight +
+					headerHeight -
+					window.innerHeight / 2;
+
+				// Smooth scroll to current time
+				setTimeout(() => {
+					window.scrollTo({
+						top: Math.max(0, scrollPosition),
+						left: 0,
+						behavior: "smooth",
+					});
+				}, 100); // Small delay to ensure rendering is complete
+			} else {
+				// Fallback to scroll to top if no current time or not a weekday
+				window.scrollTo({ top: 0, left: 0, behavior: "auto" });
+			}
+
 			if (containerRef.current) {
-				containerRef.current.scrollTop = 0;
 				containerRef.current.scrollLeft = 0;
 			}
 		}
-	}, [isDownloadMode]);
+	}, [isDownloadMode, displaySchedule]);
 
 	// Show loading state only when we're actively loading from localStorage
 	if (isLoading) {

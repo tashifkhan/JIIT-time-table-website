@@ -277,7 +277,7 @@ const TimelinePage: React.FC = () => {
 	return (
 		<div
 			ref={containerRef}
-			className="min-h-[50%] bg-[#131010] text-[#FFF0DC] p-0 md:p-8 overflow-scroll"
+			className="min-h-[50%] text-[#FFF0DC] p-0 md:p-8 overflow-scroll"
 			style={isDownloadMode ? { minWidth: "2700px" } : {}}
 		>
 			{/* Page Title Header for visitors */}

@@ -15,6 +15,8 @@ interface ScheduleDisplayProps {
 
 export function ScheduleDisplay({ schedule }: ScheduleDisplayProps) {
 	const { editedSchedule } = useContext(UserContext);
+	// Also get schedule from context for passing to EditEventDialog
+	const userContext = useContext(UserContext);
 	const [editingEvent, setEditingEvent] = useState<{
 		day: string;
 		time: string;
@@ -127,6 +129,7 @@ export function ScheduleDisplay({ schedule }: ScheduleDisplayProps) {
 					day={editingEvent.day}
 					time={editingEvent.time}
 					currentEvent={editingEvent.event}
+					schedule={userContext.schedule}
 				/>
 			)}
 			<ActionButtons schedule={displaySchedule} />

@@ -15,13 +15,24 @@ const UserContextProvider: React.FC<PropsWithChildren> = ({ children }) => {
 	const [editedSchedule, setEditedSchedule] =
 		React.useState<UserContextType["editedSchedule"]>(null);
 
+	// Load editedSchedule from localStorage on mount
 	useEffect(() => {
-		if (schedule) {
-			setEditedSchedule(schedule);
-		} else {
-			setEditedSchedule(null);
+		const cachedEdited = localStorage.getItem("editedSchedule");
+		if (cachedEdited) {
+			try {
+				setEditedSchedule(JSON.parse(cachedEdited));
+			} catch {}
 		}
-	}, [schedule]);
+	}, []);
+
+	// Persist editedSchedule to localStorage whenever it changes
+	React.useEffect(() => {
+		if (editedSchedule) {
+			localStorage.setItem("editedSchedule", JSON.stringify(editedSchedule));
+		} else {
+			localStorage.removeItem("editedSchedule");
+		}
+	}, [editedSchedule]);
 
 	return (
 		<UserContext.Provider

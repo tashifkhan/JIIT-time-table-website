@@ -872,14 +872,54 @@
 		},
 		"subjects": [
 			{
-				"Code": "24B15CS213",
-				"Full Code": "24B15CS213",
-				"Subject": "Aditi Priya"
+				"Code": "25B11MA213",
+				"Full Code": "25B11MA213",
+				"Subject": "Mathematical Foundations for Artificial Intelligence and Data Science"
 			},
 			{
-				"Code": "4:00 PM -4:50 PM",
-				"Full Code": "4:00 PM -4:50 PM",
-				"Subject": "3:00 PM - 3 :50 PM"
+				"Code": "24B11CS212",
+				"Full Code": "24B11CS212",
+				"Subject": "Theory of Computation"
+			},
+			{
+				"Code": "15B11CI311",
+				"Full Code": "15B11CI311",
+				"Subject": "Data Structures"
+			},
+			{
+				"Code": "15B17CI371",
+				"Full Code": "15B17CI371",
+				"Subject": "Data Structures Lab"
+			},
+			{
+				"Code": "24B11CS213",
+				"Full Code": "24B11CS213",
+				"Subject": "Database Management Systems"
+			},
+			{
+				"Code": "24B15CS213",
+				"Full Code": "24B15CS213",
+				"Subject": "Database Management Systems Lab"
+			},
+			{
+				"Code": "24B15CS214",
+				"Full Code": "24B15CS214",
+				"Subject": "Unix Programming Lab"
+			},
+			{
+				"Code": "24B15CS215",
+				"Full Code": "24B15CS215",
+				"Subject": "Object Oriented Programming using Java"
+			},
+			{
+				"Code": "24B17CS211",
+				"Full Code": "24B17CS211",
+				"Subject": "Summer Training-I"
+			},
+			{
+				"Code": "15B11MA301",
+				"Full Code": "15B11MA301",
+				"Subject": "Probability and Random Processes"
 			},
 			{
 				"Code": "18B11EC214",
@@ -887,34 +927,9 @@
 				"Subject": "Signals & Systems"
 			},
 			{
-				"Code": "18B15EC214",
-				"Full Code": "18B15EC214",
-				"Subject": "Signals & Systems Lab"
-			},
-			{
-				"Code": "24B15CS215",
-				"Full Code": "24B15CS215",
-				"Subject": "Twinkle Tyagi"
-			},
-			{
-				"Code": "24B11CS212",
-				"Full Code": "24B11CS212",
-				"Subject": "Divya Kaushik"
-			},
-			{
 				"Code": "18B11EC215",
 				"Full Code": "18B11EC215",
 				"Subject": "Digital Circuit Design"
-			},
-			{
-				"Code": "15B17EC271",
-				"Full Code": "15B17EC271",
-				"Subject": "Electrical Science Lab-II"
-			},
-			{
-				"Code": "15B11CI311",
-				"Full Code": "15B11CI311",
-				"Subject": "Priyanka Kwatra"
 			},
 			{
 				"Code": "15B11EC211",
@@ -922,9 +937,19 @@
 				"Subject": "Electrical Science-II"
 			},
 			{
+				"Code": "15B11HS211",
+				"Full Code": "15B11HS211",
+				"Subject": "Economics"
+			},
+			{
 				"Code": "19B13BT211",
 				"Full Code": "19B13BT211",
 				"Subject": "Environmental Studies"
+			},
+			{
+				"Code": "18B15EC214",
+				"Full Code": "18B15EC214",
+				"Subject": "Signals & Systems Lab"
 			},
 			{
 				"Code": "18B15EC215",
@@ -932,40 +957,9 @@
 				"Subject": "Digital Circuit Design Lab"
 			},
 			{
-				"Code": "2:00 PM - 2:50 PM",
-				"Full Code": "2:00 PM - 2:50 PM",
-				"Subject": "12:00 - 12:50 PM"
-			},
-			{
-				"Code": "15B17CI371",
-				"Full Code": "15B17CI371",
-				"Subject": "Vinay Anand Tikkiwal"
-			},
-			{
-				"Code": "25B11MA213",
-				"Full Code": "25B11MA213",
-				"Subject": "Satyendra Kumar"
-			},
-			{
-				"Code": "15B11HS211",
-				"Full Code": "15B11HS211",
-				"Subject": "Economics"
-			},
-			{ "Code": "24B15CS214", "Full Code": "24B15CS214", "Subject": "Anshul" },
-			{
-				"Code": "24B11CS213",
-				"Full Code": "24B11CS213",
-				"Subject": "Ajit Kumar"
-			},
-			{
-				"Code": "24B17CS211",
-				"Full Code": "24B17CS211",
-				"Subject": "Krishna Asawa"
-			},
-			{
-				"Code": "15B11MA301",
-				"Full Code": "15B11MA301",
-				"Subject": "Probability and Random Processes"
+				"Code": "15B17EC271",
+				"Full Code": "15B17EC271",
+				"Subject": "Electrical Science Lab-II"
 			}
 		]
 	},

@@ -87,12 +87,12 @@ if uploaded_file is not None:
         day_ranges = {}
 
         default_ranges = {
-            "MON": (5, 17),
-            "TUES": (19, 26),
-            "WED": (28, 35),
-            "THUR": (37, 44),
-            "FRI": (46, 53),
-            "SAT": (55, 60),
+            "MON": (1, 1),
+            "TUES": (1, 1),
+            "WED": (1, 1),
+            "THUR": (1, 1),
+            "FRI": (1, 1),
+            "SAT": (1, 1),
         }
 
         # grid for day inputs

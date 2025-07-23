@@ -17,6 +17,7 @@ def parse_batch_numbers(batch_input: str) -> list[str]:
             "C",
             "D",
             "G",
+            "H",
         ]
 
     batch_input = batch_input.strip()
@@ -1133,6 +1134,308 @@ def time_table_creator_v2(
 #     except Exception as e:
 #         print(f"Error in banado_v2: {str(e)}")
 #         return {}
+
+
+def parse_bca_batches(batch_input: str) -> list[str]:
+    """
+    Parse BCA batch formats like 'BCA1', 'LBCA1BCA2', 'PBCA3', etc.
+    Returns a list of batch names (e.g., ['BCA1', 'BCA2']).
+    """
+    if not batch_input:
+        return []
+
+    # Handle comma separated
+    if "," in batch_input:
+        return [b.strip() for b in batch_input.split(",") if b.strip()]
+
+    # Handle concatenated batches like LBCA1BCA2
+    matches = re.findall(r"BCA\d", batch_input)
+    if matches:
+        return matches
+
+    # Handle LBCA1-4 (range)
+    match = re.match(r"LBCA(\d)-(\d)", batch_input)
+
+    if match:
+        start, end = int(match.group(1)), int(match.group(2))
+        return [f"BCA{i}" for i in range(start, end + 1)]
+
+    # Handle PBCA1-4
+    match = re.match(r"PBCA(\d)-(\d)", batch_input)
+
+    if match:
+        start, end = int(match.group(1)), int(match.group(2))
+        return [f"BCA{i}" for i in range(start, end + 1)]
+
+    # Handle single batch
+    match = re.match(r"[LP]?BCA\d", batch_input)
+
+    if match:
+        return [batch_input[-4:]]
+
+    return [batch_input]
+
+
+def batch_extractor_bca(text: str) -> str:
+    # Extract batch info before '(' or before subject code
+    start_bracket = text.find("(")
+
+    if start_bracket != -1:
+        return text[:start_bracket].strip()
+    # If no '(', try before '-' or '/'
+
+    for sep in ["-", "/"]:
+        idx = text.find(sep)
+        if idx != -1:
+            return text[:idx].strip()
+
+    return text.strip()
+
+
+def subject_extractor_bca(text: str) -> str:
+    # Extract subject code inside '()'
+    start_bracket = text.find("(")
+
+    if start_bracket != -1:
+        end_bracket = text.find(")", start_bracket)
+        if end_bracket != -1:
+            return text[start_bracket + 1 : end_bracket].strip()
+    # Fallback: try to find code pattern
+    match = re.search(r"\((\w+)\)", text)
+
+    if match:
+        return match.group(1)
+
+    return text.strip()
+
+
+def type_extractor_bca(text: str) -> str:
+    # Type is usually the first character: L, P, T
+    t = text.strip()[0].upper() if text.strip() else "L"
+
+    if t in ["L", "P", "T"]:
+        return t
+
+    return "L"
+
+
+def location_extractor_bca(text: str) -> str:
+    # After '-' or '/'
+    for sep in ["-", "/"]:
+        idx = text.find(sep)
+
+        if idx != -1:
+            # After sep, before next sep or end
+            after = text[idx + 1 :]
+            # Remove faculty if present
+
+            after = after.split("/")[0]
+            after = after.split("\n")[0]
+            return after.strip()
+
+    return ""
+
+
+def subject_name_extractor_bca(subjects_dict: list, code: str) -> str:
+    for subject in subjects_dict:
+        if subject.get("Code") == code or subject.get("Full Code") == code:
+            return subject.get("Subject", code)
+
+    return code
+
+
+def bca_creator(
+    time_table_json: dict,
+    subject_json: list,
+    batch: str,
+    enrolled_subject_codes: list[str] = [],
+) -> dict:
+    """
+    Create a formatted timetable for BCA batches, filtering by batch and optionally enrolled subject codes.
+    """
+    try:
+        time_table = time_table_json if isinstance(time_table_json, dict) else {}
+        subjects = subject_json if isinstance(subject_json, list) else []
+        your_time_table = []
+        days = list(time_table.keys())
+        for day in days:
+            time_slots = time_table[day]
+            time_slot_keys = list(time_slots.keys())
+
+            for time in time_slot_keys:
+                classes = time_slots[time]
+                if not isinstance(classes, list):
+                    continue
+
+                for indi_class in classes:
+                    if not isinstance(indi_class, str) or not indi_class.strip():
+                        continue
+                    if "LUNCH" in indi_class.upper() or "TALK" in indi_class.upper():
+                        continue
+
+                    code = subject_extractor_bca(indi_class)
+                    batchs = batch_extractor_bca(indi_class)
+                    batchs_list = parse_bca_batches(batchs)
+
+                    # If batch matches (direct or in list)
+                    if batch in batchs_list or any(batch == b for b in batchs_list):
+                        # If enrolled_subject_codes is empty, include all, else filter
+                        if not enrolled_subject_codes or code in enrolled_subject_codes:
+                            your_time_table.append(
+                                [
+                                    day,
+                                    time,
+                                    subject_name_extractor_bca(subjects, code),
+                                    type_extractor_bca(indi_class),
+                                    location_extractor_bca(indi_class),
+                                ]
+                            )
+
+        formatted_timetable = {}
+
+        for entry in your_time_table:
+            day = process_day(entry[0])
+            time = entry[1]
+            # Try to parse time slot (support both '9-9.50' and '9 - 9:50 AM' etc.)
+            # Use process_timeslot if possible, else fallback
+            try:
+                # Remove AM/PM, colons, spaces for uniformity
+                t = (
+                    time.replace("AM", "")
+                    .replace("PM", "")
+                    .replace(":", ".")
+                    .replace(" ", "")
+                )
+                t = t.replace("-", "-")
+                # Split start-end
+
+                if "." in t:
+                    start, end = t.split("-")
+                    start = start.strip()
+                    end = end.strip()
+                    # Add :00 if needed
+                    if "." in start:
+                        start = start.replace(".", ":")
+                    else:
+                        start = f"{start}:00"
+                    if "." in end:
+                        end = end.replace(".", ":")
+                    else:
+                        end = f"{end}:00"
+                    start_time, end_time = start, end
+                else:
+                    # fallback
+                    start_time, end_time = process_timeslot(time, entry[3])
+
+            except Exception:
+                start_time, end_time = process_timeslot(time, entry[3])
+
+            if day not in formatted_timetable:
+                formatted_timetable[day] = {}
+
+            formatted_timetable[day][f"{start_time}-{end_time}"] = {
+                "subject_name": entry[2],
+                "type": entry[3],
+                "location": entry[4],
+            }
+        return formatted_timetable
+
+    except Exception as e:
+        print(f"Error in bca_creator: {str(e)}")
+        return {}
+
+
+def bca_creator_year1(
+    time_table_json: dict,
+    subject_json: list,
+    batch: str,
+    enrolled_subject_codes: list[str] = [],
+) -> dict:
+    """
+    For BCA Year 1: Return all classes which have the given batch (e.g., BCA1) in their batch list, regardless of enrolled_subject_codes.
+    """
+    try:
+        time_table = time_table_json if isinstance(time_table_json, dict) else {}
+        subjects = subject_json if isinstance(subject_json, list) else []
+        your_time_table = []
+        days = list(time_table.keys())
+
+        for day in days:
+            time_slots = time_table[day]
+            time_slot_keys = list(time_slots.keys())
+
+            for time in time_slot_keys:
+                classes = time_slots[time]
+                if not isinstance(classes, list):
+                    continue
+
+                for indi_class in classes:
+                    if not isinstance(indi_class, str) or not indi_class.strip():
+                        continue
+                    if "LUNCH" in indi_class.upper() or "TALK" in indi_class.upper():
+                        continue
+                    code = subject_extractor_bca(indi_class)
+                    batchs = batch_extractor_bca(indi_class)
+                    batchs_list = parse_bca_batches(batchs)
+                    # Only check if batch is present in batchs_list
+
+                    if batch in batchs_list or any(batch == b for b in batchs_list):
+                        your_time_table.append(
+                            [
+                                day,
+                                time,
+                                subject_name_extractor_bca(subjects, code),
+                                type_extractor_bca(indi_class),
+                                location_extractor_bca(indi_class),
+                            ]
+                        )
+
+        formatted_timetable = {}
+
+        for entry in your_time_table:
+            day = process_day(entry[0])
+            time = entry[1]
+            try:
+                t = (
+                    time.replace("AM", "")
+                    .replace("PM", "")
+                    .replace(":", ".")
+                    .replace(" ", "")
+                )
+                t = t.replace("-", "-")
+
+                if "." in t:
+                    start, end = t.split("-")
+                    start = start.strip()
+                    end = end.strip()
+                    if "." in start:
+                        start = start.replace(".", ":")
+                    else:
+                        start = f"{start}:00"
+                    if "." in end:
+                        end = end.replace(".", ":")
+                    else:
+                        end = f"{end}:00"
+                    start_time, end_time = start, end
+                else:
+                    start_time, end_time = process_timeslot(time, entry[3])
+
+            except Exception:
+                start_time, end_time = process_timeslot(time, entry[3])
+
+            if day not in formatted_timetable:
+                formatted_timetable[day] = {}
+
+            formatted_timetable[day][f"{start_time}-{end_time}"] = {
+                "subject_name": entry[2],
+                "type": entry[3],
+                "location": entry[4],
+            }
+        return formatted_timetable
+
+    except Exception as e:
+        print(f"Error in bca_creator_year1: {str(e)}")
+        return {}
 
 
 def Print(dic: dict | list) -> None:

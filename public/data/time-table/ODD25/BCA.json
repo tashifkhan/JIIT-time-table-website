@@ -1,0 +1,511 @@
+{
+	"1": {
+		"timetable": {
+			"MON": {
+				"9 - 9:50 AM": [
+					"LBCA1BCA2(25B11CA111)-3023\n/RAJSHREE",
+					"LBCA3BCA4(25B11CA111)-3028\n/DCANF6"
+				],
+				"10:00-10:50 AM": [
+					"LBCA1BCA2(23B12BT111)\n-3023/ANM",
+					"LBCA3BCA4(23B61CA112)\n-3028/DCANF6"
+				],
+				"11:00-11:50 AM": [
+					"PBCA1(25B15CA111)-3004/RAJSHREE",
+					"PBCA2(25B15CA111)-3011/ILA",
+					"LBCA3BCA4(23B12BT111) -3028/ANM"
+				],
+				"12:00 - 12:50 PM": [],
+				"1:00 PM - 1:\n50PM": ["LUNCH"],
+				"2:00 PM - 2:50 PM": [
+					"TBCA1(23B31MA111)-3117/UMK",
+					"LBCA3BCA4(23B31MA111)-3028/NFMATH 2"
+				],
+				"3:00 PM - 3 :50 PM": [
+					"TBCA1(25B11CA111)-3117\n/RAJSHREE",
+					"PBCA2(25B35HS111)/246-EKS",
+					"PBCA3(25B15CA111)-3004/HIB",
+					"PBCA4(25B15CA111-3011/DCANF4"
+				],
+				"4:00 PM -4:50 PM": []
+			},
+			"TUES": {
+				"9 - 9:50 AM": [
+					"LBCA3BCA4(23B61CA112)-3028\n/DCANF6",
+					"LBCA1BCA2(23B6CA114)-3023\n/PALLAVI"
+				],
+				"10:00-10:50 AM": [
+					"LBCA3BCA4(23B61CS217)\n-3028/DCANF1",
+					"LBCA1BCA2(23B31MA111)\n-3023/UMK"
+				],
+				"11:00-11:50 AM": [
+					"TBCA2(25B11CA111)-3117/RAJSHREE",
+					"LBCA3BCA4(23B31MA111)-3028/NFMATH 2"
+				],
+				"12:00 - 12:50 PM": ["LBCA1BCA2(23B31HS111)-3028\n/EKS"],
+				"1:00 PM - 1:\n50PM": [],
+				"2:00 PM - 2:50 PM": [
+					"TBCA2(23B31MA111)-3117/UMK",
+					"LBCA3BCA4(23B6CA114)-3028/DCANF5"
+				],
+				"3:00 PM - 3 :50 PM": ["LBCA1BCA2(23B61CA112)-3023\n/PALLAVI"],
+				"4:00 PM -4:50 PM": []
+			},
+			"WED": {
+				"9 - 9:50 AM": [
+					"LBCA3BCA4(23B6CA114)-3028\n/DCANF5",
+					"LBCA1BCA2(23B61CA112)-3023\n/PALLAVI"
+				],
+				"10:00-10:50 AM": [
+					"LBCA1BCA2(23B31MA111)\n-3023/UMK",
+					"LBCA3BCA4(23B61CS217)\n-3028/DCANF1"
+				],
+				"11:00-11:50 AM": [
+					"PBCA1(23B65CA115)-3004/PALLAVI",
+					"PBCA2(23B65CA115)-3011/ILA",
+					"LBCA3BCA4(23B31HS111)-3028/NFHSS"
+				],
+				"12:00 - 12:50 PM": [],
+				"1:00 PM - 1:\n50PM": [],
+				"2:00 PM - 2:50 PM": [
+					"LBCA3BCA4(25B11CA111)-3028//DCANF6",
+					"LBCA1BCA2(23B61CS217)-3023/ILA"
+				],
+				"3:00 PM - 3 :50 PM": [
+					"PBCA3(23B65CA115)-3004/DCANF5",
+					"PBCA4(23B65CA115)-3011/DCANF6"
+				],
+				"4:00 PM -4:50 PM": []
+			},
+			"THUR": {
+				"9 - 9:50 AM": [
+					"TBCA3(25B11CA111)-3117\n/DCANF2",
+					"PBCA1(25B35HS111)-240/AARUSHI"
+				],
+				"10:00-10:50 AM": [],
+				"11:00-11:50 AM": [
+					"PBCA4(25B35HS111)-246/NFHSS",
+					"LBCA1BCA2(23B31MA111)-3023/UMK",
+					"PBCA3(25B35HS111)-240/RACHNA"
+				],
+				"12:00 - 12:50 PM": ["LBCA1BCA2(25B11CA111)-3023\n/RAJSHREE"],
+				"1:00 PM - 1:\n50PM": [],
+				"2:00 PM - 2:50 PM": ["TBCA4(25B11CA111)-3117/DCANF3"],
+				"3:00 PM - 3 :50 PM": [
+					"LBCA1BCA2(23B6CA114)-3023\n/PALLAVI",
+					"LBCA3BCA4(23B12BT111) -3023\n/ANM"
+				],
+				"4:00 PM -4:50 PM": ["LBCA1BCA2(23B12BT111) -3028\n/ANM"]
+			},
+			"FRI": {
+				"9 - 9:50 AM": [
+					"LBCA1BCA2(23B61CA112)-3023\n/DCANF4",
+					"LBCA3BCA4(25B11CA111)-3028\n/DCANF6"
+				],
+				"10:00-10:50 AM": [
+					"LBCA3BCA4(23B31MA111)\n-3028/NFMATH 2",
+					"LBCA1BCA2(25B11CA111)\n-3023/RAJSHREE"
+				],
+				"11:00-11:50 AM": [
+					"LBCA1BCA2(23B61CS217)-3023/DCANF1",
+					"TBCA3(23B31MA111)-3116/UMK"
+				],
+				"12:00 - 12:50 PM": [],
+				"1:00 PM - 1:\n50PM": [],
+				"2:00 PM - 2:50 PM": ["LBCA3BCA4(23B61CA112)-3028/DCANF6"],
+				"3:00 PM - 3 :50 PM": ["TBCA4(23B31MA111)-3117/UMK"],
+				"4:00 PM -4:50 PM": []
+			}
+		},
+		"subjects": [
+			{
+				"Code": "23B31MA111",
+				"Full Code": "23B31MA111",
+				"Subject": "Fundamentals of Mathematics"
+			},
+			{
+				"Code": "23B6CA114",
+				"Full Code": "23B6CA114",
+				"Subject": "Digital Technologies"
+			},
+			{
+				"Code": "23B61CA112",
+				"Full Code": "23B61CA112",
+				"Subject": "Web Technology"
+			},
+			{ "Code": "23B31HS111", "Full Code": "23B31HS111", "Subject": "English" },
+			{
+				"Code": "23B65CA115",
+				"Full Code": "23B65CA115",
+				"Subject": "Web Technology Lab"
+			},
+			{
+				"Code": "25B11CA111",
+				"Full Code": "25B11CA111",
+				"Subject": "Problem Solving Technique using C"
+			},
+			{
+				"Code": "25B35HS111",
+				"Full Code": "25B35HS111",
+				"Subject": "English Language Lab"
+			},
+			{
+				"Code": "23B61CS217",
+				"Full Code": "23B61CS217",
+				"Subject": "Digital Logic"
+			},
+			{
+				"Code": "25B15CA111",
+				"Full Code": "25B15CA111",
+				"Subject": "Problem Solving Technique using C lab"
+			},
+			{
+				"Code": "23B12BT111",
+				"Full Code": "23B12BT111",
+				"Subject": "Environmental Science"
+			}
+		]
+	},
+	"2": {
+		"timetable": {
+			"MON": {
+				"9-9.50": [" ", "PBCA4(23B65CA215)-CC423/IMR,"],
+				"10-10.50": ["LBCA1, BCA2(19B13BT211)-CR301/ANM"],
+				"11-11.50": [
+					"LBCA3, BCA4(23B61CA213)-CR501/DCH",
+					"TBCA1(23B61CA212)-TR424/MEE"
+				],
+				"12-12.50": ["LUNCH"],
+				"1-1.50": [
+					"LBCA1, BCA2(23B61CA212)-CR325/MEE",
+					"LBCA3, BCA4(19B13BT211)-CR301/ANM"
+				],
+				"2-2.50": [
+					"LBCA3, BCA4(23B31MA211)-CR301/NF3",
+					"TBCA2(23B61CA212)-TR424/MEE",
+					"\nPBCA1(23B65CA215)-CC417/AW"
+				],
+				"3-3.50": [
+					"LBCA3, BCA4(23B61CS217)-CR501/ IMR",
+					"\nPBCA2(23B65CA214)-CL317/RCN"
+				],
+				"4-4.50": []
+			},
+			"TUES": {
+				"9-9.50": [
+					"TBCA4(23B61CA212)-TR424/MEE",
+					"PBCA3(23B65CA214)-CC423/TRN"
+				],
+				"10-10.50": ["LBCA1, BCA2(23B61CA211)-CR301/ SPS"],
+				"11-11.50": [
+					"LBCA3, BCA4(23B61CA212)-CR301/SHO",
+					"LBCA1, BCA2(23B61CA213)-CR325/DCH"
+				],
+				"12-12.50": ["LUNCH"],
+				"1-1.50": [
+					"LBCA1, BCA2(23B61CS217)-CR501/ RJM",
+					"PBCA4(23B31HS211)-Computer Centre Room no 423 4th Floor ABB-III/SDA"
+				],
+				"2-2.50": ["LBCA1, BCA2(23B31MA211)-CR325/HPT"],
+				"3-3.50": [
+					"PBCA2(23B65CA216)-CC421/AKT",
+					"LBCA3, BCA4(23B61CA213)-CR501/DCH"
+				],
+				"4-4.50": []
+			},
+			"WED": {
+				"9-9.50": [
+					"LBCA1, BCA2(23B61CA212)-CR301/MEE",
+					"LBCA3, BCA4(23B61CA211)-CR325 SPS"
+				],
+				"10-10.50": [
+					"LBCA1, BCA2(23B61CA211)-325/SPS",
+					"PBCA3(23B65CA215)-CC423/KRL,MEE"
+				],
+				"11-11.50": ["LBCA1, BCA2(23B31HS211)-CR301/MSU"],
+				"12-12.50": ["LUNCH"],
+				"1-1.50": [
+					"LBCA3, BCA4(23B61CS217)-CR301/ IMR",
+					"PBCA2(23B31HS211)-Computer Centre Room no 423 4th Floor ABB-III/SDA"
+				],
+				"2-2.50": ["LBCA3, BCA4(23B31MA211)-CR301/NF3"],
+				"3-3.50": ["LBCA3,BCA4(23B61CA212)-CR501/SHO"],
+				"4-4.50": []
+			},
+			"THUR": {
+				"9-9.50": ["LBCA3, BCA4(23B31HS211)-CR301/SDA"],
+				"10-10.50": [
+					"PBCA4(23B65CA214)-CC417/SPS",
+					"LBCA1, BCA2(23B61CA212)-CR501/MEE"
+				],
+				"11-11.50": [
+					"LBCA1, BCA2(19B13BT211)-G6/ANM",
+					"TBCA3(23B61CA212)-TR326/MEE"
+				],
+				"12-12.50": ["LUNCH"],
+				"1-1.50": [
+					"LBCA1, BCA2(23B31MA211)-CR301/HPT",
+					"\nPBCA3( 23B65CA216)-CC417/DCH,AKT",
+					"PBCA4(23B65CA216)-CC423/PRK,SHO"
+				],
+				"2-2.50": ["LBCA1, BCA2(23B61CA211)-CR301/SPS"],
+				"3-3.50": ["LBCA1, BCA2(23B61CA213)-CR325/DCH"],
+				"4-4.50": ["LBCA3, BCA4(19B13BT211)-CR301/ANM"]
+			},
+			"FRI": {
+				"9-9.50": [
+					"LBCA3,BCA4(23B61CA212)-CR301/SHO",
+					"\nPBCA1(23B65CA214)-CC421/SPS,RCN"
+				],
+				"10-10.50": ["LBCA3, BCA4(23B31MA211)-CR301/NF3"],
+				"11-11.50": [
+					"LBCA1, BCA2(23B61CS217)-CR301/ IMR",
+					"LBCA3, BCA4(23B61CA211)-CR 325/SPS"
+				],
+				"12-12.50": ["LUNCH"],
+				"1-1.50": [
+					"LBCA1, BCA2(23B31MA211)-CR325/HPT",
+					"LBCA3, BCA4(23B61CS217)-CR501/ RJM"
+				],
+				"2-2.50": ["BCA (TALK)-"],
+				"3-3.50": [
+					"PBCA2(23B65CA215)-CC417/MEE",
+					"PBCA1(23B31HS211)-Computer Centre Room no 423 4th Floor ABB-III/SDA"
+				],
+				"4-4.50": []
+			},
+			"SAT": {
+				"9-9.50": [
+					"PBCA1(23B65CA216)-CC417/DCH",
+					"LBCA3, BCA4(23B61CA211)-CR526/SPS"
+				],
+				"10-10.50": [
+					"PBCA3(23B31HS211)-Computer Centre Room no 423 4th Floor ABB-III/MSU"
+				],
+				"11-11.50": ["LBCA1, BCA2(23B61CS217)-CR301/ IMR"],
+				"12-12.50": [],
+				"1-1.50": [],
+				"2-2.50": [],
+				"3-3.50": [],
+				"4-4.50": []
+			}
+		},
+		"subjects": [
+			{
+				"Code": "SUBJECT CODE",
+				"Full Code": "SUBJECT CODE",
+				"Subject": "SUBJECT NAME"
+			},
+			{
+				"Code": "23B65CA216",
+				"Full Code": "23B65CA216",
+				"Subject": "Multimedia Technology-II Lab"
+			},
+			{
+				"Code": "23B61CA212",
+				"Full Code": "23B61CA212",
+				"Subject": "Object Oriented Programming (C++)"
+			},
+			{
+				"Code": "23B65CA214",
+				"Full Code": "23B65CA214",
+				"Subject": "Algorithm and Problem Solving (APS) Lab"
+			},
+			{
+				"Code": "23B65CA215",
+				"Full Code": "23B65CA215",
+				"Subject": "Object Oriented Programming (C++) Lab"
+			},
+			{
+				"Code": "23B31MA211",
+				"Full Code": "23B31MA211",
+				"Subject": "Probability and Statistics"
+			},
+			{
+				"Code": "23B61CA213",
+				"Full Code": "23B61CA213",
+				"Subject": "Multimedia Technology-II"
+			},
+			{
+				"Code": "23B61CS217",
+				"Full Code": "23B61CS217",
+				"Subject": "Digital Logic"
+			},
+			{
+				"Code": "23B61CA211",
+				"Full Code": "23B61CA211",
+				"Subject": "Algorithm and Problem Solving (APS)"
+			},
+			{
+				"Code": "23B31HS211",
+				"Full Code": "23B31HS211",
+				"Subject": "Soft Skills -II"
+			}
+		]
+	},
+	"3": {
+		"timetable": {
+			"MON": {
+				"9-9.50": [
+					"LBCA1-4 Major III (25B12CA313)- CR301/PAG",
+					"LBCA1-4 Major III (25B12CA314)- CR325/AYS"
+				],
+				"10-10.50": [
+					"LBCA3, BCA423B61CA312)-CR301/AST",
+					"TBCA1(23B61CA311)-TR326/ROH"
+				],
+				"11-11.50": [
+					"LBCA1-4Minor Choice(25B12CA315 )-CR301/PKU",
+					"LBCA1-4Minor Choice( 25B12CA317)-CR325/APJ"
+				],
+				"12-12.50": [
+					"LBCA1-4 Major III (25B12CA311)-CR301/IMR",
+					"LBCA1-4 Major-III (25B12CA312)-CR325/NET"
+				],
+				"1-1.50": ["LUNCH"],
+				"2-2.50": ["LBCA1, BCA2(23B61CA311)-CR325/ROH"],
+				"3-3.50": ["PBCA1-4 Major Core (25B16CA312)-CC421/AKT"],
+				"4-4.50": []
+			},
+			"TUES": {
+				"9-9.50": ["LBCA1, BCA2(23B61CA312)-CR301/AST"],
+				"10-10.50": [
+					"LBCA1-4 Major III (25B12CA311)-CR501/IMR",
+					"LBCA1-4 Major-III (25B12CA312)-CR325/NET"
+				],
+				"11-11.50": ["TBCA4(23B61CA311)-TR424/NAC"],
+				"12-12.50": [
+					"LBCA1-4 Major III (25B12CA313)- CR301/PAG",
+					"LBCA1-4 Major III (25B12CA314)- CR325/AYS"
+				],
+				"1-1.50": ["LUNCH"],
+				"2-2.50": ["LBCA3, BCA4(23B61CA311)-CR501/NAC"],
+				"3-3.50": [
+					"\nPBCA1-4 Minor Core (25B16CA315)-CL22/PKU,SHV",
+					"PBCA1-4 Minor Core(25B16CA315)-CL23/SHV"
+				],
+				"4-4.50": []
+			},
+			"WED": {
+				"9-9.50": ["LBCA3, BCA4(23B61CA312)-CR501/AST"],
+				"10-10.50": [
+					"TBCA3(23B61CA311)-TR424/NAC",
+					"LBCA1, BCA2(23B61CA312)-CR501/AST"
+				],
+				"11-11.50": ["LBCA1, BCA2(23B61CA311)-CR325/ROH"],
+				"12-12.50": [
+					"LBCA1-4Minor Choice(25B12CA315 )-CR325/PKU",
+					"LBCA1-4Minor Choice( 25B12CA317)-CR501/APJ"
+				],
+				"1-1.50": ["LUNCH"],
+				"2-2.50": [],
+				"3-3.50": [
+					"PBCA1-4 Major Core (25B16CA311)-CC417/IMR",
+					"PBCA1-4 Minor Core(25B16CA317)-CC421/HN"
+				],
+				"4-4.50": []
+			},
+			"THUR": {
+				"9-9.50": [
+					"LBCA1-4 Major III (25B12CA313)- CR325/PAG",
+					"LBCA1-4 Major III (25B12CA314)- CR501/AYS"
+				],
+				"10-10.50": [],
+				"11-11.50": [
+					"LBCA3, BCA4(23B61CA311)-CR325/NAC",
+					"TBCA2(23B61CA311)-TR424/ROH"
+				],
+				"12-12.50": [],
+				"1-1.50": ["LUNCH"],
+				"2-2.50": [],
+				"3-3.50": [
+					"\nPBCA1-4 Minor Core (25B16CA317)-CC417/APJ",
+					"PBCA1-4 Major Core (25B16CA312)-CC421/ANV"
+				],
+				"4-4.50": []
+			},
+			"FRI": {
+				"9-9.50": ["LBCA3, BCA4(23B61CA312)-CR501/AST"],
+				"10-10.50": ["LBCA1, BCA2(23B61CA311)-CR501/ROH"],
+				"11-11.50": ["LBCA1, BCA2(23B61CA312)-CR501/AST"],
+				"12-12.50": ["LBCA3, BCA4(23B61CA311)-CR301/NAC"],
+				"1-1.50": ["LUNCH"],
+				"2-2.50": ["BCA (TALK)"],
+				"3-3.50": [],
+				"4-4.50": []
+			},
+			"SAT": {
+				"9-9.50": [],
+				"10-10.50": [],
+				"11-11.50": ["PBCA1-4 Major Core (25B16CA312)-CC417/ANV,AKT"],
+				"12-12.50": [],
+				"1-1.50": [],
+				"2-2.50": [],
+				"3-3.50": [],
+				"4-4.50": []
+			}
+		},
+		"subjects": [
+			{
+				"Code": "25B12CA311",
+				"Full Code": "25B12CA311",
+				"Subject": "Fundamentals of Natural Language Processing (MCC3 )"
+			},
+			{
+				"Code": "25B12CA313",
+				"Full Code": "25B12CA313",
+				"Subject": "Introduction to Deep Learning (Major CC4 )"
+			},
+			{
+				"Code": "25B12CA314",
+				"Full Code": "25B12CA314",
+				"Subject": "Statictical Methods for Data Science (Major CC4 )"
+			},
+			{
+				"Code": "23B61CA311",
+				"Full Code": "23B61CA311",
+				"Subject": "Computer Organization and Architecture"
+			},
+			{
+				"Code": "25B16CA312",
+				"Full Code": "25B16CA312",
+				"Subject": "Data Analytics using Python and R Lab (Major CC3 )"
+			},
+			{
+				"Code": "25B12CA312",
+				"Full Code": "25B12CA312",
+				"Subject": "Data Analytics using Python and R (MCC3 )"
+			},
+			{
+				"Code": "25B16CA315",
+				"Full Code": "25B16CA315",
+				"Subject": "Full Stack Developer-I(Web development) Lab (Minor CC)"
+			},
+			{
+				"Code": "23B61CA312",
+				"Full Code": "23B61CA312",
+				"Subject": "Computer Networks"
+			},
+			{
+				"Code": "25B12CA315",
+				"Full Code": "25B12CA315",
+				"Subject": "Full Stack Developer-I(Web development)"
+			},
+			{
+				"Code": "25B16CA311",
+				"Full Code": "25B16CA311",
+				"Subject": "Fundamentals of Natural Language Processing Lab (Major CC3 )"
+			},
+			{
+				"Code": "25B16CA317",
+				"Full Code": "25B16CA317",
+				"Subject": "Full Stack Developer-I(Mobile development) Lab (Minor CC)"
+			},
+			{
+				"Code": "25B12CA317",
+				"Full Code": "25B12CA317",
+				"Subject": "Full Stack Developer-I(Mobile development)"
+			}
+		]
+	}
+}

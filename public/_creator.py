@@ -1253,6 +1253,7 @@ def bca_creator(
     """
     BCA version of time_table_creator_v2: Only include classes if the subject is in the enrolled_subject_codes (using is_enrolled_subject logic), and the batch matches.
     Fix ambiguous 12:00/01:00 times by treating 12:00 as PM and 01:00 as PM if after 12:00.
+    Always ensure start_time and end_time are valid strings.
     """
     try:
         time_table = time_table_json if isinstance(time_table_json, dict) else {}
@@ -1314,7 +1315,6 @@ def bca_creator(
                     start_time, _ = process_timeslot(
                         start_raw + "-" + end_raw, entry[3]
                     )
-
                 # Add PM to end if it's 1:00 or 01:00 and start is 12:00
                 if (end_raw in ["1:00", "01:00", "1", "01"]) and (
                     start_raw in ["12:00", "12"]
@@ -1324,22 +1324,29 @@ def bca_creator(
                     )
                 else:
                     _, end_time = process_timeslot(start_raw + "-" + end_raw, entry[3])
-
             else:
                 start_time, end_time = process_timeslot(time, entry[3])
 
-            if end_time == "01:00":
+            # Defensive: ensure start_time and end_time are valid strings
+            if not start_time or not isinstance(start_time, str):
+                start_time = "00:00"
+            if not end_time or not isinstance(end_time, str):
+                end_time = "00:00"
+
+            # Only set end_time to 13:00 if start_time is 12:00 and end_time is 01:00
+            if start_time == "12:00" and end_time == "01:00":
                 end_time = "13:00"
 
             if day not in formatted_timetable:
                 formatted_timetable[day] = {}
+            # Only add if both times are valid
 
-            formatted_timetable[day][f"{start_time}-{end_time}"] = {
-                "subject_name": entry[2],
-                "type": entry[3],
-                "location": entry[4],
-            }
-
+            if start_time and end_time:
+                formatted_timetable[day][f"{start_time}-{end_time}"] = {
+                    "subject_name": entry[2],
+                    "type": entry[3],
+                    "location": entry[4],
+                }
         return formatted_timetable
 
     except Exception as e:

@@ -38,6 +38,7 @@ interface YourTietable {
 const App: React.FC = () => {
 	const [mapping62, setMapping62] = React.useState<any>(null);
 	const [mapping128, setMapping128] = React.useState<any>(null);
+	const [mappingBCA, setMappingBCA] = React.useState<any>(null);
 
 	React.useEffect(() => {
 		fetch("/data/time-table/ODD25/62.json")
@@ -46,6 +47,9 @@ const App: React.FC = () => {
 		fetch("/data/time-table/ODD25/128.json")
 			.then((res) => res.json())
 			.then(setMapping128);
+		fetch("/data/time-table/ODD25/BCA.json")
+			.then((res) => res.json())
+			.then(setMappingBCA);
 	}, []);
 
 	const navigate = useNavigate();
@@ -120,9 +124,18 @@ const App: React.FC = () => {
 			let functionName;
 			if (year === "1") {
 				functionName =
-					campus === "62" ? "time_table_creator" : "bando128_year1";
+					campus === "62"
+						? "time_table_creator"
+						: campus === "BCA"
+						? "bca_creator_year1"
+						: "bando128_year1";
 			} else {
-				functionName = campus === "62" ? "time_table_creator_v2" : "banado128";
+				functionName =
+					campus === "62"
+						? "time_table_creator_v2"
+						: campus === "BCA"
+						? "bca_creator"
+						: "banado128";
 			}
 			console.log(functionName);
 			const output = await callPythonFunction(functionName, {
@@ -153,12 +166,16 @@ const App: React.FC = () => {
 		// Clear any existing edited schedule when generating a new one
 		setEditedSchedule(null);
 
-		const mapping = campus === "62" ? mapping62 : mapping128;
+		const mapping =
+			campus === "62" ? mapping62 : campus === "BCA" ? mappingBCA : mapping128;
 		if (!mapping) return; // mapping not loaded yet
 		const subjectJSON = mapping[year as keyof typeof mapping].subjects;
 		const timeTableJSON = mapping[year as keyof typeof mapping].timetable;
 
-		console.log("Using mapping:", campus === "62" ? "62" : "128");
+		console.log(
+			"Using mapping:",
+			campus === "62" ? "62" : campus === "BCA" ? "BCA" : "128"
+		);
 		console.log("With data:", { timeTableJSON, subjectJSON, batch, electives });
 
 		try {

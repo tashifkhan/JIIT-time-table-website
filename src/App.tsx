@@ -544,7 +544,6 @@ const App: React.FC = () => {
 												? mapping62
 												: mapping128
 										}
-										mapping128={mapping128}
 										onSubmit={handleFormSubmit}
 										onSaveConfig={handleSaveConfig}
 										savedConfigs={savedConfigs}

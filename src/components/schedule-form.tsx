@@ -619,7 +619,7 @@ export function ScheduleForm({
 									</Button>
 									<div className="flex flex-wrap gap-2 mt-2">
 										{selectedSubjects.map((code) => {
-											const subj = mapz[year]?.subjects.find(
+											const subj = (mapz?.[year]?.subjects ?? []).find(
 												(s) => s.Code === code
 											);
 											return (
@@ -756,7 +756,7 @@ export function ScheduleForm({
 
 			{/* Modal for subject selection */}
 			<SubjectSelector
-				subjects={mapz[year]?.subjects || []}
+				subjects={mapz?.[year]?.subjects || []}
 				selectedSubjects={selectedSubjects}
 				setSelectedSubjects={setSelectedSubjects}
 				open={showSubjectModal}

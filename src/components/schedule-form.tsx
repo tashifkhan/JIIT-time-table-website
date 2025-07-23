@@ -280,6 +280,8 @@ export function ScheduleForm({
 	const [_subjectSearch, setSubjectSearch] = useState("");
 	const [mapz, setMapz] = useState(mapping);
 	const { toast } = useToast();
+	const [batchError, setBatchError] = useState("");
+	const [showBatchErrorDialog, setShowBatchErrorDialog] = useState(false);
 
 	// Initialize Fuse.js for fuzzy search
 	// const fuse = useMemo(() => {
@@ -368,6 +370,27 @@ export function ScheduleForm({
 
 	const handleSubmit = async (e: React.FormEvent) => {
 		e.preventDefault();
+		let error = "";
+		if (campus === "62") {
+			if (batch.match(/^[DFH]|BBA|BCA|BSC|MCA|MBA|^[E]/)) {
+				error = "62 campus only allows A, B, C, G, and H batches.";
+			}
+		} else if (campus === "128") {
+			if (!batch.match(/^[EFGH]/)) {
+				error = "128 campus only allows E, F, G, and H batches.";
+			}
+		} else if (campus === "BCA") {
+			if (!batch.match(/^BCA\d*$/)) {
+				error = "BCA campus only allows batches like BCA1, BCA2, etc.";
+			}
+		}
+		if (error) {
+			setBatchError(error);
+			setShowBatchErrorDialog(true);
+			return;
+		} else {
+			setBatchError("");
+		}
 		setEditedSchedule(null);
 		setIsGenerating(true);
 		try {
@@ -557,26 +580,6 @@ export function ScheduleForm({
 									value={batch}
 									onChange={(e) => {
 										const value = e.target.value.toUpperCase();
-										if (campus === "62") {
-											if (value.match(/^[DFH]|BBA|BCA|BSC|MCA|MBA|^[E]/)) {
-												alert(
-													"62 campus only allows A, B, C, G, and H batches."
-												);
-												return;
-											}
-										} else if (campus === "128") {
-											if (!value.match(/^[EFGH]/)) {
-												alert("128 campus only allows E, F, G, and H batches.");
-												return;
-											}
-										} else if (campus === "BCA") {
-											if (!value.match(/^BCA\d*$/)) {
-												alert(
-													"BCA campus only allows batches like BCA1, BCA2, etc."
-												);
-												return;
-											}
-										}
 										setBatch(value);
 									}}
 									placeholder={`Enter your batch (e.g., ${
@@ -590,6 +593,11 @@ export function ScheduleForm({
 									})`}
 									className="h-9 sm:h-10 text-sm bg-white/10 border-white/20 backdrop-blur-md hover:bg-white/15 transition-all"
 								/>
+								{batchError && (
+									<p className="text-red-400 text-xs font-medium bg-red-400/10 border border-red-400/20 rounded px-2 py-1 mt-1 mb-0.5">
+										{batchError}
+									</p>
+								)}
 							</div>
 
 							{typeof year === "string" && year !== "1" && (
@@ -755,6 +763,43 @@ export function ScheduleForm({
 				setOpen={setShowSubjectModal}
 				year={year}
 			/>
+
+			{/* Modal for batch error */}
+			{showBatchErrorDialog && (
+				<motion.div
+					initial={{ opacity: 0 }}
+					animate={{ opacity: 1 }}
+					exit={{ opacity: 0 }}
+					className="fixed inset-0 z-50 flex items-center justify-center bg-black/40 backdrop-blur-md"
+				>
+					<motion.div
+						initial={{ scale: 0.9, opacity: 0 }}
+						animate={{ scale: 1, opacity: 1 }}
+						exit={{ scale: 0.9, opacity: 0 }}
+						transition={{ duration: 0.2 }}
+						className="bg-gradient-to-br from-red-400/20 to-red-400/10 border border-red-400/30 rounded-2xl shadow-2xl p-0 sm:p-0 w-[90vw] max-w-sm flex flex-col items-center"
+					>
+						<div className="w-full flex flex-col items-center p-6 pb-4 border-b border-red-400/20 bg-red-400/10 rounded-t-2xl">
+							<h2 className="text-lg font-semibold text-red-400">
+								Batch Error
+							</h2>
+						</div>
+						<div className="w-full flex flex-col gap-3 p-6 pt-4">
+							<p className="text-red-400 text-sm font-medium text-center">
+								{batchError}
+							</p>
+							<Button
+								onClick={() => setShowBatchErrorDialog(false)}
+								type="button"
+								variant="ghost"
+								className="flex-1 border border-red-400/30 text-red-400 hover:bg-red-400/10 mt-4"
+							>
+								OK
+							</Button>
+						</div>
+					</motion.div>
+				</motion.div>
+			)}
 		</>
 	);
 }

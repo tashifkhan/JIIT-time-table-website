@@ -23,7 +23,7 @@ const initialConfig = { campus: "", year: "", batch: "", electives: [] };
 const CompareTimetablePage: React.FC = () => {
 	const [mapping62, setMapping62] = useState<any>(null);
 	const [mapping128, setMapping128] = useState<any>(null);
-
+	const [mappingBCA, setMappingBCA] = useState<any>(null);
 	// Saved configs state (shared with App.tsx)
 	const [savedConfigs, setSavedConfigs] = useState<{ [key: string]: any }>(
 		() => {
@@ -48,6 +48,9 @@ const CompareTimetablePage: React.FC = () => {
 		fetch("/data/time-table/ODD25/128.json")
 			.then((res) => res.json())
 			.then(setMapping128);
+		fetch("/data/time-table/ODD25/BCA.json")
+			.then((res) => res.json())
+			.then(setMappingBCA);
 	}, []);
 
 	const [config1, setConfig1] = useState<any>({ ...initialConfig });
@@ -96,8 +99,14 @@ const CompareTimetablePage: React.FC = () => {
 			// Helper to get mapping and args
 			const getMappingAndArgs = (params: any) => {
 				const mapping: Record<string, any> =
-					params.campus === "62" ? mapping62 : mapping128;
+					params.campus === "62"
+						? mapping62
+						: params.campus === "BCA"
+						? mappingBCA
+						: mapping128;
+
 				const yearData = mapping && params.year && mapping[params.year];
+
 				if (!yearData || typeof yearData !== "object") {
 					return {
 						time_table_json: {},
@@ -106,6 +115,7 @@ const CompareTimetablePage: React.FC = () => {
 						electives_subject_codes: params.electives || [],
 					};
 				}
+
 				return {
 					time_table_json: yearData.timetable,
 					subject_json: yearData.subjects,
@@ -123,9 +133,15 @@ const CompareTimetablePage: React.FC = () => {
 				if (params.year === "1") {
 					return params.campus === "62"
 						? "time_table_creator"
+						: params.campus === "BCA"
+						? "bca_creator_year1"
 						: "bando128_year1";
 				} else {
-					return params.campus === "62" ? "time_table_creator_v2" : "banado128";
+					return params.campus === "62"
+						? "time_table_creator_v2"
+						: params.campus === "BCA"
+						? "bca_creator"
+						: "banado128";
 				}
 			};
 
@@ -193,12 +209,13 @@ const CompareTimetablePage: React.FC = () => {
 	// Helper to get subjects array for a config
 	const getSubjects = (campus: string, year: string): Subject[] => {
 		if (!campus || !year) return [];
-		const mapping = campus === "62" ? mapping62 : mapping128;
-		return (mapping as Record<string, any>)[year]?.subjects || [];
+		const mapping =
+			campus === "BCA" ? mappingBCA : campus === "62" ? mapping62 : mapping128;
+		return (mapping as Record<string, any>)?.[year]?.subjects || [];
 	};
 
 	// Only allow actions when both mappings are loaded
-	if (!mapping62 || !mapping128) {
+	if (!mapping62 || !mapping128 || !mappingBCA) {
 		return (
 			<div className="text-center text-white p-8">
 				Loading timetable data...
@@ -311,6 +328,9 @@ const CompareTimetablePage: React.FC = () => {
 											<SelectItem value="128" className="hover:bg-white/20">
 												Campus 128
 											</SelectItem>
+											<SelectItem value="BCA" className="hover:bg-white/20">
+												BCA
+											</SelectItem>
 										</SelectContent>
 									</Select>
 								</div>
@@ -337,9 +357,11 @@ const CompareTimetablePage: React.FC = () => {
 											<SelectItem value="3" className="hover:bg-white/20">
 												3rd Year
 											</SelectItem>
-											<SelectItem value="4" className="hover:bg-white/20">
-												4th Year
-											</SelectItem>
+											{config1.campus !== "BCA" && (
+												<SelectItem value="4" className="hover:bg-white/20">
+													4th Year
+												</SelectItem>
+											)}
 										</SelectContent>
 									</Select>
 								</div>
@@ -499,6 +521,9 @@ const CompareTimetablePage: React.FC = () => {
 											<SelectItem value="128" className="hover:bg-white/20">
 												Campus 128
 											</SelectItem>
+											<SelectItem value="BCA" className="hover:bg-white/20">
+												BCA
+											</SelectItem>
 										</SelectContent>
 									</Select>
 								</div>
@@ -525,9 +550,11 @@ const CompareTimetablePage: React.FC = () => {
 											<SelectItem value="3" className="hover:bg-white/20">
 												3rd Year
 											</SelectItem>
-											<SelectItem value="4" className="hover:bg-white/20">
-												4th Year
-											</SelectItem>
+											{config2.campus !== "BCA" && (
+												<SelectItem value="4" className="hover:bg-white/20">
+													4th Year
+												</SelectItem>
+											)}
 										</SelectContent>
 									</Select>
 								</div>

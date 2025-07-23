@@ -513,6 +513,7 @@ export function ScheduleForm({
 							<SelectContent className="bg-[#FFF0DC]/20 backdrop-blur-2xl border-[#F0BB78]/20">
 								<SelectItem value="62">62</SelectItem>
 								<SelectItem value="128">128</SelectItem>
+								<SelectItem value="BCA">BCA</SelectItem>
 							</SelectContent>
 						</Select>
 					</div>
@@ -531,7 +532,7 @@ export function ScheduleForm({
 										<SelectValue placeholder="Select year" />
 									</SelectTrigger>
 									<SelectContent className="bg-[#FFF0DC]/20 backdrop-blur-2xl border-[#F0BB78]/20">
-										{[1, 2, 3, 4].map((yr) => (
+										{(campus !== "BCA" ? [1, 2, 3, 4] : [1, 2, 3]).map((yr) => (
 											<SelectItem
 												key={yr}
 												value={yr.toString()}
@@ -557,20 +558,35 @@ export function ScheduleForm({
 									onChange={(e) => {
 										const value = e.target.value.toUpperCase();
 										if (campus === "62") {
-											if (value.match(/^[DF]|BBA|BCA|BSC|MCA|MBA|^[E]/)) {
-												alert("62 campus only allows A, B, C and G batches.");
+											if (value.match(/^[DFH]|BBA|BCA|BSC|MCA|MBA|^[E]/)) {
+												alert(
+													"62 campus only allows A, B, C, G, and H batches."
+												);
 												return;
 											}
 										} else if (campus === "128") {
-											if (!value.match(/^[EF]/)) {
-												alert("128 campus only allows E and F batches.");
+											if (!value.match(/^[EFGH]/)) {
+												alert("128 campus only allows E, F, G, and H batches.");
+												return;
+											}
+										} else if (campus === "BCA") {
+											if (!value.match(/^BCA\d*$/)) {
+												alert(
+													"BCA campus only allows batches like BCA1, BCA2, etc."
+												);
 												return;
 											}
 										}
 										setBatch(value);
 									}}
 									placeholder={`Enter your batch (e.g., ${
-										campus === "62" ? "A6" : "F4"
+										campus === "62"
+											? "A6"
+											: campus === "128"
+											? "F4"
+											: campus === "BCA"
+											? "BCA1"
+											: "Batch"
 									})`}
 									className="h-9 sm:h-10 text-sm bg-white/10 border-white/20 backdrop-blur-md hover:bg-white/15 transition-all"
 								/>

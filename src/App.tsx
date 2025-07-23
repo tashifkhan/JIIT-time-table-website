@@ -165,10 +165,9 @@ const App: React.FC = () => {
 
 		// Clear any existing edited schedule when generating a new one
 		setEditedSchedule(null);
-
 		const mapping =
-			campus === "62" ? mapping62 : campus === "BCA" ? mappingBCA : mapping128;
-		if (!mapping) return; // mapping not loaded yet
+			campus === "BCA" ? mappingBCA : campus === "62" ? mapping62 : mapping128;
+		if (!mapping) return;
 		const subjectJSON = mapping[year as keyof typeof mapping].subjects;
 		const timeTableJSON = mapping[year as keyof typeof mapping].timetable;
 
@@ -535,10 +534,16 @@ const App: React.FC = () => {
 							style={{ overflow: "hidden" }}
 							transition={{ duration: 0.4, ease: "easeInOut" }}
 						>
-							{isFormOpen && mapping62 && mapping128 && (
+							{isFormOpen && (
 								<div className="px-6 pb-6 pt-2 flex justify-center">
 									<ScheduleForm
-										mapping={mapping62}
+										mapping={
+											_campus === "BCA"
+												? mappingBCA
+												: _campus === "62"
+												? mapping62
+												: mapping128
+										}
 										mapping128={mapping128}
 										onSubmit={handleFormSubmit}
 										onSaveConfig={handleSaveConfig}

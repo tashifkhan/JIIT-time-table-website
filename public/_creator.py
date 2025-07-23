@@ -1251,7 +1251,7 @@ def bca_creator(
     enrolled_subject_codes: list[str] = [],
 ) -> dict:
     """
-    Create a formatted timetable for BCA batches, filtering by batch and optionally enrolled subject codes.
+    BCA version of time_table_creator_v2: Only include classes if the subject is in the enrolled_subject_codes (using is_enrolled_subject logic), and the batch matches.
     """
     try:
         time_table = time_table_json if isinstance(time_table_json, dict) else {}
@@ -1276,23 +1276,29 @@ def bca_creator(
                     code = subject_extractor_bca(indi_class)
                     batchs = batch_extractor_bca(indi_class)
                     batchs_list = parse_bca_batches(batchs)
-
-                    # If batch matches (direct or in list)
-                    if batch in batchs_list or any(batch == b for b in batchs_list):
-                        # If enrolled_subject_codes is empty, include all, else filter
-                        if not enrolled_subject_codes or code in enrolled_subject_codes:
-                            your_time_table.append(
-                                [
-                                    day,
-                                    time,
-                                    subject_name_extractor_bca(subjects, code),
-                                    type_extractor_bca(indi_class),
-                                    location_extractor_bca(indi_class),
-                                ]
-                            )
-
+                    # Only add if code is in enrolled_subject_codes and batch is allowed
+                    is_actually_enrolled_subject, subject_details = is_enrolled_subject(
+                        enrolled_subject_codes=enrolled_subject_codes,
+                        subject_dict=subjects,
+                        subject_code=code,
+                    )
+                    if is_actually_enrolled_subject and (
+                        batch in batchs_list or any(batch == b for b in batchs_list)
+                    ):
+                        your_time_table.append(
+                            [
+                                day,
+                                time,
+                                (
+                                    subject_details["Subject"]
+                                    if subject_details is not None
+                                    else subject_name_extractor_bca(subjects, code)
+                                ),
+                                type_extractor_bca(indi_class),
+                                location_extractor_bca(indi_class),
+                            ]
+                        )
         formatted_timetable = {}
-
         for entry in your_time_table:
             day = process_day(entry[0])
             time = entry[1]

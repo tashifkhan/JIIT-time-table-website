@@ -229,16 +229,6 @@ interface ScheduleFormProps {
 			subjects: Subject[];
 		};
 	};
-	mapping128: {
-		[key: string]: {
-			timetable: {
-				[day: string]: {
-					[time: string]: string[];
-				};
-			};
-			subjects: Subject[];
-		};
-	};
 	onSubmit: (data: {
 		year: string;
 		batch: string;
@@ -252,7 +242,6 @@ interface ScheduleFormProps {
 
 export function ScheduleForm({
 	mapping,
-	mapping128,
 	onSubmit,
 	onSaveConfig,
 	savedConfigs,
@@ -282,6 +271,10 @@ export function ScheduleForm({
 	const { toast } = useToast();
 	const [batchError, setBatchError] = useState("");
 	const [showBatchErrorDialog, setShowBatchErrorDialog] = useState(false);
+
+	useEffect(() => {
+		setMapz(mapping);
+	}, [mapping]);
 
 	// Initialize Fuse.js for fuzzy search
 	// const fuse = useMemo(() => {
@@ -522,12 +515,6 @@ export function ScheduleForm({
 							value={campus}
 							onValueChange={(value) => {
 								setCampus(value);
-								if (value === "128") {
-									setMapz(mapping128);
-									// alert(
-									// 	"⚠️ Warning ⚠️ \n128 Time Table is not compltely tested yet. You may encounter bugs or errors or formating issues. You can raise a github issue for the same."
-									// );
-								}
 							}}
 						>
 							<SelectTrigger className="h-9 sm:h-10 text-sm bg-[#FFF0DC]/10 border-[#F0BB78]/20 backdrop-blur-md hover:bg-[#FFF0DC]/15 transition-all">

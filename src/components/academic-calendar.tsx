@@ -14,6 +14,7 @@ export function AcademicCalendar() {
 		{ value: "2526", label: "2025-26" },
 	]);
 	const eventRefs = useRef<HTMLDivElement[]>([]);
+	const upcomingDividerRef = useRef<HTMLDivElement | null>(null);
 
 	useEffect(() => {
 		document.title = "JIIT Academic Calender Simplified";
@@ -208,7 +209,17 @@ export function AcademicCalendar() {
 							animate={{ opacity: 1, y: 0 }}
 						>
 							<button
-								onClick={() => setVisibleEventsCount(pastEvents.length)}
+								onClick={() => {
+									setVisibleEventsCount(pastEvents.length);
+									setTimeout(() => {
+										if (upcomingDividerRef.current) {
+											const rect =
+												upcomingDividerRef.current.getBoundingClientRect();
+											const scrollTop = window.scrollY + rect.top - 80; // 80px offset for header
+											window.scrollTo({ top: scrollTop, behavior: "smooth" });
+										}
+									}, 200);
+								}}
 								className="px-6 py-3 bg-white/10 border border-[#F0BB78]/30 rounded-lg text-[#F0BB78] font-semibold backdrop-blur-md hover:bg-white/20 hover:border-[#F0BB78]/50 transition-all duration-300 flex items-center gap-2"
 							>
 								<Plus className="w-4 h-4" />
@@ -247,6 +258,7 @@ export function AcademicCalendar() {
 								{/* Show "Upcoming Events" divider */}
 								{isFirstUpcoming && (
 									<motion.div
+										ref={upcomingDividerRef}
 										className="flex items-center justify-center mb-8"
 										initial={{ opacity: 0 }}
 										animate={{ opacity: 1 }}

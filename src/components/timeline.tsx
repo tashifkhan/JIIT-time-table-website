@@ -15,6 +15,8 @@ const TimelinePage: React.FC = () => {
 	const displaySchedule = editedSchedule || schedule;
 	const location = useLocation();
 	const containerRef = useRef<HTMLDivElement>(null);
+	// Add refs for each day column
+	const dayRefs = useRef<(HTMLDivElement | null)[]>([]);
 
 	// Detect if download mode is active via query param
 	const isDownloadMode = React.useMemo(() => {
@@ -59,6 +61,23 @@ const TimelinePage: React.FC = () => {
 						behavior: "smooth",
 					});
 				}, 100); // Small delay to ensure rendering is complete
+
+				// Horizontal scroll to current day
+				setTimeout(() => {
+					const dayIndex = days.indexOf(currentDay);
+					const dayNode = dayRefs.current[dayIndex];
+					if (containerRef.current && dayNode) {
+						const scrollLeft =
+							dayNode.offsetLeft -
+							containerRef.current.offsetLeft -
+							containerRef.current.clientWidth / 2 +
+							dayNode.clientWidth / 2;
+						containerRef.current.scrollTo({
+							left: Math.max(0, scrollLeft),
+							behavior: "smooth",
+						});
+					}
+				}, 200); // After vertical scroll
 			} else {
 				// Fallback to scroll to top if no current time or not a weekday
 				window.scrollTo({ top: 0, left: 0, behavior: "auto" });
@@ -275,7 +294,6 @@ const TimelinePage: React.FC = () => {
 
 	return (
 		<div
-			ref={containerRef}
 			className="min-h-[50%] text-[#FFF0DC] p-0 md:p-8 overflow-scroll"
 			style={isDownloadMode ? { minWidth: "2700px" } : {}}
 		>
@@ -386,6 +404,7 @@ const TimelinePage: React.FC = () => {
 
 			<div
 				id="schedule-display"
+				ref={containerRef} // Move ref here
 				className="max-w-8xl mx-auto backdrop-blur-lg bg-[rgba(255,240,220,0.05)] rounded-none md:rounded-xl p-0 md:p-6 shadow-xl overflow-x-auto"
 				style={isDownloadMode ? { minWidth: "2550px" } : {}}
 			>
@@ -450,8 +469,12 @@ const TimelinePage: React.FC = () => {
 						</div>
 
 						{/* Days columns */}
-						{days.map((day) => (
-							<div key={day} className="relative">
+						{days.map((day, idx) => (
+							<div
+								key={day}
+								className="relative"
+								ref={(el) => (dayRefs.current[idx] = el)}
+							>
 								<div
 									className={`h-20 flex items-center justify-center font-medium border-b text-sm md:text-base rounded-t-lg ${
 										!isDownloadMode && isToday(day)

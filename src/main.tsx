@@ -16,8 +16,7 @@ import { Background } from "./components/background.tsx";
 import { PostHogProvider } from "posthog-js/react";
 
 const options = {
-	api_host: "/ph/",
-	ui_host: "https://eu.posthog.com",
+	api_host: import.meta.env.VITE_PUBLIC_POSTHOG_HOST,
 };
 
 createRoot(document.getElementById("root")!).render(

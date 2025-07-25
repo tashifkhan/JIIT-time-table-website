@@ -1,4 +1,10 @@
 {
+	"rewrites": [
+		{
+			"source": "/ph/:path*",
+			"destination": "https://eu.i.posthog.com/:path*"
+		}
+	],
 	"routes": [
 		{ "handle": "filesystem" },
 		{ "src": "/(.*)", "dest": "/index.html" }

@@ -4,6 +4,9 @@
 			"source": "/ph/:path*",
 			"destination": "https://eu.i.posthog.com/:path*"
 		},
-		{ "src": "/(.*)", "dest": "/index.html" }
+		{
+			"source": "/(.*)",
+			"destination": "/index.html"
+		}
 	]
 }

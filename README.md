@@ -68,7 +68,7 @@ curl https://simple-timetable.tashif.codes/data/calender/2526/calender.json  # r
 ```
 
 .
-├── json_creater.py # this the python streamlit app that converts the ugly excel to json for the website
+├── json_creater.py      # this the python streamlit app that converts the ugly excel to json for the website
 ├── public
 │   ├── data                       # this directory contains all the json data created
 │   │   ├── calender

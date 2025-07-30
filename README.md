@@ -22,12 +22,15 @@ The timetable is parsed using the script available at:
 - **Branch Support**: Handles multiple branches and years
 - **Compare TimeTables**: Parses multiple timetables and tells you the common free slots & classes
 - **Shareable Timetable**: Now timetables can be recreated by simple url sharing.
-- **Save Configs**: Save and load multiple timetable configs to load that tiemtable anytime.
-- **Timeline View**: No need to export the timetable... you can view the timetable at /timetable route because stored locally
+- **Save Configs**: Save and load multiple timetable configs to load that timetable anytime.
+- **Timeline View**: No need to export the timetable... you can view the timetable at /timeline route because stored locally
+- **Mess Menu**: Added mess menu fetching as well....
 - **Export Options**: PDF, PNG, and Google Calendar sync
 - **Custom Events**: Edit the timetable and add custom events
 - **Academic Calendar**: Fetch and sync the academic calendar to Google Calendar
 - **Enhanced Color Coding**: More color coding for events synced to Google Calendar
+- **Mobile-First Design**: Responsive navbar with multi-line text support and swipe navigation
+- **Touch Gestures**: Swipe left/right to navigate between pages on mobile devices
 
 ## Tech Stack
 
@@ -36,6 +39,8 @@ The timetable is parsed using the script available at:
 - **Framework**: React.js with TypeScript
 - **Styling**: Tailwind CSS
 - **Animations**: Framer Motion
+- **Routing**: React Router with swipe navigation
+- **Touch Support**: React Swipeable for mobile gestures
 
 ### Backend
 
@@ -45,7 +50,7 @@ The timetable is parsed using the script available at:
 
 ### Data
 
-`Note: If you want to make a custom frontent or an App or something`
+`Note: If you want to make a custom frontend or an App or something`
 make a request
 
 ```bash
@@ -65,66 +70,68 @@ curl https://simple-timetable.tashif.codes/data/calender/2526/calender.json  # r
 .
 ├── json_creater.py # this the python streamlit app that converts the ugly excel to json for the website
 ├── public
-│   ├── data                       # this directory contains all the json data created
-│   │   ├── calender
-│   │   │   ├── 2425
-│   │   │   │   └── calendar.json
-│   │   │   └── 2526
-│   │   │   └── calender.json
-│   │   │ 
-│   │   └── time-table
-│   │   ├── EVEN25
-│   │   │   ├── 128.json
-│   │   │   └── 62.json
-│   │   └── ODD25
-│   │   ├── 128.json
-│   │   └── 62.json
-│   │ 
-│   ├── modules                      # this directory contains specific python modules to create timetable
-│   │   ├── BE128_creator.py
-│   │   └── BE62_creator.py
-│   │ 
-│   ├── _creator.py                  # Python file that creates the timetable
-│   ├── manifest.json                # manifest file for PWA
-│   ├── robots.txt
-│   ├── service-worker.js            # service working to save resources offline
-│   └── sitemap.xml
-│ 
+│   ├── data                       # this directory contains all the json data created
+│   │   ├── calender
+│   │   │   ├── 2425
+│   │   │   │   └── calendar.json
+│   │   │   └── 2526
+│   │   │       └── calender.json
+│   │   │
+│   │   └── time-table
+│   │       ├── EVEN25
+│   │       │   ├── 128.json
+│   │       │   └── 62.json
+│   │       └── ODD25
+│   │           ├── 128.json
+│   │           ├── 62.json
+│   │           └── BCA.json
+│   │
+│   ├── modules                      # this directory contains specific python modules to create timetable
+│   │   ├── BE128_creator.py
+│   │   └── BE62_creator.py
+│   │
+│   ├── _creator.py                  # Python file that creates the timetable
+│   ├── manifest.json                # manifest file for PWA
+│   ├── robots.txt
+│   ├── service-worker.js            # service working to save resources offline
+│   └── sitemap.xml
+│
 ├── src
-│   ├── components
-│   │   ├── academic-calendar.tsx         # Academic calendar display page
-│   │   ├── action-buttons.tsx
-│   │   ├── background.tsx
-│   │   ├── compare-timetable.tsx         # Conparing timetable page
-│   │   ├── edit-event-dialog.tsx
-│   │   ├── google-calendar-button.tsx
-│   │   ├── navbar.tsx                    # swiable navbar
-│   │   ├── not-found.tsx                 # 404 Not Found Custom page
-│   │   ├── schedule-display.tsx
-│   │   ├── schedule-form.tsx
-│   │   ├── timeline-landing.tsx          # landing page for /timeline if no schedule has been created
-│   │   ├── timeline-wrapper.tsx
-│   │   ├── timeline.tsx                  # Calendar / Timeline View page for the timetable
-│   │   ├── url-params-dialog.tsx
-│   │   └── ui\                           # this directory contains the shdcn compoents
-│   │ 
-│   ├── context
-│   │   ├── userContext.ts
-│   │   └── userContextProvider.tsx
-│   │ 
-│   ├── hooks\
-│   ├── lib\
-│   ├── types\                # TypeScript type Definitions
-│   │ 
-│   ├── utils
-│   │   ├── calender-AC.ts                  # Google Calender API Integration for AC
-│   │   ├── calender.ts                     # Google Calender API Integration for TimeTable
+│   ├── components
+│   │   ├── academic-calendar.tsx         # Academic calendar display page
+│   │   ├── action-buttons.tsx
+│   │   ├── background.tsx
+│   │   ├── compare-timetable.tsx         # Comparing timetable page
+│   │   ├── edit-event-dialog.tsx
+│   │   ├── google-calendar-button.tsx
+│   │   ├── mess-menu.tsx                 # The mess menu page
+│   │   ├── navbar.tsx                    # Swipeable navbar with mobile optimization
+│   │   ├── not-found.tsx                 # 404 Not Found Custom page
+│   │   ├── schedule-display.tsx
+│   │   ├── schedule-form.tsx
+│   │   ├── timeline-landing.tsx          # landing page for /timeline if no schedule has been created
+│   │   ├── timeline-wrapper.tsx
+│   │   ├── timeline.tsx                  # Calendar / Timeline View page for the timetable
+│   │   ├── url-params-dialog.tsx
+│   │   └── ui\                           # this directory contains the shadcn components
+│   │
+│   ├── context
+│   │   ├── userContext.ts
+│   │   └── userContextProvider.tsx
+│   │
+│   ├── hooks\
+│   ├── lib\
+│   ├── types\                # TypeScript type Definitions
+│   │
+│   ├── utils
+│   │   ├── calender-AC.ts                  # Google Calendar API Integration for AC
+│   │   ├── calender.ts                     # Google Calendar API Integration for TimeTable
 │   │   ├── download.ts                     # Hook/function to download png/pdf of TimeTable
 │   │   └── pyodide.ts                      # WASM middleware for module execution
-│   │ 
-│   ├── App.tsx          # the schedule creator page
-│   └── main.tsx         # apps entry point
-│ 
+│   │
+│   ├── App.tsx          # the schedule creator page
+│   └── main.tsx         # apps entry point
+│
 ├── README.md
 └── index.html
 
@@ -181,18 +188,29 @@ Frontend runs at: `http://localhost:5173`
 ## Usage
 
 1. **Home Page**
-   - Enter your camopus, batch, year, and electives.
+   - Enter your campus, batch, year, and electives.
    - Fetch electives dynamically from JSON - created using [Parser](https://github.com/tashifkhan/JIIT-time-table-parser).
 2. **Timetable Page**
    - View your personalized schedule.
    - Color-coded design for easy understanding.
-   - Edit Fumctionaity
+   - Edit Functionality
    - Adding of Custom Events
 3. **Export Options**
    - Download as PDF/PNG or sync with Google Calendar.
 4. **Academic Calendar Sync**
    - Fetch the academic calendar using the [Academic Calendar Parser](https://github.com/tashifkhan/JIIT-Academic-Calender).
    - Sync the academic calendar to Google Calendar with enhanced color coding for events.
+5. **Mobile Navigation**
+   - Swipe left/right to navigate between pages
+   - Responsive navbar with multi-line text support
+   - Touch-optimized interface
+
+## Mobile Features
+
+- **Swipe Navigation**: Swipe left/right to navigate between pages
+- **Responsive Navbar**: Multi-line text support for better readability
+- **Touch Gestures**: Optimized for mobile interaction
+- **PWA Support**: Install as app and use offline
 
 ## Troubleshooting
 
@@ -200,7 +218,8 @@ Common issues and solutions:
 
 1. **Loading Error**: Clear cache and reload
 2. **Export Failed**: Check browser permissions... especially WASM
-3. **Parser Error**: Check the frekaing Excel for errors
+3. **Parser Error**: Check the freaking Excel for errors
+4. **Mobile Issues**: Ensure you're using a modern browser with touch support
 
 ## Contributing
 
@@ -224,18 +243,17 @@ If you encounter any issues or have suggestions, please raise an issue on GitHub
 3. Provide a detailed description of the issue or suggestion.
 4. Submit the issue.
 
-We appreciate your feedback and contributions!
-
-## Note:
-
-`timetable excels for 4th year & 2nd year 128 campus has not been released`
+I appreciate your feedback and contributions!
 
 ## Future Scope
 
-- [x] Handelling 4th year BE TimeTable
+- [x] Handelled BCA TimeTable
+- [x] Handling 4th year BE TimeTable
 - [x] PWA Support for offline usage
 - [x] Reminders for classes
 - [x] Visualization of free and busy slots of 2 students
+- [x] Mobile-responsive navbar with multi-line text support
+- [x] Swipe navigation for mobile devices
 
 ## License
 
@@ -247,7 +265,3 @@ For support or queries:
 
 - GitHub Issues
 - Email: [developer@tashif.codes]
-
-```
-
-```

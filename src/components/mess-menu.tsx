@@ -46,6 +46,7 @@ const MessMenuPage: React.FC = () => {
 		const currentDay = dayNames[today.getDay()];
 		return day.startsWith(currentDay);
 	};
+
 	// Scroll to current day on mount
 	useEffect(() => {
 		if (menu) {
@@ -63,12 +64,20 @@ const MessMenuPage: React.FC = () => {
 			// Find the index of the first menu key that starts with the current day
 			const menuDays = Object.keys(menu);
 			const dayIndex = menuDays.findIndex((d) => d.startsWith(currentDay));
+
 			if (dayIndex !== -1 && dayRefs.current[dayIndex]) {
 				setTimeout(() => {
-					dayRefs.current[dayIndex]?.scrollIntoView({
-						behavior: "smooth",
-						block: "center",
-					});
+					const targetElement = dayRefs.current[dayIndex];
+					if (targetElement) {
+						const headerHeight = 200; // Account for header height
+						const elementTop = targetElement.offsetTop;
+						const scrollPosition = elementTop - headerHeight;
+
+						window.scrollTo({
+							top: Math.max(0, scrollPosition),
+							behavior: "smooth",
+						});
+					}
 				}, 200);
 			}
 		}

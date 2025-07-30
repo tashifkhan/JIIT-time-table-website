@@ -14,8 +14,6 @@ const MessMenuPage: React.FC = () => {
 	const [menu, setMenu] = useState<MessMenu["menu"] | null>(null);
 	const [loading, setLoading] = useState(true);
 	const [error, setError] = useState<string | null>(null);
-	const containerRef = React.useRef<HTMLDivElement>(null);
-	const dayRefs = React.useRef<(HTMLDivElement | null)[]>([]);
 
 	useEffect(() => {
 		fetch("https://jportal2-0.vercel.app/mess_menu.json")
@@ -33,39 +31,8 @@ const MessMenuPage: React.FC = () => {
 			});
 	}, []);
 
-	// Scroll to current day on mount
-	useEffect(() => {
-		if (menu) {
-			const today = new Date();
-			const dayNames = [
-				"Sunday",
-				"Monday",
-				"Tuesday",
-				"Wednesday",
-				"Thursday",
-				"Friday",
-				"Saturday",
-			];
-			const currentDay = dayNames[today.getDay()];
-			// Find the index of the first menu key that starts with the current day
-			const menuDays = Object.keys(menu);
-			const dayIndex = menuDays.findIndex((d) => d.startsWith(currentDay));
-			if (dayIndex !== -1 && dayRefs.current[dayIndex]) {
-				setTimeout(() => {
-					dayRefs.current[dayIndex]?.scrollIntoView({
-						behavior: "smooth",
-						block: "center",
-					});
-				}, 200);
-			}
-		}
-	}, [menu]);
-
 	return (
-		<div
-			ref={containerRef}
-			className="min-h-[50%] text-[#FFF0DC] p-0 md:p-8 overflow-scroll"
-		>
+		<div className="min-h-[50%] text-[#FFF0DC] p-0 md:p-8 overflow-scroll">
 			<div className="mb-8 px-4 md:px-8 text-center">
 				<div className="flex flex-col md:flex-row items-center justify-center gap-2 md:gap-3 mb-2">
 					<svg
@@ -95,10 +62,9 @@ const MessMenuPage: React.FC = () => {
 			{error && <div className="text-center text-red-400">{error}</div>}
 			{menu && (
 				<div className="mb-6 mx-4 md:mx-0 p-4 rounded-lg bg-[#23201c]/60 border border-[#FFF0DC]/10 shadow flex flex-col gap-4 animate-fade-in">
-					{Object.entries(menu).map(([day, meals], idx) => (
+					{Object.entries(menu).map(([day, meals]) => (
 						<div
 							key={day}
-							ref={(el) => (dayRefs.current[idx] = el)}
 							className="rounded-xl bg-gradient-to-r from-[#543A14]/40 to-[#F0BB78]/20 border border-[#F0BB78]/30 shadow-lg p-4"
 						>
 							<div className="flex items-center gap-3 mb-2">

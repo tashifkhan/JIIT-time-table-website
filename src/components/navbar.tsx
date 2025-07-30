@@ -53,7 +53,7 @@ export default function Navbar() {
 							<NavLink
 								to={tab.path}
 								className={({ isActive }) =>
-									`block text-center px-4 py-3 md:py-3 font-medium text-xs md:text-base transition-all duration-200 rounded-lg md:rounded-lg md:mx-1 ${
+									`block text-center px-2 sm:px-3 md:px-4 py-2 md:py-3 font-medium text-xs sm:text-sm md:text-base transition-all duration-200 rounded-lg md:rounded-lg md:mx-1 leading-tight md:leading-normal ${
 										isActive
 											? "bg-[#F0BB78]/20 text-[#F0BB78] border-l-2 md:border-l-0 md:border-b-2 border-[#F0BB78] shadow-sm"
 											: "text-[#F0BB78]/70 hover:bg-[#F0BB78]/10 hover:text-[#F0BB78]"

@@ -14,7 +14,6 @@ const MessMenuPage: React.FC = () => {
 	const [menu, setMenu] = useState<MessMenu["menu"] | null>(null);
 	const [loading, setLoading] = useState(true);
 	const [error, setError] = useState<string | null>(null);
-	const containerRef = React.useRef<HTMLDivElement>(null);
 	const dayRefs = React.useRef<(HTMLDivElement | null)[]>([]);
 
 	useEffect(() => {
@@ -33,6 +32,20 @@ const MessMenuPage: React.FC = () => {
 			});
 	}, []);
 
+	const isCurrentDay = (day: string) => {
+		const today = new Date();
+		const dayNames = [
+			"Sunday",
+			"Monday",
+			"Tuesday",
+			"Wednesday",
+			"Thursday",
+			"Friday",
+			"Saturday",
+		];
+		const currentDay = dayNames[today.getDay()];
+		return day.startsWith(currentDay);
+	};
 	// Scroll to current day on mount
 	useEffect(() => {
 		if (menu) {
@@ -62,64 +75,129 @@ const MessMenuPage: React.FC = () => {
 	}, [menu]);
 
 	return (
-		<div
-			ref={containerRef}
-			className="min-h-[50%] text-[#FFF0DC] p-0 md:p-8 overflow-scroll"
-		>
-			<div className="mb-8 px-4 md:px-8 text-center">
-				<div className="flex flex-col md:flex-row items-center justify-center gap-2 md:gap-3 mb-2">
-					<h1 className="text-2xl sm:text-4xl md:text-5xl font-bold bg-clip-text text-transparent bg-[#F0BB78]">
-						Weekly Mess Menu
-					</h1>
-				</div>
-				<div className="text-base md:text-xl text-[#FFF0DC]/70 font-normal">
-					Enjoy delicious meals every day!
-				</div>
+		<main>
+			{/* Background effects */}
+			<div className="absolute inset-0 w-full h-full pointer-events-none">
+				<div className="absolute top-[-5%] left-[-5%] w-48 sm:w-72 h-48 sm:h-72 bg-[#F0BB78]/30 rounded-full blur-[96px] sm:blur-[128px]" />
+				<div className="absolute bottom-[-5%] right-[-5%] w-48 sm:w-72 h-48 sm:h-72 bg-[#543A14]/30 rounded-full blur-[96px] sm:blur-[128px]" />
 			</div>
-			{loading && (
-				<div className="text-center text-lg text-[#F0BB78]">
-					Loading menu...
+
+			<div className="relative z-10 flex flex-col items-center justify-start max-w-7xl mx-auto space-y-6 sm:space-y-8">
+				{/* Header Section */}
+				<div className="text-center space-y-3 sm:space-y-4">
+					<div className="flex items-center justify-center gap-2 sm:gap-3 mb-2 sm:mb-4">
+						<h1 className="text-2xl sm:text-4xl font-bold bg-clip-text text-[#F0BB78] bg-gradient-to-r from-[#F0BB78] to-[#543A14]">
+							Weekly Mess Menu
+						</h1>
+					</div>
+					<p className="text-base sm:text-lg text-slate-300/80 px-4">
+						See for yourself what atrocity has been offering you
+					</p>
 				</div>
-			)}
-			{error && <div className="text-center text-red-400">{error}</div>}
-			{menu && (
-				<div className="mb-6 mx-4 md:mx-0 p-4 rounded-lg bg-[#23201c]/60 border border-[#FFF0DC]/10 shadow flex flex-col gap-4 animate-fade-in">
-					{Object.entries(menu).map(([day, meals], idx) => (
-						<div
-							key={day}
-							ref={(el) => (dayRefs.current[idx] = el)}
-							className="rounded-xl bg-gradient-to-r from-[#543A14]/40 to-[#F0BB78]/20 border border-[#F0BB78]/30 shadow-lg p-4"
-						>
-							<div className="flex items-center gap-3 mb-2">
-								<span className="font-bold text-lg text-[#F0BB78]">{day}</span>
-							</div>
-							<div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-								<div className="bg-black/20 rounded-lg p-3">
-									<div className="font-semibold text-[#F0BB78] mb-1">
-										Breakfast
-									</div>
-									<div className="text-[#FFF0DC]/90 text-sm">
-										{meals.Breakfast}
-									</div>
-								</div>
-								<div className="bg-black/20 rounded-lg p-3">
-									<div className="font-semibold text-[#F0BB78] mb-1">Lunch</div>
-									<div className="text-[#FFF0DC]/90 text-sm">{meals.Lunch}</div>
-								</div>
-								<div className="bg-black/20 rounded-lg p-3">
-									<div className="font-semibold text-[#F0BB78] mb-1">
-										Dinner
-									</div>
-									<div className="text-[#FFF0DC]/90 text-sm">
-										{meals.Dinner}
-									</div>
-								</div>
+
+				{/* Loading State */}
+				{loading && (
+					<div className="flex items-center justify-center py-20">
+						<div className="relative">
+							<div className="w-16 h-16 border-4 border-[#F0BB78]/20 border-t-[#F0BB78] rounded-full animate-spin"></div>
+							<div className="absolute inset-0 flex items-center justify-center">
+								<div className="w-8 h-8 bg-[#F0BB78] rounded-full animate-ping"></div>
 							</div>
 						</div>
-					))}
-				</div>
-			)}
-		</div>
+						<div className="ml-4 text-xl text-[#F0BB78] font-medium">
+							Loading menu...
+						</div>
+					</div>
+				)}
+
+				{/* Error State */}
+				{error && (
+					<div className="flex items-center justify-center py-20">
+						<div className="bg-red-500/20 border border-red-500/50 rounded-xl p-6 text-center">
+							<div className="text-red-400 text-xl mb-2">
+								<svg
+									className="w-6 h-6 mx-auto"
+									fill="none"
+									stroke="currentColor"
+									viewBox="0 0 24 24"
+								>
+									<path
+										strokeLinecap="round"
+										strokeLinejoin="round"
+										strokeWidth={2}
+										d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-2.5L13.732 4c-.77-.833-1.964-.833-2.732 0L3.34 16.5c-.77.833.192 2.5 1.732 2.5z"
+									/>
+								</svg>
+							</div>
+							<div className="text-red-300 font-medium">{error}</div>
+						</div>
+					</div>
+				)}
+
+				{/* Menu Content */}
+				{menu && (
+					<div className="w-full max-w-6xl space-y-4">
+						{Object.entries(menu).map(([day, meals], idx) => (
+							<div
+								key={day}
+								ref={(el) => (dayRefs.current[idx] = el)}
+								className={`backdrop-blur-lg bg-white/5 rounded-xl sm:rounded-2xl border shadow-xl overflow-hidden transition-all duration-300 hover:shadow-2xl ${
+									isCurrentDay(day)
+										? "border-[#F0BB78]/50 shadow-[0_0_30px_rgba(240,187,120,0.3)]"
+										: "border-white/10 hover:border-[#F0BB78]/30"
+								}`}
+							>
+								{/* Day Header */}
+								<div className="px-6 py-4 border-b border-white/10">
+									<div className="flex items-center justify-between">
+										<div className="flex items-center gap-3">
+											<div
+												className={`w-2 h-2 rounded-full ${
+													isCurrentDay(day) ? "bg-[#F0BB78]" : "bg-slate-400"
+												}`}
+											></div>
+											<h2
+												className={`text-lg sm:text-xl font-bold ${
+													isCurrentDay(day) ? "text-[#F0BB78]" : "text-white"
+												}`}
+											>
+												{day}
+											</h2>
+										</div>
+										{isCurrentDay(day) && (
+											<div className="px-3 py-1 bg-[#F0BB78]/20 border border-[#F0BB78]/30 rounded-full text-xs font-medium text-[#F0BB78]">
+												TODAY
+											</div>
+										)}
+									</div>
+								</div>
+
+								{/* Meals Grid */}
+								<div className="p-6">
+									<div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+										{Object.entries(meals).map(([mealType, mealContent]) => (
+											<div
+												key={mealType}
+												className="group relative overflow-hidden rounded-lg bg-white/5 border border-white/10 p-4 transition-all duration-300 hover:border-[#F0BB78]/30 hover:bg-white/10"
+											>
+												<div className="mb-3">
+													<h3 className="font-semibold text-[#F0BB78] text-lg">
+														{mealType}
+													</h3>
+												</div>
+												<div className="text-slate-300/90 text-sm leading-relaxed">
+													{mealContent}
+												</div>
+											</div>
+										))}
+									</div>
+								</div>
+							</div>
+						))}
+					</div>
+				)}
+			</div>
+		</main>
 	);
 };
 

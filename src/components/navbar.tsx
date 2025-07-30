@@ -4,6 +4,7 @@ import { useSwipeable } from "react-swipeable";
 const tabs = [
 	{ name: "Create TimeTables", path: "/" },
 	{ name: "Timeline View", path: "/timeline" },
+	{ name: "Mess Menu", path: "/mess-menu" },
 	{ name: "Academic Calender", path: "/academic-calendar" },
 	{ name: "Compare TimeTables", path: "/compare-timetables" },
 ];

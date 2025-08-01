@@ -14,7 +14,37 @@ const MessMenuPage: React.FC = () => {
 	const [menu, setMenu] = useState<MessMenu["menu"] | null>(null);
 	const [loading, setLoading] = useState(true);
 	const [error, setError] = useState<string | null>(null);
+	const [isMenuOutdated, setIsMenuOutdated] = useState(false);
 	const dayRefs = React.useRef<(HTMLDivElement | null)[]>([]);
+
+	// Function to parse date from day string like "Sunday 01.08.25"
+	const parseDateFromDay = (dayString: string): Date | null => {
+		const dateMatch = dayString.match(/(\d{2})\.(\d{2})\.(\d{2})/);
+		if (dateMatch) {
+			const [, day, month, year] = dateMatch;
+			// Convert 2-digit year to 4-digit year (assuming 20xx)
+			const fullYear = 2000 + parseInt(year);
+			return new Date(fullYear, parseInt(month) - 1, parseInt(day));
+		}
+		return null;
+	};
+
+	// Function to check if menu is outdated
+	const checkIfMenuOutdated = (menuData: MessMenu["menu"]) => {
+		const today = new Date();
+		const menuDays = Object.keys(menuData);
+
+		// Find Sunday entry
+		const sundayEntry = menuDays.find((day) => day.startsWith("Sunday"));
+		if (sundayEntry) {
+			const sundayDate = parseDateFromDay(sundayEntry);
+			if (sundayDate) {
+				// Check if today is after the Sunday date
+				return today > sundayDate;
+			}
+		}
+		return false;
+	};
 
 	useEffect(() => {
 		fetch("https://jportal2-0.vercel.app/mess_menu.json")
@@ -24,6 +54,7 @@ const MessMenuPage: React.FC = () => {
 			})
 			.then((data: MessMenu) => {
 				setMenu(data.menu);
+				setIsMenuOutdated(checkIfMenuOutdated(data.menu));
 				setLoading(false);
 			})
 			.catch((err) => {
@@ -103,6 +134,35 @@ const MessMenuPage: React.FC = () => {
 						See for yourself what atrocity has been offering you
 					</p>
 				</div>
+
+				{/* Outdated Menu Warning */}
+				{isMenuOutdated && (
+					<div className="w-full max-w-2xl mx-auto">
+						<div className="bg-amber-500/20 border border-amber-500/50 rounded-xl p-6 text-center backdrop-blur-lg">
+							<div className="text-amber-400 text-xl mb-3">
+								<svg
+									className="w-8 h-8 mx-auto"
+									fill="none"
+									stroke="currentColor"
+									viewBox="0 0 24 24"
+								>
+									<path
+										strokeLinecap="round"
+										strokeLinejoin="round"
+										strokeWidth={2}
+										d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-2.5L13.732 4c-.77-.833-1.964-.833-2.732 0L3.34 16.5c-.77.833.192 2.5 1.732 2.5z"
+									/>
+								</svg>
+							</div>
+							<div className="text-amber-300 font-medium text-lg mb-2">
+								This Week's Mess Menu Not Updated Yet
+							</div>
+							<div className="text-amber-200/80 text-sm">
+								The menu will be updated shortly. Please check back later.
+							</div>
+						</div>
+					</div>
+				)}
 
 				{/* Loading State */}
 				{loading && (

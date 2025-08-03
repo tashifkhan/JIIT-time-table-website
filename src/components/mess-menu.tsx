@@ -39,8 +39,9 @@ const MessMenuPage: React.FC = () => {
 		if (sundayEntry) {
 			const sundayDate = parseDateFromDay(sundayEntry);
 			if (sundayDate) {
-				// Check if today is after the Sunday date
-				return today > sundayDate;
+				const sundayEnd = new Date(sundayDate);
+				sundayEnd.setHours(23, 59, 59, 999);
+				return today > sundayEnd;
 			}
 		}
 		return false;

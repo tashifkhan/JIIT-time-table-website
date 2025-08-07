@@ -261,7 +261,7 @@
 		}
 	},
 	{
-		"summary": "Semester Break - Diwali (Odd)",
+		"summary": "Holiday - Semester Break - Diwali (Odd)",
 		"start": {
 			"date": "2025-10-19"
 		},
@@ -450,7 +450,7 @@
 		}
 	},
 	{
-		"summary": "Semester Break",
+		"summary": "Holiday - Semester Break",
 		"start": {
 			"date": "2025-12-14"
 		},
@@ -702,7 +702,7 @@
 		}
 	},
 	{
-		"summary": "Semester Break - Holi (Even)",
+		"summary": "Holiday - Semester Break - Holi (Even)",
 		"start": {
 			"date": "2026-03-01"
 		},
@@ -891,7 +891,7 @@
 		}
 	},
 	{
-		"summary": "Vacations & Summer Internship - Semester Break",
+		"summary": "Holiday - Vacations & Summer Internship - Semester Break",
 		"start": {
 			"date": "2026-05-27"
 		},

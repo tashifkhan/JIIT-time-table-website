@@ -1,4 +1,4 @@
-import { Calendar, ChevronDown, Plus } from "lucide-react";
+import { Calendar, ChevronDown, Plus, Filter } from "lucide-react";
 import { motion } from "framer-motion";
 import { addAcademicCalendarEvents } from "../utils/calendar-AC";
 import { useState, useEffect, useRef } from "react";
@@ -9,6 +9,7 @@ export function AcademicCalendar() {
 	const [isDataLoading, setIsDataLoading] = useState(true);
 	const [selectedYear, setSelectedYear] = useState("2526");
 	const [visibleEventsCount, setVisibleEventsCount] = useState(0);
+	const [showHolidaysOnly, setShowHolidaysOnly] = useState(false);
 	const [availableYears, setAvailableYears] = useState([
 		{ value: "2425", label: "2024-25" },
 		{ value: "2526", label: "2025-26" },
@@ -57,14 +58,19 @@ export function AcademicCalendar() {
 			new Date(a.start.date).getTime() - new Date(b.start.date).getTime()
 	);
 
+	// Filter events based on holiday filter
+	const filteredEvents = showHolidaysOnly
+		? sortedEvents.filter((event) => event.summary.startsWith("Holiday -"))
+		: sortedEvents;
+
 	// separate upcoming and past events
 	const today = new Date();
-	const upcomingEvents = sortedEvents.filter((event) => {
+	const upcomingEvents = filteredEvents.filter((event) => {
 		const eventDate = new Date(event.start.date);
 		return eventDate >= today;
 	});
 
-	const pastEvents = sortedEvents
+	const pastEvents = filteredEvents
 		.filter((event) => {
 			const eventDate = new Date(event.start.date);
 			return eventDate < today;
@@ -229,6 +235,21 @@ export function AcademicCalendar() {
 						</motion.div>
 					)}
 
+					{/* Show message when no events match the filter */}
+					{eventsToShow.length === 0 && (
+						<motion.div
+							className="text-center py-12"
+							initial={{ opacity: 0 }}
+							animate={{ opacity: 1 }}
+						>
+							<p className="text-slate-300/80 text-lg">
+								{showHolidaysOnly
+									? "No holidays found for the selected year."
+									: "No events found for the selected year."}
+							</p>
+						</motion.div>
+					)}
+
 					<div className="absolute left-4 sm:left-1/2 h-full w-px bg-[#F0BB78]/30" />
 
 					{eventsToShow.map((event, index) => {
@@ -356,6 +377,25 @@ export function AcademicCalendar() {
 					})}
 				</motion.div>
 			</div>
+			{/* Floating Holiday Filter Button */}
+			<motion.button
+				onClick={() => {
+					setShowHolidaysOnly(!showHolidaysOnly);
+					setVisibleEventsCount(0);
+				}}
+				className={`fixed bottom-16 left-4 px-4 sm:px-6 py-2 rounded-lg backdrop-blur-lg border z-50
+        transition-all duration-300 shadow-lg flex items-center gap-2 text-sm sm:text-base ${
+					showHolidaysOnly
+						? "bg-red-500/20 border-red-500/50 text-red-300 hover:bg-red-500/30"
+						: "bg-white/10 border-white/20 text-[#F0BB78] hover:bg-white/20"
+				}`}
+				whileHover={{ scale: 1.05 }}
+				whileTap={{ scale: 0.95 }}
+			>
+				<Filter className="w-4 h-4 sm:w-5 sm:h-5" />
+				<span>{showHolidaysOnly ? "All Events" : "Holidays Only"}</span>
+			</motion.button>
+
 			<motion.button
 				onClick={handleAddToCalendar}
 				disabled={isLoading}

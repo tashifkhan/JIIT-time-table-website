@@ -49,7 +49,7 @@ createRoot(document.getElementById("root")!).render(
 									<Route path="*" element={<NotFoundPage />} />
 								</Routes>
 							</div>
-							<div className="fixed right-4 bottom-4 z-50 p-5 rounded-[1.4rem]">
+							<div className="fixed right-2 bottom-2 z-50 p-0 rounded-[1.4rem]">
 								<a
 									href="https://github.com/tashifkhan/JIIT-time-table-website"
 									target="_blank"

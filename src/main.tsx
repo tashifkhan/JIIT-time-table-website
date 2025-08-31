@@ -5,7 +5,7 @@ import App from "./App.tsx";
 import TimelineWrapper from "./components/timeline-wrapper.tsx";
 import NotFoundPage from "./components/not-found.tsx";
 import MessMenuPage from "./components/mess-menu";
-import { Github } from "lucide-react";
+// use local icon instead of lucide Github
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import UserContextProvider from "./context/userContextProvider.tsx";
 import { Analytics } from "@vercel/analytics/react";
@@ -49,14 +49,19 @@ createRoot(document.getElementById("root")!).render(
 									<Route path="*" element={<NotFoundPage />} />
 								</Routes>
 							</div>
-							<div className="fixed right-4 bottom-4 z-50 p-5 rounded-[1.4rem] backdrop-blur-md bg-white/5 border border-white/30 shadow-lg hover:bg-white/30 transition-all duration-300">
+							<div className="fixed right-4 bottom-4 z-50 p-5 rounded-[1.4rem]">
 								<a
 									href="https://github.com/tashifkhan/JIIT-time-table-website"
 									target="_blank"
 									rel="noopener noreferrer"
 									className="text-[#F0BB78] hover:text-[#543A14] transition-colors"
+									aria-label="JIIT project on GitHub"
 								>
-									<Github className="w-8 h-8 sm:w-10 sm:h-10" />
+									<img
+										src="/icon.png"
+										alt="JIIT project icon"
+										className="w-20 h-20 sm:w-36 sm:h-36 object-contain rounded-lg "
+									/>
 								</a>
 							</div>
 						</Router>

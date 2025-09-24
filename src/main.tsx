@@ -5,7 +5,6 @@ import App from "./App.tsx";
 import TimelineWrapper from "./components/timeline-wrapper.tsx";
 import NotFoundPage from "./components/not-found.tsx";
 import MessMenuPage from "./components/mess-menu";
-// use local icon instead of lucide Github
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import UserContextProvider from "./context/userContextProvider.tsx";
 import { Analytics } from "@vercel/analytics/react";

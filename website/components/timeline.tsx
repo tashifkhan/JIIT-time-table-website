@@ -106,33 +106,38 @@ export const TimelineView: React.FC = () => {
 		switch (type) {
 			case "L":
 				return {
-					background: "#3B82F6", // Solid blue
-					text: "#FFFFFF",
-					border: "none",
+					background: "rgba(59, 130, 246, 0.15)", // Blue glass
+					text: "#60A5FA",
+					border: "1px solid rgba(59, 130, 246, 0.3)",
+					accent: "#3B82F6",
 				};
 			case "P":
 				return {
-					background: "#10B981", // Solid green
-					text: "#FFFFFF",
-					border: "none",
+					background: "rgba(16, 185, 129, 0.15)", // Green glass
+					text: "#34D399",
+					border: "1px solid rgba(16, 185, 129, 0.3)",
+					accent: "#10B981",
 				};
 			case "T":
 				return {
-					background: "#F59E0B", // Solid amber
-					text: "#FFFFFF",
-					border: "none",
+					background: "rgba(245, 158, 11, 0.15)", // Amber glass
+					text: "#FBBF24",
+					border: "1px solid rgba(245, 158, 11, 0.3)",
+					accent: "#F59E0B",
 				};
 			case "C":
 				return {
-					background: "#8B5CF6", // Solid purple
-					text: "#FFFFFF",
-					border: "none",
+					background: "rgba(139, 92, 246, 0.15)", // Purple glass
+					text: "#A78BFA",
+					border: "1px solid rgba(139, 92, 246, 0.3)",
+					accent: "#8B5CF6",
 				};
 			default:
 				return {
-					background: "#543A14", // Dark brown/default
+					background: "rgba(255, 240, 220, 0.05)", // Default glass
 					text: "#FFF0DC",
-					border: "1px solid rgba(255, 240, 220, 0.2)",
+					border: "1px solid rgba(255, 240, 220, 0.1)",
+					accent: "#FFF0DC",
 				};
 		}
 	};
@@ -202,16 +207,19 @@ export const TimelineView: React.FC = () => {
 			background: colors.background,
 			color: colors.text,
 			border: colors.border,
-			borderRadius: "6px",
+			borderLeft: `3px solid ${colors.accent}`,
+			borderRadius: "4px",
 			padding: "4px 8px",
 			height: "100%",
 			display: "flex",
 			flexDirection: "column" as const,
 			gap: "2px",
-			boxShadow: "0 1px 3px rgba(0,0,0,0.1)",
+			boxShadow:
+				"0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06)",
+			backdropFilter: "blur(4px)",
 			position: "relative" as const,
 			overflow: "hidden" as const,
-			transition: "all 0.2s ease-in-out",
+			transition: "all 0.2s cubic-bezier(0.4, 0, 0.2, 1)",
 			cursor: "pointer",
 			fontSize: "0.85rem",
 		};
@@ -269,7 +277,7 @@ export const TimelineView: React.FC = () => {
 
 	return (
 		<div
-			className="flex flex-col h-screen bg-[#23201c] text-[#FFF0DC] overflow-hidden"
+			className="flex flex-col h-screen bg-[#1a1816] text-[#FFF0DC] overflow-hidden bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-[#23201c] via-[#1a1816] to-[#12110f]"
 			style={isDownloadMode ? { minWidth: "2700px", height: "auto" } : {}}
 		>
 			{/* Header */}
@@ -285,17 +293,17 @@ export const TimelineView: React.FC = () => {
 
 			{/* Welcome Banner */}
 			{showWelcome && !isDownloadMode && (
-				<div className="mx-4 mt-4 p-4 rounded-lg bg-gradient-to-r from-[#543A14]/40 to-[#F0BB78]/20 border border-[#F0BB78]/30 shadow-lg flex flex-col md:flex-row items-center justify-between gap-4 animate-fade-in flex-shrink-0">
+				<div className="mx-6 mt-6 p-6 rounded-xl bg-gradient-to-r from-[#543A14]/30 to-[#F0BB78]/10 border border-[#F0BB78]/20 shadow-lg flex flex-col md:flex-row items-center justify-between gap-4 animate-fade-in flex-shrink-0 backdrop-blur-sm">
 					<div>
-						<h2 className="text-lg font-bold mb-1 text-[#F0BB78]">
-							Welcome to Your Weekly Schedule!
+						<h2 className="text-xl font-bold mb-1 text-[#F0BB78] tracking-tight">
+							Welcome to Your Weekly Schedule
 						</h2>
-						<p className="text-sm text-[#FFF0DC]/80">
+						<p className="text-sm text-[#FFF0DC]/70 font-light">
 							View your classes for each day. Toggle between Day and Week views.
 						</p>
 					</div>
 					<button
-						className="px-3 py-1 rounded bg-[#543A14]/60 text-[#FFF0DC] hover:bg-[#543A14]/80 transition text-sm"
+						className="px-4 py-1.5 rounded-full bg-[#543A14]/40 text-[#FFF0DC] hover:bg-[#543A14]/60 transition-all duration-200 text-sm border border-[#F0BB78]/10 hover:border-[#F0BB78]/30"
 						onClick={dismissWelcome}
 					>
 						Dismiss
@@ -305,7 +313,7 @@ export const TimelineView: React.FC = () => {
 
 			{/* Main Grid Container */}
 			<div
-				className="flex-1 overflow-y-auto overflow-x-auto relative"
+				className="flex-1 overflow-y-auto overflow-x-auto relative custom-scrollbar"
 				ref={containerRef}
 			>
 				<div
@@ -317,9 +325,9 @@ export const TimelineView: React.FC = () => {
 					}}
 				>
 					{/* Grid Header (Days) */}
-					<div className="sticky top-0 z-30 bg-[#23201c] border-b border-[#FFF0DC]/10 flex">
+					<div className="sticky top-0 z-30 bg-[#1a1816]/95 backdrop-blur-sm border-b border-[#FFF0DC]/5 flex shadow-sm">
 						{/* Time Column Header Spacer */}
-						<div className="w-16 md:w-20 flex-shrink-0 border-r border-[#FFF0DC]/10 bg-[#23201c]"></div>
+						<div className="w-16 md:w-20 flex-shrink-0 border-r border-[#FFF0DC]/5 bg-[#1a1816]/95"></div>
 
 						{/* Days Headers */}
 						<div
@@ -331,27 +339,23 @@ export const TimelineView: React.FC = () => {
 							{displayedDays.map((day, idx) => (
 								<div
 									key={day}
-									className={`py-3 text-center border-r border-[#FFF0DC]/10 last:border-r-0 ${
-										isToday(day) ? "bg-[#FFF0DC]/5" : ""
+									className={`py-4 text-center border-r border-[#FFF0DC]/5 last:border-r-0 transition-colors duration-300 ${
+										isToday(day) ? "bg-[#F0BB78]/5" : ""
 									}`}
 								>
 									<div
-										className={`text-sm font-medium ${
-											isToday(day) ? "text-[#F0BB78]" : "text-[#FFF0DC]/70"
+										className={`text-xs font-semibold tracking-wider mb-1 ${
+											isToday(day) ? "text-[#F0BB78]" : "text-[#FFF0DC]/50"
 										}`}
 									>
 										{day.slice(0, 3).toUpperCase()}
 									</div>
 									<div
-										className={`text-xl font-bold ${
-											isToday(day) ? "text-[#F0BB78]" : "text-[#FFF0DC]"
+										className={`text-2xl font-light ${
+											isToday(day) ? "text-[#F0BB78]" : "text-[#FFF0DC]/90"
 										}`}
 									>
-										{/* Since we don't have real dates for the schedule, we just show the day name or a placeholder if needed. 
-                                            But for "Day" view with currentDate, we could show the date number. 
-                                            For "Week" view (recurring), maybe just the day name is enough. 
-                                            Let's try to show the date number if we can derive it.
-                                        */}
+										{/* Show date number if possible, or just a placeholder/nothing for recurring schedule */}
 										{view === "day" ? currentDate.getDate() : ""}
 									</div>
 								</div>
@@ -362,10 +366,10 @@ export const TimelineView: React.FC = () => {
 					{/* Grid Body */}
 					<div className="flex relative">
 						{/* Time Column */}
-						<div className="w-16 md:w-20 flex-shrink-0 border-r border-[#FFF0DC]/10 bg-[#23201c] z-20">
+						<div className="w-16 md:w-20 flex-shrink-0 border-r border-[#FFF0DC]/5 bg-[#1a1816]/50 z-20 backdrop-blur-[2px]">
 							{Array.from({ length: 11 }, (_, i) => i + 8).map((hour) => (
 								<div key={hour} className="h-24 md:h-32 relative">
-									<div className="absolute -top-3 right-2 text-xs text-[#FFF0DC]/50">
+									<div className="absolute -top-3 right-3 text-xs font-medium text-[#FFF0DC]/40">
 										{hour === 12
 											? "12 PM"
 											: hour > 12
@@ -396,8 +400,10 @@ export const TimelineView: React.FC = () => {
 							{displayedDays.map((day, idx) => (
 								<div
 									key={day}
-									className={`relative border-r border-[#FFF0DC]/10 last:border-r-0 ${
-										isToday(day) ? "bg-[#FFF0DC]/[0.02]" : ""
+									className={`relative border-r border-[#FFF0DC]/5 last:border-r-0 ${
+										isToday(day)
+											? "bg-gradient-to-b from-[#F0BB78]/[0.02] to-transparent"
+											: ""
 									}`}
 									ref={(el) => {
 										dayRefs.current[idx] = el;
@@ -414,8 +420,8 @@ export const TimelineView: React.FC = () => {
 												}rem`, // 8rem = 32 * 4px = 128px (h-32)
 											}}
 										>
-											<div className="h-[2px] bg-red-500 shadow-[0_0_4px_rgba(239,68,68,0.6)]"></div>
-											<div className="absolute -left-1.5 -top-1.5 w-3 h-3 bg-red-500 rounded-full"></div>
+											<div className="h-[2px] bg-[#EF4444] shadow-[0_0_8px_rgba(239,68,68,0.6)]"></div>
+											<div className="absolute -left-1.5 -top-1.5 w-3 h-3 bg-[#EF4444] rounded-full shadow-[0_0_4px_rgba(239,68,68,0.8)]"></div>
 										</div>
 									)}
 
@@ -425,7 +431,7 @@ export const TimelineView: React.FC = () => {
 											([timeSlot, event]: [string, ScheduleEvent]) => (
 												<div
 													key={timeSlot}
-													className="absolute left-1 right-1 z-10 hover:z-20"
+													className="absolute left-1 right-1 z-10 hover:z-30 group"
 													style={{
 														top: `${
 															getEventPosition(timeSlot) *
@@ -441,14 +447,36 @@ export const TimelineView: React.FC = () => {
 														setSelectedEvent({ event, timeSlot, day })
 													}
 												>
-													<div style={getEventStyle(event as ScheduleEvent)}>
-														<div className="font-semibold truncate">
+													<div
+														style={getEventStyle(event as ScheduleEvent)}
+														className="group-hover:scale-[1.02] group-hover:shadow-xl transition-all duration-200"
+													>
+														<div className="font-semibold truncate text-sm leading-tight">
 															{event.subject_name}
 														</div>
-														<div className="text-xs opacity-90 truncate">
+														<div className="text-[10px] md:text-xs opacity-80 truncate mt-0.5 font-medium">
 															{timeSlot}
 														</div>
-														<div className="text-xs opacity-90 truncate">
+														<div className="text-[10px] md:text-xs opacity-70 truncate flex items-center gap-1 mt-auto pb-0.5">
+															<svg
+																className="w-3 h-3 opacity-60"
+																fill="none"
+																stroke="currentColor"
+																viewBox="0 0 24 24"
+															>
+																<path
+																	strokeLinecap="round"
+																	strokeLinejoin="round"
+																	strokeWidth={2}
+																	d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"
+																/>
+																<path
+																	strokeLinecap="round"
+																	strokeLinejoin="round"
+																	strokeWidth={2}
+																	d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"
+																/>
+															</svg>
 															{event.location}
 														</div>
 													</div>
@@ -510,16 +538,19 @@ function EventDetailModal({
 
 	return (
 		<div
-			className="fixed inset-0 z-50 flex items-center justify-center bg-black/40 backdrop-blur-sm"
+			className="fixed inset-0 z-50 flex items-center justify-center bg-black/60 backdrop-blur-sm transition-all duration-300"
 			onClick={onClose}
 		>
 			<div
-				className="relative max-w-md w-full mx-4 rounded-xl shadow-2xl p-6 animate-fade-in bg-[#23201c] border border-[#FFF0DC]/20"
+				className="relative max-w-md w-full mx-4 rounded-2xl shadow-2xl p-6 animate-fade-in bg-[#23201c] border border-[#FFF0DC]/10"
 				onClick={(e) => e.stopPropagation()}
+				style={{
+					boxShadow: `0 0 0 1px ${colors.border}, 0 20px 50px -12px rgba(0, 0, 0, 0.5)`,
+				}}
 			>
 				{/* Close button */}
 				<button
-					className="absolute top-4 right-4 text-[#FFF0DC]/50 hover:text-[#FFF0DC] transition"
+					className="absolute top-4 right-4 text-[#FFF0DC]/40 hover:text-[#FFF0DC] transition-colors p-1 hover:bg-[#FFF0DC]/10 rounded-full"
 					onClick={onClose}
 					aria-label="Close"
 				>
@@ -539,35 +570,36 @@ function EventDetailModal({
 				</button>
 
 				{/* Header with Color Strip */}
-				<div className="flex items-start gap-4 mb-4">
+				<div className="flex items-start gap-4 mb-6">
 					<div
-						className="w-4 h-4 rounded mt-1 flex-shrink-0"
-						style={{ backgroundColor: colors.background }}
+						className="w-1.5 self-stretch rounded-full flex-shrink-0"
+						style={{ backgroundColor: colors.accent }}
 					></div>
 					<div>
-						<h2 className="text-xl font-bold text-[#FFF0DC] leading-tight">
+						<div className="flex items-center gap-2 mb-1">
+							<span
+								className="text-[10px] font-bold uppercase tracking-wider px-2 py-0.5 rounded-full bg-opacity-20"
+								style={{
+									backgroundColor: colors.background,
+									color: colors.text,
+								}}
+							>
+								{getTypeLabel(event.type)}
+							</span>
+						</div>
+						<h2 className="text-2xl font-bold text-[#FFF0DC] leading-tight mb-1">
 							{event.subject_name}
 						</h2>
-						<div className="text-sm text-[#FFF0DC]/70 mt-1">
+						<div className="text-sm text-[#FFF0DC]/60 font-medium">
 							{day}, {timeSlot}
 						</div>
 					</div>
 				</div>
 
 				{/* Details */}
-				<div className="space-y-4 text-sm text-[#FFF0DC]/90 pl-8">
-					<div className="flex items-center gap-3">
-						<div className="w-5 flex justify-center text-[#FFF0DC]/50">
-							{getTypeIcon(event.type)}
-						</div>
-						<div>
-							<span className="block text-[#FFF0DC]/50 text-xs">Type</span>
-							{getTypeLabel(event.type)}
-						</div>
-					</div>
-
-					<div className="flex items-center gap-3">
-						<div className="w-5 flex justify-center text-[#FFF0DC]/50">
+				<div className="space-y-4 text-sm text-[#FFF0DC]/80 pl-6 border-l border-[#FFF0DC]/10 ml-0.5">
+					<div className="flex items-center gap-4 group">
+						<div className="w-8 h-8 rounded-full bg-[#FFF0DC]/5 flex items-center justify-center text-[#FFF0DC]/50 group-hover:bg-[#FFF0DC]/10 group-hover:text-[#FFF0DC] transition-colors">
 							<svg
 								className="w-4 h-4"
 								fill="none"
@@ -589,13 +621,15 @@ function EventDetailModal({
 							</svg>
 						</div>
 						<div>
-							<span className="block text-[#FFF0DC]/50 text-xs">Location</span>
-							{event.location}
+							<span className="block text-[#FFF0DC]/40 text-xs font-medium uppercase tracking-wide mb-0.5">
+								Location
+							</span>
+							<span className="text-base">{event.location}</span>
 						</div>
 					</div>
 
-					<div className="flex items-center gap-3">
-						<div className="w-5 flex justify-center text-[#FFF0DC]/50">
+					<div className="flex items-center gap-4 group">
+						<div className="w-8 h-8 rounded-full bg-[#FFF0DC]/5 flex items-center justify-center text-[#FFF0DC]/50 group-hover:bg-[#FFF0DC]/10 group-hover:text-[#FFF0DC] transition-colors">
 							<svg
 								className="w-4 h-4"
 								fill="none"
@@ -611,10 +645,24 @@ function EventDetailModal({
 							</svg>
 						</div>
 						<div>
-							<span className="block text-[#FFF0DC]/50 text-xs">Duration</span>
-							{getEventDuration(timeSlot)} hours
+							<span className="block text-[#FFF0DC]/40 text-xs font-medium uppercase tracking-wide mb-0.5">
+								Duration
+							</span>
+							<span className="text-base">
+								{getEventDuration(timeSlot)} hours
+							</span>
 						</div>
 					</div>
+				</div>
+
+				{/* Footer Actions (Optional placeholder for future) */}
+				<div className="mt-8 pt-4 border-t border-[#FFF0DC]/10 flex justify-end">
+					<button
+						className="text-sm font-medium text-[#F0BB78] hover:text-[#D4A366] transition-colors"
+						onClick={onClose}
+					>
+						Done
+					</button>
 				</div>
 			</div>
 		</div>

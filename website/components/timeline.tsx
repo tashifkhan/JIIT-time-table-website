@@ -22,6 +22,13 @@ export const TimelineView: React.FC = () => {
 	const [view, setView] = useState<"day" | "week">("week");
 	const [currentDate, setCurrentDate] = useState(new Date());
 
+	// Set default view to day on mobile
+	useEffect(() => {
+		if (window.innerWidth < 768) {
+			setView("day");
+		}
+	}, []);
+
 	// Detect if download mode is active via query param
 	const isDownloadMode = React.useMemo(() => {
 		const params = new URLSearchParams(location.search);

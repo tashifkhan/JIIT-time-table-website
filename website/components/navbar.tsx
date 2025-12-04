@@ -1,6 +1,14 @@
 "use client";
 import { useRouter, usePathname } from "next/navigation";
-import { Calendar, Clock, Menu, X, Utensils, GitCompare } from "lucide-react";
+import {
+	Calendar,
+	Clock,
+	Menu,
+	X,
+	Utensils,
+	GitCompare,
+	Github,
+} from "lucide-react";
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import Link from "next/link";
@@ -152,6 +160,18 @@ export default function Navbar() {
 								</Link>
 							);
 						})}
+					</div>
+
+					<div className="mt-auto px-4 pb-6">
+						<Link
+							href="https://github.com/tashifkhan/JIIT-time-table-website"
+							target="_blank"
+							rel="noopener noreferrer"
+							className="flex items-center gap-3 px-4 py-3 rounded-xl text-slate-400 hover:text-slate-200 hover:bg-white/5 transition-all duration-200 group"
+						>
+							<Github className="w-5 h-5 transition-colors text-slate-400 group-hover:text-slate-200" />
+							<span className="font-medium">GitHub</span>
+						</Link>
 					</div>
 				</div>
 			</motion.nav>

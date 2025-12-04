@@ -35,6 +35,13 @@ export const TimelineView: React.FC = () => {
 		return params.get("download") === "1";
 	}, [location.search]);
 
+	// Force week view in download mode
+	useEffect(() => {
+		if (isDownloadMode) {
+			setView("week");
+		}
+	}, [isDownloadMode]);
+
 	// Welcome banner state
 	const [showWelcome, setShowWelcome] = useState(false);
 	useEffect(() => {
@@ -284,6 +291,7 @@ export const TimelineView: React.FC = () => {
 
 	return (
 		<div
+			id="schedule-display"
 			className="flex flex-col h-screen bg-[#1a1816] text-[#FFF0DC] overflow-hidden bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-[#23201c] via-[#1a1816] to-[#12110f]"
 			style={isDownloadMode ? { minWidth: "2700px", height: "auto" } : {}}
 		>

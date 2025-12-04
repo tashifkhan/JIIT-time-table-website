@@ -3,6 +3,7 @@
 import React, { useEffect, useRef, useState, useCallback } from "react";
 import UserContext from "../context/userContext";
 import { useSearchParams } from "next/navigation";
+import { TimelineHeader } from "./timeline-header";
 
 interface ScheduleEvent {
 	subject_name: string;
@@ -11,20 +12,15 @@ interface ScheduleEvent {
 	isCustom?: boolean;
 }
 
-interface TimeSlot {
-	time: string;
-	subject: string;
-	type: string;
-	location: string;
-	day?: string;
-}
-
 export const TimelineView: React.FC = () => {
 	const { editedSchedule, schedule } = React.useContext(UserContext);
 	const displaySchedule = editedSchedule || schedule;
 	const containerRef = useRef<HTMLDivElement>(null);
-	// Add refs for each day column
 	const dayRefs = useRef<(HTMLDivElement | null)[]>([]);
+
+	// State for view and date
+	const [view, setView] = useState<"day" | "week">("week");
+	const [currentDate, setCurrentDate] = useState(new Date());
 
 	// Detect if download mode is active via query param
 	const isDownloadMode = React.useMemo(() => {
@@ -45,7 +41,7 @@ export const TimelineView: React.FC = () => {
 		localStorage.setItem("timelineWelcomeDismissed", "1");
 	};
 
-	// Scroll to current time on mount for visitors (not download mode)
+	// Scroll to current time on mount
 	useEffect(() => {
 		if (!isDownloadMode && displaySchedule) {
 			const currentTimePosition = getCurrentTimePosition();
@@ -53,49 +49,26 @@ export const TimelineView: React.FC = () => {
 			const isCurrentDayInSchedule = days.includes(currentDay);
 
 			if (currentTimePosition !== null && isCurrentDayInSchedule) {
-				// Calculate the scroll position to center the current time
-				const timeSlotHeight = window.innerWidth >= 768 ? 12 * 16 : 9 * 16; // 12rem or 9rem in pixels
-				const headerHeight = 80; // Account for day header
-				const scrollPosition =
-					currentTimePosition * timeSlotHeight +
-					headerHeight -
-					window.innerHeight / 2;
+				// If in day view and it's today, or in week view
+				if (view === "week" || (view === "day" && isToday(currentDay))) {
+					const timeSlotHeight = window.innerWidth >= 768 ? 12 * 16 : 9 * 16;
+					const headerHeight = 80;
+					const scrollPosition =
+						currentTimePosition * timeSlotHeight +
+						headerHeight -
+						window.innerHeight / 2;
 
-				// Smooth scroll to current time
-				setTimeout(() => {
-					window.scrollTo({
-						top: Math.max(0, scrollPosition),
-						left: 0,
-						behavior: "smooth",
-					});
-				}, 100); // Small delay to ensure rendering is complete
-
-				// Horizontal scroll to current day
-				setTimeout(() => {
-					const dayIndex = days.indexOf(currentDay);
-					const dayNode = dayRefs.current[dayIndex];
-					if (containerRef.current && dayNode) {
-						const scrollLeft =
-							dayNode.offsetLeft -
-							containerRef.current.offsetLeft -
-							containerRef.current.clientWidth / 2 +
-							dayNode.clientWidth / 2;
-						containerRef.current.scrollTo({
-							left: Math.max(0, scrollLeft),
+					setTimeout(() => {
+						window.scrollTo({
+							top: Math.max(0, scrollPosition),
+							left: 0,
 							behavior: "smooth",
 						});
-					}
-				}, 200); // After vertical scroll
-			} else {
-				// Fallback to scroll to top if no current time or not a weekday
-				window.scrollTo({ top: 0, left: 0, behavior: "auto" });
-			}
-
-			if (containerRef.current) {
-				containerRef.current.scrollLeft = 0;
+					}, 100);
+				}
 			}
 		}
-	}, [isDownloadMode, displaySchedule]);
+	}, [isDownloadMode, displaySchedule, view]);
 
 	const days = [
 		"Monday",
@@ -106,41 +79,60 @@ export const TimelineView: React.FC = () => {
 		"Saturday",
 	];
 
+	const handleNavigate = (direction: "prev" | "next") => {
+		const newDate = new Date(currentDate);
+		if (view === "week") {
+			newDate.setDate(newDate.getDate() + (direction === "next" ? 7 : -7));
+		} else {
+			newDate.setDate(newDate.getDate() + (direction === "next" ? 1 : -1));
+		}
+		setCurrentDate(newDate);
+	};
+
+	const handleToday = () => {
+		setCurrentDate(new Date());
+	};
+
+	const getDaysToDisplay = () => {
+		if (view === "day") {
+			return [currentDate.toLocaleDateString("en-US", { weekday: "long" })];
+		}
+		return days;
+	};
+
+	const displayedDays = getDaysToDisplay();
+
 	const getEventColor = (type: string) => {
 		switch (type) {
 			case "L":
 				return {
-					background:
-						"linear-gradient(135deg, rgba(59, 130, 246, 0.15), rgba(37, 99, 235, 0.25))",
-					border: "1px solid rgba(59, 130, 246, 0.3)",
-					accent: "#3B82F6",
+					background: "#3B82F6", // Solid blue
+					text: "#FFFFFF",
+					border: "none",
 				};
 			case "P":
 				return {
-					background:
-						"linear-gradient(135deg, rgba(16, 185, 129, 0.15), rgba(5, 150, 105, 0.25))",
-					border: "1px solid rgba(16, 185, 129, 0.3)",
-					accent: "#10B981",
+					background: "#10B981", // Solid green
+					text: "#FFFFFF",
+					border: "none",
 				};
 			case "T":
 				return {
-					background:
-						"linear-gradient(135deg, rgba(245, 158, 11, 0.15), rgba(217, 119, 6, 0.25))",
-					border: "1px solid rgba(245, 158, 11, 0.3)",
-					accent: "#F59E0B",
+					background: "#F59E0B", // Solid amber
+					text: "#FFFFFF",
+					border: "none",
 				};
 			case "C":
 				return {
-					background:
-						"linear-gradient(135deg, rgba(139, 92, 246, 0.15), rgba(124, 58, 237, 0.25))",
-					border: "1px solid rgba(139, 92, 246, 0.3)",
-					accent: "#8B5CF6",
+					background: "#8B5CF6", // Solid purple
+					text: "#FFFFFF",
+					border: "none",
 				};
 			default:
 				return {
-					background: "rgba(255, 240, 220, 0.1)",
+					background: "#543A14", // Dark brown/default
+					text: "#FFF0DC",
 					border: "1px solid rgba(255, 240, 220, 0.2)",
-					accent: "#FFF0DC",
 				};
 		}
 	};
@@ -161,17 +153,15 @@ export const TimelineView: React.FC = () => {
 	};
 
 	const getTypeIcon = (type: string) => {
-		const iconProps = "w-4 h-4 inline-block";
+		const iconProps = "w-3 h-3 inline-block opacity-80";
 		switch (type) {
 			case "L":
-				// Book/Lecture icon
 				return (
 					<svg className={iconProps} fill="currentColor" viewBox="0 0 20 20">
 						<path d="M9 4.804A7.968 7.968 0 005.5 4c-1.255 0-2.443.29-3.5.804v10A7.969 7.969 0 015.5 14c1.669 0 3.218.51 4.5 1.385A7.962 7.962 0 0114.5 14c1.255 0 2.443.29 3.5.804v-10A7.968 7.968 0 0014.5 4c-1.255 0-2.443.29-3.5.804V12a1 1 0 11-2 0V4.804z" />
 					</svg>
 				);
 			case "P":
-				// Flask/Lab icon
 				return (
 					<svg className={iconProps} fill="currentColor" viewBox="0 0 20 20">
 						<path
@@ -182,21 +172,18 @@ export const TimelineView: React.FC = () => {
 					</svg>
 				);
 			case "T":
-				// Pencil/Tutorial icon
 				return (
 					<svg className={iconProps} fill="currentColor" viewBox="0 0 20 20">
 						<path d="M13.586 3.586a2 2 0 112.828 2.828l-.793.793-2.828-2.828.793-.793zM11.379 5.793L3 14.172V17h2.828l8.38-8.379-2.83-2.828z" />
 					</svg>
 				);
 			case "C":
-				// Star/Custom icon
 				return (
 					<svg className={iconProps} fill="currentColor" viewBox="0 0 20 20">
 						<path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
 					</svg>
 				);
 			default:
-				// Calendar icon
 				return (
 					<svg className={iconProps} fill="currentColor" viewBox="0 0 20 20">
 						<path
@@ -213,19 +200,20 @@ export const TimelineView: React.FC = () => {
 		const colors = getEventColor(event.type);
 		return {
 			background: colors.background,
-			backdropFilter: "blur(10px)",
+			color: colors.text,
 			border: colors.border,
-			borderRadius: "18px",
-			padding: "0.75rem",
+			borderRadius: "6px",
+			padding: "4px 8px",
 			height: "100%",
 			display: "flex",
 			flexDirection: "column" as const,
-			gap: "0.5rem",
-			boxShadow: `0 6px 18px rgba(0, 0, 0, 0.1), inset 0 1px 0 rgba(255, 255, 255, 0.1)`,
+			gap: "2px",
+			boxShadow: "0 1px 3px rgba(0,0,0,0.1)",
 			position: "relative" as const,
 			overflow: "hidden" as const,
 			transition: "all 0.2s ease-in-out",
 			cursor: "pointer",
+			fontSize: "0.85rem",
 		};
 	};
 
@@ -271,27 +259,6 @@ export const TimelineView: React.FC = () => {
 		return getCurrentDay() === day;
 	};
 
-	const getScheduleStats = () => {
-		if (!displaySchedule) return { total: 0, byType: {}, todayCount: 0 };
-
-		let total = 0;
-		let todayCount = 0;
-		const byType: { [key: string]: number } = {};
-		const currentDay = getCurrentDay();
-
-		Object.entries(displaySchedule).forEach(([day, daySchedule]) => {
-			Object.values(daySchedule).forEach((event) => {
-				total++;
-				byType[event.type] = (byType[event.type] || 0) + 1;
-				if (day === currentDay) {
-					todayCount++;
-				}
-			});
-		});
-
-		return { total, byType, todayCount };
-	};
-
 	const [selectedEvent, setSelectedEvent] = useState<{
 		event: ScheduleEvent;
 		timeSlot: string;
@@ -302,50 +269,33 @@ export const TimelineView: React.FC = () => {
 
 	return (
 		<div
-			className="min-h-[50%] text-[#FFF0DC] p-0 md:p-8 overflow-scroll"
-			style={isDownloadMode ? { minWidth: "2700px" } : {}}
+			className="flex flex-col h-screen bg-[#23201c] text-[#FFF0DC] overflow-hidden"
+			style={isDownloadMode ? { minWidth: "2700px", height: "auto" } : {}}
 		>
-			{/* Page Title Header for visitors */}
+			{/* Header */}
 			{!isDownloadMode && (
-				<div className="mb-8 px-4 md:px-8 text-center">
-					<div className="flex flex-col md:flex-row items-center justify-center gap-2 md:gap-3 mb-2">
-						<h1 className="text-2xl sm:text-4xl md:text-5xl font-bold bg-clip-text text-transparent bg-[#F0BB78]">
-							Your Weekly Schedule
-						</h1>
-					</div>
-					<div className="text-base md:text-xl text-[#FFF0DC]/70 font-normal">
-						Today: {getCurrentDay()}
-					</div>
-				</div>
+				<TimelineHeader
+					currentDate={currentDate}
+					view={view}
+					onViewChange={setView}
+					onNavigate={handleNavigate}
+					onToday={handleToday}
+				/>
 			)}
 
-			{showWelcome && (
-				<div className="mb-6 mx-4 md:mx-0 p-4 rounded-lg bg-gradient-to-r from-[#543A14]/40 to-[#F0BB78]/20 border border-[#F0BB78]/30 shadow-lg flex flex-col md:flex-row items-center justify-between gap-4 animate-fade-in">
+			{/* Welcome Banner */}
+			{showWelcome && !isDownloadMode && (
+				<div className="mx-4 mt-4 p-4 rounded-lg bg-gradient-to-r from-[#543A14]/40 to-[#F0BB78]/20 border border-[#F0BB78]/30 shadow-lg flex flex-col md:flex-row items-center justify-between gap-4 animate-fade-in flex-shrink-0">
 					<div>
-						<h2 className="text-lg md:text-xl font-bold mb-1 text-[#F0BB78]">
+						<h2 className="text-lg font-bold mb-1 text-[#F0BB78]">
 							Welcome to Your Weekly Schedule!
 						</h2>
-						<ul className="text-sm text-[#FFF0DC]/80 list-disc pl-5 space-y-1">
-							<li>View your classes for each day, color-coded by type.</li>
-							<li>
-								Hover over events for details. Today is highlighted for you.
-							</li>
-							<li>
-								Moreover clicking on it will show you all the details of that
-								particular class.
-							</li>
-							<li>
-								Use the buttons below to download your schedule as PNG or PDF,
-								or add to Google Calendar.
-							</li>
-							<li>
-								Need to edit or create a new schedule? Use the navigation bar on
-								the left.
-							</li>
-						</ul>
+						<p className="text-sm text-[#FFF0DC]/80">
+							View your classes for each day. Toggle between Day and Week views.
+						</p>
 					</div>
 					<button
-						className="ml-auto mt-2 md:mt-0 px-3 py-1 rounded bg-[#543A14]/60 text-[#FFF0DC] hover:bg-[#543A14]/80 transition"
+						className="px-3 py-1 rounded bg-[#543A14]/60 text-[#FFF0DC] hover:bg-[#543A14]/80 transition text-sm"
 						onClick={dismissWelcome}
 					>
 						Dismiss
@@ -353,265 +303,161 @@ export const TimelineView: React.FC = () => {
 				</div>
 			)}
 
-			{/* Stats & Legend container for visitors */}
-			{!isDownloadMode && (
-				<div className="mb-6 mx-4 md:mx-0 p-4 rounded-lg bg-[#23201c]/60 border border-[#FFF0DC]/10 shadow flex flex-col md:flex-row items-center md:items-center justify-between gap-4 md:gap-0">
-					<div className="flex flex-col sm:flex-row items-center gap-2 sm:gap-6 w-full md:w-auto justify-center md:justify-start">
-						<div className="text-sm flex items-center gap-2">
-							<span className="text-[#FFF0DC]/70">Total Classes:</span>
-							<span className="font-semibold text-blue-300">
-								{getScheduleStats().total}
-							</span>
-						</div>
-						<div className="flex gap-4 text-sm flex-wrap justify-center">
-							{Object.entries(getScheduleStats().byType).map(
-								([type, count]) => (
-									<div key={type} className="flex items-center gap-2">
-										<span className="flex-shrink-0">{getTypeIcon(type)}</span>
-										<span className="text-[#FFF0DC]/70">
-											{getTypeLabel(type)}:
-										</span>
-										<span
-											className="font-semibold"
-											style={{ color: getEventColor(type).accent }}
-										>
-											{count}
-										</span>
-									</div>
-								)
-							)}
-						</div>
-					</div>
-					<div className="flex flex-col sm:flex-row items-center gap-2 sm:gap-3 text-xs w-full md:w-auto justify-center md:justify-end">
-						<span className="text-[#FFF0DC]/70">Legend:</span>
-						<div className="flex gap-2 sm:gap-3 flex-wrap justify-center">
-							{["L", "P", "T", "C"].map((type) => (
-								<div key={type} className="flex items-center gap-1">
-									<div
-										className="w-3 h-3 rounded-full"
-										style={{ backgroundColor: getEventColor(type).accent }}
-									></div>
-									<span>{getTypeLabel(type)}</span>
-								</div>
-							))}
-						</div>
-					</div>
-				</div>
-			)}
-
+			{/* Main Grid Container */}
 			<div
-				id="schedule-display"
-				ref={containerRef} // Move ref here
-				className="max-w-8xl mx-auto backdrop-blur-lg bg-[rgba(255,240,220,0.05)] rounded-none md:rounded-xl p-0 md:p-6 shadow-xl overflow-x-auto"
-				style={isDownloadMode ? { minWidth: "2550px" } : {}}
+				className="flex-1 overflow-y-auto overflow-x-auto relative"
+				ref={containerRef}
 			>
-				{/* Only show the title inside the grid in download mode */}
-				{isDownloadMode && (
-					<div className="flex items-center justify-between mb-6">
-						<h1 className="text-xl md:text-3xl font-bold text-center flex-1 flex items-center justify-center gap-3">
-							<svg
-								className="w-7 h-7 md:w-8 md:h-8"
-								fill="currentColor"
-								viewBox="0 0 20 20"
-							>
-								<path
-									fillRule="evenodd"
-									d="M6 2a1 1 0 00-1 1v1H4a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V6a2 2 0 00-2-2h-1V3a1 1 0 10-2 0v1H7V3a1 1 0 00-1-1zm0 5a1 1 0 000 2h8a1 1 0 100-2H6z"
-									clipRule="evenodd"
-								/>
-							</svg>
-							Your Weekly Schedule
-						</h1>
-						<div className="text-right">
-							<div className="text-sm text-[#FFF0DC]/70">
-								Today: {getCurrentDay()}
-							</div>
-							{getScheduleStats().todayCount > 0 && (
-								<div className="text-xs text-blue-300">
-									{getScheduleStats().todayCount} classes today
-								</div>
-							)}
-						</div>
-					</div>
-				)}
+				<div
+					className="min-w-full"
+					style={{
+						width:
+							view === "week" ? (isDownloadMode ? "2500px" : "100%") : "100%",
+						minWidth: view === "week" ? "800px" : "auto",
+					}}
+				>
+					{/* Grid Header (Days) */}
+					<div className="sticky top-0 z-30 bg-[#23201c] border-b border-[#FFF0DC]/10 flex">
+						{/* Time Column Header Spacer */}
+						<div className="w-16 md:w-20 flex-shrink-0 border-r border-[#FFF0DC]/10 bg-[#23201c]"></div>
 
-				{/* Schedule Statistics */}
-				{/* This block is now moved outside the main display div */}
-
-				<div className="min-w-[1500px] px-2 md:px-0">
-					<div
-						className={
-							isDownloadMode
-								? "grid grid-cols-[150px_repeat(6,1fr)] gap-4"
-								: "grid grid-cols-[70px_repeat(6,1fr)] md:grid-cols-[110px_repeat(6,1fr)] gap-4"
-						}
-					>
-						{/* Time column */}
-						<div className="font-medium">
-							<div className="h-20"></div> {/* Header spacer */}
-							{Array.from({ length: 11 }, (_, i) => i + 8).map((hour) => (
+						{/* Days Headers */}
+						<div
+							className="flex-1 grid"
+							style={{
+								gridTemplateColumns: `repeat(${displayedDays.length}, 1fr)`,
+							}}
+						>
+							{displayedDays.map((day, idx) => (
 								<div
-									key={hour}
-									className="h-36 md:h-48 flex items-center justify-center text-sm md:text-base relative"
-									style={{ transform: "translateY(-50%)" }}
-								>
-									<div className="text-center">
-										<div className="font-semibold">{`${hour}:00`}</div>
-										<div className="text-xs opacity-60">
-											{hour < 12 ? "AM" : "PM"}
-										</div>
-									</div>
-								</div>
-							))}
-						</div>
-
-						{/* Days columns */}
-						{days.map((day, idx) => (
-							<div
-								key={day}
-								className="relative"
-								ref={(el) => {
-									dayRefs.current[idx] = el;
-								}}
-							>
-								<div
-									className={`h-20 flex items-center justify-center font-medium border-b text-sm md:text-base rounded-t-lg ${
-										!isDownloadMode && isToday(day)
-											? "bg-gradient-to-r from-[#543A14]/40 to-[#F0BB78]/20 border-[rgba(255,240,220,0.1)] text-white"
-											: "border-[rgba(255,240,220,0.1)]"
+									key={day}
+									className={`py-3 text-center border-r border-[#FFF0DC]/10 last:border-r-0 ${
+										isToday(day) ? "bg-[#FFF0DC]/5" : ""
 									}`}
 								>
-									<div className="text-center">
-										<div className="font-semibold">{day}</div>
-										{isToday(day) && (
-											<div className="text-xs opacity-75">Today</div>
-										)}
+									<div
+										className={`text-sm font-medium ${
+											isToday(day) ? "text-[#F0BB78]" : "text-[#FFF0DC]/70"
+										}`}
+									>
+										{day.slice(0, 3).toUpperCase()}
+									</div>
+									<div
+										className={`text-xl font-bold ${
+											isToday(day) ? "text-[#F0BB78]" : "text-[#FFF0DC]"
+										}`}
+									>
+										{/* Since we don't have real dates for the schedule, we just show the day name or a placeholder if needed. 
+                                            But for "Day" view with currentDate, we could show the date number. 
+                                            For "Week" view (recurring), maybe just the day name is enough. 
+                                            Let's try to show the date number if we can derive it.
+                                        */}
+										{view === "day" ? currentDate.getDate() : ""}
 									</div>
 								</div>
+							))}
+						</div>
+					</div>
 
-								{/* Time grid background */}
-								<div className="grid grid-rows-[repeat(10,9rem)] md:grid-rows-[repeat(10,12rem)]">
-									{Array.from({ length: 11 }, (_, i) => i + 8).map((hour) => (
-										<div
-											key={hour}
-											className="border-b border-[rgba(255,240,220,0.05)] relative"
-										>
-											{/* Current time indicator */}
-											{!isDownloadMode &&
-												isToday(day) &&
-												getCurrentTimePosition() !== null &&
-												Math.floor(getCurrentTimePosition()!) === hour - 8 && (
-													<div
-														className="absolute left-0 right-0 h-0.5 bg-red-500 shadow-lg z-20 animate-pulse"
-														style={{
-															top: `${
-																(getCurrentTimePosition()! - (hour - 8)) * 100
-															}%`,
-															boxShadow: "0 0 10px rgba(239, 68, 68, 0.6)",
-														}}
-													>
-														<div className="absolute -left-1 -top-1 w-2 h-2 bg-red-500 rounded-full animate-ping"></div>
-														<div className="absolute -left-1 -top-1 w-2 h-2 bg-red-500 rounded-full"></div>
-														<div className="absolute -right-8 -top-2 text-xs text-red-400 font-medium bg-black/30 px-1 rounded">
-															Now
-														</div>
-													</div>
-												)}
-										</div>
-									))}
+					{/* Grid Body */}
+					<div className="flex relative">
+						{/* Time Column */}
+						<div className="w-16 md:w-20 flex-shrink-0 border-r border-[#FFF0DC]/10 bg-[#23201c] z-20">
+							{Array.from({ length: 11 }, (_, i) => i + 8).map((hour) => (
+								<div key={hour} className="h-24 md:h-32 relative">
+									<div className="absolute -top-3 right-2 text-xs text-[#FFF0DC]/50">
+										{hour === 12
+											? "12 PM"
+											: hour > 12
+											? `${hour - 12} PM`
+											: `${hour} AM`}
+									</div>
 								</div>
+							))}
+						</div>
 
-								{/* Events */}
-								{displaySchedule?.[day] &&
-									Object.entries(displaySchedule[day]).map(
-										([timeSlot, event]: [string, ScheduleEvent]) => (
-											<div
-												key={timeSlot}
-												className="absolute w-[calc(100%-1.2rem)] left-2.5 group transition-all duration-200 hover:scale-105 hover:-translate-y-1 cursor-pointer"
-												style={{
-													top: `${
-														getEventPosition(timeSlot) *
-															(window.innerWidth >= 768 ? 12 : 9) +
-														4.5
-													}rem`,
-													height: `${
-														getEventDuration(timeSlot) *
-														(window.innerWidth >= 768 ? 12 : 9)
-													}rem`,
-													zIndex: 10,
-												}}
-												onClick={() =>
-													setSelectedEvent({ event, timeSlot, day })
-												}
-											>
+						{/* Days Columns */}
+						<div
+							className="flex-1 grid relative"
+							style={{
+								gridTemplateColumns: `repeat(${displayedDays.length}, 1fr)`,
+							}}
+						>
+							{/* Horizontal Grid Lines */}
+							<div className="absolute inset-0 z-0 pointer-events-none">
+								{Array.from({ length: 11 }, (_, i) => i + 8).map((hour) => (
+									<div
+										key={hour}
+										className="h-24 md:h-32 border-b border-[#FFF0DC]/5"
+									></div>
+								))}
+							</div>
+
+							{displayedDays.map((day, idx) => (
+								<div
+									key={day}
+									className={`relative border-r border-[#FFF0DC]/10 last:border-r-0 ${
+										isToday(day) ? "bg-[#FFF0DC]/[0.02]" : ""
+									}`}
+									ref={(el) => {
+										dayRefs.current[idx] = el;
+									}}
+								>
+									{/* Current Time Indicator Line */}
+									{isToday(day) && getCurrentTimePosition() !== null && (
+										<div
+											className="absolute left-0 right-0 z-20 pointer-events-none"
+											style={{
+												top: `${
+													getCurrentTimePosition()! *
+													(window.innerWidth >= 768 ? 8 : 6)
+												}rem`, // 8rem = 32 * 4px = 128px (h-32)
+											}}
+										>
+											<div className="h-[2px] bg-red-500 shadow-[0_0_4px_rgba(239,68,68,0.6)]"></div>
+											<div className="absolute -left-1.5 -top-1.5 w-3 h-3 bg-red-500 rounded-full"></div>
+										</div>
+									)}
+
+									{/* Events */}
+									{displaySchedule?.[day] &&
+										Object.entries(displaySchedule[day]).map(
+											([timeSlot, event]: [string, ScheduleEvent]) => (
 												<div
-													style={getEventStyle(event as ScheduleEvent)}
-													className="group-hover:shadow-2xl group-hover:shadow-black/20"
+													key={timeSlot}
+													className="absolute left-1 right-1 z-10 hover:z-20"
+													style={{
+														top: `${
+															getEventPosition(timeSlot) *
+															(window.innerWidth >= 768 ? 8 : 6)
+														}rem`,
+														height: `${
+															getEventDuration(timeSlot) *
+																(window.innerWidth >= 768 ? 8 : 6) -
+															0.125
+														}rem`, // Subtract small gap
+													}}
+													onClick={() =>
+														setSelectedEvent({ event, timeSlot, day })
+													}
 												>
-													{/* Event Type Badge */}
-													<div className="flex items-center justify-between mb-2">
-														<span className="inline-flex items-center gap-2 px-2 py-1 rounded-full text-xs font-medium bg-black/20 backdrop-blur-sm">
-															{getTypeIcon(event.type)}{" "}
-															{getTypeLabel(event.type)}
-														</span>
-														{event.isCustom && (
-															<svg
-																className="w-4 h-4 opacity-75"
-																fill="currentColor"
-																viewBox="0 0 20 20"
-															>
-																<path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
-															</svg>
-														)}
-													</div>
-
-													{/* Subject Name */}
-													<div className="font-semibold text-sm md:text-base mb-1 leading-tight">
-														{event.subject_name}
-													</div>
-
-													{/* Time and Location */}
-													<div className="space-y-1 text-xs md:text-sm opacity-90">
-														<div className="flex items-center gap-2">
-															<svg
-																className="w-3 h-3 flex-shrink-0"
-																fill="currentColor"
-																viewBox="0 0 20 20"
-															>
-																<path
-																	fillRule="evenodd"
-																	d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-12a1 1 0 10-2 0v4a1 1 0 00.293.707l2.828 2.829a1 1 0 101.415-1.415L11 9.586V6z"
-																	clipRule="evenodd"
-																/>
-															</svg>
-															<span className="font-medium">{timeSlot}</span>
+													<div style={getEventStyle(event as ScheduleEvent)}>
+														<div className="font-semibold truncate">
+															{event.subject_name}
 														</div>
-														<div className="flex items-center gap-2">
-															<svg
-																className="w-3 h-3 flex-shrink-0"
-																fill="currentColor"
-																viewBox="0 0 20 20"
-															>
-																<path
-																	fillRule="evenodd"
-																	d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z"
-																	clipRule="evenodd"
-																/>
-															</svg>
-															<span>{event.location}</span>
+														<div className="text-xs opacity-90 truncate">
+															{timeSlot}
 														</div>
-													</div>
-
-													{/* Duration indicator */}
-													<div className="mt-auto pt-1 text-xs opacity-75">
-														Duration: {getEventDuration(timeSlot)}h
+														<div className="text-xs opacity-90 truncate">
+															{event.location}
+														</div>
 													</div>
 												</div>
-											</div>
-										)
-									)}
-							</div>
-						))}
+											)
+										)}
+								</div>
+							))}
+						</div>
 					</div>
 				</div>
 			</div>
@@ -668,18 +514,12 @@ function EventDetailModal({
 			onClick={onClose}
 		>
 			<div
-				className="relative max-w-md w-full mx-2 rounded-2xl shadow-2xl p-6 animate-fade-in"
-				style={{
-					background: colors.background,
-					border: colors.border,
-					boxShadow: "0 8px 32px 0 rgba(31, 38, 135, 0.37)",
-					backdropFilter: "blur(16px)",
-				}}
+				className="relative max-w-md w-full mx-4 rounded-xl shadow-2xl p-6 animate-fade-in bg-[#23201c] border border-[#FFF0DC]/20"
 				onClick={(e) => e.stopPropagation()}
 			>
 				{/* Close button */}
 				<button
-					className="absolute top-3 right-3 text-[#FFF0DC]/70 hover:text-[#FFF0DC] bg-black/20 rounded-full p-1 transition"
+					className="absolute top-4 right-4 text-[#FFF0DC]/50 hover:text-[#FFF0DC] transition"
 					onClick={onClose}
 					aria-label="Close"
 				>
@@ -697,71 +537,83 @@ function EventDetailModal({
 						/>
 					</svg>
 				</button>
-				{/* Event Type Badge */}
-				<div className="flex items-center gap-2 mb-4">
-					<span
-						className="inline-flex items-center gap-2 px-2 py-1 rounded-full text-xs font-medium bg-black/20 backdrop-blur-sm"
-						style={{ color: colors.accent }}
-					>
-						{getTypeIcon(event.type)} {getTypeLabel(event.type)}
-					</span>
-					{event.isCustom && (
-						<svg
-							className="w-4 h-4 opacity-75"
-							fill="currentColor"
-							viewBox="0 0 20 20"
-						>
-							<path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
-						</svg>
-					)}
+
+				{/* Header with Color Strip */}
+				<div className="flex items-start gap-4 mb-4">
+					<div
+						className="w-4 h-4 rounded mt-1 flex-shrink-0"
+						style={{ backgroundColor: colors.background }}
+					></div>
+					<div>
+						<h2 className="text-xl font-bold text-[#FFF0DC] leading-tight">
+							{event.subject_name}
+						</h2>
+						<div className="text-sm text-[#FFF0DC]/70 mt-1">
+							{day}, {timeSlot}
+						</div>
+					</div>
 				</div>
-				{/* Subject Name */}
-				<div className="font-bold text-lg md:text-xl mb-2 text-[#FFF0DC]">
-					{event.subject_name}
-				</div>
-				{/* Details Grid */}
-				<div className="grid grid-cols-1 gap-2 text-sm text-[#FFF0DC]/90">
-					<div className="flex items-center gap-2">
-						<svg className="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
-							<path
-								fillRule="evenodd"
-								d="M6 2a1 1 0 00-1 1v1H4a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V6a2 2 0 00-2-2h-1V3a1 1 0 10-2 0v1H7V3a1 1 0 00-1-1zm0 5a1 1 0 000 2h8a1 1 0 100-2H6z"
-								clipRule="evenodd"
-							/>
-						</svg>
-						<span className="font-medium">Day:</span> <span>{day}</span>
+
+				{/* Details */}
+				<div className="space-y-4 text-sm text-[#FFF0DC]/90 pl-8">
+					<div className="flex items-center gap-3">
+						<div className="w-5 flex justify-center text-[#FFF0DC]/50">
+							{getTypeIcon(event.type)}
+						</div>
+						<div>
+							<span className="block text-[#FFF0DC]/50 text-xs">Type</span>
+							{getTypeLabel(event.type)}
+						</div>
 					</div>
-					<div className="flex items-center gap-2">
-						<svg className="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
-							<path
-								fillRule="evenodd"
-								d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-12a1 1 0 10-2 0v4a1 1 0 00.293.707l2.828 2.829a1 1 0 101.415-1.415L11 9.586V6z"
-								clipRule="evenodd"
-							/>
-						</svg>
-						<span className="font-medium">Time:</span> <span>{timeSlot}</span>
+
+					<div className="flex items-center gap-3">
+						<div className="w-5 flex justify-center text-[#FFF0DC]/50">
+							<svg
+								className="w-4 h-4"
+								fill="none"
+								stroke="currentColor"
+								viewBox="0 0 24 24"
+							>
+								<path
+									strokeLinecap="round"
+									strokeLinejoin="round"
+									strokeWidth={2}
+									d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"
+								/>
+								<path
+									strokeLinecap="round"
+									strokeLinejoin="round"
+									strokeWidth={2}
+									d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"
+								/>
+							</svg>
+						</div>
+						<div>
+							<span className="block text-[#FFF0DC]/50 text-xs">Location</span>
+							{event.location}
+						</div>
 					</div>
-					<div className="flex items-center gap-2">
-						<svg className="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
-							<path
-								fillRule="evenodd"
-								d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z"
-								clipRule="evenodd"
-							/>
-						</svg>
-						<span className="font-medium">Location:</span>{" "}
-						<span>{event.location}</span>
-					</div>
-					<div className="flex items-center gap-2">
-						<svg className="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
-							<path
-								fillRule="evenodd"
-								d="M9 4.804A7.968 7.968 0 005.5 4c-1.255 0-2.443.29-3.5.804v10A7.969 7.969 0 015.5 14c1.669 0 3.218.51 4.5 1.385A7.962 7.962 0 0114.5 14c1.255 0 2.443.29 3.5.804v-10A7.968 7.968 0 0014.5 4c-1.255 0-2.443.29-3.5.804V12a1 1 0 11-2 0V4.804z"
-								clipRule="evenodd"
-							/>
-						</svg>
-						<span className="font-medium">Duration:</span>{" "}
-						<span>{getEventDuration(timeSlot)}h</span>
+
+					<div className="flex items-center gap-3">
+						<div className="w-5 flex justify-center text-[#FFF0DC]/50">
+							<svg
+								className="w-4 h-4"
+								fill="none"
+								stroke="currentColor"
+								viewBox="0 0 24 24"
+							>
+								<path
+									strokeLinecap="round"
+									strokeLinejoin="round"
+									strokeWidth={2}
+									d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"
+								/>
+							</svg>
+						</div>
+						<div>
+							<span className="block text-[#FFF0DC]/50 text-xs">Duration</span>
+							{getEventDuration(timeSlot)} hours
+						</div>
 					</div>
 				</div>
 			</div>

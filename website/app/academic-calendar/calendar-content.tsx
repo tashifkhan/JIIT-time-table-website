@@ -231,6 +231,39 @@ export default function CalendarContent() {
 							</SelectContent>
 						</Select>
 					</div>
+
+					{/* Action Buttons - Inline on mobile, Fixed on desktop */}
+					<div className="flex flex-wrap justify-center gap-3 mt-6 mb-8 md:fixed md:bottom-8 md:left-8 md:flex-col md:items-start md:m-0 md:z-50">
+						<motion.button
+							onClick={() => {
+								setShowHolidaysOnly(!showHolidaysOnly);
+								setVisibleEventsCount(0);
+							}}
+							className={`px-4 sm:px-6 py-2 rounded-lg backdrop-blur-lg border transition-all duration-300 shadow-lg flex items-center gap-2 text-sm sm:text-base ${
+								showHolidaysOnly
+									? "bg-red-500/20 border-red-500/50 text-red-300 hover:bg-red-500/30"
+									: "bg-white/10 border-white/20 text-[#F0BB78] hover:bg-white/20"
+							}`}
+							whileHover={{ scale: 1.05 }}
+							whileTap={{ scale: 0.95 }}
+						>
+							<Filter className="w-4 h-4 sm:w-5 sm:h-5" />
+							<span>{showHolidaysOnly ? "All Events" : "Holidays Only"}</span>
+						</motion.button>
+
+						<motion.button
+							onClick={handleAddToCalendar}
+							disabled={isLoading}
+							className="px-4 sm:px-6 py-2 rounded-lg backdrop-blur-lg bg-white/10 border border-white/20 text-[#F0BB78] hover:bg-white/20 transition-all duration-300 shadow-lg flex items-center gap-2 text-sm sm:text-base"
+							whileHover={{ scale: 1.05 }}
+							whileTap={{ scale: 0.95 }}
+						>
+							<Calendar className="w-4 h-4 sm:w-5 sm:h-5" />
+							<span>
+								{isLoading ? "Adding to Calendar..." : "Add to Calendar"}
+							</span>
+						</motion.button>
+					</div>
 				</motion.div>
 
 				<motion.div
@@ -409,36 +442,6 @@ export default function CalendarContent() {
 				</motion.div>
 			</div>
 			{/* Floating Holiday Filter Button */}
-			<motion.button
-				onClick={() => {
-					setShowHolidaysOnly(!showHolidaysOnly);
-					setVisibleEventsCount(0);
-				}}
-				className={`fixed bottom-40 md:bottom-16 left-4 px-4 sm:px-6 py-2 rounded-lg backdrop-blur-lg border z-50
-        transition-all duration-300 shadow-lg flex items-center gap-2 text-sm sm:text-base ${
-					showHolidaysOnly
-						? "bg-red-500/20 border-red-500/50 text-red-300 hover:bg-red-500/30"
-						: "bg-white/10 border-white/20 text-[#F0BB78] hover:bg-white/20"
-				}`}
-				whileHover={{ scale: 1.05 }}
-				whileTap={{ scale: 0.95 }}
-			>
-				<Filter className="w-4 h-4 sm:w-5 sm:h-5" />
-				<span>{showHolidaysOnly ? "All Events" : "Holidays Only"}</span>
-			</motion.button>
-
-			<motion.button
-				onClick={handleAddToCalendar}
-				disabled={isLoading}
-				className="fixed bottom-28 md:bottom-4 left-4 px-4 sm:px-6 py-2 rounded-lg backdrop-blur-lg bg-white/10 border border-white/20 z-50
-        text-[#F0BB78] hover:bg-white/20 transition-all duration-300 shadow-lg
-        flex items-center gap-2 text-sm sm:text-base"
-				whileHover={{ scale: 1.05 }}
-				whileTap={{ scale: 0.95 }}
-			>
-				<Calendar className="w-4 h-4 sm:w-5 sm:h-5" />
-				<span>{isLoading ? "Adding to Calendar..." : "Add to Calendar"}</span>
-			</motion.button>
 		</main>
 	);
 }

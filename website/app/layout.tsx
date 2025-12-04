@@ -92,7 +92,7 @@ export default function RootLayout({
 				<Providers>
 					<div className="flex min-h-screen">
 						<Navbar />
-						<main className="flex-1 md:ml-64 p-0 md:p-8 overflow-y-auto">
+						<main className="flex-1 md:ml-64 p-0 md:p-8 pb-24 md:pb-8 overflow-y-auto">
 							{children}
 						</main>
 					</div>

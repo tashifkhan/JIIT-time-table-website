@@ -6,30 +6,36 @@ import { motion, AnimatePresence } from "framer-motion";
 import Link from "next/link";
 import Image from "next/image";
 import { useSwipeable } from "react-swipeable";
+import MobileNavbar from "./mobile-navbar";
 
-const tabs = [
+export const tabs = [
 	{
 		label: "Create Timetable",
+		mobileLabel: "Create",
 		path: "/",
 		icon: Calendar,
 	},
 	{
 		label: "Timeline",
+		mobileLabel: "Timeline",
 		path: "/timeline",
 		icon: Clock,
 	},
 	{
 		label: "Mess Menu",
+		mobileLabel: "Menu",
 		path: "/mess-menu",
 		icon: Utensils,
 	},
 	{
 		label: "Academic Calendar",
+		mobileLabel: "Calendar",
 		path: "/academic-calendar",
 		icon: Calendar,
 	},
 	{
 		label: "Compare Timetables",
+		mobileLabel: "Compare",
 		path: "/compare-timetables",
 		icon: GitCompare,
 	},
@@ -167,6 +173,8 @@ export default function Navbar() {
 					/>
 				</>
 			)}
+
+			<MobileNavbar />
 		</>
 	);
 }

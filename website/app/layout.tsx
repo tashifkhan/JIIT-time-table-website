@@ -75,19 +75,7 @@ export default function RootLayout({
 		<html lang="en">
 			<head>
 				{/* Service Worker Registration */}
-				<Script
-					id="service-worker-register"
-					strategy="afterInteractive"
-					dangerouslySetInnerHTML={{
-						__html: `
-              if ('serviceWorker' in navigator) {
-                window.addEventListener('load', function() {
-                  navigator.serviceWorker.register('/service-worker.js');
-                });
-              }
-            `,
-					}}
-				/>
+
 				{/* Google APIs */}
 				<Script
 					src="https://apis.google.com/js/api.js"

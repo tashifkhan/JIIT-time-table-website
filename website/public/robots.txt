@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://simple-timetable.tashif.codes/sitemap.xml 

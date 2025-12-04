@@ -12,6 +12,12 @@ interface ScheduleEvent {
 	isCustom?: boolean;
 }
 
+interface CalendarEvent {
+	summary: string;
+	start: { date: string };
+	end: { date: string };
+}
+
 export const TimelineView: React.FC = () => {
 	const { editedSchedule, schedule } = React.useContext(UserContext);
 	const displaySchedule = editedSchedule || schedule;
@@ -21,6 +27,10 @@ export const TimelineView: React.FC = () => {
 	// State for view and date
 	const [view, setView] = useState<"day" | "week">("week");
 	const [currentDate, setCurrentDate] = useState(new Date());
+	const [calendarEvents, setCalendarEvents] = useState<CalendarEvent[]>([]);
+	const [filteredCalendarEvents, setFilteredCalendarEvents] = useState<
+		CalendarEvent[]
+	>([]);
 
 	// Set default view to day on mobile
 	useEffect(() => {
@@ -83,6 +93,61 @@ export const TimelineView: React.FC = () => {
 			}
 		}
 	}, [isDownloadMode, displaySchedule, view]);
+
+	// Fetch Academic Calendar Data
+	useEffect(() => {
+		if (isDownloadMode) return;
+
+		const fetchCalendarData = async () => {
+			try {
+				// 1. Get available years
+				const yearsRes = await fetch("/api/academic-calendar");
+				const years = await yearsRes.json();
+
+				if (years.length > 0) {
+					// 2. Get data for the latest year (assuming sorted)
+					const latestYear = years[0].value;
+					const eventsRes = await fetch(`/api/academic-calendar/${latestYear}`);
+					const events = await eventsRes.json();
+					setCalendarEvents(events);
+				}
+			} catch (error) {
+				console.error("Failed to fetch calendar data:", error);
+			}
+		};
+
+		fetchCalendarData();
+	}, [isDownloadMode]);
+
+	// Filter calendar events for the current view
+	useEffect(() => {
+		if (calendarEvents.length === 0) return;
+
+		const getWeekRange = (date: Date) => {
+			const start = new Date(date);
+			const day = start.getDay();
+			const diff = start.getDate() - day + (day === 0 ? -6 : 1); // Adjust when day is Sunday
+			start.setDate(diff);
+			start.setHours(0, 0, 0, 0);
+
+			const end = new Date(start);
+			end.setDate(start.getDate() + 6);
+			end.setHours(23, 59, 59, 999);
+
+			return { start, end };
+		};
+
+		const { start: weekStart, end: weekEnd } = getWeekRange(currentDate);
+
+		const filtered = calendarEvents.filter((event) => {
+			const eventStart = new Date(event.start.date);
+			const eventEnd = new Date(event.end.date);
+			// Check if event overlaps with the current week
+			return eventStart <= weekEnd && eventEnd >= weekStart;
+		});
+
+		setFilteredCalendarEvents(filtered);
+	}, [calendarEvents, currentDate, view]);
 
 	const days = [
 		"Monday",
@@ -377,6 +442,91 @@ export const TimelineView: React.FC = () => {
 							))}
 						</div>
 					</div>
+
+					{/* Academic Calendar Events Section */}
+					{!isDownloadMode && filteredCalendarEvents.length > 0 && (
+						<div className="relative border-b border-[#FFF0DC]/5 bg-[#1a1816]/30">
+							<div className="flex">
+								{/* Spacer for time column */}
+								<div className="w-16 md:w-20 flex-shrink-0 border-r border-[#FFF0DC]/5 bg-[#1a1816]/50 backdrop-blur-[2px]"></div>
+
+								{/* Events Grid */}
+								<div
+									className="flex-1 grid relative py-1"
+									style={{
+										gridTemplateColumns: `repeat(${displayedDays.length}, 1fr)`,
+									}}
+								>
+									{filteredCalendarEvents.map((event, idx) => {
+										const eventStart = new Date(event.start.date);
+										const eventEnd = new Date(event.end.date);
+
+										// Calculate start and end indices for the grid
+										let startIndex = -1;
+										let span = 0;
+
+										if (view === "day") {
+											// In day view, check if event includes this day
+											const dayDate = new Date(currentDate);
+											dayDate.setHours(0, 0, 0, 0);
+											if (eventStart <= dayDate && eventEnd >= dayDate) {
+												startIndex = 0;
+												span = 1;
+											}
+										} else {
+											// In week view
+											const weekStart = new Date(currentDate);
+											const day = weekStart.getDay();
+											const diff =
+												weekStart.getDate() - day + (day === 0 ? -6 : 1);
+											weekStart.setDate(diff);
+											weekStart.setHours(0, 0, 0, 0);
+
+											// Find start index (0-6 for Mon-Sun)
+											// We need to map event dates to grid columns
+											// This is a simplified logic assuming standard week view
+											const dayMs = 24 * 60 * 60 * 1000;
+
+											// Iterate through displayed days to find overlap
+											displayedDays.forEach((dayName, dayIdx) => {
+												const currentDayDate = new Date(weekStart);
+												currentDayDate.setDate(weekStart.getDate() + dayIdx);
+
+												// Check if this day is within event range
+												if (
+													currentDayDate >= eventStart &&
+													currentDayDate <= eventEnd
+												) {
+													if (startIndex === -1) startIndex = dayIdx;
+													span++;
+												}
+											});
+										}
+
+										if (startIndex === -1) return null;
+
+										return (
+											<div
+												key={idx}
+												className="relative mx-1 mb-1 last:mb-0"
+												style={{
+													gridColumnStart: startIndex + 1,
+													gridColumnEnd: `span ${span}`,
+												}}
+											>
+												<div className="bg-[#543A14]/40 border border-[#F0BB78]/30 rounded px-2 py-1 text-xs text-[#F0BB78] truncate flex items-center gap-1.5 shadow-sm hover:bg-[#543A14]/60 transition-colors cursor-default">
+													<div className="w-1.5 h-1.5 rounded-full bg-[#F0BB78] flex-shrink-0 animate-pulse"></div>
+													<span className="font-medium truncate">
+														{event.summary.replace("Holiday -", "").trim()}
+													</span>
+												</div>
+											</div>
+										);
+									})}
+								</div>
+							</div>
+						</div>
+					)}
 
 					{/* Grid Body */}
 					<div className="flex relative">

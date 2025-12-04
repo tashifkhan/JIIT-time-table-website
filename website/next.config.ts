@@ -1,7 +1,14 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
-  /* config options here */
+  async rewrites() {
+    return [
+      {
+        source: "/ph/:path*",
+        destination: "https://eu.posthog.com/:path*",
+      },
+    ];
+  },
 };
 
 export default nextConfig;

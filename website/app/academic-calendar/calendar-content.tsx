@@ -198,9 +198,8 @@ export default function CalendarContent() {
 					animate={{ opacity: 1, y: 0 }}
 				>
 					<div className="flex flex-col sm:flex-row items-center justify-center gap-2 sm:gap-3">
-						<Calendar className="w-8 h-8 sm:w-10 sm:h-10 text-[#F0BB78]" />
-						<h1 className="text-xl sm:text-4xl font-bold text-[#F0BB78] text-center">
-							Academic Calendar
+						<h1 className="text-2xl sm:text-4xl font-bold bg-clip-text text-[#F0BB78] bg-gradient-to-r from-[#F0BB78] to-[#543A14]">
+							JIIT Academic Calendar
 						</h1>
 					</div>
 					<p className="text-base sm:text-lg text-slate-300/80 px-4 pb-2">
@@ -415,7 +414,7 @@ export default function CalendarContent() {
 					setShowHolidaysOnly(!showHolidaysOnly);
 					setVisibleEventsCount(0);
 				}}
-				className={`fixed bottom-16 left-4 px-4 sm:px-6 py-2 rounded-lg backdrop-blur-lg border z-50
+				className={`fixed bottom-40 md:bottom-16 left-4 px-4 sm:px-6 py-2 rounded-lg backdrop-blur-lg border z-50
         transition-all duration-300 shadow-lg flex items-center gap-2 text-sm sm:text-base ${
 					showHolidaysOnly
 						? "bg-red-500/20 border-red-500/50 text-red-300 hover:bg-red-500/30"
@@ -431,7 +430,7 @@ export default function CalendarContent() {
 			<motion.button
 				onClick={handleAddToCalendar}
 				disabled={isLoading}
-				className="fixed bottom-4 left-4 px-4 sm:px-6 py-2 rounded-lg backdrop-blur-lg bg-white/10 border border-white/20 z-50
+				className="fixed bottom-28 md:bottom-4 left-4 px-4 sm:px-6 py-2 rounded-lg backdrop-blur-lg bg-white/10 border border-white/20 z-50
         text-[#F0BB78] hover:bg-white/20 transition-all duration-300 shadow-lg
         flex items-center gap-2 text-sm sm:text-base"
 				whileHover={{ scale: 1.05 }}

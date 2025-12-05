@@ -30,4 +30,10 @@
   <url>
     <loc>https://jiit-timetable.tashif.codes/mess-menu</loc>
   </url>
+  <url>
+    <loc>https://simple-timetable.tashif.codes/api-doc</loc>
+  </url>
+  <url>
+    <loc>https://jiit-timetable.tashif.codes/api-doc</loc>
+  </url>
 </urlset> 

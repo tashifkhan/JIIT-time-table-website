@@ -2,6 +2,32 @@ import { NextResponse } from "next/server";
 import fs from "fs";
 import path from "path";
 
+/**
+ * @swagger
+ * /api/time-table:
+ *   get:
+ *     description: Returns a structure of available semesters and batches
+ *     responses:
+ *       200:
+ *         description: A list of semesters and their batches
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: array
+ *               items:
+ *                 type: object
+ *                 properties:
+ *                   semester:
+ *                     type: string
+ *                     description: The semester name
+ *                   batches:
+ *                     type: array
+ *                     items:
+ *                       type: string
+ *                     description: List of available batches
+ *       500:
+ *         description: Internal server error
+ */
 export async function GET() {
 	try {
 		const timeTableDir = path.join(process.cwd(), "data/time-table");

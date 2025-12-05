@@ -2,6 +2,30 @@ import { NextResponse } from "next/server";
 import fs from "fs";
 import path from "path";
 
+/**
+ * @swagger
+ * /api/academic-calendar:
+ *   get:
+ *     description: Returns a list of available academic calendar years
+ *     responses:
+ *       200:
+ *         description: A list of years
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: array
+ *               items:
+ *                 type: object
+ *                 properties:
+ *                   value:
+ *                     type: string
+ *                     description: The directory name for the year (e.g., "2425")
+ *                   label:
+ *                     type: string
+ *                     description: The formatted label for the year (e.g., "2024-25")
+ *       500:
+ *         description: Internal server error
+ */
 export async function GET() {
 	try {
 		const calendarDir = path.join(process.cwd(), "data/calender");

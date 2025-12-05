@@ -2,6 +2,37 @@ import { NextResponse } from "next/server";
 import fs from "fs";
 import path from "path";
 
+/**
+ * @swagger
+ * /api/time-table/{semester}/{batch}:
+ *   get:
+ *     description: Returns the time table for a specific semester and batch
+ *     parameters:
+ *       - in: path
+ *         name: semester
+ *         required: true
+ *         schema:
+ *           type: string
+ *         description: The semester identifier
+ *       - in: path
+ *         name: batch
+ *         required: true
+ *         schema:
+ *           type: string
+ *         description: The batch identifier
+ *     responses:
+ *       200:
+ *         description: The time table data
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               description: Time table data object
+ *       404:
+ *         description: Time table not found
+ *       500:
+ *         description: Internal server error
+ */
 export async function GET(
 	request: Request,
 	{ params }: { params: Promise<{ semester: string; batch: string }> }

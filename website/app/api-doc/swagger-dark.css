@@ -1,0 +1,28 @@
+/* Dark Mode for Swagger UI */
+.swagger-ui {
+  filter: invert(88%) hue-rotate(180deg);
+}
+
+.swagger-ui .microlight {
+  filter: invert(100%) hue-rotate(180deg);
+}
+
+/* Revert inversion for specific elements if needed, e.g., images or specific colors */
+.swagger-ui .opblock-summary-method {
+  filter: invert(100%) hue-rotate(180deg);
+  text-shadow: none !important;
+}
+
+.swagger-ui .opblock-summary-description {
+    color: #000; /* Will be inverted to white */
+}
+
+.swagger-ui .scheme-container {
+    background-color: #fff; /* Will be inverted to dark */
+    box-shadow: none;
+    border-bottom: 1px solid #ddd;
+}
+
+.swagger-ui select {
+    color: #000;
+}

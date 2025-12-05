@@ -1,5 +1,5 @@
 import { motion, AnimatePresence } from "framer-motion";
-import { Button } from "./ui/button";
+import { Button } from "../ui/button";
 import { Calendar, BookOpen } from "lucide-react";
 
 interface UrlParamsDialogProps {

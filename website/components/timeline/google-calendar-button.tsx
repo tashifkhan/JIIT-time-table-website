@@ -1,9 +1,9 @@
 import { useState, useEffect } from "react";
-import { Button } from "./ui/button";
+import { Button } from "../ui/button";
 import { Calendar } from "lucide-react";
 import { motion } from "framer-motion";
-import { createGoogleCalendarEvents } from "../utils/calendar";
-import { WeekSchedule } from "../types/schedule";
+import { createGoogleCalendarEvents } from "../../utils/calendar";
+import { WeekSchedule } from "../../types/schedule";
 
 declare global {
 	interface Window {

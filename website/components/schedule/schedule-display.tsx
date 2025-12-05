@@ -1,13 +1,13 @@
 import { useContext, useState } from "react";
 import { motion } from "framer-motion";
-import { Card } from "./ui/card";
-import { ClassType } from "../types/schedule";
+import { Card } from "../ui/card";
+import { ClassType } from "../../types/schedule";
 import { Clock, MapPin, User, Edit2, Plus } from "lucide-react";
-import { ActionButtons } from "./action-buttons";
-import { EditEventDialog } from "./edit-event-dialog";
-import UserContext from "../context/userContext";
-import { Button } from "./ui/button";
-import { YourTietable } from "../types";
+import { ActionButtons } from "../timeline/action-buttons";
+import { EditEventDialog } from "../timeline/edit-event-dialog";
+import UserContext from "../../context/userContext";
+import { Button } from "../ui/button";
+import { YourTietable } from "../../types";
 
 interface ScheduleDisplayProps {
 	schedule: YourTietable;

@@ -4,7 +4,7 @@ import posthog from "posthog-js";
 import { PostHogProvider as PHProvider } from "posthog-js/react";
 import { useEffect } from "react";
 import UserContextProvider from "../context/userContextProvider";
-import { Background } from "../components/background";
+import { Background } from "../components/layout/background";
 import { NuqsAdapter } from "nuqs/adapters/next/app";
 import { Toaster } from "../components/ui/toaster";
 import { Analytics } from "@vercel/analytics/react";

@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
-import HomeContent from "./home-content";
-import Loading from "./loading";
+import HomeContent from "../components/home/home-content";
+import Loading from "../components/common/loading";
 
 export const metadata: Metadata = {
 	title: "JIIT Time Table Simplified",

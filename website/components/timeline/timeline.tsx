@@ -4,6 +4,8 @@ import React, { useEffect, useRef, useState, useCallback } from "react";
 import UserContext from "../../context/userContext";
 import { useSearchParams } from "next/navigation";
 import { TimelineHeader } from "./timeline-header";
+import { EditEventDialog } from "./edit-event-dialog";
+import { Edit2 } from "lucide-react";
 
 interface ScheduleEvent {
 	subject_name: string;
@@ -352,7 +354,24 @@ export const TimelineView: React.FC = () => {
 		day: string;
 	} | null>(null);
 
+	const [editingEvent, setEditingEvent] = useState<{
+		day: string;
+		time: string;
+		event: any;
+	} | null>(null);
+
 	const closeModal = useCallback(() => setSelectedEvent(null), []);
+
+	const handleEdit = useCallback(() => {
+		if (selectedEvent) {
+			setEditingEvent({
+				day: selectedEvent.day,
+				time: selectedEvent.timeSlot,
+				event: selectedEvent.event,
+			});
+			setSelectedEvent(null);
+		}
+	}, [selectedEvent]);
 
 	return (
 		<div
@@ -662,10 +681,23 @@ export const TimelineView: React.FC = () => {
 					timeSlot={selectedEvent.timeSlot}
 					day={selectedEvent.day}
 					onClose={closeModal}
+					onEdit={handleEdit}
 					getEventColor={getEventColor}
 					getTypeIcon={getTypeIcon}
 					getTypeLabel={getTypeLabel}
 					getEventDuration={getEventDuration}
+				/>
+			)}
+
+			{/* Edit Event Dialog */}
+			{editingEvent && (
+				<EditEventDialog
+					isOpen={true}
+					onClose={() => setEditingEvent(null)}
+					day={editingEvent.day}
+					time={editingEvent.time}
+					currentEvent={editingEvent.event}
+					schedule={displaySchedule}
 				/>
 			)}
 		</div>
@@ -677,6 +709,7 @@ function EventDetailModal({
 	timeSlot,
 	day,
 	onClose,
+	onEdit,
 	getEventColor,
 	getTypeIcon,
 	getTypeLabel,
@@ -686,6 +719,7 @@ function EventDetailModal({
 	timeSlot: string;
 	day: string;
 	onClose: () => void;
+	onEdit: () => void;
 	getEventColor: (type: string) => any;
 	getTypeIcon: (type: string) => React.ReactElement;
 	getTypeLabel: (type: string) => string;
@@ -732,6 +766,15 @@ function EventDetailModal({
 							d="M6 18L18 6M6 6l12 12"
 						/>
 					</svg>
+				</button>
+
+				{/* Edit button */}
+				<button
+					className="absolute top-4 right-12 text-[#FFF0DC]/40 hover:text-[#FFF0DC] transition-colors p-1 hover:bg-[#FFF0DC]/10 rounded-full"
+					onClick={onEdit}
+					aria-label="Edit"
+				>
+					<Edit2 className="w-4 h-4" />
 				</button>
 
 				{/* Header with Color Strip */}

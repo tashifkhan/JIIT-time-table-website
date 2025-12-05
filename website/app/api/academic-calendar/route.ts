@@ -26,6 +26,11 @@ import path from "path";
  *       500:
  *         description: Internal server error
  */
+/**
+ * Retrieves a list of available academic calendar years.
+ *
+ * @returns A JSON response containing an array of available years
+ */
 export async function GET() {
 	try {
 		const calendarDir = path.join(process.cwd(), "data/calender");

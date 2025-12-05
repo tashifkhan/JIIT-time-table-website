@@ -27,11 +27,41 @@ import path from "path";
  *           application/json:
  *             schema:
  *               type: object
- *               description: Time table data object
+ *               additionalProperties:
+ *                 type: object
+ *                 properties:
+ *                   timetable:
+ *                     type: object
+ *                     additionalProperties:
+ *                       type: object
+ *                       additionalProperties:
+ *                         type: array
+ *                         items:
+ *                           type: string
+ *                   subjects:
+ *                     type: array
+ *                     items:
+ *                       type: object
+ *                       properties:
+ *                         Code:
+ *                           type: string
+ *                         "Full Code":
+ *                           type: string
+ *                         Subject:
+ *                           type: string
+ *       400:
+ *         description: Semester and Batch identifiers are required
  *       404:
  *         description: Time table not found
  *       500:
  *         description: Internal server error
+ */
+/**
+ * Retrieves the time table for a specific semester and batch.
+ *
+ * @param request - The incoming request object
+ * @param params - The route parameters containing semester and batch
+ * @returns A JSON response containing the time table data or an error message
  */
 export async function GET(
 	request: Request,

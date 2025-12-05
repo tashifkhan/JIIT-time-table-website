@@ -20,12 +20,40 @@ import path from "path";
  *         content:
  *           application/json:
  *             schema:
- *               type: object
- *               description: Calendar data object
+ *               type: array
+ *               items:
+ *                 type: object
+ *                 properties:
+ *                   summary:
+ *                     type: string
+ *                     description: Event summary
+ *                   start:
+ *                     type: object
+ *                     properties:
+ *                       date:
+ *                         type: string
+ *                         format: date
+ *                         description: Start date (YYYY-MM-DD)
+ *                   end:
+ *                     type: object
+ *                     properties:
+ *                       date:
+ *                         type: string
+ *                         format: date
+ *                         description: End date (YYYY-MM-DD)
+ *       400:
+ *         description: Year identifier is required
  *       404:
  *         description: Calendar not found
  *       500:
  *         description: Internal server error
+ */
+/**
+ * Retrieves the academic calendar for a specific year.
+ *
+ * @param request - The incoming request object
+ * @param params - The route parameters containing the year
+ * @returns A JSON response containing the calendar data or an error message
  */
 export async function GET(
 	request: Request,

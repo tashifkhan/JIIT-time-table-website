@@ -1,4 +1,4 @@
-# JIIT Personalized Time Table Creator
+<h1 align="center"> JIIT Personalized Time Table Creator </h1>
 
 <div align="center">
     <a href="https://jiit-timetable.tashif.codes/"><strong>Live Demo</strong></a>

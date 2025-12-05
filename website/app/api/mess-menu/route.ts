@@ -1,5 +1,37 @@
 import { NextResponse } from "next/server";
 
+/**
+ * @swagger
+ * /api/mess-menu:
+ *   get:
+ *     description: Returns the combined mess menu for sector 62 and 128
+ *     responses:
+ *       200:
+ *         description: The combined mess menu
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 menu:
+ *                   type: object
+ *                   additionalProperties:
+ *                     type: object
+ *                     properties:
+ *                       Breakfast:
+ *                         type: string
+ *                       Lunch:
+ *                         type: string
+ *                       Snacks:
+ *                         type: string
+ *                       Dinner:
+ *                         type: string
+ *                       Lunch128:
+ *                         type: string
+ *                         nullable: true
+ *       500:
+ *         description: Internal server error
+ */
 export async function GET() {
 	try {
 		if (!process.env.N8N_URI || !process.env.N8N_128_URI) {

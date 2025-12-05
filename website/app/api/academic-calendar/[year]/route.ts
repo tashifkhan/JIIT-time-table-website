@@ -2,6 +2,31 @@ import { NextResponse } from "next/server";
 import fs from "fs";
 import path from "path";
 
+/**
+ * @swagger
+ * /api/academic-calendar/{year}:
+ *   get:
+ *     description: Returns the academic calendar data for a specific year
+ *     parameters:
+ *       - in: path
+ *         name: year
+ *         required: true
+ *         schema:
+ *           type: string
+ *         description: The year identifier (e.g., "2425")
+ *     responses:
+ *       200:
+ *         description: The academic calendar data
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               description: Calendar data object
+ *       404:
+ *         description: Calendar not found
+ *       500:
+ *         description: Internal server error
+ */
 export async function GET(
 	request: Request,
 	{ params }: { params: Promise<{ year: string }> }

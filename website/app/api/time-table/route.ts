@@ -28,6 +28,11 @@ import path from "path";
  *       500:
  *         description: Internal server error
  */
+/**
+ * Retrieves the structure of available semesters and batches.
+ *
+ * @returns A JSON response containing a list of semesters and their batches
+ */
 export async function GET() {
 	try {
 		const timeTableDir = path.join(process.cwd(), "data/time-table");

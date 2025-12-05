@@ -1,0 +1,281 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "JIIT Time Table API",
+    "version": "1.0"
+  },
+  "components": {
+    "securitySchemes": {
+      "BearerAuth": {
+        "type": "http",
+        "scheme": "bearer",
+        "bearerFormat": "JWT"
+      }
+    }
+  },
+  "security": [],
+  "paths": {
+    "/api/academic-calendar/{year}": {
+      "get": {
+        "description": "Returns the academic calendar data for a specific year",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "year",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "The year identifier (e.g., \"2425\")"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The academic calendar data",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "summary": {
+                        "type": "string",
+                        "description": "Event summary"
+                      },
+                      "start": {
+                        "type": "object",
+                        "properties": {
+                          "date": {
+                            "type": "string",
+                            "format": "date",
+                            "description": "Start date (YYYY-MM-DD)"
+                          }
+                        }
+                      },
+                      "end": {
+                        "type": "object",
+                        "properties": {
+                          "date": {
+                            "type": "string",
+                            "format": "date",
+                            "description": "End date (YYYY-MM-DD)"
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Year identifier is required"
+          },
+          "404": {
+            "description": "Calendar not found"
+          },
+          "500": {
+            "description": "Internal server error"
+          }
+        }
+      }
+    },
+    "/api/academic-calendar": {
+      "get": {
+        "description": "Returns a list of available academic calendar years",
+        "responses": {
+          "200": {
+            "description": "A list of years",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "value": {
+                        "type": "string",
+                        "description": "The directory name for the year (e.g., \"2425\")"
+                      },
+                      "label": {
+                        "type": "string",
+                        "description": "The formatted label for the year (e.g., \"2024-25\")"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal server error"
+          }
+        }
+      }
+    },
+    "/api/mess-menu": {
+      "get": {
+        "description": "Returns the combined mess menu for sector 62 and 128",
+        "responses": {
+          "200": {
+            "description": "The combined mess menu",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "menu": {
+                      "type": "object",
+                      "additionalProperties": {
+                        "type": "object",
+                        "properties": {
+                          "Breakfast": {
+                            "type": "string"
+                          },
+                          "Lunch": {
+                            "type": "string"
+                          },
+                          "Snacks": {
+                            "type": "string"
+                          },
+                          "Dinner": {
+                            "type": "string"
+                          },
+                          "Lunch128": {
+                            "type": "string",
+                            "nullable": true
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal server error"
+          }
+        }
+      }
+    },
+    "/api/time-table/{semester}/{batch}": {
+      "get": {
+        "description": "Returns the time table for a specific semester and batch",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "semester",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "The semester identifier"
+          },
+          {
+            "in": "path",
+            "name": "batch",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "The batch identifier"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The time table data",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "additionalProperties": {
+                    "type": "object",
+                    "properties": {
+                      "timetable": {
+                        "type": "object",
+                        "additionalProperties": {
+                          "type": "object",
+                          "additionalProperties": {
+                            "type": "array",
+                            "items": {
+                              "type": "string"
+                            }
+                          }
+                        }
+                      },
+                      "subjects": {
+                        "type": "array",
+                        "items": {
+                          "type": "object",
+                          "properties": {
+                            "Code": {
+                              "type": "string"
+                            },
+                            "Full Code": {
+                              "type": "string"
+                            },
+                            "Subject": {
+                              "type": "string"
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Semester and Batch identifiers are required"
+          },
+          "404": {
+            "description": "Time table not found"
+          },
+          "500": {
+            "description": "Internal server error"
+          }
+        }
+      }
+    },
+    "/api/time-table": {
+      "get": {
+        "description": "Returns a structure of available semesters and batches",
+        "responses": {
+          "200": {
+            "description": "A list of semesters and their batches",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "semester": {
+                        "type": "string",
+                        "description": "The semester name"
+                      },
+                      "batches": {
+                        "type": "array",
+                        "items": {
+                          "type": "string"
+                        },
+                        "description": "List of available batches"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal server error"
+          }
+        }
+      }
+    }
+  },
+  "tags": []
+}

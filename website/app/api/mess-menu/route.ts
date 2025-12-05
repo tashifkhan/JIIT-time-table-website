@@ -32,6 +32,11 @@ import { NextResponse } from "next/server";
  *       500:
  *         description: Internal server error
  */
+/**
+ * Retrieves the combined mess menu for sector 62 and 128.
+ *
+ * @returns A JSON response containing the combined mess menu
+ */
 export async function GET() {
 	try {
 		if (!process.env.N8N_URI || !process.env.N8N_128_URI) {

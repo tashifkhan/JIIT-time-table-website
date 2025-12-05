@@ -253,7 +253,7 @@ const MenuContent: React.FC<MenuContentProps> = ({
 													<div className="mt-4 pt-4 border-t border-white/10">
 														<div className="mb-2">
 															<h3 className="font-medium text-[#F0BB78] text-base flex items-center gap-2">
-																<span>Sector 128 Lunch</span>
+																<span>Sector 128</span>
 															</h3>
 														</div>
 														<div className="text-slate-400 text-sm leading-relaxed">

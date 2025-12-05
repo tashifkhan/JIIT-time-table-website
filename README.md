@@ -1,140 +1,81 @@
-<h1 align="center"> JIIT Personalized Time Table Creator </h1>
+# JIIT Personalized Time Table Creator
 
 <div align="center">
-    <a href="https://simple-timetable.tashif.codes/">Live Demo</a>
+    <a href="https://jiit-timetable.tashif.codes/"><strong>Live Demo</strong></a>
 </div>
-</br>
+<br />
 
 ## Overview
 
-A powerful React + Python application using WebAssembly (Pyodide) that helps JIIT students create personalized class schedules. Features a modern glassmorphic UI, color-coded timetables, and multiple export options. This application allows users to edit the timetable and add custom events. It also features the ability to fetch the academic calendar and sync it to Google Calendar, with enhanced color coding for events synced to Google Calendar.
-
-The academic calendar is parsed using the script available at:
-[JIIT Academic Calendar](https://github.com/tashifkhan/JIIT-Academic-Calender)
-
-The timetable is parsed using the script available at:
-[JIIT Time Table Parser](https://github.com/tashifkhan/JIIT-time-table-parser)
+A powerful **Next.js** application that helps JIIT students create personalized class schedules. Features a modern glassmorphic UI, color-coded timetables, academic calendar integration, and multiple export options. This application leverages **WebAssembly (Pyodide)** to generate timetables directly in the browser, ensuring privacy and offline capability.
 
 ## Key Features
 
-- **Parsing**: Uses JIIT TimeTable Parser for accurate data extraction
-- **PWA**: Download and use offline as well
-- **Branch Support**: Handles multiple branches and years
-- **Compare TimeTables**: Parses multiple timetables and tells you the common free slots & classes
-- **Shareable Timetable**: Now timetables can be recreated by simple url sharing.
-- **Save Configs**: Save and load multiple timetable configs to load that timetable anytime.
-- **Timeline View**: No need to export the timetable... you can view the timetable at /timeline route because stored locally
-- **Mess Menu**: Added mess menu fetching as well....
-- **Export Options**: PDF, PNG, and Google Calendar sync
-- **Custom Events**: Edit the timetable and add custom events
-- **Academic Calendar**: Fetch and sync the academic calendar to Google Calendar
-- **Enhanced Color Coding**: More color coding for events synced to Google Calendar
-- **Mobile-First Design**: Responsive navbar with multi-line text support and swipe navigation
-- **Touch Gestures**: Swipe left/right to navigate between pages on mobile devices
+- **Personalized Schedules**: Generates timetables based on your specific batch and electives.
+- **Client-Side Processing**: Uses Pyodide to run Python logic in the browser—no server round-trips for generation.
+- **Modern UI/UX**: Built with **Next.js 16**, **Tailwind CSS v4**, and **Shadcn UI** for a premium feel.
+- **PWA Support**: Installable as a native-like app with full offline functionality.
+- **Academic Calendar**: View the academic calendar, filter holidays, and sync events to Google Calendar.
+- **Mess Menu**: Check daily mess menus for Sector 62 and 128.
+- **Compare Timetables**: Find common free slots and classes with friends.
+- **Timeline View**: A calendar-like view of your schedule integrated with academic events.
+- **Export Options**: Download as PDF/PNG or sync directly to Google Calendar.
+- **Shareable Timetable**: Timetables can be recreated by simple URL sharing.
+- **Save Configs**: Save and load multiple timetable configurations.
+- **Analytics**: Integrated PostHog analytics for usage tracking.
+- **GenAI Integration**: Backend tools use Google Gemini for summarizing PDF notices.
 
 ## Tech Stack
 
-### Frontend
+### Frontend (`/website`)
 
-- **Framework**: React.js with TypeScript
-- **Styling**: Tailwind CSS
-- **Animations**: Framer Motion
-- **Routing**: React Router with swipe navigation
-- **Touch Support**: React Swipeable for mobile gestures
+- **Framework**: Next.js 16 (App Router)
+- **Language**: TypeScript
+- **Styling**: Tailwind CSS v4, Shadcn UI, Framer Motion
+- **State Management**: React Context, Nuqs (URL search params)
+- **Core Engine**: Pyodide (Python in WebAssembly)
+- **Analytics**: PostHog
 
-### Backend
+### Backend & Tools (`/parser`, `/creator`)
 
-- **Framework**: Python - Pyodide (Web Assembly)
-- **Endpoints**: Timetable & Academic Calendar processing, generation & comparing
-- **Google Calendar API** for syncing schedules
+- **Parser API**: Python (Flask) - Converts raw Excel/PDF timetables into JSON.
+- **Data Processing**: Python scripts for batch processing.
+- **AI**: Google GenAI (Gemini) for PDF summarization.
 
-### Data
+## Data
 
 `Note: If you want to make a custom frontend or an App or something`
 make a request
 
 ```bash
-curl https://simple-timetable.tashif.codes/data/time-table/ODD25/62.json   # replace 62 with 128 if want 128 data, also also replace the semester also if want anyother
+curl https://jiit-timetable.tashif.codes/data/time-table/ODD25/62.json   # replace 62 with 128 if want 128 data, also also replace the semester also if want anyother
 ```
 
 or
 
 ```bash
-curl https://simple-timetable.tashif.codes/data/calender/2526/calender.json  # replace 2526 with whichever academic year you want to use
+curl https://jiit-timetable.tashif.codes/data/calender/2526/calender.json  # replace 2526 with whichever academic year you want to use
 ```
 
 ## Project Structure
 
 ```
-
 .
-├── json_creater.py      # this the python streamlit app that converts the ugly excel to json for the website
-├── public
-│   ├── data                       # this directory contains all the json data created
-│   │   ├── calender
-│   │   │   ├── 2425
-│   │   │   │   └── calendar.json
-│   │   │   └── 2526
-│   │   │       └── calender.json
-│   │   │
-│   │   └── time-table
-│   │       ├── EVEN25
-│   │       │   ├── 128.json
-│   │       │   └── 62.json
-│   │       └── ODD25
-│   │           ├── 128.json
-│   │           ├── 62.json
-│   │           └── BCA.json
-│   │
-│   ├── modules                      # this directory contains specific python modules to create timetable
-│   │   ├── BE128_creator.py
-│   │   └── BE62_creator.py
-│   │
-│   ├── _creator.py                  # Python file that creates the timetable
-│   ├── manifest.json                # manifest file for PWA
-│   ├── robots.txt
-│   ├── service-worker.js            # service working to save resources offline
-│   └── sitemap.xml
+├── website/                 # Main Next.js Application
+│   ├── app/                 # App Router pages and API routes
+│   ├── components/          # React components (including Shadcn)
+│   ├── public/              # Static assets and data
+│   └── utils/               # Utilities (including Pyodide bridge)
 │
-├── src
-│   ├── components
-│   │   ├── academic-calendar.tsx         # Academic calendar display page
-│   │   ├── action-buttons.tsx
-│   │   ├── background.tsx
-│   │   ├── compare-timetable.tsx         # Comparing timetable page
-│   │   ├── edit-event-dialog.tsx
-│   │   ├── google-calendar-button.tsx
-│   │   ├── mess-menu.tsx                 # The mess menu page
-│   │   ├── navbar.tsx                    # Swipeable navbar with mobile optimization
-│   │   ├── not-found.tsx                 # 404 Not Found Custom page
-│   │   ├── schedule-display.tsx
-│   │   ├── schedule-form.tsx
-│   │   ├── timeline-landing.tsx          # landing page for /timeline if no schedule has been created
-│   │   ├── timeline-wrapper.tsx
-│   │   ├── timeline.tsx                  # Calendar / Timeline View page for the timetable
-│   │   ├── url-params-dialog.tsx
-│   │   └── ui\                           # this directory contains the shadcn components
-│   │
-│   ├── context
-│   │   ├── userContext.ts
-│   │   └── userContextProvider.tsx
-│   │
-│   ├── hooks\
-│   ├── lib\
-│   ├── types\                # TypeScript type Definitions
-│   │
-│   ├── utils
-│   │   ├── calender-AC.ts                  # Google Calendar API Integration for AC
-│   │   ├── calender.ts                     # Google Calendar API Integration for TimeTable
-│   │   ├── download.ts                     # Hook/function to download png/pdf of TimeTable
-│   │   └── pyodide.ts                      # WASM middleware for module execution
-│   │
-│   ├── App.tsx          # the schedule creator page
-│   └── main.tsx         # apps entry point
+├── parser/                  # Flask App for parsing raw files
+│   ├── server.py            # API entry point
+│   └── modules/             # Parsing logic for XLS, XLSX, PDF
 │
-├── README.md
-└── index.html
-
+├── creator/                 # Standalone utility scripts
+│   ├── ac_creator.py        # Academic Calendar creator (uses GenAI)
+│   └── json_creater.py      # JSON generation scripts
+│
+└── README.md
 ```
 
 ## Data Flow
@@ -145,65 +86,80 @@ curl https://simple-timetable.tashif.codes/data/calender/2526/calender.json  # r
 4. Export options handle data conversion.
 5. Academic calendar is accessed to add its visualization.
 
-## Development Setup
+## Getting Started
 
 ### Prerequisites
 
-- bun (recommended) or npm
-- Python 3.8+ (for parser)
+- **Node.js** (or Bun)
+- **Python 3.8+**
 
-1.  Clone the repository and navigate:
+### Running the Website
 
-    ```bash
-    git clone https://github.com/tashifkhan/JIIT-time-table-website
-    cd JIIT-time-table-website
-    ```
+1. Navigate to the website directory:
 
-2.  Install dependencies:
+   ```bash
+   cd website
+   ```
 
-    ```bash
-    bun i
-    ```
+2. Install dependencies:
 
-    or
+   ```bash
+   bun install
+   # or
+   npm install
+   ```
 
-    ```bash
-    npm i
-    ```
+3. Run the development server:
 
-3.  Run the development server:
+   ```bash
+   bun dev
+   # or
+   npm run dev
+   ```
 
-    ```bash
-    bun dev
-    ```
+4. Open [http://localhost:3000](http://localhost:3000) (or the port shown in terminal).
 
-    or
+### Running the Parser (Optional)
 
-    ```bash
-    npm run dev
-    ```
+If you need to parse new timetable files:
 
-Frontend runs at: `http://localhost:5173`
+1. Navigate to the parser directory:
+
+   ```bash
+   cd parser
+   ```
+
+2. Install Python dependencies:
+
+   ```bash
+   pip install -r requirements.txt
+   ```
+
+3. Run the Flask server:
+   ```bash
+   python server.py
+   ```
 
 ## Usage
 
-1. **Home Page**
-   - Enter your campus, batch, year, and electives.
-   - Fetch electives dynamically from JSON - created using [Parser](https://github.com/tashifkhan/JIIT-time-table-parser).
-2. **Timetable Page**
-   - View your personalized schedule.
-   - Color-coded design for easy understanding.
-   - Edit Functionality
-   - Adding of Custom Events
-3. **Export Options**
-   - Download as PDF/PNG or sync with Google Calendar.
-4. **Academic Calendar Sync**
-   - Fetch the academic calendar using the [Academic Calendar Parser](https://github.com/tashifkhan/JIIT-Academic-Calender).
-   - Sync the academic calendar to Google Calendar with enhanced color coding for events.
-5. **Mobile Navigation**
-   - Swipe left/right to navigate between pages
-   - Responsive navbar with multi-line text support
-   - Touch-optimized interface
+1. **Select Details**: On the home page, choose your campus, batch, and electives.
+2. **View Timetable**: The app generates your schedule instantly.
+3. **Customize**: Add custom events or edit existing ones.
+4. **Export**: Use the "Export" button to download or sync with Google Calendar.
+5. **Explore**: Use the bottom navigation (mobile) or sidebar to access the Mess Menu, Academic Calendar, and Timeline.
+
+## API Reference
+
+The application provides a comprehensive REST API documented via Swagger UI.
+
+- **Documentation**: [https://jiit-timetable.tashif.codes/api-doc](https://jiit-timetable.tashif.codes/api-doc)
+- **OpenAPI Spec**: [https://jiit-timetable.tashif.codes/api/doc](https://jiit-timetable.tashif.codes/api/doc)
+
+### Available Endpoints
+
+- `/api/academic-calendar`: Fetch academic calendar data.
+- `/api/mess-menu`: Get daily mess menus.
+- `/api/time-table`: Access raw timetable data.
 
 ## Mobile Features
 
@@ -221,30 +177,6 @@ Common issues and solutions:
 3. **Parser Error**: Check the freaking Excel for errors
 4. **Mobile Issues**: Ensure you're using a modern browser with touch support
 
-## Contributing
-
-We welcome contributions to enhance this project!
-
-1.  Fork the repository.
-2.  Create a new branch:
-
-    ```bash
-    git checkout -b feature-name
-    ```
-
-3.  Commit changes and create a pull request.
-
-## Raising an Issue
-
-If you encounter any issues or have suggestions, please raise an issue on GitHub:
-
-1. Go to the [Issues](https://github.com/tashifkhan/JIIT-time-table-website/issues) section of the repository.
-2. Click on the "New Issue" button.
-3. Provide a detailed description of the issue or suggestion.
-4. Submit the issue.
-
-I appreciate your feedback and contributions!
-
 ## Future Scope
 
 - [x] Handelled BCA TimeTable
@@ -255,13 +187,22 @@ I appreciate your feedback and contributions!
 - [x] Mobile-responsive navbar with multi-line text support
 - [x] Swipe navigation for mobile devices
 
+## Contributing
+
+Contributions are welcome!
+
+1. Fork the repository.
+2. Create a feature branch (`git checkout -b feature/amazing-feature`).
+3. Commit your changes.
+4. Push to the branch.
+5. Open a Pull Request.
+
 ## License
 
-GPL-3.0 License - See ![LICENSE](./LICENSE) file
+[GPL-3.0 License](LICENSE)
 
 ## Contact
 
-For support or queries:
-
-- GitHub Issues
-- Email: [developer@tashif.codes]
+- **Issues**: [GitHub Issues](https://github.com/tashifkhan/JIIT-time-table-website/issues)
+- **Feature Requests**: [GitHub Issues](https://github.com/tashifkhan/JIIT-time-table-website/issues)
+- **Email**: [developer@tashif.codes](mailto:developer@tashif.codes)

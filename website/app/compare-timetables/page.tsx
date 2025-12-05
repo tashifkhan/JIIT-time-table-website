@@ -16,7 +16,10 @@ import {
 	SelectValue,
 } from "../../components/ui/select";
 import type { PyodideInterface } from "pyodide";
-import { SubjectSelector, Subject } from "../../components/schedule-form";
+import {
+	SubjectSelector,
+	Subject,
+} from "../../components/schedule/schedule-form";
 
 const initialConfig = { campus: "", year: "", batch: "", electives: [] };
 

@@ -5,14 +5,14 @@ import {
 	callPythonFunction,
 	usePyodideStatus,
 	initializePyodide,
-} from "../utils/pyodide";
-import { ScheduleForm } from "../components/schedule-form";
-import { ScheduleDisplay } from "../components/schedule-display";
-import { UrlParamsDialog } from "../components/url-params-dialog";
+} from "../../utils/pyodide";
+import { ScheduleForm } from "../schedule/schedule-form";
+import { ScheduleDisplay } from "../schedule/schedule-display";
+import { UrlParamsDialog } from "./url-params-dialog";
 import { motion } from "framer-motion";
 import { Calendar, ChevronDown, Trash, Share2 } from "lucide-react";
 import { useRouter } from "next/navigation";
-import UserContext from "../context/userContext";
+import UserContext from "../../context/userContext";
 import {
 	useQueryState,
 	parseAsInteger,
@@ -25,8 +25,8 @@ import {
 	DialogContent,
 	DialogTitle,
 	DialogDescription,
-} from "../components/ui/dialog";
-import { YourTietable } from "../types";
+} from "../ui/dialog";
+import { YourTietable } from "../../types";
 
 export default function HomeContent() {
 	const [timeTableData, setTimeTableData] = React.useState<any[]>([]);

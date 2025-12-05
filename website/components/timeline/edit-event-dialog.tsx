@@ -1,15 +1,15 @@
 import React, { useContext, useEffect } from "react";
-import { Dialog, DialogContent, DialogHeader, DialogTitle } from "./ui/dialog";
-import { Button } from "./ui/button";
-import { Input } from "./ui/input";
+import { Dialog, DialogContent, DialogHeader, DialogTitle } from "../ui/dialog";
+import { Button } from "../ui/button";
+import { Input } from "../ui/input";
 import {
 	Select,
 	SelectContent,
 	SelectItem,
 	SelectTrigger,
 	SelectValue,
-} from "./ui/select";
-import UserContext from "../context/userContext";
+} from "../ui/select";
+import UserContext from "../../context/userContext";
 import { Trash2 } from "lucide-react";
 
 interface EditEventDialogProps {

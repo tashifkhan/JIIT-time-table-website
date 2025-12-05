@@ -1,7 +1,7 @@
 "use client";
 import React, { useState, useEffect, useContext } from "react";
-import TimelinePage from "../../components/timeline";
-import TimelineLanding from "../../components/timeline-landing";
+import TimelinePage from "../../components/timeline/timeline";
+import TimelineLanding from "../../components/timeline/timeline-landing";
 import UserContext from "../../context/userContext";
 
 const TimelineWrapper: React.FC = () => {

@@ -1,14 +1,14 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { Button } from "./ui/button";
+import { Button } from "../ui/button";
 import { Download, Loader2 } from "lucide-react";
-import { downloadAsPng, downloadAsPdf } from "../utils/download";
+import { downloadAsPng, downloadAsPdf } from "../../utils/download";
 import { useRouter } from "next/navigation";
 import { GoogleCalendarButton } from "./google-calendar-button";
-import { YourTietable } from "../types";
+import { YourTietable } from "../../types";
 import { useContext, useState } from "react";
-import UserContext from "../context/userContext";
+import UserContext from "../../context/userContext";
 import { useToast } from "@/hooks/use-toast";
 
 interface ActionButtonsProps {

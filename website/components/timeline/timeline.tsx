@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useEffect, useRef, useState, useCallback } from "react";
-import UserContext from "../context/userContext";
+import UserContext from "../../context/userContext";
 import { useSearchParams } from "next/navigation";
 import { TimelineHeader } from "./timeline-header";
 

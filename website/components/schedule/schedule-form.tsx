@@ -1,23 +1,23 @@
 import { useState, useContext, useEffect, useRef, useMemo } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Button } from "./ui/button";
-import { Card } from "./ui/card";
+import { Button } from "../ui/button";
+import { Card } from "../ui/card";
 import {
 	Select,
 	SelectContent,
 	SelectItem,
 	SelectTrigger,
 	SelectValue,
-} from "./ui/select";
-import { Input } from "./ui/input";
-import { Label } from "./ui/label";
-import { Dialog, DialogContent, DialogHeader, DialogTitle } from "./ui/dialog";
+} from "../ui/select";
+import { Input } from "../ui/input";
+import { Label } from "../ui/label";
+import { Dialog, DialogContent, DialogHeader, DialogTitle } from "../ui/dialog";
 import Fuse from "fuse.js";
 
 import { Sparkles, Save } from "lucide-react";
-import UserContext from "../context/userContext";
+import UserContext from "../../context/userContext";
 import { useQueryState, parseAsString, parseAsArrayOf } from "nuqs";
-import { useToast } from "../hooks/use-toast";
+import { useToast } from "../../hooks/use-toast";
 
 export interface Subject {
 	Code: string;

@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import MenuContent from "./menu-content";
+import MenuContent from "../../components/mess-menu/menu-content";
 
 export const metadata: Metadata = {
 	title: "JIIT Mess Menu",

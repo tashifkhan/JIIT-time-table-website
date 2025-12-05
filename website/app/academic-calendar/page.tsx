@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import CalendarContent from "./calendar-content";
+import CalendarContent from "../../components/academic-calendar/calendar-content";
 
 export const metadata: Metadata = {
 	title: "JIIT Academic Calendar",

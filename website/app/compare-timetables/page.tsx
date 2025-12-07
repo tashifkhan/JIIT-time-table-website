@@ -20,6 +20,7 @@ import {
 	SubjectSelector,
 	Subject,
 } from "../../components/schedule/schedule-form";
+import Loading from "@/components/common/loading";
 
 const initialConfig = { campus: "", year: "", batch: "", electives: [] };
 
@@ -275,9 +276,7 @@ export default function CompareTimetables() {
 	// Only allow actions when mappings are loaded
 	if (Object.keys(mappings).length === 0) {
 		return (
-			<div className="text-center text-white p-8">
-				Loading timetable data...
-			</div>
+			<Loading />
 		);
 	}
 

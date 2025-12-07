@@ -9,6 +9,10 @@
 
 A powerful **Next.js** application that helps JIIT students create personalized class schedules. Features a modern glassmorphic UI, color-coded timetables, academic calendar integration, and multiple export options. This application leverages **WebAssembly (Pyodide)** to generate timetables directly in the browser, ensuring privacy and offline capability.
 
+## Analytics
+<img width="1800" height="1129" alt="image" src="https://github.com/user-attachments/assets/cb7e8ce7-a0a0-4fda-8d41-aef462fecfc2" />
+
+
 ## Key Features
 
 - **Personalized Schedules**: Generates timetables based on your specific batch and electives.

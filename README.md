@@ -46,21 +46,6 @@ A powerful **Next.js** application that helps JIIT students create personalized 
 - **Data Processing**: Python scripts for batch processing.
 - **AI**: Google GenAI (Gemini) for PDF summarization.
 
-## Data
-
-`Note: If you want to make a custom frontend or an App or something`
-make a request
-
-```bash
-curl https://jiit-timetable.tashif.codes/data/time-table/ODD25/62.json   # replace 62 with 128 if want 128 data, also also replace the semester also if want anyother
-```
-
-or
-
-```bash
-curl https://jiit-timetable.tashif.codes/data/calender/2526/calender.json  # replace 2526 with whichever academic year you want to use
-```
-
 ## Project Structure
 
 ```

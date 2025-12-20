@@ -1,7 +1,15 @@
+[build-system]
+requires = ["setuptools>=61.0"]
+build-backend = "setuptools.build_meta"
+
 [project]
-name = "timetable-creator"
+name = "jiit-timetable-parser"
 version = "0.1.0"
-description = "Add your description here"
+description = "A parser for JIIT time table JSON data"
 readme = "README.md"
 requires-python = ">=3.12"
 dependencies = []
+
+[tool.setuptools]
+packages = ["BCA", "common", "modules", "sector_128", "sector_62"]
+py-modules = ["main", "_legacy"]

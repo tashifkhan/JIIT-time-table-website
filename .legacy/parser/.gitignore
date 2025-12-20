@@ -1,0 +1,15 @@
+.env
+.idea
+blah.py
+data
+.DS_Store
+__pycache__
+*.pyc
+hello.csv
+uploads
+styles.scss
+.vercel
+emsdk
+.pyodide-xbuildenv-0.29.2
+UNKNOWN.egg-info
+test.py

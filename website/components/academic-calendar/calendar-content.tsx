@@ -232,14 +232,14 @@ export default function CalendarContent() {
 						</Select>
 					</div>
 
-					{/* Action Buttons - Inline on mobile, Fixed on desktop */}
-					<div className="flex flex-wrap justify-center gap-3 mt-6 mb-8 md:fixed md:bottom-8 md:left-8 md:flex-col md:items-start md:m-0 md:z-50">
+					{/* Action Buttons - Compact row on mobile, Fixed column on desktop */}
+					<div className="flex flex-row flex-wrap justify-center gap-2 mt-4 mb-4 md:fixed md:bottom-8 md:left-8 md:flex-col md:items-start md:m-0 md:z-50 md:gap-3">
 						<motion.button
 							onClick={() => {
 								setShowHolidaysOnly(!showHolidaysOnly);
 								setVisibleEventsCount(0);
 							}}
-							className={`px-4 sm:px-6 py-2 rounded-lg backdrop-blur-lg border transition-all duration-300 shadow-lg flex items-center gap-2 text-sm sm:text-base ${
+							className={`px-3 py-1.5 sm:px-6 sm:py-2 rounded-lg backdrop-blur-lg border transition-all duration-300 shadow-lg flex items-center gap-1.5 sm:gap-2 text-xs sm:text-base ${
 								showHolidaysOnly
 									? "bg-red-500/20 border-red-500/50 text-red-300 hover:bg-red-500/30"
 									: "bg-white/10 border-white/20 text-[#F0BB78] hover:bg-white/20"
@@ -247,35 +247,39 @@ export default function CalendarContent() {
 							whileHover={{ scale: 1.05 }}
 							whileTap={{ scale: 0.95 }}
 						>
-							<Filter className="w-4 h-4 sm:w-5 sm:h-5" />
-							<span>{showHolidaysOnly ? "All Events" : "Holidays Only"}</span>
+							<Filter className="w-3.5 h-3.5 sm:w-5 sm:h-5" />
+							<span className="hidden sm:inline">{showHolidaysOnly ? "All Events" : "Holidays Only"}</span>
+							<span className="sm:hidden">{showHolidaysOnly ? "All" : "Holidays"}</span>
 						</motion.button>
 
 						<motion.button
 							onClick={handleAddToCalendar}
 							disabled={isLoading}
-							className="px-4 sm:px-6 py-2 rounded-lg backdrop-blur-lg bg-white/10 border border-white/20 text-[#F0BB78] hover:bg-white/20 transition-all duration-300 shadow-lg flex items-center gap-2 text-sm sm:text-base"
+							className="px-3 py-1.5 sm:px-6 sm:py-2 rounded-lg backdrop-blur-lg bg-white/10 border border-white/20 text-[#F0BB78] hover:bg-white/20 transition-all duration-300 shadow-lg flex items-center gap-1.5 sm:gap-2 text-xs sm:text-base"
 							whileHover={{ scale: 1.05 }}
 							whileTap={{ scale: 0.95 }}
 						>
-							<Calendar className="w-4 h-4 sm:w-5 sm:h-5" />
-							<span>
-									{isLoading ? "Adding to Calendar..." : "Add to Google Calendar"}
-								</span>
-							</motion.button>
+							<Calendar className="w-3.5 h-3.5 sm:w-5 sm:h-5" />
+							<span className="hidden sm:inline">
+								{isLoading ? "Adding..." : "Add to Google Calendar"}
+							</span>
+							<span className="sm:hidden">
+								{isLoading ? "Adding..." : "Google"}
+							</span>
+						</motion.button>
 
-							<motion.button
-								onClick={() => {
-									const yearLabel = availableYears.find(y => y.value === selectedYear)?.label || selectedYear;
-									downloadICalFile(calendarData, `jiit-academic-calendar-${selectedYear}.ics`);
-								}}
-								disabled={calendarData.length === 0}
-								className="px-4 sm:px-6 py-2 rounded-lg backdrop-blur-lg bg-white/10 border border-white/20 text-[#F0BB78] hover:bg-white/20 transition-all duration-300 shadow-lg flex items-center gap-2 text-sm sm:text-base disabled:opacity-50 disabled:cursor-not-allowed"
-								whileHover={{ scale: 1.05 }}
-								whileTap={{ scale: 0.95 }}
-							>
-								<Download className="w-4 h-4 sm:w-5 sm:h-5" />
-								<span>Download iCal File</span>
+						<motion.button
+							onClick={() => {
+								downloadICalFile(calendarData, `jiit-academic-calendar-${selectedYear}.ics`);
+							}}
+							disabled={calendarData.length === 0}
+							className="px-3 py-1.5 sm:px-6 sm:py-2 rounded-lg backdrop-blur-lg bg-white/10 border border-white/20 text-[#F0BB78] hover:bg-white/20 transition-all duration-300 shadow-lg flex items-center gap-1.5 sm:gap-2 text-xs sm:text-base disabled:opacity-50 disabled:cursor-not-allowed"
+							whileHover={{ scale: 1.05 }}
+							whileTap={{ scale: 0.95 }}
+						>
+							<Download className="w-3.5 h-3.5 sm:w-5 sm:h-5" />
+							<span className="hidden sm:inline">Download iCal File</span>
+							<span className="sm:hidden">iCal</span>
 						</motion.button>
 					</div>
 				</motion.div>

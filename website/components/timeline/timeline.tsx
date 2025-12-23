@@ -6,6 +6,7 @@ import { useSearchParams } from "next/navigation";
 import { TimelineHeader } from "./timeline-header";
 import { EditEventDialog } from "./edit-event-dialog";
 import { Edit2 } from "lucide-react";
+import { useAcademicYears, useAcademicCalendar } from "../../hooks/use-api";
 
 interface ScheduleEvent {
   subject_name: string;
@@ -29,10 +30,20 @@ export const TimelineView: React.FC = () => {
   // State for view and date
   const [view, setView] = useState<"day" | "week">("week");
   const [currentDate, setCurrentDate] = useState(new Date());
-  const [calendarEvents, setCalendarEvents] = useState<CalendarEvent[]>([]);
   const [filteredCalendarEvents, setFilteredCalendarEvents] = useState<
     CalendarEvent[]
   >([]);
+
+  // Detect if download mode is active via query param
+  const isDownloadMode = React.useMemo(() => {
+    const params = new URLSearchParams(location.search);
+    return params.get("download") === "1";
+  }, [location.search]);
+
+  // Fetch Academic Calendar Data using React Query
+  const { data: years = [] } = useAcademicYears();
+  const latestYear = years.length > 0 ? years[0].value : "";
+  const { data: calendarEvents = [] } = useAcademicCalendar(latestYear);
 
   // Set default view to day on mobile
   useEffect(() => {
@@ -40,12 +51,6 @@ export const TimelineView: React.FC = () => {
       setView("day");
     }
   }, []);
-
-  // Detect if download mode is active via query param
-  const isDownloadMode = React.useMemo(() => {
-    const params = new URLSearchParams(location.search);
-    return params.get("download") === "1";
-  }, [location.search]);
 
   // Force week view in download mode
   useEffect(() => {
@@ -95,31 +100,6 @@ export const TimelineView: React.FC = () => {
       }
     }
   }, [isDownloadMode, displaySchedule, view]);
-
-  // Fetch Academic Calendar Data
-  useEffect(() => {
-    if (isDownloadMode) return;
-
-    const fetchCalendarData = async () => {
-      try {
-        // 1. Get available years
-        const yearsRes = await fetch("/api/academic-calendar");
-        const years = await yearsRes.json();
-
-        if (years.length > 0) {
-          // 2. Get data for the latest year (assuming sorted)
-          const latestYear = years[0].value;
-          const eventsRes = await fetch(`/api/academic-calendar/${latestYear}`);
-          const events = await eventsRes.json();
-          setCalendarEvents(events);
-        }
-      } catch (error) {
-        console.error("Failed to fetch calendar data:", error);
-      }
-    };
-
-    fetchCalendarData();
-  }, [isDownloadMode]);
 
   // Filter calendar events for the current view
   useEffect(() => {

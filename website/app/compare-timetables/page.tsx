@@ -1,5 +1,5 @@
 "use client";
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useMemo } from "react";
 import { motion } from "framer-motion";
 import { ChevronDown, Trash } from "lucide-react";
 import {
@@ -21,14 +21,24 @@ import {
 	Subject,
 } from "../../components/schedule/schedule-form";
 import Loading from "@/components/common/loading";
+import { useTimeTables, useBatchMappings } from "../../hooks/use-api";
 
 const initialConfig = { campus: "", year: "", batch: "", electives: [] };
 
 export default function CompareTimetables() {
-	// Dynamic Data State
-	const [timeTableData, setTimeTableData] = useState<any[]>([]);
+	// Dynamic Data State using React Query
+	const { data: timeTableData = [], isLoading: isTimeTableLoading } = useTimeTables();
 	const [selectedSemester, setSelectedSemester] = useState<string>("");
-	const [mappings, setMappings] = useState<Record<string, any>>({});
+
+	// Get batches for the selected semester
+	const semesterInfo = useMemo(() => 
+		timeTableData.find((d) => d.semester === selectedSemester),
+		[timeTableData, selectedSemester]
+	);
+	const batches = semesterInfo?.batches || [];
+
+	// Fetch all batch mappings for the selected semester
+	const { data: mappings = {} } = useBatchMappings(selectedSemester, batches);
 
 	// Saved configs state (shared with App.tsx)
 	const [savedConfigs, setSavedConfigs] = useState<{ [key: string]: any }>({});
@@ -58,62 +68,36 @@ export default function CompareTimetables() {
 		}
 	}, [savedConfigs, isConfigLoaded]);
 
-	// Fetch available time tables and set smart default semester
+	// Smart default semester selection
 	useEffect(() => {
-		fetch("/api/time-table")
-			.then((res) => res.json())
-			.then((data) => {
-				setTimeTableData(data);
-				if (data.length === 0) return;
+		if (timeTableData.length === 0 || selectedSemester) return;
 
-				const now = new Date();
-				const currentYear = now.getFullYear().toString().slice(-2);
-				const currentMonth = now.getMonth(); // 0-11
+		const now = new Date();
+		const currentYear = now.getFullYear().toString().slice(-2);
+		const currentMonth = now.getMonth(); // 0-11
 
-				// Filter for semesters matching current year
-				const currentYearSemesters = data.filter((d: any) =>
-					d.semester.endsWith(currentYear)
-				);
-
-				if (currentYearSemesters.length === 1) {
-					setSelectedSemester(currentYearSemesters[0].semester);
-				} else if (currentYearSemesters.length > 1) {
-					const isEven = currentMonth <= 4;
-					const preferredPrefix = isEven ? "EVEN" : "ODD";
-					const preferred = currentYearSemesters.find((d: any) =>
-						d.semester.startsWith(preferredPrefix)
-					);
-					if (preferred) {
-						setSelectedSemester(preferred.semester);
-					} else {
-						setSelectedSemester(currentYearSemesters[0].semester);
-					}
-				} else {
-					setSelectedSemester(data[0].semester);
-				}
-			})
-			.catch((err) => console.error("Failed to fetch time tables", err));
-	}, []);
-
-	// Fetch mappings for selected semester
-	useEffect(() => {
-		if (!selectedSemester) return;
-		const semesterInfo = timeTableData.find(
-			(d) => d.semester === selectedSemester
+		// Filter for semesters matching current year
+		const currentYearSemesters = timeTableData.filter((d: any) =>
+			d.semester.endsWith(currentYear)
 		);
-		if (!semesterInfo) return;
 
-		const newMappings: Record<string, any> = {};
-		const promises = semesterInfo.batches.map((batch: string) =>
-			fetch(`/api/time-table/${selectedSemester}/${batch}`)
-				.then((res) => res.json())
-				.then((json) => {
-					newMappings[batch] = json;
-				})
-				.catch((err) => console.error(`Failed to fetch batch ${batch}`, err))
-		);
-		Promise.all(promises).then(() => setMappings(newMappings));
-	}, [selectedSemester, timeTableData]);
+		if (currentYearSemesters.length === 1) {
+			setSelectedSemester(currentYearSemesters[0].semester);
+		} else if (currentYearSemesters.length > 1) {
+			const isEven = currentMonth <= 4;
+			const preferredPrefix = isEven ? "EVEN" : "ODD";
+			const preferred = currentYearSemesters.find((d: any) =>
+				d.semester.startsWith(preferredPrefix)
+			);
+			if (preferred) {
+				setSelectedSemester(preferred.semester);
+			} else {
+				setSelectedSemester(currentYearSemesters[0].semester);
+			}
+		} else if (timeTableData.length > 0) {
+			setSelectedSemester(timeTableData[0].semester);
+		}
+	}, [timeTableData, selectedSemester]);
 
 	const [config1, setConfig1] = useState<any>({ ...initialConfig });
 	const [config2, setConfig2] = useState<any>({ ...initialConfig });

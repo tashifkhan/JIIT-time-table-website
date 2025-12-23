@@ -16,6 +16,7 @@
 		"@radix-ui/react-slot": "^1.2.3",
 		"@radix-ui/react-tabs": "^1.1.13",
 		"@radix-ui/react-toast": "^1.2.14",
+		"@tanstack/react-query": "^5.90.12",
 		"@vercel/analytics": "^1.4.1",
 		"caniuse-lite": "^1.0.30001727",
 		"class-variance-authority": "^0.7.1",

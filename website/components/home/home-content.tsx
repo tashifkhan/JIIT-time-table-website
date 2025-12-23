@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useContext, useState } from "react";
+import React, { useContext, useState, useMemo, useEffect } from "react";
 import {
 	callPythonFunction,
 	usePyodideStatus,
@@ -27,69 +27,52 @@ import {
 	DialogDescription,
 } from "../ui/dialog";
 import { YourTietable } from "../../types";
+import { useTimeTables, useBatchMappings } from "../../hooks/use-api";
 
 export default function HomeContent() {
-	const [timeTableData, setTimeTableData] = React.useState<any[]>([]);
+	const { data: timeTableData = [], isLoading: isTimeTableLoading } = useTimeTables();
 	const [selectedSemester, setSelectedSemester] = React.useState<string>("");
-	const [mappings, setMappings] = React.useState<Record<string, any>>({});
 
-	React.useEffect(() => {
-		fetch("/api/time-table")
-			.then((res) => res.json())
-			.then((data) => {
-				setTimeTableData(data);
-				if (data.length === 0) return;
+	// Get batches for the selected semester
+	const semesterInfo = useMemo(() => 
+		timeTableData.find((d) => d.semester === selectedSemester),
+		[timeTableData, selectedSemester]
+	);
+	const batches = semesterInfo?.batches || [];
 
-				const now = new Date();
-				const currentYear = now.getFullYear().toString().slice(-2);
-				const currentMonth = now.getMonth(); // 0-11
+	// Fetch all batch mappings for the selected semester
+	const { data: mappings = {} } = useBatchMappings(selectedSemester, batches);
 
-				// Filter for semesters matching current year
-				const currentYearSemesters = data.filter((d: any) =>
-					d.semester.endsWith(currentYear)
-				);
+	// Smart default semester selection
+	useEffect(() => {
+		if (timeTableData.length === 0 || selectedSemester) return;
 
-				if (currentYearSemesters.length === 1) {
-					// If only one exists for current year, use it
-					setSelectedSemester(currentYearSemesters[0].semester);
-				} else if (currentYearSemesters.length > 1) {
-					// If multiple exist, check month (Jan-May = EVEN, else ODD)
-					const isEven = currentMonth <= 4;
-					const preferredPrefix = isEven ? "EVEN" : "ODD";
-					const preferred = currentYearSemesters.find((d: any) =>
-						d.semester.startsWith(preferredPrefix)
-					);
-					if (preferred) {
-						setSelectedSemester(preferred.semester);
-					} else {
-						setSelectedSemester(currentYearSemesters[0].semester);
-					}
-				} else {
-					// Fallback to first available if no current year match
-					setSelectedSemester(data[0].semester);
-				}
-			})
-			.catch((err) => console.error("Failed to fetch time tables", err));
-	}, []);
+		const now = new Date();
+		const currentYear = now.getFullYear().toString().slice(-2);
+		const currentMonth = now.getMonth(); // 0-11
 
-	React.useEffect(() => {
-		if (!selectedSemester) return;
-		const semesterInfo = timeTableData.find(
-			(d) => d.semester === selectedSemester
+		// Filter for semesters matching current year
+		const currentYearSemesters = timeTableData.filter((d: any) =>
+			d.semester.endsWith(currentYear)
 		);
-		if (!semesterInfo) return;
 
-		const newMappings: Record<string, any> = {};
-		const promises = semesterInfo.batches.map((batch: string) =>
-			fetch(`/api/time-table/${selectedSemester}/${batch}`)
-				.then((res) => res.json())
-				.then((json) => {
-					newMappings[batch] = json;
-				})
-				.catch((err) => console.error(`Failed to fetch batch ${batch}`, err))
-		);
-		Promise.all(promises).then(() => setMappings(newMappings));
-	}, [selectedSemester, timeTableData]);
+		if (currentYearSemesters.length === 1) {
+			setSelectedSemester(currentYearSemesters[0].semester);
+		} else if (currentYearSemesters.length > 1) {
+			const isEven = currentMonth <= 4;
+			const preferredPrefix = isEven ? "EVEN" : "ODD";
+			const preferred = currentYearSemesters.find((d: any) =>
+				d.semester.startsWith(preferredPrefix)
+			);
+			if (preferred) {
+				setSelectedSemester(preferred.semester);
+			} else {
+				setSelectedSemester(currentYearSemesters[0].semester);
+			}
+		} else if (timeTableData.length > 0) {
+			setSelectedSemester(timeTableData[0].semester);
+		}
+	}, [timeTableData, selectedSemester]);
 	const router = useRouter();
 	const { schedule, setSchedule, setEditedSchedule } = useContext(UserContext);
 	const [numExecutions, setNumExecutions] = React.useState(0);

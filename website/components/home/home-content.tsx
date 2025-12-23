@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import {
 	callPythonFunction,
 	usePyodideStatus,
@@ -93,10 +93,7 @@ export default function HomeContent() {
 	const router = useRouter();
 	const { schedule, setSchedule, setEditedSchedule } = useContext(UserContext);
 	const [numExecutions, setNumExecutions] = React.useState(0);
-	const [isGenerating, setIsGenerating] = useQueryState(
-		"isGenerating",
-		parseAsBoolean.withDefault(false)
-	);
+	const [isGenerating, setIsGenerating] = useState(false);
 	// saved configs state
 	const [savedConfigs, setSavedConfigs] = React.useState<{
 		[key: string]: any;

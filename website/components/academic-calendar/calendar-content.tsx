@@ -10,19 +10,30 @@ import {
 	SelectTrigger,
 	SelectValue,
 } from "../../components/ui/select";
+import { useAcademicYears, useAcademicCalendar } from "../../hooks/use-api";
 
 export default function CalendarContent() {
 	const [isLoading, setIsLoading] = useState(false);
-	const [calendarData, setCalendarData] = useState<any[]>([]);
-	const [isDataLoading, setIsDataLoading] = useState(true);
 	const [selectedYear, setSelectedYear] = useState("");
 	const [visibleEventsCount, setVisibleEventsCount] = useState(0);
 	const [showHolidaysOnly, setShowHolidaysOnly] = useState(false);
-	const [availableYears, setAvailableYears] = useState<
-		{ value: string; label: string }[]
-	>([]);
 	const eventRefs = useRef<HTMLDivElement[]>([]);
 	const upcomingDividerRef = useRef<HTMLDivElement | null>(null);
+
+	// Fetch available years
+	const { data: availableYears = [], isLoading: isYearsLoading } = useAcademicYears();
+
+	// Fetch calendar data for selected year
+	const { data: calendarData = [], isLoading: isCalendarLoading } = useAcademicCalendar(selectedYear);
+
+	const isDataLoading = isYearsLoading || (selectedYear && isCalendarLoading);
+
+	// Set default year when years are loaded
+	useEffect(() => {
+		if (availableYears.length > 0 && !selectedYear) {
+			setSelectedYear(availableYears[0].value);
+		}
+	}, [availableYears, selectedYear]);
 
 	useEffect(() => {
 		document.title = "JIIT Academic Calender Simplified";
@@ -32,40 +43,10 @@ export default function CalendarContent() {
 		script.defer = true;
 		document.body.appendChild(script);
 
-		fetch("/api/academic-calendar")
-			.then((res) => res.json())
-			.then((years) => {
-				setAvailableYears(years);
-				if (years.length > 0) {
-					setSelectedYear(years[0].value);
-				} else {
-					setIsDataLoading(false);
-				}
-			})
-			.catch((error) => {
-				console.error("Failed to fetch available years:", error);
-				setIsDataLoading(false);
-			});
-
 		return () => {
 			document.body.removeChild(script);
 		};
 	}, []);
-
-	useEffect(() => {
-		if (!selectedYear) return;
-
-		setIsDataLoading(true);
-
-		fetch(`/api/academic-calendar/${selectedYear}`)
-			.then((res) => res.json())
-			.then((data) => setCalendarData(data))
-			.catch((error) => {
-				console.error("Failed to fetch calendar data:", error);
-				setCalendarData([]);
-			})
-			.finally(() => setIsDataLoading(false));
-	}, [selectedYear]);
 
 	const sortedEvents = [...calendarData].sort(
 		(a, b) =>

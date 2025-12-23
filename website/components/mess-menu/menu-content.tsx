@@ -17,13 +17,25 @@ interface MenuContentProps {
 	apiUrl?: string;
 }
 
+interface OutdatedInfo {
+	isOutdated: boolean;
+	daysOutdated: number;
+	menuWeekStart: Date | null;
+	menuWeekEnd: Date | null;
+}
+
 const MenuContent: React.FC<MenuContentProps> = ({
 	apiUrl = "/api/mess-menu",
 }) => {
 	const [menu, setMenu] = useState<MessMenu["menu"] | null>(null);
 	const [loading, setLoading] = useState(true);
 	const [error, setError] = useState<string | null>(null);
-	const [isMenuOutdated, setIsMenuOutdated] = useState(false);
+	const [outdatedInfo, setOutdatedInfo] = useState<OutdatedInfo>({
+		isOutdated: false,
+		daysOutdated: 0,
+		menuWeekStart: null,
+		menuWeekEnd: null,
+	});
 	const dayRefs = React.useRef<(HTMLDivElement | null)[]>([]);
 
 	// Function to parse date from day string like "Sunday 01.08.25"
@@ -38,22 +50,51 @@ const MenuContent: React.FC<MenuContentProps> = ({
 		return null;
 	};
 
-	// Function to check if menu is outdated
-	const checkIfMenuOutdated = (menuData: MessMenu["menu"]) => {
+	// Function to check if menu is outdated and get details
+	const getOutdatedInfo = (menuData: MessMenu["menu"]): OutdatedInfo => {
 		const today = new Date();
+		today.setHours(0, 0, 0, 0);
 		const menuDays = Object.keys(menuData);
 
-		// Find Sunday entry
+		// Find Monday (start) and Sunday (end) entries
+		const mondayEntry = menuDays.find((day) => day.startsWith("Monday"));
 		const sundayEntry = menuDays.find((day) => day.startsWith("Sunday"));
-		if (sundayEntry) {
-			const sundayDate = parseDateFromDay(sundayEntry);
-			if (sundayDate) {
-				const sundayEnd = new Date(sundayDate);
-				sundayEnd.setHours(23, 59, 59, 999);
-				return today > sundayEnd;
+
+		const menuWeekStart = mondayEntry ? parseDateFromDay(mondayEntry) : null;
+		const menuWeekEnd = sundayEntry ? parseDateFromDay(sundayEntry) : null;
+
+		if (menuWeekEnd) {
+			const sundayEnd = new Date(menuWeekEnd);
+			sundayEnd.setHours(23, 59, 59, 999);
+
+			if (today > sundayEnd) {
+				const diffTime = today.getTime() - sundayEnd.getTime();
+				const daysOutdated = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+				return {
+					isOutdated: true,
+					daysOutdated,
+					menuWeekStart,
+					menuWeekEnd,
+				};
 			}
 		}
-		return false;
+
+		return {
+			isOutdated: false,
+			daysOutdated: 0,
+			menuWeekStart,
+			menuWeekEnd,
+		};
+	};
+
+	// Format date range for display
+	const formatDateRange = (start: Date | null, end: Date | null): string => {
+		if (!start || !end) return "";
+		const options: Intl.DateTimeFormatOptions = {
+			month: "short",
+			day: "numeric",
+		};
+		return `${start.toLocaleDateString("en-US", options)} - ${end.toLocaleDateString("en-US", options)}`;
 	};
 
 	useEffect(() => {
@@ -64,14 +105,14 @@ const MenuContent: React.FC<MenuContentProps> = ({
 			})
 			.then((data: MessMenu) => {
 				setMenu(data.menu);
-				setIsMenuOutdated(checkIfMenuOutdated(data.menu));
+				setOutdatedInfo(getOutdatedInfo(data.menu));
 				setLoading(false);
 			})
 			.catch((err) => {
 				setError(err.message);
 				setLoading(false);
 			});
-	}, []);
+	}, [apiUrl]);
 
 	const isCurrentDay = (day: string) => {
 		const today = new Date();
@@ -88,9 +129,9 @@ const MenuContent: React.FC<MenuContentProps> = ({
 		return day.startsWith(currentDay);
 	};
 
-	// Scroll to current day on mount
+	// Scroll to current day on mount (only if menu is not outdated)
 	useEffect(() => {
-		if (menu) {
+		if (menu && !outdatedInfo.isOutdated) {
 			const today = new Date();
 			const dayNames = [
 				"Sunday",
@@ -122,7 +163,7 @@ const MenuContent: React.FC<MenuContentProps> = ({
 				}, 200);
 			}
 		}
-	}, [menu]);
+	}, [menu, outdatedInfo.isOutdated]);
 
 	return (
 		<main>
@@ -146,7 +187,7 @@ const MenuContent: React.FC<MenuContentProps> = ({
 				</div>
 
 				{/* Outdated Menu Warning */}
-				{isMenuOutdated && (
+				{outdatedInfo.isOutdated && (
 					<div className="w-full max-w-2xl mx-auto">
 						<div className="bg-amber-500/20 border border-amber-500/50 rounded-xl p-6 text-center backdrop-blur-lg">
 							<div className="text-amber-400 text-xl mb-3">
@@ -160,15 +201,27 @@ const MenuContent: React.FC<MenuContentProps> = ({
 										strokeLinecap="round"
 										strokeLinejoin="round"
 										strokeWidth={2}
-										d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-2.5L13.732 4c-.77-.833-1.964-.833-2.732 0L3.34 16.5c-.77.833.192 2.5 1.732 2.5z"
+										d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"
 									/>
 								</svg>
 							</div>
 							<div className="text-amber-300 font-medium text-lg mb-2">
-								This Week's Mess Menu Not Updated Yet
+								Menu Outdated by {outdatedInfo.daysOutdated} Day
+								{outdatedInfo.daysOutdated !== 1 ? "s" : ""}
 							</div>
-							<div className="text-amber-200/80 text-sm">
-								The menu will be updated shortly. Please check back later.
+							<div className="text-amber-200/80 text-sm mb-3">
+								This week's mess menu hasn't been updated yet. The menu below is
+								from{" "}
+								<span className="font-medium text-amber-200">
+									{formatDateRange(
+										outdatedInfo.menuWeekStart,
+										outdatedInfo.menuWeekEnd
+									)}
+								</span>
+								.
+							</div>
+							<div className="text-amber-200/60 text-xs">
+								The new menu will be updated shortly. Please check back later.
 							</div>
 						</div>
 					</div>
@@ -203,34 +256,70 @@ const MenuContent: React.FC<MenuContentProps> = ({
 
 				{/* Menu Content */}
 				{menu && (
-					<div className="w-full max-w-6xl space-y-4">
-						{Object.entries(menu).map(([day, meals], idx) => (
-							<div
-								key={day}
-								ref={(el) => {
-									dayRefs.current[idx] = el;
-								}}
-								className={`rounded-2xl border p-6 transition-all duration-300 ${
-									isCurrentDay(day)
-										? "border-[#F0BB78]/50 bg-white/5 shadow-[0_0_30px_rgba(240,187,120,0.1)]"
-										: "border-white/10 bg-white/5 hover:border-[#F0BB78]/30"
-								}`}
-							>
-								{/* Day Header */}
-								<div className="flex items-center gap-3 mb-6">
-									<div className="w-1.5 h-1.5 rounded-full bg-slate-400"></div>
-									<h2 className="text-xl font-bold text-white">
-										{day.split(" ")[0]}
-										<span className="ml-2 text-slate-400 font-normal text-lg">
-											{day.split(" ").slice(1).join(" ")}
-										</span>
-									</h2>
-									{isCurrentDay(day) && (
-										<span className="ml-2 px-2 py-0.5 bg-[#F0BB78]/20 text-[#F0BB78] text-xs rounded-full border border-[#F0BB78]/30">
-											Today
-										</span>
+					<div
+						className={`w-full max-w-6xl space-y-4 ${outdatedInfo.isOutdated ? "opacity-75" : ""}`}
+					>
+						{/* Outdated menu label */}
+						{outdatedInfo.isOutdated && (
+							<div className="flex items-center justify-center gap-2 text-amber-400/80 text-sm mb-2">
+								<svg
+									className="w-4 h-4"
+									fill="none"
+									stroke="currentColor"
+									viewBox="0 0 24 24"
+								>
+									<path
+										strokeLinecap="round"
+										strokeLinejoin="round"
+										strokeWidth={2}
+										d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"
+									/>
+								</svg>
+								<span>
+									Showing last available menu (
+									{formatDateRange(
+										outdatedInfo.menuWeekStart,
+										outdatedInfo.menuWeekEnd
 									)}
-								</div>
+									)
+								</span>
+							</div>
+						)}
+						{Object.entries(menu).map(([day, meals], idx) => {
+							// Don't highlight "today" if menu is outdated
+							const shouldHighlight =
+								!outdatedInfo.isOutdated && isCurrentDay(day);
+							return (
+								<div
+									key={day}
+									ref={(el) => {
+										dayRefs.current[idx] = el;
+									}}
+									className={`rounded-2xl border p-6 transition-all duration-300 ${
+										shouldHighlight
+											? "border-[#F0BB78]/50 bg-white/5 shadow-[0_0_30px_rgba(240,187,120,0.1)]"
+											: "border-white/10 bg-white/5 hover:border-[#F0BB78]/30"
+									}`}
+								>
+									{/* Day Header */}
+									<div className="flex items-center gap-3 mb-6">
+										<div
+											className={`w-1.5 h-1.5 rounded-full ${outdatedInfo.isOutdated ? "bg-slate-500" : "bg-slate-400"}`}
+										></div>
+										<h2
+											className={`text-xl font-bold ${outdatedInfo.isOutdated ? "text-slate-300" : "text-white"}`}
+										>
+											{day.split(" ")[0]}
+											<span className="ml-2 text-slate-400 font-normal text-lg">
+												{day.split(" ").slice(1).join(" ")}
+											</span>
+										</h2>
+										{shouldHighlight && (
+											<span className="ml-2 px-2 py-0.5 bg-[#F0BB78]/20 text-[#F0BB78] text-xs rounded-full border border-[#F0BB78]/30">
+												Today
+											</span>
+										)}
+									</div>
 
 								{/* Meals Grid */}
 								<div className="grid grid-cols-1 md:grid-cols-3 gap-4">
@@ -266,7 +355,8 @@ const MenuContent: React.FC<MenuContentProps> = ({
 									})}
 								</div>
 							</div>
-						))}
+							);
+						})}
 					</div>
 				)}
 			</div>

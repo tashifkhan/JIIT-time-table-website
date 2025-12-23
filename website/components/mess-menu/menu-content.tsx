@@ -1,6 +1,7 @@
 "use client";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useMemo } from "react";
 import { Loader } from "@/components/ui/loader";
+import { useMessMenu } from "../../hooks/use-api";
 
 interface MessMenu {
 	menu: {
@@ -27,15 +28,10 @@ interface OutdatedInfo {
 const MenuContent: React.FC<MenuContentProps> = ({
 	apiUrl = "/api/mess-menu",
 }) => {
-	const [menu, setMenu] = useState<MessMenu["menu"] | null>(null);
-	const [loading, setLoading] = useState(true);
-	const [error, setError] = useState<string | null>(null);
-	const [outdatedInfo, setOutdatedInfo] = useState<OutdatedInfo>({
-		isOutdated: false,
-		daysOutdated: 0,
-		menuWeekStart: null,
-		menuWeekEnd: null,
-	});
+	const { data, isLoading: loading, error: queryError } = useMessMenu(apiUrl);
+	const menu = data?.menu ?? null;
+	const error = queryError?.message ?? null;
+
 	const dayRefs = React.useRef<(HTMLDivElement | null)[]>([]);
 
 	// Function to parse date from day string like "Sunday 01.08.25"
@@ -87,6 +83,19 @@ const MenuContent: React.FC<MenuContentProps> = ({
 		};
 	};
 
+	// Compute outdated info from menu data
+	const outdatedInfo = useMemo<OutdatedInfo>(() => {
+		if (!menu) {
+			return {
+				isOutdated: false,
+				daysOutdated: 0,
+				menuWeekStart: null,
+				menuWeekEnd: null,
+			};
+		}
+		return getOutdatedInfo(menu);
+	}, [menu]);
+
 	// Format date range for display
 	const formatDateRange = (start: Date | null, end: Date | null): string => {
 		if (!start || !end) return "";
@@ -96,23 +105,6 @@ const MenuContent: React.FC<MenuContentProps> = ({
 		};
 		return `${start.toLocaleDateString("en-US", options)} - ${end.toLocaleDateString("en-US", options)}`;
 	};
-
-	useEffect(() => {
-		fetch(apiUrl)
-			.then((res) => {
-				if (!res.ok) throw new Error("Failed to fetch mess menu");
-				return res.json();
-			})
-			.then((data: MessMenu) => {
-				setMenu(data.menu);
-				setOutdatedInfo(getOutdatedInfo(data.menu));
-				setLoading(false);
-			})
-			.catch((err) => {
-				setError(err.message);
-				setLoading(false);
-			});
-	}, [apiUrl]);
 
 	const isCurrentDay = (day: string) => {
 		const today = new Date();

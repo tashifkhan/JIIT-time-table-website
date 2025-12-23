@@ -1,7 +1,7 @@
 "use client";
-import { Calendar, Plus, Filter } from "lucide-react";
+import { Calendar, Plus, Filter, Download } from "lucide-react";
 import { motion } from "framer-motion";
-import { addAcademicCalendarEvents } from "../../utils/calendar-AC";
+import { addAcademicCalendarEvents, downloadICalFile } from "../../utils/calendar-AC";
 import { useState, useEffect, useRef } from "react";
 import {
 	Select,
@@ -260,8 +260,22 @@ export default function CalendarContent() {
 						>
 							<Calendar className="w-4 h-4 sm:w-5 sm:h-5" />
 							<span>
-								{isLoading ? "Adding to Calendar..." : "Add to Calendar"}
-							</span>
+									{isLoading ? "Adding to Calendar..." : "Add to Google Calendar"}
+								</span>
+							</motion.button>
+
+							<motion.button
+								onClick={() => {
+									const yearLabel = availableYears.find(y => y.value === selectedYear)?.label || selectedYear;
+									downloadICalFile(calendarData, `jiit-academic-calendar-${selectedYear}.ics`);
+								}}
+								disabled={calendarData.length === 0}
+								className="px-4 sm:px-6 py-2 rounded-lg backdrop-blur-lg bg-white/10 border border-white/20 text-[#F0BB78] hover:bg-white/20 transition-all duration-300 shadow-lg flex items-center gap-2 text-sm sm:text-base disabled:opacity-50 disabled:cursor-not-allowed"
+								whileHover={{ scale: 1.05 }}
+								whileTap={{ scale: 0.95 }}
+							>
+								<Download className="w-4 h-4 sm:w-5 sm:h-5" />
+								<span>Download iCal File</span>
 						</motion.button>
 					</div>
 				</motion.div>

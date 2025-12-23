@@ -2,8 +2,9 @@
 
 import { motion } from "framer-motion";
 import { Button } from "../ui/button";
-import { Download, Loader2 } from "lucide-react";
+import { Download, Loader2, FileDown } from "lucide-react";
 import { downloadAsPng, downloadAsPdf } from "../../utils/download";
+import { downloadTimetableICalFile } from "../../utils/calendar";
 import { useRouter } from "next/navigation";
 import { GoogleCalendarButton } from "./google-calendar-button";
 import { YourTietable } from "../../types";
@@ -142,7 +143,21 @@ export function ActionButtons({ schedule }: ActionButtonsProps) {
 			{progressMsg && (
 				<p className="text-xs text-blue-300 mt-1">{progressMsg}</p>
 			)}
-			<GoogleCalendarButton schedule={displaySchedule} />
+			<motion.div
+				className="flex flex-col sm:flex-row gap-2 sm:gap-4 justify-center items-center"
+				initial={{ opacity: 0, y: 10 }}
+				animate={{ opacity: 1, y: 0 }}
+				transition={{ duration: 0.3 }}
+			>
+				<GoogleCalendarButton schedule={displaySchedule} />
+				<Button
+					onClick={() => downloadTimetableICalFile(displaySchedule, "jiit-timetable.ics")}
+					className="backdrop-blur-md bg-[#FFF0DC]/10 border border-[#F0BB78]/20 shadow-lg hover:bg-[#FFF0DC]/20 transition-all duration-300 rounded-xl px-6 py-3 text-[#fff]/60"
+				>
+					<FileDown className="w-5 h-5 mr-3" />
+					Download iCal File
+				</Button>
+			</motion.div>
 			<p className="text-xs text-gray-400 mt-2">
 				Note: Custom events will not be recurring in Google Calendar
 			</p>

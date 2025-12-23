@@ -8,6 +8,16 @@ import { Background } from "../components/layout/background";
 import { NuqsAdapter } from "nuqs/adapters/next/app";
 import { Toaster } from "../components/ui/toaster";
 import { Analytics } from "@vercel/analytics/react";
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+
+const queryClient = new QueryClient({
+	defaultOptions: {
+		queries: {
+			refetchOnWindowFocus: false,
+			retry: 1,
+		},
+	},
+});
 
 export function PostHogProvider({ children }: { children: React.ReactNode }) {
 	useEffect(() => {
@@ -26,16 +36,18 @@ export function PostHogProvider({ children }: { children: React.ReactNode }) {
 
 export function Providers({ children }: { children: React.ReactNode }) {
 	return (
-		<PostHogProvider>
-			<Background>
-				<UserContextProvider>
-					<NuqsAdapter>
-						{children}
-						<Analytics />
-						<Toaster />
-					</NuqsAdapter>
-				</UserContextProvider>
-			</Background>
-		</PostHogProvider>
+		<QueryClientProvider client={queryClient}>
+			<PostHogProvider>
+				<Background>
+					<UserContextProvider>
+						<NuqsAdapter>
+							{children}
+							<Analytics />
+							<Toaster />
+						</NuqsAdapter>
+					</UserContextProvider>
+				</Background>
+			</PostHogProvider>
+		</QueryClientProvider>
 	);
 }

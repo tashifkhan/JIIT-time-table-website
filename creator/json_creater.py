@@ -1,3 +1,10 @@
+"""
+Timetable to JSON Converter (Creator Tool).
+
+This script provides a Streamlit interface for converting Excel (.xlsx, .xls) 
+and CSV timetable files into a structured JSON format. It allows users to 
+manually define row/column ranges for time slots, days, and subjects.
+"""
 import streamlit as st
 import pandas as pd
 import json
@@ -50,6 +57,8 @@ if uploaded_file is not None:
             "Specify the row containing time slots, the column range for those time slots, and the location of day headings."
         )
 
+        # Note: UI uses 1-based indexing for user-friendliness, 
+        # while internal pandas logic uses 0-based indexing.
         st.subheader("Define Time Slots and Column Range")
 
         col1, col2, col3 = st.columns([1, 1, 1])
@@ -236,6 +245,16 @@ else:
 
 # ==== Subject JSON Generator ====
 def subject_json_generator(df):
+    """
+    Extracts subject and course code information from the timetable dataframe.
+
+    This function provides a UI for users to specify column ranges where subject 
+    mappings (Code, Full Code, Subject Name) are located and generates a 
+    deduplicated JSON list.
+
+    Args:
+        df (pd.DataFrame): The timetable data loaded from Excel/CSV.
+    """
     st.header("Step 3: Subject JSON Generator (Optional)")
     with st.expander("Expand to create a subject list from the timetable"):
         st.info(
@@ -243,6 +262,7 @@ def subject_json_generator(df):
             "You can add multiple ranges if subjects are in different parts of the sheet."
         )
 
+        # Persistent state for subject ranges to allow dynamic UI updates
         if "subject_ranges" not in st.session_state:
             st.session_state.subject_ranges = [
                 {"start_row": 1, "end_row": 1, "cols": [1, 2, 3]}

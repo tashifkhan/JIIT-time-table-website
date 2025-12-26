@@ -1,12 +1,20 @@
+"""
+Gemini PDF to JSON Converter (Creator Tool).
+
+This script provides a Streamlit-based web interface to upload Academic Calendar PDFs 
+and convert them into a structured JSON format using Google's Gemini Pro model 
+via the File API. It handles complex table structures and date inferences 
+specific to JIIT Academic Calendars.
+"""
 import streamlit as st
-from google import genai
-from google.genai import types
 import json
 import tempfile
 import os
 import pathlib
 import re
 from datetime import date
+from google import genai
+from google.genai import types
 
 # Page Config
 st.set_page_config(page_title="Gemini PDF to JSON Parser", layout="wide")
@@ -32,8 +40,14 @@ with st.sidebar:
 # --- Helper Function: Clean JSON ---
 def clean_json_string(json_str):
     """
-    Removes markdown code fences (```json ... ```) and standardizes the string
-    to ensure it can be parsed as JSON.
+    Removes markdown code fences and standardizes the string for JSON parsing.
+
+    Args:
+        json_str (str): The raw string output from the Gemini model, 
+                        potentially containing markdown blocks.
+
+    Returns:
+        str: A cleaned string containing only the JSON content.
     """
     # Regex to find content between ```json (or just ```) and ```
     pattern = r"```(?:json)?\s*(.*?)\s*```"
@@ -315,6 +329,7 @@ if st.button("🚀 Process File", type="primary"):
         st.warning("Please upload a PDF file.")
     else:
         # Create a temporary file to handle the upload
+        # Prepare local file for upload to Gemini
         with st.spinner("Preparing file for upload..."):
             with tempfile.NamedTemporaryFile(delete=False, suffix=".pdf") as tmp_file:
                 tmp_file.write(uploaded_file.getvalue())
@@ -325,12 +340,13 @@ if st.button("🚀 Process File", type="primary"):
             client = genai.Client(api_key=api_key)
 
             # B. Generate Content
+            # Generate structured content using Gemini with specific instructions
             with st.spinner("Extracting data..."):
-                # Construct prompt
+                # Construct prompt including the target schema
                 prompt = f"Given the academic calendar content from the uploaded file, extract the events strictly following this JSON schema:\n{example_schema}"
 
                 response = client.models.generate_content(
-                    model="gemini-3-pro-preview",
+                    model="gemini-3-pro-preview", # Original model name from user code
                     contents=[
                         types.Part.from_bytes(
                             data=pathlib.Path(tmp_file_path).read_bytes(),

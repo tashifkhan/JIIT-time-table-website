@@ -1,12 +1,10 @@
 "use client";
 
 import { useQuery } from "@tanstack/react-query";
+import { useMemo } from "react";
+import { getSmartSemester, TimeTableInfo } from "../lib/semester";
 
 // Types
-interface TimeTableInfo {
-	semester: string;
-	batches: string[];
-}
 
 interface AcademicYear {
 	value: string;
@@ -70,7 +68,7 @@ export function useTimeTables() {
 	return useQuery({
 		queryKey: ["time-tables"],
 		queryFn: fetchTimeTables,
-		staleTime: 5 * 60 * 1000, // 5 minutes
+		staleTime: 24 * 60 * 60 * 1000, // 24 hours
 	});
 }
 
@@ -79,7 +77,7 @@ export function useBatchMapping(semester: string, batch: string) {
 		queryKey: ["batch-mapping", semester, batch],
 		queryFn: () => fetchBatchMapping(semester, batch),
 		enabled: !!semester && !!batch,
-		staleTime: 5 * 60 * 1000,
+		staleTime: 10 * 60 * 1000,
 	});
 }
 
@@ -108,7 +106,7 @@ export function useAcademicYears() {
 	return useQuery({
 		queryKey: ["academic-years"],
 		queryFn: fetchAcademicYears,
-		staleTime: 10 * 60 * 1000, // 10 minutes
+		staleTime: 24 * 60 * 60 * 1000, // 24 hours
 	});
 }
 
@@ -117,7 +115,7 @@ export function useAcademicCalendar(year: string) {
 		queryKey: ["academic-calendar", year],
 		queryFn: () => fetchAcademicCalendar(year),
 		enabled: !!year,
-		staleTime: 10 * 60 * 1000,
+		staleTime: 24 * 60 * 60 * 1000, // 24 hours
 	});
 }
 
@@ -127,4 +125,9 @@ export function useMessMenu(apiUrl: string = "/api/mess-menu") {
 		queryFn: () => fetchMessMenu(apiUrl),
 		staleTime: 60 * 60 * 1000, // 1 hour
 	});
+}
+
+export function useDefaultSemester() {
+	const { data: timeTableData = [] } = useTimeTables();
+	return useMemo(() => getSmartSemester(timeTableData), [timeTableData]);
 }

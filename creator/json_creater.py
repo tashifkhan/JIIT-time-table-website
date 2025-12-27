@@ -8,6 +8,7 @@ manually define row/column ranges for time slots, days, and subjects.
 import streamlit as st
 import pandas as pd
 import json
+import re
 from io import StringIO
 
 st.set_page_config(page_title="Timetable Parser", layout="wide")
@@ -56,6 +57,19 @@ if uploaded_file is not None:
             "Use the fields below to tell the app where to find the data."
             "Specify the row containing time slots, the column range for those time slots, and the location of day headings."
         )
+
+        def normalize_time_slot(time_str):
+            """
+            Normalizes time slot strings like '9-', '10-' to '9-9.50', '10-10.50', etc.
+            If the format is already correct or different, it returns the original string.
+            """
+            time_str = str(time_str).strip()
+            match = re.match(r"^(\d{1,2})-$", time_str)
+            if match:
+                hour = match.group(1)
+                return f"{hour}-{hour}.50"
+            return time_str
+
 
         # Note: UI uses 1-based indexing for user-friendliness, 
         # while internal pandas logic uses 0-based indexing.
@@ -177,7 +191,10 @@ if uploaded_file is not None:
                     header_index, start_col_index:end_col_index
                 ].dropna()
                 if not time_headers_preview.empty:
-                    st.write("**Time Slots Found:**", list(time_headers_preview.values))
+                    normalized_headers = [
+                        normalize_time_slot(h) for h in time_headers_preview.values
+                    ]
+                    st.write("**Time Slots Found:**", normalized_headers)
                 else:
                     st.warning("No time slots found in the specified range.")
             except:
@@ -215,7 +232,8 @@ if uploaded_file is not None:
                         class_entries = (
                             df.iloc[start_index:end_index, col_idx].dropna().tolist()
                         )
-                        final_json["timetable"][day_name][str(time_str)] = class_entries
+                        normalized_time = normalize_time_slot(time_str)
+                        final_json["timetable"][day_name][normalized_time] = class_entries
 
                 st.header("Step 2: View and Download JSON")
                 st.success("JSON generated successfully!")

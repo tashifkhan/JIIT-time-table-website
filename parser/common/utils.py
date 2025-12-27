@@ -456,6 +456,12 @@ def process_timeslot(timeslot: str, type: str = "L") -> tuple[str, str]:
         # Handle special case for NOON
         timeslot = timeslot.replace("12 NOON", "12:00 PM").replace("NOON", "12:00 PM")
 
+        # Normalize formats like '9-' to '9-9.50'
+        match = re.match(r"^(\d{1,2})-$", timeslot.strip())
+        if match:
+            hour = match.group(1)
+            timeslot = f"{hour}-{hour}.50"
+
         # Split the timeslot into start and end times
         start_time, end_time = timeslot.split("-")
 

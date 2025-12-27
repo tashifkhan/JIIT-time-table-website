@@ -1457,5 +1457,728 @@
 				"Subject": "Information Theory and Applications"
 			}
 		]
+	},
+	"3": {
+		"timetable": {
+			"MON": {
+				"8-9AM": [
+					"LAB(PH633)-G2/BCJ",
+					"LAB(PH632)-G5/RAV",
+					"LB(CS341)-CS1/MSI",
+					"LABC(PH636)-CS3/VRT",
+					"LAB(PH634)-CS4/INC",
+					"LAC(PH3110)-FF2/MTR",
+					"LABC(21HS411)-FF3/YN",
+					"LABC(24HS316)-FF4/MDU",
+					"LABC(25HS314)-FF5/VSE",
+					"LAB(MA311)-FF6/RSH",
+					"LABC(MA633)-FF7/ATI",
+					"LABC(MA633)-FF8/ANK",
+					"LAB(MA611)-FF9/NS",
+					"LABC(25CH312)-CS2/GUP",
+					"LABC(25CH311)-CS5/HNS",
+					"LAB(MA612)-CR301/NSK"
+				],
+				"9-10AM": [
+					"LB(CS321)-G2/HN",
+					"LB1-B8(CS319)-G5/PAG",
+					"LB(CS314)-CS1/SON",
+					"LB1-B8(CS315)-CS3/SHV",
+					"LA(17B11EC731)-CS4/SMK",
+					"LA(18B13EC314)-FF2/VKH",
+					"LA(24B12EC411)-FF3/RU",
+					"LA(23B12EC311)-FF5/SHS",
+					"LC1-C3(BT631)-FF7/ASM",
+					"LC1-C3(BT634)-FF8/SMO"
+				],
+				"10-11AM": [
+					"LB1,B2,B3(CI513)-CS1/AKT",
+					"LB4,B5,B6(CI513)-CS3/AA",
+					"LA17-A18(24B12EC314)-G5/GV",
+					"LA7-A8(EC315)-CS4/SCH",
+					"LA5-A6-A10(EC315)-CS2/BVI",
+					"LC1-C3(15BT611)-CR425/SAJ, VBR",
+					"TB7,B8,B9(CI514)-F4/ANV",
+					"TB14(CI621)-TR305/SON",
+					"TB10(CI513)-TR307/RCA",
+					"PA4(15EC315)-VDA/RMD,SLM",
+					"PA1(EC671)-ACL/RU,NSH",
+					"PB11(18B15CS311)-CL17/JAG, VIK"
+				],
+				"11-12PM": [
+					"LB5,B6(CS311)-F8/AMK",
+					"LB13,B16(CS311)-CS1/SJA",
+					"LB14,B15(CI521)-CS3/AJS",
+					"LB9,B10(CS311)-CS4/KA",
+					"TA7(EC315)-F4/SCH",
+					"TA2(EC315)-F7/APN",
+					"LA17-A18(25B31EC313)-G5/ALJ"
+				],
+				"12-1PM": ["  PABC(CS361)-CL21,22/AMS", "LUNCH"],
+				"1-2PM": [],
+				"2-3PM": [
+					"LA3-A4(EC611)-G2/JG",
+					"LA1-A2(EC315)-G5/APN",
+					"LA15-A16(24B12EC315)-CS1/RHA",
+					"LB12,B13,B16(CI513)-CS3/RCA",
+					"PA7(15EC315)-VDA/SLM,HIM",
+					"PA8(EC671)-ACL/VD,NFY",
+					"PB7, B9(CI573)-CL11/AKT, PRK",
+					"PB5, B6(CI573)-CL09,CL10/DCH, SHO",
+					"PB1(CI573)-CL03/KM, AA",
+					"PB1,B5,B6,B7,B8,B9(CI574)-CL01,02/ASY, NEH,ANV",
+					"PB14, 15(CI681)-CL21,22 / BS, DL,SON"
+				],
+				"3-4PM": [
+					"LB11,B12(CS311)-G2/SJA",
+					"TA4(EC315)-F4/SCH",
+					"LA15-A16(24B21EC311)-CS1/RSB",
+					"LB3,B4(CS311)-G5/AST",
+					"PA-Minor(25B26EC311)-VDA-PG/SHA,TA-4"
+				],
+				"4-5PM": []
+			},
+			"WED": {
+				"8-9AM": [
+					"HSS1",
+					"LABC (18HS611)-G2/MSU",
+					"LABC (HS636)-G5/MB",
+					"LABC (HS831)-CS1/KMB",
+					"LABC (24HS313)-CS3/NAM",
+					"LABC (20HS311)-CS4/IJ",
+					"LABC (24HS311)-FF2//PSH",
+					"LABC(25HS315)-FF3//NIS",
+					"LABC(HS632)-FF5/AMI",
+					"LABC(25HS317)-FF6/KNP",
+					"LABC (21HS311)-CR301/SDA"
+				],
+				"9-10AM": [
+					"DE3/1",
+					"LB(CS318)-G2/SOS",
+					"LA(17B1NEC734)-G5/ATA,Shweta",
+					"LB9-B16(CS313)-CS1/SMS/",
+					"LB1-B10(CS313)-CS3/PKU",
+					"LA(17B1NEC741)-CS4//SHA",
+					" LA(15B11EC613)-FF2//RRJ",
+					"LA(24B12EC315)-FF3/RHA",
+					"LB1-B8(CS313)-FF4/PK",
+					"LC1-C3(BT632)-FF5/VGU",
+					"LC1-C3(BT831)-FF6/SHD",
+					"LB(CS321)-FF7/KM"
+				],
+				"10-11AM": [
+					"LA15-A16(24B21EC311)-G2/RSB",
+					"LA17-A18(24B31EC312)-G5/BHG",
+					"LC1-C3(15BT611)-CS1/SAJ, VBR",
+					"TA3(EC315)-F4/APN",
+					"TB15CI621)- TR305/SON",
+					"TA6(EC315)-F7/BVI",
+					"PB2,B13(CI573)-CL09/AA, KJ",
+					"PB4,B16(CI573)-CL10/AKT, DCH",
+					"PB3(CI573)-CC1417/IC,RCA",
+					"PB12(CI573)-CL03/KM, PRK",
+					"PB2,B3,B4,B10-B16(CI574)-CL01,02/ASY, NEH, PU",
+					"PB5,B6(18B15CS311)-CL05, 06/KA,AST, SJA",
+					"PA5(15EC315)-VDA/AKS,SCH",
+					"PA10(EC671)-ACL/PKY,NFY"
+				],
+				"11-12PM": [
+					"LA1-A2(EC611)-G2/ABU",
+					"LA17-A18(24B31EC313)-G5/SMK",
+					"LA3-A4(EC611)-CS1/JG",
+					"LA15-A16(24B12EC315)-G1/RHA",
+					"TC1(15BT611)-F4/SAJ, VBR"
+				],
+				"12-1PM": [" LABC(CS361)-G2/AMS", "LUNCH"],
+				"1-2PM": [
+					"LB14,B15(CI621)-G2/SON",
+					"LA3-A4(EC315)-G5/AKS",
+					"LA5-A6-A10(EC611)-CS1/NFY",
+					"LA7-A8(EC611)-CS3/ABU",
+					"LB7-B16(CI514)-CS4/ANV",
+					"LC1-C3(BT414)-G8/RAC, SHM",
+					"LB1-B6(CI514)-G9ASY",
+					"LB7,B8,B9(CI513)-FF5/DCH",
+					"LB10,B11(CI513)-FF6/RCA",
+					"LB1,B2,B3(CI513)-FF8/AKT",
+					"LB4,B5,B6(CI513)-FF9/AA",
+					"LA15-A16(25B22EC313)-CR301/RMD",
+					"TA18(24B12EC314)-F4/GV"
+				],
+				"2-3PM": [
+					"VAC",
+					"LABC1(CS312)-G2/ASI",
+					"LAB(21PH311)-G5/ABH",
+					"L(25B19EC611)-CS1/MNA",
+					"LAB(13MA311)-CS3/HZR",
+					"LABC(25HS311)-CS4/IJ",
+					"LABC(CS314)-G3/SHO/",
+					"LABC(CS313)-G4/PRV/",
+					"LABC(25CH311)-G2/NIS",
+					"LABC(25HS313)-G9/-HK",
+					"PA1-A4, C1(CS312)-CL14/ ANV",
+					"PA5-A8, B1-B3(CS312)-CL11/ ASI",
+					"PB10-B13(CS312)-CL12/ AYS",
+					"PB14-B16(CS312)-CL13/ JSM",
+					"PABC(CS314)-CL9, 10/ PKU, SHV, SHO",
+					"PABC(CS313)-CL08/ PRV,PTK",
+					"PABC(25B18CS311)-CL05,06,07/ AW,ASY,TKT"
+				],
+				"3-4PM": [
+					"LABC2(CS312)-G2/ASI",
+					"LAB(21PH311)-G5/ABH",
+					"LAB(13MA311)-CS3/HZR",
+					"LABC(25HS311)-CS4/IJ",
+					"LABC(21BT311)-G2/SOC",
+					"LABC(25BT312)-CS1/AKV",
+					"LABC(24BT311)-G5/RPS"
+				],
+				"4-5PM": []
+			},
+			"THUR": {
+				"8-9AM": [
+					"HSS2",
+					"LABC (18HS611)-G2/MSU",
+					"LABC (HS636)-G5/MB",
+					"LABC (HS831)-CS1/KMB",
+					"LABC (24HS313)-CS3/NAM",
+					"LABC (20HS311)-CS4/IJ",
+					"LABC (24HS311)-FF2//PSH",
+					"LABC(25HS315)-FF3//NIS",
+					"LABC(HS632)-FF5/AMI",
+					"LABC(25HS317)-FF6/KNP",
+					"LABC (21HS311)-CR301/SDA"
+				],
+				"9-10AM": [
+					"OE1/3",
+					"LAB(PH633)-G2/BCJ",
+					"LAB(PH632)-G5/RAV",
+					"LB(CS341)-CS1/MSI",
+					"LABC(PH636)-CS3/VRT",
+					"LAB(PH634)-CS4/INC",
+					"LAC(PH3110)-FF2/MTR",
+					"LABC(21HS411)-FF3/YN",
+					"LABC(24HS316)-FF4/MDU",
+					"LABC(25HS314)-FF5/VSE",
+					"LAB(MA311)-FF6/RSH",
+					"LABC(MA633)-FF7/ATI",
+					"LABC(MA633)-FF8/ANK",
+					"LAB(MA611)-FF9/NS",
+					"LABC(25CH312)-CS6/GUP",
+					"LABC(25CH311)-CS5/HNS",
+					"LAB(MA612)-CR301/NSK"
+				],
+				"10-11AM": [
+					"LB9,B10(CS311)-G2/KA",
+					"LA17-A18(24B12EC314)-G5/GV",
+					"LB7,B8(CS311)-CS1/AMK",
+					"LB3,B4(CS311)-CS3/AST",
+					"LB11,B12(CS311)-CS4/SJA",
+					"LC1-C3(15BT611)-F8/SAJ, VBR",
+					"TB1,B5,B6(CI514)-TR305/ANV",
+					"TB1(CI513)-TR307/AKT",
+					"TB5, B6(CI513)-TS12/DCH",
+					"TA1(EC315)-F4/APN",
+					"TA5(EC315)-F7/BVI",
+					"PA2(15EC315)-VDA/SHA,RMD",
+					"PA7(EC671)-ACL/PKY,KUL",
+					"PB14, 15(CI581)-CL19,20 /AJS, KRL, NAC"
+				],
+				"11-12PM": [
+					"LB12,B13,B16(CI513)-G2/RCA/",
+					"LA17-A18(25B31EC313)-G5/ALJ",
+					"LB7-B16(CI514)-G3/ANV",
+					"TC2,C3(15BT611)-F7/SAJ, VBR",
+					"TB3(CI513)-TR307/AKT",
+					"TB8(CI513)-TR305/AA"
+				],
+				"12-1PM": [" LABC(CS361)-G2/AMS", "LUNCH"],
+				"1-2PM": [
+					"LB14,B15(CI621)-G2/SON",
+					"LA7-A8(EC611)-CS1/ABU",
+					"LA5-A6-A10(EC611)-CS3//NFY",
+					"LA3-A4(EC315)-CS4/AKS",
+					"LA15-A16(25B22EC313)-G4/RMD",
+					"LB1-B6(CI514)-G5/ASY",
+					"LB7-B16(CI514)-G6/ANV",
+					"LB1,B2,B3(CI513)-G7/AKT",
+					"LB4,B5,B6(CI513)-FF5/AA",
+					"LB7,B8,B9(CI513)-FF6/DCH",
+					"LB10,B11(CI513)-FF7/RCA",
+					"PA18(24B35EC312)-MODLAB/ALJ,TA-10"
+				],
+				"2-3PM": [
+					"LA15-A16(24B12EC315)-G2/RHA",
+					"LC1-C3(BT414)-G5/RAC, SHM",
+					"TA17(24B12EC314)-TS6/RS",
+					"PA6(15EC315)-VDA/SLM,MN",
+					"PA5(EC671)-ACL/RU,JYO",
+					"PB13,B16(18B15CS311)-CL19, 20/AST, SJA, VIK",
+					"PB7,B8(18B15CS311)-CL11, 12/KA, NAC, JAG",
+					"PB12(18B15CS311)-CL15/AMK",
+					"PB11(CI573)-CL14/DCH, PRK",
+					"PB10(CI573)-CL13/KM, RCA"
+				],
+				"3-4PM": ["LA17-A18(24B31EC312)-G5/BHG"],
+				"4-5PM": []
+			},
+			"FRI": {
+				"8-9AM": [
+					"DE3/2",
+					"LB(CS318)-G2/SOS",
+					"LB9-B16(CS313)-CS1/SMS",
+					"LB1-B10(CS313)-CS3/PKU",
+					"LA(17B1NEC741)-CS4//SHA",
+					" LA(15B11EC613)-FF2//RRJ",
+					"LA(24B12EC315)-FF3/RHA",
+					"LB1-B8(CS313)-FF4/PK",
+					"LC1-C3(BT632)-FF5/VGU",
+					"LC1-C3(BT831)-FF6/SHD",
+					"LB(CS321)-FF7/KM"
+				],
+				"9-10AM": [
+					"TABC (HSS3) NON-CSE",
+					"TA1-A8,A10,A15-A18,C1-C3 (18HS611)-G2/MSU",
+					"TA1-A8,A10,A15-A18,C1-C3 (HS636)-G5/MB",
+					"TA1-A8,A10,A15-A18,C1-C3 (HS831)-CS1/KMB",
+					"TA1-A8,A10,A15-A18,C1-C3 (24HS313)-CS3/NAM",
+					"TA1-A8,A10,A15-A18,C1-C3 (20HS311)-CS4/IJ",
+					"TA1-A8,A10,A15-A18,C1-C3 (24HS311)-FF2/PSH",
+					"TA1-A8,A10,A15-A18,C1-C3(25HS315)-FF3/NIS",
+					"TA1-A8,A10,A15-A18,C1-C3(HS632)-FF5/ASU",
+					"TA1-A8,A10,A15-A18,C1-C3(25HS317)-FF6/KNP",
+					"TA1-A8,A10,A15-A18,C1-C3 (21HS311)-CR301/SDA"
+				],
+				"10-11AM": [
+					"LA1-A2(EC315)-G2/APN",
+					"LA17-A18(24B31EC312)-G5/BHG",
+					"LA15-A16(24B21EC311)-CS1/RSB",
+					"LA7-A8(EC315)-CS3/SCH",
+					"TB7,9(CI513)-TR305/DCH",
+					"TB10(CI513)-TR307/AA",
+					"PA10(15EC315)-VDA/SHA,AJK",
+					"PA6(EC671)-ACL/VD,NSH",
+					"PB1,B2(18B15CS311)-CL19, 20/KA,AMK, SJA",
+					"PB8(CI573)-CL13/RCA, IC",
+					"PC1(BT671)BT1/POC,VBR,ANM,SMO",
+					"PC2,C3(BT474)BT2-3/RAC,MAS,SHM,RG"
+				],
+				"11-12PM": [
+					"LA1-A2(EC611)-G2/ABU",
+					"LA17-A18(24B31EC313)-G5/SMK",
+					"LA3-A4(EC611)-CS1/JG",
+					"TB10-13,16(CI514)-TR305/ASY",
+					"TB4,16CI513)-F4/DCH",
+					"TB12CI513)-TR307/AA"
+				],
+				"12-1PM": ["LB11, B14-B15 (23B31HS212)-G8/SKU", "LUNCH"],
+				"1-2PM": [
+					"LA5-A6-A10(EC315)-G2/BVI",
+					"LA7-A8(EC611)-G5/ABU",
+					"LA3-A4(EC315)-CS1/AKS",
+					"LB7,B8(CS311)-CS3AMK",
+					"LB9-B16(CS319)-CS4/PAG",
+					"LB9-B16(CS315)-G8/SHV",
+					"TB2,B3,B4(CI514)-TR305/ANV",
+					"PA1(15EC315)-VDA/APN,HIM",
+					"PA2(EC671)-ACL/RU,JYO",
+					"PA17(18B15EC313)-IOT Lab/RHA,RS\n"
+				],
+				"2-3PM": [
+					"Blocked for All",
+					"LB11-B16(CS313)-G5/PKU",
+					"LC1-C3(BT414)-CS1/RAC, SHM",
+					"PB9,B10(18B15CS311)-CL19, 20/AMK,SJA ,VIK"
+				],
+				"3-4PM": [
+					"LA(17B1NEC734)-G2/ATA,Shweta",
+					"PA15(24B25EC313)-VDA/SKA,TA-4"
+				],
+				"4-5PM": []
+			},
+			"SAT": {
+				"8-9AM": [
+					"DE2/3",
+					"LB(CS318)-G2/SOS",
+					"LB9-B16(CS313)-G5/SMS",
+					"LB1-B10(CS313)-CS1/PKU",
+					"LB(CS321)-CS3/KM",
+					"LA(17B11EC731)-CS4/SMK",
+					"LA(18B13EC314)-FF2/VKH",
+					"LA(24B12EC411)-FF3/RU",
+					"LA(23B12EC311)-FF5/SHS",
+					"LC1-C3(BT631)-FF7/ASM",
+					"LC1-C3(BT634)-FF8/SMO"
+				],
+				"9-10AM": [
+					"DE3/3",
+					"LB(CS321)-G2/HN",
+					"LA(17B1NEC734)-G5/ATA,Shweta",
+					"LB1-B8(CS319)-CS1/PAG",
+					"LB(CS314)-CS2/SON",
+					"LB1-B8(CS315)-CS3/SHV",
+					"LA(17B1NEC741)-CS4//SHA",
+					" LA(15B11EC613)-FF2//RRJ",
+					"LA(24B12EC315)-FF3/RHA",
+					"LB1-B8(CS313)-FF4/PK",
+					"LC1-C3(BT632)-FF5/VGU",
+					"LC1-C3(BT831)-FF6/SHD",
+					"PA16(24B25EC313)-VDA/SKA,TA-4"
+				],
+				"10-11AM": [
+					"LB1,B2(CS311)-G2/AST",
+					"LA17-A18(24B31EC313)-G5/SMK",
+					"LB13,B16(CS311)-CS1/SJA",
+					"LB14,B15(CI521)-CS3/AJS",
+					"LB9-B16(CS319)-CS4/PAG",
+					"LB9-B16(CS315)-FF4/SHV",
+					"LB5,B6(CS311)-FF3/AMK"
+				],
+				"11-12PM": [
+					"VAC",
+					"LABC(25HS312)-G2/-EKS",
+					"LABC(25CH311)-G5/NIS",
+					"LABC(25B16HS314)-CS3/NIS",
+					"LB6-B16(CS312)-G8/ASI",
+					"LABC(25B18CS311)-G9/AW",
+					"LABC(CS313)-G4/PRV",
+					"LABC(CS314)-FF9/SHO"
+				],
+				"12-1PM": [
+					"LABC(25HS312)-G2/-EKS",
+					"LABC(21BT311)-G5/SOC",
+					"LABC(25BT312)-CS1/AKV",
+					"LABC(24BT311)-CS3/RPS",
+					"LC1,C2,B1-B5, A1-A8,A15,17,18(CS312)-G3/ASI",
+					"LUNCH"
+				],
+				"1-2PM": ["LB11-B16(CS313)-G2/PKU", "  PABC(CS361)-CL21,22/AMS"],
+				"2-3PM": [],
+				"3-4PM": [],
+				"4-5PM": []
+			}
+		},
+		"subjects": [
+			{
+				"Code": "CS311",
+				"Full Code": "18B11CS311",
+				"Subject": "Computer Netwks and Internet of Things"
+			},
+			{
+				"Code": "18B15CS311",
+				"Full Code": "18B15CS311",
+				"Subject": "Computer Netwks and Internet of Things Lab"
+			},
+			{
+				"Code": "CI513",
+				"Full Code": "15B11CI513",
+				"Subject": "Software Engineering"
+			},
+			{
+				"Code": "CI514",
+				"Full Code": "15B11CI514",
+				"Subject": "Artificial Intelligence"
+			},
+			{
+				"Code": "CI573",
+				"Full Code": "15B17CI573",
+				"Subject": "Software Engineering Lab"
+			},
+			{
+				"Code": "CI574",
+				"Full Code": "15B17CI574",
+				"Subject": "Artificial Intelligence Lab"
+			},
+			{
+				"Code": "CI521",
+				"Full Code": "15B22CI521",
+				"Subject": "Cloud based Enterprise Systems"
+			},
+			{
+				"Code": "CI581",
+				"Full Code": "15B28CI581",
+				"Subject": "Cloud based Enterprise Systems Lab"
+			},
+			{
+				"Code": "CI621",
+				"Full Code": "15B22CI621",
+				"Subject": "Data Mining and Web Algithms"
+			},
+			{
+				"Code": "CI681",
+				"Full Code": "15B28CI681",
+				"Subject": "Data Mining and Web Algithms Lab"
+			},
+			{
+				"Code": "EC611",
+				"Full Code": "15B11EC611",
+				"Subject": "Telecommunication Networks"
+			},
+			{
+				"Code": "EC671",
+				"Full Code": "15B17EC671",
+				"Subject": "Telecommunication Networks Lab"
+			},
+			{
+				"Code": "EC315",
+				"Full Code": "18B11EC315",
+				"Subject": "VLSI Design"
+			},
+			{
+				"Code": "15EC315",
+				"Full Code": "18B15EC315",
+				"Subject": "VLSI Design Lab-11"
+			},
+			{
+				"Code": "24B21EC311",
+				"Full Code": "24B21EC311",
+				"Subject": "Semiconductor Materials Synthesis and Characterization"
+			},
+			{
+				"Code": "24B25EC313",
+				"Full Code": "24B25EC313",
+				"Subject": "VLSI Verification and Testing Lab"
+			},
+			{
+				"Code": "25B31EC313",
+				"Full Code": "25B31EC313",
+				"Subject": "Information coding theory for Wireless communications"
+			},
+			{
+				"Code": "24B31EC313",
+				"Full Code": "24B31EC313",
+				"Subject": "Advance Wireless Technologies"
+			},
+			{
+				"Code": "24B31EC312",
+				"Full Code": "24B31EC312",
+				"Subject": "Introduction to AI & ML"
+			},
+			{
+				"Code": "24B35EC312",
+				"Full Code": "24B35EC312",
+				"Subject": "Advance Wireless Technologies Lab"
+			},
+			{
+				"Code": "24B12EC314",
+				"Full Code": "24B12EC314",
+				"Subject": "Introduction to IOT and Embedded Systems"
+			},
+			{
+				"Code": "18B15EC313",
+				"Full Code": "18B15EC313",
+				"Subject": "IOT and Embedded Systems Lab"
+			},
+			{
+				"Code": "BT414",
+				"Full Code": "15B11BT414",
+				"Subject": "Immunology"
+			},
+			{
+				"Code": "BT474",
+				"Full Code": "15B17BT474",
+				"Subject": "Immunology Lab"
+			},
+			{
+				"Code": "BT611",
+				"Full Code": "15B11BT611",
+				"Subject": "Comparative and fFunctional Genomics"
+			},
+			{
+				"Code": "BT671",
+				"Full Code": "15B17BT671",
+				"Subject": "Comparative and fFunctional Genomics Lab"
+			},
+			{
+				"Code": "MA633",
+				"Full Code": "16B1NMA633",
+				"Subject": "STATISTICS"
+			},
+			{
+				"Code": "MA611",
+				"Full Code": "18B12MA611",
+				"Subject": "OPERATIONS RESEARCH"
+			},
+			{
+				"Code": "MA612",
+				"Full Code": "18B12MA612",
+				"Subject": "APPLIED MATHEMATICAL METHODS"
+			},
+			{
+				"Code": "MA311",
+				"Full Code": "20B12MA311",
+				"Subject": "APPLICATIONAL ASPECTS OF DIFFERENTIAL EQUATIONS"
+			},
+			{
+				"Code": "25HS314",
+				"Full Code": "25B12HS314",
+				"Subject": "Economy, Policy and Business Environment"
+			},
+			{
+				"Code": "21HS411",
+				"Full Code": "21B12HS411",
+				"Subject": "Urban Sociology"
+			},
+			{
+				"Code": "24HS316",
+				"Full Code": "24B12HS316",
+				"Subject": "Popular Literature"
+			},
+			{
+				"Code": "PH632",
+				"Full Code": "16B1NPH632",
+				"Subject": "SOLID STATE ELECTRONIC DEVICES"
+			},
+			{
+				"Code": "PH633",
+				"Full Code": "16B1NPH633",
+				"Subject": "PHOTOVOLTAIC TECHNIQUES"
+			},
+			{
+				"Code": "PH636",
+				"Full Code": "16B1NPH636",
+				"Subject": "MEDICAL AND INDUSTRIAL APPLICATIONS OF NUCLEAR RADIATIONS"
+			},
+			{
+				"Code": "CS341",
+				"Full Code": "23B12CS341",
+				"Subject": "Cyber Security"
+			},
+			{
+				"Code": "PH311",
+				"Full Code": "23B12PH311",
+				"Subject": "Waste to Energy Conversion"
+			},
+			{
+				"Code": "PH634",
+				"Full Code": "16B1NPH634",
+				"Subject": "APPLIED STATISTICAL MECHANICS"
+			},
+			{
+				"Code": "25CH311",
+				"Full Code": "25B12CH311",
+				"Subject": "Polymer Chemistry"
+			},
+			{
+				"Code": "25CH312",
+				"Full Code": "25B12CH312",
+				"Subject": "Cosmetic Chemistry"
+			},
+			{
+				"Code": "CS315",
+				"Full Code": "21B12CS315",
+				"Subject": "Web Technology and Cyber Security"
+			},
+			{
+				"Code": "CS319",
+				"Full Code": "21B12CS319",
+				"Subject": "Fundamentals of Soft Computing"
+			},
+			{
+				"Code": "CS314",
+				"Full Code": "21B12CS314",
+				"Subject": "Introduction to Large Scale Database Systems"
+			},
+			{
+				"Code": "CS312",
+				"Full Code": "21B12CS312",
+				"Subject": "Sensor Technology & Android Programming"
+			},
+			{
+				"Code": "17B1NEC741",
+				"Full Code": "17B11EC731",
+				"Subject": "MOBILE COMMUNICATION"
+			},
+			{
+				"Code": "18B13EC314",
+				"Full Code": "18B13EC314",
+				"Subject": "MACHINE LEARNING FOR SIGNAL PROCESSING"
+			},
+			{
+				"Code": "24B12EC411",
+				"Full Code": "24B12EC411",
+				"Subject": "Fundamentals of Electric Vehicle"
+			},
+			{
+				"Code": "25B22EC313",
+				"Full Code": "25B22EC313",
+				"Subject": "Nano Manufacturing"
+			},
+			{
+				"Code": "23B12EC311",
+				"Full Code": "23B12EC311",
+				"Subject": "Semiconductor Devices and Circuits"
+			},
+			{
+				"Code": "CS320",
+				"Full Code": "21B12CS320",
+				"Subject": "Open source software development"
+			},
+			{
+				"Code": "CS313",
+				"Full Code": "21B12CS313",
+				"Subject": "Fundamentals of Distributed and Cloud Computing"
+			},
+			{
+				"Code": "CS321",
+				"Full Code": "21B12CS321",
+				"Subject": "Concepts of Graph theory"
+			},
+			{
+				"Code": "CS318",
+				"Full Code": "21B12CS318",
+				"Subject": "Big Data Ingestion"
+			},
+			{
+				"Code": "17B1NEC741",
+				"Full Code": "17B1NEC741",
+				"Subject": "DIGITAL HARDWARE DESIGN"
+			},
+			{
+				"Code": "15B11EC613",
+				"Full Code": "15B11EC613",
+				"Subject": "CONTROL SYSTEMS"
+			},
+			{
+				"Code": "17B1NEC734",
+				"Full Code": "17B1NEC734",
+				"Subject": "RF AND MICROWAVE ENGINEERING"
+			},
+			{
+				"Code": "24B12EC315",
+				"Full Code": "24B12EC315",
+				"Subject": "Introduction to FPGA Design"
+			},
+			{
+				"Code": "BT831",
+				"Full Code": "15B1NBT831",
+				"Subject": "BIOPHARMACEUTICS AND PHARMACOKINETICS"
+			},
+			{
+				"Code": "BT632",
+				"Full Code": "16B1NBT632",
+				"Subject": "ANTIMICROBIAL RESISTANCE"
+			},
+			{
+				"Code": "BT631",
+				"Full Code": "16B1NBT631",
+				"Subject": "BIOECONOMICS"
+			},
+			{
+				"Code": "BT634",
+				"Full Code": "16B1NBT634",
+				"Subject": "GENETIC DISORDERS AND PERSONALIZED MEDICINE"
+			},
+			{
+				"Code": "CS361",
+				"Full Code": "25B11CS361",
+				"Subject": "Fundamentals of natural Language Processing"
+			},
+			{
+				"Code": "25B26EC311",
+				"Full Code": "25B26EC311",
+				"Subject": "VSLI (Minor) VSLI System Design Lab"
+			}
+		]
 	}
 }

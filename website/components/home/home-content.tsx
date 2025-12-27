@@ -9,6 +9,7 @@ import {
 import { ScheduleForm } from "../schedule/schedule-form";
 import { ScheduleDisplay } from "../schedule/schedule-display";
 import { UrlParamsDialog } from "./url-params-dialog";
+import { NoticeBanner } from "./notice-banner";
 import { motion } from "framer-motion";
 import { Calendar, ChevronDown, Trash, Share2 } from "lucide-react";
 import { useRouter } from "next/navigation";
@@ -402,6 +403,7 @@ export default function HomeContent() {
 		name: string;
 		config: any;
 	} | null>(null);
+
 	return (
 		<main>
 			{/* Background effects */}
@@ -410,6 +412,7 @@ export default function HomeContent() {
 				<div className="absolute bottom-[-5%] right-[-5%] w-48 sm:w-72 h-48 sm:h-72 bg-[#543A14]/30 rounded-full blur-[96px] sm:blur-[128px]" />
 			</div>
 			<div className="relative z-10 flex flex-col items-center justify-start max-w-7xl mx-auto space-y-6 sm:space-y-8">
+				<NoticeBanner />
 				<motion.div
 					className="text-center space-y-3 sm:space-y-4"
 					initial={{ opacity: 0, y: 20 }}

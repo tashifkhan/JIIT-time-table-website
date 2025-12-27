@@ -2180,5 +2180,312 @@
 				"Subject": "VSLI (Minor) VSLI System Design Lab"
 			}
 		]
+	},
+	"4": {
+		"timetable": {
+			"MON": {
+				"8:00-8:50 AM": [
+					"LD7B11-G1/ ANM",
+					"LD7A21-G3/RIG",
+					"LD7A11-G4/ABY",
+					"LD7A31-G6/GK",
+					"LD7B11-G7/VRN",
+					"LD7B21-G8/SHO",
+					"LD7B31-G9/BS",
+					"LD7B41(B7-B14)-FF1/ANP",
+					"LD7B41(B1-B6,B15)-LT3/SHB",
+					"LDD,MT(12BT113)-CR325/SMG"
+				],
+				"9:00-9:50 AM": [
+					"LD7B21-G1/ASM",
+					"LD8A11-G3/NHI",
+					"LD8A21-G4/SIM",
+					"LD8A31-G6/RSB",
+					"LD8A41-G7/HIM",
+					"LD8B11-G8/NEH",
+					"LD8B21-G9/SHB",
+					"LD8B31(B8-B15)-FF1/DSI",
+					"LD8B31(B1-B7)-LT3/NAC",
+					"9Y"
+				],
+				"10:00-10:50 AM": [],
+				"11:00-11:50 AM": [],
+				"12:00-1:00 PM": [],
+				"1:00-1:50 PM": [],
+				"2:00-2:50 PM": [],
+				"3:00-3:50 PM": [],
+				"4:00-4:50 PM": [],
+				"5:00-5:50 PM": ["LD8B22-G6/KRL"]
+			},
+			"TUES": {
+				"8:00-8:50 AM": [
+					"OE3 (Z1)",
+					"LO3H11-G1/PAC",
+					"LO3H21-G3/IJ",
+					"LO3H31-G4/MM",
+					"LO3M31-G6//RSC",
+					"LO3M11-G7/DGA",
+					"LO3P11-G8/NKS",
+					"LO3P21-G9/AP",
+					"LO3P31-FF1/PC",
+					"LO3CH1- LT3/NKC"
+				],
+				"9:00-9:50 AM": [
+					"DE7 (X1)",
+					"LD7B11-G1/ ANM",
+					"LD7A21-G3/RIG",
+					"LD7A11-G4/ABY",
+					"LD7A31-G6/GK",
+					"LD7B11-G7/VRN",
+					"LD7B21-G8/SHO",
+					"LD7B31-G9/BS",
+					"LD7B41(B7-B14)-FF1/ANP",
+					"LD7B41(B1-B6,B15)-LT3/SHB",
+					"LDD,MT(12BT113)-CS5/SMG"
+				],
+				"10:00-10:50 AM": [],
+				"11:00-11:50 AM": [],
+				"12:00-1:00 PM": [],
+				"1:00-1:50 PM": [],
+				"2:00-2:50 PM": [],
+				"3:00-3:50 PM": [],
+				"4:00-4:50 PM": ["OE3 (Z2)", "LO3BT1-G6/CKJ"],
+				"5:00-5:50 PM": ["DE7 (X2)"]
+			},
+			"WED": {
+				"8:00-8:50 AM": [
+					"DE8 (Y1)",
+					"LD7B21-G1/ASM",
+					"LD8A11-G3/NHI",
+					"LD8A21-G4/SIM",
+					"LD8A31-G6/RSB",
+					"LD8A41-G7/HIM",
+					"LD8B11-G8/NEH",
+					"LD8B21-G9/SHB",
+					"LD8B31(B8-B15)-FF1/DSI",
+					"LD8B31(B1-B7)-LT3/NAC"
+				],
+				"9:00-9:50 AM": [
+					"OE3 (Z1)",
+					"LO3H11-G1/PAC",
+					"LO3H21-G3/IJ",
+					"LO3H31-G4/MM",
+					"LO3M31-G6//RSC",
+					"LO3M11-G7/DGA",
+					"LO3P11-G8/NKS",
+					"LO3P21-G9/AP",
+					"LO3P31-FF1/PC",
+					"LO3CH1- LT3/NKC"
+				],
+				"10:00-10:50 AM": [],
+				"11:00-11:50 AM": [],
+				"12:00-1:00 PM": [],
+				"1:00-1:50 PM": [],
+				"2:00-2:50 PM": [],
+				"3:00-3:50 PM": [],
+				"4:00-4:50 PM": ["DE8 (Y2)", "LD8B22-G6/KRL"],
+				"5:00-5:50 PM": ["OE3 (Z2)", "LO3BT1-G6/CKJ"]
+			},
+			"THUR": {
+				"8:00-8:50 AM": [
+					"DE8 (Y1)",
+					"LD7B21-G1/ASM",
+					"LD8A11-G3/NHI",
+					"LD8A21-G4/SIM",
+					"LD8A31-G6/RSB",
+					"LD8A41-G7/HIM",
+					"LD8B11-G8/NEH",
+					"LD8B21-G9/SHB",
+					"LD8B31(B8-B15)-FF1/DSI",
+					"LD8B31(B1-B7)-LT3/NAC"
+				],
+				"9:00-9:50 AM": ["LCSE,ECE,BT(19M1HS113)-CR325/EKS"],
+				"10:00-10:50 AM": [],
+				"11:00-11:50 AM": [],
+				"12:00-1:00 PM": [],
+				"1:00-1:50 PM": [],
+				"2:00-2:50 PM": [],
+				"3:00-3:50 PM": [],
+				"4:00-4:50 PM": ["DE8 (Y2)", "LD8B22-G6/KRL"],
+				"5:00-5:50 PM": []
+			},
+			"FRI": {
+				"8:00-8:50 AM": [
+					"OE3 (Z1)",
+					"LO3H11-G1/PAC",
+					"LO3H21-G3/IJ",
+					"LO3H31-G4/MM",
+					"LO3M31-G6//RSC",
+					"LO3M11-G7/DGA",
+					"LO3P11-G8/NKS",
+					"LO3P21-G9/AP",
+					"LO3P31-FF1/PC",
+					"LO3CH1- LT3/NKC"
+				],
+				"9:00-9:50 AM": [
+					"DE7 (X1)",
+					"LD7B11-G1/ ANM",
+					"LD7A21-G3/RIG",
+					"LD7A11-G4/ABY",
+					"LD7A31-G6/GK",
+					"LD7B11-G7/VRN",
+					"LD7B21-G8/SHO",
+					"LD7B31-G9/BS",
+					"LD7B41(B7-B14)-FF1/ANP",
+					"LD7B41(B1-B6,B15)-LT3/SHB",
+					"LDD,MT(12BT113)-CR401/SMG"
+				],
+				"10:00-10:50 AM": [],
+				"11:00-11:50 AM": [],
+				"12:00-1:00 PM": [],
+				"1:00-1:50 PM": [],
+				"2:00-2:50 PM": ["LCSE,ECE,BT(19M1HS113)-CR325/EKS"],
+				"3:00-3:50 PM": [],
+				"4:00-4:50 PM": ["DE7 (X2)"],
+				"5:00-5:50 PM": ["OE3 (Z2)", "LO3BT1-G6/CKJ"]
+			}
+		},
+		"subjects": [
+			{
+				"Code": "LD7B21",
+				"Full Code": "19B12BT411",
+				"Subject": "Market Research in Biosciences"
+			},
+			{
+				"Code": "LO3P11",
+				"Full Code": "18B18PH811",
+				"Subject": "Photonics and Applications"
+			},
+			{
+				"Code": "LD8A11",
+				"Full Code": "18B12EC417",
+				"Subject": "SateLite Communication"
+			},
+			{
+				"Code": "LD7B31",
+				"Full Code": "22B12CS413",
+				"Subject": "Data Analytics using R & Python"
+			},
+			{
+				"Code": "LD8B22",
+				"Full Code": "22B12CS420",
+				"Subject": "Software construction using Kubernetes and microservices"
+			},
+			{
+				"Code": "LO3H21",
+				"Full Code": "15B1NHS832",
+				"Subject": "International Studies"
+			},
+			{
+				"Code": "LD7B21",
+				"Full Code": "22B12CS412",
+				"Subject": "Digital Forensics & Cyber Laws"
+			},
+			{
+				"Code": "LO3BT1",
+				"Full Code": "18B12BT414",
+				"Subject": "Machine Learning Tools in Bioinformatics"
+			},
+			{
+				"Code": "LD7A31",
+				"Full Code": "24B12EC414",
+				"Subject": "Physical Design for submicron technology"
+			},
+			{
+				"Code": "LD8B31",
+				"Full Code": "22B12CS422",
+				"Subject": "Cloud computing essentials: Azure and AWS"
+			},
+			{
+				"Code": "LD7B11",
+				"Full Code": "25B12BT416",
+				"Subject": "Radiation Biology and Technological Applications"
+			},
+			{
+				"Code": "LD8A31",
+				"Full Code": "19B12EC415",
+				"Subject": "Digital Integrated Circuits in Deep Submicron Technology"
+			},
+			{
+				"Code": "LD8B21",
+				"Full Code": "22B12CS420",
+				"Subject": "Software construction using Kubernetes and microservices"
+			},
+			{
+				"Code": "LD7A11",
+				"Full Code": "18B12EC411",
+				"Subject": "Introduction to IoT"
+			},
+			{
+				"Code": "LD7B11",
+				"Full Code": "22B12CS415",
+				"Subject": "AI For Healthcare & Smart Systems"
+			},
+			{
+				"Code": "LD7B41",
+				"Full Code": "22B12CS412",
+				"Subject": "Agile Software Development Process"
+			},
+			{
+				"Code": "LD7A21",
+				"Full Code": "18B12EC412",
+				"Subject": "Multimedia Communications"
+			},
+			{
+				"Code": "LO3CH1",
+				"Full Code": "25B12CH411",
+				"Subject": "Smart Materials"
+			},
+			{
+				"Code": "LD8A21",
+				"Full Code": "25B12EC411",
+				"Subject": "Fuzzy Logic and Applications"
+			},
+			{
+				"Code": "LO3H11",
+				"Full Code": "16B1NHS831",
+				"Subject": "Gender Studies"
+			},
+			{
+				"Code": "LO3M11",
+				"Full Code": "18B12MA811",
+				"Subject": "FUZZY OPTIMIZATION AND DECISION MAKING"
+			},
+			{
+				"Code": "LO3P21",
+				"Full Code": "18B18PH812",
+				"Subject": "Astrophysics"
+			},
+			{
+				"Code": "12BT113",
+				"Full Code": "18M12BT113",
+				"Subject": "Nutraceuticals"
+			},
+			{
+				"Code": "LO3P31",
+				"Full Code": "18B12PH813",
+				"Subject": "Biophysics"
+			},
+			{
+				"Code": "LO3H31",
+				"Full Code": "17B1NHS732",
+				"Subject": "Indian Financial System"
+			},
+			{
+				"Code": "LD8B11",
+				"Full Code": "22B12CS419",
+				"Subject": "Cryptocurrency Technologies"
+			},
+			{
+				"Code": "LO3M31",
+				"Full Code": "16B1NMA831",
+				"Subject": "OPTIMIZATION TECHNIQUES"
+			},
+			{
+				"Code": "LD8A41",
+				"Full Code": "24B12EC415",
+				"Subject": "Introduction to UAV Design"
+			}
+		]
 	}
 }

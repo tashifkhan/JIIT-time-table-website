@@ -1,7 +1,10 @@
 "use client";
 import { Calendar, Plus, Filter, Download } from "lucide-react";
 import { motion } from "framer-motion";
-import { addAcademicCalendarEvents, downloadICalFile } from "../../utils/calendar-AC";
+import {
+	addAcademicCalendarEvents,
+	downloadICalFile,
+} from "../../utils/calendar-AC";
 import { useState, useEffect, useRef } from "react";
 import {
 	Select,
@@ -10,7 +13,11 @@ import {
 	SelectTrigger,
 	SelectValue,
 } from "../../components/ui/select";
-import { useAcademicYears, useAcademicCalendar } from "../../hooks/use-api";
+import {
+	useAcademicYears,
+	useAcademicCalendar,
+	useDefaultAcademicYear,
+} from "../../hooks/use-api";
 
 export default function CalendarContent() {
 	const [isLoading, setIsLoading] = useState(false);
@@ -21,19 +28,23 @@ export default function CalendarContent() {
 	const upcomingDividerRef = useRef<HTMLDivElement | null>(null);
 
 	// Fetch available years
-	const { data: availableYears = [], isLoading: isYearsLoading } = useAcademicYears();
+	const { data: availableYears = [], isLoading: isYearsLoading } =
+		useAcademicYears();
 
 	// Fetch calendar data for selected year
-	const { data: calendarData = [], isLoading: isCalendarLoading } = useAcademicCalendar(selectedYear);
+	const { data: calendarData = [], isLoading: isCalendarLoading } =
+		useAcademicCalendar(selectedYear);
 
 	const isDataLoading = isYearsLoading || (selectedYear && isCalendarLoading);
 
+	const defaultYear = useDefaultAcademicYear();
+
 	// Set default year when years are loaded
 	useEffect(() => {
-		if (availableYears.length > 0 && !selectedYear) {
-			setSelectedYear(availableYears[0].value);
+		if (defaultYear && !selectedYear) {
+			setSelectedYear(defaultYear);
 		}
-	}, [availableYears, selectedYear]);
+	}, [defaultYear, selectedYear]);
 
 	useEffect(() => {
 		document.title = "JIIT Academic Calender Simplified";
@@ -229,8 +240,12 @@ export default function CalendarContent() {
 							whileTap={{ scale: 0.95 }}
 						>
 							<Filter className="w-3.5 h-3.5 sm:w-5 sm:h-5" />
-							<span className="hidden sm:inline">{showHolidaysOnly ? "All Events" : "Holidays Only"}</span>
-							<span className="sm:hidden">{showHolidaysOnly ? "All" : "Holidays"}</span>
+							<span className="hidden sm:inline">
+								{showHolidaysOnly ? "All Events" : "Holidays Only"}
+							</span>
+							<span className="sm:hidden">
+								{showHolidaysOnly ? "All" : "Holidays"}
+							</span>
 						</motion.button>
 
 						<motion.button
@@ -251,7 +266,10 @@ export default function CalendarContent() {
 
 						<motion.button
 							onClick={() => {
-								downloadICalFile(calendarData, `jiit-academic-calendar-${selectedYear}.ics`);
+								downloadICalFile(
+									calendarData,
+									`jiit-academic-calendar-${selectedYear}.ics`
+								);
 							}}
 							disabled={calendarData.length === 0}
 							className="px-3 py-1.5 sm:px-6 sm:py-2 rounded-lg backdrop-blur-lg bg-white/10 border border-white/20 text-[#F0BB78] hover:bg-white/20 transition-all duration-300 shadow-lg flex items-center gap-1.5 sm:gap-2 text-xs sm:text-base disabled:opacity-50 disabled:cursor-not-allowed"

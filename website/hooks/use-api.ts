@@ -3,13 +3,10 @@
 import { useQuery } from "@tanstack/react-query";
 import { useMemo } from "react";
 import { getSmartSemester, TimeTableInfo } from "../lib/semester";
+import { getSmartAcademicYear, AcademicYear } from "../lib/calendar-utils";
 
 // Types
 
-interface AcademicYear {
-	value: string;
-	label: string;
-}
 
 interface MessMenu {
 	menu: {
@@ -130,4 +127,9 @@ export function useMessMenu(apiUrl: string = "/api/mess-menu") {
 export function useDefaultSemester() {
 	const { data: timeTableData = [] } = useTimeTables();
 	return useMemo(() => getSmartSemester(timeTableData), [timeTableData]);
+}
+
+export function useDefaultAcademicYear() {
+	const { data: availableYears = [] } = useAcademicYears();
+	return useMemo(() => getSmartAcademicYear(availableYears), [availableYears]);
 }

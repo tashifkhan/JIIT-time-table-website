@@ -54,10 +54,14 @@ export default function HomeContent() {
 			setSelectedSemester(defaultSemester);
 		}
 	}, [defaultSemester, selectedSemester]);
+
 	const router = useRouter();
+
 	const { schedule, setSchedule, setEditedSchedule } = useContext(UserContext);
+
 	const [numExecutions, setNumExecutions] = React.useState(0);
 	const [isGenerating, setIsGenerating] = useState(false);
+
 	// saved configs state
 	const [savedConfigs, setSavedConfigs] = React.useState<{
 		[key: string]: any;
@@ -85,9 +89,11 @@ export default function HomeContent() {
 		campus: string;
 		electives: string[];
 	} | null>(null);
+
 	React.useEffect(() => {
 		localStorage.setItem("classConfigs", JSON.stringify(savedConfigs));
 	}, [savedConfigs]);
+
 	// cached schedule from localStorage on mount
 	React.useEffect(() => {
 		const cached = localStorage.getItem("cachedSchedule");
@@ -100,13 +106,16 @@ export default function HomeContent() {
 			} catch {}
 		}
 	}, []);
+
 	const initialFormOpen = React.useMemo(() => {
 		if (typeof window !== "undefined") {
 			return !localStorage.getItem("cachedSchedule");
 		}
 		return true;
 	}, []);
+
 	const [isFormOpen, setIsFormOpen] = React.useState(initialFormOpen);
+
 	const { loaded: pyodideLoaded } = usePyodideStatus();
 	// schedule to localStorage whenever it changes (and is not null)
 	React.useEffect(() => {
@@ -114,9 +123,11 @@ export default function HomeContent() {
 			localStorage.setItem("cachedSchedule", JSON.stringify(schedule));
 		}
 	}, [schedule]);
+
 	React.useEffect(() => {
 		initializePyodide();
 	}, []);
+
 	const evaluteTimeTable = async (
 		time_table_json: any,
 		subject_json: any,
@@ -155,6 +166,7 @@ export default function HomeContent() {
 			return "Error executing Python function";
 		}
 	};
+
 	const handleFormSubmit = async (data: {
 		year: string;
 		batch: string;

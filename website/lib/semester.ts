@@ -8,6 +8,12 @@ export interface TimeTableInfo {
 export function getSmartSemester(timeTableData: TimeTableInfo[]): string {
 	if (timeTableData.length === 0) return DEFAULT_SEMESTER;
 
+	// FIX: Prioritize DEFAULT_SEMESTER if it exists in the data
+	const defaultInList = timeTableData.find((d) => d.semester === DEFAULT_SEMESTER);
+	if (defaultInList) {
+		return DEFAULT_SEMESTER;
+	}
+
 	const now = new Date();
 	const currentYear = now.getFullYear().toString().slice(-2);
 	const currentMonth = now.getMonth(); // 0-11 (0 = Jan, 4 = May)

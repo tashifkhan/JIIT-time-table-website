@@ -1,166 +1,166 @@
 {
-	"2": {
-		"timetable": {
-			"MON": {
-				"9-9.50": [
-					"LBCA3,BCA4(23B61CA221)-SHR/CR501",
-					"LBCA1,BCA2(23B61CA221)-RTK/CR425"
-				],
-				"10-10.50": [
-					"LBCA1,BCA2,BCA 3 &BCA 4(23B12CA216)-MEE/CS6",
-					"LBCA1,BCA2,BCA 3 &BCA 4(23B12CA215)-KA/CS8"
-				],
-				"11-11.50": [
-					"LBCA1,BCA2,BCA 3 &BCA 4(23B12CA213)-DEP/CS8",
-					"LBCA1,BCA2,BCA 3 &BCA 4(23B12CA211)-SUD/CS6"
-				],
-				"12-12.50": [
-					"LBCA1,BCA2(23B61CA223)-SLK/CR425",
-					"LBCA3,BCA4(23B61CA223)-AJP/CR501"
-				],
-				"1-1.50": ["LUNCH"],
-				"2-2.50": [
-					"LBCA1,BCA2(23B31HS212)-SKU/CR425",
-					"LBCA3,BCA4(23B61CA222)-JAG/CR526"
-				],
-				"3-3.50": ["PBCA4(23B65CA224) CC 421 SHV,NET"],
-				"4-4.50": []
-			},
-			"TUES": {
-				"9-9.50": [
-					"TBCA1(23B61CA223)-TR502/AJP",
-					"LBCA3,BCA4(23B61CA222)-JAG/CR425"
-				],
-				"10-10.50": ["LBCA1,BCA2(23B31HS212)-SKU/CR501"],
-				"11-11.50": ["PBCA2(23B65CA224)CC417 KM,RTK"],
-				"12-12.50": [],
-				"1-1.50": ["LUNCH"],
-				"2-2.50": ["LBCA3,BCA4(23B31HS212)-HK/CR425"],
-				"3-3.50": ["LBCA1,BCA2(23B61CA222)-JAG/CR425"],
-				"4-4.50": ["LBCA1,BCA2,BCA 3 &BCA 4(23B12CA216)-MEE/CR501"]
-			},
-			"WED": {
-				"9-9.50": [
-					"PBCA3(23B65CA224) CL304 SHV,NET",
-					"PBCA1(23B65CA224  CL306,)SHR,RTK"
-				],
-				"10-10.50": [],
-				"11-11.50": ["LBCA3,BCA4(23B61CA221)-SHR/CR501"],
-				"12-12.50": ["LBCA3,BCA4(23B31HS212)-HK/CR501"],
-				"1-1.50": ["LUNCH"],
-				"2-2.50": ["LBCA1,BCA2(23B61CA222)-JAG/CR425"],
-				"3-3.50": [],
-				"4-4.50": ["LBCA1,BCA2(23B61CA221)-RTK/CR425"]
-			},
-			"THUR": {
-				"9-9.50": [
-					"LBCA1,BCA2,BCA 3 &BCA 4(23B12CA211)-SUD/CR526",
-					"LBCA1,BCA2,BCA 3 &BCA 4(23B12CA213)-DEP/CR501"
-				],
-				"10-10.50": [
-					"LBCA1,BCA2(23B61CA222)-JAG/CR526",
-					"LBCA3,BCA4(23B61CA221)-SHR/CR501"
-				],
-				"11-11.50": ["TBCA4(23B61CA223)-TR424/AJP"],
-				"12-12.50": [
-					"LBCA1,BCA2,BCA 3 &BCA 4(23B12CA216)-MEE/CR526",
-					"LBCA1,BCA2,BCA 3 &BCA 4(23B12CA215)-KA/CR425"
-				],
-				"1-1.50": ["LUNCH"],
-				"2-2.50": [
-					"LBCA1,BCA2(23B61CA223)-SLK/CR425",
-					"LBCA3,BCA4(23B61CA223)-AJP/CR501"
-				],
-				"3-3.50": ["TBCA3(23B61CA223)-TR502/SLK"],
-				"4-4.50": []
-			},
-			"FRI": {
-				"9-9.50": [
-					"PBCA1(23B65CA225)/ CL01,SHP,AJP",
-					"PBCA 2(23B65CA225)CC417,/NET ,SKS,"
-				],
-				"10-10.50": [],
-				"11-11.50": ["LBCA3,BCA4(23B61CA222)-JAG/CR301"],
-				"12-12.50": [
-					"LBCA1,BCA2(23B61CA221)-RTK/CR301",
-					"TBCA2(23B61CA223)-TR424/AJP"
-				],
-				"1-1.50": ["LUNCH", "LUNCH"],
-				"2-2.50": [
-					"PBCA3(23B65CA225)/ CL13, CL14/ AJP,,PTK",
-					"PBCA 4(23B65CA225)/ CL13,Cl14,/SKS,AJP"
-				],
-				"3-3.50": [],
-				"4-4.50": ["LBCA1,BCA2,BCA 3 &BCA 4(23B12CA215)-KA/CR425"]
-			},
-			"SAT": {
-				"9-9.50": [
-					"LBCA3,BCA4(23B61CA223)-AJP/CR501",
-					"LBCA1,BCA2(23B61CA223)-SLK/CR425"
-				],
-				"10-10.50": [
-					"LBCA1,BCA2,BCA 3 &BCA 4(23B12CA211)-SUD/CR425",
-					"LBCA1,BCA2,BCA 3 &BCA 4(23B12CA211)-DEP/CR501"
-				],
-				"11-11.50": [],
-				"12-12.50": [],
-				"1-1.50": [],
-				"2-2.50": [],
-				"3-3.50": [],
-				"4-4.50": []
-			}
-		}
-	},
-	"subjects": [
-		{
-			"Code": "23B61CA221",
-			"Full Code": "23B61CA221",
-			"Subject": "Software Engineering"
-		},
-		{
-			"Code": "23B61CA222",
-			"Full Code": "23B61CA222",
-			"Subject": "Operating System"
-		},
-		{
-			"Code": "23B12CA211",
-			"Full Code": "23B12CA211",
-			"Subject": "Fundamentals of Artificial Intelligence"
-		},
-		{
-			"Code": "23B12CA213",
-			"Full Code": "23B12CA213",
-			"Subject": "Introduction to Big Data and Data Analytics"
-		},
-		{
-			"Code": "23B12CA215",
-			"Full Code": "23B12CA215",
-			"Subject": "Introduction to Cryptography and its Applications"
-		},
-		{
-			"Code": "23B12CA216",
-			"Full Code": "23B12CA216",
-			"Subject": "Fundamentals of Machine Learning"
-		},
-		{
-			"Code": "23B61CA223",
-			"Full Code": "23B61CA223",
-			"Subject": "Java Full Stack Development-I (Core Java)"
-		},
-		{
-			"Code": "23B31HS212",
-			"Full Code": "23B31HS212",
-			"Subject": "Life skills"
-		},
-		{
-			"Code": "23B65CA224",
-			"Full Code": "23B65CA224",
-			"Subject": "Software Engineering Lab"
-		},
-		{
-			"Code": "23B65CA225",
-			"Full Code": "23B65CA225",
-			"Subject": "Java Full Stack Development-I (Core Java) Lab"
-		}
-	]
+  "2": {
+    "timetable": {
+      "MON": {
+        "9-9.50": [
+          "LBCA3,BCA4(23B61CA221)-SHR/CR501",
+          "LBCA1,BCA2(23B61CA221)-RTK/CR425"
+        ],
+        "10-10.50": [
+          "LBCA1,BCA2,BCA 3 &BCA 4(23B12CA216)-MEE/CS6",
+          "LBCA1,BCA2,BCA 3 &BCA 4(23B12CA215)-KA/CS8"
+        ],
+        "11-11.50": [
+          "LBCA1,BCA2,BCA 3 &BCA 4(23B12CA213)-DEP/CS8",
+          "LBCA1,BCA2,BCA 3 &BCA 4(23B12CA211)-SUD/CS6"
+        ],
+        "12-12.50": [
+          "LBCA1,BCA2(23B61CA223)-SLK/CR425",
+          "LBCA3,BCA4(23B61CA223)-AJP/CR501"
+        ],
+        "1-1.50": ["LUNCH"],
+        "2-2.50": [
+          "LBCA1,BCA2(23B31HS212)-SKU/CR425",
+          "LBCA3,BCA4(23B61CA222)-JAG/CR526"
+        ],
+        "3-3.50": ["PBCA4(23B65CA224) CC 421 SHV,NET"],
+        "4-4.50": []
+      },
+      "TUES": {
+        "9-9.50": [
+          "TBCA1(23B61CA223)-TR502/AJP",
+          "LBCA3,BCA4(23B61CA222)-JAG/CR425"
+        ],
+        "10-10.50": ["LBCA1,BCA2(23B31HS212)-SKU/CR501"],
+        "11-11.50": ["PBCA2(23B65CA224)CC417 KM,RTK"],
+        "12-12.50": [],
+        "1-1.50": ["LUNCH"],
+        "2-2.50": ["LBCA3,BCA4(23B31HS212)-HK/CR425"],
+        "3-3.50": ["LBCA1,BCA2(23B61CA222)-JAG/CR425"],
+        "4-4.50": ["LBCA1,BCA2,BCA 3 &BCA 4(23B12CA216)-MEE/CR501"]
+      },
+      "WED": {
+        "9-9.50": [
+          "PBCA3(23B65CA224) CL304 SHV,NET",
+          "PBCA1(23B65CA224  CL306,)SHR,RTK"
+        ],
+        "10-10.50": [],
+        "11-11.50": ["LBCA3,BCA4(23B61CA221)-SHR/CR501"],
+        "12-12.50": ["LBCA3,BCA4(23B31HS212)-HK/CR501"],
+        "1-1.50": ["LUNCH"],
+        "2-2.50": ["LBCA1,BCA2(23B61CA222)-JAG/CR425"],
+        "3-3.50": [],
+        "4-4.50": ["LBCA1,BCA2(23B61CA221)-RTK/CR425"]
+      },
+      "THUR": {
+        "9-9.50": [
+          "LBCA1,BCA2,BCA 3 &BCA 4(23B12CA211)-SUD/CR526",
+          "LBCA1,BCA2,BCA 3 &BCA 4(23B12CA213)-DEP/CR501"
+        ],
+        "10-10.50": [
+          "LBCA1,BCA2(23B61CA222)-JAG/CR526",
+          "LBCA3,BCA4(23B61CA221)-SHR/CR501"
+        ],
+        "11-11.50": ["TBCA4(23B61CA223)-TR424/AJP"],
+        "12-12.50": [
+          "LBCA1,BCA2,BCA 3 &BCA 4(23B12CA216)-MEE/CR526",
+          "LBCA1,BCA2,BCA 3 &BCA 4(23B12CA215)-KA/CR425"
+        ],
+        "1-1.50": ["LUNCH"],
+        "2-2.50": [
+          "LBCA1,BCA2(23B61CA223)-SLK/CR425",
+          "LBCA3,BCA4(23B61CA223)-AJP/CR501"
+        ],
+        "3-3.50": ["TBCA3(23B61CA223)-TR502/SLK"],
+        "4-4.50": []
+      },
+      "FRI": {
+        "9-9.50": [
+          "PBCA1(23B65CA225)/ CL01,SHP,AJP",
+          "PBCA 2(23B65CA225)CC417,/NET ,SKS,"
+        ],
+        "10-10.50": [],
+        "11-11.50": ["LBCA3,BCA4(23B61CA222)-JAG/CR301"],
+        "12-12.50": [
+          "LBCA1,BCA2(23B61CA221)-RTK/CR301",
+          "TBCA2(23B61CA223)-TR424/AJP"
+        ],
+        "1-1.50": ["LUNCH", "LUNCH"],
+        "2-2.50": [
+          "PBCA3(23B65CA225)/ CL13, CL14/ AJP,,PTK",
+          "PBCA 4(23B65CA225)/ CL13,Cl14,/SKS,AJP"
+        ],
+        "3-3.50": [],
+        "4-4.50": ["LBCA1,BCA2,BCA 3 &BCA 4(23B12CA215)-KA/CR425"]
+      },
+      "SAT": {
+        "9-9.50": [
+          "LBCA3,BCA4(23B61CA223)-AJP/CR501",
+          "LBCA1,BCA2(23B61CA223)-SLK/CR425"
+        ],
+        "10-10.50": [
+          "LBCA1,BCA2,BCA 3 &BCA 4(23B12CA211)-SUD/CR425",
+          "LBCA1,BCA2,BCA 3 &BCA 4(23B12CA211)-DEP/CR501"
+        ],
+        "11-11.50": [],
+        "12-12.50": [],
+        "1-1.50": [],
+        "2-2.50": [],
+        "3-3.50": [],
+        "4-4.50": []
+      }
+    },
+    "subjects": [
+      {
+        "Code": "23B61CA221",
+        "Full Code": "23B61CA221",
+        "Subject": "Software Engineering"
+      },
+      {
+        "Code": "23B61CA222",
+        "Full Code": "23B61CA222",
+        "Subject": "Operating System"
+      },
+      {
+        "Code": "23B12CA211",
+        "Full Code": "23B12CA211",
+        "Subject": "Fundamentals of Artificial Intelligence"
+      },
+      {
+        "Code": "23B12CA213",
+        "Full Code": "23B12CA213",
+        "Subject": "Introduction to Big Data and Data Analytics"
+      },
+      {
+        "Code": "23B12CA215",
+        "Full Code": "23B12CA215",
+        "Subject": "Introduction to Cryptography and its Applications"
+      },
+      {
+        "Code": "23B12CA216",
+        "Full Code": "23B12CA216",
+        "Subject": "Fundamentals of Machine Learning"
+      },
+      {
+        "Code": "23B61CA223",
+        "Full Code": "23B61CA223",
+        "Subject": "Java Full Stack Development-I (Core Java)"
+      },
+      {
+        "Code": "23B31HS212",
+        "Full Code": "23B31HS212",
+        "Subject": "Life skills"
+      },
+      {
+        "Code": "23B65CA224",
+        "Full Code": "23B65CA224",
+        "Subject": "Software Engineering Lab"
+      },
+      {
+        "Code": "23B65CA225",
+        "Full Code": "23B65CA225",
+        "Subject": "Java Full Stack Development-I (Core Java) Lab"
+      }
+    ]
+  }
 }

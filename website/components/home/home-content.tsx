@@ -2,7 +2,7 @@
 
 import React, { useContext, useState, useMemo, useEffect } from "react";
 import {
-	callPythonFunction,
+	callTimeTableCreator,
 	usePyodideStatus,
 	initializePyodide,
 } from "../../utils/pyodide";
@@ -138,24 +138,7 @@ export default function HomeContent() {
 		year: string
 	) => {
 		try {
-			let functionName;
-			if (year === "1") {
-				functionName =
-					campus === "62"
-						? "time_table_creator"
-						: campus === "BCA"
-						? "bca_creator_year1"
-						: "bando128_year1";
-			} else {
-				functionName =
-					campus === "62"
-						? "time_table_creator_v2"
-						: campus === "BCA"
-						? "bca_creator"
-						: "banado128";
-			}
-			console.log(functionName);
-			const output = await callPythonFunction(functionName, {
+			const output = await callTimeTableCreator(campus, year, {
 				time_table_json,
 				subject_json,
 				batch,
@@ -164,6 +147,7 @@ export default function HomeContent() {
 			setNumExecutions((prev) => (typeof prev === "number" ? prev + 1 : 1));
 			return output;
 		} catch (error) {
+			console.error("Error executing Python function:", error);
 			return "Error executing Python function";
 		}
 	};

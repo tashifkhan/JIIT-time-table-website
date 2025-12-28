@@ -1,7 +1,74 @@
-from BCA.creator import creator as creator_bca
-from sector_62.creator import creator as creator_btech
-from sector_128.creator import creator as creator_btech_offcampus
+from BCA.creator import creator as creator_bca, creator_year1 as creator_bca_year1
+from sector_62.creator import (
+    creator as creator_btech,
+    creator_year1 as creator_btech_year1,
+    time_table_creator,
+    time_table_creator_v2,
+)
+from sector_128.creator import (
+    creator as creator_btech_offcampus,
+    creator_year1 as creator_btech_offcampus_year1,
+    banado,
+    bando_year1,
+)
 from typing import Literal
+
+def create_time_table(
+    campus: Literal("62", "128", "BCA"),
+    year: Literal("1", "2", "3", "4", "5"),
+    time_table_json: dict,
+    subject_json: list,
+    batch: str,
+    electives_subject_codes: list[str] = [],
+) -> dict:
+    """
+    Create a personalized timetable based on campus and year.
+    
+    This function mirrors the TypeScript evaluteTimeTable logic:
+    - Sector 62, Year 1: time_table_creator
+    - Sector 62, Year 2+: time_table_creator_v2
+    - Sector 128, Year 1: bando_year1
+    - Sector 128, Year 2+: banado
+    - BCA, Year 1: creator_year1
+    - BCA, Year 2+: creator
+
+    Args:
+        campus: Campus identifier ("62", "128", or "BCA")
+        year: Year of study ("1", "2", "3", "4", "5")
+        time_table_json: Raw timetable data
+        subject_json: List of subject information dictionaries
+        batch: User's batch (e.g., "A6", "B12", "BCA1")
+        electives_subject_codes: List of enrolled elective subject codes
+
+    Returns:
+        dict: Formatted personalized timetable
+    """
+    if year == "1":
+        if campus == "62":
+            return time_table_creator(
+                time_table_json, subject_json, batch, electives_subject_codes
+            )
+        elif campus == "BCA":
+            return creator_bca_year1(
+                time_table_json, subject_json, batch, electives_subject_codes
+            )
+        else:  # 128
+            return bando_year1(
+                time_table_json, subject_json, batch, electives_subject_codes
+            )
+    else:
+        if campus == "62":
+            return time_table_creator_v2(
+                time_table_json, subject_json, batch, electives_subject_codes
+            )
+        elif campus == "BCA":
+            return creator_bca(
+                time_table_json, subject_json, batch, electives_subject_codes
+            )
+        else:  # 128
+            return banado(
+                time_table_json, subject_json, batch, electives_subject_codes
+            )
 
 
 def meta_creator(

@@ -563,6 +563,24 @@ def do_you_have_subject(subject_codes: list[str], subject_code: str) -> bool:
     return False
 
 
+def type_extractor(text: str) -> str:
+    """
+    Extracts the session type (Lecture, Practical, Tutorial) from a text string.
+
+    Args:
+        text (str): The input text, where the first character usually indicates the type.
+
+    Returns:
+        str: 'L' for Lecture, 'P' for Practical, 'T' for Tutorial. Defaults to 'L'.
+    """
+    t = text.strip()[0].upper() if text.strip() else "L"
+
+    if t in ["L", "P", "T"]:
+        return t
+
+    return "L"
+
+
 def pprint(data: dict) -> None:
     """
     Prints a dictionary in a pretty-printed JSON format.

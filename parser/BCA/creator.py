@@ -1,14 +1,14 @@
 from .utils import (
     batch_extractor,
-    is_enrolled_subject,
     parse_batches,
-    process_day,
-    process_timeslot,
     subject_extractor,
 )
 
 from common.utils import (
+    is_enrolled_subject,
     location_extractor,
+    process_day,
+    process_timeslot,
     subject_name_extractor,
     type_extractor,
 )
@@ -30,26 +30,34 @@ def creator(
         subjects = subject_json if isinstance(subject_json, list) else []
         your_time_table = []
         days = list(time_table.keys())
+        
         for day in days:
             time_slots = time_table[day]
             time_slot_keys = list(time_slots.keys())
+            
             for time in time_slot_keys:
                 classes = time_slots[time]
+                
                 if not isinstance(classes, list):
                     continue
+                
                 for indi_class in classes:
                     if not isinstance(indi_class, str) or not indi_class.strip():
                         continue
+                    
                     if "LUNCH" in indi_class.upper() or "TALK" in indi_class.upper():
                         continue
+                    
                     code = subject_extractor(indi_class)
                     batchs = batch_extractor(indi_class)
                     batchs_list = parse_batches(batchs)
+                    
                     is_actually_enrolled_subject, subject_details = is_enrolled_subject(
                         enrolled_subject_codes=enrolled_subject_codes,
                         subject_dict=subjects,
                         subject_code=code,
                     )
+                    
                     if is_actually_enrolled_subject and (
                         batch in batchs_list or any(batch == b for b in batchs_list)
                     ):
@@ -66,17 +74,22 @@ def creator(
                                 location_extractor(indi_class),
                             ]
                         )
+        
         formatted_timetable = {}
+        
         for entry in your_time_table:
             day = process_day(entry[0])
             time = entry[1]
+            
             # Fix for ambiguous 12:00/01:00 times (treat 12:00 as PM, 01:00 as PM if after 12:00)
             raw_times = [
                 t.strip() for t in time.replace("AM", "").replace("PM", "").split("-")
             ]
+            
             if len(raw_times) == 2:
                 start_raw, end_raw = raw_times
                 # Add PM if missing for 12:00
+                
                 if start_raw in ["12:00", "12"] and "PM" not in time.upper():
                     start_time, _ = process_timeslot(
                         start_raw + " PM-" + end_raw, entry[3]

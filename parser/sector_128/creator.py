@@ -162,3 +162,9 @@ def bando_year1(
     except Exception as e:
         print(f"Error in time_table_creator: {str(e)}")
         return {}
+
+
+# Aliases for consistent interface across modules
+creator = banado
+creator_year1 = bando_year1
+

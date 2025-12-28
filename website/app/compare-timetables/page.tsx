@@ -4,7 +4,8 @@ import { motion } from "framer-motion";
 import { ChevronDown, Trash } from "lucide-react";
 import {
 	initializePyodide,
-	callPythonFunction,
+	callTimeTableCreator,
+	callCompareTimetables,
 	usePyodideStatus,
 } from "../../utils/pyodide";
 import { Button } from "../../components/ui/button";
@@ -15,7 +16,7 @@ import {
 	SelectTrigger,
 	SelectValue,
 } from "../../components/ui/select";
-import type { PyodideInterface } from "pyodide";
+
 import {
 	SubjectSelector,
 	Subject,
@@ -148,46 +149,23 @@ export default function CompareTimetables() {
 					electives_subject_codes: params.electives || [],
 				};
 			};
-			// Always use time_table_creator_v2 for comparison
+
 			const args1 = getMappingAndArgs(config1);
 			const args2 = getMappingAndArgs(config2);
-			// Conditionally call the correct timetable generator as in App.tsx
-			let tt1, tt2;
 
-			const getFunctionName = (params: any) => {
-				if (params.year === "1") {
-					return params.campus === "62"
-						? "time_table_creator"
-						: params.campus === "BCA"
-						? "bca_creator_year1"
-						: "bando128_year1";
-				} else {
-					return params.campus === "62"
-						? "time_table_creator_v2"
-						: params.campus === "BCA"
-						? "bca_creator"
-						: "banado128";
-				}
-			};
-
-			const fnName1 = getFunctionName(config1);
-			const fnName2 = getFunctionName(config2);
-
-			[tt1, tt2] = await Promise.all([
-				callPythonFunction(fnName1, args1),
-				callPythonFunction(fnName2, args2),
+			// Use the unified callTimeTableCreator for both timetables
+			const [tt1, tt2] = await Promise.all([
+				callTimeTableCreator(config1.campus, config1.year, args1),
+				callTimeTableCreator(config2.campus, config2.year, args2),
 			]);
 			setTimetable1(tt1);
 			setTimetable2(tt2);
-			// Now compare
-			// compare_timetables expects only two arguments
-			const pyodide = (await initializePyodide()) as PyodideInterface;
-			const compareFn = pyodide.globals.get("compare_timetables");
-			const pyTT1 = pyodide.toPy(tt1);
-			const pyTT2 = pyodide.toPy(tt2);
-			const result = compareFn(pyTT1, pyTT2).toJs();
+
+			// Compare the timetables
+			const result = await callCompareTimetables(tt1, tt2);
 			setCompareResult(result);
 		} catch (e) {
+			console.error("Error comparing timetables:", e);
 			setCompareResult({ error: "Failed to compare timetables." });
 		} finally {
 			setLoading(false);

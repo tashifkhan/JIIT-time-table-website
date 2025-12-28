@@ -8,7 +8,9 @@ version = "0.1.0"
 description = "A parser for JIIT time table JSON data"
 readme = "README.md"
 requires-python = ">=3.12"
-dependencies = []
+dependencies = [
+    "pydantic>=2.12.5",
+]
 
 [tool.setuptools]
 packages = ["BCA", "common", "modules", "sector_128", "sector_62"]

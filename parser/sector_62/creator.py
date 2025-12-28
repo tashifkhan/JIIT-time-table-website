@@ -9,7 +9,6 @@ from common.utils import (
     process_timeslot,
     subject_extractor,
     subject_name_extractor,
-    pprint,
 )
 
 
@@ -19,17 +18,9 @@ def time_table_creator(
     batch: str,
     electives_subject_codes: list[str] = [],
 ) -> dict:
-    pprint(
-        {
-            "Processing inputs:": {
-                "batch": batch,
-                "electives": electives_subject_codes,
-                "time_table_type": type(time_table_json),
-                "subject_type": type(subject_json),
-            },
-        }
-    )
-
+    """
+    Create a personalized timetable for Year 1 students at Sector 62.
+    """
     try:
         time_table = time_table_json if isinstance(time_table_json, dict) else {}
         subject = subject_json if isinstance(subject_json, list) else []
@@ -71,11 +62,12 @@ def time_table_creator(
                                 ]
                             )
                     else:
-                        if is_enrolled_subject(
-                            subject_dict=subject,  # type: ignore
+                        is_enrolled, _ = is_enrolled_subject(
                             enrolled_subject_codes=electives_subject_codes,
                             subject_code=code,
-                        ) and is_batch_included(batch, batchs):
+                            subject_dict=subject,  # type: ignore
+                        )
+                        if is_enrolled and is_batch_included(batch, batchs):
                             your_time_table.append(
                                 [
                                     day,
@@ -131,17 +123,9 @@ def time_table_creator_v2(
     batch: str,
     enrolled_subjects: list[str],
 ) -> dict:
-    pprint(
-        {
-            "Processing inputs": {
-                "batch": batch,
-                "all_subjects": all_subjects,
-                "enrolled_subjects": enrolled_subjects,
-                "time_table_json": time_table_json,
-            }
-        }
-    )
-
+    """
+    Create a personalized timetable for Year 2+ students at Sector 62.
+    """
     try:
         time_table = time_table_json if isinstance(time_table_json, dict) else {}
         # print(f"Time table: {time_table}")

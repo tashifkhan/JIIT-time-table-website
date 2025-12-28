@@ -2,6 +2,7 @@ from common.utils import (
     batch_extractor,
     is_batch_included,
     is_elective,
+    is_enrolled_subject,
     location_extractor,
     parse_batch_numbers,
     process_day,
@@ -235,3 +236,9 @@ def time_table_creator_v2(
     except Exception as e:
         print(f"Error in time_table_creator_v2: {str(e)}")
         return {}
+
+
+# Aliases for consistent interface across modules
+creator = time_table_creator_v2
+creator_year1 = time_table_creator
+

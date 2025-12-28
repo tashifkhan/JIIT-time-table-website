@@ -70,7 +70,7 @@ export function NoticeBanner() {
 									>
 										admin@tashif.codes
 									</a>
-									, or DM the me.
+									, or DM me.
 								</p>
 							</div>
 						</div>

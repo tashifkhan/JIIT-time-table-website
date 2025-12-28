@@ -69,9 +69,12 @@ def expand_batch(batch_code: str) -> list[str]:
         A list of individual batch strings.
     """
     if not batch_code:
-        return []
+        return ["E", "F", "H", "D"]
 
     if batch_code == "ALL":
+        return ["E", "F", "H", "D"]
+
+    if batch_code.upper() == "MINOR":
         return ["E", "F", "H", "D"]
 
     matches = re.findall(r"([A-Z])(\d+)", batch_code)

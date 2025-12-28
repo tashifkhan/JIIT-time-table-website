@@ -29,6 +29,17 @@ def parse_batch_numbers(batch_input: str) -> list[str]:
 
     batch_input = batch_input.strip()
 
+    # Handle minor subjects
+    if batch_input.upper() == "MINOR":
+        return [
+            "A",
+            "B",
+            "C",
+            "D",
+            "G",
+            "H",
+        ]
+
     # Handle concatenated batch numbers (e.g., A15A17)
     if re.match(r"^[A-Za-z]\d+[A-Za-z]\d+$", batch_input):
         matches = re.findall(r"[A-Za-z]\d+", batch_input)
@@ -42,34 +53,52 @@ def parse_batch_numbers(batch_input: str) -> list[str]:
     if len(batch_input) == 1 and batch_input.isalpha():
         return [batch_input.upper()]
 
+
     # Handle multiple ranges separated by comma
     if "," in batch_input:
         ranges = [r.strip() for r in batch_input.split(",")]
         result = []
         current_prefix = None
 
+        mapping = {
+            "ECE": "A", 
+            "CSE": "B", 
+            "BT": "C",
+        } # mapping for the branch codes
+
         for r in ranges:
             if not r:
                 continue
 
-            if r.isdigit():  # If it's just a number, use the previous prefix
+            # Handle CSE,ECE,BT
+            if r in mapping:
+                result.append(mapping[r])
+                continue
+
+            elif r.isdigit():  # If it's just a number, use the previous prefix
                 if current_prefix:
                     result.append(f"{current_prefix}{r}")
                 continue
+            
             elif r[0].isalpha():  # If it starts with a letter, update the prefix
                 current_prefix = re.match(r"([A-Za-z]+)", r).group(1)  # type: ignore
+            
             # Handle hyphen-separated ranges within comma-separated parts
             if "-" in r:
                 parts = r.split("-")
                 match = re.match(r"([A-Za-z]+)", parts[0])
+                
                 if not match:
                     continue
+                
                 prefix = match.group(1)
+                
                 numbers = [
                     int(re.search(r"\d+", part).group())  # type: ignore
                     for part in parts
                     if re.search(r"\d+", part)
                 ]
+                
                 if numbers:
                     result.extend(
                         f"{prefix}{i}" for i in range(numbers[0], numbers[-1] + 1)

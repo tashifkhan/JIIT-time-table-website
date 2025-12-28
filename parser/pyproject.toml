@@ -20,14 +20,15 @@ classifiers = [
     "Programming Language :: Python :: 3.12",
     "Topic :: Software Development :: Libraries :: Python Modules",
 ]
-dependencies = [
-    "pydantic>=2.12.5",
-]
+# No runtime dependencies for Pyodide compatibility
+# pydantic types are optional - only used for development
+dependencies = []
 
 [project.optional-dependencies]
 dev = [
     "build",
     "pytest",
+    "pydantic>=2.12.5",
 ]
 
 [tool.setuptools]

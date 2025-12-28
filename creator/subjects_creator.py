@@ -1,13 +1,15 @@
-"Subject List JSON Creator (AI Powered).
+"""
+Subject List JSON Creator (AI Powered).
 
 This script provides a Streamlit interface for extracting subject information
 (Code, Full Code, Subject Name) from Excel/CSV timetables using Google Gemini AI.
-"
+"""
 
-import streamlit as st
-import pandas as pd
 import json
 import re
+
+import pandas as pd
+import streamlit as st
 from google import genai
 from google.genai import types
 
@@ -27,8 +29,8 @@ with st.sidebar:
     st.divider()
     model_name = st.selectbox(
         "Select Model",
-        ["gemini-2.0-flash-exp", "gemini-1.5-flash", "gemini-1.5-pro"],
-        index=0
+        ["gemini-2.5-flash", "gemini-3-flash-preview", "gemini-3-pro-preview"],
+        index=0,
     )
 
 # ==== File Uploader ====
@@ -206,6 +208,7 @@ Before outputting, verify:
 Process the input text provided in the next message. Apply the algorithmic logic without interpretation or inference beyond the stated rules. Output only the final JSON object that passes all validation checks. If the input contains zero valid course lines, output `{"subjects":[]}`.
 """
 
+
 def clean_json_string(json_str):
     """
     Removes markdown code fences and standardizes the string for JSON parsing.
@@ -215,6 +218,7 @@ def clean_json_string(json_str):
     if match:
         return match.group(1).strip()
     return json_str.strip().strip("`")
+
 
 def subject_json_generator(df):
     """
@@ -256,8 +260,8 @@ def subject_json_generator(df):
 
     # display ranges
     for i, r in enumerate(st.session_state.subject_ranges):
-        st.markdown(f"---")
-        st.markdown(f"**Range {i+1}**")
+        st.markdown("---")
+        st.markdown(f"**Range {i + 1}**")
         cols = st.columns([1, 1, 3, 0.5])
 
         # Row inputs
@@ -277,7 +281,7 @@ def subject_json_generator(df):
         )
 
         # Column inputs
-        col_labels = [f"Col {j+1}" for j in range(num_cols)]
+        col_labels = [f"Col {j + 1}" for j in range(num_cols)]
 
         with cols[2]:
             sub_cols = st.columns(num_cols)
@@ -337,7 +341,9 @@ def subject_json_generator(df):
 
         # Debug: Show what's being sent (optional)
         with st.expander("Preview Input Data Sending to AI"):
-            st.text(full_input_text[:1000] + ("..." if len(full_input_text)>1000 else ""))
+            st.text(
+                full_input_text[:1000] + ("..." if len(full_input_text) > 1000 else "")
+            )
 
         # 2. Call Gemini API
         try:
@@ -369,7 +375,9 @@ def subject_json_generator(df):
                     # Sort for consistency (by Code)
                     unique_subjects.sort(key=lambda x: x.get("Code", ""))
 
-                    st.success(f"Success! Extracted {len(unique_subjects)} unique subjects.")
+                    st.success(
+                        f"Success! Extracted {len(unique_subjects)} unique subjects."
+                    )
 
                     st.json(unique_subjects)
 

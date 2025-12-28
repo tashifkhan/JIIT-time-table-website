@@ -1,5 +1,5 @@
 [build-system]
-requires = ["setuptools>=61.0"]
+requires = ["setuptools>=61.0", "wheel"]
 build-backend = "setuptools.build_meta"
 
 [project]
@@ -8,10 +8,36 @@ version = "0.1.0"
 description = "A parser for JIIT time table JSON data"
 readme = "README.md"
 requires-python = ">=3.12"
+license = "MIT"
+authors = [
+    {name = "JIIT Timetable Team"}
+]
+keywords = ["jiit", "timetable", "parser"]
+classifiers = [
+    "Development Status :: 4 - Beta",
+    "Intended Audience :: Developers",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.12",
+    "Topic :: Software Development :: Libraries :: Python Modules",
+]
 dependencies = [
     "pydantic>=2.12.5",
+]
+
+[project.optional-dependencies]
+dev = [
+    "build",
+    "pytest",
 ]
 
 [tool.setuptools]
 packages = ["BCA", "common", "modules", "sector_128", "sector_62"]
 py-modules = ["main", "_legacy"]
+
+[tool.setuptools.package-data]
+"*" = ["py.typed"]
+
+[dependency-groups]
+dev = [
+    "build>=1.3.0",
+]

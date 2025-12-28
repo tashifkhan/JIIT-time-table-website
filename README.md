@@ -40,11 +40,23 @@ A powerful **Next.js** application that helps JIIT students create personalized 
 - **Core Engine**: Pyodide (Python in WebAssembly)
 - **Analytics**: PostHog
 
-### Backend & Tools (`/parser`, `/creator`)
+### Backend & Core Logic
 
-- **Parser API**: Python (Flask) - Converts raw Excel/PDF timetables into JSON.
-- **Data Processing**: Python scripts for batch processing.
-- **AI**: Google GenAI (Gemini) for PDF summarization.
+#### Parser Library (`/parser`)
+
+A modular Python package that handles the core logic for timetable generation and comparison.
+
+- **Multi-Campus Support**: Custom logic for Sector 62, 128, and BCA.
+- **Type Safety**: Uses Pydantic models for validation.
+- **Usage**: Compiled to a wheel and loaded by Pyodide in the frontend.
+
+#### Creator Tools (`/creator`)
+
+Standalone utility scripts for generating the data files (JSONs) required by the website.
+
+- **Academic Calendar Parser**: Gemini-powered tool to extract events from PDFs.
+- **Subject List Creator**: AI-powered tool to clean and extract subject data.
+- **Timetable Creators**: Tools to convert raw Excel/PDF data into the JSON structure.
 
 ## Project Structure
 
@@ -56,13 +68,19 @@ A powerful **Next.js** application that helps JIIT students create personalized 
 │   ├── public/              # Static assets and data
 │   └── utils/               # Utilities (including Pyodide bridge)
 │
-├── parser/                  # Flask App for parsing raw files
-│   ├── server.py            # API entry point
-│   └── modules/             # Parsing logic for XLS, XLSX, PDF
+├── parser/                  # Core Python Library (runs in browser via Pyodide)
+│   ├── main.py              # Unified API entry point
+│   ├── common/              # Shared types and utils
+│   ├── sector_62/           # Sector 62 logic
+│   ├── sector_128/          # Sector 128 logic
+│   └── BCA/                 # BCA logic
 │
-├── creator/                 # Standalone utility scripts
-│   ├── ac_creator.py        # Academic Calendar creator (uses GenAI)
-│   └── json_creater.py      # JSON generation scripts
+├── creator/                 # Data Generation Tools
+│   ├── run.sh               # Helper script to launch tools
+│   ├── ac_creator.py        # Academic Calendar Creator
+│   ├── subjects_creator.py  # AI Subject List Creator
+│   ├── timetable_creator.py # Timetable JSON Creator
+│   └── json_creater.py      # Legacy/Manual Creator
 │
 └── README.md
 ```
@@ -70,17 +88,18 @@ A powerful **Next.js** application that helps JIIT students create personalized 
 ## Data Flow
 
 1. User selects batch, year, campus, and electives.
-2. Python parser processes the timetable.
-3. React renders the personalized schedule.
-4. Export options handle data conversion.
-5. Academic calendar is accessed to add its visualization.
+2. **Pyodide** loads the `parser` library in the browser.
+3. React sends raw data to the Python `create_time_table` function.
+4. The function returns the structured schedule.
+5. React renders the personalized, color-coded timetable.
 
 ## Getting Started
 
 ### Prerequisites
 
 - **Node.js** (or Bun)
-- **Python 3.8+**
+- **Python 3.9+** (for Creator tools)
+- **uv** (recommended for Python dependency management)
 
 ### Running the Website
 
@@ -108,26 +127,23 @@ A powerful **Next.js** application that helps JIIT students create personalized 
 
 4. Open [http://localhost:3000](http://localhost:3000) (or the port shown in terminal).
 
-### Running the Parser (Optional)
+### Running Creator Tools (Optional)
 
-If you need to parse new timetable files:
+If you need to generate new JSON data files (e.g., for a new semester):
 
-1. Navigate to the parser directory:
-
-   ```bash
-   cd parser
-   ```
-
-2. Install Python dependencies:
+1. Navigate to the creator directory:
 
    ```bash
-   pip install -r requirements.txt
+   cd creator
    ```
 
-3. Run the Flask server:
+2. Run the helper script:
+
    ```bash
-   python server.py
+   ./run.sh
    ```
+
+3. Follow the interactive menu to launch the desired tool (Academic Calendar, Subjects, or Timetable creator).
 
 ## Usage
 
@@ -161,10 +177,10 @@ The application provides a comprehensive REST API documented via Swagger UI.
 
 Common issues and solutions:
 
-1. **Loading Error**: Clear cache and reload
-2. **Export Failed**: Check browser permissions... especially WASM
-3. **Parser Error**: Check the freaking Excel for errors
-4. **Mobile Issues**: Ensure you're using a modern browser with touch support
+1. **Loading Error**: Clear cache and reload.
+2. **Export Failed**: Check browser permissions or try a different browser.
+3. **Wrong Timetable**: Verify you selected the correct batch and electives.
+4. **Mobile Issues**: Ensure you're using a modern browser with touch support.
 
 ## Future Scope
 

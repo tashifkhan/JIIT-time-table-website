@@ -10,8 +10,8 @@
 A powerful **Next.js** application that helps JIIT students create personalized class schedules. Features a modern glassmorphic UI, color-coded timetables, academic calendar integration, and multiple export options. This application leverages **WebAssembly (Pyodide)** to generate timetables directly in the browser, ensuring privacy and offline capability.
 
 ## Analytics
-<img width="1800" height="1129" alt="image" src="https://github.com/user-attachments/assets/cb7e8ce7-a0a0-4fda-8d41-aef462fecfc2" />
 
+<img width="1800" height="1129" alt="image" src="https://github.com/user-attachments/assets/cb7e8ce7-a0a0-4fda-8d41-aef462fecfc2" />
 
 ## Key Features
 
@@ -190,8 +190,13 @@ Contributions are welcome!
 
 [GPL-3.0 License](LICENSE)
 
+## Maintainers
+
+- **Tashif Ahmad Khan** ([@tashifkhan](https://github.com/tashifkhan)) - [admin@tashif.codes](mailto:admin@tashif.codes)
+- **Shaurya Rahlon** ([@ShauryaRahlon](https://github.com/ShauryaRahlon)) - [shauryarahlon.11@gmail.com](mailto:shauryarahlon.11@gmail.com)
+
 ## Contact
 
 - **Issues**: [GitHub Issues](https://github.com/tashifkhan/JIIT-time-table-website/issues)
 - **Feature Requests**: [GitHub Issues](https://github.com/tashifkhan/JIIT-time-table-website/issues)
-- **Email**: [developer@tashif.codes](mailto:developer@tashif.codes)
+- **Email**: [admin@tashif.codes](mailto:admin@tashif.codes)

@@ -12,7 +12,7 @@ from sector_128.creator import (
     bando_year1,
 )
 from typing import Literal, TypedDict
-
+from common.utils import pprint
 
 class TimetableParams(TypedDict, total=False):
     """Parameters for creating a timetable."""
@@ -82,12 +82,50 @@ def create_time_table(
             )
 
 
+def _expand_timetable_to_hourly(timetable: dict) -> dict:
+    """
+    Expand a timetable with multi-hour blocks into hourly slots.
+    
+    For example, a class at "10:00-12:00" will be expanded to:
+    - "10:00-11:00": class_info
+    - "11:00-12:00": class_info
+    
+    Args:
+        timetable: Original timetable with potentially multi-hour blocks
+        
+    Returns:
+        dict: Timetable with only 1-hour slots
+    """
+    expanded = {}
+    for day, slots in timetable.items():
+        expanded[day] = {}
+        for time_range, class_info in slots.items():
+            # Parse time range like "10:00-12:00" or "09:00-10:00"
+            try:
+                start_str, end_str = time_range.split("-")
+                start_hour = int(start_str.split(":")[0])
+                end_hour = int(end_str.split(":")[0])
+                
+                # Expand into hourly slots
+                for hour in range(start_hour, end_hour):
+                    hourly_slot = f"{hour:02d}:00-{hour+1:02d}:00"
+                    expanded[day][hourly_slot] = class_info
+            except (ValueError, IndexError):
+                # If parsing fails, keep the original slot
+                expanded[day][time_range] = class_info
+    return expanded
+
+
 def compare_timetables(timetable1: dict, timetable2: dict) -> dict:
     """
     Compare two timetables and return:
       - common_free_slots: dict of day -> list of time slots where both are free
       - classes_together: dict of day -> dict of time slot -> class info where both have the same class
     """
+    # Expand both timetables to hourly slots for accurate comparison
+    expanded1 = _expand_timetable_to_hourly(timetable1)
+    expanded2 = _expand_timetable_to_hourly(timetable2)
+    
     # Collect all days
     all_days = set(timetable1.keys()) | set(timetable2.keys())
     result = {
@@ -96,12 +134,11 @@ def compare_timetables(timetable1: dict, timetable2: dict) -> dict:
     }
 
     for day in all_days:
-        slots1 = timetable1.get(day, {})
-        slots2 = timetable2.get(day, {})
+        slots1 = expanded1.get(day, {})
+        slots2 = expanded2.get(day, {})
 
-        # Get the set of all unique time slots for this day from both timetables (union of slot keys)
-        # all_slots = set(slots1.keys()) | set(slots2.keys())
-        all_slots = [f"{time}:00-{time+1}:00" for time in range(8, 17)]
+        # Generate all hourly slots with 2-digit format (08:00, 09:00, etc.)
+        all_slots = [f"{time:02d}:00-{time+1:02d}:00" for time in range(8, 17)]
 
         free_slots = []
         together_slots = {}
@@ -187,3 +224,28 @@ def create_and_compare_timetable(
 
 if __name__ == "__main__":
     ...
+    # import json
+    # data = json.load(open("../website/data/time-table/2026/EVEN26/62.json", "r"))["1"]
+    # subject_json = data["subjects"]
+    # time_table_json = data["timetable"]
+    # params_list = [
+    #     {
+    #         "campus": "62",
+    #         "year": "1",
+    #         "time_table_json": time_table_json,
+    #         "subject_json": subject_json,
+    #         "batch": "A6",
+    #         "electives_subject_codes": [],
+    #     },
+    #     {
+    #         "campus": "62",
+    #         "year": "1",
+    #         "time_table_json": time_table_json,
+    #         "subject_json": subject_json,
+    #         "batch": "A6",
+    #         "electives_subject_codes": [],
+    #     },
+    # ]
+    # pprint(params_list)
+    # result = create_and_compare_timetable(params_list)
+    # pprint(result)

@@ -14,7 +14,16 @@ import { Label } from "../ui/label";
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from "../ui/dialog";
 import Fuse from "fuse.js";
 
-import { Sparkles, Save } from "lucide-react";
+import {
+	Sparkles,
+	Save,
+	Building2,
+	Calendar,
+	Users,
+	BookOpen,
+	Check,
+	AlertCircle,
+} from "lucide-react";
 import UserContext from "../../context/userContext";
 import { useQueryState, parseAsString, parseAsArrayOf } from "nuqs";
 import { useToast } from "../../hooks/use-toast";
@@ -506,13 +515,14 @@ export function ScheduleForm({
 				)}
 			</AnimatePresence>
 
-			<Card className="w-full max-w-[95vw] sm:max-w-md p-4 sm:p-6 backdrop-blur-2xl bg-[#FFF0DC]/10 border border-[#F0BB78]/20 shadow-2xl rounded-xl">
-				<form onSubmit={handleSubmit} className="space-y-4 sm:space-y-6">
+			<Card className="w-full max-w-[95vw] sm:max-w-md p-4 sm:p-6 backdrop-blur-2xl bg-[#FFF0DC]/10 border border-[#F0BB78]/20 shadow-2xl rounded-xl hover:border-[#F0BB78]/30 transition-all duration-300">
+				<form onSubmit={handleSubmit} className="space-y-5 sm:space-y-6">
 					<div className="space-y-2">
 						<Label
 							htmlFor="campus"
-							className="text-white/90 font-medium text-sm sm:text-base"
+							className="text-white/90 font-medium text-sm sm:text-base flex items-center gap-2 tracking-wide"
 						>
+							<Building2 className="w-4 h-4 text-[#F0BB78]" />
 							Campus
 						</Label>
 						<Select
@@ -521,13 +531,17 @@ export function ScheduleForm({
 								setCampus(value);
 							}}
 						>
-							<SelectTrigger className="h-9 sm:h-10 text-sm bg-[#FFF0DC]/10 border-[#F0BB78]/20 backdrop-blur-md hover:bg-[#FFF0DC]/15 transition-all">
-								<SelectValue placeholder="Select campus" />
+							<SelectTrigger className="h-10 sm:h-11 text-sm bg-[#FFF0DC]/10 border-[#F0BB78]/20 backdrop-blur-md hover:bg-[#FFF0DC]/20 hover:border-[#F0BB78]/40 focus:border-[#F0BB78]/60 focus:ring-[#F0BB78]/20 transition-all duration-200">
+								<SelectValue placeholder="Select your campus" />
 							</SelectTrigger>
-							<SelectContent className="bg-[#FFF0DC]/20 backdrop-blur-2xl border-[#F0BB78]/20">
+							<SelectContent className="bg-[#1a1a1a]/95 backdrop-blur-2xl border-[#F0BB78]/20 shadow-xl">
 								{campuses.map((c) => (
-									<SelectItem key={c} value={c}>
-										{c}
+									<SelectItem
+										key={c}
+										value={c}
+										className="hover:bg-[#F0BB78]/20 focus:bg-[#F0BB78]/20 cursor-pointer transition-colors"
+									>
+										Sector {c}
 									</SelectItem>
 								))}
 							</SelectContent>
@@ -539,20 +553,21 @@ export function ScheduleForm({
 							<div className="space-y-2">
 								<Label
 									htmlFor="year"
-									className="text-white/90 font-medium text-sm sm:text-base"
+									className="text-white/90 font-medium text-sm sm:text-base flex items-center gap-2 tracking-wide"
 								>
+									<Calendar className="w-4 h-4 text-[#F0BB78]" />
 									Year
 								</Label>
 								<Select value={year} onValueChange={setYear}>
-									<SelectTrigger className="h-9 sm:h-10 text-sm bg-[#FFF0DC]/10 border-[#F0BB78]/20 backdrop-blur-md hover:bg-[#FFF0DC]/15 transition-all">
-										<SelectValue placeholder="Select year" />
+									<SelectTrigger className="h-10 sm:h-11 text-sm bg-[#FFF0DC]/10 border-[#F0BB78]/20 backdrop-blur-md hover:bg-[#FFF0DC]/20 hover:border-[#F0BB78]/40 focus:border-[#F0BB78]/60 focus:ring-[#F0BB78]/20 transition-all duration-200">
+										<SelectValue placeholder="Select your year" />
 									</SelectTrigger>
-									<SelectContent className="bg-[#FFF0DC]/20 backdrop-blur-2xl border-[#F0BB78]/20">
+									<SelectContent className="bg-[#1a1a1a]/95 backdrop-blur-2xl border-[#F0BB78]/20 shadow-xl">
 										{(campus !== "BCA" ? [1, 2, 3, 4] : [1, 2, 3]).map((yr) => (
 											<SelectItem
 												key={yr}
 												value={yr.toString()}
-												className="hover:bg-white/20"
+												className="hover:bg-[#F0BB78]/20 focus:bg-[#F0BB78]/20 cursor-pointer transition-colors"
 											>
 												Year {yr}
 											</SelectItem>
@@ -564,28 +579,36 @@ export function ScheduleForm({
 							<div className="space-y-2">
 								<Label
 									htmlFor="batch"
-									className="text-white/90 font-medium text-sm sm:text-base"
+									className="text-white/90 font-medium text-sm sm:text-base flex items-center gap-2 tracking-wide"
 								>
+									<Users className="w-4 h-4 text-[#F0BB78]" />
 									Batch
 								</Label>
-								<Input
-									id="batch"
-									value={batch}
-									onChange={(e) => {
-										const value = e.target.value.toUpperCase();
-										setBatch(value);
-									}}
-									placeholder={`Enter your batch (e.g., ${
-										campus === "62"
-											? "A6"
-											: campus === "128"
-											? "F4"
-											: campus === "BCA"
-											? "BCA1"
-											: "Batch"
-									})`}
-									className="h-9 sm:h-10 text-sm bg-white/10 border-white/20 backdrop-blur-md hover:bg-white/15 transition-all"
-								/>
+								<div className="relative">
+									<Input
+										id="batch"
+										value={batch}
+										onChange={(e) => {
+											const value = e.target.value.toUpperCase();
+											setBatch(value);
+										}}
+										placeholder={`Enter your batch (e.g., ${
+											campus === "62"
+												? "A6"
+												: campus === "128"
+												? "F4"
+												: campus === "BCA"
+												? "BCA1"
+												: "Batch"
+										})`}
+										className={`h-10 sm:h-11 text-sm bg-white/10 border-white/20 backdrop-blur-md hover:bg-white/15 hover:border-[#F0BB78]/40 focus:border-[#F0BB78]/60 focus:ring-[#F0BB78]/20 transition-all duration-200 ${
+											batchError ? "border-red-400/50" : ""
+										}`}
+									/>
+									{batchError && (
+										<AlertCircle className="absolute right-3 top-1/2 -translate-y-1/2 w-4 h-4 text-red-400" />
+									)}
+								</div>
 								{batchError && (
 									<p className="text-red-400 text-xs font-medium bg-red-400/10 border border-red-400/20 rounded px-2 py-1 mt-1 mb-0.5">
 										{batchError}
@@ -595,61 +618,69 @@ export function ScheduleForm({
 
 							{typeof year === "string" && year !== "1" && (
 								<div className="space-y-2">
-									<Label className="text-white/90 font-medium text-sm sm:text-base">
+									<Label className="text-white/90 font-medium text-sm sm:text-base flex items-center gap-2 tracking-wide">
+										<BookOpen className="w-4 h-4 text-[#F0BB78]" />
 										Choose Your Subjects
+										{selectedSubjects.length > 0 && (
+											<span className="ml-auto text-xs bg-[#F0BB78]/20 text-[#F0BB78] px-2 py-0.5 rounded-full">
+												{selectedSubjects.length} selected
+											</span>
+										)}
 									</Label>
 									<Button
 										type="button"
-										className="w-full h-9 sm:h-10 text-sm bg-gradient-to-r from-[#543A14] to-[#F0BB78] hover:from-[#543A14]/80 hover:to-[#F0BB78]/80 transition-all duration-300 shadow-lg hover:shadow-[#F0BB78]/25"
+										className="w-full h-10 sm:h-11 text-sm bg-gradient-to-r from-[#543A14] to-[#F0BB78] hover:from-[#543A14]/80 hover:to-[#F0BB78]/80 transition-all duration-300 shadow-lg hover:shadow-[#F0BB78]/25 hover:scale-[1.01]"
 										onClick={() => {
-											setSubjectSearch(""); // Clear search when opening modal
+											setSubjectSearch("");
 											setShowSubjectModal(true);
 										}}
 									>
 										{selectedSubjects.length > 0
-											? `Selected: ${selectedSubjects.length} subject(s)`
-											: "Select Subjects"}
+											? `Tap to modify selection`
+											: "Tap to select subjects"}
 									</Button>
-									<div className="flex flex-wrap gap-2 mt-2">
-										{selectedSubjects.map((code) => {
-											const subj = (
-												mapz?.[campus]?.[year]?.subjects ?? []
-											).find((s) => s.Code === code);
-											return (
-												<div
-													key={code}
-													className="flex items-center gap-1 px-2 py-1 bg-[#F0BB78]/20 rounded text-[#F0BB78] text-xs group hover:bg-[#F0BB78]/30 transition-colors"
-												>
-													<span className="truncate max-w-[120px]">
-														{subj?.Subject || code}
-													</span>
-													<button
-														type="button"
-														onClick={(e) => {
-															e.stopPropagation();
-															handleSubjectToggle(code);
-														}}
-														className="ml-1 text-[#F0BB78]/60 hover:text-red-400 transition-colors opacity-0 group-hover:opacity-100"
-														aria-label={`Remove ${subj?.Subject || code}`}
+									{selectedSubjects.length > 0 && (
+										<div className="flex flex-wrap gap-2 mt-3">
+											{selectedSubjects.map((code) => {
+												const subj = (
+													mapz?.[campus]?.[year]?.subjects ?? []
+												).find((s) => s.Code === code);
+												return (
+													<div
+														key={code}
+														className="flex items-center gap-1 px-2.5 py-1.5 bg-[#F0BB78]/20 rounded-lg text-[#F0BB78] text-xs group hover:bg-[#F0BB78]/30 transition-all duration-200 border border-[#F0BB78]/20 hover:border-[#F0BB78]/40"
 													>
-														×
-													</button>
-												</div>
-											);
-										})}
-									</div>
+														<span className="truncate max-w-[120px]">
+															{subj?.Subject || code}
+														</span>
+														<button
+															type="button"
+															onClick={(e) => {
+																e.stopPropagation();
+																handleSubjectToggle(code);
+															}}
+															className="ml-1 text-[#F0BB78]/60 hover:text-red-400 transition-colors opacity-60 group-hover:opacity-100"
+															aria-label={`Remove ${subj?.Subject || code}`}
+														>
+															<span className="text-base leading-none">x</span>
+														</button>
+													</div>
+												);
+											})}
+										</div>
+									)}
 								</div>
 							)}
 						</>
 					)}
 
-					<div className="flex justify-center gap-2">
+					<div className="flex justify-center gap-3 pt-2">
 						<Button
 							type="submit"
-							className="w-full h-9 sm:h-10 text-sm sm:text-base bg-gradient-to-r from-[#543A14] to-[#F0BB78] hover:from-[#543A14]/80 hover:to-[#F0BB78]/80 transition-all duration-300 shadow-lg hover:shadow-[#F0BB78]/25"
+							className="w-full h-11 sm:h-12 text-sm sm:text-base bg-gradient-to-r from-[#543A14] to-[#F0BB78] hover:from-[#543A14]/90 hover:to-[#F0BB78]/90 transition-all duration-300 shadow-lg hover:shadow-[#F0BB78]/30 hover:scale-[1.02] active:scale-[0.98]"
 						>
-							<Sparkles className="w-3 h-3 sm:w-4 sm:h-4 mr-2" />
-							Generate
+							<Sparkles className="w-4 h-4 sm:w-5 sm:h-5 mr-2" />
+							Generate Schedule
 						</Button>
 						<Button
 							type="button"
@@ -659,10 +690,10 @@ export function ScheduleForm({
 									? "Fill all fields to save config"
 									: "Save this class config for later"
 							}
-							className="w-[50%] h-9 sm:h-10 text-sm sm:text-base bg-gradient-to-r from-[#543A14] to-[#F0BB78] hover:from-[#543A14]/80 hover:to-[#F0BB78]/80 transition-all duration-300 shadow-lg hover:shadow-[#F0BB78]/25 flex items-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed"
+							className="w-[45%] h-11 sm:h-12 text-sm sm:text-base bg-white/10 border border-[#F0BB78]/30 text-[#F0BB78] hover:bg-[#F0BB78]/20 hover:border-[#F0BB78]/50 transition-all duration-300 shadow-md hover:shadow-[#F0BB78]/20 hover:scale-[1.02] active:scale-[0.98] flex items-center gap-2 disabled:opacity-40 disabled:cursor-not-allowed disabled:hover:scale-100"
 							onClick={() => setShowSaveModal(true)}
 						>
-							<Save className="w-4 h-4 mr-1" />
+							<Save className="w-4 h-4" />
 							Save
 						</Button>
 					</div>

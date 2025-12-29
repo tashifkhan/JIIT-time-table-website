@@ -441,16 +441,19 @@ export default function HomeContent() {
 				{/* Dropdown for saved configs - always visible above the form */}
 				{Object.keys(savedConfigs).length > 0 && (
 					<div className="mb-4 w-full max-w-xl mx-auto">
-						<div className="bg-white/5 rounded-xl sm:rounded-2xl border border-white/10 shadow-xl overflow-hidden">
+						<div className="bg-white/5 rounded-xl sm:rounded-2xl border border-white/10 shadow-xl overflow-hidden hover:border-[#F0BB78]/20 transition-all duration-300">
 							<button
 								onClick={() => setIsConfigOpen((prev) => !prev)}
-								className="w-full flex items-center justify-between px-6 py-4 bg-transparent hover:bg-white/10 transition-all duration-200 focus:outline-none cursor-pointer select-none"
+								className="w-full flex items-center justify-between px-6 py-4 bg-transparent hover:bg-white/5 transition-all duration-200 focus:outline-none cursor-pointer select-none group"
 							>
-								<span className="text-lg font-semibold text-[#F0BB78]">
+								<span className="text-lg font-semibold text-[#F0BB78] flex items-center gap-2">
 									Load Saved Config
+									<span className="text-xs bg-[#F0BB78]/20 px-2 py-0.5 rounded-full">
+										{Object.keys(savedConfigs).length}
+									</span>
 								</span>
 								<ChevronDown
-									className={`w-6 h-6 text-[#F0BB78] transition-transform duration-300 ${
+									className={`w-5 h-5 text-[#F0BB78] transition-transform duration-300 group-hover:scale-110 ${
 										isConfigOpen ? "rotate-180" : "rotate-0"
 									}`}
 								/>
@@ -469,14 +472,14 @@ export default function HomeContent() {
 										{Object.keys(savedConfigs).map((name) => (
 											<div
 												key={name}
-												className="flex items-center justify-between gap-2"
+												className="flex items-center justify-between gap-2 group/item"
 											>
 												<button
 													onClick={async () => {
 														await handleSelectConfig(name);
 														setIsConfigOpen(false);
 													}}
-													className={`flex-1 text-left px-4 py-2 rounded-lg bg-[#FFF0DC]/10 border border-[#F0BB78]/10 hover:bg-[#F0BB78]/20 text-[#F0BB78] font-medium transition-all duration-200`}
+													className="flex-1 text-left px-4 py-3 rounded-lg bg-[#FFF0DC]/10 border border-[#F0BB78]/10 hover:bg-[#F0BB78]/20 hover:border-[#F0BB78]/30 text-[#F0BB78] font-medium transition-all duration-200 hover:translate-x-1"
 												>
 													{name}
 												</button>
@@ -489,7 +492,7 @@ export default function HomeContent() {
 														});
 														setShowShareDialog(true);
 													}}
-													className="ml-2 p-1 rounded hover:bg-blue-100/20 transition-colors"
+													className="p-2 rounded-lg hover:bg-[#F0BB78]/20 transition-all duration-200 opacity-60 group-hover/item:opacity-100"
 													title="Share config"
 												>
 													<Share2 className="w-4 h-4 text-[#F0BB78]" />
@@ -499,7 +502,7 @@ export default function HomeContent() {
 														e.stopPropagation();
 														handleDeleteConfig(name);
 													}}
-													className="ml-2 p-1 rounded hover:bg-red-100/20 transition-colors"
+													className="p-2 rounded-lg hover:bg-red-500/20 transition-all duration-200 opacity-60 group-hover/item:opacity-100"
 													title="Delete config"
 												>
 													<Trash className="w-4 h-4 text-red-400" />
@@ -511,27 +514,29 @@ export default function HomeContent() {
 							</motion.div>
 						</div>
 					</div>
-				)}{" "}
+				)}
+
 				<motion.div
 					className="flex justify-center w-full"
 					initial={{ opacity: 0, y: 20 }}
 					animate={{ opacity: 1, y: 0 }}
 					transition={{ duration: 0.5, delay: 0.2 }}
 				>
-					<div className="w-full max-w-xl bg-white/5 rounded-xl sm:rounded-2xl border border-white/10 shadow-xl overflow-hidden">
+					<div className="w-full max-w-xl bg-white/5 rounded-xl sm:rounded-2xl border border-white/10 shadow-xl overflow-hidden hover:border-[#F0BB78]/20 transition-all duration-300">
 						<button
 							onClick={() => setIsFormOpen((prev) => !prev)}
-							className="w-full flex items-center justify-between px-6 py-4 bg-transparent hover:bg-white/10 transition-all duration-200 focus:outline-none cursor-pointer select-none"
+							className="w-full flex items-center justify-between px-6 py-4 bg-transparent hover:bg-white/5 transition-all duration-200 focus:outline-none cursor-pointer select-none group"
 						>
-							<span className="text-lg font-semibold text-[#F0BB78]">
-								Schedule Form
+							<span className="text-lg font-semibold text-[#F0BB78] flex items-center gap-2">
+								Create Your Schedule
 							</span>
 							<ChevronDown
-								className={`w-6 h-6 text-[#F0BB78] transition-transform duration-300 ${
+								className={`w-5 h-5 text-[#F0BB78] transition-transform duration-300 group-hover:scale-110 ${
 									isFormOpen ? "rotate-180" : "rotate-0"
 								}`}
 							/>
 						</button>
+
 						<motion.div
 							initial={false}
 							animate={{

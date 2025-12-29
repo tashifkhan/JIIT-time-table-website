@@ -21,8 +21,11 @@ import {
 	Calendar,
 	Users,
 	BookOpen,
-	Check,
 	AlertCircle,
+	Eye,
+	EyeOff,
+	Globe,
+	Loader2,
 } from "lucide-react";
 import UserContext from "../../context/userContext";
 import { useQueryState, parseAsString, parseAsArrayOf } from "nuqs";
@@ -285,6 +288,14 @@ export function ScheduleForm({
 	const [batchError, setBatchError] = useState("");
 	const [showBatchErrorDialog, setShowBatchErrorDialog] = useState(false);
 
+	// Web portal login state
+	const [enrollmentNumber, setEnrollmentNumber] = useState("");
+	const [portalPassword, setPortalPassword] = useState("");
+	const [showPassword, setShowPassword] = useState(false);
+
+	// Input mode: 'manual' or 'portal'
+	const [inputMode, setInputMode] = useState<"manual" | "portal">("manual");
+
 	useEffect(() => {
 		setMapz(mapping);
 	}, [mapping]);
@@ -516,188 +527,315 @@ export function ScheduleForm({
 			</AnimatePresence>
 
 			<Card className="w-full max-w-[95vw] sm:max-w-md p-4 sm:p-6 backdrop-blur-2xl bg-[#FFF0DC]/10 border border-[#F0BB78]/20 shadow-2xl rounded-xl hover:border-[#F0BB78]/30 transition-all duration-300">
-				<form onSubmit={handleSubmit} className="space-y-5 sm:space-y-6">
-					<div className="space-y-2">
-						<Label
-							htmlFor="campus"
-							className="text-white/90 font-medium text-sm sm:text-base flex items-center gap-2 tracking-wide"
-						>
-							<Building2 className="w-4 h-4 text-[#F0BB78]" />
-							Campus
-						</Label>
-						<Select
-							value={campus}
-							onValueChange={(value) => {
-								setCampus(value);
-							}}
-						>
-							<SelectTrigger className="h-10 sm:h-11 text-sm bg-[#FFF0DC]/10 border-[#F0BB78]/20 backdrop-blur-md hover:bg-[#FFF0DC]/20 hover:border-[#F0BB78]/40 focus:border-[#F0BB78]/60 focus:ring-[#F0BB78]/20 transition-all duration-200">
-								<SelectValue placeholder="Select your campus" />
-							</SelectTrigger>
-							<SelectContent className="bg-[#1a1a1a]/95 backdrop-blur-2xl border-[#F0BB78]/20 shadow-xl">
-								{campuses.map((c) => (
-									<SelectItem
-										key={c}
-										value={c}
-										className="hover:bg-[#F0BB78]/20 focus:bg-[#F0BB78]/20 cursor-pointer transition-colors"
-									>
-										Sector {c}
-									</SelectItem>
-								))}
-							</SelectContent>
-						</Select>
-					</div>
+				{/* Mode Toggle */}
+				<div className="flex gap-1 mb-4 p-0.5 bg-white/5 rounded-lg border border-white/10">
+					<button
+						type="button"
+						onClick={() => setInputMode("manual")}
+						className={`flex-1 flex items-center justify-center gap-2 px-3 py-2 rounded-md text-sm font-medium transition-all duration-200 ${
+							inputMode === "manual"
+								? "bg-[#F0BB78]/20 text-[#F0BB78] border border-[#F0BB78]/30"
+								: "text-slate-400 hover:text-white hover:bg-white/5 border border-transparent"
+						}`}
+					>
+						<Building2 className="w-4 h-4" />
+						Manual Entry
+					</button>
+					<button
+						type="button"
+						onClick={() => setInputMode("portal")}
+						className={`flex-1 flex items-center justify-center gap-2 px-3 py-2 rounded-md text-sm font-medium transition-all duration-200 ${
+							inputMode === "portal"
+								? "bg-[#F0BB78]/20 text-[#F0BB78] border border-[#F0BB78]/30"
+								: "text-slate-400 hover:text-white hover:bg-white/5 border border-transparent"
+						}`}
+					>
+						<Globe className="w-4 h-4" />
+						WebPortal
+					</button>
+				</div>
 
-					{campus && typeof campus === "string" && (
-						<>
-							<div className="space-y-2">
-								<Label
-									htmlFor="year"
-									className="text-white/90 font-medium text-sm sm:text-base flex items-center gap-2 tracking-wide"
-								>
-									<Calendar className="w-4 h-4 text-[#F0BB78]" />
-									Year
-								</Label>
-								<Select value={year} onValueChange={setYear}>
-									<SelectTrigger className="h-10 sm:h-11 text-sm bg-[#FFF0DC]/10 border-[#F0BB78]/20 backdrop-blur-md hover:bg-[#FFF0DC]/20 hover:border-[#F0BB78]/40 focus:border-[#F0BB78]/60 focus:ring-[#F0BB78]/20 transition-all duration-200">
-										<SelectValue placeholder="Select your year" />
-									</SelectTrigger>
-									<SelectContent className="bg-[#1a1a1a]/95 backdrop-blur-2xl border-[#F0BB78]/20 shadow-xl">
-										{(campus !== "BCA" ? [1, 2, 3, 4] : [1, 2, 3]).map((yr) => (
-											<SelectItem
-												key={yr}
-												value={yr.toString()}
-												className="hover:bg-[#F0BB78]/20 focus:bg-[#F0BB78]/20 cursor-pointer transition-colors"
-											>
-												Year {yr}
-											</SelectItem>
-										))}
-									</SelectContent>
-								</Select>
-							</div>
+				{/* Manual Entry Mode */}
+				{inputMode === "manual" && (
+					<form onSubmit={handleSubmit} className="space-y-5 sm:space-y-6">
+						<div className="space-y-2">
+							<Label
+								htmlFor="campus"
+								className="text-white/90 font-medium text-sm sm:text-base flex items-center gap-2 tracking-wide"
+							>
+								<Building2 className="w-4 h-4 text-[#F0BB78]" />
+								Campus
+							</Label>
+							<Select
+								value={campus}
+								onValueChange={(value) => {
+									setCampus(value);
+								}}
+							>
+								<SelectTrigger className="h-10 sm:h-11 text-sm bg-[#FFF0DC]/10 border-[#F0BB78]/20 backdrop-blur-md hover:bg-[#FFF0DC]/20 hover:border-[#F0BB78]/40 focus:border-[#F0BB78]/60 focus:ring-[#F0BB78]/20 transition-all duration-200">
+									<SelectValue placeholder="Select your campus" />
+								</SelectTrigger>
+								<SelectContent className="bg-[#1a1a1a]/95 backdrop-blur-2xl border-[#F0BB78]/20 shadow-xl">
+									{campuses.map((c) => (
+										<SelectItem
+											key={c}
+											value={c}
+											className="hover:bg-[#F0BB78]/20 focus:bg-[#F0BB78]/20 cursor-pointer transition-colors"
+										>
+											Sector {c}
+										</SelectItem>
+									))}
+								</SelectContent>
+							</Select>
+						</div>
 
-							<div className="space-y-2">
-								<Label
-									htmlFor="batch"
-									className="text-white/90 font-medium text-sm sm:text-base flex items-center gap-2 tracking-wide"
-								>
-									<Users className="w-4 h-4 text-[#F0BB78]" />
-									Batch
-								</Label>
-								<div className="relative">
-									<Input
-										id="batch"
-										value={batch}
-										onChange={(e) => {
-											const value = e.target.value.toUpperCase();
-											setBatch(value);
-										}}
-										placeholder={`Enter your batch (e.g., ${
-											campus === "62"
-												? "A6"
-												: campus === "128"
-												? "F4"
-												: campus === "BCA"
-												? "BCA1"
-												: "Batch"
-										})`}
-										className={`h-10 sm:h-11 text-sm bg-white/10 border-white/20 backdrop-blur-md hover:bg-white/15 hover:border-[#F0BB78]/40 focus:border-[#F0BB78]/60 focus:ring-[#F0BB78]/20 transition-all duration-200 ${
-											batchError ? "border-red-400/50" : ""
-										}`}
-									/>
-									{batchError && (
-										<AlertCircle className="absolute right-3 top-1/2 -translate-y-1/2 w-4 h-4 text-red-400" />
-									)}
-								</div>
-								{batchError && (
-									<p className="text-red-400 text-xs font-medium bg-red-400/10 border border-red-400/20 rounded px-2 py-1 mt-1 mb-0.5">
-										{batchError}
-									</p>
-								)}
-							</div>
-
-							{typeof year === "string" && year !== "1" && (
+						{campus && typeof campus === "string" && (
+							<>
 								<div className="space-y-2">
-									<Label className="text-white/90 font-medium text-sm sm:text-base flex items-center gap-2 tracking-wide">
-										<BookOpen className="w-4 h-4 text-[#F0BB78]" />
-										Choose Your Subjects
-										{selectedSubjects.length > 0 && (
-											<span className="ml-auto text-xs bg-[#F0BB78]/20 text-[#F0BB78] px-2 py-0.5 rounded-full">
-												{selectedSubjects.length} selected
-											</span>
-										)}
-									</Label>
-									<Button
-										type="button"
-										className="w-full h-10 sm:h-11 text-sm bg-gradient-to-r from-[#543A14] to-[#F0BB78] hover:from-[#543A14]/80 hover:to-[#F0BB78]/80 transition-all duration-300 shadow-lg hover:shadow-[#F0BB78]/25 hover:scale-[1.01]"
-										onClick={() => {
-											setSubjectSearch("");
-											setShowSubjectModal(true);
-										}}
+									<Label
+										htmlFor="year"
+										className="text-white/90 font-medium text-sm sm:text-base flex items-center gap-2 tracking-wide"
 									>
-										{selectedSubjects.length > 0
-											? `Tap to modify selection`
-											: "Tap to select subjects"}
-									</Button>
-									{selectedSubjects.length > 0 && (
-										<div className="flex flex-wrap gap-2 mt-3">
-											{selectedSubjects.map((code) => {
-												const subj = (
-													mapz?.[campus]?.[year]?.subjects ?? []
-												).find((s) => s.Code === code);
-												return (
-													<div
-														key={code}
-														className="flex items-center gap-1 px-2.5 py-1.5 bg-[#F0BB78]/20 rounded-lg text-[#F0BB78] text-xs group hover:bg-[#F0BB78]/30 transition-all duration-200 border border-[#F0BB78]/20 hover:border-[#F0BB78]/40"
+										<Calendar className="w-4 h-4 text-[#F0BB78]" />
+										Year
+									</Label>
+									<Select value={year} onValueChange={setYear}>
+										<SelectTrigger className="h-10 sm:h-11 text-sm bg-[#FFF0DC]/10 border-[#F0BB78]/20 backdrop-blur-md hover:bg-[#FFF0DC]/20 hover:border-[#F0BB78]/40 focus:border-[#F0BB78]/60 focus:ring-[#F0BB78]/20 transition-all duration-200">
+											<SelectValue placeholder="Select your year" />
+										</SelectTrigger>
+										<SelectContent className="bg-[#1a1a1a]/95 backdrop-blur-2xl border-[#F0BB78]/20 shadow-xl">
+											{(campus !== "BCA" ? [1, 2, 3, 4] : [1, 2, 3]).map(
+												(yr) => (
+													<SelectItem
+														key={yr}
+														value={yr.toString()}
+														className="hover:bg-[#F0BB78]/20 focus:bg-[#F0BB78]/20 cursor-pointer transition-colors"
 													>
-														<span className="truncate max-w-[120px]">
-															{subj?.Subject || code}
-														</span>
-														<button
-															type="button"
-															onClick={(e) => {
-																e.stopPropagation();
-																handleSubjectToggle(code);
-															}}
-															className="ml-1 text-[#F0BB78]/60 hover:text-red-400 transition-colors opacity-60 group-hover:opacity-100"
-															aria-label={`Remove ${subj?.Subject || code}`}
-														>
-															<span className="text-base leading-none">x</span>
-														</button>
-													</div>
-												);
-											})}
-										</div>
+														Year {yr}
+													</SelectItem>
+												)
+											)}
+										</SelectContent>
+									</Select>
+								</div>
+
+								<div className="space-y-2">
+									<Label
+										htmlFor="batch"
+										className="text-white/90 font-medium text-sm sm:text-base flex items-center gap-2 tracking-wide"
+									>
+										<Users className="w-4 h-4 text-[#F0BB78]" />
+										Batch
+									</Label>
+									<div className="relative">
+										<Input
+											id="batch"
+											value={batch}
+											onChange={(e) => {
+												const value = e.target.value.toUpperCase();
+												setBatch(value);
+											}}
+											placeholder={`Enter your batch (e.g., ${
+												campus === "62"
+													? "A6"
+													: campus === "128"
+													? "F4"
+													: campus === "BCA"
+													? "BCA1"
+													: "Batch"
+											})`}
+											className={`h-10 sm:h-11 text-sm bg-white/10 border-white/20 backdrop-blur-md hover:bg-white/15 hover:border-[#F0BB78]/40 focus:border-[#F0BB78]/60 focus:ring-[#F0BB78]/20 transition-all duration-200 ${
+												batchError ? "border-red-400/50" : ""
+											}`}
+										/>
+										{batchError && (
+											<AlertCircle className="absolute right-3 top-1/2 -translate-y-1/2 w-4 h-4 text-red-400" />
+										)}
+									</div>
+									{batchError && (
+										<p className="text-red-400 text-xs font-medium bg-red-400/10 border border-red-400/20 rounded px-2 py-1 mt-1 mb-0.5">
+											{batchError}
+										</p>
 									)}
 								</div>
-							)}
-						</>
-					)}
 
-					<div className="flex justify-center gap-3 pt-2">
-						<Button
-							type="submit"
-							className="w-full h-11 sm:h-12 text-sm sm:text-base bg-gradient-to-r from-[#543A14] to-[#F0BB78] hover:from-[#543A14]/90 hover:to-[#F0BB78]/90 transition-all duration-300 shadow-lg hover:shadow-[#F0BB78]/30 hover:scale-[1.02] active:scale-[0.98]"
-						>
-							<Sparkles className="w-4 h-4 sm:w-5 sm:h-5 mr-2" />
-							Generate Schedule
-						</Button>
+								{typeof year === "string" && year !== "1" && (
+									<div className="space-y-2">
+										<Label className="text-white/90 font-medium text-sm sm:text-base flex items-center gap-2 tracking-wide">
+											<BookOpen className="w-4 h-4 text-[#F0BB78]" />
+											Choose Your Subjects
+											{selectedSubjects.length > 0 && (
+												<span className="ml-auto text-xs bg-[#F0BB78]/20 text-[#F0BB78] px-2 py-0.5 rounded-full">
+													{selectedSubjects.length} selected
+												</span>
+											)}
+										</Label>
+										<Button
+											type="button"
+											className="w-full h-10 sm:h-11 text-sm bg-gradient-to-r from-[#543A14] to-[#F0BB78] hover:from-[#543A14]/80 hover:to-[#F0BB78]/80 transition-all duration-300 shadow-lg hover:shadow-[#F0BB78]/25 hover:scale-[1.01]"
+											onClick={() => {
+												setSubjectSearch("");
+												setShowSubjectModal(true);
+											}}
+										>
+											{selectedSubjects.length > 0
+												? `Tap to modify selection`
+												: "Tap to select subjects"}
+										</Button>
+										{selectedSubjects.length > 0 && (
+											<div className="flex flex-wrap gap-2 mt-3">
+												{selectedSubjects.map((code) => {
+													const subj = (
+														mapz?.[campus]?.[year]?.subjects ?? []
+													).find((s) => s.Code === code);
+													return (
+														<div
+															key={code}
+															className="flex items-center gap-1 px-2.5 py-1.5 bg-[#F0BB78]/20 rounded-lg text-[#F0BB78] text-xs group hover:bg-[#F0BB78]/30 transition-all duration-200 border border-[#F0BB78]/20 hover:border-[#F0BB78]/40"
+														>
+															<span className="truncate max-w-[120px]">
+																{subj?.Subject || code}
+															</span>
+															<button
+																type="button"
+																onClick={(e) => {
+																	e.stopPropagation();
+																	handleSubjectToggle(code);
+																}}
+																className="ml-1 text-[#F0BB78]/60 hover:text-red-400 transition-colors opacity-60 group-hover:opacity-100"
+																aria-label={`Remove ${subj?.Subject || code}`}
+															>
+																<span className="text-base leading-none">
+																	x
+																</span>
+															</button>
+														</div>
+													);
+												})}
+											</div>
+										)}
+									</div>
+								)}
+							</>
+						)}
+
+						<div className="flex justify-center gap-3 pt-2">
+							<Button
+								type="submit"
+								className="w-full h-11 sm:h-12 text-sm sm:text-base bg-gradient-to-r from-[#543A14] to-[#F0BB78] hover:from-[#543A14]/90 hover:to-[#F0BB78]/90 transition-all duration-300 shadow-lg hover:shadow-[#F0BB78]/30 hover:scale-[1.02] active:scale-[0.98]"
+							>
+								<Sparkles className="w-4 h-4 sm:w-5 sm:h-5 mr-2" />
+								Generate Schedule
+							</Button>
+							<Button
+								type="button"
+								disabled={!isFormValid}
+								title={
+									!isFormValid
+										? "Fill all fields to save config"
+										: "Save this class config for later"
+								}
+								className="w-[45%] h-11 sm:h-12 text-sm sm:text-base bg-white/10 border border-[#F0BB78]/30 text-[#F0BB78] hover:bg-[#F0BB78]/20 hover:border-[#F0BB78]/50 transition-all duration-300 shadow-md hover:shadow-[#F0BB78]/20 hover:scale-[1.02] active:scale-[0.98] flex items-center gap-2 disabled:opacity-40 disabled:cursor-not-allowed disabled:hover:scale-100"
+								onClick={() => setShowSaveModal(true)}
+							>
+								<Save className="w-4 h-4" />
+								Save
+							</Button>
+						</div>
+					</form>
+				)}
+
+				{/* WebPortal Mode */}
+				{inputMode === "portal" && (
+					<div className="space-y-5 sm:space-y-6">
+						{/* In Progress Badge */}
+						<div className="flex justify-center">
+							<div className="flex items-center gap-2 px-4 py-2 bg-amber-500/20 border border-amber-500/30 rounded-full">
+								<Loader2 className="w-4 h-4 text-amber-400 animate-spin" />
+								<span className="text-sm font-medium text-amber-400">
+									Feature In Progress
+								</span>
+							</div>
+						</div>
+
+						<p className="text-xs text-slate-400 text-center">
+							Automatically fetch your campus, batch, and enrolled subjects from
+							the JIIT WebPortal.
+						</p>
+
+						{/* Enrollment Number */}
+						<div className="space-y-2">
+							<Label
+								htmlFor="enrollment-number"
+								className="text-white/90 font-medium text-sm sm:text-base flex items-center gap-2 tracking-wide"
+							>
+								<Users className="w-4 h-4 text-[#F0BB78]" />
+								Enrollment Number
+							</Label>
+							<Input
+								id="enrollment-number"
+								type="text"
+								placeholder="e.g., 21103001"
+								value={enrollmentNumber}
+								onChange={(e) => setEnrollmentNumber(e.target.value)}
+								className="h-10 sm:h-11 text-sm bg-white/10 border-white/20 backdrop-blur-md hover:bg-white/15 hover:border-[#F0BB78]/40 focus:border-[#F0BB78]/60 focus:ring-[#F0BB78]/20 transition-all duration-200"
+								disabled
+							/>
+						</div>
+
+						{/* Password */}
+						<div className="space-y-2">
+							<Label
+								htmlFor="portal-password"
+								className="text-white/90 font-medium text-sm sm:text-base flex items-center gap-2 tracking-wide"
+							>
+								<AlertCircle className="w-4 h-4 text-[#F0BB78]" />
+								Password
+							</Label>
+							<div className="relative">
+								<Input
+									id="portal-password"
+									type={showPassword ? "text" : "password"}
+									placeholder="Your WebPortal password"
+									value={portalPassword}
+									onChange={(e) => setPortalPassword(e.target.value)}
+									className="h-10 sm:h-11 text-sm bg-white/10 border-white/20 backdrop-blur-md hover:bg-white/15 hover:border-[#F0BB78]/40 focus:border-[#F0BB78]/60 focus:ring-[#F0BB78]/20 transition-all duration-200 pr-10"
+									disabled
+								/>
+								<button
+									type="button"
+									onClick={() => setShowPassword(!showPassword)}
+									className="absolute right-3 top-1/2 -translate-y-1/2 p-1 rounded-md hover:bg-white/10 transition-colors text-slate-400 hover:text-[#F0BB78]"
+									title={showPassword ? "Hide password" : "Show password"}
+								>
+									{showPassword ? (
+										<EyeOff className="w-4 h-4" />
+									) : (
+										<Eye className="w-4 h-4" />
+									)}
+								</button>
+							</div>
+						</div>
+
+						{/* Coming Soon Notice */}
+						<div className="bg-amber-500/10 border border-amber-500/20 rounded-lg p-3">
+							<p className="text-xs text-amber-400/90 text-center">
+								This feature is currently under development. Stay tuned for
+								updates!
+							</p>
+						</div>
+
+						{/* Fetch Button */}
 						<Button
 							type="button"
-							disabled={!isFormValid}
-							title={
-								!isFormValid
-									? "Fill all fields to save config"
-									: "Save this class config for later"
-							}
-							className="w-[45%] h-11 sm:h-12 text-sm sm:text-base bg-white/10 border border-[#F0BB78]/30 text-[#F0BB78] hover:bg-[#F0BB78]/20 hover:border-[#F0BB78]/50 transition-all duration-300 shadow-md hover:shadow-[#F0BB78]/20 hover:scale-[1.02] active:scale-[0.98] flex items-center gap-2 disabled:opacity-40 disabled:cursor-not-allowed disabled:hover:scale-100"
-							onClick={() => setShowSaveModal(true)}
+							disabled
+							className="w-full h-11 sm:h-12 text-sm sm:text-base bg-gradient-to-r from-[#543A14] to-[#F0BB78] hover:from-[#543A14]/90 hover:to-[#F0BB78]/90 transition-all duration-300 shadow-lg hover:shadow-[#F0BB78]/30 disabled:opacity-50 disabled:cursor-not-allowed"
 						>
-							<Save className="w-4 h-4" />
-							Save
+							<Globe className="w-4 h-4 sm:w-5 sm:h-5 mr-2" />
+							Fetch and Generate Schedule
 						</Button>
 					</div>
-				</form>
+				)}
 			</Card>
 
 			{/* Modal for saving config */}

@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useContext, useState, useMemo, useEffect } from "react";
+import React, { useContext, useState, useMemo, useEffect, useRef } from "react";
 import {
 	callTimeTableCreator,
 	usePyodideStatus,
@@ -82,6 +82,31 @@ export default function HomeContent() {
 		campus: string;
 		selectedSubjects: string[];
 	} | null>(null);
+
+	// Auto-scroll logic
+	const scheduleRef = useRef<HTMLDivElement>(null);
+	const [shouldAutoScroll, setShouldAutoScroll] = useState(false);
+
+	// Effect to handle scrolling
+	useEffect(() => {
+		if (
+			shouldAutoScroll &&
+			schedule &&
+			Object.keys(schedule).length > 0 &&
+			scheduleRef.current
+		) {
+			// Delay scroll to allow animation to complete
+			const timer = setTimeout(() => {
+				if (scheduleRef.current) {
+					const rect = scheduleRef.current.getBoundingClientRect();
+					const scrollTop = window.scrollY + rect.top - 200; // 200px offset from top
+					window.scrollTo({ top: scrollTop, behavior: "smooth" });
+					setShouldAutoScroll(false);
+				}
+			}, 100);
+			return () => clearTimeout(timer);
+		}
+	}, [schedule, shouldAutoScroll]);
 
 	// New state to track pending auto-generation
 	const [pendingAutoGeneration, setPendingAutoGeneration] = React.useState<{
@@ -205,6 +230,7 @@ export default function HomeContent() {
 			} else {
 				const plainSchedule = JSON.parse(JSON.stringify(Schedule));
 				setSchedule(plainSchedule);
+				setShouldAutoScroll(true);
 			}
 			localStorage.setItem(
 				"cachedScheduleParams",
@@ -532,18 +558,20 @@ export default function HomeContent() {
 				</motion.div>
 				{schedule && Object.keys(schedule).length > 0 && (
 					<>
-						<motion.div
-							className="mt-6 sm:mt-8 backdrop-blur-lg bg-white/5 rounded-xl sm:rounded-2xl p-0 sm:p-6 border border-white/10 shadow-xl overflow-x-auto"
-							initial={{ opacity: 0, scale: 0.95 }}
-							animate={{ opacity: 1, scale: 1 }}
-							transition={{ duration: 0.5 }}
-						>
-							<p className="text-sm text-slate-300/60 p-4 text-center">
-								Tap on any time slot to edit it, or click the + icon in each
-								day's title to add new events.
-							</p>
-							<ScheduleDisplay schedule={schedule} />
-						</motion.div>
+						<div ref={scheduleRef} className="scroll-mt-48">
+							<motion.div
+								className="mt-6 sm:mt-8 backdrop-blur-lg bg-white/5 rounded-xl sm:rounded-2xl p-0 sm:p-6 border border-white/10 shadow-xl overflow-x-auto"
+								initial={{ opacity: 0, scale: 0.95 }}
+								animate={{ opacity: 1, scale: 1 }}
+								transition={{ duration: 0.5 }}
+							>
+								<p className="text-sm text-slate-300/60 p-4 text-center">
+									Tap on any time slot to edit it, or click the + icon in each
+									day's title to add new events.
+								</p>
+								<ScheduleDisplay schedule={schedule} />
+							</motion.div>
+						</div>
 						<div className="flex justify-center gap-4">
 							<motion.button
 								onClick={() => {

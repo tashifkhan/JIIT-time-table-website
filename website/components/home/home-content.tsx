@@ -422,7 +422,6 @@ export default function HomeContent() {
 				<div className="absolute bottom-[-5%] right-[-5%] w-48 sm:w-72 h-48 sm:h-72 bg-[#543A14]/30 rounded-full blur-[96px] sm:blur-[128px]" />
 			</div>
 			<div className="relative z-10 flex flex-col items-center justify-start max-w-7xl mx-auto space-y-6 sm:space-y-8">
-				<NoticeBanner />
 				<motion.div
 					className="text-center space-y-3 sm:space-y-4"
 					initial={{ opacity: 0, y: 20 }}
@@ -437,6 +436,7 @@ export default function HomeContent() {
 					<p className="text-base sm:text-lg text-slate-300/80 px-4">
 						Create your personalized class schedule in minutes
 					</p>
+					<NoticeBanner />
 				</motion.div>
 				{/* Dropdown for saved configs - always visible above the form */}
 				{Object.keys(savedConfigs).length > 0 && (

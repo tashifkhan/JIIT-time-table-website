@@ -100,22 +100,28 @@ export default function Navbar() {
 		<>
 			{/* Desktop Sidebar */}
 			<motion.nav
-				className={`hidden md:flex flex-col fixed left-0 top-0 h-screen w-64 bg-[#0a0a0a]/95 backdrop-blur-xl border-r border-white/10 z-50 transition-all duration-300`}
+				className="hidden md:flex flex-col fixed left-0 top-0 h-screen w-64 bg-gradient-to-b from-[#0a0a0a] via-[#0a0a0a] to-[#0f0f0f] backdrop-blur-xl border-r border-white/5 z-50"
 				initial={{ x: -100, opacity: 0 }}
 				animate={{ x: 0, opacity: 1 }}
-				transition={{ duration: 0.5 }}
+				transition={{ duration: 0.5, ease: "easeOut" }}
 			>
 				<div className="p-6 flex flex-col h-full">
 					<div className="flex justify-center items-center gap-3 mb-8 px-2">
-						<Image
-							src="/icon.png"
-							alt="JIIT TimeTable"
-							width={125}
-							height={125}
-						/>
+						<motion.div
+							whileHover={{ scale: 1.05 }}
+							transition={{ type: "spring", stiffness: 400, damping: 17 }}
+						>
+							<Image
+								src="/icon.png"
+								alt="JIIT TimeTable"
+								width={125}
+								height={125}
+								className="drop-shadow-lg"
+							/>
+						</motion.div>
 					</div>
 
-					<div className="flex-1 space-y-2">
+					<div className="flex-1 space-y-1.5">
 						{tabs.map((tab) => {
 							const isActive =
 								tab.path === "/"
@@ -127,14 +133,14 @@ export default function Navbar() {
 									href={tab.path}
 									className={`relative flex items-center gap-3 px-4 py-3 rounded-xl transition-all duration-200 group overflow-hidden ${
 										isActive
-											? "text-[#F0BB78] bg-[#F0BB78]/10"
+											? "text-[#F0BB78]"
 											: "text-slate-400 hover:text-slate-200 hover:bg-white/5"
 									}`}
 								>
 									{isActive && (
 										<motion.div
 											layoutId="activeTab"
-											className="absolute inset-0 bg-[#F0BB78]/10 rounded-xl"
+											className="absolute inset-0 bg-gradient-to-r from-[#F0BB78]/15 to-[#F0BB78]/5 rounded-xl border border-[#F0BB78]/10"
 											initial={false}
 											transition={{
 												type: "spring",
@@ -144,17 +150,17 @@ export default function Navbar() {
 										/>
 									)}
 									<tab.icon
-										className={`w-5 h-5 relative z-10 transition-colors ${
+										className={`w-5 h-5 relative z-10 transition-all duration-200 ${
 											isActive
 												? "text-[#F0BB78]"
-												: "text-slate-400 group-hover:text-slate-200"
+												: "text-slate-400 group-hover:text-slate-200 group-hover:scale-110"
 										}`}
 									/>
 									<span className="font-medium relative z-10">{tab.label}</span>
 									{isActive && (
 										<motion.div
 											layoutId="activeIndicator"
-											className="absolute right-0 w-1 h-8 bg-[#F0BB78] rounded-l-full"
+											className="absolute right-0 w-1 h-6 bg-gradient-to-b from-[#F0BB78] to-[#d4943d] rounded-l-full shadow-lg shadow-[#F0BB78]/30"
 										/>
 									)}
 								</Link>
@@ -162,15 +168,15 @@ export default function Navbar() {
 						})}
 					</div>
 
-					<div className="mt-auto px-4 pb-6">
+					<div className="mt-auto pt-4 border-t border-white/5">
 						<Link
 							href="https://github.com/tashifkhan/JIIT-time-table-website"
 							target="_blank"
 							rel="noopener noreferrer"
 							className="flex items-center gap-3 px-4 py-3 rounded-xl text-slate-400 hover:text-slate-200 hover:bg-white/5 transition-all duration-200 group"
 						>
-							<Github className="w-5 h-5 transition-colors text-slate-400 group-hover:text-slate-200" />
-							<span className="font-medium">GitHub</span>
+							<Github className="w-5 h-5 transition-all duration-200 text-slate-400 group-hover:text-slate-200 group-hover:scale-110" />
+							<span className="font-medium">Star on GitHub</span>
 						</Link>
 					</div>
 				</div>

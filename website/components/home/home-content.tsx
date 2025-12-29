@@ -436,8 +436,8 @@ export default function HomeContent() {
 					<p className="text-base sm:text-lg text-slate-300/80 px-4">
 						Create your personalized class schedule in minutes
 					</p>
-					<NoticeBanner />
 				</motion.div>
+				<NoticeBanner />
 				{/* Dropdown for saved configs - always visible above the form */}
 				{Object.keys(savedConfigs).length > 0 && (
 					<div className="mb-4 w-full max-w-xl mx-auto">

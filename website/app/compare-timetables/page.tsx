@@ -7,7 +7,6 @@ import {
 	Eye,
 	Clock,
 	Users,
-	Calendar,
 	User,
 	Sparkles,
 } from "lucide-react";
@@ -58,6 +57,8 @@ function ConfigForm({
 	onDeleteConfig,
 	isConfigOpen,
 	setIsConfigOpen,
+	isFormExpanded,
+	setIsFormExpanded,
 }: {
 	config: any;
 	configIndex: 1 | 2;
@@ -73,6 +74,8 @@ function ConfigForm({
 	onDeleteConfig: (name: string) => void;
 	isConfigOpen: boolean;
 	setIsConfigOpen: React.Dispatch<React.SetStateAction<boolean>>;
+	isFormExpanded: boolean;
+	setIsFormExpanded: React.Dispatch<React.SetStateAction<boolean>>;
 }) {
 	const personLabel = configIndex === 1 ? "Your Schedule" : "Friend's Schedule";
 	const personIcon = configIndex === 1 ? User : Users;
@@ -80,13 +83,16 @@ function ConfigForm({
 
 	return (
 		<div className="flex-1 bg-white/5 backdrop-blur-xl rounded-xl sm:rounded-2xl border border-white/10 shadow-xl overflow-hidden flex flex-col">
-			{/* Header with icon */}
-			<div className="bg-gradient-to-r from-[#F0BB78]/10 to-[#543A14]/10 px-6 py-4 border-b border-white/10">
+			{/* Header with icon - Clickable to collapse/expand */}
+			<button
+				onClick={() => setIsFormExpanded((prev) => !prev)}
+				className="w-full bg-gradient-to-r from-[#F0BB78]/10 to-[#543A14]/10 px-6 py-4 border-b border-white/10 flex items-center justify-between cursor-pointer hover:from-[#F0BB78]/15 hover:to-[#543A14]/15 transition-all"
+			>
 				<div className="flex items-center gap-3">
 					<div className="w-10 h-10 rounded-full bg-[#F0BB78]/20 border border-[#F0BB78]/30 flex items-center justify-center shrink-0">
 						<Icon className="w-5 h-5 text-[#F0BB78]" />
 					</div>
-					<div>
+					<div className="text-left">
 						<h2 className="text-lg sm:text-xl font-semibold text-[#F0BB78]">
 							{personLabel}
 						</h2>
@@ -103,221 +109,247 @@ function ConfigForm({
 						</p>
 					</div>
 				</div>
-			</div>
+				<ChevronDown
+					className={`w-5 h-5 text-[#F0BB78] transition-transform duration-300 ${
+						isFormExpanded ? "rotate-180" : "rotate-0"
+					}`}
+				/>
+			</button>
 
-			<div className="p-6 space-y-5 flex-1 flex flex-col">
-				{/* Saved Configs Dropdown */}
-				{Object.keys(savedConfigs).length > 0 && (
-					<div className="bg-white/5 rounded-lg border border-white/10 overflow-hidden shrink-0">
-						<button
-							onClick={() => setIsConfigOpen((prev) => !prev)}
-							className="w-full flex items-center justify-between px-4 py-3 bg-transparent hover:bg-white/5 transition-all duration-200 focus:outline-none cursor-pointer select-none"
-						>
-							<span className="text-sm font-medium text-[#F0BB78]">
-								Load Saved Config
-							</span>
-							<ChevronDown
-								className={`w-4 h-4 text-[#F0BB78] transition-transform duration-300 ${
-									isConfigOpen ? "rotate-180" : "rotate-0"
-								}`}
-							/>
-						</button>
-						<AnimatePresence>
-							{isConfigOpen && (
-								<motion.div
-									initial={{ height: 0, opacity: 0 }}
-									animate={{ height: "auto", opacity: 1 }}
-									exit={{ height: 0, opacity: 0 }}
-									transition={{ duration: 0.2 }}
-									className="overflow-hidden"
-								>
-									<div className="px-4 pb-3 pt-1 flex flex-col gap-2 border-t border-white/5">
-										{Object.keys(savedConfigs).map((name) => (
-											<div
-												key={name}
-												className="flex items-center justify-between gap-2"
+			<AnimatePresence>
+				{isFormExpanded && (
+					<motion.div
+						initial={{ height: 0, opacity: 0 }}
+						animate={{ height: "auto", opacity: 1 }}
+						exit={{ height: 0, opacity: 0 }}
+						transition={{ duration: 0.3 }}
+						className="overflow-hidden"
+					>
+						<div className="p-6 space-y-5 flex-1 flex flex-col">
+							{/* Saved Configs Dropdown */}
+							{Object.keys(savedConfigs).length > 0 && (
+								<div className="bg-white/5 rounded-lg border border-white/10 overflow-hidden shrink-0">
+									<button
+										onClick={() => setIsConfigOpen((prev) => !prev)}
+										className="w-full flex items-center justify-between px-4 py-3 bg-transparent hover:bg-white/5 transition-all duration-200 focus:outline-none cursor-pointer select-none"
+									>
+										<span className="text-sm font-medium text-[#F0BB78]">
+											Load Saved Config
+										</span>
+										<ChevronDown
+											className={`w-4 h-4 text-[#F0BB78] transition-transform duration-300 ${
+												isConfigOpen ? "rotate-180" : "rotate-0"
+											}`}
+										/>
+									</button>
+									<AnimatePresence>
+										{isConfigOpen && (
+											<motion.div
+												initial={{ height: 0, opacity: 0 }}
+												animate={{ height: "auto", opacity: 1 }}
+												exit={{ height: 0, opacity: 0 }}
+												transition={{ duration: 0.2 }}
+												className="overflow-hidden"
 											>
-												<button
-													onClick={() => onSelectConfig(configIndex, name)}
-													className="flex-1 text-left px-3 py-2 rounded-lg bg-[#FFF0DC]/10 border border-[#F0BB78]/10 hover:bg-[#F0BB78]/20 text-[#F0BB78] text-sm font-medium transition-all duration-200 truncate"
-												>
-													{name}
-												</button>
-												<button
-													onClick={(e) => {
-														e.stopPropagation();
-														onDeleteConfig(name);
-													}}
-													className="p-2 rounded-lg hover:bg-red-500/10 text-red-400 hover:text-red-300 transition-colors shrink-0"
-													title="Delete config"
-												>
-													<Trash className="w-3.5 h-3.5" />
-												</button>
-											</div>
-										))}
-									</div>
-								</motion.div>
-							)}
-						</AnimatePresence>
-					</div>
-				)}
-
-				{/* Form Fields */}
-				<div className="space-y-4">
-					<div className="space-y-2">
-						<Label className="text-white/90 font-medium text-sm">Campus</Label>
-						<Select
-							value={config.campus}
-							onValueChange={(value) =>
-								onConfigChange(configIndex, "campus", value)
-							}
-						>
-							<SelectTrigger className="h-10 text-sm bg-[#FFF0DC]/10 border-[#F0BB78]/20 backdrop-blur-md hover:bg-[#FFF0DC]/15 transition-all text-white">
-								<SelectValue placeholder="Select campus" />
-							</SelectTrigger>
-							<SelectContent className="bg-[#131010]/95 backdrop-blur-2xl border-[#F0BB78]/20 text-white">
-								{Object.keys(mappings).map((campus) => (
-									<SelectItem
-										key={campus}
-										value={campus}
-										className="focus:bg-[#F0BB78]/20 focus:text-white"
-									>
-										{campus === "62"
-											? "Campus 62"
-											: campus === "128"
-											? "Campus 128"
-											: campus}
-									</SelectItem>
-								))}
-							</SelectContent>
-						</Select>
-					</div>
-
-					<div className="space-y-2">
-						<Label className="text-white/90 font-medium text-sm">Year</Label>
-						<Select
-							value={config.year}
-							onValueChange={(value) =>
-								onConfigChange(configIndex, "year", value)
-							}
-						>
-							<SelectTrigger className="h-10 text-sm bg-[#FFF0DC]/10 border-[#F0BB78]/20 backdrop-blur-md hover:bg-[#FFF0DC]/15 transition-all text-white">
-								<SelectValue placeholder="Select year" />
-							</SelectTrigger>
-							<SelectContent className="bg-[#131010]/95 backdrop-blur-2xl border-[#F0BB78]/20 text-white">
-								<SelectItem
-									value="1"
-									className="focus:bg-[#F0BB78]/20 focus:text-white"
-								>
-									1st Year
-								</SelectItem>
-								<SelectItem
-									value="2"
-									className="focus:bg-[#F0BB78]/20 focus:text-white"
-								>
-									2nd Year
-								</SelectItem>
-								<SelectItem
-									value="3"
-									className="focus:bg-[#F0BB78]/20 focus:text-white"
-								>
-									3rd Year
-								</SelectItem>
-								{config.campus !== "BCA" && (
-									<SelectItem
-										value="4"
-										className="focus:bg-[#F0BB78]/20 focus:text-white"
-									>
-										4th Year
-									</SelectItem>
-								)}
-							</SelectContent>
-						</Select>
-					</div>
-
-					<div className="space-y-2">
-						<Label className="text-white/90 font-medium text-sm">Batch</Label>
-						<Input
-							type="text"
-							value={config.batch}
-							onChange={(e) =>
-								onConfigChange(
-									configIndex,
-									"batch",
-									e.target.value.toUpperCase()
-								)
-							}
-							className="h-10 text-sm bg-white/10 border-white/20 backdrop-blur-md hover:bg-white/15 focus:border-[#F0BB78]/50 focus:ring-[#F0BB78]/50 transition-all text-white placeholder:text-white/40"
-							placeholder="Enter batch (e.g. A6 or F4)"
-						/>
-					</div>
-
-					{/* Electives UI */}
-					<AnimatePresence>
-						{config.year && config.year !== "1" && (
-							<motion.div
-								initial={{ opacity: 0, height: 0 }}
-								animate={{ opacity: 1, height: "auto" }}
-								exit={{ opacity: 0, height: 0 }}
-								className="space-y-3 pt-1"
-							>
-								<Label className="text-white/90 font-medium text-sm">
-									Choose Your Subjects
-								</Label>
-								<Button
-									type="button"
-									className="w-full h-10 text-sm bg-gradient-to-r from-[#543A14] to-[#F0BB78] hover:from-[#543A14]/80 hover:to-[#F0BB78]/80 transition-all duration-300 shadow-lg hover:shadow-[#F0BB78]/25 rounded-lg border border-[#F0BB78]/20"
-									onClick={() => setShowSubjectModal(true)}
-								>
-									{selectedSubjects.length > 0
-										? `Selected: ${selectedSubjects.length} subject(s)`
-										: "Select Subjects"}
-								</Button>
-								{selectedSubjects.length > 0 && (
-									<div className="flex flex-wrap gap-2">
-										{selectedSubjects.map((code) => {
-											const subj = getSubjects(config.campus, config.year).find(
-												(s) => s.Code === code
-											);
-											return (
-												<div
-													key={code}
-													className="flex items-center gap-2 px-3 py-1.5 bg-[#F0BB78]/20 rounded-lg text-[#F0BB78] text-xs group hover:bg-[#F0BB78]/30 transition-colors border border-[#F0BB78]/20"
-												>
-													<span className="truncate max-w-[100px] font-medium">
-														{subj?.Subject || code}
-													</span>
-													<button
-														type="button"
-														onClick={(e) => {
-															e.stopPropagation();
-															setSelectedSubjects((prev) =>
-																prev.filter((c) => c !== code)
-															);
-														}}
-														className="text-[#F0BB78]/60 hover:text-red-400 transition-colors text-sm font-bold"
-														aria-label={`Remove ${subj?.Subject || code}`}
-													>
-														×
-													</button>
+												<div className="px-4 pb-3 pt-1 flex flex-col gap-2 border-t border-white/5">
+													{Object.keys(savedConfigs).map((name) => (
+														<div
+															key={name}
+															className="flex items-center justify-between gap-2"
+														>
+															<button
+																onClick={() =>
+																	onSelectConfig(configIndex, name)
+																}
+																className="flex-1 text-left px-3 py-2 rounded-lg bg-[#FFF0DC]/10 border border-[#F0BB78]/10 hover:bg-[#F0BB78]/20 text-[#F0BB78] text-sm font-medium transition-all duration-200 truncate"
+															>
+																{name}
+															</button>
+															<button
+																onClick={(e) => {
+																	e.stopPropagation();
+																	onDeleteConfig(name);
+																}}
+																className="p-2 rounded-lg hover:bg-red-500/10 text-red-400 hover:text-red-300 transition-colors shrink-0"
+																title="Delete config"
+															>
+																<Trash className="w-3.5 h-3.5" />
+															</button>
+														</div>
+													))}
 												</div>
-											);
-										})}
-									</div>
-								)}
-								<SubjectSelector
-									subjects={getSubjects(config.campus, config.year)}
-									selectedSubjects={selectedSubjects}
-									setSelectedSubjects={setSelectedSubjects}
-									open={showSubjectModal}
-									setOpen={setShowSubjectModal}
-									year={config.year}
-								/>
-							</motion.div>
-						)}
-					</AnimatePresence>
-				</div>
-			</div>
+											</motion.div>
+										)}
+									</AnimatePresence>
+								</div>
+							)}
+
+							{/* Form Fields */}
+							<div className="space-y-4">
+								<div className="space-y-2">
+									<Label className="text-white/90 font-medium text-sm">
+										Campus
+									</Label>
+									<Select
+										value={config.campus}
+										onValueChange={(value) =>
+											onConfigChange(configIndex, "campus", value)
+										}
+									>
+										<SelectTrigger className="h-10 text-sm bg-[#FFF0DC]/10 border-[#F0BB78]/20 backdrop-blur-md hover:bg-[#FFF0DC]/15 transition-all text-white">
+											<SelectValue placeholder="Select campus" />
+										</SelectTrigger>
+										<SelectContent className="bg-[#131010]/95 backdrop-blur-2xl border-[#F0BB78]/20 text-white">
+											{Object.keys(mappings).map((campus) => (
+												<SelectItem
+													key={campus}
+													value={campus}
+													className="focus:bg-[#F0BB78]/20 focus:text-white"
+												>
+													{campus === "62"
+														? "Campus 62"
+														: campus === "128"
+														? "Campus 128"
+														: campus}
+												</SelectItem>
+											))}
+										</SelectContent>
+									</Select>
+								</div>
+
+								<div className="space-y-2">
+									<Label className="text-white/90 font-medium text-sm">
+										Year
+									</Label>
+									<Select
+										value={config.year}
+										onValueChange={(value) =>
+											onConfigChange(configIndex, "year", value)
+										}
+									>
+										<SelectTrigger className="h-10 text-sm bg-[#FFF0DC]/10 border-[#F0BB78]/20 backdrop-blur-md hover:bg-[#FFF0DC]/15 transition-all text-white">
+											<SelectValue placeholder="Select year" />
+										</SelectTrigger>
+										<SelectContent className="bg-[#131010]/95 backdrop-blur-2xl border-[#F0BB78]/20 text-white">
+											<SelectItem
+												value="1"
+												className="focus:bg-[#F0BB78]/20 focus:text-white"
+											>
+												1st Year
+											</SelectItem>
+											<SelectItem
+												value="2"
+												className="focus:bg-[#F0BB78]/20 focus:text-white"
+											>
+												2nd Year
+											</SelectItem>
+											<SelectItem
+												value="3"
+												className="focus:bg-[#F0BB78]/20 focus:text-white"
+											>
+												3rd Year
+											</SelectItem>
+											{config.campus !== "BCA" && (
+												<SelectItem
+													value="4"
+													className="focus:bg-[#F0BB78]/20 focus:text-white"
+												>
+													4th Year
+												</SelectItem>
+											)}
+										</SelectContent>
+									</Select>
+								</div>
+
+								<div className="space-y-2">
+									<Label className="text-white/90 font-medium text-sm">
+										Batch
+									</Label>
+									<Input
+										type="text"
+										value={config.batch}
+										onChange={(e) =>
+											onConfigChange(
+												configIndex,
+												"batch",
+												e.target.value.toUpperCase()
+											)
+										}
+										className="h-10 text-sm bg-white/10 border-white/20 backdrop-blur-md hover:bg-white/15 focus:border-[#F0BB78]/50 focus:ring-[#F0BB78]/50 transition-all text-white placeholder:text-white/40"
+										placeholder="Enter batch (e.g. A6 or F4)"
+									/>
+								</div>
+
+								{/* Electives UI */}
+								<AnimatePresence>
+									{config.year && config.year !== "1" && (
+										<motion.div
+											initial={{ opacity: 0, height: 0 }}
+											animate={{ opacity: 1, height: "auto" }}
+											exit={{ opacity: 0, height: 0 }}
+											className="space-y-3 pt-1"
+										>
+											<Label className="text-white/90 font-medium text-sm">
+												Choose Your Subjects
+											</Label>
+											<Button
+												type="button"
+												className="w-full h-10 text-sm bg-gradient-to-r from-[#543A14] to-[#F0BB78] hover:from-[#543A14]/80 hover:to-[#F0BB78]/80 transition-all duration-300 shadow-lg hover:shadow-[#F0BB78]/25 rounded-lg border border-[#F0BB78]/20"
+												onClick={() => setShowSubjectModal(true)}
+											>
+												{selectedSubjects.length > 0
+													? `Selected: ${selectedSubjects.length} subject(s)`
+													: "Select Subjects"}
+											</Button>
+											{selectedSubjects.length > 0 && (
+												<div className="flex flex-wrap gap-2">
+													{selectedSubjects.map((code) => {
+														const subj = getSubjects(
+															config.campus,
+															config.year
+														).find((s) => s.Code === code);
+														return (
+															<div
+																key={code}
+																className="flex items-center gap-2 px-3 py-1.5 bg-[#F0BB78]/20 rounded-lg text-[#F0BB78] text-xs group hover:bg-[#F0BB78]/30 transition-colors border border-[#F0BB78]/20"
+															>
+																<span className="truncate max-w-[100px] font-medium">
+																	{subj?.Subject || code}
+																</span>
+																<button
+																	type="button"
+																	onClick={(e) => {
+																		e.stopPropagation();
+																		setSelectedSubjects((prev) =>
+																			prev.filter((c) => c !== code)
+																		);
+																	}}
+																	className="text-[#F0BB78]/60 hover:text-red-400 transition-colors text-sm font-bold"
+																	aria-label={`Remove ${subj?.Subject || code}`}
+																>
+																	×
+																</button>
+															</div>
+														);
+													})}
+												</div>
+											)}
+											<SubjectSelector
+												subjects={getSubjects(config.campus, config.year)}
+												selectedSubjects={selectedSubjects}
+												setSelectedSubjects={setSelectedSubjects}
+												open={showSubjectModal}
+												setOpen={setShowSubjectModal}
+												year={config.year}
+											/>
+										</motion.div>
+									)}
+								</AnimatePresence>
+							</div>
+						</div>
+					</motion.div>
+				)}
+			</AnimatePresence>
 		</div>
 	);
 }
@@ -384,6 +416,18 @@ export default function CompareTimetables() {
 	// Modal states for viewing individual timetables
 	const [showTimetable1Modal, setShowTimetable1Modal] = useState(false);
 	const [showTimetable2Modal, setShowTimetable2Modal] = useState(false);
+
+	// Collapsible form states (default collapsed on mobile)
+	const [isForm1Expanded, setIsForm1Expanded] = useState(true);
+	const [isForm2Expanded, setIsForm2Expanded] = useState(true);
+
+	// Collapse forms on mobile on mount
+	useEffect(() => {
+		if (typeof window !== "undefined" && window.innerWidth < 768) {
+			setIsForm1Expanded(false);
+			setIsForm2Expanded(false);
+		}
+	}, []);
 
 	// Scroll ref for results
 	const resultsRef = useRef<HTMLDivElement>(null);
@@ -577,9 +621,6 @@ export default function CompareTimetables() {
 					transition={{ duration: 0.5 }}
 				>
 					<div className="flex items-center justify-center gap-3">
-						<div className="w-12 h-12 rounded-full bg-[#F0BB78]/20 border border-[#F0BB78]/30 flex items-center justify-center">
-							<Users className="w-6 h-6 text-[#F0BB78]" />
-						</div>
 						<h1 className="text-2xl sm:text-4xl font-bold bg-clip-text text-[#F0BB78]">
 							Compare Timetables
 						</h1>
@@ -611,6 +652,8 @@ export default function CompareTimetables() {
 						onDeleteConfig={handleDeleteConfig}
 						isConfigOpen={isConfigOpen1}
 						setIsConfigOpen={setIsConfigOpen1}
+						isFormExpanded={isForm1Expanded}
+						setIsFormExpanded={setIsForm1Expanded}
 					/>
 
 					<ConfigForm
@@ -628,6 +671,8 @@ export default function CompareTimetables() {
 						onDeleteConfig={handleDeleteConfig}
 						isConfigOpen={isConfigOpen2}
 						setIsConfigOpen={setIsConfigOpen2}
+						isFormExpanded={isForm2Expanded}
+						setIsFormExpanded={setIsForm2Expanded}
 					/>
 				</motion.div>
 
@@ -705,9 +750,6 @@ export default function CompareTimetables() {
 								{/* Common Free Slots Section */}
 								<section className="space-y-6">
 									<div className="flex items-center gap-4">
-										<div className="w-10 h-10 rounded-full bg-white/5 border border-white/10 flex items-center justify-center">
-											<Clock className="w-5 h-5 text-[#F0BB78]" />
-										</div>
 										<h3 className="text-xl font-bold text-white tracking-tight">
 											Common Free Slots{" "}
 											<span className="text-[#F0BB78]/60 ml-2 text-lg">

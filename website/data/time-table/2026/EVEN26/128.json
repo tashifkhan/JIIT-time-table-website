@@ -509,6 +509,569 @@
       }
     ]
   },
+  "2": {
+    "timetable": {
+      "MON": {
+        "9 - 9:50 AM": [
+          "PF1F2F3(24B15CS221) - CL2/KSA/NRP/ANU/VAIBHAV",
+          "PF4F5F6(24B15CS222) -151/RKA/SHR/AKS/FARAZ",
+          "PF7F8(XXXXXXX) -CL4/KHM/BHB",
+          "LF16F17(24B11CS225) -118/DVG",
+          "LF13F14F19(19B13BT211) -153\n/NEAKANKSHIKA",
+          "PE4(18B15EC214) -256/MEA/SAK/MAK",
+          "PF9(25B15EC311) -257/PAA/HIG",
+          "TE2(18B11EC214) -127/SVS",
+          "TE1(24B41EC211) -225/ANK",
+          "TF11(24B11CS221) -229/BAIBHAV"
+        ],
+        "10:00-10:50 AM": [
+          "LF16F17(24B11CS221) -118/MHS",
+          "LF13F14F19(19B13BT211) -153\n/NEAKANKSHIKA",
+          "LF11F12(25B11EC311) -138/PAA",
+          "TF18(24B11CS221) -244/BAIBHAV"
+        ],
+        "11:00-11:50 AM": [
+          "LE1E2(18B11EC214) -226/SVS",
+          "LE3E4(18B11EC214) -228/MEA",
+          "LF16F17F18(19B13BT211) -153\n/GUNJAN",
+          "LF1F2(24B11CS222) -111/MGO",
+          "LF4F5F6(25B12CS211) -118/AKS",
+          "LF7F8F9(25B12CS211) -230/AKB",
+          "TF19(24B11CS225) -126/TWINKLE",
+          "LF11F12(XXXXXXX) -138/BHB"
+        ],
+        "12:00 - 12:50 PM": [
+          "LALL(15B1NHS431) -230/EKS",
+          "LALL(16B1NHS431) -148/PRS",
+          "LALL(15B1NHS433) -153/SAV",
+          "LALL(16B1NHS332)-117/ALOK",
+          "LF12F13F14F16F18F19E1E2E3E4 (19B12HS412)-228/AMA",
+          "LALL(23B12HS211)-118/HIMANSHI",
+          "LALL(15B1NHS433)-SR05/AKS",
+          "TF1F2F4F9F10F11(19B12HS412)-225/HSS SCHOLAR"
+        ],
+        "1:00 PM - 1:50PM": [
+          "LF9F10(25B11EC311) -117/PAA"
+        ],
+        "2:00 PM - 2:50 PM": [
+          "LF1F2F3F4F5F6F7F8F9F10F11 (19B12HS412)-117/AMA",
+          "LF13F14F19(19B13BT211) -153\n/NEAKANKSHIKA",
+          "LF16F17(24B11CS222) -138/GAH",
+          "TF1F2F7F8F9F10F11(15B1NHS433) -225\n/SAV",
+          "TF1F2F7F8F9F10F11(15B1NHS431) -229\n/EKS",
+          "TF1F2F7F8F9F10F11(16B1NHS431) -234\n/PRS",
+          "TF1F2F7F8F9F10F11(16B1NHS332)-138\n/ALOK",
+          "TF1F2F7F8F9F10F11((23B12HS211)-244\n/HIMANSHI",
+          "TF1F2F7F8F9F10F11(15B1NHS433)-244 B/AKS"
+        ],
+        "3:00 PM - 3 :50 PM": [
+          "PE1(24B45EC211) -256/HIG/PRK",
+          "PF8(25B15EC311) -257/AJK/ATK/DKS",
+          "PF1F2F3F4F5F6F7F9F10F11(25B16CS212)-151/RHN/HMV",
+          "PF1F2F3F4(25B16CS211)-035//MSH/JSH/AKB",
+          "LE3E4(24B41EC211) -138/ANG",
+          "LF16F17F18(19B13BT211) -153\n/GUNJAN",
+          "LF13F14(XXXXXXX) -230/KHM",
+          "TE2(15B11EC411) --234/BHC"
+        ],
+        "4:00 PM -4:50 PM": [
+          "LF16F17F18(19B13BT211) -153\n/GUNJAN",
+          "LF13F14(24B11CS223) -230/VKG"
+        ]
+      },
+      "TUES": {
+        "9 - 9:50 AM": [
+          "LF10F11F12(19B13BT211) -SR05/NIVEDITA",
+          "PF6(25B15EC311) -257/RUS/MEA/MAK",
+          "LF1F2F3(25B12CS211) -117/ADS",
+          "LF7F8(XXXXXXX) -148/MHS",
+          "LF13F14(24B11CS222) -153/RKA",
+          "LF16F17(24B11CS223) -244B/HMV",
+          "LF18F19(24B15CS221) -118/SHIVANI"
+        ],
+        "10:00-10:50 AM": [
+          "LF10F11F12(19B13BT211) - SR05/NIVEDITA",
+          "LF7F8F9(25B12CS211) -148/AKB",
+          "LF1F2(24B11CS221) -117/NRP",
+          "LF3F4(24B11CS221) -111/KSA",
+          "PE2(18B15EC214) -256/SVS/RKS",
+          "LF13F14(24B11CS221) -153/MIT",
+          "PE1(15B17EC471) -142/BHC/ISC/DKS",
+          "LF18F19(24B11CS225) -118/JRD",
+          "LE3E4(15B11EC411) -123/ATK"
+        ],
+        "11:00-11:50 AM": [
+          "LF16F17(24B11CS225) -111/DVG",
+          "PF9F10(XXXXXXX) -CL4/BHB/HMA",
+          "PF4F5F6(24B15CS221) - CL2/MIT/NRP/ANU/NAVED",
+          "PF1F2F3(24B15CS222) -151//MGO/AMS/FARAZ",
+          "PF13F14(XXXXXXX) -CL1/MHS/JYR/KHM",
+          "PF18F19(24B15CS215) -AI LAB//PRM/SHIVANI",
+          "PF7(25B15EC311) -257/VKM/RAS",
+          "LF11F12(24B11CS221) -118/ANU",
+          "TE3(18B11EC214) -244/MEA",
+          "TE4(24B41EC211) -244B/ANK"
+        ],
+        "12:00 - 12:50 PM": [
+          "LF16F17(24B11CS222) -111/GAH",
+          "LE1E2(24B41EC211) -226/ANG",
+          "LE3E4(24B41EC312) -123/HIG",
+          "LF11F12(25B11EC311) -118/PAA"
+        ],
+        "1:00 PM - 1:50PM": [],
+        "2:00 PM - 2:50 PM": [
+          "LF10F11F12(19B13BT211) - SR05/NIVEDITA",
+          "LF13F14F17(25B12CS211) -117/MSH",
+          "LF16F18F19(25B12CS211) -118/KISHAN",
+          "LF3F4(24B11CS222) -111/SGU",
+          "LF7F8(24B11CS223) -123/PRM",
+          "LF5F6(24B11CS223) 148/KNS"
+        ],
+        "3:00 PM - 3 :50 PM": [
+          "PF11(25B15EC311) -257/AJK/RKV",
+          "PE2(24B45EC211) -256/ISC/PAA",
+          "PF8F12F13F14F16F17F18F19(25B16CS212)-151//RHN/HMV",
+          "PF5F6F7F8(25B16CS211)-035//MSH/ADS/JSH",
+          "LF1F2(XXXXXXX) -148/BHB",
+          "LE3E4(24B41EC211) -226/ANG",
+          "LF3F4(XXXXXXX) -111/KHM",
+          "LF9F10(24B11CS221) -SR05/DTS"
+        ],
+        "4:00 PM -4:50 PM": [
+          "LF1F2(24B11CS223) -148/HMA",
+          "LF3F4(24B11CS223) -111/NRP",
+          "LF9F10(24B11CS222) SR05-/SHR"
+        ]
+      },
+      "WED": {
+        "9 - 9:50 AM": [
+          "LF10F11F12(25B12CS211) -148/GSH",
+          "LF5F6(24B11CS221) -CR53/TWT",
+          "LF13F14(24B11CS223) -3037/VKG",
+          "LF7F8(25B11EC311) -153/RUS",
+          "LF16F17(24B11CS221) -3029/MHS",
+          "LF18F19(24B15CS221) -111/SHIVANI",
+          "LE3E4(15B11EC411) -CR54/ATK",
+          "LF3F4(25B11EC311) -SR05/DIVYA"
+        ],
+        "10:00-10:50 AM": [
+          "LE3E4(24B41EC211) -CR54/ANG",
+          "LF1F2F3(19B13BT211) -SR05/MANISHA",
+          "LF5F6(24B11CS222) -CR53/AKS",
+          "LE1E2(15B11EC411) -148/BHC",
+          "LF7F8(24B11CS222) -153/AYP",
+          "LF9F10(24B11CS222) -111/SHR",
+          "LF18F19(24B11CS223) -123/KHM"
+        ],
+        "11:00-11:50 AM": [
+          "LALL((25B42EC211) -228/ISC",
+          "LALL(25B42EC212) -244B/VKT",
+          "LALL(21B12CS319) -244/RAS",
+          "LF1F2(24B11CS222) -148/MGO",
+          "LF3F4(24B11CS221) -SR05/KSA",
+          "LF7F8(24B11CS221) -153/VARSHA",
+          "LF11F12(24B11CS221)- 118/ANU",
+          "LF16F17(24B11CS225) -117/DVG",
+          "LF9F10(25B11EC311) -111/PAA",
+          "TF19(24B11CS221) -127/BAIBHAV"
+        ],
+        "12:00 - 12:50 PM": [
+          "LALL(15B1NHS431) -230/EKS",
+          "LALL(16B1NHS431) -148/PRS",
+          "LALL(15B1NHS433) -153/SAV",
+          "LALL(16B1NHS332)-117/ALOK",
+          "LF1F2F3F4F5F6F7F8F9F10F11\n(19B12HS412)-228/AMA",
+          "LALL(23B12HS211)-118/HIMANSHI",
+          "LALL(15B1NHS433)-SR05/AKS",
+          "TF12F13F14F16F17F18F19(19B12HS412)\n-225/HSS SCHOLAR"
+        ],
+        "1:00 PM - 1:50PM": [
+          "PF13(25B15EC311) -257/PRK/SVS/MAP"
+        ],
+        "2:00 PM - 2:50 PM": [
+          "LF12F13F14F16F18F19E1E2E3E4 (19B12HS412)-225/AMA",
+          "LF1F2F3(19B13BT211) -SR05/MANISHA",
+          "LF5F6(XXXXXXX) -111/MSH",
+          "TF12F14F16F17F18F19E1E2E3E4 (15B1NHS433) -229/SAV",
+          "LF7F8(24B11CS223) -118/PRM",
+          "LF9F10(24B11CS223) -123/SHJ",
+          "TF12F14F16F17F18F19E1E2E3E4 (15B1NHS431) -234/EKS",
+          "TF12F14F16F17F18F19E1E2E3E4 (16B1NHS431) -244/PRS",
+          "TF12F14F16F17F18F19E1E2E3E4 (16B1NHS332)-217/ALOK",
+          "TF12F14F16F17F18F19E1E2E3E4 (15B1NHS433)-244B/AKS"
+        ],
+        "3:00 PM - 3 :50 PM": [
+          "LE1E2(24B41EC312) -226/HIG",
+          "PF1F2(XXXXXXX) -CL4/KHM/MHS",
+          "PF7F8F9(24B15CS221) - CL2/KSA/ANU/N/SHIVANI/AVINASH/VAIBHAV",
+          "PF10F11F12(24B15CS222) -151/MGO/SHR/AYP/ZUBAIR",
+          "PF16F17(24B15CS225) -AI LAB/JRD/DVG/TWINKLE",
+          "LF5F6(25B11EC311) -111/RUS",
+          "PE4(15B17EC471) -142/ATK/BHC/DKS",
+          "PE3(24B45EC211) -256/HIG/ANG",
+          "PF4(25B15EC311) -257/VIT/BAB/MAK",
+          "LF13F14(24B11CS221) -118/MIT"
+        ],
+        "4:00 PM -4:50 PM": [
+          "LF13F14(25B11EC311) -117/PRK",
+          "TF5(24B11CS221) -225/SAMARTH",
+          "TF6(24B11CS221) -229/JATIN"
+        ]
+      },
+      "THUR": {
+        "9 - 9:50 AM": [
+          "LF3F4(24B11CS223) -3029/NRP",
+          "LF5F6(24B11CS222) -148/AKS",
+          "LF7F8(24B11CS222) -3075/AYP",
+          "LF9F10(24B11CS221) -153/DTS",
+          "LF11F12(24B11CS222) -3037/AMS",
+          "LF18F19(24B15CS221) -3096/SHIVANI",
+          "LE1E2(15B11EC411) -244B/BHC",
+          "TF13(24B11CS221) -127/VAIBHAV",
+          "TF14(24B11CS221) -126/SAMARATH",
+          "TF17(24B11CS225) -3044/TWINKLE"
+        ],
+        "10:00-10:50 AM": [
+          "LE3E4(24B41EC312) -111/HIG",
+          "LF1F2(24B11CS222) -118/MGO",
+          "LF12F13F14F16F17F18F19(25B12CS212)\n-117/RHN",
+          "LF10F11F12(25B12CS211) -SR05/GSH",
+          "LF3F4(24B11CS221) -138/KSA",
+          "LF5F6(24B11CS221) -148/TWT",
+          "LF9F10(24B11CS223) -153/SHJ",
+          "LE1E2(24B41EC211) -244B/ANG"
+        ],
+        "11:00-11:50 AM": [
+          "PF10F11F12(24B15CS221) - CL2/MIT/KSA/VARSHA/SHIVANI",
+          "PF7F8F9(24B15CS222) -151/MGO/AMS/AKS",
+          "PF3F4(XXXXXXX) -CL4/ANK/JYR",
+          "PF18F19(24B15CS225) -AI LAB/DVG/TWINKLE/JRD",
+          "PE3(15B17EC471) -142/ATK/ISC",
+          "PE4(24B45EC211) -256/DIJ/VIT",
+          "PF1(25B15EC311) -257/DKA/AJK",
+          "LF13F14F17(25B12CS211) -153/MSH",
+          "TE1(15B11EC411) -138/BHC",
+          "LF5F6(25B11EC311) -148/RUS"
+        ],
+        "12:00 - 12:50 PM": [
+          "LF16F17(24B11CS223) -118/HMV",
+          "LF5F6(24B11CS223) -148/KNS",
+          "LF13F14(24B11CS222) -111/RKA"
+        ],
+        "1:00 PM - 1:50PM": [
+          "TF16(24B11CS221) -111/SHIVANI"
+        ],
+        "2:00 PM - 2:50 PM": [
+          "LE1E2(18B11EC214) -226/SVS",
+          "LE3E4(18B11EC214) -226/MEA",
+          "LF1F2F3F4F5F6F7F8F9F10F11 (25B12CS212) -117/HMV",
+          "LF4F5F6(25B12CS211) -SR05/AKS",
+          "LF13F14(24B11CS221) -111/MIT",
+          "LF18F19(24B11CS225)-118/JRD",
+          "TF17(24B11CS221) -138/SHIVANI",
+          "TF12(24B11CS221) -127/JATIN"
+        ],
+        "3:00 PM - 3 :50 PM": [
+          "PF10(25B15EC311) -257/PAA/KDT",
+          "PF14F16F17F18 F19(25B16CS211)-035/AKB/JSH/ADS/MSH",
+          "LALL((25B42EC211) -228/ISC",
+          "LALL(25B42EC212) -244B/VKT",
+          "LALL(21B12CS319) -244/RAS",
+          "LF11F12(24B11CS223) -118/SHR",
+          "LF1F2(25B11EC311) -111/DIVYA",
+          "LF7F8(25B11EC311) -117/RUS",
+          "TF3F4F5F6F13(15B1NHS433) -225/SAV",
+          "TF3F4F5F6F13(15B1NHS431) -229/EKS",
+          "TF3F4F5F6F13(16B1NHS431) -234/PRS",
+          "TF3F4F5F6F13(16B1NHS332)-226\n/ALOK",
+          "TF3F4F5F6F13((23B12HS211)-228\n/HIMANSHI",
+          "TF3F4F5F6F13(15B1NHS433)-230/AKS"
+        ],
+        "4:00 PM -4:50 PM": [
+          "LF11F12(24B11CS221) -118/ANU",
+          "LF1F2(24B11CS223) -111/HMA",
+          "LF3F4(25B11EC311) -117/DIVYA",
+          "LF5F6(25B11EC311) -118//RUS",
+          "TF7(24B11CS221) -229/JATIN",
+          "TF8(24B11CS221) -225/VAIBHAV"
+        ]
+      },
+      "FRI": {
+        "9 - 9:50 AM": [
+          "LF4F5F6(19B13BT211) -117/APURVA",
+          "PF12(25B15EC311) -257/AJK/RUS",
+          "LF7F8(24B11CS222) -153/AYP",
+          "TE1E2E3E4(19B12HS412)-116/AMA",
+          "LF9F10(24B11CS221) -244B/DTS",
+          "LF13F14(24B11CS223) -148/VKG",
+          "TF1(24B11CS221) -116/JATIN",
+          "TF2(24B11CS221) -121/BAIBHAV",
+          "TF3(24B11CS221) -126/VAIBHAV",
+          "TF16(24B11CS225) -127/TWINKLE"
+        ],
+        "10:00-10:50 AM": [
+          "LF16F17(24B11CS221) -111/MHS",
+          "LE3E4(15B11EC411) -123/ATK",
+          "PE2(15B17EC471) -142/BHC/VKM",
+          "PE1(18B15EC214) -256/SVS/RKS/DKS",
+          "LF1F2F3F4F5F6F7F8F9F10F11 (25B12CS212) -117/HMV",
+          "LF18F19(24B11CS222) -153/JSH",
+          "LF13F14(25B11EC311) -148/PRK"
+        ],
+        "11:00-11:50 AM": [
+          "PF13F14F16(24B15CS221) - CL2/NFCS1",
+          "PF17F18F19(24B15CS222) -151//AKS/RKA/AMS",
+          "PF5F6(XXXXXXX) -CL4/HMA/ANK/RHN",
+          "PF2(25B15EC311) -257/DKA/KDT",
+          "LF3F4(24B11CS222) -153/SGU",
+          "LF7F8(24B11CS221) -117/VARSHA",
+          "LF9F10(24B11CS222) -148/SHR",
+          "LF11F12(25B11EC311) -123/PAA",
+          "TE4(18B11EC214) -244/MEA",
+          "TE3(24B41EC211) -244B/ANK"
+        ],
+        "12:00 - 12:50 PM": [
+          "LALL((25B42EC211) -228/ISC",
+          "LALL(25B42EC212) -244B/VKT",
+          "LALL(21B12CS319) -244/RAS",
+          "LF3F4(24B11CS223) -153/NRP",
+          "LF9F10(25B11EC311) -148/PAA",
+          "LF7F8(24B11CS221) -117/VARSHA"
+        ],
+        "1:00 PM - 1:50PM": [
+          "LF11F12(24B11CS223) -123/SHR"
+        ],
+        "2:00 PM - 2:50 PM": [
+          "LF4F5F6(19B13BT211) -117/APURVA",
+          "LF12F13F14F16F17F18F19(25B12CS212)\n-148/RHN",
+          "LF16F18F19(25B12CS211) -111/KISHAN",
+          "LF9F10(24B11CS223) -153/SHJ",
+          "LF11F12(24B11CS222) -123/AMS",
+          "LF1F2(24B11CS221) -118/NRP",
+          "TF7F8F3(19B12HS412)-116/AMA",
+          "TE3(15B11EC411) --121/ATK",
+          "TE1(18B11EC214) -244/SVS",
+          "TE2(24B41EC211) -244B/ANK"
+        ],
+        "3:00 PM - 3 :50 PM": [
+          "LF4F5F6(19B13BT211) -117/APURVA",
+          "PF10F11F12F13(25B16CS211)-035/ADS/AKB",
+          "PF14(25B15EC311) -257/VKM/BAB",
+          "LE3E4(24B41EC312) -226/HIG",
+          "LF18F19(24B11CS225) -111/JRD",
+          "LF16F17(24B11CS222) -153/GAH",
+          "LF1F2(25B11EC311) -118/DIVYA",
+          "LF7F8(25B11EC311) -148/RUS"
+        ],
+        "4:00 PM -4:50 PM": [
+          "LF3F4(24B11CS222) -148/SGU",
+          "LF5F6(24B11CS222) -117/AKS",
+          "LF16F17(24B11CS223) -153/HMV",
+          "LE1E2(24B41EC312) -CR53/HIG",
+          "LF1F2(24B11CS223) -118/HMA",
+          "TF9(24B11CS221) -229MHS"
+        ]
+      },
+      "SAT": {
+        "9 - 9:50 AM": [
+          "PF5(25B15EC311)-257/RUS/DIJ",
+          "LE1E2(18B11EC214) -111/SVS",
+          "LE3E4(18B11EC214) -228/MEA",
+          "LF7F8F9(19B13BT211) -117/HANEESH",
+          "LF1F2F3(25B12CS211) -118/ADS",
+          "LF11F12(24B11CS223) -123/SHR",
+          "PF16F17(24B15CS215) -AI LAB/SHIVANI",
+          "LF18F19(24B11CS223) -CR53/KHM",
+          "LF13F14(25B11EC311) -138/PRK"
+        ],
+        "10:00-10:50 AM": [
+          "LF3F4(24B11CS222) -CR53/SGU",
+          "LF11F12(24B11CS222) -123/AMS",
+          "LF7F8F9(19B13BT211) -117/HANEESH",
+          "LF13F14(24B11CS222) -138/RKA",
+          "LF18F19(24B11CS222) -CR54/JSH",
+          "LF1F2(24B11CS221) -118/NRP"
+        ],
+        "11:00-11:50 AM": [
+          "PF17F18F19(24B15CS221) - CL2//NRP/S/SHIVANI/KSA/AVINASH",
+          "PF13F14F16(24B15CS222) -151/RKA/SHR/AYP/ZUBAIR",
+          "PF11F12(XXXXXXX) -CL4/HMA/ANK/BHB",
+          "PE3(18B15EC214) -256/MEA/ASG",
+          "PF3(25B15EC311) -257/VIT/DIJ",
+          "LE1E2(24B41EC211) -111/ANG",
+          "LF7F8(24B11CS223) -117/PRM",
+          "LF9F10(XXXXXXX) -123/RHN",
+          "LF1F2(25B11EC311) -118/DIVYA",
+          "TE4(15B11EC411) -116/ATK",
+          "TF4(24B11CS221) -CR53/SAMARTH",
+          "LF5F6(24B11CS223) -CR54/KNS"
+        ],
+        "12:00 - 12:50 PM": [
+          "LE1E2(24B41EC312) -111/HIG",
+          "LF7F8F9(19B13BT211) -117/HANEESH",
+          "LF5F6(24B11CS221) -CR54/TWT",
+          "LF3F4(25B11EC311) -CR53/DIVYA",
+          "TF10(24B11CS221) -229/BAIBHAV"
+        ],
+        "1:00 PM - 1:50PM": [],
+        "2:00 PM - 2:50 PM": [],
+        "3:00 PM - 3 :50 PM": [],
+        "4:00 PM -4:50 PM": []
+      }
+    },
+    "subjects": [
+      {
+        "Code": "24B11CS221",
+        "Full Code": "24B11CS221",
+        "Subject": "Design and Analysis of Algorithms"
+      },
+      {
+        "Code": "25B11EC311",
+        "Full Code": "25B11EC311",
+        "Subject": "Digital Systems and Computer Organisation"
+      },
+      {
+        "Code": "18B15EC214",
+        "Full Code": "18B15EC214",
+        "Subject": "Signals and Systems Lab"
+      },
+      {
+        "Code": "25B12CS211",
+        "Full Code": "25B12CS211",
+        "Subject": "Fundamentals of Data Analytics"
+      },
+      {
+        "Code": "24B15CS222",
+        "Full Code": "24B15CS222",
+        "Subject": "Artificial Intelligence and Machine Learning Lab"
+      },
+      {
+        "Code": "15B11EC411",
+        "Full Code": "15B11EC411",
+        "Subject": "Analogue Electronics"
+      },
+      {
+        "Code": "15B1NHS431",
+        "Full Code": "15B1NHS431",
+        "Subject": "Introduction to Literature"
+      },
+      {
+        "Code": "24B41EC211",
+        "Full Code": "24B41EC211",
+        "Subject": "Introduction of Database Management System"
+      },
+      {
+        "Code": "25B16CS211",
+        "Full Code": "25B16CS211",
+        "Subject": "Fundamentals of Data Analytics Lab"
+      },
+      {
+        "Code": "24B11CS222",
+        "Full Code": "24B11CS222",
+        "Subject": "Artificial Intelligence and Machine Learning"
+      },
+      {
+        "Code": "16B1NHS431",
+        "Full Code": "16B1NHS431",
+        "Subject": "Human Resource Management"
+      },
+      {
+        "Code": "25B15EC311",
+        "Full Code": "25B15EC311",
+        "Subject": "Digital Systems and Computer Organisation Lab"
+      },
+      {
+        "Code": "24B41EC312",
+        "Full Code": "24B41EC312",
+        "Subject": "Computer Architecture and Organization"
+      },
+      {
+        "Code": "15B1NHS433",
+        "Full Code": "15B1NHS433",
+        "Subject": "Financial Accounting"
+      },
+      {
+        "Code": "16B1NHS332",
+        "Full Code": "16B1NHS332",
+        "Subject": "Quantitative Methods for Social Sciences"
+      },
+      {
+        "Code": "23B12HS211",
+        "Full Code": "23B12HS211",
+        "Subject": "Introduction to Political Science"
+      },
+      {
+        "Code": "25B42EC212",
+        "Full Code": "25B42EC212",
+        "Subject": "Foundation of machine learning and python"
+      },
+      {
+        "Code": "19B13BT211",
+        "Full Code": "19B13BT211",
+        "Subject": "Environmental Studies"
+      },
+      {
+        "Code": "15B17EC471",
+        "Full Code": "15B17EC471",
+        "Subject": "Analogue Electronics Lab"
+      },
+      {
+        "Code": "15B1NHS433",
+        "Full Code": "15B1NHS433",
+        "Subject": "Introduction to Sociology"
+      },
+      {
+        "Code": "18B11EC214",
+        "Full Code": "18B11EC214",
+        "Subject": "Signals and Systems"
+      },
+      {
+        "Code": "25B12CS212",
+        "Full Code": "25B12CS212",
+        "Subject": "Fundamentals of Mobile Appliction Development"
+      },
+      {
+        "Code": "25B16CS212",
+        "Full Code": "25B16CS212",
+        "Subject": "Fundamentals of Mobile Appliction Development Lab"
+      },
+      {
+        "Code": "24B11CS223",
+        "Full Code": "24B11CS223",
+        "Subject": "Software Engineering"
+      },
+      {
+        "Code": "21B12CS319",
+        "Full Code": "21B12CS319",
+        "Subject": "Fundamental of Soft Computing"
+      },
+      {
+        "Code": "19B12HS412",
+        "Full Code": "19B12HS412",
+        "Subject": "Industrial Economics"
+      },
+      {
+        "Code": "24B15CS221",
+        "Full Code": "24B15CS221",
+        "Subject": "Design and Analysis of Algorithms Lab"
+      },
+      {
+        "Code": "25B42EC211",
+        "Full Code": "25B42EC211",
+        "Subject": "Introduction to Neural Networks"
+      },
+      {
+        "Code": "24B45EC211",
+        "Full Code": "24B45EC211",
+        "Subject": "Introduction of Database Management System Lab"
+      },
+      {
+        "Code": "25B42EC214",
+        "Full Code": "25B42EC214",
+        "Subject": "Fundamentals of soft computing"
+      }
+    ]
+  },
   "3": {
     "timetable": {
       "MON": {

@@ -9,7 +9,7 @@ import {
 import { ScheduleForm } from "../schedule/schedule-form";
 import { ScheduleDisplay } from "../schedule/schedule-display";
 import { UrlParamsDialog } from "./url-params-dialog";
-import { NoticeBanner } from "./notice-banner";
+// import { NoticeBanner } from "./notice-banner";
 import { motion } from "framer-motion";
 import { Calendar, ChevronDown, Trash, Share2 } from "lucide-react";
 import { useRouter } from "next/navigation";
@@ -437,7 +437,7 @@ export default function HomeContent() {
 						Create your personalized class schedule in minutes
 					</p>
 				</motion.div>
-				<NoticeBanner />
+				{/* <NoticeBanner /> */}
 				{/* Dropdown for saved configs - always visible above the form */}
 				{Object.keys(savedConfigs).length > 0 && (
 					<div className="mb-4 w-full max-w-xl mx-auto">

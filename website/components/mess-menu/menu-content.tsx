@@ -1,7 +1,9 @@
 "use client";
-import React, { useEffect, useState, useMemo } from "react";
+import React, { useEffect, useState, useMemo, useRef } from "react";
 import { Loader } from "@/components/ui/loader";
 import { useMessMenu } from "../../hooks/use-api";
+import { motion } from "framer-motion";
+import { Plus } from "lucide-react";
 
 interface MessMenu {
 	menu: {
@@ -32,7 +34,9 @@ const MenuContent: React.FC<MenuContentProps> = ({
 	const menu = data?.menu ?? null;
 	const error = queryError?.message ?? null;
 
-	const dayRefs = React.useRef<(HTMLDivElement | null)[]>([]);
+	const [visibleDaysCount, setVisibleDaysCount] = useState(0);
+	const dayRefs = useRef<(HTMLDivElement | null)[]>([]);
+	const upcomingDividerRef = useRef<HTMLDivElement | null>(null);
 
 	// Function to parse date from day string like "Sunday 01.08.25"
 	const parseDateFromDay = (dayString: string): Date | null => {
@@ -121,6 +125,37 @@ const MenuContent: React.FC<MenuContentProps> = ({
 		return day.startsWith(currentDay);
 	};
 
+	const todayDate = useMemo(() => {
+		const d = new Date();
+		d.setHours(0, 0, 0, 0);
+		return d;
+	}, []);
+
+	const allDays = useMemo(() => {
+		if (!menu) return [];
+		return Object.entries(menu);
+	}, [menu]);
+
+	const pastDays = useMemo(() => {
+		return allDays
+			.filter(([dayKey]) => {
+				const dayDate = parseDateFromDay(dayKey);
+				return dayDate && dayDate < todayDate;
+			})
+			.reverse();
+	}, [allDays, todayDate]);
+
+	const upcomingDays = useMemo(() => {
+		return allDays.filter(([dayKey]) => {
+			const dayDate = parseDateFromDay(dayKey);
+			return !dayDate || dayDate >= todayDate;
+		});
+	}, [allDays, todayDate]);
+
+	const daysToShow = useMemo(() => {
+		return [...pastDays.slice(0, visibleDaysCount).reverse(), ...upcomingDays];
+	}, [pastDays, upcomingDays, visibleDaysCount]);
+
 	// Scroll to current day on mount (only if menu is not outdated)
 	useEffect(() => {
 		if (menu && !outdatedInfo.isOutdated) {
@@ -136,8 +171,7 @@ const MenuContent: React.FC<MenuContentProps> = ({
 			];
 			const currentDay = dayNames[today.getDay()];
 			// Find the index of the first menu key that starts with the current day
-			const menuDays = Object.keys(menu);
-			const dayIndex = menuDays.findIndex((d) => d.startsWith(currentDay));
+			const dayIndex = daysToShow.findIndex(([d]) => d.startsWith(currentDay));
 
 			if (dayIndex !== -1 && dayRefs.current[dayIndex]) {
 				setTimeout(() => {
@@ -155,7 +189,8 @@ const MenuContent: React.FC<MenuContentProps> = ({
 				}, 200);
 			}
 		}
-	}, [menu, outdatedInfo.isOutdated]);
+	}, [menu, outdatedInfo.isOutdated, daysToShow]);
+
 
 	return (
 		<main>
@@ -277,76 +312,138 @@ const MenuContent: React.FC<MenuContentProps> = ({
 								</span>
 							</div>
 						)}
-						{Object.entries(menu).map(([day, meals], idx) => {
+
+						{/* Load Previous Days Button */}
+						{pastDays.length > visibleDaysCount && (
+							<motion.div
+								className="flex justify-center mb-8"
+								initial={{ opacity: 0, y: 20 }}
+								animate={{ opacity: 1, y: 0 }}
+							>
+								<button
+									onClick={() => {
+										setVisibleDaysCount(pastDays.length);
+										setTimeout(() => {
+											if (upcomingDividerRef.current) {
+												const rect =
+													upcomingDividerRef.current.getBoundingClientRect();
+												const scrollTop = window.scrollY + rect.top - 100; // Offset for header
+												window.scrollTo({ top: scrollTop, behavior: "smooth" });
+											}
+										}, 200);
+									}}
+									className="px-6 py-3 bg-white/10 border border-[#F0BB78]/30 rounded-lg text-[#F0BB78] font-semibold backdrop-blur-md hover:bg-white/20 hover:border-[#F0BB78]/50 transition-all duration-300 flex items-center gap-2"
+								>
+									<Plus className="w-4 h-4" />
+									Load Previous Days (
+									{pastDays.length - visibleDaysCount} remaining)
+								</button>
+							</motion.div>
+						)}
+
+						{daysToShow.map(([day, meals], idx) => {
 							// Don't highlight "today" if menu is outdated
 							const shouldHighlight =
 								!outdatedInfo.isOutdated && isCurrentDay(day);
-							return (
-								<div
-									key={day}
-									ref={(el) => {
-										dayRefs.current[idx] = el;
-									}}
-									className={`rounded-2xl border p-6 transition-all duration-300 ${
-										shouldHighlight
-											? "border-[#F0BB78]/50 bg-white/5 shadow-[0_0_30px_rgba(240,187,120,0.1)]"
-											: "border-white/10 bg-white/5 hover:border-[#F0BB78]/30"
-									}`}
-								>
-									{/* Day Header */}
-									<div className="flex items-center gap-3 mb-6">
-										<div
-											className={`w-1.5 h-1.5 rounded-full ${outdatedInfo.isOutdated ? "bg-slate-500" : "bg-slate-400"}`}
-										></div>
-										<h2
-											className={`text-xl font-bold ${outdatedInfo.isOutdated ? "text-slate-300" : "text-white"}`}
-										>
-											{day.split(" ")[0]}
-											<span className="ml-2 text-slate-400 font-normal text-lg">
-												{day.split(" ").slice(1).join(" ")}
-											</span>
-										</h2>
-										{shouldHighlight && (
-											<span className="ml-2 px-2 py-0.5 bg-[#F0BB78]/20 text-[#F0BB78] text-xs rounded-full border border-[#F0BB78]/30">
-												Today
-											</span>
-										)}
-									</div>
 
-								{/* Meals Grid */}
-								<div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-									{Object.entries(meals).map(([mealType, mealContent]) => {
-										if (mealType === "Lunch128") return null; // Handle separately
-										return (
+							const dayDate = parseDateFromDay(day);
+							const isPastDay = dayDate && dayDate < todayDate;
+
+							// Check if this is the first upcoming day after past days
+							const prevDayKey = idx > 0 ? daysToShow[idx - 1][0] : null;
+							const prevDayDate = prevDayKey ? parseDateFromDay(prevDayKey) : null;
+							const isFirstUpcoming =
+								idx > 0 &&
+								!isPastDay &&
+								prevDayDate &&
+								prevDayDate < todayDate;
+
+							return (
+								<div key={day}>
+									{/* Upcoming Days Divider */}
+									{isFirstUpcoming && (
+										<motion.div
+											ref={upcomingDividerRef}
+											className="flex items-center justify-center mb-8 mt-4"
+											initial={{ opacity: 0 }}
+											animate={{ opacity: 1 }}
+										>
+											<div className="flex-1 h-px bg-[#F0BB78]/30"></div>
+											<span className="px-4 py-2 bg-[#F0BB78]/10 text-[#F0BB78] text-sm font-semibold rounded-full border border-[#F0BB78]/20">
+												Upcoming Days
+											</span>
+											<div className="flex-1 h-px bg-[#F0BB78]/30"></div>
+										</motion.div>
+									)}
+
+									<motion.div
+										ref={(el) => {
+											dayRefs.current[idx] = el;
+										}}
+										initial={{ opacity: 0, y: 20 }}
+										animate={{ opacity: 1, y: 0 }}
+										transition={{ delay: idx * 0.05 }}
+										className={`rounded-2xl border p-6 transition-all duration-300 ${
+											shouldHighlight
+												? "border-[#F0BB78]/50 bg-white/5 shadow-[0_0_30px_rgba(240,187,120,0.1)]"
+												: `border-white/10 bg-white/5 hover:border-[#F0BB78]/30 ${isPastDay ? "opacity-75" : ""}`
+										}`}
+									>
+										{/* Day Header */}
+										<div className="flex items-center gap-3 mb-6">
 											<div
-												key={mealType}
-												className="rounded-xl bg-[#1a1a1a] border border-white/5 p-5 hover:border-white/10 transition-colors"
+												className={`w-1.5 h-1.5 rounded-full ${outdatedInfo.isOutdated ? "bg-slate-500" : "bg-slate-400"}`}
+											></div>
+											<h2
+												className={`text-xl font-bold ${outdatedInfo.isOutdated ? "text-slate-300" : "text-white"}`}
 											>
-												<div className="mb-2">
-													<h3 className="font-medium text-[#F0BB78] text-base">
-														{mealType}
-													</h3>
-												</div>
-												<div className="text-slate-400 text-sm leading-relaxed">
-													{mealContent as string}
-												</div>
-												{mealType === "Lunch" && meals.Lunch128 && (
-													<div className="mt-4 pt-4 border-t border-white/10">
+												{day.split(" ")[0]}
+												<span className="ml-2 text-slate-400 font-normal text-lg">
+													{day.split(" ").slice(1).join(" ")}
+												</span>
+											</h2>
+											{shouldHighlight && (
+												<span className="ml-2 px-2 py-0.5 bg-[#F0BB78]/20 text-[#F0BB78] text-xs rounded-full border border-[#F0BB78]/30">
+													Today
+												</span>
+											)}
+										</div>
+
+										{/* Meals Grid */}
+										<div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+											{Object.entries(meals).map(([mealType, mealContent]) => {
+												if (mealType === "Lunch128") return null; // Handle separately
+												return (
+													<div
+														key={mealType}
+														className="rounded-xl bg-[#1a1a1a] border border-white/5 p-5 hover:border-white/10 transition-colors"
+													>
 														<div className="mb-2">
-															<h3 className="font-medium text-[#F0BB78] text-base flex items-center gap-2">
-																<span>Sector 128</span>
+															<h3 className="font-medium text-[#F0BB78] text-base">
+																{mealType}
 															</h3>
 														</div>
 														<div className="text-slate-400 text-sm leading-relaxed">
-															{meals.Lunch128}
+															{mealContent as string}
 														</div>
+														{mealType === "Lunch" && meals.Lunch128 && (
+															<div className="mt-4 pt-4 border-t border-white/10">
+																<div className="mb-2">
+																	<h3 className="font-medium text-[#F0BB78] text-base flex items-center gap-2">
+																		<span>Sector 128</span>
+																	</h3>
+																</div>
+																<div className="text-slate-400 text-sm leading-relaxed">
+																	{meals.Lunch128}
+																</div>
+															</div>
+														)}
 													</div>
-												)}
-											</div>
-										);
-									})}
+												);
+											})}
+										</div>
+									</motion.div>
 								</div>
-							</div>
 							);
 						})}
 					</div>

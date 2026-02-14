@@ -1,2 +1,3 @@
 export const DEFAULT_SEMESTER = "EVEN26";
 export const DEFAULT_ACADEMIC_YEAR = "2526";
+export const DEFAULT_PORTAL_SEMESTER= ""

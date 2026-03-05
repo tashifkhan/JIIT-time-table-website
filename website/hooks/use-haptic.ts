@@ -13,13 +13,13 @@
  *   "soft"      — 40ms @ 0.5 intensity   — gentle impression
  *   "rigid"     — 10ms @ 1.0 intensity   — crisp snap
  *   "selection" —  8ms @ 0.3 intensity   — picker / toggle micro-tap
- *   "nudge"     — 80ms @ 0.8 + 50ms @ 0.3 — double-pulse, ideal for navigation
+ *   "nudge"     — 80ms @ 0.8 + 50ms @ 0.3 — double-pulse (avoid for navigation)
  *   "buzz"      — 1000ms @ 1.0           — long sustained buzz
  *   "success"   — 30ms @ 0.5 + 40ms @ 1.0 — two-stage confirmation
  *   "warning"   — 40ms @ 0.8 + 40ms @ 0.6 — double caution pulse
  *   "error"     — triple 40ms @ 0.9 burst — destructive / failure feedback
  *
- * "navigation" is a convenience alias for "nudge".
+ * "navigation" is a convenience alias for "selection" (subtle 8ms micro-tap — keeps nav light).
  *
  * Usage:
  *   const haptic = useHaptic();
@@ -60,7 +60,7 @@ export function useHaptic() {
 		(pattern: HapticPattern = "medium") => {
 			// Map our "navigation" alias to the library's "nudge" preset
 			const resolved: HapticInput =
-				pattern === "navigation" ? "nudge" : pattern;
+				pattern === "navigation" ? "selection" : pattern;
 			trigger(resolved);
 		},
 		[trigger]

@@ -20,7 +20,7 @@ const SelectTrigger = React.forwardRef<
 	const handlePointerDown = (
 		e: React.PointerEvent<HTMLButtonElement>
 	) => {
-		haptic("light");
+		haptic("selection");
 		onPointerDown?.(e);
 	};
 

@@ -61,16 +61,16 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
 		// Determine which pattern to use:
 		//  - explicit false  → no haptic
 		//  - explicit value  → use that value
-		//  - destructive     → "error" pattern
-		//  - default         → "medium"
+		//  - destructive     → "medium" pattern
+		//  - default         → "light"
 		const resolvedPattern: HapticPattern | false =
 			hapticPattern === false
 				? false
 				: hapticPattern !== undefined
 				? hapticPattern
 				: variant === "destructive"
-				? "error"
-				: "medium";
+				? "medium"
+				: "light";
 
 		const handleClick = (e: React.MouseEvent<HTMLButtonElement>) => {
 			if (resolvedPattern !== false) {

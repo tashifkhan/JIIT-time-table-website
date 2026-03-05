@@ -38,6 +38,7 @@ import {
 	useBatchMappings,
 	useDefaultSemester,
 } from "../../hooks/use-api";
+import { useHaptic } from "../../hooks/use-haptic";
 
 const initialConfig = { campus: "", year: "", batch: "", electives: [] };
 
@@ -80,14 +81,18 @@ function ConfigForm({
 	const personLabel = configIndex === 1 ? "Your Schedule" : "Friend's Schedule";
 	const personIcon = configIndex === 1 ? User : Users;
 	const Icon = personIcon;
+	const haptic = useHaptic();
 
 	return (
 		<div className="flex-1 bg-white/5 backdrop-blur-xl rounded-xl sm:rounded-2xl border border-white/10 shadow-xl overflow-hidden flex flex-col">
 			{/* Header with icon - Clickable to collapse/expand */}
-			<button
-				onClick={() => setIsFormExpanded((prev) => !prev)}
-				className="w-full bg-gradient-to-r from-[#F0BB78]/10 to-[#543A14]/10 px-6 py-4 border-b border-white/10 flex items-center justify-between cursor-pointer hover:from-[#F0BB78]/15 hover:to-[#543A14]/15 transition-all"
-			>
+		<button
+			onClick={() => {
+				haptic("light");
+				setIsFormExpanded((prev) => !prev);
+			}}
+			className="w-full bg-gradient-to-r from-[#F0BB78]/10 to-[#543A14]/10 px-6 py-4 border-b border-white/10 flex items-center justify-between cursor-pointer hover:from-[#F0BB78]/15 hover:to-[#543A14]/15 transition-all"
+		>
 				<div className="flex items-center gap-3">
 					<div className="w-10 h-10 rounded-full bg-[#F0BB78]/20 border border-[#F0BB78]/30 flex items-center justify-center shrink-0">
 						<Icon className="w-5 h-5 text-[#F0BB78]" />
@@ -129,10 +134,13 @@ function ConfigForm({
 							{/* Saved Configs Dropdown */}
 							{Object.keys(savedConfigs).length > 0 && (
 								<div className="bg-white/5 rounded-lg border border-white/10 overflow-hidden shrink-0">
-									<button
-										onClick={() => setIsConfigOpen((prev) => !prev)}
-										className="w-full flex items-center justify-between px-4 py-3 bg-transparent hover:bg-white/5 transition-all duration-200 focus:outline-none cursor-pointer select-none"
-									>
+								<button
+									onClick={() => {
+										haptic("light");
+										setIsConfigOpen((prev) => !prev);
+									}}
+									className="w-full flex items-center justify-between px-4 py-3 bg-transparent hover:bg-white/5 transition-all duration-200 focus:outline-none cursor-pointer select-none"
+								>
 										<span className="text-sm font-medium text-[#F0BB78]">
 											Load Saved Config
 										</span>
@@ -158,9 +166,10 @@ function ConfigForm({
 															className="flex items-center justify-between gap-2"
 														>
 															<button
-																onClick={() =>
-																	onSelectConfig(configIndex, name)
-																}
+																onClick={() => {
+																	haptic("medium");
+																	onSelectConfig(configIndex, name);
+																}}
 																className="flex-1 text-left px-3 py-2 rounded-lg bg-[#FFF0DC]/10 border border-[#F0BB78]/10 hover:bg-[#F0BB78]/20 text-[#F0BB78] text-sm font-medium transition-all duration-200 truncate"
 															>
 																{name}
@@ -168,6 +177,7 @@ function ConfigForm({
 															<button
 																onClick={(e) => {
 																	e.stopPropagation();
+																	haptic("error");
 																	onDeleteConfig(name);
 																}}
 																className="p-2 rounded-lg hover:bg-red-500/10 text-red-400 hover:text-red-300 transition-colors shrink-0"

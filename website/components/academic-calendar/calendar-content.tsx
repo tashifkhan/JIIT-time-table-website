@@ -18,6 +18,7 @@ import {
 	useAcademicCalendar,
 	useDefaultAcademicYear,
 } from "../../hooks/use-api";
+import { useHaptic } from "../../hooks/use-haptic";
 
 export default function CalendarContent() {
 	const [isLoading, setIsLoading] = useState(false);
@@ -26,6 +27,7 @@ export default function CalendarContent() {
 	const [showHolidaysOnly, setShowHolidaysOnly] = useState(false);
 	const eventRefs = useRef<HTMLDivElement[]>([]);
 	const upcomingDividerRef = useRef<HTMLDivElement | null>(null);
+	const haptic = useHaptic();
 
 	// Fetch available years
 	const { data: availableYears = [], isLoading: isYearsLoading } =
@@ -226,11 +228,12 @@ export default function CalendarContent() {
 
 					{/* Action Buttons - Compact row on mobile, Fixed column on desktop */}
 					<div className="flex flex-row flex-wrap justify-center gap-2 mt-4 mb-4 md:fixed md:bottom-8 md:left-8 md:flex-col md:items-start md:m-0 md:z-50 md:gap-3">
-						<motion.button
-							onClick={() => {
-								setShowHolidaysOnly(!showHolidaysOnly);
-								setVisibleEventsCount(0);
-							}}
+					<motion.button
+						onClick={() => {
+							haptic("selection");
+							setShowHolidaysOnly(!showHolidaysOnly);
+							setVisibleEventsCount(0);
+						}}
 							className={`px-3 py-1.5 sm:px-6 sm:py-2 rounded-lg backdrop-blur-lg border transition-all duration-300 shadow-lg flex items-center gap-1.5 sm:gap-2 text-xs sm:text-base ${
 								showHolidaysOnly
 									? "bg-red-500/20 border-red-500/50 text-red-300 hover:bg-red-500/30"
@@ -248,9 +251,12 @@ export default function CalendarContent() {
 							</span>
 						</motion.button>
 
-						<motion.button
-							onClick={handleAddToCalendar}
-							disabled={isLoading}
+					<motion.button
+						onClick={() => {
+							haptic("medium");
+							handleAddToCalendar();
+						}}
+						disabled={isLoading}
 							className="px-3 py-1.5 sm:px-6 sm:py-2 rounded-lg backdrop-blur-lg bg-white/10 border border-white/20 text-[#F0BB78] hover:bg-white/20 transition-all duration-300 shadow-lg flex items-center gap-1.5 sm:gap-2 text-xs sm:text-base"
 							whileHover={{ scale: 1.05 }}
 							whileTap={{ scale: 0.95 }}
@@ -264,14 +270,15 @@ export default function CalendarContent() {
 							</span>
 						</motion.button>
 
-						<motion.button
-							onClick={() => {
-								downloadICalFile(
-									calendarData,
-									`jiit-academic-calendar-${selectedYear}.ics`
-								);
-							}}
-							disabled={calendarData.length === 0}
+					<motion.button
+						onClick={() => {
+							haptic("success");
+							downloadICalFile(
+								calendarData,
+								`jiit-academic-calendar-${selectedYear}.ics`
+							);
+						}}
+						disabled={calendarData.length === 0}
 							className="px-3 py-1.5 sm:px-6 sm:py-2 rounded-lg backdrop-blur-lg bg-white/10 border border-white/20 text-[#F0BB78] hover:bg-white/20 transition-all duration-300 shadow-lg flex items-center gap-1.5 sm:gap-2 text-xs sm:text-base disabled:opacity-50 disabled:cursor-not-allowed"
 							whileHover={{ scale: 1.05 }}
 							whileTap={{ scale: 0.95 }}
@@ -295,10 +302,11 @@ export default function CalendarContent() {
 							initial={{ opacity: 0, y: 20 }}
 							animate={{ opacity: 1, y: 0 }}
 						>
-							<button
-								onClick={() => {
-									setVisibleEventsCount(pastEvents.length);
-									setTimeout(() => {
+						<button
+							onClick={() => {
+								haptic("light");
+								setVisibleEventsCount(pastEvents.length);
+								setTimeout(() => {
 										if (upcomingDividerRef.current) {
 											const rect =
 												upcomingDividerRef.current.getBoundingClientRect();

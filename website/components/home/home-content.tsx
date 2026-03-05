@@ -33,6 +33,7 @@ import {
 	useBatchMappings,
 	useDefaultSemester,
 } from "../../hooks/use-api";
+import { useHaptic } from "../../hooks/use-haptic";
 
 export default function HomeContent() {
 	const { data: timeTableData = [], isLoading: isTimeTableLoading } =
@@ -59,6 +60,7 @@ export default function HomeContent() {
 	const router = useRouter();
 
 	const { schedule, setSchedule, setEditedSchedule } = useContext(UserContext);
+	const haptic = useHaptic();
 
 	const [numExecutions, setNumExecutions] = React.useState(0);
 	const [isGenerating, setIsGenerating] = useState(false);
@@ -442,10 +444,13 @@ export default function HomeContent() {
 				{Object.keys(savedConfigs).length > 0 && (
 					<div className="mb-4 w-full max-w-xl mx-auto">
 						<div className="bg-white/5 rounded-xl sm:rounded-2xl border border-white/10 shadow-xl overflow-hidden hover:border-[#F0BB78]/20 transition-all duration-300">
-							<button
-								onClick={() => setIsConfigOpen((prev) => !prev)}
-								className="w-full flex items-center justify-between px-6 py-4 bg-transparent hover:bg-white/5 transition-all duration-200 focus:outline-none cursor-pointer select-none group"
-							>
+						<button
+							onClick={() => {
+								haptic("light");
+								setIsConfigOpen((prev) => !prev);
+							}}
+							className="w-full flex items-center justify-between px-6 py-4 bg-transparent hover:bg-white/5 transition-all duration-200 focus:outline-none cursor-pointer select-none group"
+						>
 								<span className="text-lg font-semibold text-[#F0BB78] flex items-center gap-2">
 									Load Saved Config
 									<span className="text-xs bg-[#F0BB78]/20 px-2 py-0.5 rounded-full">
@@ -474,39 +479,42 @@ export default function HomeContent() {
 												key={name}
 												className="flex items-center justify-between gap-2 group/item"
 											>
-												<button
-													onClick={async () => {
-														await handleSelectConfig(name);
-														setIsConfigOpen(false);
-													}}
-													className="flex-1 text-left px-4 py-3 rounded-lg bg-[#FFF0DC]/10 border border-[#F0BB78]/10 hover:bg-[#F0BB78]/20 hover:border-[#F0BB78]/30 text-[#F0BB78] font-medium transition-all duration-200 hover:translate-x-1"
-												>
-													{name}
-												</button>
-												<button
-													onClick={(e) => {
-														e.stopPropagation();
-														setShareDialogConfig({
-															name,
-															config: savedConfigs[name],
-														});
-														setShowShareDialog(true);
-													}}
-													className="p-2 rounded-lg hover:bg-[#F0BB78]/20 transition-all duration-200 opacity-60 group-hover/item:opacity-100"
-													title="Share config"
-												>
-													<Share2 className="w-4 h-4 text-[#F0BB78]" />
-												</button>
-												<button
-													onClick={(e) => {
-														e.stopPropagation();
-														handleDeleteConfig(name);
-													}}
-													className="p-2 rounded-lg hover:bg-red-500/20 transition-all duration-200 opacity-60 group-hover/item:opacity-100"
-													title="Delete config"
-												>
-													<Trash className="w-4 h-4 text-red-400" />
-												</button>
+											<button
+												onClick={async () => {
+													haptic("medium");
+													await handleSelectConfig(name);
+													setIsConfigOpen(false);
+												}}
+												className="flex-1 text-left px-4 py-3 rounded-lg bg-[#FFF0DC]/10 border border-[#F0BB78]/10 hover:bg-[#F0BB78]/20 hover:border-[#F0BB78]/30 text-[#F0BB78] font-medium transition-all duration-200 hover:translate-x-1"
+											>
+												{name}
+											</button>
+											<button
+												onClick={(e) => {
+													e.stopPropagation();
+													haptic("light");
+													setShareDialogConfig({
+														name,
+														config: savedConfigs[name],
+													});
+													setShowShareDialog(true);
+												}}
+												className="p-2 rounded-lg hover:bg-[#F0BB78]/20 transition-all duration-200 opacity-60 group-hover/item:opacity-100"
+												title="Share config"
+											>
+												<Share2 className="w-4 h-4 text-[#F0BB78]" />
+											</button>
+											<button
+												onClick={(e) => {
+													e.stopPropagation();
+													haptic("error");
+													handleDeleteConfig(name);
+												}}
+												className="p-2 rounded-lg hover:bg-red-500/20 transition-all duration-200 opacity-60 group-hover/item:opacity-100"
+												title="Delete config"
+											>
+												<Trash className="w-4 h-4 text-red-400" />
+											</button>
 											</div>
 										))}
 									</div>
@@ -523,10 +531,13 @@ export default function HomeContent() {
 					transition={{ duration: 0.5, delay: 0.2 }}
 				>
 					<div className="w-full max-w-xl bg-white/5 rounded-xl sm:rounded-2xl border border-white/10 shadow-xl overflow-hidden hover:border-[#F0BB78]/20 transition-all duration-300">
-						<button
-							onClick={() => setIsFormOpen((prev) => !prev)}
-							className="w-full flex items-center justify-between px-6 py-4 bg-transparent hover:bg-white/5 transition-all duration-200 focus:outline-none cursor-pointer select-none group"
-						>
+					<button
+						onClick={() => {
+							haptic("light");
+							setIsFormOpen((prev) => !prev);
+						}}
+						className="w-full flex items-center justify-between px-6 py-4 bg-transparent hover:bg-white/5 transition-all duration-200 focus:outline-none cursor-pointer select-none group"
+					>
 							<span className="text-lg font-semibold text-[#F0BB78] flex items-center gap-2">
 								Create Your Schedule
 							</span>
@@ -578,18 +589,19 @@ export default function HomeContent() {
 							</motion.div>
 						</div>
 						<div className="flex justify-center gap-4">
-							<motion.button
-								onClick={() => {
-									router.push("/timeline");
-								}}
-								className="mt-4 px-6 py-2 rounded-lg backdrop-blur-lg bg-white/10 border border-white/20 
-														 text-[#F0BB78] hover:bg-white/20 transition-all duration-300 shadow-lg
-														 flex items-center gap-2"
-								initial={{ opacity: 0 }}
-								animate={{ opacity: 1 }}
-								whileHover={{ scale: 1.05 }}
-								whileTap={{ scale: 0.95 }}
-							>
+						<motion.button
+							onClick={() => {
+								haptic("navigation");
+								router.push("/timeline");
+							}}
+							className="mt-4 px-6 py-2 rounded-lg backdrop-blur-lg bg-white/10 border border-white/20 
+													 text-[#F0BB78] hover:bg-white/20 transition-all duration-300 shadow-lg
+													 flex items-center gap-2"
+							initial={{ opacity: 0 }}
+							animate={{ opacity: 1 }}
+							whileHover={{ scale: 1.05 }}
+							whileTap={{ scale: 0.95 }}
+						>
 								<Calendar className="w-5 h-5" />
 								<span>Timeline View</span>
 							</motion.button>
@@ -712,11 +724,12 @@ export default function HomeContent() {
 										className="w-full px-4 py-3 pr-12 text-sm bg-white/5 border border-white/20 rounded-lg text-white placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-[#F0BB78]/50 focus:border-[#F0BB78]/50 transition-all"
 										onFocus={(e) => e.target.select()}
 									/>
-									<button
-										className="absolute right-3 top-1/2 -translate-y-1/2 p-1.5 rounded-md hover:bg-white/10 transition-colors group"
-										onClick={async () => {
-											const { year, batch, campus, selectedSubjects } =
-												shareDialogConfig.config;
+								<button
+									className="absolute right-3 top-1/2 -translate-y-1/2 p-1.5 rounded-md hover:bg-white/10 transition-colors group"
+									onClick={async () => {
+										haptic("success");
+										const { year, batch, campus, selectedSubjects } =
+											shareDialogConfig.config;
 											const params = new URLSearchParams({
 												year,
 												batch,
@@ -760,7 +773,10 @@ export default function HomeContent() {
 							{/* Action Buttons */}
 							<div className="flex gap-3 pt-2">
 								<button
-									onClick={() => setShowShareDialog(false)}
+									onClick={() => {
+										haptic("light");
+										setShowShareDialog(false);
+									}}
 									className="flex-1 px-4 py-2.5 text-sm font-medium text-slate-300 bg-white/5 hover:bg-white/10 border border-white/20 rounded-lg transition-all duration-200 flex items-center justify-center gap-2"
 								>
 									<svg
@@ -781,6 +797,7 @@ export default function HomeContent() {
 								<button
 									className="flex-1 px-4 py-2.5 text-sm font-medium text-white bg-[#F0BB78] hover:bg-[#e0a85c] rounded-lg transition-all duration-200 flex items-center justify-center gap-2 shadow-lg"
 									onClick={async () => {
+										haptic("success");
 										const { year, batch, campus, selectedSubjects } =
 											shareDialogConfig.config;
 										const params = new URLSearchParams({

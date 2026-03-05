@@ -252,10 +252,10 @@ export default function CalendarContent() {
 						</motion.button>
 
 					<motion.button
-						onClick={() => {
-							haptic("medium");
-							handleAddToCalendar();
-						}}
+					onClick={() => {
+						haptic("light");
+						handleAddToCalendar();
+					}}
 						disabled={isLoading}
 							className="px-3 py-1.5 sm:px-6 sm:py-2 rounded-lg backdrop-blur-lg bg-white/10 border border-white/20 text-[#F0BB78] hover:bg-white/20 transition-all duration-300 shadow-lg flex items-center gap-1.5 sm:gap-2 text-xs sm:text-base"
 							whileHover={{ scale: 1.05 }}
@@ -271,9 +271,9 @@ export default function CalendarContent() {
 						</motion.button>
 
 					<motion.button
-						onClick={() => {
-							haptic("success");
-							downloadICalFile(
+					onClick={() => {
+						haptic("light");
+						downloadICalFile(
 								calendarData,
 								`jiit-academic-calendar-${selectedYear}.ics`
 							);
@@ -303,9 +303,9 @@ export default function CalendarContent() {
 							animate={{ opacity: 1, y: 0 }}
 						>
 						<button
-							onClick={() => {
-								haptic("light");
-								setVisibleEventsCount(pastEvents.length);
+						onClick={() => {
+							haptic("selection");
+							setVisibleEventsCount(pastEvents.length);
 								setTimeout(() => {
 										if (upcomingDividerRef.current) {
 											const rect =

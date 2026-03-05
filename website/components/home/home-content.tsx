@@ -445,10 +445,10 @@ export default function HomeContent() {
 					<div className="mb-4 w-full max-w-xl mx-auto">
 						<div className="bg-white/5 rounded-xl sm:rounded-2xl border border-white/10 shadow-xl overflow-hidden hover:border-[#F0BB78]/20 transition-all duration-300">
 						<button
-							onClick={() => {
-								haptic("light");
-								setIsConfigOpen((prev) => !prev);
-							}}
+						onClick={() => {
+							haptic("selection");
+							setIsConfigOpen((prev) => !prev);
+						}}
 							className="w-full flex items-center justify-between px-6 py-4 bg-transparent hover:bg-white/5 transition-all duration-200 focus:outline-none cursor-pointer select-none group"
 						>
 								<span className="text-lg font-semibold text-[#F0BB78] flex items-center gap-2">
@@ -480,9 +480,9 @@ export default function HomeContent() {
 												className="flex items-center justify-between gap-2 group/item"
 											>
 											<button
-												onClick={async () => {
-													haptic("medium");
-													await handleSelectConfig(name);
+											onClick={async () => {
+												haptic("light");
+												await handleSelectConfig(name);
 													setIsConfigOpen(false);
 												}}
 												className="flex-1 text-left px-4 py-3 rounded-lg bg-[#FFF0DC]/10 border border-[#F0BB78]/10 hover:bg-[#F0BB78]/20 hover:border-[#F0BB78]/30 text-[#F0BB78] font-medium transition-all duration-200 hover:translate-x-1"
@@ -490,10 +490,10 @@ export default function HomeContent() {
 												{name}
 											</button>
 											<button
-												onClick={(e) => {
-													e.stopPropagation();
-													haptic("light");
-													setShareDialogConfig({
+											onClick={(e) => {
+												e.stopPropagation();
+												haptic("selection");
+												setShareDialogConfig({
 														name,
 														config: savedConfigs[name],
 													});
@@ -505,10 +505,10 @@ export default function HomeContent() {
 												<Share2 className="w-4 h-4 text-[#F0BB78]" />
 											</button>
 											<button
-												onClick={(e) => {
-													e.stopPropagation();
-													haptic("error");
-													handleDeleteConfig(name);
+										onClick={(e) => {
+											e.stopPropagation();
+											haptic("light");
+											handleDeleteConfig(name);
 												}}
 												className="p-2 rounded-lg hover:bg-red-500/20 transition-all duration-200 opacity-60 group-hover/item:opacity-100"
 												title="Delete config"
@@ -532,10 +532,10 @@ export default function HomeContent() {
 				>
 					<div className="w-full max-w-xl bg-white/5 rounded-xl sm:rounded-2xl border border-white/10 shadow-xl overflow-hidden hover:border-[#F0BB78]/20 transition-all duration-300">
 					<button
-						onClick={() => {
-							haptic("light");
-							setIsFormOpen((prev) => !prev);
-						}}
+					onClick={() => {
+						haptic("selection");
+						setIsFormOpen((prev) => !prev);
+					}}
 						className="w-full flex items-center justify-between px-6 py-4 bg-transparent hover:bg-white/5 transition-all duration-200 focus:outline-none cursor-pointer select-none group"
 					>
 							<span className="text-lg font-semibold text-[#F0BB78] flex items-center gap-2">
@@ -726,21 +726,21 @@ export default function HomeContent() {
 									/>
 								<button
 									className="absolute right-3 top-1/2 -translate-y-1/2 p-1.5 rounded-md hover:bg-white/10 transition-colors group"
-									onClick={async () => {
-										haptic("success");
-										const { year, batch, campus, selectedSubjects } =
-											shareDialogConfig.config;
-											const params = new URLSearchParams({
-												year,
-												batch,
-												campus,
-												selectedSubjects: (selectedSubjects || []).join(","),
-											});
-											const url = `${window.location.origin}${
-												window.location.pathname
-											}?${params.toString()}`;
-											try {
-												await navigator.clipboard.writeText(url);
+								onClick={async () => {
+									haptic("light");
+									const { year, batch, campus, selectedSubjects } =
+										shareDialogConfig.config;
+										const params = new URLSearchParams({
+											year,
+											batch,
+											campus,
+											selectedSubjects: (selectedSubjects || []).join(","),
+										});
+										const url = `${window.location.origin}${
+											window.location.pathname
+										}?${params.toString()}`;
+										try {
+											await navigator.clipboard.writeText(url);
 											} catch (err) {
 												// Fallback for older browsers
 												const input = document.querySelector(
@@ -773,9 +773,9 @@ export default function HomeContent() {
 							{/* Action Buttons */}
 							<div className="flex gap-3 pt-2">
 								<button
-									onClick={() => {
-										haptic("light");
-										setShowShareDialog(false);
+								onClick={() => {
+									haptic("selection");
+									setShowShareDialog(false);
 									}}
 									className="flex-1 px-4 py-2.5 text-sm font-medium text-slate-300 bg-white/5 hover:bg-white/10 border border-white/20 rounded-lg transition-all duration-200 flex items-center justify-center gap-2"
 								>
@@ -796,16 +796,16 @@ export default function HomeContent() {
 								</button>
 								<button
 									className="flex-1 px-4 py-2.5 text-sm font-medium text-white bg-[#F0BB78] hover:bg-[#e0a85c] rounded-lg transition-all duration-200 flex items-center justify-center gap-2 shadow-lg"
-									onClick={async () => {
-										haptic("success");
-										const { year, batch, campus, selectedSubjects } =
-											shareDialogConfig.config;
-										const params = new URLSearchParams({
-											year,
-											batch,
-											campus,
-											selectedSubjects: (selectedSubjects || []).join(","),
-										});
+								onClick={async () => {
+									haptic("light");
+									const { year, batch, campus, selectedSubjects } =
+										shareDialogConfig.config;
+									const params = new URLSearchParams({
+										year,
+										batch,
+										campus,
+										selectedSubjects: (selectedSubjects || []).join(","),
+									});
 										const url = `${window.location.origin}${
 											window.location.pathname
 										}?${params.toString()}`;

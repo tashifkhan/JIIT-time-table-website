@@ -88,7 +88,7 @@ function ConfigForm({
 			{/* Header with icon - Clickable to collapse/expand */}
 		<button
 			onClick={() => {
-				haptic("light");
+				haptic("selection");
 				setIsFormExpanded((prev) => !prev);
 			}}
 			className="w-full bg-gradient-to-r from-[#F0BB78]/10 to-[#543A14]/10 px-6 py-4 border-b border-white/10 flex items-center justify-between cursor-pointer hover:from-[#F0BB78]/15 hover:to-[#543A14]/15 transition-all"
@@ -135,10 +135,10 @@ function ConfigForm({
 							{Object.keys(savedConfigs).length > 0 && (
 								<div className="bg-white/5 rounded-lg border border-white/10 overflow-hidden shrink-0">
 								<button
-									onClick={() => {
-										haptic("light");
-										setIsConfigOpen((prev) => !prev);
-									}}
+					onClick={() => {
+									haptic("selection");
+									setIsConfigOpen((prev) => !prev);
+								}}
 									className="w-full flex items-center justify-between px-4 py-3 bg-transparent hover:bg-white/5 transition-all duration-200 focus:outline-none cursor-pointer select-none"
 								>
 										<span className="text-sm font-medium text-[#F0BB78]">
@@ -166,19 +166,19 @@ function ConfigForm({
 															className="flex items-center justify-between gap-2"
 														>
 															<button
-																onClick={() => {
-																	haptic("medium");
-																	onSelectConfig(configIndex, name);
+							onClick={() => {
+																haptic("light");
+																onSelectConfig(configIndex, name);
 																}}
 																className="flex-1 text-left px-3 py-2 rounded-lg bg-[#FFF0DC]/10 border border-[#F0BB78]/10 hover:bg-[#F0BB78]/20 text-[#F0BB78] text-sm font-medium transition-all duration-200 truncate"
 															>
 																{name}
 															</button>
 															<button
-																onClick={(e) => {
-																	e.stopPropagation();
-																	haptic("error");
-																	onDeleteConfig(name);
+														onClick={(e) => {
+																e.stopPropagation();
+																haptic("light");
+																onDeleteConfig(name);
 																}}
 																className="p-2 rounded-lg hover:bg-red-500/10 text-red-400 hover:text-red-300 transition-colors shrink-0"
 																title="Delete config"

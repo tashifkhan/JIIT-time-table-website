@@ -37,7 +37,7 @@ export const TimelineHeader: React.FC<TimelineHeaderProps> = ({
 				</h1>
 				<button
 					onClick={() => {
-						haptic("medium");
+						haptic("light");
 						onToday();
 					}}
 					className="px-4 py-1.5 md:px-5 md:py-2 text-xs md:text-sm font-semibold text-[#23201c] bg-gradient-to-r from-[#F0BB78] to-[#D4A366] rounded-full shadow-lg shadow-[#F0BB78]/20 hover:shadow-[#F0BB78]/40 hover:scale-105 transition-all duration-200 md:ml-8 active:scale-95"
@@ -51,7 +51,7 @@ export const TimelineHeader: React.FC<TimelineHeaderProps> = ({
 				<div className="flex items-center gap-1 md:bg-[#FFF0DC]/5 md:rounded-full md:p-1 md:border md:border-[#FFF0DC]/5">
 					<button
 						onClick={() => {
-							haptic("light");
+							haptic("selection");
 							onNavigate("prev");
 						}}
 						className="p-1.5 md:p-2 text-[#FFF0DC]/70 hover:text-[#FFF0DC] hover:bg-[#FFF0DC]/10 rounded-full transition-all duration-200 active:scale-90"
@@ -73,7 +73,7 @@ export const TimelineHeader: React.FC<TimelineHeaderProps> = ({
 					</button>
 					<button
 						onClick={() => {
-							haptic("light");
+							haptic("selection");
 							onNavigate("next");
 						}}
 						className="p-1.5 md:p-2 text-[#FFF0DC]/70 hover:text-[#FFF0DC] hover:bg-[#FFF0DC]/10 rounded-full transition-all duration-200 active:scale-90"

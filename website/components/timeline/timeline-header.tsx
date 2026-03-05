@@ -1,4 +1,7 @@
+"use client";
+
 import React from "react";
+import { useHaptic } from "../../hooks/use-haptic";
 
 interface TimelineHeaderProps {
 	currentDate: Date;
@@ -15,6 +18,8 @@ export const TimelineHeader: React.FC<TimelineHeaderProps> = ({
 	onNavigate,
 	onToday,
 }) => {
+	const haptic = useHaptic();
+
 	const monthYear = currentDate.toLocaleString("default", {
 		month: "long",
 		year: "numeric",
@@ -31,7 +36,10 @@ export const TimelineHeader: React.FC<TimelineHeaderProps> = ({
 					</span>
 				</h1>
 				<button
-					onClick={onToday}
+					onClick={() => {
+						haptic("medium");
+						onToday();
+					}}
 					className="px-4 py-1.5 md:px-5 md:py-2 text-xs md:text-sm font-semibold text-[#23201c] bg-gradient-to-r from-[#F0BB78] to-[#D4A366] rounded-full shadow-lg shadow-[#F0BB78]/20 hover:shadow-[#F0BB78]/40 hover:scale-105 transition-all duration-200 md:ml-8 active:scale-95"
 				>
 					Today
@@ -42,7 +50,10 @@ export const TimelineHeader: React.FC<TimelineHeaderProps> = ({
 			<div className="flex items-center justify-between w-full md:w-auto gap-4 md:gap-6 bg-[#FFF0DC]/5 md:bg-transparent rounded-lg p-2 md:p-0">
 				<div className="flex items-center gap-1 md:bg-[#FFF0DC]/5 md:rounded-full md:p-1 md:border md:border-[#FFF0DC]/5">
 					<button
-						onClick={() => onNavigate("prev")}
+						onClick={() => {
+							haptic("light");
+							onNavigate("prev");
+						}}
 						className="p-1.5 md:p-2 text-[#FFF0DC]/70 hover:text-[#FFF0DC] hover:bg-[#FFF0DC]/10 rounded-full transition-all duration-200 active:scale-90"
 						aria-label="Previous"
 					>
@@ -61,7 +72,10 @@ export const TimelineHeader: React.FC<TimelineHeaderProps> = ({
 						</svg>
 					</button>
 					<button
-						onClick={() => onNavigate("next")}
+						onClick={() => {
+							haptic("light");
+							onNavigate("next");
+						}}
 						className="p-1.5 md:p-2 text-[#FFF0DC]/70 hover:text-[#FFF0DC] hover:bg-[#FFF0DC]/10 rounded-full transition-all duration-200 active:scale-90"
 						aria-label="Next"
 					>
@@ -89,7 +103,10 @@ export const TimelineHeader: React.FC<TimelineHeaderProps> = ({
 			<div className="flex items-center gap-2 w-full md:w-auto justify-end">
 				<div className="relative flex w-full md:w-auto bg-[#000]/20 backdrop-blur-sm rounded-lg p-1 border border-[#FFF0DC]/5">
 					<button
-						onClick={() => onViewChange("day")}
+						onClick={() => {
+							haptic("selection");
+							onViewChange("day");
+						}}
 						className={`flex-1 md:flex-none px-4 md:px-6 py-1.5 text-xs md:text-sm font-medium rounded-md transition-all duration-200 ${
 							view === "day"
 								? "bg-[#F0BB78] text-[#23201c] shadow-md"
@@ -99,7 +116,10 @@ export const TimelineHeader: React.FC<TimelineHeaderProps> = ({
 						Day
 					</button>
 					<button
-						onClick={() => onViewChange("week")}
+						onClick={() => {
+							haptic("selection");
+							onViewChange("week");
+						}}
 						className={`flex-1 md:flex-none px-4 md:px-6 py-1.5 text-xs md:text-sm font-medium rounded-md transition-all duration-200 ${
 							view === "week"
 								? "bg-[#F0BB78] text-[#23201c] shadow-md"

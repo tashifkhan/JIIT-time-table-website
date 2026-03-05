@@ -2,8 +2,10 @@
 import { motion } from "framer-motion";
 import { Search, Clock, Calendar, Home, ArrowLeft } from "lucide-react";
 import Link from "next/link";
+import { useHaptic } from "../hooks/use-haptic";
 
 export default function NotFound() {
+	const haptic = useHaptic();
 	return (
 		<>
 			{/* Background effects */}
@@ -153,7 +155,7 @@ export default function NotFound() {
 					transition={{ duration: 0.6, delay: 1.0 }}
 				>
 					<button
-						onClick={() => window.history.back()}
+						onClick={() => { haptic("light"); window.history.back(); }}
 						className="group flex items-center gap-2 text-slate-400 hover:text-[#F0BB78] transition-colors text-sm"
 					>
 						<ArrowLeft className="w-4 h-4 group-hover:-translate-x-1 transition-transform" />

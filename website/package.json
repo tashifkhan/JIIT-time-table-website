@@ -39,7 +39,8 @@
 		"react-swipeable": "^7.0.2",
 		"swagger-ui-react": "^5.30.3",
 		"tailwind-merge": "^3.4.0",
-		"tailwindcss-animate": "^1.0.7"
+		"tailwindcss-animate": "^1.0.7",
+		"web-haptics": "^0.0.6"
 	},
 	"devDependencies": {
 		"@ducanh2912/next-pwa": "^10.2.9",

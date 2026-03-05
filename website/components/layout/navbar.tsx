@@ -15,6 +15,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { useSwipeable } from "react-swipeable";
 import MobileNavbar from "./mobile-navbar";
+import { useHaptic } from "../../hooks/use-haptic";
 
 export const tabs = [
 	{
@@ -54,6 +55,7 @@ export default function Navbar() {
 	const [scrolled, setScrolled] = useState(false);
 	const router = useRouter();
 	const pathname = usePathname();
+	const haptic = useHaptic();
 
 	// Find current tab index
 	const currentTabIndex = tabs.findIndex((tab) => {
@@ -81,6 +83,7 @@ export default function Navbar() {
 			if (isTimelinePage) return;
 			// Swipe left to go to next page
 			const nextIndex = (currentTabIndex + 1) % tabs.length;
+			haptic("navigation");
 			router.push(tabs[nextIndex].path);
 		},
 		onSwipedRight: () => {
@@ -89,6 +92,7 @@ export default function Navbar() {
 			// Swipe right to go to previous page
 			const prevIndex =
 				currentTabIndex <= 0 ? tabs.length - 1 : currentTabIndex - 1;
+			haptic("navigation");
 			router.push(tabs[prevIndex].path);
 		},
 		trackMouse: true, // Enable mouse swipe for desktop testing

@@ -4,10 +4,12 @@ import React, { useState, useRef, useEffect } from "react";
 import { motion } from "framer-motion";
 import { usePathname, useRouter } from "next/navigation";
 import { tabs } from "./navbar";
+import { useHaptic } from "../../hooks/use-haptic";
 
 const MobileNavbar = () => {
 	const pathname = usePathname();
 	const router = useRouter();
+	const haptic = useHaptic();
 	const [active, setActive] = useState(0);
 	const [indicatorStyle, setIndicatorStyle] = useState({ width: 0, left: 0 });
 	const containerRef = useRef<HTMLDivElement>(null);
@@ -73,7 +75,10 @@ const MobileNavbar = () => {
 							ref={(el) => {
 								btnRefs.current[index] = el;
 							}}
-							onClick={() => router.push(tab.path)}
+							onClick={() => {
+								haptic("navigation");
+								router.push(tab.path);
+							}}
 							className={`relative flex flex-col items-center justify-center flex-1 px-1 py-2 text-sm font-medium transition-colors z-10 ${
 								isActive
 									? "text-[#F0BB78]"

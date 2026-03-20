@@ -33,7 +33,7 @@ export async function initializePyodide() {
   try {
     if (!window.loadPyodide) {
       const script = document.createElement('script');
-      script.src = 'https://cdn.jsdelivr.net/pyodide/v0.27.0/full/pyodide.js';
+      script.src = 'https://cdn.jsdelivr.net/pyodide/v0.27.7/full/pyodide.js';
       script.async = true;
       document.body.appendChild(script);
       await new Promise((resolve, reject) => {
@@ -43,7 +43,7 @@ export async function initializePyodide() {
     }
 
     pyodideInstance = await window.loadPyodide({
-      indexURL: 'https://cdn.jsdelivr.net/pyodide/v0.27.0/full/',
+      indexURL: 'https://cdn.jsdelivr.net/pyodide/v0.27.7/full/',
       fullStdLib: false,
     });
     if (!pyodideInstance) {

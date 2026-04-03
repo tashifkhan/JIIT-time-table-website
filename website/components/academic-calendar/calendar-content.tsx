@@ -227,22 +227,32 @@ export default function CalendarContent() {
 					</div>
 
 					{/* Action Buttons - Compact row on mobile, Fixed column on desktop */}
-					<div className="flex flex-row flex-wrap justify-center gap-2 mt-4 mb-4 md:fixed md:bottom-8 md:left-8 md:flex-col md:items-start md:m-0 md:z-50 md:gap-3">
+
+					{/* <div className="flex flex-row flex-wrap justify-center gap-2 mt-4 mb-4 md:fixed md:bottom-8 md:left-8 md:flex-col md:items-start md:m-0 md:z-50 md:gap-3"> */}  
+
+					<div className="flex flex-row flex-wrap justify-center gap-2 mt-4 mb-4
+				     md:fixed md:bottom-8 md:left-6 md:flex-col md:items-stretch md:w-[calc(16rem-3rem)] md:z-50 md:gap-3 "> 
 					<motion.button
 						onClick={() => {
 							haptic("selection");
 							setShowHolidaysOnly(!showHolidaysOnly);
 							setVisibleEventsCount(0);
 						}}
-							className={`px-3 py-1.5 sm:px-6 sm:py-2 rounded-lg backdrop-blur-lg border transition-all duration-300 shadow-lg flex items-center gap-1.5 sm:gap-2 text-xs sm:text-base ${
-								showHolidaysOnly
-									? "bg-red-500/20 border-red-500/50 text-red-300 hover:bg-red-500/30"
-									: "bg-white/10 border-white/20 text-[#F0BB78] hover:bg-white/20"
-							}`}
+							// className={`px-3 py-1.5 sm:px-6 sm:py-2 rounded-lg backdrop-blur-lg border transition-all duration-300 shadow-lg flex items-center gap-1.5 sm:gap-2 text-xs sm:text-base ${
+						
+							className={`px-3 py-1.5 sm:px-6 sm:py-2 rounded-lg backdrop-blur-lg border
+							transition-all duration-300 shadow-lg
+							flex items-center justify-start gap-2 text-left
+							text-xs sm:text-base ${
+  								showHolidaysOnly
+   									 ? "bg-red-500/20 border-red-500/50 text-red-300 hover:bg-red-500/30"
+    								 : "bg-white/10 border-white/20 text-[#F0BB78] hover:bg-white/20"
+							   }`}
+
 							whileHover={{ scale: 1.05 }}
 							whileTap={{ scale: 0.95 }}
 						>
-							<Filter className="w-3.5 h-3.5 sm:w-5 sm:h-5" />
+							<Filter className="w-3.5 h-3.5 sm:w-6 sm:h-5" />
 							<span className="hidden sm:inline">
 								{showHolidaysOnly ? "All Events" : "Holidays Only"}
 							</span>
@@ -257,11 +267,17 @@ export default function CalendarContent() {
 						handleAddToCalendar();
 					}}
 						disabled={isLoading}
-							className="px-3 py-1.5 sm:px-6 sm:py-2 rounded-lg backdrop-blur-lg bg-white/10 border border-white/20 text-[#F0BB78] hover:bg-white/20 transition-all duration-300 shadow-lg flex items-center gap-1.5 sm:gap-2 text-xs sm:text-base"
+							// className="px-3 py-1.5 sm:px-6 sm:py-2 rounded-lg backdrop-blur-lg bg-white/10 border border-white/20 text-[#F0BB78] hover:bg-white/20 transition-all duration-300 shadow-lg flex items-center gap-1.5 sm:gap-2 text-xs sm:text-base"
+
+							className="px-3 py-1.5 sm:px-6 sm:py-2 rounded-lg backdrop-blur-lg
+							bg-white/10 border border-white/20 text-[#F0BB78]
+							hover:bg-white/20 transition-all duration-300 shadow-lg
+							flex items-center justify-start gap-2 text-left
+							text-xs sm:text-base" 
 							whileHover={{ scale: 1.05 }}
 							whileTap={{ scale: 0.95 }}
 						>
-							<Calendar className="w-3.5 h-3.5 sm:w-5 sm:h-5" />
+							<Calendar className="w-3.5 h-3.5 sm:w-8 sm:h-5" />
 							<span className="hidden sm:inline">
 								{isLoading ? "Adding..." : "Add to Google Calendar"}
 							</span>
@@ -279,7 +295,13 @@ export default function CalendarContent() {
 							);
 						}}
 						disabled={calendarData.length === 0}
-							className="px-3 py-1.5 sm:px-6 sm:py-2 rounded-lg backdrop-blur-lg bg-white/10 border border-white/20 text-[#F0BB78] hover:bg-white/20 transition-all duration-300 shadow-lg flex items-center gap-1.5 sm:gap-2 text-xs sm:text-base disabled:opacity-50 disabled:cursor-not-allowed"
+							// className="px-3 py-1.5 sm:px-6 sm:py-2 rounded-lg backdrop-blur-lg bg-white/10 border border-white/20 text-[#F0BB78] hover:bg-white/20 transition-all duration-300 shadow-lg flex items-center gap-1.5 sm:gap-2 text-xs sm:text-base disabled:opacity-50 disabled:cursor-not-allowed"
+							className="px-3 py-1.5 sm:px-6 sm:py-2 rounded-lg backdrop-blur-lg
+							bg-white/10 border border-white/20 text-[#F0BB78]
+							hover:bg-white/20 transition-all duration-300 shadow-lg
+							flex items-center justify-start gap-2 text-left
+							text-xs sm:text-base disabled:opacity-50 disabled:cursor-not-allowed"
+
 							whileHover={{ scale: 1.05 }}
 							whileTap={{ scale: 0.95 }}
 						>

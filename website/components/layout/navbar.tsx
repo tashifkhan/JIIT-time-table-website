@@ -100,6 +100,10 @@ export default function Navbar() {
 		preventScrollOnSwipe: false, // Allow normal scrolling
 		delta: 50, // Minimum distance for swipe
 	});
+
+	// to diable "star on github" button on academic calendar page
+	const isAcademicCalendarPage = pathname.startsWith("/academic-calendar");
+
 	return (
 		<>
 			{/* Desktop Sidebar */}
@@ -171,8 +175,7 @@ export default function Navbar() {
 							);
 						})}
 					</div>
-
-					<div className="mt-auto pt-4 border-t border-white/5">
+					{!isAcademicCalendarPage && (<div className="mt-auto pt-4 border-t border-white/5">
 						<Link
 							href="https://github.com/tashifkhan/JIIT-time-table-website"
 							target="_blank"
@@ -182,7 +185,7 @@ export default function Navbar() {
 							<Github className="w-5 h-5 transition-all duration-200 text-slate-400 group-hover:text-slate-200 group-hover:scale-110" />
 							<span className="font-medium">Star on GitHub</span>
 						</Link>
-					</div>
+					</div>)}				
 				</div>
 			</motion.nav>
 

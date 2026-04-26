@@ -1,11 +1,26 @@
 [project]
 name = "creator"
-version = "0.1.0"
-description = "Add your description here"
+version = "0.2.0"
+description = "JIIT Creator Tools — unified CLI and web app for converting academic documents to JSON"
 readme = "README.md"
 requires-python = ">=3.12"
 dependencies = [
     "google-genai>=1.56.0",
+    "openpyxl>=3.1.0",
+    "pandas>=2.2.0",
+    "pydantic>=2.7.0",
+    "pydantic-settings>=2.3.0",
     "python-dotenv>=1.2.2",
     "streamlit>=1.52.2",
+    "typer>=0.12.0",
 ]
+
+[project.scripts]
+creator = "main:main"
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[tool.hatch.build.targets.wheel]
+packages = ["app"]

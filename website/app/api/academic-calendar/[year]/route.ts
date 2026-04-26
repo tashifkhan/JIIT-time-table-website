@@ -1,6 +1,7 @@
 import { NextResponse } from "next/server";
 import fs from "fs";
 import path from "path";
+import { DATA_DIR } from "../../../../lib/data-path";
 
 /**
  * @swagger
@@ -69,35 +70,16 @@ export async function GET(
 	}
 
 	try {
-		const calendarDir = path.join(
-			process.cwd(),
-			"data/calender",
-			year
-		);
+		const filePath = path.join(DATA_DIR, "calender", `${year}.json`);
 
-		if (!fs.existsSync(calendarDir)) {
+		if (!fs.existsSync(filePath)) {
 			return NextResponse.json(
 				{ error: "Calendar not found for the specified year" },
 				{ status: 404 }
 			);
 		}
 
-		// Check for both spellings: calendar.json and calender.json
-		let filePath = path.join(calendarDir, "calendar.json");
-		if (!fs.existsSync(filePath)) {
-			filePath = path.join(calendarDir, "calender.json");
-		}
-
-		if (!fs.existsSync(filePath)) {
-			return NextResponse.json(
-				{ error: "Calendar data file not found" },
-				{ status: 404 }
-			);
-		}
-
-		const fileContent = fs.readFileSync(filePath, "utf-8");
-		const data = JSON.parse(fileContent);
-
+		const data = JSON.parse(fs.readFileSync(filePath, "utf-8"));
 		return NextResponse.json(data);
 	} catch (error) {
 		console.error(`Error reading calendar for year ${year}:`, error);

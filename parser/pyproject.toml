@@ -20,20 +20,29 @@ classifiers = [
     "Programming Language :: Python :: 3.12",
     "Topic :: Software Development :: Libraries :: Python Modules",
 ]
-# No runtime dependencies for Pyodide compatibility
-# pydantic types are optional - only used for development
-dependencies = []
+dependencies = [
+    "pydantic>=2.12.5",
+]
 
 [project.optional-dependencies]
 dev = [
     "build",
     "pytest",
-    "pydantic>=2.12.5",
 ]
 
 [tool.setuptools]
-packages = ["BCA", "common", "modules", "sector_128", "sector_62"]
-py-modules = ["main", "_legacy"]
+packages = [
+    # Canonical packages
+    "models",
+    "utils",
+    "modules",
+    "modules.tt_parsers",
+    "modules.tt_parsers.BCA",
+    "modules.tt_parsers.sector_62",
+    "modules.tt_parsers.sector_128",
+    "modules.compare_tt",
+]
+py-modules = ["main"]
 
 [tool.setuptools.package-data]
 "*" = ["py.typed"]

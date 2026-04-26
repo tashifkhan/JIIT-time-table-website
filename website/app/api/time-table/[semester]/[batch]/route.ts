@@ -1,6 +1,7 @@
 import { NextResponse } from "next/server";
 import fs from "fs";
 import path from "path";
+import { DATA_DIR } from "../../../../../lib/data-path";
 
 /**
  * @swagger
@@ -77,7 +78,7 @@ export async function GET(
 	}
 
 	try {
-		const timeTableDir = path.join(process.cwd(), "data/time-table");
+		const timeTableDir = path.join(DATA_DIR, "time-table");
 		let semesterPath = path.join(timeTableDir, semester);
 
 		// If not found in root, check year directories

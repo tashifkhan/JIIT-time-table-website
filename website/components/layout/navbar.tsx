@@ -8,6 +8,7 @@ import {
 	Utensils,
 	GitCompare,
 	Github,
+	BookOpen,
 } from "lucide-react";
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
@@ -41,6 +42,12 @@ export const tabs = [
 		mobileLabel: "Calendar",
 		path: "/academic-calendar",
 		icon: Calendar,
+	},
+	{
+		label: "Exam Schedule",
+		mobileLabel: "Exams",
+		path: "/exam-schedule",
+		icon: BookOpen,
 	},
 	{
 		label: "Compare Timetables",

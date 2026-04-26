@@ -4,9 +4,9 @@ import { useQuery } from "@tanstack/react-query";
 import { useMemo } from "react";
 import { getSmartSemester, TimeTableInfo } from "../lib/semester";
 import { getSmartAcademicYear, AcademicYear } from "../lib/calendar-utils";
+import { ExamEntry, ExamSemesterInfo } from "../types/exam";
 
 // Types
-
 
 interface MessMenu {
 	menu: {
@@ -121,6 +121,36 @@ export function useMessMenu(apiUrl: string = "/api/mess-menu") {
 		queryKey: ["mess-menu", apiUrl],
 		queryFn: () => fetchMessMenu(apiUrl),
 		staleTime: 60 * 60 * 1000, // 1 hour
+	});
+}
+
+// Exam schedule fetchers
+const fetchExamSemesters = async (): Promise<ExamSemesterInfo[]> => {
+	const res = await fetch("/api/exam-schedule");
+	if (!res.ok) throw new Error("Failed to fetch exam semesters");
+	return res.json();
+};
+
+const fetchExamSchedule = async (semester: string): Promise<ExamEntry[]> => {
+	const res = await fetch(`/api/exam-schedule/${semester}`);
+	if (!res.ok) throw new Error(`Failed to fetch exam schedule for ${semester}`);
+	return res.json();
+};
+
+export function useExamSemesters() {
+	return useQuery({
+		queryKey: ["exam-semesters"],
+		queryFn: fetchExamSemesters,
+		staleTime: 24 * 60 * 60 * 1000,
+	});
+}
+
+export function useExamSchedule(semester: string) {
+	return useQuery({
+		queryKey: ["exam-schedule", semester],
+		queryFn: () => fetchExamSchedule(semester),
+		enabled: !!semester,
+		staleTime: 24 * 60 * 60 * 1000,
 	});
 }
 

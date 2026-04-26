@@ -1,0 +1,2846 @@
+[
+  {
+    "subject_code": "19M21BT117",
+    "subject_type": "L",
+    "subject_name": "ENZYMES AND BIOPROCESS TECHNOLOGY",
+    "exam_date": "11-05-2026",
+    "exam_time": "10.00 AM",
+    "exam_day": "Monday",
+    "semester": "2"
+  },
+  {
+    "subject_code": "24B11CS243",
+    "subject_type": "L",
+    "subject_name": "Data Science & Data Analytics: Theory & Practice",
+    "exam_date": "11-05-2026",
+    "exam_time": "10.00 AM",
+    "exam_day": "Monday",
+    "semester": "2, 4"
+  },
+  {
+    "subject_code": "24B11HS111",
+    "subject_type": "L",
+    "subject_name": "Universal Human Values (UHV)",
+    "exam_date": "11-05-2026",
+    "exam_time": "10.00 AM",
+    "exam_day": "Monday",
+    "semester": "2, 4"
+  },
+  {
+    "subject_code": "24B12PH211",
+    "subject_type": "L",
+    "subject_name": "Introduction to Quantum Mechanics and Quantum Technologies",
+    "exam_date": "11-05-2026",
+    "exam_time": "10.00 AM",
+    "exam_day": "Monday",
+    "semester": "4"
+  },
+  {
+    "subject_code": "24B12PH312",
+    "subject_type": "L",
+    "subject_name": "Quantum Communication",
+    "exam_date": "11-05-2026",
+    "exam_time": "10.00 AM",
+    "exam_day": "Monday",
+    "semester": "6"
+  },
+  {
+    "subject_code": "24B21MA211",
+    "subject_type": "L",
+    "subject_name": "Design and Analysis of Algorithms",
+    "exam_date": "11-05-2026",
+    "exam_time": "10.00 AM",
+    "exam_day": "Monday",
+    "semester": "4"
+  },
+  {
+    "subject_code": "25B11CS361",
+    "subject_type": "L",
+    "subject_name": "Fundamentals of Natural Language Processing",
+    "exam_date": "11-05-2026",
+    "exam_time": "10.00 AM",
+    "exam_day": "Monday",
+    "semester": "6"
+  },
+  {
+    "subject_code": "15B11BT611",
+    "subject_type": "L",
+    "subject_name": "COMPARATIVE AND FUNCTIONAL GENOMICS",
+    "exam_date": "11-05-2026",
+    "exam_time": "02.30 PM",
+    "exam_day": "Monday",
+    "semester": "6"
+  },
+  {
+    "subject_code": "15B11CI513",
+    "subject_type": "L",
+    "subject_name": "SOFTWARE ENGINEERING",
+    "exam_date": "11-05-2026",
+    "exam_time": "02.30 PM",
+    "exam_day": "Monday",
+    "semester": "6"
+  },
+  {
+    "subject_code": "15B11CI514",
+    "subject_type": "L",
+    "subject_name": "ARTIFICIAL INTELLIGENCE",
+    "exam_date": "11-05-2026",
+    "exam_time": "02.30 PM",
+    "exam_day": "Monday",
+    "semester": "6"
+  },
+  {
+    "subject_code": "15B22CI621",
+    "subject_type": "L",
+    "subject_name": "DATA MINING AND WEB ALGORITHMS",
+    "exam_date": "11-05-2026",
+    "exam_time": "02.30 PM",
+    "exam_day": "Monday",
+    "semester": "6"
+  },
+  {
+    "subject_code": "17B1NEC734",
+    "subject_type": "L",
+    "subject_name": "RF AND MICROWAVE ENGINEERING",
+    "exam_date": "11-05-2026",
+    "exam_time": "02.30 PM",
+    "exam_day": "Monday",
+    "semester": "6"
+  },
+  {
+    "subject_code": "18B12PH814",
+    "subject_type": "L",
+    "subject_name": "PLASMA PHYSICS",
+    "exam_date": "11-05-2026",
+    "exam_time": "02.30 PM",
+    "exam_day": "Monday",
+    "semester": "8"
+  },
+  {
+    "subject_code": "19M13HS111",
+    "subject_type": "L",
+    "subject_name": "ENGLISH FOR RESEARCH PAPER WRITING",
+    "exam_date": "11-05-2026",
+    "exam_time": "02.30 PM",
+    "exam_day": "Monday",
+    "semester": "2, 6"
+  },
+  {
+    "subject_code": "20M22MA211",
+    "subject_type": "L",
+    "subject_name": "ADVANCED MATRIX THEORY",
+    "exam_date": "11-05-2026",
+    "exam_time": "02.30 PM",
+    "exam_day": "Monday",
+    "semester": "1, 2, 3"
+  },
+  {
+    "subject_code": "20M22PH213",
+    "subject_type": "L",
+    "subject_name": "SEMICONDUCTOR & ELECTRONIC DEVICES",
+    "exam_date": "11-05-2026",
+    "exam_time": "02.30 PM",
+    "exam_day": "Monday",
+    "semester": "2"
+  },
+  {
+    "subject_code": "23B61CA221",
+    "subject_type": "L",
+    "subject_name": "Software Engineering",
+    "exam_date": "11-05-2026",
+    "exam_time": "02.30 PM",
+    "exam_day": "Monday",
+    "semester": "4"
+  },
+  {
+    "subject_code": "23B61CS123",
+    "subject_type": "L",
+    "subject_name": "Python- I",
+    "exam_date": "11-05-2026",
+    "exam_time": "02.30 PM",
+    "exam_day": "Monday",
+    "semester": "2"
+  },
+  {
+    "subject_code": "23M22HS212",
+    "subject_type": "L",
+    "subject_name": "Research Methodology in Economics",
+    "exam_date": "11-05-2026",
+    "exam_time": "02.30 PM",
+    "exam_day": "Monday",
+    "semester": "4"
+  },
+  {
+    "subject_code": "24B31EC312",
+    "subject_type": "L",
+    "subject_name": "Introduction to AI & ML",
+    "exam_date": "11-05-2026",
+    "exam_time": "02.30 PM",
+    "exam_day": "Monday",
+    "semester": "6"
+  },
+  {
+    "subject_code": "24M22BT211",
+    "subject_type": "L",
+    "subject_name": "Computational Tools for Biological Research (Online)",
+    "exam_date": "11-05-2026",
+    "exam_time": "02.30 PM",
+    "exam_day": "Monday",
+    "semester": "1, 2, 4"
+  },
+  {
+    "subject_code": "24M22PH111",
+    "subject_type": "L",
+    "subject_name": "Astrophysics and Cosmology",
+    "exam_date": "11-05-2026",
+    "exam_time": "02.30 PM",
+    "exam_day": "Monday",
+    "semester": "2"
+  },
+  {
+    "subject_code": "24M31HS111",
+    "subject_type": "L",
+    "subject_name": "Professional Communication",
+    "exam_date": "11-05-2026",
+    "exam_time": "02.30 PM",
+    "exam_day": "Monday",
+    "semester": "2"
+  },
+  {
+    "subject_code": "25B11MA232",
+    "subject_type": "L",
+    "subject_name": "Numerical Methods and Computation",
+    "exam_date": "11-05-2026",
+    "exam_time": "02.30 PM",
+    "exam_day": "Monday",
+    "semester": "4"
+  },
+  {
+    "subject_code": "25B32EC211",
+    "subject_type": "L",
+    "subject_name": "Introduction to Artificial Intelligence with Python",
+    "exam_date": "11-05-2026",
+    "exam_time": "02.30 PM",
+    "exam_day": "Monday",
+    "semester": "4"
+  },
+  {
+    "subject_code": "25B51CS361",
+    "subject_type": "L",
+    "subject_name": "Cloud Computing",
+    "exam_date": "11-05-2026",
+    "exam_time": "02.30 PM",
+    "exam_day": "Monday",
+    "semester": "6"
+  },
+  {
+    "subject_code": "25B52CS411",
+    "subject_type": "L",
+    "subject_name": "Introduction to Blockchain Technologies",
+    "exam_date": "11-05-2026",
+    "exam_time": "02.30 PM",
+    "exam_day": "Monday",
+    "semester": "8"
+  },
+  {
+    "subject_code": "25B11MA232",
+    "subject_type": "L",
+    "subject_name": "Numerical Methods and Computation",
+    "exam_date": "12-05-2026",
+    "exam_time": "10.00 AM",
+    "exam_day": "Tuesday",
+    "semester": "4"
+  },
+  {
+    "subject_code": "25B32EC211",
+    "subject_type": "L",
+    "subject_name": "Introduction to Artificial Intelligence with Python",
+    "exam_date": "12-05-2026",
+    "exam_time": "10.00 AM",
+    "exam_day": "Tuesday",
+    "semester": "4"
+  },
+  {
+    "subject_code": "25B51CS361",
+    "subject_type": "L",
+    "subject_name": "Cloud Computing",
+    "exam_date": "12-05-2026",
+    "exam_time": "10.00 AM",
+    "exam_day": "Tuesday",
+    "semester": "6"
+  },
+  {
+    "subject_code": "25B52CS411",
+    "subject_type": "L",
+    "subject_name": "Introduction to Blockchain Technologies",
+    "exam_date": "12-05-2026",
+    "exam_time": "10.00 AM",
+    "exam_day": "Tuesday",
+    "semester": "8"
+  },
+  {
+    "subject_code": "25M11CH115",
+    "subject_type": "L",
+    "subject_name": "Organometallics and Bioinorganic Chemistry",
+    "exam_date": "12-05-2026",
+    "exam_time": "10.00 AM",
+    "exam_day": "Tuesday",
+    "semester": "2"
+  },
+  {
+    "subject_code": "25M22HS111",
+    "subject_type": "L",
+    "subject_name": "Advances in Positive Psychology",
+    "exam_date": "12-05-2026",
+    "exam_time": "10.00 AM",
+    "exam_day": "Tuesday",
+    "semester": "2"
+  },
+  {
+    "subject_code": "25M22HS112",
+    "subject_type": "L",
+    "subject_name": "Peace Psychology",
+    "exam_date": "12-05-2026",
+    "exam_time": "10.00 AM",
+    "exam_day": "Tuesday",
+    "semester": "2"
+  },
+  {
+    "subject_code": "25M23HS111",
+    "subject_type": "L",
+    "subject_name": "Introduction to FINTECH & Digital Innovation",
+    "exam_date": "12-05-2026",
+    "exam_time": "10.00 AM",
+    "exam_day": "Tuesday",
+    "semester": "2"
+  },
+  {
+    "subject_code": "15B11BT412",
+    "subject_type": "L",
+    "subject_name": "MOLECULAR BIOLOGY AND GENETIC ENGINEERING",
+    "exam_date": "12-05-2026",
+    "exam_time": "10.00 AM",
+    "exam_day": "Tuesday",
+    "semester": "5"
+  },
+  {
+    "subject_code": "15B11CI411",
+    "subject_type": "L",
+    "subject_name": "ALGORITHMS AND PROBLEM SOLVING",
+    "exam_date": "12-05-2026",
+    "exam_time": "10.00 AM",
+    "exam_day": "Tuesday",
+    "semester": "4"
+  },
+  {
+    "subject_code": "24B11BT211",
+    "subject_type": "L",
+    "subject_name": "Molecular biology",
+    "exam_date": "12-05-2026",
+    "exam_time": "10.00 AM",
+    "exam_day": "Tuesday",
+    "semester": "4"
+  },
+  {
+    "subject_code": "24B28MA111",
+    "subject_type": "L",
+    "subject_name": "Object Oriented Programming using C++",
+    "exam_date": "12-05-2026",
+    "exam_time": "10.00 AM",
+    "exam_day": "Tuesday",
+    "semester": "2"
+  },
+  {
+    "subject_code": "24M41BT116",
+    "subject_type": "L",
+    "subject_name": "Systems Biology and Biological Networks",
+    "exam_date": "12-05-2026",
+    "exam_time": "10.00 AM",
+    "exam_day": "Tuesday",
+    "semester": "1, 2"
+  },
+  {
+    "subject_code": "25P11BGM14",
+    "subject_type": "L",
+    "subject_name": "Survey Development & Analysis",
+    "exam_date": "12-05-2026",
+    "exam_time": "10.00 AM",
+    "exam_day": "Tuesday",
+    "semester": "2, 3"
+  },
+  {
+    "subject_code": "15B11EC413",
+    "subject_type": "L",
+    "subject_name": "DIGITAL SIGNAL PROCESSING",
+    "exam_date": "12-05-2026",
+    "exam_time": "02.30 PM",
+    "exam_day": "Tuesday",
+    "semester": "4"
+  },
+  {
+    "subject_code": "15B11EC613",
+    "subject_type": "L",
+    "subject_name": "CONTROL SYSTEMS",
+    "exam_date": "12-05-2026",
+    "exam_time": "02.30 PM",
+    "exam_day": "Tuesday",
+    "semester": "6"
+  },
+  {
+    "subject_code": "15B11HS211",
+    "subject_type": "L",
+    "subject_name": "ECONOMICS",
+    "exam_date": "12-05-2026",
+    "exam_time": "02.30 PM",
+    "exam_day": "Tuesday",
+    "semester": "3"
+  },
+  {
+    "subject_code": "15B1NHS832",
+    "subject_type": "L",
+    "subject_name": "INTERNATIONAL STUDIES",
+    "exam_date": "12-05-2026",
+    "exam_time": "02.30 PM",
+    "exam_day": "Tuesday",
+    "semester": "8"
+  },
+  {
+    "subject_code": "16B1NHS831",
+    "subject_type": "L",
+    "subject_name": "GENDER STUDIES",
+    "exam_date": "12-05-2026",
+    "exam_time": "02.30 PM",
+    "exam_day": "Tuesday",
+    "semester": "8"
+  },
+  {
+    "subject_code": "16B1NMA831",
+    "subject_type": "L",
+    "subject_name": "OPTIMIZATION TECHNIQUES",
+    "exam_date": "12-05-2026",
+    "exam_time": "02.30 PM",
+    "exam_day": "Tuesday",
+    "semester": "8"
+  },
+  {
+    "subject_code": "17B1NHS732",
+    "subject_type": "L",
+    "subject_name": "INDIAN FINANCIAL SYSTEM",
+    "exam_date": "12-05-2026",
+    "exam_time": "02.30 PM",
+    "exam_day": "Tuesday",
+    "semester": "8"
+  },
+  {
+    "subject_code": "18B12BT414",
+    "subject_type": "L",
+    "subject_name": "MACHINE LEARNING TOOLS IN BIOINFORMATICS",
+    "exam_date": "12-05-2026",
+    "exam_time": "02.30 PM",
+    "exam_day": "Tuesday",
+    "semester": "6, 8"
+  },
+  {
+    "subject_code": "18B12MA811",
+    "subject_type": "L",
+    "subject_name": "FUZZY OPTIMIZATION & DECISION MAKING",
+    "exam_date": "12-05-2026",
+    "exam_time": "02.30 PM",
+    "exam_day": "Tuesday",
+    "semester": "8"
+  },
+  {
+    "subject_code": "18B12PH811",
+    "subject_type": "L",
+    "subject_name": "PHOTONICS AND APPLICATIONS",
+    "exam_date": "12-05-2026",
+    "exam_time": "02.30 PM",
+    "exam_day": "Tuesday",
+    "semester": "8"
+  },
+  {
+    "subject_code": "18B12PH812",
+    "subject_type": "L",
+    "subject_name": "ASTROPHYSICS",
+    "exam_date": "12-05-2026",
+    "exam_time": "02.30 PM",
+    "exam_day": "Tuesday",
+    "semester": "8"
+  },
+  {
+    "subject_code": "18B12PH813",
+    "subject_type": "L",
+    "subject_name": "BIOPHYSICS",
+    "exam_date": "12-05-2026",
+    "exam_time": "02.30 PM",
+    "exam_day": "Tuesday",
+    "semester": "8"
+  },
+  {
+    "subject_code": "23M21HS111",
+    "subject_type": "L",
+    "subject_name": "Microeconomics-II",
+    "exam_date": "12-05-2026",
+    "exam_time": "02.30 PM",
+    "exam_day": "Tuesday",
+    "semester": "2"
+  },
+  {
+    "subject_code": "24M21BT212",
+    "subject_type": "L",
+    "subject_name": "Real World Applications Ethical Aspects",
+    "exam_date": "13-05-2026",
+    "exam_time": "10.00 AM",
+    "exam_day": "Wednesday",
+    "semester": "4"
+  },
+  {
+    "subject_code": "25B12CA325",
+    "subject_type": "L",
+    "subject_name": "Agile Software Development",
+    "exam_date": "13-05-2026",
+    "exam_time": "10.00 AM",
+    "exam_day": "Wednesday",
+    "semester": "6"
+  },
+  {
+    "subject_code": "25B12CH411",
+    "subject_type": "L",
+    "subject_name": "Smart Materials",
+    "exam_date": "13-05-2026",
+    "exam_time": "10.00 AM",
+    "exam_day": "Wednesday",
+    "semester": "8"
+  },
+  {
+    "subject_code": "25B21EC213",
+    "subject_type": "L",
+    "subject_name": "Discrete Signal Processing",
+    "exam_date": "13-05-2026",
+    "exam_time": "10.00 AM",
+    "exam_day": "Wednesday",
+    "semester": "4"
+  },
+  {
+    "subject_code": "15B11CI211",
+    "subject_type": "L",
+    "subject_name": "SOFTWARE DEVELOPMENT FUNDAMENTALS-2",
+    "exam_date": "13-05-2026",
+    "exam_time": "10.00 AM",
+    "exam_day": "Wednesday",
+    "semester": "2"
+  },
+  {
+    "subject_code": "18B11CI121",
+    "subject_type": "L",
+    "subject_name": "FUNDAMENTALS OF COMPUTERS & PROGRAMMING - II",
+    "exam_date": "13-05-2026",
+    "exam_time": "10.00 AM",
+    "exam_day": "Wednesday",
+    "semester": "2"
+  },
+  {
+    "subject_code": "19M21MA116",
+    "subject_type": "L",
+    "subject_name": "LINEAR ALGEBRA",
+    "exam_date": "13-05-2026",
+    "exam_time": "10.00 AM",
+    "exam_day": "Wednesday",
+    "semester": "2"
+  },
+  {
+    "subject_code": "15B1NBT831",
+    "subject_type": "L",
+    "subject_name": "BIOPHARMACEUTICS AND PHARMACOKINETICS",
+    "exam_date": "13-05-2026",
+    "exam_time": "02.30 PM",
+    "exam_day": "Wednesday",
+    "semester": "6"
+  },
+  {
+    "subject_code": "15B1NHS432",
+    "subject_type": "L",
+    "subject_name": "INTRODUCTION TO PSYCHOLOGY",
+    "exam_date": "13-05-2026",
+    "exam_time": "02.30 PM",
+    "exam_day": "Wednesday",
+    "semester": "4"
+  },
+  {
+    "subject_code": "16B1NBT632",
+    "subject_type": "L",
+    "subject_name": "ANTIMICROBIAL RESISTANCE",
+    "exam_date": "13-05-2026",
+    "exam_time": "02.30 PM",
+    "exam_day": "Wednesday",
+    "semester": "6"
+  },
+  {
+    "subject_code": "17B1NEC741",
+    "subject_type": "L",
+    "subject_name": "DIGITAL HARDWARE DESIGN",
+    "exam_date": "13-05-2026",
+    "exam_time": "02.30 PM",
+    "exam_day": "Wednesday",
+    "semester": "6"
+  },
+  {
+    "subject_code": "17M11BT114",
+    "subject_type": "L",
+    "subject_name": "DISEASES AND HEALTHCARE",
+    "exam_date": "13-05-2026",
+    "exam_time": "02.30 PM",
+    "exam_day": "Wednesday",
+    "semester": "1, 2, 8"
+  },
+  {
+    "subject_code": "19M21BT114",
+    "subject_type": "L",
+    "subject_name": "ENVIRONMENTAL MICROBIOLOGY",
+    "exam_date": "13-05-2026",
+    "exam_time": "02.30 PM",
+    "exam_day": "Wednesday",
+    "semester": "2"
+  },
+  {
+    "subject_code": "19M21PH116",
+    "subject_type": "L",
+    "subject_name": "ATOMIC, MOLECULAR AND LASER PHYSICS",
+    "exam_date": "13-05-2026",
+    "exam_time": "02.30 PM",
+    "exam_day": "Wednesday",
+    "semester": "2"
+  },
+  {
+    "subject_code": "21B12CS313",
+    "subject_type": "L",
+    "subject_name": "Fundamentals of Distributed and Cloud Computing",
+    "exam_date": "13-05-2026",
+    "exam_time": "02.30 PM",
+    "exam_day": "Wednesday",
+    "semester": "6"
+  },
+  {
+    "subject_code": "21B12CS318",
+    "subject_type": "L",
+    "subject_name": "Big Data Ingestion",
+    "exam_date": "13-05-2026",
+    "exam_time": "02.30 PM",
+    "exam_day": "Wednesday",
+    "semester": "6"
+  },
+  {
+    "subject_code": "21B12CS320",
+    "subject_type": "L",
+    "subject_name": "Open source software development",
+    "exam_date": "13-05-2026",
+    "exam_time": "02.30 PM",
+    "exam_day": "Wednesday",
+    "semester": "6"
+  },
+  {
+    "subject_code": "21B12CS321",
+    "subject_type": "L",
+    "subject_name": "Concepts of Graph theory",
+    "exam_date": "13-05-2026",
+    "exam_time": "02.30 PM",
+    "exam_day": "Wednesday",
+    "semester": "6"
+  },
+  {
+    "subject_code": "24B11CS242",
+    "subject_type": "L",
+    "subject_name": "Artificial Intelligence and Machine Learning: Theory & Practice",
+    "exam_date": "13-05-2026",
+    "exam_time": "02.30 PM",
+    "exam_day": "Wednesday",
+    "semester": "4"
+  },
+  {
+    "subject_code": "24B12EC314",
+    "subject_type": "L",
+    "subject_name": "Introduction to IOT and Embedded Systems",
+    "exam_date": "13-05-2026",
+    "exam_time": "02.30 PM",
+    "exam_day": "Wednesday",
+    "semester": "6"
+  },
+  {
+    "subject_code": "24B12EC315",
+    "subject_type": "L",
+    "subject_name": "Introduction to FPGA Design",
+    "exam_date": "13-05-2026",
+    "exam_time": "02.30 PM",
+    "exam_day": "Wednesday",
+    "semester": "6"
+  },
+  {
+    "subject_code": "24B51CS241",
+    "subject_type": "L",
+    "subject_name": "Open Source Programming",
+    "exam_date": "13-05-2026",
+    "exam_time": "02.30 PM",
+    "exam_day": "Wednesday",
+    "semester": "4"
+  },
+  {
+    "subject_code": "24C11MA211",
+    "subject_type": "L",
+    "subject_name": "Pattern Recognition Models for Learning from Data",
+    "exam_date": "13-05-2026",
+    "exam_time": "02.30 PM",
+    "exam_day": "Wednesday",
+    "semester": "4"
+  },
+  {
+    "subject_code": "24M11CA117",
+    "subject_type": "L",
+    "subject_name": "Computer Networks",
+    "exam_date": "13-05-2026",
+    "exam_time": "02.30 PM",
+    "exam_day": "Wednesday",
+    "semester": "2"
+  },
+  {
+    "subject_code": "24M12EC113",
+    "subject_type": "L",
+    "subject_name": "Fundamentals of Nano-Science & Technology",
+    "exam_date": "13-05-2026",
+    "exam_time": "02.30 PM",
+    "exam_day": "Wednesday",
+    "semester": "1, 2, 8"
+  },
+  {
+    "subject_code": "25B12CA326",
+    "subject_type": "L",
+    "subject_name": "IOT Analytics",
+    "exam_date": "14-05-2026",
+    "exam_time": "10.00 AM",
+    "exam_day": "Thursday",
+    "semester": "6"
+  },
+  {
+    "subject_code": "25B51CS365",
+    "subject_type": "L",
+    "subject_name": "Software Engineering",
+    "exam_date": "14-05-2026",
+    "exam_time": "10.00 AM",
+    "exam_day": "Thursday",
+    "semester": "6"
+  },
+  {
+    "subject_code": "25M11CH116",
+    "subject_type": "L",
+    "subject_name": "Organic Reagents and Pericyclic Reactions",
+    "exam_date": "14-05-2026",
+    "exam_time": "10.00 AM",
+    "exam_day": "Thursday",
+    "semester": "2"
+  },
+  {
+    "subject_code": "25M11ME114",
+    "subject_type": "L",
+    "subject_name": "Materials and Processes in Design",
+    "exam_date": "14-05-2026",
+    "exam_time": "10.00 AM",
+    "exam_day": "Thursday",
+    "semester": "2"
+  },
+  {
+    "subject_code": "25M21HS117",
+    "subject_type": "L",
+    "subject_name": "Research methods in Psychology",
+    "exam_date": "14-05-2026",
+    "exam_time": "10.00 AM",
+    "exam_day": "Thursday",
+    "semester": "2"
+  },
+  {
+    "subject_code": "25M31EC113",
+    "subject_type": "L",
+    "subject_name": "Sensors and Actuators for Robotics",
+    "exam_date": "14-05-2026",
+    "exam_time": "10.00 AM",
+    "exam_day": "Thursday",
+    "semester": "2"
+  },
+  {
+    "subject_code": "15B11BT411",
+    "subject_type": "L",
+    "subject_name": "INTRODUCTION TO BIOINFORMATICS",
+    "exam_date": "14-05-2026",
+    "exam_time": "10.00 AM",
+    "exam_day": "Thursday",
+    "semester": "4"
+  },
+  {
+    "subject_code": "15B11MA301",
+    "subject_type": "L",
+    "subject_name": "PROBABILITY AND RANDOM PROCESSES",
+    "exam_date": "14-05-2026",
+    "exam_time": "10.00 AM",
+    "exam_day": "Thursday",
+    "semester": "4"
+  },
+  {
+    "subject_code": "19B13BT211",
+    "subject_type": "L",
+    "subject_name": "ENVIRONMENTAL STUDIES",
+    "exam_date": "14-05-2026",
+    "exam_time": "10.00 AM",
+    "exam_day": "Thursday",
+    "semester": "3, 4"
+  },
+  {
+    "subject_code": "23B12BT111",
+    "subject_type": "L",
+    "subject_name": "Environmental Science",
+    "exam_date": "14-05-2026",
+    "exam_time": "10.00 AM",
+    "exam_day": "Thursday",
+    "semester": "1, 2"
+  },
+  {
+    "subject_code": "23B31HS212",
+    "subject_type": "L",
+    "subject_name": "Life skills",
+    "exam_date": "14-05-2026",
+    "exam_time": "10.00 AM",
+    "exam_day": "Thursday",
+    "semester": "4, 8"
+  },
+  {
+    "subject_code": "10P1NGE201",
+    "subject_type": "L",
+    "subject_name": "RESEARCH METHODOLOGY AND COMPUTATIONAL TECHNIQUES",
+    "exam_date": "14-05-2026",
+    "exam_time": "02.30 PM",
+    "exam_day": "Thursday",
+    "semester": "1"
+  },
+  {
+    "subject_code": "18B11EC212",
+    "subject_type": "L",
+    "subject_name": "ANALOG AND DIGITAL COMMUNICATION",
+    "exam_date": "14-05-2026",
+    "exam_time": "02.30 PM",
+    "exam_day": "Thursday",
+    "semester": "4"
+  },
+  {
+    "subject_code": "19M12CS111",
+    "subject_type": "L",
+    "subject_name": "WEB INTELLIGENCE",
+    "exam_date": "14-05-2026",
+    "exam_time": "02.30 PM",
+    "exam_day": "Thursday",
+    "semester": "2"
+  },
+  {
+    "subject_code": "21B12CS315",
+    "subject_type": "L",
+    "subject_name": "Web Technology and Cyber Security",
+    "exam_date": "14-05-2026",
+    "exam_time": "02.30 PM",
+    "exam_day": "Thursday",
+    "semester": "6"
+  },
+  {
+    "subject_code": "23B61CS122",
+    "subject_type": "L",
+    "subject_name": "Database Management Systems",
+    "exam_date": "14-05-2026",
+    "exam_time": "02.30 PM",
+    "exam_day": "Thursday",
+    "semester": "2"
+  },
+  {
+    "subject_code": "23M21HS113",
+    "subject_type": "L",
+    "subject_name": "International Economics",
+    "exam_date": "14-05-2026",
+    "exam_time": "02.30 PM",
+    "exam_day": "Thursday",
+    "semester": "2"
+  },
+  {
+    "subject_code": "24M12CS128",
+    "subject_type": "L",
+    "subject_name": "Digital Forensics",
+    "exam_date": "14-05-2026",
+    "exam_time": "02.30 PM",
+    "exam_day": "Thursday",
+    "semester": "2, 8"
+  },
+  {
+    "subject_code": "25B21EC214",
+    "subject_type": "L",
+    "subject_name": "Communication Engineering",
+    "exam_date": "14-05-2026",
+    "exam_time": "02.30 PM",
+    "exam_day": "Thursday",
+    "semester": "4"
+  },
+  {
+    "subject_code": "15B1NBT832",
+    "subject_type": "L",
+    "subject_name": "BIOSTATISTICS AND ITS APPLICATIONS",
+    "exam_date": "15-05-2026",
+    "exam_time": "10.00 AM",
+    "exam_day": "Friday",
+    "semester": "1"
+  },
+  {
+    "subject_code": "17M21EC115",
+    "subject_type": "L",
+    "subject_name": "ANALOGUE INTEGRATED CIRCUIT DESIGN",
+    "exam_date": "15-05-2026",
+    "exam_time": "10.00 AM",
+    "exam_day": "Friday",
+    "semester": "2, 8"
+  },
+  {
+    "subject_code": "18B11EC315",
+    "subject_type": "L",
+    "subject_name": "VLSI Design",
+    "exam_date": "15-05-2026",
+    "exam_time": "10.00 AM",
+    "exam_day": "Friday",
+    "semester": "6"
+  },
+  {
+    "subject_code": "18B12EC417",
+    "subject_type": "L",
+    "subject_name": "SATELLITE COMMUNICATION",
+    "exam_date": "15-05-2026",
+    "exam_time": "10.00 AM",
+    "exam_day": "Friday",
+    "semester": "8"
+  },
+  {
+    "subject_code": "18M12BT113",
+    "subject_type": "L",
+    "subject_name": "NUTRACEUTICALS",
+    "exam_date": "15-05-2026",
+    "exam_time": "10.00 AM",
+    "exam_day": "Friday",
+    "semester": "2, 8"
+  },
+  {
+    "subject_code": "19B12EC415",
+    "subject_type": "L",
+    "subject_name": "DIGITAL INTEGRATED CIRCUITS IN DEEP SUBMICRON TECHNOLOGY",
+    "exam_date": "15-05-2026",
+    "exam_time": "10.00 AM",
+    "exam_day": "Friday",
+    "semester": "8"
+  },
+  {
+    "subject_code": "19M21BT116",
+    "subject_type": "L",
+    "subject_name": "IMMUNOLOGY AND IMMUNOTECHNOLOGY",
+    "exam_date": "15-05-2026",
+    "exam_time": "10.00 AM",
+    "exam_day": "Friday",
+    "semester": "2"
+  },
+  {
+    "subject_code": "24B21MA313",
+    "subject_type": "L",
+    "subject_name": "Fundamentals of Soft Computing",
+    "exam_date": "15-05-2026",
+    "exam_time": "10.00 AM",
+    "exam_day": "Friday",
+    "semester": "6"
+  },
+  {
+    "subject_code": "24B31EC313",
+    "subject_type": "L",
+    "subject_name": "Advance Wireless Technologies",
+    "exam_date": "15-05-2026",
+    "exam_time": "10.00 AM",
+    "exam_day": "Friday",
+    "semester": "6"
+  },
+  {
+    "subject_code": "24B51CS243",
+    "subject_type": "L",
+    "subject_name": "Data Base Management System",
+    "exam_date": "15-05-2026",
+    "exam_time": "10.00 AM",
+    "exam_day": "Friday",
+    "semester": "4"
+  },
+  {
+    "subject_code": "24M41BT115",
+    "subject_type": "L",
+    "subject_name": "Omics Analytics",
+    "exam_date": "15-05-2026",
+    "exam_time": "10.00 AM",
+    "exam_day": "Friday",
+    "semester": "2"
+  },
+  {
+    "subject_code": "25B12CA327",
+    "subject_type": "L",
+    "subject_name": "Fuzzy Logic and Neural Network",
+    "exam_date": "15-05-2026",
+    "exam_time": "10.00 AM",
+    "exam_day": "Friday",
+    "semester": "6"
+  },
+  {
+    "subject_code": "25B12CA328",
+    "subject_type": "L",
+    "subject_name": "Computer and Network Security",
+    "exam_date": "15-05-2026",
+    "exam_time": "10.00 AM",
+    "exam_day": "Friday",
+    "semester": "6"
+  },
+  {
+    "subject_code": "25M11CH118",
+    "subject_type": "L",
+    "subject_name": "Supramolecular Chemistry",
+    "exam_date": "15-05-2026",
+    "exam_time": "10.00 AM",
+    "exam_day": "Friday",
+    "semester": "2"
+  },
+  {
+    "subject_code": "25M12ME118",
+    "subject_type": "L",
+    "subject_name": "Packaging and Branding",
+    "exam_date": "15-05-2026",
+    "exam_time": "10.00 AM",
+    "exam_day": "Friday",
+    "semester": "2"
+  },
+  {
+    "subject_code": "25M21HS119",
+    "subject_type": "L",
+    "subject_name": "Psychological Testing and Human Assessment",
+    "exam_date": "16-05-2026",
+    "exam_time": "10.00 AM",
+    "exam_day": "Saturday",
+    "semester": "2"
+  },
+  {
+    "subject_code": "17M11BT113",
+    "subject_type": "L",
+    "subject_name": "BIOPROCESS AND INDUSTRIAL BIOTECHNOLOGY",
+    "exam_date": "16-05-2026",
+    "exam_time": "10.00 AM",
+    "exam_day": "Saturday",
+    "semester": "2, 8"
+  },
+  {
+    "subject_code": "17M11EC121",
+    "subject_type": "L",
+    "subject_name": "STATISTICAL SIGNAL PROCESSING",
+    "exam_date": "16-05-2026",
+    "exam_time": "10.00 AM",
+    "exam_day": "Saturday",
+    "semester": "8"
+  },
+  {
+    "subject_code": "19M21MA120",
+    "subject_type": "L",
+    "subject_name": "PARTIAL DIFFERENTIAL EQUATIONS",
+    "exam_date": "16-05-2026",
+    "exam_time": "10.00 AM",
+    "exam_day": "Saturday",
+    "semester": "2"
+  },
+  {
+    "subject_code": "20M51EC124",
+    "subject_type": "L",
+    "subject_name": "IoT Perspective: Cloud Computing and Machine Learning",
+    "exam_date": "16-05-2026",
+    "exam_time": "10.00 AM",
+    "exam_day": "Saturday",
+    "semester": "8"
+  },
+  {
+    "subject_code": "21B13BT311",
+    "subject_type": "L",
+    "subject_name": "BIORISK AND BIOSECURITY",
+    "exam_date": "16-05-2026",
+    "exam_time": "10.00 AM",
+    "exam_day": "Saturday",
+    "semester": "6"
+  },
+  {
+    "subject_code": "21B13PH311",
+    "subject_type": "L",
+    "subject_name": "Rechargeable Battery Science and Technology",
+    "exam_date": "16-05-2026",
+    "exam_time": "10.00 AM",
+    "exam_day": "Saturday",
+    "semester": "6"
+  },
+  {
+    "subject_code": "23B12CA215",
+    "subject_type": "L",
+    "subject_name": "Introduction to Cryptography and its Applications",
+    "exam_date": "16-05-2026",
+    "exam_time": "10.00 AM",
+    "exam_day": "Saturday",
+    "semester": "4"
+  },
+  {
+    "subject_code": "23B12CA216",
+    "subject_type": "L",
+    "subject_name": "Fundamentals of Machine Learning",
+    "exam_date": "16-05-2026",
+    "exam_time": "10.00 AM",
+    "exam_day": "Saturday",
+    "semester": "4"
+  },
+  {
+    "subject_code": "23B58CS125",
+    "subject_type": "L",
+    "subject_name": "Unix Workshop",
+    "exam_date": "16-05-2026",
+    "exam_time": "10.00 AM",
+    "exam_day": "Saturday",
+    "semester": "2"
+  },
+  {
+    "subject_code": "24B13BT311",
+    "subject_type": "L",
+    "subject_name": "Scientific writing and Communication",
+    "exam_date": "16-05-2026",
+    "exam_time": "10.00 AM",
+    "exam_day": "Saturday",
+    "semester": "6"
+  },
+  {
+    "subject_code": "24M22HS112",
+    "subject_type": "L",
+    "subject_name": "Introduction to Consumer Psychology",
+    "exam_date": "16-05-2026",
+    "exam_time": "10.00 AM",
+    "exam_day": "Saturday",
+    "semester": "2"
+  },
+  {
+    "subject_code": "24M22HS213",
+    "subject_type": "L",
+    "subject_name": "Corporate Finance",
+    "exam_date": "16-05-2026",
+    "exam_time": "10.00 AM",
+    "exam_day": "Saturday",
+    "semester": "2"
+  },
+  {
+    "subject_code": "24P11GE112",
+    "subject_type": "L",
+    "subject_name": "RESEARCH AND PUBLICATION ETHICS",
+    "exam_date": "16-05-2026",
+    "exam_time": "10.00 AM",
+    "exam_day": "Saturday",
+    "semester": "1"
+  },
+  {
+    "subject_code": "25B12MA421",
+    "subject_type": "L",
+    "subject_name": "Data Science",
+    "exam_date": "16-05-2026",
+    "exam_time": "10.00 AM",
+    "exam_day": "Saturday",
+    "semester": "8"
+  },
+  {
+    "subject_code": "25B13BT312",
+    "subject_type": "L",
+    "subject_name": "Waste to energy: technologies for circular economy",
+    "exam_date": "16-05-2026",
+    "exam_time": "10.00 AM",
+    "exam_day": "Saturday",
+    "semester": "6"
+  },
+  {
+    "subject_code": "25B13CH311",
+    "subject_type": "L",
+    "subject_name": "Green Fuels",
+    "exam_date": "16-05-2026",
+    "exam_time": "10.00 AM",
+    "exam_day": "Saturday",
+    "semester": "6"
+  },
+  {
+    "subject_code": "25B13MA324",
+    "subject_type": "L",
+    "subject_name": "Statistical Methods for Machine Learning",
+    "exam_date": "16-05-2026",
+    "exam_time": "10.00 AM",
+    "exam_day": "Saturday",
+    "semester": "6"
+  },
+  {
+    "subject_code": "25B16HS311",
+    "subject_type": "L",
+    "subject_name": "International Humanitarian Law: Practice & Policy",
+    "exam_date": "16-05-2026",
+    "exam_time": "10.00 AM",
+    "exam_day": "Saturday",
+    "semester": "6"
+  },
+  {
+    "subject_code": "25B16HS312",
+    "subject_type": "L",
+    "subject_name": "Organisational Communication",
+    "exam_date": "16-05-2026",
+    "exam_time": "10.00 AM",
+    "exam_day": "Saturday",
+    "semester": "6"
+  },
+  {
+    "subject_code": "25B16HS313",
+    "subject_type": "L",
+    "subject_name": "Introduction to Creative & Professional Writing",
+    "exam_date": "16-05-2026",
+    "exam_time": "10.00 AM",
+    "exam_day": "Saturday",
+    "semester": "6"
+  },
+  {
+    "subject_code": "25B16HS314",
+    "subject_type": "L",
+    "subject_name": "Media Literacy",
+    "exam_date": "16-05-2026",
+    "exam_time": "10.00 AM",
+    "exam_day": "Saturday",
+    "semester": "6"
+  },
+  {
+    "subject_code": "25B18CS311",
+    "subject_type": "L",
+    "subject_name": "Advanced Data Structures and Algorithms Workshop",
+    "exam_date": "16-05-2026",
+    "exam_time": "10.00 AM",
+    "exam_day": "Saturday",
+    "semester": "6"
+  },
+  {
+    "subject_code": "25B18CS312",
+    "subject_type": "L",
+    "subject_name": "GenAI Workshop",
+    "exam_date": "16-05-2026",
+    "exam_time": "10.00 AM",
+    "exam_day": "Saturday",
+    "semester": "6"
+  },
+  {
+    "subject_code": "25B18CS313",
+    "subject_type": "L",
+    "subject_name": "Advanced Java Programming Workshop",
+    "exam_date": "16-05-2026",
+    "exam_time": "10.00 AM",
+    "exam_day": "Saturday",
+    "semester": "6"
+  },
+  {
+    "subject_code": "24M11CA118",
+    "subject_type": "L",
+    "subject_name": "Operating System",
+    "exam_date": "20-05-2026",
+    "exam_time": "10.00 AM",
+    "exam_day": "Wednesday",
+    "semester": "2"
+  },
+  {
+    "subject_code": "25B12CA320",
+    "subject_type": "L",
+    "subject_name": "Full Stack Developer-II(Web development)",
+    "exam_date": "20-05-2026",
+    "exam_time": "10.00 AM",
+    "exam_day": "Wednesday",
+    "semester": "6"
+  },
+  {
+    "subject_code": "25B12CA322",
+    "subject_type": "L",
+    "subject_name": "Full Stack Developer-II(Mobile development)",
+    "exam_date": "20-05-2026",
+    "exam_time": "10.00 AM",
+    "exam_day": "Wednesday",
+    "semester": "6"
+  },
+  {
+    "subject_code": "25M81CS121",
+    "subject_type": "L",
+    "subject_name": "Soft Computing",
+    "exam_date": "20-05-2026",
+    "exam_time": "10.00 AM",
+    "exam_day": "Wednesday",
+    "semester": "2"
+  },
+  {
+    "subject_code": "15B11EC611",
+    "subject_type": "L",
+    "subject_name": "TELECOMMUNICATION NETWORKS",
+    "exam_date": "20-05-2026",
+    "exam_time": "10.00 AM",
+    "exam_day": "Wednesday",
+    "semester": "4, 6"
+  },
+  {
+    "subject_code": "18B11CS811",
+    "subject_type": "L",
+    "subject_name": "Computer Networks and Internet of Things",
+    "exam_date": "20-05-2026",
+    "exam_time": "10.00 AM",
+    "exam_day": "Wednesday",
+    "semester": "6"
+  },
+  {
+    "subject_code": "19M21MA119",
+    "subject_type": "L",
+    "subject_name": "FUNCTIONAL ANALYSIS",
+    "exam_date": "20-05-2026",
+    "exam_time": "10.00 AM",
+    "exam_day": "Wednesday",
+    "semester": "2"
+  },
+  {
+    "subject_code": "23B61CA223",
+    "subject_type": "L",
+    "subject_name": "Java Full Stack Development-I (Core Java)",
+    "exam_date": "20-05-2026",
+    "exam_time": "10.00 AM",
+    "exam_day": "Wednesday",
+    "semester": "4"
+  },
+  {
+    "subject_code": "24M11EC111",
+    "subject_type": "L",
+    "subject_name": "VLSI Technology and Fabrication Processes",
+    "exam_date": "20-05-2026",
+    "exam_time": "10.00 AM",
+    "exam_day": "Wednesday",
+    "semester": "2, 8"
+  },
+  {
+    "subject_code": "18B12EC411",
+    "subject_type": "L",
+    "subject_name": "INTRODUCTION TO IOT",
+    "exam_date": "20-05-2026",
+    "exam_time": "02.30 PM",
+    "exam_day": "Wednesday",
+    "semester": "8"
+  },
+  {
+    "subject_code": "18B12EC412",
+    "subject_type": "L",
+    "subject_name": "MULTIMEDIA COMMUNICATIONS",
+    "exam_date": "20-05-2026",
+    "exam_time": "02.30 PM",
+    "exam_day": "Wednesday",
+    "semester": "8"
+  },
+  {
+    "subject_code": "19M21BT118",
+    "subject_type": "L",
+    "subject_name": "MEDICAL MICROBIOLOGY",
+    "exam_date": "20-05-2026",
+    "exam_time": "02.30 PM",
+    "exam_day": "Wednesday",
+    "semester": "2"
+  },
+  {
+    "subject_code": "19M21PH118",
+    "subject_type": "L",
+    "subject_name": "CONDENSED MATTER PHYSICS",
+    "exam_date": "20-05-2026",
+    "exam_time": "02.30 PM",
+    "exam_day": "Wednesday",
+    "semester": "2"
+  },
+  {
+    "subject_code": "23B21MA112",
+    "subject_type": "L",
+    "subject_name": "Calculus",
+    "exam_date": "20-05-2026",
+    "exam_time": "02.30 PM",
+    "exam_day": "Wednesday",
+    "semester": "2"
+  },
+  {
+    "subject_code": "23M21HS114",
+    "subject_type": "L",
+    "subject_name": "Public Finance",
+    "exam_date": "20-05-2026",
+    "exam_time": "02.30 PM",
+    "exam_day": "Wednesday",
+    "semester": "2"
+  },
+  {
+    "subject_code": "24B12EC414",
+    "subject_type": "L",
+    "subject_name": "Physical Design for submicron technology",
+    "exam_date": "20-05-2026",
+    "exam_time": "02.30 PM",
+    "exam_day": "Wednesday",
+    "semester": "8"
+  },
+  {
+    "subject_code": "24B21EC212",
+    "subject_type": "L",
+    "subject_name": "Introduction to Microfabrication Technology",
+    "exam_date": "20-05-2026",
+    "exam_time": "02.30 PM",
+    "exam_day": "Wednesday",
+    "semester": "4"
+  },
+  {
+    "subject_code": "24M12CS121",
+    "subject_type": "L",
+    "subject_name": "Security of e-Systems and Networks",
+    "exam_date": "20-05-2026",
+    "exam_time": "02.30 PM",
+    "exam_day": "Wednesday",
+    "semester": "2, 8"
+  },
+  {
+    "subject_code": "24M12CS122",
+    "subject_type": "L",
+    "subject_name": "Deep Learning",
+    "exam_date": "20-05-2026",
+    "exam_time": "02.30 PM",
+    "exam_day": "Wednesday",
+    "semester": "1, 2, 3"
+  },
+  {
+    "subject_code": "24M12CS123",
+    "subject_type": "L",
+    "subject_name": "Text Analytics",
+    "exam_date": "20-05-2026",
+    "exam_time": "02.30 PM",
+    "exam_day": "Wednesday",
+    "semester": "2"
+  },
+  {
+    "subject_code": "24M41BT114",
+    "subject_type": "L",
+    "subject_name": "Programming in R",
+    "exam_date": "20-05-2026",
+    "exam_time": "02.30 PM",
+    "exam_day": "Wednesday",
+    "semester": "2"
+  },
+  {
+    "subject_code": "25B12CS211",
+    "subject_type": "L",
+    "subject_name": "Fundamentals of Data Analytics",
+    "exam_date": "20-05-2026",
+    "exam_time": "02.30 PM",
+    "exam_day": "Wednesday",
+    "semester": "4"
+  },
+  {
+    "subject_code": "25B12CS212",
+    "subject_type": "L",
+    "subject_name": "Fundamentals of Mobile Application Development",
+    "exam_date": "20-05-2026",
+    "exam_time": "02.30 PM",
+    "exam_day": "Wednesday",
+    "semester": "4"
+  },
+  {
+    "subject_code": "25B12CS213",
+    "subject_type": "L",
+    "subject_name": "Fundamentals of Smart Systems and IoT",
+    "exam_date": "20-05-2026",
+    "exam_time": "02.30 PM",
+    "exam_day": "Wednesday",
+    "semester": "4"
+  },
+  {
+    "subject_code": "25B12MA222",
+    "subject_type": "L",
+    "subject_name": "Fuzzy Sets, Logic and Applications",
+    "exam_date": "20-05-2026",
+    "exam_time": "02.30 PM",
+    "exam_day": "Wednesday",
+    "semester": "4"
+  },
+  {
+    "subject_code": "25B12MA223",
+    "subject_type": "L",
+    "subject_name": "Time Series Analysis and Forecasting",
+    "exam_date": "20-05-2026",
+    "exam_time": "02.30 PM",
+    "exam_day": "Wednesday",
+    "semester": "4"
+  },
+  {
+    "subject_code": "25B51CS363",
+    "subject_type": "L",
+    "subject_name": "Java Programming",
+    "exam_date": "20-05-2026",
+    "exam_time": "02.30 PM",
+    "exam_day": "Wednesday",
+    "semester": "6"
+  },
+  {
+    "subject_code": "15B11MA211",
+    "subject_type": "L",
+    "subject_name": "MATHEMATICS-2",
+    "exam_date": "18-05-2026",
+    "exam_time": "02.30 PM",
+    "exam_day": "Monday",
+    "semester": "2"
+  },
+  {
+    "subject_code": "15B11MA212",
+    "subject_type": "L",
+    "subject_name": "BASIC MATHEMATICS-2",
+    "exam_date": "18-05-2026",
+    "exam_time": "02.30 PM",
+    "exam_day": "Monday",
+    "semester": "2"
+  },
+  {
+    "subject_code": "18M12BT116",
+    "subject_type": "L",
+    "subject_name": "IPR IN BIOTECHNOLOGY",
+    "exam_date": "18-05-2026",
+    "exam_time": "02.30 PM",
+    "exam_day": "Monday",
+    "semester": "1, 2, 8"
+  },
+  {
+    "subject_code": "19B12BT411",
+    "subject_type": "L",
+    "subject_name": "MARKET RESEARCH IN BIOSCIENCES",
+    "exam_date": "18-05-2026",
+    "exam_time": "02.30 PM",
+    "exam_day": "Monday",
+    "semester": "8"
+  },
+  {
+    "subject_code": "19M21PH115",
+    "subject_type": "L",
+    "subject_name": "CLASSICAL ELECTRODYNAMICS",
+    "exam_date": "18-05-2026",
+    "exam_time": "02.30 PM",
+    "exam_day": "Monday",
+    "semester": "2"
+  },
+  {
+    "subject_code": "22M12BT111",
+    "subject_type": "L",
+    "subject_name": "Agriculture Biotechnology",
+    "exam_date": "18-05-2026",
+    "exam_time": "02.30 PM",
+    "exam_day": "Monday",
+    "semester": "2"
+  },
+  {
+    "subject_code": "22M22BT211",
+    "subject_type": "L",
+    "subject_name": "Market Research and Data Analysis",
+    "exam_date": "19-05-2026",
+    "exam_time": "10.00 AM",
+    "exam_day": "Tuesday",
+    "semester": "2"
+  },
+  {
+    "subject_code": "23M21HS115",
+    "subject_type": "L",
+    "subject_name": "Mathematical Methods in Economics",
+    "exam_date": "19-05-2026",
+    "exam_time": "10.00 AM",
+    "exam_day": "Tuesday",
+    "semester": "2"
+  },
+  {
+    "subject_code": "24B21MA312",
+    "subject_type": "L",
+    "subject_name": "Operations Research",
+    "exam_date": "19-05-2026",
+    "exam_time": "10.00 AM",
+    "exam_day": "Tuesday",
+    "semester": "6"
+  },
+  {
+    "subject_code": "25M12CH112",
+    "subject_type": "L",
+    "subject_name": "Inorganic Polymers",
+    "exam_date": "19-05-2026",
+    "exam_time": "10.00 AM",
+    "exam_day": "Tuesday",
+    "semester": "2"
+  },
+  {
+    "subject_code": "25M21HS120",
+    "subject_type": "L",
+    "subject_name": "Fundamentals of Organizational Behavior",
+    "exam_date": "19-05-2026",
+    "exam_time": "10.00 AM",
+    "exam_day": "Tuesday",
+    "semester": "2"
+  },
+  {
+    "subject_code": "15B22CI521",
+    "subject_type": "L",
+    "subject_name": "CLOUD BASED ENTERPRISE SYSTEMS",
+    "exam_date": "19-05-2026",
+    "exam_time": "10.00 AM",
+    "exam_day": "Tuesday",
+    "semester": "6"
+  },
+  {
+    "subject_code": "16B1NBT631",
+    "subject_type": "L",
+    "subject_name": "BIOECONOMICS",
+    "exam_date": "19-05-2026",
+    "exam_time": "10.00 AM",
+    "exam_day": "Tuesday",
+    "semester": "6"
+  },
+  {
+    "subject_code": "16B1NBT634",
+    "subject_type": "L",
+    "subject_name": "GENETIC DISORDERS AND PERSONALIZED MEDICINE",
+    "exam_date": "19-05-2026",
+    "exam_time": "10.00 AM",
+    "exam_day": "Tuesday",
+    "semester": "6"
+  },
+  {
+    "subject_code": "17B11EC731",
+    "subject_type": "L",
+    "subject_name": "MOBILE COMMUNICATION",
+    "exam_date": "19-05-2026",
+    "exam_time": "10.00 AM",
+    "exam_day": "Tuesday",
+    "semester": "6"
+  },
+  {
+    "subject_code": "17M11CS121",
+    "subject_type": "L",
+    "subject_name": "CLOUD AND WEB SERVICES SOFTWARE ENGINEERING",
+    "exam_date": "19-05-2026",
+    "exam_time": "10.00 AM",
+    "exam_day": "Tuesday",
+    "semester": "2, 8"
+  },
+  {
+    "subject_code": "18B13EC314",
+    "subject_type": "L",
+    "subject_name": "MACHINE LEARNING FOR SIGNAL PROCESSING",
+    "exam_date": "19-05-2026",
+    "exam_time": "10.00 AM",
+    "exam_day": "Tuesday",
+    "semester": "6"
+  },
+  {
+    "subject_code": "22B12CS419",
+    "subject_type": "L",
+    "subject_name": "Cryptocurrency Technologies",
+    "exam_date": "19-05-2026",
+    "exam_time": "10.00 AM",
+    "exam_day": "Tuesday",
+    "semester": "8"
+  },
+  {
+    "subject_code": "22B12CS420",
+    "subject_type": "L",
+    "subject_name": "Software Construction using Kubernetes and Microservices",
+    "exam_date": "19-05-2026",
+    "exam_time": "10.00 AM",
+    "exam_day": "Tuesday",
+    "semester": "8"
+  },
+  {
+    "subject_code": "22B12CS422",
+    "subject_type": "L",
+    "subject_name": "Cloud computing Essentials: Azure and AWS",
+    "exam_date": "19-05-2026",
+    "exam_time": "10.00 AM",
+    "exam_day": "Tuesday",
+    "semester": "8"
+  },
+  {
+    "subject_code": "23B12CA211",
+    "subject_type": "L",
+    "subject_name": "Fundamentals of Artificial Intelligence",
+    "exam_date": "19-05-2026",
+    "exam_time": "10.00 AM",
+    "exam_day": "Tuesday",
+    "semester": "4"
+  },
+  {
+    "subject_code": "23B12CA213",
+    "subject_type": "L",
+    "subject_name": "Introduction to Big Data and Data Analytics",
+    "exam_date": "19-05-2026",
+    "exam_time": "10.00 AM",
+    "exam_day": "Tuesday",
+    "semester": "4"
+  },
+  {
+    "subject_code": "23B12EC311",
+    "subject_type": "L",
+    "subject_name": "Semiconductor Devices and Circuits",
+    "exam_date": "19-05-2026",
+    "exam_time": "10.00 AM",
+    "exam_day": "Tuesday",
+    "semester": "6"
+  },
+  {
+    "subject_code": "24B11CS223",
+    "subject_type": "L",
+    "subject_name": "Software Engineering",
+    "exam_date": "19-05-2026",
+    "exam_time": "10.00 AM",
+    "exam_day": "Tuesday",
+    "semester": "4"
+  },
+  {
+    "subject_code": "24B12EC411",
+    "subject_type": "L",
+    "subject_name": "Fundamentals of Electric Vehicle",
+    "exam_date": "19-05-2026",
+    "exam_time": "10.00 AM",
+    "exam_day": "Tuesday",
+    "semester": "6"
+  },
+  {
+    "subject_code": "25P11BGM11",
+    "subject_type": "L",
+    "subject_name": "ADVANCED RESEARCH METHODOLOGY",
+    "exam_date": "19-05-2026",
+    "exam_time": "10.00 AM",
+    "exam_day": "Tuesday",
+    "semester": "1"
+  },
+  {
+    "subject_code": "25P11MA130",
+    "subject_type": "L",
+    "subject_name": "Aggregation Operators in Probabilistic and Fuzzy Domains",
+    "exam_date": "19-05-2026",
+    "exam_time": "10.00 AM",
+    "exam_day": "Tuesday",
+    "semester": "1, 2, 3"
+  },
+  {
+    "subject_code": "15B11BT312",
+    "subject_type": "L",
+    "subject_name": "MICROBIOLOGY",
+    "exam_date": "19-05-2026",
+    "exam_time": "02.30 PM",
+    "exam_day": "Tuesday",
+    "semester": "4"
+  },
+  {
+    "subject_code": "15B11EC211",
+    "subject_type": "L",
+    "subject_name": "ELECTRICAL SCIENCE-2",
+    "exam_date": "19-05-2026",
+    "exam_time": "02.30 PM",
+    "exam_day": "Tuesday",
+    "semester": "3"
+  },
+  {
+    "subject_code": "21M22MA213",
+    "subject_type": "L",
+    "subject_name": "Theory of Data Science",
+    "exam_date": "19-05-2026",
+    "exam_time": "02.30 PM",
+    "exam_day": "Tuesday",
+    "semester": "3, 4"
+  },
+  {
+    "subject_code": "23B31MA112",
+    "subject_type": "L",
+    "subject_name": "Discrete Mathematics",
+    "exam_date": "19-05-2026",
+    "exam_time": "02.30 PM",
+    "exam_day": "Tuesday",
+    "semester": "2"
+  },
+  {
+    "subject_code": "24B21HS211",
+    "subject_type": "L",
+    "subject_name": "Sustainable Development",
+    "exam_date": "19-05-2026",
+    "exam_time": "02.30 PM",
+    "exam_day": "Tuesday",
+    "semester": "4"
+  },
+  {
+    "subject_code": "21B12HS411",
+    "subject_type": "L",
+    "subject_name": "Urban Sociology",
+    "exam_date": "21-05-2026",
+    "exam_time": "10.00 AM",
+    "exam_day": "Thursday",
+    "semester": "6"
+  },
+  {
+    "subject_code": "23B12CS341",
+    "subject_type": "L",
+    "subject_name": "Cyber Security",
+    "exam_date": "21-05-2026",
+    "exam_time": "10.00 AM",
+    "exam_day": "Thursday",
+    "semester": "6"
+  },
+  {
+    "subject_code": "23B12PH311",
+    "subject_type": "L",
+    "subject_name": "Waste to Energy Conversion",
+    "exam_date": "21-05-2026",
+    "exam_time": "10.00 AM",
+    "exam_day": "Thursday",
+    "semester": "6"
+  },
+  {
+    "subject_code": "24B12HS316",
+    "subject_type": "L",
+    "subject_name": "Popular Literature",
+    "exam_date": "21-05-2026",
+    "exam_time": "10.00 AM",
+    "exam_day": "Thursday",
+    "semester": "6"
+  },
+  {
+    "subject_code": "24B15CS224",
+    "subject_type": "L",
+    "subject_name": "Competitive Programming Lab",
+    "exam_date": "21-05-2026",
+    "exam_time": "10.00 AM",
+    "exam_day": "Thursday",
+    "semester": "4"
+  },
+  {
+    "subject_code": "25B12CH311",
+    "subject_type": "L",
+    "subject_name": "Polymer Chemistry",
+    "exam_date": "21-05-2026",
+    "exam_time": "10.00 AM",
+    "exam_day": "Thursday",
+    "semester": "6"
+  },
+  {
+    "subject_code": "25B12CH312",
+    "subject_type": "L",
+    "subject_name": "Cosmetic Chemistry",
+    "exam_date": "21-05-2026",
+    "exam_time": "10.00 AM",
+    "exam_day": "Thursday",
+    "semester": "6"
+  },
+  {
+    "subject_code": "25B12EC211",
+    "subject_type": "L",
+    "subject_name": "Electronic Instrumentation and Measurement Techniques",
+    "exam_date": "21-05-2026",
+    "exam_time": "10.00 AM",
+    "exam_day": "Thursday",
+    "semester": "4"
+  },
+  {
+    "subject_code": "25B12HS314",
+    "subject_type": "L",
+    "subject_name": "Economy, Policy and Business Environment",
+    "exam_date": "21-05-2026",
+    "exam_time": "10.00 AM",
+    "exam_day": "Thursday",
+    "semester": "6"
+  },
+  {
+    "subject_code": "15B11EC111",
+    "subject_type": "L",
+    "subject_name": "ELECTRICAL SCIENCE-1",
+    "exam_date": "21-05-2026",
+    "exam_time": "02.30 PM",
+    "exam_day": "Thursday",
+    "semester": "2"
+  },
+  {
+    "subject_code": "15B11PH211",
+    "subject_type": "L",
+    "subject_name": "PHYSICS-",
+    "exam_date": "21-05-2026",
+    "exam_time": "02.30 PM",
+    "exam_day": "Thursday",
+    "semester": "2"
+  },
+  {
+    "subject_code": "15B11PH212",
+    "subject_type": "L",
+    "subject_name": "BIOPHYSICAL TECHNIQUES",
+    "exam_date": "21-05-2026",
+    "exam_time": "02.30 PM",
+    "exam_day": "Thursday",
+    "semester": "2"
+  },
+  {
+    "subject_code": "17B1NEC735",
+    "subject_type": "L",
+    "subject_name": "INFORMATION THEORY AND APPLICATIONS",
+    "exam_date": "21-05-2026",
+    "exam_time": "02.30 PM",
+    "exam_day": "Thursday",
+    "semester": "4"
+  },
+  {
+    "subject_code": "20B12EC211",
+    "subject_type": "L",
+    "subject_name": "INTRODUCTION TO DIGITAL IMAGE AND VIDEO PROCESSING",
+    "exam_date": "21-05-2026",
+    "exam_time": "02.30 PM",
+    "exam_day": "Thursday",
+    "semester": "4"
+  },
+  {
+    "subject_code": "22B15HS211",
+    "subject_type": "L",
+    "subject_name": "Professional Communication Practice",
+    "exam_date": "21-05-2026",
+    "exam_time": "02.30 PM",
+    "exam_day": "Thursday",
+    "semester": "3"
+  },
+  {
+    "subject_code": "24B21MA212",
+    "subject_type": "L",
+    "subject_name": "Linear Algebra",
+    "exam_date": "21-05-2026",
+    "exam_time": "02.30 PM",
+    "exam_day": "Thursday",
+    "semester": "4"
+  },
+  {
+    "subject_code": "15B11BT414",
+    "subject_type": "L",
+    "subject_name": "IMMUNOLOGY",
+    "exam_date": "22-05-2026",
+    "exam_time": "10.00 AM",
+    "exam_day": "Friday",
+    "semester": "4, 6"
+  },
+  {
+    "subject_code": "18B11EC213",
+    "subject_type": "L",
+    "subject_name": "DIGITAL SYSTEMS",
+    "exam_date": "22-05-2026",
+    "exam_time": "10.00 AM",
+    "exam_day": "Friday",
+    "semester": "4"
+  },
+  {
+    "subject_code": "18M11PH114",
+    "subject_type": "L",
+    "subject_name": "STRUCTURE AND CHARACTERIZATION OF MATERIALS",
+    "exam_date": "22-05-2026",
+    "exam_time": "10.00 AM",
+    "exam_day": "Friday",
+    "semester": "1, 2"
+  },
+  {
+    "subject_code": "19M21MA118",
+    "subject_type": "L",
+    "subject_name": "COMPUTER PROGRAMMING",
+    "exam_date": "22-05-2026",
+    "exam_time": "10.00 AM",
+    "exam_day": "Friday",
+    "semester": "2"
+  },
+  {
+    "subject_code": "20M52EC114",
+    "subject_type": "L",
+    "subject_name": "Low-Power VLSI Design",
+    "exam_date": "22-05-2026",
+    "exam_time": "10.00 AM",
+    "exam_day": "Friday",
+    "semester": "2"
+  },
+  {
+    "subject_code": "23B31MA211",
+    "subject_type": "L",
+    "subject_name": "Probability and Statistics",
+    "exam_date": "22-05-2026",
+    "exam_time": "10.00 AM",
+    "exam_day": "Friday",
+    "semester": "3"
+  },
+  {
+    "subject_code": "23M21HS112",
+    "subject_type": "L",
+    "subject_name": "Macroeconomics-II",
+    "exam_date": "22-05-2026",
+    "exam_time": "10.00 AM",
+    "exam_day": "Friday",
+    "semester": "2"
+  },
+  {
+    "subject_code": "24M12EC114",
+    "subject_type": "L",
+    "subject_name": "VLSI DESIGN AUTOMATION",
+    "exam_date": "22-05-2026",
+    "exam_time": "10.00 AM",
+    "exam_day": "Friday",
+    "semester": "8"
+  },
+  {
+    "subject_code": "24M41BT113",
+    "subject_type": "L",
+    "subject_name": "Database Management System and Web Technology",
+    "exam_date": "22-05-2026",
+    "exam_time": "10.00 AM",
+    "exam_day": "Friday",
+    "semester": "2"
+  },
+  {
+    "subject_code": "25B11EC311",
+    "subject_type": "L",
+    "subject_name": "Digital Systems and Computer Organisation",
+    "exam_date": "22-05-2026",
+    "exam_time": "10.00 AM",
+    "exam_day": "Friday",
+    "semester": "4"
+  },
+  {
+    "subject_code": "25M12ME114",
+    "subject_type": "L",
+    "subject_name": "Visual Ergonomics",
+    "exam_date": "22-05-2026",
+    "exam_time": "10.00 AM",
+    "exam_day": "Friday",
+    "semester": "2"
+  },
+  {
+    "subject_code": "25M23HS211",
+    "subject_type": "L",
+    "subject_name": "BLOCKCHAIN AND CRYPTOCURRENCY IN FINANCIAL SERVICES",
+    "exam_date": "22-05-2026",
+    "exam_time": "10.00 AM",
+    "exam_day": "Friday",
+    "semester": "4"
+  },
+  {
+    "subject_code": "25M32EC115",
+    "subject_type": "L",
+    "subject_name": "Computer vision for Robotics",
+    "exam_date": "22-05-2026",
+    "exam_time": "10.00 AM",
+    "exam_day": "Friday",
+    "semester": "2"
+  },
+  {
+    "subject_code": "17M11CS122",
+    "subject_type": "L",
+    "subject_name": "PERFORMANCE EVALUATION OF COMPUTING SYSTEMS",
+    "exam_date": "22-05-2026",
+    "exam_time": "02.30 PM",
+    "exam_day": "Friday",
+    "semester": "2, 8"
+  },
+  {
+    "subject_code": "18B11EC312",
+    "subject_type": "L",
+    "subject_name": "ELECTROMAGNETIC FIELD THEORY",
+    "exam_date": "22-05-2026",
+    "exam_time": "02.30 PM",
+    "exam_day": "Friday",
+    "semester": "5"
+  },
+  {
+    "subject_code": "22B12CS412",
+    "subject_type": "L",
+    "subject_name": "Digital Forensics and Cyber Laws",
+    "exam_date": "22-05-2026",
+    "exam_time": "02.30 PM",
+    "exam_day": "Friday",
+    "semester": "8"
+  },
+  {
+    "subject_code": "22B12CS413",
+    "subject_type": "L",
+    "subject_name": "Data Analytics using R and Python",
+    "exam_date": "22-05-2026",
+    "exam_time": "02.30 PM",
+    "exam_day": "Friday",
+    "semester": "8"
+  },
+  {
+    "subject_code": "22B12CS414",
+    "subject_type": "L",
+    "subject_name": "Agile Software Development Process",
+    "exam_date": "22-05-2026",
+    "exam_time": "02.30 PM",
+    "exam_day": "Friday",
+    "semester": "8"
+  },
+  {
+    "subject_code": "19M21PH117",
+    "subject_type": "L",
+    "subject_name": "STATISTICAL MECHANICS",
+    "exam_date": "15-05-2026",
+    "exam_time": "02.30 PM",
+    "exam_day": "Friday",
+    "semester": "2"
+  },
+  {
+    "subject_code": "24M11CA119",
+    "subject_type": "L",
+    "subject_name": "Information Security",
+    "exam_date": "15-05-2026",
+    "exam_time": "02.30 PM",
+    "exam_day": "Friday",
+    "semester": "2"
+  },
+  {
+    "subject_code": "25M23HS212",
+    "subject_type": "L",
+    "subject_name": "FINTECH CYBERSECURITY, RISK MANAGEMENT AND REGULATORY FRAMEWORK",
+    "exam_date": "15-05-2026",
+    "exam_time": "02.30 PM",
+    "exam_day": "Friday",
+    "semester": "4"
+  },
+  {
+    "subject_code": "25M32EC114",
+    "subject_type": "L",
+    "subject_name": "Industry 5.0",
+    "exam_date": "15-05-2026",
+    "exam_time": "02.30 PM",
+    "exam_day": "Friday",
+    "semester": "2"
+  },
+  {
+    "subject_code": "15B1NHS431",
+    "subject_type": "L",
+    "subject_name": "INTRODUCTION TO LITERATURE",
+    "exam_date": "15-05-2026",
+    "exam_time": "02.30 PM",
+    "exam_day": "Friday",
+    "semester": "4"
+  },
+  {
+    "subject_code": "15B1NHS433",
+    "subject_type": "L",
+    "subject_name": "INTRODUCTION TO SOCIOLOGY",
+    "exam_date": "15-05-2026",
+    "exam_time": "02.30 PM",
+    "exam_day": "Friday",
+    "semester": "4"
+  },
+  {
+    "subject_code": "15B1NHS434",
+    "subject_type": "L",
+    "subject_name": "PRINCIPLES OF MANAGEMENT",
+    "exam_date": "15-05-2026",
+    "exam_time": "02.30 PM",
+    "exam_day": "Friday",
+    "semester": "4"
+  },
+  {
+    "subject_code": "15B1NHS435",
+    "subject_type": "L",
+    "subject_name": "FINANCIAL ACCOUNTING",
+    "exam_date": "15-05-2026",
+    "exam_time": "02.30 PM",
+    "exam_day": "Friday",
+    "semester": "4"
+  },
+  {
+    "subject_code": "16B1NHS332",
+    "subject_type": "L",
+    "subject_name": "QUANTITATIVE METHODS FOR SOCIAL SCIENCES",
+    "exam_date": "15-05-2026",
+    "exam_time": "02.30 PM",
+    "exam_day": "Friday",
+    "semester": "4"
+  },
+  {
+    "subject_code": "19B12HS412",
+    "subject_type": "L",
+    "subject_name": "INDUSTRIAL ECONOMICS",
+    "exam_date": "15-05-2026",
+    "exam_time": "02.30 PM",
+    "exam_day": "Friday",
+    "semester": "4"
+  },
+  {
+    "subject_code": "19M12CS112",
+    "subject_type": "L",
+    "subject_name": "METAHEURISTIC MODELLING & OPTIMIZATION",
+    "exam_date": "15-05-2026",
+    "exam_time": "02.30 PM",
+    "exam_day": "Friday",
+    "semester": "2, 8"
+  },
+  {
+    "subject_code": "21M21CS123",
+    "subject_type": "L",
+    "subject_name": "ESSENTIAL STATISTICS FOR DATA SCIENCE",
+    "exam_date": "15-05-2026",
+    "exam_time": "02.30 PM",
+    "exam_day": "Friday",
+    "semester": "2, 3"
+  },
+  {
+    "subject_code": "23B12HS211",
+    "subject_type": "L",
+    "subject_name": "Introduction to Political Science",
+    "exam_date": "15-05-2026",
+    "exam_time": "02.30 PM",
+    "exam_day": "Friday",
+    "semester": "4"
+  },
+  {
+    "subject_code": "24B12HS211",
+    "subject_type": "L",
+    "subject_name": "Media, Culture and Society",
+    "exam_date": "15-05-2026",
+    "exam_time": "02.30 PM",
+    "exam_day": "Friday",
+    "semester": "4"
+  },
+  {
+    "subject_code": "24B12HS212",
+    "subject_type": "L",
+    "subject_name": "Science of Happiness",
+    "exam_date": "15-05-2026",
+    "exam_time": "02.30 PM",
+    "exam_day": "Friday",
+    "semester": "4"
+  },
+  {
+    "subject_code": "24B12HS213",
+    "subject_type": "L",
+    "subject_name": "Sociology of Work",
+    "exam_date": "15-05-2026",
+    "exam_time": "02.30 PM",
+    "exam_day": "Friday",
+    "semester": "4"
+  },
+  {
+    "subject_code": "24B21MA313",
+    "subject_type": "L",
+    "subject_name": "Fundamentals of Soft Computing",
+    "exam_date": "15-05-2026",
+    "exam_time": "02.30 PM",
+    "exam_day": "Friday",
+    "semester": "6"
+  },
+  {
+    "subject_code": "24B31EC313",
+    "subject_type": "L",
+    "subject_name": "Advance Wireless Technologies",
+    "exam_date": "15-05-2026",
+    "exam_time": "02.30 PM",
+    "exam_day": "Friday",
+    "semester": "6"
+  },
+  {
+    "subject_code": "24B51CS243",
+    "subject_type": "L",
+    "subject_name": "Data Base Management System",
+    "exam_date": "15-05-2026",
+    "exam_time": "02.30 PM",
+    "exam_day": "Friday",
+    "semester": "4"
+  },
+  {
+    "subject_code": "24M41BT115",
+    "subject_type": "L",
+    "subject_name": "Omics Analytics",
+    "exam_date": "15-05-2026",
+    "exam_time": "02.30 PM",
+    "exam_day": "Friday",
+    "semester": "2"
+  },
+  {
+    "subject_code": "25B12CA327",
+    "subject_type": "L",
+    "subject_name": "Fuzzy Logic and Neural Network",
+    "exam_date": "15-05-2026",
+    "exam_time": "02.30 PM",
+    "exam_day": "Friday",
+    "semester": "6"
+  },
+  {
+    "subject_code": "25B12CA328",
+    "subject_type": "L",
+    "subject_name": "Computer and Network Security",
+    "exam_date": "15-05-2026",
+    "exam_time": "02.30 PM",
+    "exam_day": "Friday",
+    "semester": "6"
+  },
+  {
+    "subject_code": "25M11CH118",
+    "subject_type": "L",
+    "subject_name": "Supramolecular Chemistry",
+    "exam_date": "15-05-2026",
+    "exam_time": "02.30 PM",
+    "exam_day": "Friday",
+    "semester": "2"
+  },
+  {
+    "subject_code": "25M12ME118",
+    "subject_type": "L",
+    "subject_name": "Packaging and Branding",
+    "exam_date": "15-05-2026",
+    "exam_time": "02.30 PM",
+    "exam_day": "Friday",
+    "semester": "2"
+  },
+  {
+    "subject_code": "25B18CS314",
+    "subject_type": "L",
+    "subject_name": "Ethical Hacking Workshop",
+    "exam_date": "18-05-2026",
+    "exam_time": "10.00 AM",
+    "exam_day": "Monday",
+    "semester": "6"
+  },
+  {
+    "subject_code": "25B19EC611",
+    "subject_type": "L",
+    "subject_name": "Basics of Artificial Intelligence",
+    "exam_date": "18-05-2026",
+    "exam_time": "10.00 AM",
+    "exam_day": "Monday",
+    "semester": "6"
+  },
+  {
+    "subject_code": "26M12CS122",
+    "subject_type": "L",
+    "subject_name": "Data Visualization",
+    "exam_date": "18-05-2026",
+    "exam_time": "10.00 AM",
+    "exam_day": "Monday",
+    "semester": "2"
+  },
+  {
+    "subject_code": "15B1NEC733",
+    "subject_type": "L",
+    "subject_name": "FUNDAMENTALS OF EMBEDDED SYSTEMS",
+    "exam_date": "18-05-2026",
+    "exam_time": "10.00 AM",
+    "exam_day": "Monday",
+    "semester": "4"
+  },
+  {
+    "subject_code": "17M12EC125",
+    "subject_type": "L",
+    "subject_name": "DETECTION AND ESTIMATION THEORY",
+    "exam_date": "18-05-2026",
+    "exam_time": "10.00 AM",
+    "exam_day": "Monday",
+    "semester": "8"
+  },
+  {
+    "subject_code": "19M21MA211",
+    "subject_type": "L",
+    "subject_name": "MATHEMATICAL STATISTICS",
+    "exam_date": "18-05-2026",
+    "exam_time": "10.00 AM",
+    "exam_day": "Monday",
+    "semester": "2"
+  },
+  {
+    "subject_code": "19M21PH216",
+    "subject_type": "L",
+    "subject_name": "Advanced Condensed Matter Physics-2",
+    "exam_date": "18-05-2026",
+    "exam_time": "10.00 AM",
+    "exam_day": "Monday",
+    "semester": "4"
+  },
+  {
+    "subject_code": "19M21PH217",
+    "subject_type": "L",
+    "subject_name": "Fiber Optics",
+    "exam_date": "18-05-2026",
+    "exam_time": "10.00 AM",
+    "exam_day": "Monday",
+    "semester": "2, 4"
+  },
+  {
+    "subject_code": "21B12BT311",
+    "subject_type": "L",
+    "subject_name": "Phenomics",
+    "exam_date": "18-05-2026",
+    "exam_time": "10.00 AM",
+    "exam_day": "Monday",
+    "semester": "4"
+  },
+  {
+    "subject_code": "21B12CS312",
+    "subject_type": "L",
+    "subject_name": "Sensor Technology & Android Programming",
+    "exam_date": "18-05-2026",
+    "exam_time": "10.00 AM",
+    "exam_day": "Monday",
+    "semester": "6"
+  },
+  {
+    "subject_code": "21B12CS314",
+    "subject_type": "L",
+    "subject_name": "Introduction to Large Scale Database Systems",
+    "exam_date": "18-05-2026",
+    "exam_time": "10.00 AM",
+    "exam_day": "Monday",
+    "semester": "6"
+  },
+  {
+    "subject_code": "21B12CS319",
+    "subject_type": "L",
+    "subject_name": "Fundamentals of Soft Computing",
+    "exam_date": "18-05-2026",
+    "exam_time": "10.00 AM",
+    "exam_day": "Monday",
+    "semester": "6"
+  },
+  {
+    "subject_code": "23B21MA111",
+    "subject_type": "L",
+    "subject_name": "Data Structures",
+    "exam_date": "18-05-2026",
+    "exam_time": "10.00 AM",
+    "exam_day": "Monday",
+    "semester": "2"
+  },
+  {
+    "subject_code": "24B11CS222",
+    "subject_type": "L",
+    "subject_name": "Artificial Intelligence and Machine Learning",
+    "exam_date": "18-05-2026",
+    "exam_time": "10.00 AM",
+    "exam_day": "Monday",
+    "semester": "4"
+  },
+  {
+    "subject_code": "25B12BT211",
+    "subject_type": "L",
+    "subject_name": "Python for biologists",
+    "exam_date": "18-05-2026",
+    "exam_time": "10.00 AM",
+    "exam_day": "Monday",
+    "semester": "4"
+  },
+  {
+    "subject_code": "25B12CA324",
+    "subject_type": "L",
+    "subject_name": "Cloud Computing",
+    "exam_date": "18-05-2026",
+    "exam_time": "10.00 AM",
+    "exam_day": "Monday",
+    "semester": "6"
+  },
+  {
+    "subject_code": "25B22EC313",
+    "subject_type": "L",
+    "subject_name": "Nano Manufacturing",
+    "exam_date": "18-05-2026",
+    "exam_time": "10.00 AM",
+    "exam_day": "Monday",
+    "semester": "6"
+  },
+  {
+    "subject_code": "25M12ME122",
+    "subject_type": "L",
+    "subject_name": "Design for Elderly",
+    "exam_date": "18-05-2026",
+    "exam_time": "10.00 AM",
+    "exam_day": "Monday",
+    "semester": "2"
+  },
+  {
+    "subject_code": "25M32EC117",
+    "subject_type": "L",
+    "subject_name": "Humanoid & Quadruped Robots",
+    "exam_date": "18-05-2026",
+    "exam_time": "10.00 AM",
+    "exam_day": "Monday",
+    "semester": "2"
+  },
+  {
+    "subject_code": "22B12CS415",
+    "subject_type": "L",
+    "subject_name": "AI for Healthcare and Smart Systems",
+    "exam_date": "23-05-2026",
+    "exam_time": "10.00 AM",
+    "exam_day": "Saturday",
+    "semester": "8"
+  },
+  {
+    "subject_code": "23B21PH112",
+    "subject_type": "L",
+    "subject_name": "Modern Physics",
+    "exam_date": "23-05-2026",
+    "exam_time": "10.00 AM",
+    "exam_day": "Saturday",
+    "semester": "2"
+  },
+  {
+    "subject_code": "24B11CS221",
+    "subject_type": "L",
+    "subject_name": "Design and Analysis of Algorithms",
+    "exam_date": "23-05-2026",
+    "exam_time": "10.00 AM",
+    "exam_day": "Saturday",
+    "semester": "4"
+  },
+  {
+    "subject_code": "24B21EC311",
+    "subject_type": "L",
+    "subject_name": "Semiconductor Materials Synthesis and Characterization",
+    "exam_date": "23-05-2026",
+    "exam_time": "10.00 AM",
+    "exam_day": "Saturday",
+    "semester": "6"
+  },
+  {
+    "subject_code": "24M21BT111",
+    "subject_type": "L",
+    "subject_name": "Foundations of Artificial Intelligence in Biotechnology",
+    "exam_date": "23-05-2026",
+    "exam_time": "10.00 AM",
+    "exam_day": "Saturday",
+    "semester": "2"
+  },
+  {
+    "subject_code": "25B12BT416",
+    "subject_type": "L",
+    "subject_name": "Radiation Biology and Technological Applications",
+    "exam_date": "23-05-2026",
+    "exam_time": "10.00 AM",
+    "exam_day": "Saturday",
+    "semester": "6"
+  },
+  {
+    "subject_code": "25B12CA323",
+    "subject_type": "L",
+    "subject_name": "Introduction to Blockchain",
+    "exam_date": "23-05-2026",
+    "exam_time": "10.00 AM",
+    "exam_day": "Saturday",
+    "semester": "3"
+  },
+  {
+    "subject_code": "25B31EC313",
+    "subject_type": "L",
+    "subject_name": "Information coding theory for Wireless communications",
+    "exam_date": "23-05-2026",
+    "exam_time": "10.00 AM",
+    "exam_day": "Saturday",
+    "semester": "6"
+  },
+  {
+    "subject_code": "25M21HS118",
+    "subject_type": "L",
+    "subject_name": "Statistics in Psychology",
+    "exam_date": "23-05-2026",
+    "exam_time": "10.00 AM",
+    "exam_day": "Saturday",
+    "semester": "2"
+  },
+  {
+    "subject_code": "25P11BGM13",
+    "subject_type": "L",
+    "subject_name": "Quantitative Techniques and Software Application",
+    "exam_date": "23-05-2026",
+    "exam_time": "10.00 AM",
+    "exam_day": "Saturday",
+    "semester": "2, 3"
+  },
+  {
+    "subject_code": "15B11EC411",
+    "subject_type": "L",
+    "subject_name": "ANALOGUE ELECTRONICS",
+    "exam_date": "23-05-2026",
+    "exam_time": "10.00 AM",
+    "exam_day": "Saturday",
+    "semester": "4"
+  },
+  {
+    "subject_code": "15B1NHS831",
+    "subject_type": "L",
+    "subject_name": "EFFECTIVE TOOLS FOR CAREER MANAGEMENT AND DEVELOPMENT",
+    "exam_date": "23-05-2026",
+    "exam_time": "10.00 AM",
+    "exam_day": "Saturday",
+    "semester": "6"
+  },
+  {
+    "subject_code": "16B1NHS636",
+    "subject_type": "L",
+    "subject_name": "LITERATURE AND ADAPTION",
+    "exam_date": "23-05-2026",
+    "exam_time": "10.00 AM",
+    "exam_day": "Saturday",
+    "semester": "6"
+  },
+  {
+    "subject_code": "16B12HS611",
+    "subject_type": "L",
+    "subject_name": "MARKETING MANAGEMENT",
+    "exam_date": "23-05-2026",
+    "exam_time": "10.00 AM",
+    "exam_day": "Saturday",
+    "semester": "6"
+  },
+  {
+    "subject_code": "20B12HS311",
+    "subject_type": "L",
+    "subject_name": "GLOBAL POLITICS",
+    "exam_date": "23-05-2026",
+    "exam_time": "10.00 AM",
+    "exam_day": "Saturday",
+    "semester": "6"
+  },
+  {
+    "subject_code": "21B12HS311",
+    "subject_type": "L",
+    "subject_name": "Development Issues and Rural Engineering",
+    "exam_date": "23-05-2026",
+    "exam_time": "10.00 AM",
+    "exam_day": "Saturday",
+    "semester": "6"
+  },
+  {
+    "subject_code": "23B61CA222",
+    "subject_type": "L",
+    "subject_name": "Operating System",
+    "exam_date": "23-05-2026",
+    "exam_time": "10.00 AM",
+    "exam_day": "Saturday",
+    "semester": "4"
+  },
+  {
+    "subject_code": "24B12EC415",
+    "subject_type": "L",
+    "subject_name": "Introduction to UAV Design",
+    "exam_date": "23-05-2026",
+    "exam_time": "10.00 AM",
+    "exam_day": "Saturday",
+    "semester": "8"
+  },
+  {
+    "subject_code": "24B12HS311",
+    "subject_type": "L",
+    "subject_name": "Investment Management",
+    "exam_date": "23-05-2026",
+    "exam_time": "10.00 AM",
+    "exam_day": "Saturday",
+    "semester": "6"
+  },
+  {
+    "subject_code": "24B12HS313",
+    "subject_type": "L",
+    "subject_name": "Political Philosophy",
+    "exam_date": "23-05-2026",
+    "exam_time": "10.00 AM",
+    "exam_day": "Saturday",
+    "semester": "6"
+  },
+  {
+    "subject_code": "24M22MA112",
+    "subject_type": "L",
+    "subject_name": "Techniques of Data Handling and Visualization",
+    "exam_date": "23-05-2026",
+    "exam_time": "10.00 AM",
+    "exam_day": "Saturday",
+    "semester": "2"
+  },
+  {
+    "subject_code": "25B11BT212",
+    "subject_type": "L",
+    "subject_name": "Sequence Informatics and Phylogeny",
+    "exam_date": "23-05-2026",
+    "exam_time": "10.00 AM",
+    "exam_day": "Saturday",
+    "semester": "4"
+  },
+  {
+    "subject_code": "25B11MA231",
+    "subject_type": "L",
+    "subject_name": "Theory and Applications of Linear Algebra",
+    "exam_date": "23-05-2026",
+    "exam_time": "10.00 AM",
+    "exam_day": "Saturday",
+    "semester": "4"
+  },
+  {
+    "subject_code": "25B12HS315",
+    "subject_type": "L",
+    "subject_name": "Health Communication",
+    "exam_date": "23-05-2026",
+    "exam_time": "10.00 AM",
+    "exam_day": "Saturday",
+    "semester": "6"
+  },
+  {
+    "subject_code": "25B12HS316",
+    "subject_type": "L",
+    "subject_name": "Game Theory for Engineers",
+    "exam_date": "23-05-2026",
+    "exam_time": "10.00 AM",
+    "exam_day": "Saturday",
+    "semester": "6"
+  },
+  {
+    "subject_code": "25B12HS317",
+    "subject_type": "L",
+    "subject_name": "Indian Literature",
+    "exam_date": "23-05-2026",
+    "exam_time": "10.00 AM",
+    "exam_day": "Saturday",
+    "semester": "6"
+  },
+  {
+    "subject_code": "25B12MA223",
+    "subject_type": "L",
+    "subject_name": "Time Series Analysis and Forecasting",
+    "exam_date": "21-05-2026",
+    "exam_time": "10.00 AM",
+    "exam_day": "Thursday",
+    "semester": "4"
+  },
+  {
+    "subject_code": "25B51CS363",
+    "subject_type": "L",
+    "subject_name": "Java Programming",
+    "exam_date": "21-05-2026",
+    "exam_time": "10.00 AM",
+    "exam_day": "Thursday",
+    "semester": "6"
+  },
+  {
+    "subject_code": "25M11CH117",
+    "subject_type": "L",
+    "subject_name": "Molecular Spectroscopy",
+    "exam_date": "21-05-2026",
+    "exam_time": "10.00 AM",
+    "exam_day": "Thursday",
+    "semester": "2"
+  },
+  {
+    "subject_code": "25M11ME113",
+    "subject_type": "L",
+    "subject_name": "Design Methodology",
+    "exam_date": "21-05-2026",
+    "exam_time": "10.00 AM",
+    "exam_day": "Thursday",
+    "semester": "2"
+  },
+  {
+    "subject_code": "25M21HS121",
+    "subject_type": "L",
+    "subject_name": "Foundations of Counselling Skills",
+    "exam_date": "21-05-2026",
+    "exam_time": "10.00 AM",
+    "exam_day": "Thursday",
+    "semester": "2"
+  },
+  {
+    "subject_code": "25M31EC114",
+    "subject_type": "L",
+    "subject_name": "Robotic Operating System",
+    "exam_date": "21-05-2026",
+    "exam_time": "10.00 AM",
+    "exam_day": "Thursday",
+    "semester": "2"
+  },
+  {
+    "subject_code": "15B11EC313",
+    "subject_type": "L",
+    "subject_name": "MICROPROCESSORS AND MICROCONTROLLERS",
+    "exam_date": "21-05-2026",
+    "exam_time": "10.00 AM",
+    "exam_day": "Thursday",
+    "semester": "4"
+  },
+  {
+    "subject_code": "16B1NMA633",
+    "subject_type": "L",
+    "subject_name": "STATISTICS",
+    "exam_date": "21-05-2026",
+    "exam_time": "10.00 AM",
+    "exam_day": "Thursday",
+    "semester": "6"
+  },
+  {
+    "subject_code": "16B1NPH632",
+    "subject_type": "L",
+    "subject_name": "SOLID STATE ELECTRONIC DEVICES",
+    "exam_date": "21-05-2026",
+    "exam_time": "10.00 AM",
+    "exam_day": "Thursday",
+    "semester": "6"
+  },
+  {
+    "subject_code": "16B1NPH633",
+    "subject_type": "L",
+    "subject_name": "PHOTOVOLTAIC TECHNIQUES",
+    "exam_date": "21-05-2026",
+    "exam_time": "10.00 AM",
+    "exam_day": "Thursday",
+    "semester": "6"
+  },
+  {
+    "subject_code": "16B1NPH634",
+    "subject_type": "L",
+    "subject_name": "APPLIED STATISTICAL MECHANICS",
+    "exam_date": "21-05-2026",
+    "exam_time": "10.00 AM",
+    "exam_day": "Thursday",
+    "semester": "6"
+  },
+  {
+    "subject_code": "16B1NPH636",
+    "subject_type": "L",
+    "subject_name": "MEDICAL AND INDUSTRIAL APPLICATIONS OF NUCLEAR RADIATIONS",
+    "exam_date": "21-05-2026",
+    "exam_time": "10.00 AM",
+    "exam_day": "Thursday",
+    "semester": "6"
+  },
+  {
+    "subject_code": "18B12MA611",
+    "subject_type": "L",
+    "subject_name": "OPERATIONS RESEARCH",
+    "exam_date": "21-05-2026",
+    "exam_time": "10.00 AM",
+    "exam_day": "Thursday",
+    "semester": "6"
+  },
+  {
+    "subject_code": "18B12MA612",
+    "subject_type": "L",
+    "subject_name": "APPLIED MATHEMATICAL METHODS",
+    "exam_date": "21-05-2026",
+    "exam_time": "10.00 AM",
+    "exam_day": "Thursday",
+    "semester": "6"
+  },
+  {
+    "subject_code": "20B12MA311",
+    "subject_type": "L",
+    "subject_name": "APPLICATIONAL ASPECTS OF DIFFERENTIAL EQUATIONS",
+    "exam_date": "21-05-2026",
+    "exam_time": "10.00 AM",
+    "exam_day": "Thursday",
+    "semester": "6"
+  },
+  {
+    "subject_code": "20M41EC119",
+    "subject_type": "L",
+    "subject_name": "MIMO-OFDM FOR WIRELESS COMMUNICATIONS",
+    "exam_date": "21-05-2026",
+    "exam_time": "10.00 AM",
+    "exam_day": "Thursday",
+    "semester": "1, 8"
+  }
+]

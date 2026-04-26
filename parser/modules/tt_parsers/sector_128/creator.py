@@ -1,7 +1,4 @@
-from common.utils import (
-    process_day,
-    process_timeslot,
-)
+from utils.time import process_day, process_timeslot
 
 
 from .utils import (
@@ -167,4 +164,3 @@ def bando_year1(
 # Aliases for consistent interface across modules
 creator = banado
 creator_year1 = bando_year1
-

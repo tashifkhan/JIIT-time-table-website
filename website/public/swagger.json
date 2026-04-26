@@ -96,11 +96,116 @@
                     "properties": {
                       "value": {
                         "type": "string",
-                        "description": "The directory name for the year (e.g., \"2425\")"
+                        "description": "The year identifier (e.g., \"2425\")"
                       },
                       "label": {
                         "type": "string",
                         "description": "The formatted label for the year (e.g., \"2024-25\")"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal server error"
+          }
+        }
+      }
+    },
+    "/api/exam-schedule/{semester}": {
+      "get": {
+        "description": "Returns all exam entries for a given semester, merged from all available exam type files",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "semester",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "The semester identifier (e.g. \"EVEN26\")"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Array of exam entries",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "subject_code": {
+                        "type": "string"
+                      },
+                      "subject_type": {
+                        "type": "string",
+                        "enum": [
+                          "L",
+                          "T",
+                          "P"
+                        ]
+                      },
+                      "subject_name": {
+                        "type": "string"
+                      },
+                      "exam_date": {
+                        "type": "string",
+                        "description": "DD-MM-YYYY"
+                      },
+                      "exam_time": {
+                        "type": "string"
+                      },
+                      "exam_day": {
+                        "type": "string"
+                      },
+                      "semester": {
+                        "type": "string"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Semester identifier is required"
+          },
+          "404": {
+            "description": "Exam schedule not found for this semester"
+          },
+          "500": {
+            "description": "Internal server error"
+          }
+        }
+      }
+    },
+    "/api/exam-schedule": {
+      "get": {
+        "description": "Returns a list of available exam semesters and their exam types",
+        "responses": {
+          "200": {
+            "description": "A list of semesters with available exam schedule files",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "semester": {
+                        "type": "string",
+                        "description": "The semester identifier (e.g. \"EVEN26\")"
+                      },
+                      "types": {
+                        "type": "array",
+                        "items": {
+                          "type": "string"
+                        },
+                        "description": "Available exam types (e.g. [\"T3\"])"
                       }
                     }
                   }

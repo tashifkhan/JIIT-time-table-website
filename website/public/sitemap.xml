@@ -10,6 +10,9 @@
     <loc>https://simple-timetable.tashif.codes/academic-calendar</loc>
   </url>
   <url>
+    <loc>https://simple-timetable.tashif.codes/exam-schedule</loc>
+  </url>
+  <url>
     <loc>https://simple-timetable.tashif.codes/compare-timetables</loc>
   </url>
   <url>
@@ -25,6 +28,9 @@
     <loc>https://jiit-timetable.tashif.codes/academic-calendar</loc>
   </url>
   <url>
+    <loc>https://jiit-timetable.tashif.codes/exam-schedule</loc>
+  </url>
+  <url>
     <loc>https://jiit-timetable.tashif.codes/compare-timetables</loc>
   </url>
   <url>
@@ -36,4 +42,4 @@
   <url>
     <loc>https://jiit-timetable.tashif.codes/api-doc</loc>
   </url>
-</urlset> 
+</urlset>

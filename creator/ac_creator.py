@@ -1,9 +1,9 @@
 """
 Gemini PDF to JSON Converter (Creator Tool).
 
-This script provides a Streamlit-based web interface to upload Academic Calendar PDFs 
-and convert them into a structured JSON format using Google's Gemini Pro model 
-via the File API. It handles complex table structures and date inferences 
+This script provides a Streamlit-based web interface to upload Academic Calendar PDFs
+and convert them into a structured JSON format using Google's Gemini Pro model
+via the File API. It handles complex table structures and date inferences
 specific to JIIT Academic Calendars.
 """
 import streamlit as st
@@ -22,7 +22,7 @@ st.set_page_config(page_title="Gemini PDF to JSON Parser", layout="wide")
 st.title("📄 PDF to Structured JSON Converter (File API)")
 st.markdown(
     """
-This app uses **Google Gemini's File API** to process PDFs directly. 
+This app uses **Google Gemini's File API** to process PDFs directly.
 It uploads the document to Gemini's context window for superior understanding of layout and tables.
 """
 )
@@ -43,7 +43,7 @@ def clean_json_string(json_str):
     Removes markdown code fences and standardizes the string for JSON parsing.
 
     Args:
-        json_str (str): The raw string output from the Gemini model, 
+        json_str (str): The raw string output from the Gemini model,
                         potentially containing markdown blocks.
 
     Returns:
@@ -346,7 +346,7 @@ if st.button("🚀 Process File", type="primary"):
                 prompt = f"Given the academic calendar content from the uploaded file, extract the events strictly following this JSON schema:\n{example_schema}"
 
                 response = client.models.generate_content(
-                    model="gemini-3-pro-preview", # Original model name from user code
+                    model="gemini-3.1-pro-preview", # Original model name from user code
                     contents=[
                         types.Part.from_bytes(
                             data=pathlib.Path(tmp_file_path).read_bytes(),

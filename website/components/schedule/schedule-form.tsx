@@ -26,10 +26,12 @@ import {
 	EyeOff,
 	Globe,
 	Loader2,
+	CheckCircle,
 } from "lucide-react";
 import UserContext from "../../context/userContext";
 import { useQueryState, parseAsString, parseAsArrayOf } from "nuqs";
 import { useToast } from "../../hooks/use-toast";
+import { useWebPortal } from "../../hooks/use-webportal";
 
 export interface Subject {
 	Code: string;
@@ -296,6 +298,9 @@ export function ScheduleForm({
 	// Input mode: 'manual' or 'portal'
 	const [inputMode, setInputMode] = useState<"manual" | "portal">("manual");
 
+	// WebPortal hook
+	const webPortal = useWebPortal();
+
 	useEffect(() => {
 		setMapz(mapping);
 	}, [mapping]);
@@ -304,6 +309,46 @@ export function ScheduleForm({
 		setSelectedSubjects((prev) =>
 			prev.includes(code) ? prev.filter((c) => c !== code) : [...prev, code]
 		);
+	};
+
+	// Handle WebPortal login and subject fetching
+	const handlePortalLogin = async () => {
+		const result = await webPortal.login(enrollmentNumber, portalPassword);
+
+		if (result.success && result.studentInfo) {
+			// Auto-populate campus, year, batch from profile
+			setCampus(result.studentInfo.campus);
+			setYear(result.studentInfo.year);
+			if (result.studentInfo.batch) {
+				setBatch(result.studentInfo.batch);
+			}
+
+			// Match portal subjects with available subjects in batch data
+			const availableSubjects =
+				mapz?.[result.studentInfo.campus]?.[result.studentInfo.year]
+					?.subjects || [];
+			const portalSubjectCodes = new Set(
+				result.subjects.map((s) => s.subject_code)
+			);
+
+			// Find matching subjects by code
+			const matchedCodes = availableSubjects
+				.filter((s) => portalSubjectCodes.has(s.Code))
+				.map((s) => s.Code);
+
+			if (matchedCodes.length > 0) {
+				setSelectedSubjects(matchedCodes);
+				toast({
+					title: "Subjects fetched!",
+					description: `Found ${matchedCodes.length} matching subjects from your enrollment.`,
+				});
+			} else {
+				toast({
+					title: "Subjects fetched",
+					description: `No subjects matched with available timetable data. You may need to select manually.`,
+				});
+			}
+		}
 	};
 
 	const handleSubmit = async (e: React.FormEvent) => {
@@ -669,15 +714,26 @@ export function ScheduleForm({
 				{/* WebPortal Mode */}
 				{inputMode === "portal" && (
 					<div className="space-y-5 sm:space-y-6">
-						{/* In Progress Badge */}
-						<div className="flex justify-center">
-							<div className="flex items-center gap-2 px-4 py-2 bg-amber-500/20 border border-amber-500/30 rounded-full">
-								<Loader2 className="w-4 h-4 text-amber-400 animate-spin" />
-								<span className="text-sm font-medium text-amber-400">
-									Feature In Progress
-								</span>
+						{/* Error Message */}
+						{webPortal.error && (
+							<div className="bg-red-500/20 border border-red-500/30 rounded-lg p-3">
+								<p className="text-xs text-red-400 text-center">
+									{webPortal.error}
+								</p>
 							</div>
-						</div>
+						)}
+
+						{/* Success State */}
+						{webPortal.isLoggedIn && (
+							<div className="flex justify-center">
+								<div className="flex items-center gap-2 px-4 py-2 bg-green-500/20 border border-green-500/30 rounded-full">
+									<CheckCircle className="w-4 h-4 text-green-400" />
+									<span className="text-sm font-medium text-green-400">
+										Logged In
+									</span>
+								</div>
+							</div>
+						)}
 
 						<p className="text-xs text-slate-400 text-center">
 							Automatically fetch your campus, batch, and enrolled subjects from
@@ -700,7 +756,7 @@ export function ScheduleForm({
 								value={enrollmentNumber}
 								onChange={(e) => setEnrollmentNumber(e.target.value)}
 								className="h-10 sm:h-11 text-sm bg-white/10 border-white/20 backdrop-blur-md hover:bg-white/15 hover:border-[#F0BB78]/40 focus:border-[#F0BB78]/60 focus:ring-[#F0BB78]/20 transition-all duration-200"
-								disabled
+								disabled={webPortal.isLoading || webPortal.isLoggedIn}
 							/>
 						</div>
 
@@ -721,7 +777,7 @@ export function ScheduleForm({
 									value={portalPassword}
 									onChange={(e) => setPortalPassword(e.target.value)}
 									className="h-10 sm:h-11 text-sm bg-white/10 border-white/20 backdrop-blur-md hover:bg-white/15 hover:border-[#F0BB78]/40 focus:border-[#F0BB78]/60 focus:ring-[#F0BB78]/20 transition-all duration-200 pr-10"
-									disabled
+									disabled={webPortal.isLoading || webPortal.isLoggedIn}
 								/>
 								<button
 									type="button"
@@ -738,23 +794,92 @@ export function ScheduleForm({
 							</div>
 						</div>
 
-						{/* Coming Soon Notice */}
-						<div className="bg-amber-500/10 border border-amber-500/20 rounded-lg p-3">
-							<p className="text-xs text-amber-400/90 text-center">
-								This feature is currently under development. Stay tuned for
-								updates!
-							</p>
-						</div>
+						{/* Fetched Info Display */}
+						{webPortal.isLoggedIn && webPortal.studentInfo && (
+							<div className="bg-green-500/10 border border-green-500/20 rounded-lg p-3 space-y-2">
+								<div className="flex flex-wrap gap-3 text-sm">
+									<span className="text-slate-400">
+										Campus:{" "}
+										<span className="text-green-400 font-medium">
+											{webPortal.studentInfo.campus}
+										</span>
+									</span>
+									<span className="text-slate-400">
+										Year:{" "}
+										<span className="text-green-400 font-medium">
+											{webPortal.studentInfo.year}
+										</span>
+									</span>
+									{webPortal.studentInfo.batch && (
+										<span className="text-slate-400">
+											Batch:{" "}
+											<span className="text-green-400 font-medium">
+												{webPortal.studentInfo.batch}
+											</span>
+										</span>
+									)}
+								</div>
+								<p className="text-xs text-green-400/80">
+									Found {webPortal.subjects.length} enrolled subjects •{" "}
+									{selectedSubjects.length} matched with timetable
+								</p>
+							</div>
+						)}
 
-						{/* Fetch Button */}
-						<Button
-							type="button"
-							disabled
-							className="w-full h-11 sm:h-12 text-sm sm:text-base bg-gradient-to-r from-[#543A14] to-[#F0BB78] hover:from-[#543A14]/90 hover:to-[#F0BB78]/90 transition-all duration-300 shadow-lg hover:shadow-[#F0BB78]/30 disabled:opacity-50 disabled:cursor-not-allowed"
-						>
-							<Globe className="w-4 h-4 sm:w-5 sm:h-5 mr-2" />
-							Fetch and Generate Schedule
-						</Button>
+						{/* Fetch / Generate Buttons */}
+						{!webPortal.isLoggedIn ? (
+							<Button
+								type="button"
+								disabled={
+									webPortal.isLoading || !enrollmentNumber || !portalPassword
+								}
+								onClick={handlePortalLogin}
+								className="w-full h-11 sm:h-12 text-sm sm:text-base bg-gradient-to-r from-[#543A14] to-[#F0BB78] hover:from-[#543A14]/90 hover:to-[#F0BB78]/90 transition-all duration-300 shadow-lg hover:shadow-[#F0BB78]/30 disabled:opacity-50 disabled:cursor-not-allowed"
+							>
+								{webPortal.isLoading ? (
+									<>
+										<Loader2 className="w-4 h-4 sm:w-5 sm:h-5 mr-2 animate-spin" />
+										Logging in...
+									</>
+								) : (
+									<>
+										<Globe className="w-4 h-4 sm:w-5 sm:h-5 mr-2" />
+										Fetch Subjects
+									</>
+								)}
+							</Button>
+						) : (
+							<div className="space-y-3">
+								<Button
+									type="button"
+									onClick={() => {
+										setEditedSchedule(null);
+										onSubmit({
+											year,
+											batch,
+											electives: selectedSubjects,
+											campus,
+										});
+									}}
+									className="w-full h-11 sm:h-12 text-sm sm:text-base bg-gradient-to-r from-[#543A14] to-[#F0BB78] hover:from-[#543A14]/90 hover:to-[#F0BB78]/90 transition-all duration-300 shadow-lg hover:shadow-[#F0BB78]/30"
+								>
+									<Sparkles className="w-4 h-4 sm:w-5 sm:h-5 mr-2" />
+									Generate Schedule
+								</Button>
+								<Button
+									type="button"
+									variant="outline"
+									onClick={() => {
+										webPortal.reset();
+										setEnrollmentNumber("");
+										setPortalPassword("");
+									}}
+									className="w-full h-10 text-sm border-[#F0BB78]/30 text-[#F0BB78] hover:bg-[#F0BB78]/10"
+								>
+									Login Again
+								</Button>
+							</div>
+						)}
 					</div>
 				)}
 			</Card>

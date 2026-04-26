@@ -1,23 +1,14 @@
 # JIIT Timetable Parser
 
-A modular Python package for parsing and creating personalized timetables for JIIT (Jaypee Institute of Information Technology) students.
-
-## Features
-
-- **Multi-Campus Support**: Handles timetables for Sector 62, Sector 128, and BCA programs
-- **Year-Specific Logic**: Different parsing strategies for Year 1 vs upper years
-- **Elective Handling**: Filters timetables based on enrolled electives
-- **Timetable Comparison**: Compare two timetables to find common free slots and shared classes
-- **Type Safety**: Pydantic models for input/output validation
+A Python package for parsing and creating personalized timetables for JIIT students. Handles all three campuses (Sector 62, Sector 128, BCA) with year-specific logic and elective filtering.
 
 ## Installation
 
 ```bash
-# Using uv (recommended)
-cd parser
+# Development setup
 uv sync
 
-# Or install from wheel
+# Install from wheel
 pip install dist/jiit_timetable_parser-0.1.0-py3-none-any.whl
 ```
 
@@ -26,22 +17,19 @@ pip install dist/jiit_timetable_parser-0.1.0-py3-none-any.whl
 ```python
 from main import create_time_table, compare_timetables, create_and_compare_timetable
 
-# Create a personalized timetable
 timetable = create_time_table(
-    campus="62",           # "62", "128", or "BCA"
-    year="3",              # "1", "2", "3", "4", "5"
-    time_table_json=raw_timetable,  # Raw timetable data
-    subject_json=subjects,          # List of subject info
-    batch="B12",                    # Your batch
-    electives_subject_codes=["CS311", "CI573"],  # Enrolled electives
+    campus="62",
+    year="3",
+    time_table_json=raw_timetable,
+    subject_json=subjects,
+    batch="B12",
+    electives_subject_codes=["CS311", "CI573"],
 )
 ```
 
-## API Reference
+## API
 
 ### `create_time_table()`
-
-Create a personalized timetable based on campus and year.
 
 ```python
 def create_time_table(
@@ -54,64 +42,49 @@ def create_time_table(
 ) -> dict
 ```
 
-**Parameters:**
-| Parameter | Type | Description |
-|-----------|------|-------------|
-| `campus` | `str` | Campus identifier: `"62"`, `"128"`, or `"BCA"` |
-| `year` | `str` | Year of study: `"1"` through `"5"` |
-| `time_table_json` | `dict` | Raw timetable data (day → time → classes) |
-| `subject_json` | `list` | List of subject dictionaries with Code, Full Code, Subject |
-| `batch` | `str` | User's batch (e.g., `"A6"`, `"B12"`, `"BCA1"`) |
-| `electives_subject_codes` | `list[str]` | List of enrolled elective codes |
+| Parameter | Description |
+|-----------|-------------|
+| `campus` | `"62"` (Sector 62), `"128"` (Sector 128), or `"BCA"` |
+| `year` | Year of study — `"1"` uses batch-only matching; `"2"`–`"5"` require enrollment |
+| `time_table_json` | Raw timetable JSON (day → timeslot → list of class strings) |
+| `subject_json` | List of `{Code, Full Code, Subject}` dicts |
+| `batch` | Student's batch, e.g. `"A6"`, `"B12"`, `"BCA1"` |
+| `electives_subject_codes` | Subject codes of enrolled electives |
 
-**Returns:** Formatted timetable dictionary:
-
+**Output:**
 ```python
 {
     "Monday": {
-        "09:00-10:00": {
-            "subject_name": "Data Structures",
-            "type": "L",
-            "location": "G7"
-        }
+        "09:00-10:00": {"subject_name": "Data Structures", "type": "L", "location": "G7"}
     }
 }
 ```
 
-### `compare_timetables()`
+---
 
-Compare two timetables to find common free slots and shared classes.
+### `compare_timetables()`
 
 ```python
 def compare_timetables(timetable1: dict, timetable2: dict) -> dict
 ```
 
-**Returns:**
-
+**Output:**
 ```python
 {
-    "common_free_slots": {
-        "Monday": ["12:00-13:00", "14:00-15:00"]
-    },
-    "classes_together": {
-        "Tuesday": {
-            "10:00-11:00": {"subject_name": "...", "type": "L", "location": "G7"}
-        }
-    }
+    "common_free_slots": {"Monday": ["12:00-13:00", "14:00-15:00"]},
+    "classes_together": {"Tuesday": {"10:00-11:00": {...}}}
 }
 ```
 
-### `create_and_compare_timetable()`
+---
 
-Create two timetables and compare them in one call.
+### `create_and_compare_timetable()`
 
 ```python
 def create_and_compare_timetable(params_list: list[TimetableParams]) -> dict
 ```
 
-**Parameters:** List of exactly 2 `TimetableParams` dictionaries.
-
-**Returns:**
+Takes exactly 2 `TimetableParams` dicts (same keys as `create_time_table`). Returns:
 
 ```python
 {
@@ -121,52 +94,56 @@ def create_and_compare_timetable(params_list: list[TimetableParams]) -> dict
 }
 ```
 
-## Project Structure
+---
+
+## Package Structure
 
 ```
 parser/
-├── main.py              # Main entry point with unified API
-├── _legacy.py           # Legacy implementation (preserved)
-├── common/
-│   ├── utils.py         # Shared utility functions
-│   └── types.py         # Pydantic type definitions
-├── sector_62/
-│   └── creator.py       # Sector 62 timetable creators
-├── sector_128/
-│   └── creator.py       # Sector 128 timetable creators
-└── BCA/
-    └── creator.py       # BCA timetable creators
+├── main.py                          # Public API entry point
+├── pyproject.toml
+│
+├── models/                          # Pydantic data models
+│   ├── enums.py                     # ClassType, WeekDay, RawWeekDay
+│   ├── subject.py                   # Subject model
+│   └── class_info.py                # ClassInfo model
+│
+├── utils/                           # Shared utility functions
+│   ├── batch.py                     # Batch parsing and matching
+│   ├── subject.py                   # Subject extraction and enrollment checks
+│   ├── location.py                  # Location extraction
+│   ├── time.py                      # Day/timeslot processing
+│   └── debug.py                     # pprint helper
+│
+└── modules/
+    ├── tt_parsers/                  # Campus-specific timetable creators
+    │   ├── BCA/
+    │   │   ├── creator.py           # creator(), creator_year1()
+    │   │   └── utils.py             # BCA batch/subject extractors
+    │   ├── sector_62/
+    │   │   └── creator.py           # time_table_creator(), time_table_creator_v2()
+    │   └── sector_128/
+    │       ├── creator.py           # banado(), bando_year1()
+    │       └── utils.py             # Sector 128 batch/subject extractors
+    └── compare_tt/
+        └── compare.py               # compare_timetables(), _expand_timetable_to_hourly()
 ```
+
+## Campus / Year Routing
+
+| Campus     | Year 1            | Year 2+                 |
+|------------|-------------------|-------------------------|
+| Sector 62  | `time_table_creator` | `time_table_creator_v2` |
+| Sector 128 | `bando_year1`     | `banado`                |
+| BCA        | `creator_year1`   | `creator`               |
+
+Year 1 includes all classes matching the batch. Year 2+ additionally require the subject to be in `electives_subject_codes`.
 
 ## Building
 
 ```bash
-# Build wheel file
-cd parser
 uv run python -m build --wheel
-
 # Output: dist/jiit_timetable_parser-0.1.0-py3-none-any.whl
 ```
 
-## Type Definitions
-
-Import Pydantic models from `common.types`:
-
-```python
-from common.types import (
-    Subject,              # Subject info model
-    ClassInfo,            # Class details (subject_name, type, location)
-    FormattedTimetable,   # Output timetable structure
-    Section,              # Year section with timetable + subjects
-    TimetableData,        # Complete campus data
-    CompareTimetablesResult,  # Comparison output
-)
-```
-
-## Campus-Specific Logic
-
-| Campus     | Year 1 Function      | Year 2+ Function        |
-| ---------- | -------------------- | ----------------------- |
-| Sector 62  | `time_table_creator` | `time_table_creator_v2` |
-| Sector 128 | `bando_year1`        | `banado`                |
-| BCA        | `creator_year1`      | `creator`               |
+The wheel is served from `website/public/parser/` and loaded in-browser via Pyodide.

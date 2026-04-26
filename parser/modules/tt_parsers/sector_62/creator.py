@@ -1,15 +1,7 @@
-from common.utils import (
-    batch_extractor,
-    is_batch_included,
-    is_elective,
-    is_enrolled_subject,
-    location_extractor,
-    parse_batch_numbers,
-    process_day,
-    process_timeslot,
-    subject_extractor,
-    subject_name_extractor,
-)
+from utils.batch import batch_extractor, is_batch_included, is_elective, parse_batch_numbers
+from utils.subject import is_enrolled_subject, subject_extractor, subject_name_extractor
+from utils.location import location_extractor
+from utils.time import process_day, process_timeslot
 
 
 def time_table_creator(
@@ -128,10 +120,8 @@ def time_table_creator_v2(
     """
     try:
         time_table = time_table_json if isinstance(time_table_json, dict) else {}
-        # print(f"Time table: {time_table}")
 
         all_subjects = all_subjects if isinstance(all_subjects, list) else []
-        # print(f"Subject: {subject}")
 
         your_time_table = []
 
@@ -186,9 +176,7 @@ def time_table_creator_v2(
         for entry in your_time_table:
             day = process_day(entry[0])
             time = entry[1]
-            # print(f"Processing time: {time}")
             start_time, end_time = process_timeslot(time, entry[3])
-            # print(f"Processed times: {start_time} - {end_time}")
 
             if entry[2] in [
                 "ENGINEERING DRAWING AND DESIGN",
@@ -225,4 +213,3 @@ def time_table_creator_v2(
 # Aliases for consistent interface across modules
 creator = time_table_creator_v2
 creator_year1 = time_table_creator
-

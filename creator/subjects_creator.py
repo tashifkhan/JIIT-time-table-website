@@ -29,7 +29,11 @@ with st.sidebar:
     st.divider()
     model_name = st.selectbox(
         "Select Model",
-        ["gemini-2.5-flash", "gemini-3-flash-preview", "gemini-3-pro-preview"],
+        [
+            "gemini-2.5-flash",
+            "gemini-3-flash-preview",
+            "gemini-3.1-pro-preview",
+        ],
         index=0,
     )
 
@@ -66,17 +70,17 @@ Convert input text into a JSON object with a single key `"subjects"` containing 
 **Step 2: Field Population Logic**
 Apply these rules in strict order for each line:
 
-**Scenario A: Two distinct codes detected at line start**  
-Format: `[ShortCode][-/ ,][FullCode][Separators][Title]`  
-Example: `CS311/18B11CS311 Computer Networks`  
+**Scenario A: Two distinct codes detected at line start**
+Format: `[ShortCode][-/ ,][FullCode][Separators][Title]`
+Example: `CS311/18B11CS311 Computer Networks`
 - `"Code"`: Assign the first alphanumeric token (short code)
 - `"Full Code"`: Assign the second alphanumeric token (full code)
 - `"Subject"`: Assign all remaining text after the second token, stripping leading separators
 
-**Scenario B: Single code detected at line start**  
-Format: `[Code][Separators][Title]`  
-Sub-case B1: If the single code length ≥ 8  
-Example: `15B11PH211-PHYSICS-II`  
+**Scenario B: Single code detected at line start**
+Format: `[Code][Separators][Title]`
+Sub-case B1: If the single code length ≥ 8
+Example: `15B11PH211-PHYSICS-II`
 - `"Code"`: Assign the code
 - `"Full Code"`: Assign the **same code** (duplicate value)
 - `"Subject"`: Assign all text after the code, stripping leading separators
@@ -103,11 +107,11 @@ Example: `15B11PH211-PHYSICS-II`
    - Create two entries, **both using the same `Subject1`** for subject titles
 
 **Example - Standard OR**:
-Input: `15B11CI513 OR 15B11CI514 Software Engineering OR Artificial Intelligence`  
+Input: `15B11CI513 OR 15B11CI514 Software Engineering OR Artificial Intelligence`
 Output: Two entries with distinct subjects
 
 **Example - Malformed OR**:
-Input: `15B11CI513 OR 15B11CI514 Software Engineering`  
+Input: `15B11CI513 OR 15B11CI514 Software Engineering`
 Output: Two entries, both with `"Subject":"Software Engineering"`
 
 **Step 3: Subject Title Sanitization**
@@ -198,24 +202,24 @@ CS311-18B11CS311-Computer Networks
 
 ### **EDGE CASE HANDLING PROTOCOLS**
 
-1. **What if "OR" appears in the subject title legitimately?**  
-   Example: `CS311 18B11CS311 Logic or Circuit Design`  
+1. **What if "OR" appears in the subject title legitimately?**
+   Example: `CS311 18B11CS311 Logic or Circuit Design`
    **Resolution**: This will be **misinterpreted** if the title contains two code-like tokens before the "or". The parser cannot distinguish semantically. If this occurs frequently, preprocess data to replace title "or" with synonyms like "and/or" or use a different delimiter pattern.
 
-2. **What if OR pattern has more than two ORs?**  
-   Example: `15B11CI513 OR 15B11CI514 OR 15B11CI515 Sub1 OR Sub2 OR Sub3`  
+2. **What if OR pattern has more than two ORs?**
+   Example: `15B11CI513 OR 15B11CI514 OR 15B11CI515 Sub1 OR Sub2 OR Sub3`
    **Resolution**: Treat as **invalid**. Only patterns with one or two ORs are supported. Skip the line or create entries only for the first two codes with corresponding subjects.
 
-3. **What if codes before OR are not exactly two?**  
-   Example: `CS311 CS312 or CS313 Subject1 or Subject2`  
+3. **What if codes before OR are not exactly two?**
+   Example: `CS311 CS312 or CS313 Subject1 or Subject2`
    **Resolution**: Treat as **Scenario A** (multiple codes at start) rather than OR pattern. The first code becomes "Code", second becomes "Full Code", and the rest is subject text. No splitting occurs.
 
-4. **What if subject titles have internal slashes/hyphens?**  
-   Example: `CS311/18B11CS311 Unix/Linux Systems`  
+4. **What if subject titles have internal slashes/hyphens?**
+   Example: `CS311/18B11CS311 Unix/Linux Systems`
    **Resolution**: Internal separators are **preserved**. Only leading separators before the subject title begins are stripped.
 
-5. **What if OR appears with mixed code lengths?**  
-   Example: `CS311 OR 15B11CI514 Software Engineering OR Artificial Intelligence`  
+5. **What if OR appears with mixed code lengths?**
+   Example: `CS311 OR 15B11CI514 Software Engineering OR Artificial Intelligence`
    **Resolution**: This is valid. Two codes are detected, so split into two entries. First entry gets short code `CS311` with empty Full Code, second gets full code `15B11CI514`.
 
 ---

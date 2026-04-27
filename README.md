@@ -20,6 +20,7 @@ A powerful **Next.js** application that helps JIIT students create personalized 
 - **Modern UI/UX**: Built with **Next.js 16**, **Tailwind CSS v4**, and **Shadcn UI** for a premium feel.
 - **PWA Support**: Installable as a native-like app with full offline functionality.
 - **Academic Calendar**: View the academic calendar, filter holidays, and sync events to Google Calendar.
+- **Exam Schedule**: Advanced exam schedule with subject search, year/session selectors, and "my exams" filter to quickly find your exam dates.
 - **Mess Menu**: Check daily mess menus for Sector 62 and 128.
 - **Compare Timetables**: Find common free slots and classes with friends.
 - **Timeline View**: A calendar-like view of your schedule integrated with academic events.
@@ -46,17 +47,19 @@ A powerful **Next.js** application that helps JIIT students create personalized 
 
 A modular Python package that handles the core logic for timetable generation and comparison.
 
-- **Multi-Campus Support**: Custom logic for Sector 62, 128, and BCA.
-- **Type Safety**: Uses Pydantic models for validation.
+- **Multi-Campus Support**: Custom logic for Sector 62, 128, and BCA with year-specific routing.
+- **Type Safety**: Uses stdlib dataclasses for lightweight type validation without external dependencies.
+- **API**: `create_time_table()`, `compare_timetables()`, `create_and_compare_timetable()`.
 - **Usage**: Compiled to a wheel and loaded by Pyodide in the frontend.
 
 #### Creator Tools (`/creator`)
 
-Standalone utility scripts for generating the data files (JSONs) required by the website.
+Streamlit web app and CLI for converting raw academic documents into structured JSON formats.
 
-- **Academic Calendar Parser**: Gemini-powered tool to extract events from PDFs.
-- **Subject List Creator**: AI-powered tool to clean and extract subject data.
-- **Timetable Creators**: Tools to convert raw Excel/PDF data into the JSON structure.
+- **Web UI**: Multi-page Streamlit interface for all data conversion tools.
+- **CLI**: Typer-based command-line interface for batch processing.
+- **Tools**: Timetable converter, AI-powered subject extractor, exam schedule parser (Gemini Vision), academic calendar processor.
+- **No Frontend Data Needed**: Generates the JSON data files consumed by the website and parser library.
 
 ## Project Structure
 
@@ -69,18 +72,21 @@ Standalone utility scripts for generating the data files (JSONs) required by the
 │   └── utils/               # Utilities (including Pyodide bridge)
 │
 ├── parser/                  # Core Python Library (runs in browser via Pyodide)
-│   ├── main.py              # Unified API entry point
-│   ├── common/              # Shared types and utils
-│   ├── sector_62/           # Sector 62 logic
-│   ├── sector_128/          # Sector 128 logic
-│   └── BCA/                 # BCA logic
+│   ├── main.py              # Public API entry point (create_time_table, compare_timetables)
+│   ├── models/              # Data models (Subject, ClassInfo, Enums)
+│   ├── utils/               # Batch, subject, location, time utilities
+│   └── modules/
+│       ├── tt_parsers/      # Campus-specific timetable creators (Sector 62, 128, BCA)
+│       └── compare_tt/      # Timetable comparison logic
 │
-├── creator/                 # Data Generation Tools
-│   ├── run.sh               # Helper script to launch tools
-│   ├── ac_creator.py        # Academic Calendar Creator
-│   ├── subjects_creator.py  # AI Subject List Creator
-│   ├── timetable_creator.py # Timetable JSON Creator
-│   └── json_creater.py      # Legacy/Manual Creator
+├── creator/                 # Data Generation Tools (Web UI + CLI)
+│   ├── main.py              # Entry point: web | cli
+│   ├── app.py               # Streamlit multi-page app
+│   ├── cli.py               # Typer CLI sub-commands
+│   └── app/
+│       ├── core/            # Settings, models, Gemini client
+│       ├── services/        # Business logic (timetable, subjects, exam schedule, academic calendar)
+│       └── ui/              # Streamlit page modules
 │
 └── README.md
 ```
@@ -126,24 +132,6 @@ Standalone utility scripts for generating the data files (JSONs) required by the
    ```
 
 4. Open [http://localhost:3000](http://localhost:3000) (or the port shown in terminal).
-
-### Running Creator Tools (Optional)
-
-If you need to generate new JSON data files (e.g., for a new semester):
-
-1. Navigate to the creator directory:
-
-   ```bash
-   cd creator
-   ```
-
-2. Run the helper script:
-
-   ```bash
-   ./run.sh
-   ```
-
-3. Follow the interactive menu to launch the desired tool (Academic Calendar, Subjects, or Timetable creator).
 
 ## Usage
 

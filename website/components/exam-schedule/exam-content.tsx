@@ -5,9 +5,9 @@ import { AnimatePresence, motion } from "framer-motion";
 import {
 	BookOpen,
 	Calendar,
-	CalendarDays,
 	ChevronDown,
 	Clock,
+	Filter,
 	Search,
 	Sparkles,
 	User,
@@ -130,87 +130,89 @@ function SkeletonCard() {
 	);
 }
 
-// ── Calendar Popover ──────────────────────────────────────────────────────────
+// ── Filter Popover (semester + type + date) ───────────────────────────────────
 
-interface CalendarPopoverProps {
+interface FilterPopoverProps {
+	semesterFilter: string;
+	setSemesterFilter: (v: string) => void;
+	availableSemesters: number[];
+	examTypeFilter: string;
+	setExamTypeFilter: (v: string) => void;
+	availableExamTypes: string[];
 	pickedDate: Date | null;
 	onPickedDateChange: (d: Date | null) => void;
+	onClearAll: () => void;
 }
 
-function CalendarPopover({ pickedDate, onPickedDateChange }: CalendarPopoverProps) {
+function FilterPopover({
+	semesterFilter,
+	setSemesterFilter,
+	availableSemesters,
+	examTypeFilter,
+	setExamTypeFilter,
+	availableExamTypes,
+	pickedDate,
+	onPickedDateChange,
+	onClearAll,
+}: FilterPopoverProps) {
 	const haptic = useHaptic();
 	const [open, setOpen] = useState(false);
 	const containerRef = useRef<HTMLDivElement>(null);
 
 	useEffect(() => {
 		function handler(e: MouseEvent) {
-			if (containerRef.current && !containerRef.current.contains(e.target as Node)) {
+			if (containerRef.current && !containerRef.current.contains(e.target as Node))
 				setOpen(false);
-			}
 		}
 		if (open) document.addEventListener("mousedown", handler);
 		return () => document.removeEventListener("mousedown", handler);
 	}, [open]);
 
 	useEffect(() => {
-function handler(e: KeyboardEvent) {
+		function handler(e: KeyboardEvent) {
 			if (e.key === "Escape") setOpen(false);
 		}
 		if (open) document.addEventListener("keydown", handler);
 		return () => document.removeEventListener("keydown", handler);
 	}, [open]);
 
-	const formattedDate = pickedDate
-		? pickedDate.toLocaleDateString("en-IN", {
-				day: "numeric",
-				month: "short",
-				year: "numeric",
-		  })
-		: "All dates";
+	const hasFilter = semesterFilter !== "all" || examTypeFilter !== "all" || pickedDate !== null;
+
+	const filterLabel: string[] = [];
+	if (semesterFilter !== "all") filterLabel.push(`Sem ${semesterFilter}`);
+	if (examTypeFilter !== "all") filterLabel.push(examTypeFilter);
+	if (pickedDate)
+		filterLabel.push(
+			pickedDate.toLocaleDateString("en-IN", { day: "numeric", month: "short" })
+		);
 
 	return (
 		<div ref={containerRef} className="relative">
 			<button
 				type="button"
-				onClick={() => {
-					haptic("selection");
-					setOpen((v) => !v);
-				}}
-				className={`flex h-10 w-[140px] items-center justify-between gap-2 rounded-md border px-3 py-2 text-sm transition-all duration-150 ${
-					pickedDate
-						? "border-[#F0BB78]/40 bg-[#F0BB78]/10 text-[#F0BB78]"
-						: "border-white/10 bg-white/10 text-slate-200 hover:bg-white/20"
+				onClick={() => { haptic("selection"); setOpen((v) => !v); }}
+				className={`px-3 py-1.5 h-auto rounded-lg backdrop-blur-lg border transition-all duration-300 shadow-lg flex items-center gap-1.5 text-xs ${
+					hasFilter
+						? "bg-white/20 border-[#F0BB78]/40 text-[#F0BB78]"
+						: "bg-white/10 border-white/20 text-[#F0BB78] hover:bg-white/20"
 				}`}
 			>
-				<div className="flex items-center gap-2 overflow-hidden">
-					<CalendarDays className="h-4 w-4 shrink-0" />
-					<span className="truncate">{formattedDate}</span>
-				</div>
-				{pickedDate ? (
+				<Filter className="w-3.5 h-3.5 shrink-0" />
+				<span className="max-w-[140px] truncate">{hasFilter ? filterLabel.join(" · ") : "Filter"}</span>
+				{hasFilter ? (
 					<span
 						role="button"
 						tabIndex={0}
-						onClick={(e) => {
-							e.stopPropagation();
-							haptic("light");
-							onPickedDateChange(null);
-							setOpen(false);
-						}}
+						onClick={(e) => { e.stopPropagation(); haptic("light"); onClearAll(); }}
 						onKeyDown={(e) => {
-							if (e.key === "Enter" || e.key === " ") {
-								e.stopPropagation();
-								onPickedDateChange(null);
-								setOpen(false);
-							}
+							if (e.key === "Enter" || e.key === " ") { e.stopPropagation(); onClearAll(); }
 						}}
 						className="rounded p-0.5 text-[#F0BB78]/60 transition-colors hover:text-[#F0BB78]"
 					>
 						<X className="h-3 w-3" />
 					</span>
 				) : (
-					<ChevronDown
-						className={`h-4 w-4 shrink-0 opacity-50 transition-transform duration-200 ${open ? "rotate-180" : ""}`}
-					/>
+					<ChevronDown className={`w-3 h-3 transition-transform duration-200 ${open ? "rotate-180" : ""}`} />
 				)}
 			</button>
 
@@ -221,16 +223,81 @@ function handler(e: KeyboardEvent) {
 						animate={{ opacity: 1, y: 0, scale: 1 }}
 						exit={{ opacity: 0, y: -6, scale: 0.97 }}
 						transition={{ duration: 0.18, ease: "easeOut" }}
-						className="absolute left-1/2 -translate-x-1/2 sm:left-0 sm:translate-x-0 top-full z-50 mt-2 w-[280px]"
+						className="absolute left-0 top-full z-50 mt-2 w-72 rounded-xl border border-white/10 bg-[#1a1614] shadow-xl backdrop-blur-xl"
 					>
-						<CalendarPicker
-							selected={pickedDate}
-							onSelect={(date) => {
-								haptic("selection");
-								onPickedDateChange(date);
-								if (date) setOpen(false);
-							}}
-						/>
+						<div className="p-3 space-y-3">
+							{/* Semester */}
+							<div className="space-y-1.5">
+								<p className="text-[10px] font-bold uppercase tracking-wider text-slate-500">Semester</p>
+								<Select
+									value={semesterFilter}
+									onValueChange={(v) => { haptic("selection"); setSemesterFilter(v); }}
+									disabled={availableSemesters.length === 0}
+								>
+									<SelectTrigger className="w-full h-9 bg-white/5 border-white/10 text-[#F0BB78] text-xs focus:ring-[#F0BB78]/30">
+										<SelectValue placeholder="All Semesters" />
+									</SelectTrigger>
+									<SelectContent className="bg-[#131010] border-[#F0BB78]/30 text-[#F0BB78]">
+										<SelectItem value="all" className="focus:bg-[#F0BB78]/20 focus:text-[#F0BB78] cursor-pointer">
+											All Semesters
+										</SelectItem>
+										{availableSemesters.map((s) => (
+											<SelectItem key={s} value={String(s)} className="focus:bg-[#F0BB78]/20 focus:text-[#F0BB78] cursor-pointer">
+												Semester {s}
+											</SelectItem>
+										))}
+									</SelectContent>
+								</Select>
+							</div>
+
+							{/* Exam Type */}
+							<div className="space-y-1.5">
+								<p className="text-[10px] font-bold uppercase tracking-wider text-slate-500">Exam Type</p>
+								<Select
+									value={examTypeFilter}
+									onValueChange={(v) => { haptic("selection"); setExamTypeFilter(v); }}
+									disabled={availableExamTypes.length === 0}
+								>
+									<SelectTrigger className="w-full h-9 bg-white/5 border-white/10 text-[#F0BB78] text-xs focus:ring-[#F0BB78]/30">
+										<SelectValue placeholder="All Types" />
+									</SelectTrigger>
+									<SelectContent className="bg-[#131010] border-[#F0BB78]/30 text-[#F0BB78]">
+										<SelectItem value="all" className="focus:bg-[#F0BB78]/20 focus:text-[#F0BB78] cursor-pointer">
+											All Types
+										</SelectItem>
+										{availableExamTypes.map((t) => (
+											<SelectItem key={t} value={t} className="focus:bg-[#F0BB78]/20 focus:text-[#F0BB78] cursor-pointer">
+												{t}
+											</SelectItem>
+										))}
+									</SelectContent>
+								</Select>
+							</div>
+
+							{/* Date */}
+							<div className="space-y-1.5">
+								<div className="flex items-center justify-between">
+									<p className="text-[10px] font-bold uppercase tracking-wider text-slate-500">Date</p>
+									{pickedDate && (
+										<button
+											type="button"
+											onClick={() => { haptic("light"); onPickedDateChange(null); }}
+											className="text-[10px] text-[#F0BB78]/60 hover:text-[#F0BB78] transition-colors"
+										>
+											Clear
+										</button>
+									)}
+								</div>
+								<CalendarPicker
+									selected={pickedDate}
+									onSelect={(date) => {
+										haptic("selection");
+										onPickedDateChange(date);
+										if (date) setOpen(false);
+									}}
+								/>
+							</div>
+						</div>
 					</motion.div>
 				)}
 			</AnimatePresence>
@@ -247,14 +314,14 @@ export default function ExamContent() {
 	// ─ Data ─────────────────────────────────────────────────────────────────
 	const { data: semesterList = [], isLoading: semestersLoading } = useExamSemesters();
 	const defaultSession = semesterList[0]?.semester ?? "";
-	const [selectedSession, setSelectedSession] = useState("");
-	const activeSession = selectedSession || defaultSession;
+	const activeSession = defaultSession;
 	const activeSessionInfo = semesterList.find((s) => s.semester === activeSession);
 
 	const { data: examData = [], isLoading: examLoading } = useExamSchedule(activeSession);
 
 	// ─ Filters ──────────────────────────────────────────────────────────────
 	const [semesterFilter, setSemesterFilter] = useState("all");
+	const [examTypeFilter, setExamTypeFilter] = useState("all");
 	const [pickedDate, setPickedDate] = useState<Date | null>(null);
 	const [searchQuery, setSearchQuery] = useState("");
 	const [showMyExams, setShowMyExams] = useState(false);
@@ -275,12 +342,30 @@ export default function ExamContent() {
 		return Array.from(all).sort((a, b) => a - b);
 	}, [examData]);
 
+	const availableExamTypes = useMemo(() => {
+		const all = new Set<string>();
+		for (const entry of examData) {
+			if (entry.exam_type) all.add(entry.exam_type);
+		}
+		// If examData doesn't have exam_type, maybe fallback to activeSessionInfo?.types
+		if (all.size === 0 && activeSessionInfo?.types) {
+			for (const t of activeSessionInfo.types) all.add(t);
+		}
+		return Array.from(all).sort();
+	}, [examData, activeSessionInfo]);
+
 	// ─ Filter pipeline ───────────────────────────────────────────────────────
 	const afterSemFilter = useMemo(() => {
-		if (semesterFilter === "all") return examData;
-		const n = Number(semesterFilter);
-		return examData.filter((e) => getEntrySemesters(e).includes(n));
-	}, [examData, semesterFilter]);
+		let result = examData;
+		if (semesterFilter !== "all") {
+			const n = Number(semesterFilter);
+			result = result.filter((e) => getEntrySemesters(e).includes(n));
+		}
+		if (examTypeFilter !== "all") {
+			result = result.filter((e) => e.exam_type === examTypeFilter);
+		}
+		return result;
+	}, [examData, semesterFilter, examTypeFilter]);
 
 	const afterDateFilter = useMemo(() => {
 		if (pickedDate) {
@@ -328,18 +413,18 @@ export default function ExamContent() {
 	}, [filtered]);
 
 	const isLoading = semestersLoading || examLoading;
-	const assessedLabel = activeSessionInfo?.types?.join(", ") ?? "";
 
 	function clearFilters() {
 		haptic("light");
 		setSemesterFilter("all");
+		setExamTypeFilter("all");
 		setPickedDate(null);
 		setShowMyExams(false);
 		setSearchQuery("");
 	}
 
 	const hasActiveFilter =
-		semesterFilter !== "all" || pickedDate !== null || showMyExams || searchQuery.trim().length > 0;
+		semesterFilter !== "all" || examTypeFilter !== "all" || pickedDate !== null || showMyExams || searchQuery.trim().length > 0;
 
 	// ─ Render ────────────────────────────────────────────────────────────────
 
@@ -358,79 +443,40 @@ export default function ExamContent() {
 						</h1>
 					</div>
 
-					{/* Toolbar */}
-					<div className="flex flex-col items-center gap-4 mt-6 px-4">
-						<div className="flex flex-wrap justify-center items-center gap-2 sm:gap-3 w-full max-w-3xl">
-							<Select
-								value={activeSession}
-								onValueChange={(v) => {
-									haptic("selection");
-									setSelectedSession(v);
+					{/* Toolbar — single row */}
+					<div className="flex flex-col items-center gap-3 mt-6">
+						<div className="flex flex-row items-center justify-center gap-2">
+							{/* Filter: semester + type + date */}
+							<FilterPopover
+								semesterFilter={semesterFilter}
+								setSemesterFilter={setSemesterFilter}
+								availableSemesters={availableSemesters}
+								examTypeFilter={examTypeFilter}
+								setExamTypeFilter={setExamTypeFilter}
+								availableExamTypes={availableExamTypes}
+								pickedDate={pickedDate}
+								onPickedDateChange={setPickedDate}
+								onClearAll={() => {
 									setSemesterFilter("all");
+									setExamTypeFilter("all");
+									setPickedDate(null);
 								}}
-								disabled={semesterList.length === 0}
-							>
-								<SelectTrigger className="w-[140px] h-10 bg-white/10 border-white/10 text-slate-200 hover:bg-white/20 focus:ring-[#F0BB78]/30 transition-all">
-									<SelectValue placeholder="Session" />
-								</SelectTrigger>
-								<SelectContent className="bg-[#131010]/95 border-[#F0BB78]/20 text-white backdrop-blur-2xl">
-									{semesterList.map((item) => (
-										<SelectItem
-											key={item.semester}
-											value={item.semester}
-											className="focus:bg-[#F0BB78]/20 focus:text-white"
-										>
-											{item.semester}
-										</SelectItem>
-									))}
-								</SelectContent>
-							</Select>
+							/>
 
-							<Select
-								value={semesterFilter}
-								onValueChange={(v) => {
-									haptic("selection");
-									setSemesterFilter(v);
-								}}
-								disabled={availableSemesters.length === 0}
-							>
-								<SelectTrigger className={`w-[140px] h-10 border-white/10 transition-all hover:bg-white/20 focus:ring-[#F0BB78]/30 ${
-									semesterFilter !== "all" ? "bg-[#F0BB78]/10 border-[#F0BB78]/30 text-[#F0BB78]" : "bg-white/10 text-slate-200"
-								}`}>
-									<SelectValue placeholder="All Semesters" />
-								</SelectTrigger>
-								<SelectContent className="bg-[#131010]/95 border-[#F0BB78]/20 text-white backdrop-blur-2xl">
-									<SelectItem value="all" className="focus:bg-[#F0BB78]/20 focus:text-white">
-										All semesters
-									</SelectItem>
-									{availableSemesters.map((s) => (
-										<SelectItem
-											key={s}
-											value={String(s)}
-											className="focus:bg-[#F0BB78]/20 focus:text-white"
-										>
-											Semester {s}
-										</SelectItem>
-									))}
-								</SelectContent>
-							</Select>
-
-							<CalendarPopover pickedDate={pickedDate} onPickedDateChange={setPickedDate} />
-
+							{/* Mine */}
 							<Button
 								type="button"
 								variant="outline"
 								disabled={!hasSchedule}
-								onClick={() => setShowMyExams((v) => !v)}
-								className={`h-10 px-4 gap-2 transition-all ${
+								onClick={() => { haptic("selection"); setShowMyExams((v) => !v); }}
+								className={`px-3 py-1.5 h-auto rounded-lg backdrop-blur-lg border transition-all duration-300 shadow-lg flex items-center gap-1.5 text-xs ${
 									showMyExams
-										? "bg-[#F0BB78]/10 border-[#F0BB78]/40 text-[#F0BB78] hover:bg-[#F0BB78]/20"
-										: "bg-white/10 border-white/10 text-slate-200 hover:bg-white/20 disabled:opacity-35"
+										? "bg-[#F0BB78]/20 border-[#F0BB78]/50 text-[#F0BB78] hover:bg-[#F0BB78]/30"
+										: "bg-white/10 border-white/20 text-[#F0BB78] hover:bg-white/20 disabled:opacity-50"
 								}`}
 							>
-								<User className="h-4 w-4" />
-								<span className="hidden sm:inline">My Exams Only</span>
-								<span className="sm:hidden">My Exams</span>
+								<User className="w-3.5 h-3.5" />
+								Mine
 							</Button>
 						</div>
 
@@ -442,14 +488,13 @@ export default function ExamContent() {
 								value={searchQuery}
 								onChange={(e) => setSearchQuery(e.target.value)}
 								placeholder="Search subject name or code..."
-								className="h-10 w-full bg-white/10 border-white/10 pl-9 pr-9 text-slate-200 placeholder:text-slate-400 hover:bg-white/20 focus:bg-white/10 focus-visible:ring-[#F0BB78]/30 transition-all rounded-full"
+								className="h-10 text-sm w-full bg-white/5 border-white/10 pl-9 pr-9 text-slate-200 placeholder:text-slate-400 hover:bg-white/10 focus:bg-white/10 focus-visible:ring-[#F0BB78]/30 transition-all rounded-xl"
 							/>
 							{searchQuery && (
 								<button
 									type="button"
 									onClick={() => setSearchQuery("")}
-									className="absolute right
--3 top-1/2 -translate-y-1/2 text-slate-400 hover:text-slate-200 transition-colors p-1"
+									className="absolute right-3 top-1/2 -translate-y-1/2 text-slate-400 hover:text-slate-200 transition-colors p-1"
 								>
 									<X className="h-3.5 w-3.5" />
 								</button>
@@ -458,10 +503,10 @@ export default function ExamContent() {
 
 						{/* Active Status */}
 						<div className="flex flex-wrap justify-center items-center gap-3 mt-4 text-xs font-medium text-slate-400">
-							{assessedLabel && (
+							{activeSessionInfo?.types && activeSessionInfo.types.length > 0 && (
 								<span className="flex items-center gap-1.5 px-3 py-1 rounded-full bg-white/5 border border-white/10">
-									<Sparkles className="h-3.5 w-3.5 text-[#F0BB78]" />
-									Assessed: {assessedLabel}
+									<Sparkles className="h-3 w-3 text-[#F0BB78]" />
+									Assessed: {activeSessionInfo.types.join(", ")}
 								</span>
 							)}
 							{!isLoading && examData.length > 0 && (
@@ -482,7 +527,7 @@ export default function ExamContent() {
 				</motion.div>
 
 				{/* ── Content ──────────────────────────────────────────────────── */}
-				<div className="max-w-4xl mx-auto px-4">
+				<div className="max-w-4xl mx-auto">
 					{isLoading ? (
 						<div className="flex flex-col gap-2.5">
 							{[...Array(6)].map((_, i) => <SkeletonCard key={i} />)}
@@ -501,6 +546,8 @@ export default function ExamContent() {
 										? "Your timetable subjects have no matching exams"
 										: pickedDate
 										? `No exams on ${pickedDate.toLocaleDateString("en-IN", { day: "numeric", month: "long", year: "numeric" })}`
+										: examTypeFilter !== "all"
+										? `No ${examTypeFilter} exams`
 										: semesterFilter !== "all"
 										? `No exams in Semester ${semesterFilter}`
 										: "No exam schedule data available"}

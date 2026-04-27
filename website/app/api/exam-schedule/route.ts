@@ -18,6 +18,10 @@ import { DATA_DIR } from "../../../lib/data-path";
  *               items:
  *                 type: object
  *                 properties:
+ *                   year:
+ *                     type: string
+ *                     nullable: true
+ *                     description: The calendar year directory (e.g. "2026")
  *                   semester:
  *                     type: string
  *                     description: The semester identifier (e.g. "EVEN26")
@@ -37,17 +41,17 @@ export async function GET() {
 			return NextResponse.json([], { status: 200 });
 		}
 
-		const result: { semester: string; types: string[] }[] = [];
+		const result: { year: string | null; semester: string; types: string[] }[] = [];
 
-		const collectSemesters = (dir: string) => {
+		const collectSemesters = (dir: string, year: string | null) => {
 			const items = fs.readdirSync(dir);
 			for (const item of items) {
 				const itemPath = path.join(dir, item);
 				if (!fs.statSync(itemPath).isDirectory()) continue;
 
-				// Year directory (4 digits) — recurse
+				// Year directory (4 digits) — recurse, capturing the year
 				if (/^\d{4}$/.test(item)) {
-					collectSemesters(itemPath);
+					collectSemesters(itemPath, item);
 					continue;
 				}
 
@@ -58,12 +62,20 @@ export async function GET() {
 					.map((f) => f.replace(".json", ""));
 
 				if (types.length > 0) {
-					result.push({ semester: item, types });
+					result.push({ year, semester: item, types });
 				}
 			}
 		};
 
-		collectSemesters(examDir);
+		collectSemesters(examDir, null);
+
+		// Sort newest year + session first
+		result.sort((a, b) => {
+			const ay = Number(a.year) || 0;
+			const by = Number(b.year) || 0;
+			if (ay !== by) return by - ay;
+			return a.semester.localeCompare(b.semester);
+		});
 
 		return NextResponse.json(result);
 	} catch (error) {

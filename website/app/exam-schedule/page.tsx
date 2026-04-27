@@ -3,7 +3,7 @@ import ExamContent from "../../components/exam-schedule/exam-content";
 import Loading from "../../components/common/loading";
 
 export const metadata = {
-	title: "Exam Schedule | JIIT TimeTable",
+	title: "JIIT Exam Schdule | JIIT TimeTable",
 	description: "View and search exam schedules for JIIT students",
 };
 

@@ -116,7 +116,7 @@
     },
     "/api/exam-schedule/{semester}": {
       "get": {
-        "description": "Returns all exam entries for a given semester, merged from all available exam type files",
+        "description": "Returns all normalized exam entries for a given session, merged from all available exam type files",
         "parameters": [
           {
             "in": "path",
@@ -125,12 +125,12 @@
             "schema": {
               "type": "string"
             },
-            "description": "The semester identifier (e.g. \"EVEN26\")"
+            "description": "The semester/session identifier (e.g. \"EVEN26\")"
           }
         ],
         "responses": {
           "200": {
-            "description": "Array of exam entries",
+            "description": "Array of normalized exam entries",
             "content": {
               "application/json": {
                 "schema": {
@@ -162,8 +162,16 @@
                       "exam_day": {
                         "type": "string"
                       },
-                      "semester": {
-                        "type": "string"
+                      "semesters": {
+                        "type": "array",
+                        "items": {
+                          "type": "integer"
+                        },
+                        "description": "Parsed semester list split and stripped from the raw semester string"
+                      },
+                      "exam_type": {
+                        "type": "string",
+                        "description": "Source exam type file, e.g. T3"
                       }
                     }
                   }

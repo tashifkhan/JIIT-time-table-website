@@ -1,10 +1,12 @@
-from pydantic import BaseModel
+from dataclasses import dataclass
 
 from .enums import ClassType
 
 
-class ClassInfo(BaseModel):
+@dataclass
+class ClassInfo:
     """Information about a single class."""
+
     subject_name: str
     type: ClassType
     location: str

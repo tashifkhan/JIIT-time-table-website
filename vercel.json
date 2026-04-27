@@ -1,9 +1,11 @@
 {
- 	"buildCommand": "cd website && npm run build",
-	"outputDirectory": "website/.next",
-	"framework": "nextjs",
-	"installCommand": "cd website && npm install",
-	"devCommand": "cd website && npm run dev",
+	"version": 2,
+	"builds": [
+		{
+			"src": "website/package.json",
+			"use": "@vercel/next"
+		}
+	],
 	"rewrites": [
 		{
 			"source": "/ph/static/(.*)",

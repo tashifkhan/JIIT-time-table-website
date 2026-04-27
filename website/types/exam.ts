@@ -10,6 +10,7 @@ export interface ExamEntry {
 }
 
 export interface ExamSemesterInfo {
+	year?: string | null; // e.g. "2026" (calendar year directory)
 	semester: string; // e.g. "EVEN26"
 	types: string[]; // e.g. ["T3"]
 }

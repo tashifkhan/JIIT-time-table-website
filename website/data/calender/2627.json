@@ -1,0 +1,1325 @@
+[
+    {
+        "summary": "Registration of 1st Semester of UG Prog (B.Tech, Intgt M.Tech, BCA, BSc, BCcom, BBA, BA)",
+        "start": {
+            "date": "2026-07-14"
+        },
+        "end": {
+            "date": "2026-07-14"
+        }
+    },
+    {
+        "summary": "Induction Program and Commencement of Academic Activities for UG 1st Year",
+        "start": {
+            "date": "2026-07-15"
+        },
+        "end": {
+            "date": "2026-07-15"
+        }
+    },
+    {
+        "summary": "Registration of 1st Semester of PG Prog (M.T, M.Sc, MBA, MCA, MDes)",
+        "start": {
+            "date": "2026-07-23"
+        },
+        "end": {
+            "date": "2026-07-23"
+        }
+    },
+    {
+        "summary": "Reporting of all students except 1st Semester",
+        "start": {
+            "date": "2026-07-23"
+        },
+        "end": {
+            "date": "2026-07-23"
+        }
+    },
+    {
+        "summary": "Commencement of Classes for all batches (except 1st Sem UG Program)",
+        "start": {
+            "date": "2026-07-23"
+        },
+        "end": {
+            "date": "2026-07-23"
+        }
+    },
+    {
+        "summary": "Add & Drop Subjects (except 1st semester students) - Odd Semester",
+        "start": {
+            "date": "2026-07-24"
+        },
+        "end": {
+            "date": "2026-07-31"
+        }
+    },
+    {
+        "summary": "Registration For Existing PhD Scholars - Odd Semester",
+        "start": {
+            "date": "2026-07-25"
+        },
+        "end": {
+            "date": "2026-07-25"
+        }
+    },
+    {
+        "summary": "Ph.D Enrolment (New batch July 2026)",
+        "start": {
+            "date": "2026-07-30"
+        },
+        "end": {
+            "date": "2026-07-30"
+        }
+    },
+    {
+        "summary": "Last Date for Registration of MOOC subject on web-portal - Odd Semester",
+        "start": {
+            "date": "2026-07-31"
+        },
+        "end": {
+            "date": "2026-07-31"
+        }
+    },
+    {
+        "summary": "Ph.D Orientation (New batch July 2026)",
+        "start": {
+            "date": "2026-08-01"
+        },
+        "end": {
+            "date": "2026-08-01"
+        }
+    },
+    {
+        "summary": "Ph.D DPMAC Meeting and Completion of follow-up Registration requirements",
+        "start": {
+            "date": "2026-08-03"
+        },
+        "end": {
+            "date": "2026-08-03"
+        }
+    },
+    {
+        "summary": "Allocation of Supervisor/Topics for Seminar/Term Paper for M.Tech 3rd Sem",
+        "start": {
+            "date": "2026-08-03"
+        },
+        "end": {
+            "date": "2026-08-03"
+        }
+    },
+    {
+        "summary": "Ph.D Registration (New batch July 2026)",
+        "start": {
+            "date": "2026-08-04"
+        },
+        "end": {
+            "date": "2026-08-04"
+        }
+    },
+    {
+        "summary": "Deactivation of Un-Registered Students (except 1st Sem) - Odd Semester",
+        "start": {
+            "date": "2026-08-07"
+        },
+        "end": {
+            "date": "2026-08-07"
+        }
+    },
+    {
+        "summary": "Ebullience/Welcome function of 1st year students",
+        "start": {
+            "date": "2026-08-14"
+        },
+        "end": {
+            "date": "2026-08-14"
+        }
+    },
+    {
+        "summary": "Holiday - Independence Day",
+        "start": {
+            "date": "2026-08-15"
+        },
+        "end": {
+            "date": "2026-08-15"
+        }
+    },
+    {
+        "summary": "Attendance Review before Test-1 exam - Odd Semester",
+        "start": {
+            "date": "2026-08-27"
+        },
+        "end": {
+            "date": "2026-08-27"
+        }
+    },
+    {
+        "summary": "Holiday - Rakshabandhan",
+        "start": {
+            "date": "2026-08-28"
+        },
+        "end": {
+            "date": "2026-08-28"
+        }
+    },
+    {
+        "summary": "Test-1 Examination Schedule - Odd Semester",
+        "start": {
+            "date": "2026-08-31"
+        },
+        "end": {
+            "date": "2026-09-08"
+        }
+    },
+    {
+        "summary": "Holiday - Janmashtami",
+        "start": {
+            "date": "2026-09-04"
+        },
+        "end": {
+            "date": "2026-09-04"
+        }
+    },
+    {
+        "summary": "Showing of Evaluated Answer Sheets Test-1 - Odd Semester",
+        "start": {
+            "date": "2026-09-15"
+        },
+        "end": {
+            "date": "2026-09-15"
+        }
+    },
+    {
+        "summary": "Marks uploading on System Test-1 - Odd Semester",
+        "start": {
+            "date": "2026-09-17"
+        },
+        "end": {
+            "date": "2026-09-17"
+        }
+    },
+    {
+        "summary": "Holiday - Gandhi Jayanti",
+        "start": {
+            "date": "2026-10-02"
+        },
+        "end": {
+            "date": "2026-10-02"
+        }
+    },
+    {
+        "summary": "Attendance Review before Test-2 exam - Odd Semester",
+        "start": {
+            "date": "2026-10-08"
+        },
+        "end": {
+            "date": "2026-10-08"
+        }
+    },
+    {
+        "summary": "Summer Training Viva - Locking of Marks",
+        "start": {
+            "date": "2026-10-10"
+        },
+        "end": {
+            "date": "2026-10-10"
+        }
+    },
+    {
+        "summary": "Mid-Term Seminars / Vivas Marks Uploading (Odd)",
+        "start": {
+            "date": "2026-10-12"
+        },
+        "end": {
+            "date": "2026-10-12"
+        }
+    },
+    {
+        "summary": "Mid Term(1st Sem) / Test-2 Examination Schedule - Odd Semester",
+        "start": {
+            "date": "2026-10-12"
+        },
+        "end": {
+            "date": "2026-10-19"
+        }
+    },
+    {
+        "summary": "Final Curriculum and list of electives to be sent to the Dean Academics UG (Next Sem)",
+        "start": {
+            "date": "2026-10-14"
+        },
+        "end": {
+            "date": "2026-10-14"
+        }
+    },
+    {
+        "summary": "Holiday - Dusshera",
+        "start": {
+            "date": "2026-10-20"
+        },
+        "end": {
+            "date": "2026-10-20"
+        }
+    },
+    {
+        "summary": "Final Curriculum to be sent to Registrar’s Office from Dean’s Office (Next Sem)",
+        "start": {
+            "date": "2026-10-21"
+        },
+        "end": {
+            "date": "2026-10-21"
+        }
+    },
+    {
+        "summary": "Showing of Evaluated Answer Sheets Test-2 - Odd Semester",
+        "start": {
+            "date": "2026-10-27"
+        },
+        "end": {
+            "date": "2026-10-27"
+        }
+    },
+    {
+        "summary": "Orientation program by the department/s to help students to select electives",
+        "start": {
+            "date": "2026-10-28"
+        },
+        "end": {
+            "date": "2026-10-30"
+        }
+    },
+    {
+        "summary": "Marks Uploading on System Test-2 - Odd Semester",
+        "start": {
+            "date": "2026-10-29"
+        },
+        "end": {
+            "date": "2026-10-29"
+        }
+    },
+    {
+        "summary": "Pre-Registration by students through webportal - Next Semester",
+        "start": {
+            "date": "2026-10-29"
+        },
+        "end": {
+            "date": "2026-11-02"
+        }
+    },
+    {
+        "summary": "Holiday - Semester Break – Diwali (Odd)",
+        "start": {
+            "date": "2026-11-05"
+        },
+        "end": {
+            "date": "2026-11-11"
+        }
+    },
+    {
+        "summary": "Holiday - Mid-semester break (Diwali)",
+        "start": {
+            "date": "2026-11-05"
+        },
+        "end": {
+            "date": "2026-11-11"
+        }
+    },
+    {
+        "summary": "Holiday - Faculty Vacations (Diwali)",
+        "start": {
+            "date": "2026-11-05"
+        },
+        "end": {
+            "date": "2026-11-11"
+        }
+    },
+    {
+        "summary": "Holiday - Deepawali",
+        "start": {
+            "date": "2026-11-07"
+        },
+        "end": {
+            "date": "2026-11-08"
+        }
+    },
+    {
+        "summary": "Holiday - Govardhan Puja",
+        "start": {
+            "date": "2026-11-09"
+        },
+        "end": {
+            "date": "2026-11-09"
+        }
+    },
+    {
+        "summary": "Meeting of Time Table Committee for finalization of courses (Next Sem)",
+        "start": {
+            "date": "2026-11-10"
+        },
+        "end": {
+            "date": "2026-11-10"
+        }
+    },
+    {
+        "summary": "Make-up Examination Schedule - Odd Semester",
+        "start": {
+            "date": "2026-11-16"
+        },
+        "end": {
+            "date": "2026-11-19"
+        }
+    },
+    {
+        "summary": "Major Project allocation for next semester",
+        "start": {
+            "date": "2026-11-18"
+        },
+        "end": {
+            "date": "2026-11-18"
+        }
+    },
+    {
+        "summary": "Minor Project allocation for next semester",
+        "start": {
+            "date": "2026-11-18"
+        },
+        "end": {
+            "date": "2026-11-18"
+        }
+    },
+    {
+        "summary": "Conduct of End-Semester Seminar/Viva for Labs and Minor Projects - Odd Semester",
+        "start": {
+            "date": "2026-11-21"
+        },
+        "end": {
+            "date": "2026-11-21"
+        }
+    },
+    {
+        "summary": "Students’ Feedback (online) - Odd Semester",
+        "start": {
+            "date": "2026-11-21"
+        },
+        "end": {
+            "date": "2026-11-21"
+        }
+    },
+    {
+        "summary": "Submission of Project/Dissertation/Term Paper reports - Odd Semester",
+        "start": {
+            "date": "2026-11-23"
+        },
+        "end": {
+            "date": "2026-11-23"
+        }
+    },
+    {
+        "summary": "Final Project Viva / Evaluation of Dissertation - Odd Semester",
+        "start": {
+            "date": "2026-11-23"
+        },
+        "end": {
+            "date": "2026-11-23"
+        }
+    },
+    {
+        "summary": "Holiday - Guru Nanak Jayanti",
+        "start": {
+            "date": "2026-11-24"
+        },
+        "end": {
+            "date": "2026-11-24"
+        }
+    },
+    {
+        "summary": "Locking of Make-up Examination marks - Odd Semester",
+        "start": {
+            "date": "2026-11-25"
+        },
+        "end": {
+            "date": "2026-11-25"
+        }
+    },
+    {
+        "summary": "End Semester Attendance Review - Odd Semester",
+        "start": {
+            "date": "2026-11-26"
+        },
+        "end": {
+            "date": "2026-11-26"
+        }
+    },
+    {
+        "summary": "Results uploaded End-Semester Seminar/Viva - Odd Semester",
+        "start": {
+            "date": "2026-11-28"
+        },
+        "end": {
+            "date": "2026-11-28"
+        }
+    },
+    {
+        "summary": "Classes to be over - Odd Semester",
+        "start": {
+            "date": "2026-11-28"
+        },
+        "end": {
+            "date": "2026-11-28"
+        }
+    },
+    {
+        "summary": "Debar list to be displayed - Odd Semester",
+        "start": {
+            "date": "2026-11-28"
+        },
+        "end": {
+            "date": "2026-11-28"
+        }
+    },
+    {
+        "summary": "End Semester Examination Schedule - Odd Semester",
+        "start": {
+            "date": "2026-12-01"
+        },
+        "end": {
+            "date": "2026-12-14"
+        }
+    },
+    {
+        "summary": "Meeting of Disciplinary Committee (Disciplinary Grade Finalization) - Odd Semester",
+        "start": {
+            "date": "2026-12-11"
+        },
+        "end": {
+            "date": "2026-12-11"
+        }
+    },
+    {
+        "summary": "Results of minor projects after finalization shared with students - Odd Semester",
+        "start": {
+            "date": "2026-12-14"
+        },
+        "end": {
+            "date": "2026-12-14"
+        }
+    },
+    {
+        "summary": "Holiday - Semester Break (Odd to Even Transition)",
+        "start": {
+            "date": "2026-12-15"
+        },
+        "end": {
+           "date": "2027-01-03"
+        }
+    },
+    {
+        "summary": "Holiday - Winter Vacation",
+        "start": {
+            "date": "2026-12-15"
+        },
+        "end": {
+            "date": "2027-01-03"
+        }
+    },
+    {
+        "summary": "Showing of Evaluated Answer Sheets to students - Odd Semester",
+        "start": {
+            "date": "2026-12-18"
+        },
+        "end": {
+            "date": "2026-12-18"
+        }
+    },
+    {
+        "summary": "JIIT Alumni Meet",
+        "start": {
+            "date": "2026-12-19"
+        },
+        "end": {
+            "date": "2026-12-19"
+        }
+    },
+    {
+        "summary": "Meeting of IAMC - Odd Semester",
+        "start": {
+            "date": "2026-12-22"
+        },
+        "end": {
+            "date": "2026-12-22"
+        }
+    },
+    {
+        "summary": "Provisional Grades Display - Odd Semester",
+        "start": {
+            "date": "2026-12-22"
+        },
+        "end": {
+            "date": "2026-12-22"
+        }
+    },
+    {
+        "summary": "Freezing the grades/Submission of Final Grades to Registrar - Odd Semester",
+        "start": {
+            "date": "2026-12-23"
+        },
+        "end": {
+            "date": "2026-12-23"
+        }
+    },
+    {
+        "summary": "Holiday - Faculty Vacations (Winter)",
+        "start": {
+            "date": "2026-12-24"
+        },
+        "end": {
+            "date": "2027-01-03"
+        }
+    },
+    {
+        "summary": "Publishing of Results - Odd Semester",
+        "start": {
+            "date": "2026-12-24"
+        },
+        "end": {
+            "date": "2026-12-24"
+        }
+    },
+    {
+        "summary": "Holiday - Christmas",
+        "start": {
+            "date": "2026-12-25"
+        },
+        "end": {
+            "date": "2026-12-25"
+        }
+    },
+    {
+        "summary": "Registration for Supl Exam - Odd Semester",
+        "start": {
+            "date": "2026-12-26"
+        },
+        "end": {
+            "date": "2027-01-04"
+        }
+    },
+    {
+        "summary": "Registration All students (Online) - Even Semester",
+        "start": {
+            "date": "2027-01-04"
+        },
+        "end": {
+            "date": "2027-01-04"
+        }
+    },
+    {
+        "summary": "Commencement of Classes for all batches - Even Semester",
+        "start": {
+            "date": "2027-01-04"
+        },
+        "end": {
+            "date": "2027-01-04"
+        }
+    },
+    {
+        "summary": "Commencement of Next Semester",
+        "start": {
+            "date": "2027-01-04"
+        },
+        "end": {
+            "date": "2027-01-04"
+        }
+    },
+    {
+        "summary": "Add & Drop Subjects (except 1st semester students) - Even Semester",
+        "start": {
+            "date": "2027-01-05"
+        },
+        "end": {
+            "date": "2027-01-11"
+        }
+    },
+    {
+        "summary": "Registration For Existing PhD Scholars - Even Semester",
+        "start": {
+            "date": "2027-01-05"
+        },
+        "end": {
+            "date": "2027-01-05"
+        }
+    },
+    {
+        "summary": "Last Date for Registration of MOOC subject on web-portal - Even Semester",
+        "start": {
+            "date": "2027-01-11"
+        },
+        "end": {
+            "date": "2027-01-11"
+        }
+    },
+    {
+        "summary": "Supplementary Exam Schedule - Odd Semester",
+        "start": {
+            "date": "2027-01-12"
+        },
+        "end": {
+            "date": "2027-01-15"
+        }
+    },
+    {
+        "summary": "Deactivation of Un-Registered Students (except 1st Sem) - Even Semester",
+        "start": {
+            "date": "2027-01-20"
+        },
+        "end": {
+            "date": "2027-01-20"
+        }
+    },
+    {
+        "summary": "Meeting of IAMC (Supplementary) - Odd Semester",
+        "start": {
+            "date": "2027-01-20"
+        },
+        "end": {
+            "date": "2027-01-20"
+        }
+    },
+    {
+        "summary": "Freezing the grades (Supplementary) - Odd Semester",
+        "start": {
+            "date": "2027-01-21"
+        },
+        "end": {
+            "date": "2027-01-21"
+        }
+    },
+    {
+        "summary": "Publishing of Results (Supplementary) - Odd Semester",
+        "start": {
+            "date": "2027-01-22"
+        },
+        "end": {
+            "date": "2027-01-22"
+        }
+    },
+    {
+        "summary": "Holiday - Republic day",
+        "start": {
+            "date": "2027-01-26"
+        },
+        "end": {
+            "date": "2027-01-26"
+        }
+    },
+    {
+        "summary": "Attendance Review before Test-1 exam - Even Semester",
+        "start": {
+            "date": "2027-02-05"
+        },
+        "end": {
+            "date": "2027-02-05"
+        }
+    },
+    {
+        "summary": "Test-1 Examination Schedule - Even Semester",
+        "start": {
+            "date": "2027-02-08"
+        },
+        "end": {
+            "date": "2027-02-15"
+        }
+    },
+    {
+        "summary": "Showing of Evaluated Answer Sheets to students Test-1 - Even Semester",
+        "start": {
+            "date": "2027-02-20"
+        },
+        "end": {
+            "date": "2027-02-20"
+        }
+    },
+    {
+        "summary": "Marks uploading on System Test-1 - Even Semester",
+        "start": {
+            "date": "2027-02-24"
+        },
+        "end": {
+            "date": "2027-02-24"
+        }
+    },
+    {
+        "summary": "JYC Function",
+        "start": {
+            "date": "2027-02-27"
+        },
+        "end": {
+            "date": "2027-02-28"
+        }
+    },
+    {
+        "summary": "Holiday - Maha Shivratri",
+        "start": {
+            "date": "2027-03-06"
+        },
+        "end": {
+            "date": "2027-03-06"
+        }
+    },
+    {
+        "summary": "Holiday - Eid-Ul-Fitr",
+        "start": {
+            "date": "2027-03-09"
+        },
+        "end": {
+            "date": "2027-03-09"
+        }
+    },
+    {
+        "summary": "Mid-Term Seminars / Vivas Marks Uploading (Even)",
+        "start": {
+            "date": "2027-03-18"
+        },
+        "end": {
+            "date": "2027-03-18"
+        }
+    },
+    {
+        "summary": "Holiday - Semester Break – Holi (Even)",
+        "start": {
+            "date": "2027-03-19"
+        },
+        "end": {
+            "date": "2027-03-25"
+        }
+    },
+    {
+        "summary": "Holiday - Mid-semester break (Holi)",
+        "start": {
+            "date": "2027-03-19"
+        },
+        "end": {
+            "date": "2027-03-25"
+        }
+    },
+    {
+        "summary": "Holiday - Faculty Vacations (Holi)",
+        "start": {
+            "date": "2027-03-19"
+        },
+        "end": {
+            "date": "2027-03-25"
+        }
+    },
+    {
+        "summary": "Holiday - Holi",
+        "start": {
+            "date": "2027-03-22"
+        },
+        "end": {
+            "date": "2027-03-23"
+        }
+    },
+    {
+        "summary": "Attendance Review before Test-2 exam - Even Semester",
+        "start": {
+            "date": "2027-03-26"
+        },
+        "end": {
+            "date": "2027-03-26"
+        }
+    },
+    {
+        "summary": "Mid Term / Test-2 Examination Schedule - Even Semester",
+        "start": {
+            "date": "2027-03-29"
+        },
+        "end": {
+            "date": "2027-04-05"
+        }
+    },
+    {
+        "summary": "Final Curriculum for electives sent to Dean Academics UG - Even Semester",
+        "start": {
+            "date": "2027-04-05"
+        },
+        "end": {
+            "date": "2027-04-05"
+        }
+    },
+    {
+        "summary": "Showing of Evaluated Answer Sheets Test-2 - Even Semester",
+        "start": {
+            "date": "2027-04-10"
+        },
+        "end": {
+            "date": "2027-04-10"
+        }
+    },
+    {
+        "summary": "Final Curriculum sent to Registrar’s Office - Even Semester",
+        "start": {
+            "date": "2027-04-12"
+        },
+        "end": {
+            "date": "2027-04-12"
+        }
+    },
+    {
+        "summary": "Marks Uploading on System Test-2 - Even Semester",
+        "start": {
+            "date": "2027-04-13"
+        },
+        "end": {
+            "date": "2027-04-13"
+        }
+    },
+    {
+        "summary": "Holiday - Ambedkar Jayanti",
+        "start": {
+            "date": "2027-04-14"
+        },
+        "end": {
+            "date": "2027-04-14"
+        }
+    },
+    {
+        "summary": "Holiday - Ram Navami",
+        "start": {
+            "date": "2027-04-15"
+        },
+        "end": {
+            "date": "2027-04-15"
+        }
+    },
+    {
+        "summary": "Holiday - Mahavir Jayanti",
+        "start": {
+            "date": "2027-04-19"
+        },
+        "end": {
+            "date": "2027-04-19"
+        }
+    },
+    {
+        "summary": "Orientation program for electives - Even Semester",
+        "start": {
+            "date": "2027-04-22"
+        },
+        "end": {
+            "date": "2027-04-24"
+        }
+    },
+    {
+        "summary": "Pre-Registration by students through webportal - Even Semester",
+        "start": {
+            "date": "2027-04-23"
+        },
+        "end": {
+            "date": "2027-04-26"
+        }
+    },
+    {
+        "summary": "Summer Semester Notice",
+        "start": {
+            "date": "2027-04-24"
+        },
+        "end": {
+            "date": "2027-04-24"
+        }
+    },
+    {
+        "summary": "Make-up Examination Schedule - Even Semester",
+        "start": {
+            "date": "2027-04-26"
+        },
+        "end": {
+            "date": "2027-04-29"
+        }
+    },
+    {
+        "summary": "Fee payment and Subject Registration by Students - Summer Semester 2027",
+        "start": {
+            "date": "2027-04-27"
+        },
+        "end": {
+            "date": "2027-05-02"
+        }
+    },
+    {
+        "summary": "Meeting of Time Table Committee for finalization of courses (Next Sem)",
+        "start": {
+            "date": "2027-05-03"
+        },
+        "end": {
+            "date": "2027-05-03"
+        }
+    },
+    {
+        "summary": "Major Project allocation for next semester",
+        "start": {
+            "date": "2027-05-04"
+        },
+        "end": {
+            "date": "2027-05-04"
+        }
+    },
+    {
+        "summary": "Minor Project allocation for next semester",
+        "start": {
+            "date": "2027-05-04"
+        },
+        "end": {
+            "date": "2027-05-04"
+        }
+    },
+    {
+        "summary": "Locking of Make-up Examination marks - Even Semester",
+        "start": {
+            "date": "2027-05-06"
+        },
+        "end": {
+            "date": "2027-05-06"
+        }
+    },
+    {
+        "summary": "Students’ Feedback (online) - Even Semester",
+        "start": {
+            "date": "2027-05-07"
+        },
+        "end": {
+            "date": "2027-05-07"
+        }
+    },
+    {
+        "summary": "Conduct of End-Semester Seminar/Viva for Labs and Minor Projects - Even Semester",
+        "start": {
+            "date": "2027-05-08"
+        },
+        "end": {
+            "date": "2027-05-08"
+        }
+    },
+    {
+        "summary": "Farewell",
+        "start": {
+            "date": "2027-05-08"
+        },
+        "end": {
+            "date": "2027-05-08"
+        }
+    },
+    {
+        "summary": "Submission of Project/Dissertation/Term Paper reports - Even Semester",
+        "start": {
+            "date": "2027-05-10"
+        },
+        "end": {
+            "date": "2027-05-10"
+        }
+    },
+    {
+        "summary": "Final Project Viva / Evaluation of Dissertation - Even Semester",
+        "start": {
+            "date": "2027-05-10"
+        },
+        "end": {
+            "date": "2027-05-10"
+        }
+    },
+    {
+        "summary": "End Semester Attendance Review - Even Semester",
+        "start": {
+            "date": "2027-05-10"
+        },
+        "end": {
+            "date": "2027-05-10"
+        }
+    },
+    {
+        "summary": "Display of Final list of subjects for Summer Semester",
+        "start": {
+            "date": "2027-05-10"
+        },
+        "end": {
+            "date": "2027-05-10"
+        }
+    },
+    {
+        "summary": "Classes to be over - Even Semester",
+        "start": {
+            "date": "2027-05-12"
+        },
+        "end": {
+            "date": "2027-05-12"
+        }
+    },
+    {
+        "summary": "Debar list to be displayed - Even Semester",
+        "start": {
+            "date": "2027-05-13"
+        },
+        "end": {
+            "date": "2027-05-13"
+        }
+    },
+    {
+        "summary": "Results uploaded End-Semester Seminar/Viva - Even Semester",
+        "start": {
+            "date": "2027-05-14"
+        },
+        "end": {
+            "date": "2027-05-14"
+        }
+    },
+    {
+        "summary": "End Semester Examination Schedule - Even Semester",
+        "start": {
+            "date": "2027-05-14"
+        },
+        "end": {
+            "date": "2027-05-26"
+        }
+    },
+    {
+        "summary": "Final Time Table for Summer Semester",
+        "start": {
+            "date": "2027-05-18"
+        },
+        "end": {
+            "date": "2027-05-18"
+        }
+    },
+    {
+        "summary": "Holiday - Budh Purnima",
+        "start": {
+            "date": "2027-05-20"
+        },
+        "end": {
+            "date": "2027-05-20"
+        }
+    },
+    {
+        "summary": "Meeting of Disciplinary Committee (Disciplinary Grade Finalization) - Even Semester",
+        "start": {
+            "date": "2027-05-25"
+        },
+        "end": {
+            "date": "2027-05-25"
+        }
+    },
+    {
+        "summary": "Results of minor projects finalized - Even Semester",
+        "start": {
+            "date": "2027-05-27"
+        },
+        "end": {
+            "date": "2027-05-27"
+        }
+    },
+    {
+        "summary": "Holiday - Semester Break (Even)",
+        "start": {
+            "date": "2027-05-27"
+        },
+        "end": {
+            "date": "2027-07-26"
+        }
+    },
+    {
+        "summary": "Holiday - Summer Vacation",
+        "start": {
+            "date": "2027-05-27"
+        },
+        "end": {
+            "date": "2027-07-26"
+        }
+    },
+    {
+        "summary": "Showing of Evaluated Answer Sheets to students - Even Semester",
+        "start": {
+            "date": "2027-05-31"
+        },
+        "end": {
+            "date": "2027-05-31"
+        }
+    },
+    {
+        "summary": "Meeting of IAMC - Even Semester",
+        "start": {
+            "date": "2027-06-03"
+        },
+        "end": {
+            "date": "2027-06-03"
+        }
+    },
+    {
+        "summary": "Provisional Grades Display - Even Semester",
+        "start": {
+            "date": "2027-06-03"
+        },
+        "end": {
+            "date": "2027-06-03"
+        }
+    },
+    {
+        "summary": "Freezing the grades/Submission of Final Grades to Registrar - Even Semester",
+        "start": {
+            "date": "2027-06-04"
+        },
+        "end": {
+            "date": "2027-06-04"
+        }
+    },
+    {
+        "summary": "Publishing of Results - Even Semester",
+        "start": {
+            "date": "2027-06-05"
+        },
+        "end": {
+            "date": "2027-06-05"
+        }
+    },
+    {
+        "summary": "Re-opening of Registration for Summer Semester (backlog)",
+        "start": {
+            "date": "2027-06-05"
+        },
+        "end": {
+            "date": "2027-06-07"
+        }
+    },
+    {
+        "summary": "Registration for Supl Exam - Even Semester",
+        "start": {
+            "date": "2027-06-07"
+        },
+        "end": {
+            "date": "2027-06-09"
+        }
+    },
+    {
+        "summary": "Commencement of Classes - Summer Semester",
+        "start": {
+            "date": "2027-06-07"
+        },
+        "end": {
+            "date": "2027-06-07"
+        }
+    },
+    {
+        "summary": "Holiday - Faculty Vacations (Summer)",
+        "start": {
+            "date": "2027-06-08"
+        },
+        "end": {
+            "date": "2027-07-12"
+        }
+    },
+    {
+        "summary": "Supplementary Exam Schedule - Even Semester",
+        "start": {
+            "date": "2027-06-12"
+        },
+        "end": {
+            "date": "2027-06-15"
+        }
+    },
+    {
+        "summary": "Meeting of IAMC (Supplementary) - Even Semester",
+        "start": {
+            "date": "2027-06-22"
+        },
+        "end": {
+            "date": "2027-06-22"
+        }
+    },
+    {
+        "summary": "Freezing the grades (Supplementary) - Even Semester",
+        "start": {
+            "date": "2027-06-23"
+        },
+        "end": {
+            "date": "2027-06-23"
+        }
+    },
+    {
+        "summary": "Mid Term Test - Summer Semester",
+        "start": {
+            "date": "2027-06-23"
+        },
+        "end": {
+            "date": "2027-06-25"
+        }
+    },
+    {
+        "summary": "Publishing of Results (Supplementary) - Even Semester",
+        "start": {
+            "date": "2027-06-24"
+        },
+        "end": {
+            "date": "2027-06-24"
+        }
+    },
+    {
+        "summary": "End Term Test - Summer Semester",
+        "start": {
+            "date": "2027-07-15"
+        },
+        "end": {
+            "date": "2027-07-17"
+        }
+    },
+    {
+        "summary": "Showing of answer scripts Summer Semester",
+        "start": {
+            "date": "2027-07-21"
+        },
+        "end": {
+            "date": "2027-07-21"
+        }
+    },
+    {
+        "summary": "Meeting of IAMC Summer Semester",
+        "start": {
+            "date": "2027-07-22"
+        },
+        "end": {
+            "date": "2027-07-22"
+        }
+    },
+    {
+        "summary": "Freezing the grades Summer Semester",
+        "start": {
+            "date": "2027-07-23"
+        },
+        "end": {
+            "date": "2027-07-23"
+        }
+    },
+    {
+        "summary": "Publishing of Results Summer Semester",
+        "start": {
+            "date": "2027-07-24"
+        },
+        "end": {
+            "date": "2027-07-24"
+        }
+    },
+    {
+        "summary": "Finalization of progression of 1st yr students into 2nd yr and their registration",
+        "start": {
+            "date": "2027-07-27"
+        },
+        "end": {
+            "date": "2027-07-27"
+        }
+    },
+    {
+        "summary": "Commencement of Next Semester",
+        "start": {
+            "date": "2027-07-27"
+        },
+        "end": {
+            "date": "2027-07-27"
+        }
+    }
+]

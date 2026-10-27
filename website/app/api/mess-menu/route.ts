@@ -1,5 +1,9 @@
 import { NextResponse } from "next/server";
-import { MESS_MENU_128_URI, MESS_MENU_62_URI } from "@/lib/constants";
+import {
+	MESS_MENU_128_URI,
+	MESS_MENU_62_URI,
+	MESS_WEEKDAY_ORDER,
+} from "@/lib/constants";
 
 /**
  * @swagger
@@ -55,35 +59,47 @@ export async function GET() {
 		const data62 = await res62.json();
 		const data128 = await res128.json();
 
-		const menu62 = data62.menu;
-		const menu128 = data128.menu;
+		const menu62 = data62.menu ?? {};
+		const menu128 = data128.menu ?? {};
 
-		const combinedMenu: any = {};
+		const combinedMenu: Record<string, unknown> = {};
 
-		Object.entries(menu62).forEach(([dayKey, dayValue]) => {
+		const weekdayIndex = (dayName: string) => {
+			const idx = MESS_WEEKDAY_ORDER.indexOf(
+				dayName as (typeof MESS_WEEKDAY_ORDER)[number]
+			);
+			return idx === -1 ? 99 : idx;
+		};
+
+		const entries = Object.entries(menu62).sort(([a], [b]) => {
+			return weekdayIndex(a.split(" ")[0]) - weekdayIndex(b.split(" ")[0]);
+		});
+
+		for (const [dayKey, dayValue] of entries) {
 			const dayName = dayKey.split(" ")[0];
 			const meals = dayValue as Record<string, unknown>;
-
-			// Extract the date from the day entry, if present
 			const dateStr = (meals.date as string) || "";
 			const { date: _date, ...rest } = meals;
 
-			const lunch128 = menu128[dayName]
-				? menu128[dayName]
+			const campus128 = menu128[dayName];
+			const lunch128 = Array.isArray(campus128)
+				? campus128
 						.filter((item: string) => item && item.trim() !== "")
 						.join(", ")
 				: null;
 
-			// Normalize the key to "<Day> <dd.mm.yy>" so the view can parse it
 			const normalizedKey = dateStr ? `${dayName} ${dateStr}` : dayName;
 
 			combinedMenu[normalizedKey] = {
 				...rest,
 				Lunch128: lunch128 || null,
 			};
-		});
+		}
 
-		return NextResponse.json({ menu: combinedMenu });
+		return NextResponse.json({
+			last_updated: data62.last_updated ?? null,
+			menu: combinedMenu,
+		});
 	} catch (error) {
 		console.error("Error fetching mess menu:", error);
 		return NextResponse.json(

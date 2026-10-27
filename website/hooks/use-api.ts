@@ -9,6 +9,7 @@ import { ExamEntry, ExamSemesterInfo } from "../types/exam";
 // Types
 
 interface MessMenu {
+	last_updated?: string | null;
 	menu: {
 		[day: string]: {
 			Breakfast: string;

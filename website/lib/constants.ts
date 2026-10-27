@@ -7,6 +7,16 @@ export const MESS_MENU_62_URI =
 export const MESS_MENU_128_URI =
 	"https://raw.githubusercontent.com/life2harsh/mess-schedular/main/mess_128_menu.json";
 
+export const MESS_WEEKDAY_ORDER = [
+	"Monday",
+	"Tuesday",
+	"Wednesday",
+	"Thursday",
+	"Friday",
+	"Saturday",
+	"Sunday",
+] as const;
+
 
 /**
  * Converts portal semester format to app format

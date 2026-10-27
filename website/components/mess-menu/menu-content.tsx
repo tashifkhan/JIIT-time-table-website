@@ -4,6 +4,7 @@ import { Loader } from "@/components/ui/loader";
 import { useMessMenu } from "../../hooks/use-api";
 import { motion } from "framer-motion";
 import { Plus } from "lucide-react";
+import { MESS_WEEKDAY_ORDER } from "@/lib/constants";
 
 interface MessMenu {
 	menu: {
@@ -25,6 +26,36 @@ interface OutdatedInfo {
 	daysOutdated: number;
 	menuWeekStart: Date | null;
 	menuWeekEnd: Date | null;
+}
+
+const JS_WEEKDAYS = [
+	"Sunday",
+	"Monday",
+	"Tuesday",
+	"Wednesday",
+	"Thursday",
+	"Friday",
+	"Saturday",
+];
+
+function weekdayName(dayKey: string): string {
+	return dayKey.split(" ")[0];
+}
+
+function weekdayIndex(dayKey: string): number {
+	const idx = (MESS_WEEKDAY_ORDER as readonly string[]).indexOf(
+		weekdayName(dayKey)
+	);
+	return idx === -1 ? 99 : idx;
+}
+
+function dateOnThisWeek(dayKey: string, today: Date): Date {
+	const d = new Date(today);
+	d.setDate(
+		today.getDate() +
+			(weekdayIndex(dayKey) - weekdayIndex(JS_WEEKDAYS[today.getDay()]))
+	);
+	return d;
 }
 
 const MenuContent: React.FC<MenuContentProps> = ({
@@ -111,18 +142,7 @@ const MenuContent: React.FC<MenuContentProps> = ({
 	};
 
 	const isCurrentDay = (day: string) => {
-		const today = new Date();
-		const dayNames = [
-			"Sunday",
-			"Monday",
-			"Tuesday",
-			"Wednesday",
-			"Thursday",
-			"Friday",
-			"Saturday",
-		];
-		const currentDay = dayNames[today.getDay()];
-		return day.startsWith(currentDay);
+		return weekdayName(day) === JS_WEEKDAYS[new Date().getDay()];
 	};
 
 	const todayDate = useMemo(() => {
@@ -131,47 +151,42 @@ const MenuContent: React.FC<MenuContentProps> = ({
 		return d;
 	}, []);
 
+	const todayWeekday = JS_WEEKDAYS[todayDate.getDay()];
+
 	const allDays = useMemo(() => {
 		if (!menu) return [];
-		return Object.entries(menu);
+		return Object.entries(menu).sort(
+			([a], [b]) => weekdayIndex(a) - weekdayIndex(b)
+		);
 	}, [menu]);
 
+	const isPastMenuDay = (dayKey: string) => {
+		if (outdatedInfo.isOutdated) {
+			return weekdayIndex(dayKey) < weekdayIndex(todayWeekday);
+		}
+		const dayDate = parseDateFromDay(dayKey);
+		return Boolean(dayDate && dayDate < todayDate);
+	};
+
 	const pastDays = useMemo(() => {
-		return allDays
-			.filter(([dayKey]) => {
-				const dayDate = parseDateFromDay(dayKey);
-				return dayDate && dayDate < todayDate;
-			})
-			.reverse();
-	}, [allDays, todayDate]);
+		return allDays.filter(([dayKey]) => isPastMenuDay(dayKey)).reverse();
+	}, [allDays, todayDate, todayWeekday, outdatedInfo.isOutdated]);
 
 	const upcomingDays = useMemo(() => {
-		return allDays.filter(([dayKey]) => {
-			const dayDate = parseDateFromDay(dayKey);
-			return !dayDate || dayDate >= todayDate;
-		});
-	}, [allDays, todayDate]);
+		return allDays.filter(([dayKey]) => !isPastMenuDay(dayKey));
+	}, [allDays, todayDate, todayWeekday, outdatedInfo.isOutdated]);
 
 	const daysToShow = useMemo(() => {
 		return [...pastDays.slice(0, visibleDaysCount).reverse(), ...upcomingDays];
 	}, [pastDays, upcomingDays, visibleDaysCount]);
 
-	// Scroll to current day on mount (only if menu is not outdated)
+	// Scroll to current weekday on mount
 	useEffect(() => {
-		if (menu && !outdatedInfo.isOutdated) {
-			const today = new Date();
-			const dayNames = [
-				"Sunday",
-				"Monday",
-				"Tuesday",
-				"Wednesday",
-				"Thursday",
-				"Friday",
-				"Saturday",
-			];
-			const currentDay = dayNames[today.getDay()];
-			// Find the index of the first menu key that starts with the current day
-			const dayIndex = daysToShow.findIndex(([d]) => d.startsWith(currentDay));
+		if (menu) {
+			const currentDay = JS_WEEKDAYS[new Date().getDay()];
+			const dayIndex = daysToShow.findIndex(([d]) =>
+				d.startsWith(currentDay)
+			);
 
 			if (dayIndex !== -1 && dayRefs.current[dayIndex]) {
 				setTimeout(() => {
@@ -189,7 +204,7 @@ const MenuContent: React.FC<MenuContentProps> = ({
 				}, 200);
 			}
 		}
-	}, [menu, outdatedInfo.isOutdated, daysToShow]);
+	}, [menu, daysToShow]);
 
 
 	return (
@@ -237,15 +252,15 @@ const MenuContent: React.FC<MenuContentProps> = ({
 								{outdatedInfo.daysOutdated !== 1 ? "s" : ""}
 							</div>
 							<div className="text-amber-200/80 text-sm mb-3">
-								This week's mess menu hasn't been updated yet. The menu below is
-								from{" "}
+								This week's mess menu hasn't been updated yet. Showing the last
+								published rotation from{" "}
 								<span className="font-medium text-amber-200">
 									{formatDateRange(
 										outdatedInfo.menuWeekStart,
 										outdatedInfo.menuWeekEnd
 									)}
-								</span>
-								.
+								</span>{" "}
+								on this week's days.
 							</div>
 							<div className="text-amber-200/60 text-xs">
 								The new menu will be updated shortly. Please check back later.
@@ -342,21 +357,15 @@ const MenuContent: React.FC<MenuContentProps> = ({
 						)}
 
 						{daysToShow.map(([day, meals], idx) => {
-							// Don't highlight "today" if menu is outdated
-							const shouldHighlight =
-								!outdatedInfo.isOutdated && isCurrentDay(day);
-
-							const dayDate = parseDateFromDay(day);
-							const isPastDay = dayDate && dayDate < todayDate;
+							const shouldHighlight = isCurrentDay(day);
+							const isPastDay = isPastMenuDay(day);
 
 							// Check if this is the first upcoming day after past days
 							const prevDayKey = idx > 0 ? daysToShow[idx - 1][0] : null;
-							const prevDayDate = prevDayKey ? parseDateFromDay(prevDayKey) : null;
 							const isFirstUpcoming =
 								idx > 0 &&
 								!isPastDay &&
-								prevDayDate &&
-								prevDayDate < todayDate;
+								Boolean(prevDayKey && isPastMenuDay(prevDayKey));
 
 							return (
 								<div key={day}>
@@ -392,14 +401,22 @@ const MenuContent: React.FC<MenuContentProps> = ({
 										{/* Day Header */}
 										<div className="flex items-center gap-3 mb-6">
 											<div
-												className={`w-1.5 h-1.5 rounded-full ${outdatedInfo.isOutdated ? "bg-slate-500" : "bg-slate-400"}`}
+												className={`w-1.5 h-1.5 rounded-full ${shouldHighlight ? "bg-[#F0BB78]" : outdatedInfo.isOutdated ? "bg-slate-500" : "bg-slate-400"}`}
 											></div>
 											<h2
-												className={`text-xl font-bold ${outdatedInfo.isOutdated ? "text-slate-300" : "text-white"}`}
+												className={`text-xl font-bold ${shouldHighlight || !outdatedInfo.isOutdated ? "text-white" : "text-slate-300"}`}
 											>
-												{day.split(" ")[0]}
+												{weekdayName(day)}
 												<span className="ml-2 text-slate-400 font-normal text-lg">
-													{day.split(" ").slice(1).join(" ")}
+													{outdatedInfo.isOutdated
+														? dateOnThisWeek(
+																day,
+																todayDate
+															).toLocaleDateString("en-US", {
+																month: "short",
+																day: "numeric",
+															})
+														: day.split(" ").slice(1).join(" ")}
 												</span>
 											</h2>
 											{shouldHighlight && (
@@ -412,7 +429,8 @@ const MenuContent: React.FC<MenuContentProps> = ({
 										{/* Meals Grid */}
 										<div className="grid grid-cols-1 md:grid-cols-3 gap-4">
 											{Object.entries(meals).map(([mealType, mealContent]) => {
-												if (mealType === "Lunch128") return null; // Handle separately
+												if (mealType === "Lunch128" || mealType === "date")
+													return null;
 												return (
 													<div
 														key={mealType}

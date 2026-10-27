@@ -1,4 +1,5 @@
 import { NextResponse } from "next/server";
+import { MESS_MENU_128_URI, MESS_MENU_62_URI } from "@/lib/constants";
 
 /**
  * @swagger
@@ -39,13 +40,12 @@ import { NextResponse } from "next/server";
  */
 export async function GET() {
 	try {
-		if (!process.env.N8N_URI || !process.env.N8N_128_URI) {
-			throw new Error("N8N_URI or N8N_128_URI is not defined");
-		}
+		const menu62Uri = process.env.N8N_URI || MESS_MENU_62_URI;
+		const menu128Uri = process.env.N8N_128_URI || MESS_MENU_128_URI;
 
 		const [res62, res128] = await Promise.all([
-			fetch(process.env.N8N_URI, { next: { revalidate: 3600 } }),
-			fetch(process.env.N8N_128_URI, { next: { revalidate: 3600 } }),
+			fetch(menu62Uri, { next: { revalidate: 3600 } }),
+			fetch(menu128Uri, { next: { revalidate: 3600 } }),
 		]);
 
 		if (!res62.ok || !res128.ok) {
